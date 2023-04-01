@@ -18,6 +18,7 @@
     "tailwindcss": "^3.2.7"
   },
   "dependencies": {
+    "@vueuse/core": "^9.13.0",
     "nuxt-swiper": "^1.0.1"
   }
 }

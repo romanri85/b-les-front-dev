@@ -1,15 +1,13 @@
-// import {definePageMeta} from "#imports";
-// import layout from "#app/components/layout";
+
 
 <script setup>
 definePageMeta({layout: "light"});
 
-const collections = [{name: 'Classic', description:'This is a classic collection', image:'/classic-hero.jpg', url:'https://google.com'},
-    {name: 'Classic', description:'This is a classic collection', image:'/versal-hero.jpg', url:'https://facebook.com
-]
+
+const data = await $fetch('http:////64.225.66.244/api/product/collections')
+const collections = data.results
 
 </script>
-
 
 <template>
     <div class="-z-50 top-0 absolute w-screen">
@@ -37,14 +35,23 @@ const collections = [{name: 'Classic', description:'This is a classic collection
     }"
 
         >
-            <SwiperSlide v-for="(bgImage, index) in collections" :key="index">
-                <div class="hero bg-cover bg-center xl:h-screen lg:h-screen md:h-[450px] sm:h-[584px] w-screen"
-                     :style="{ backgroundImage: `url(${bgImage})` }">
-                    <div class="relative container xl:top-[705px] lg:top-[576px]">
-                        <button class="prev-slide-button">
+            <SwiperSlide v-for="(collection, index) in collections" :key="index">
+                <div class="hero bg-cover bg-center h-screen w-screen"
+                     :style="{ backgroundImage: `url(${collection.image.replace(/^http:\/\/localhost:8000/, 'http://64.225.66.244')})` }">
+                    <div class="relative container xl:top-[278px] lg:top-[199px] md:top-[293px] sm:top-[215px] text-white">
+                        <h2>About collection</h2>
+                        <p>{{ collection.description }}</p>
+                    </div>
+                    <div class="relative container xl:top-[705px] lg:top-[576px] md:top-[140px] sm:top-[124px] flex justify-between">
+                        <button class="prev-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] sm:w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] sm:h-[30px]">
                             <img src="/icons/prev-square-icon.svg" alt="prev">
                         </button>
-                        <button class="next-slide-button">
+                        <div>
+                            <h1 class="text-white">{{ collection.name }}</h1>
+                            <a class="text-white" :href="collection.slug"><h3 class="underline px-1">View
+                                collection</h3></a>
+                        </div>
+                        <button class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] sm:w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] sm:h-[30px]">
                             <img src="/icons/next-square-icon.svg" alt="next">
                         </button>
                     </div>
@@ -56,27 +63,3 @@ const collections = [{name: 'Classic', description:'This is a classic collection
     </div>
 </template>
 
-<style scoped>
-.prev-slide-button,
-.next-slide-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 24px;
-    background: transparent;
-    border: none;
-    color: #fff;
-}
-
-.prev-slide-button {
-    left: 10px;
-}
-
-.next-slide-button {
-    right: 10px;
-}
-
-.hero {
-    /*z-index: -50!important;*/
-}
-</style>
