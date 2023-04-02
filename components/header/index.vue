@@ -1,6 +1,9 @@
 <script setup>
 defineProps({light: Boolean})
 
+const data = await $fetch('http:////64.225.66.244/api/product/collections')
+const collections = data.results
+
 const menuItems = [
     { id: 'catalog', title: 'Catalog', to: '/catalog' },
     { id: 'other-elements', title: 'Other Elements', to: '/other-elements' },
@@ -13,24 +16,7 @@ const activeDropdownItems = ref(null)
 const activeDropdownTimeout = ref(null)
 
 const menuItemsProps = {
-    "catalog": [
-        {
-            "name": "Classic",
-            "image": "http://",
-            "slug": "/catalog/doors"
-        },
-        {
-            "name": "Classic",
-            "image": "http://",
-            "slug": "/catalog/doors"
-        },
-        {
-            "name": "Classic",
-            "image": "http://",
-            "slug": "/catalog/doors"
-        },
-
-    ],
+    "catalog": collections,
     "about-us": [
         {
             "name": "about-is",
@@ -72,7 +58,7 @@ function onMenuDropdownMouseLeave() {
 <template>
     <header class="header">
         <div class="container font-mono text-sm h-[100px] lg:grid xl:grid-cols-[246px_15fr_1fr_43px]  lg:grid-cols-[232px_15fr_1fr_33px] flex justify-between lg:gap-x-[80px] xl:gap-x-[200px] items-center">
-            <img src="/icons/burger-menu-icon.svg" class="lg:hidden md:w-[32px] w-[25px]" alt="burger-menu">
+            <img src="/icons/burger-menu-icon.svg" class="lg:hidden md:w-[32px] w-[25px] order-3 md:order-1" alt="burger-menu">
             <img v-if="!light" src="/logo-black.svg" alt="logo"
                  class="header__logo mb-1 hover:cursor-pointer xl:w-[246px] lg:w-[232px]  md:w-[182px] sm:w-[166px] xl:h-[49px] lg:h-[46px] md:h-[36px] sm:h-[33px]">
             <img v-else src="/logo-white.svg" alt="logo"
@@ -103,7 +89,7 @@ function onMenuDropdownMouseLeave() {
             </ul>
             <h3 class="lg:block font-mono text-sm text-white hidden">RU</h3>
         </div>
-        <modals-header :items="activeDropdownItems" v-if="activeDropdownItems" @mouseover="onMenuDropdownMouseOver"
+        <modals-header :items="activeDropdownItems" :number="number" v-if="activeDropdownItems" @mouseover="onMenuDropdownMouseOver"
                        @mouseleave="onMenuDropdownMouseLeave"/>
     </header>
     <div class="border-b w-full"></div>
