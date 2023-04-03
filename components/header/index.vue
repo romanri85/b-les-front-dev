@@ -5,15 +5,12 @@ const data = await $fetch('http:////64.225.66.244/api/product/collections')
 const collections = data.results
 
 const menuItems = [
-    { id: 'catalog', title: 'Catalog', to: '/catalog' },
-    { id: 'other-elements', title: 'Other Elements', to: '/other-elements' },
-    { id: 'where-to-buy', title: 'Where To Buy', to: '/where-to-buy' },
-    { id: 'doors-in-interiour', title: 'Doors in Interiour', to: '/doors-in-interiour' },
-    { id: 'about-us', title: 'About Us', to: '/about-us' }
+    {id: 'catalog', title: 'Catalog', to: '/catalog', needToShowDropdown: true},
+    {id: 'other-elements', title: 'Other Elements', to: '/other-elements'},
+    {id: 'where-to-buy', title: 'Where To Buy', to: '/where-to-buy'},
+    {id: 'doors-in-interiour', title: 'Doors in Interiour', to: '/doors-in-interiour'},
+    {id: 'about-us', title: 'About Us', to: '/about-us'}
 ]
-
-const activeDropdownItems = ref(null)
-const activeDropdownTimeout = ref(null)
 
 const menuItemsProps = {
     "catalog": collections,
@@ -30,27 +27,14 @@ const menuItemsProps = {
         }]
 }
 
-function onMenuItemMouseOver(event) {
-    const linkId = event.target.dataset.id
-    activeDropdownItems.value = menuItemsProps[linkId]
+const activeItemIndex = ref(null)
+
+function onItemMouseOver(index) {
+    activeItemIndex.value = index
 }
 
-function onMenuItemMouseLeave() {
-    // activeDropdownItems.value = null
-    activeDropdownTimeout.value = setTimeout(() => {
-        activeDropdownItems.value = null
-    }, 1000)
-
-
-}
-
-function onMenuDropdownMouseOver() {
-    clearTimeout(activeDropdownTimeout.value)
-    console.log(activeDropdownTimeout.value)
-}
-
-function onMenuDropdownMouseLeave() {
-    activeDropdownItems.value = null
+function onItemMouseLeave() {
+    activeItemIndex.value = null
 }
 
 
@@ -58,18 +42,23 @@ function onMenuDropdownMouseLeave() {
 <template>
     <header class="header">
         <div class="container font-mono text-sm h-[100px] lg:grid xl:grid-cols-[246px_15fr_1fr_43px]  lg:grid-cols-[232px_15fr_1fr_33px] flex justify-between lg:gap-x-[80px] xl:gap-x-[200px] items-center">
-            <img src="/icons/burger-menu-icon.svg" class="lg:hidden md:w-[32px] w-[25px] order-3 md:order-1" alt="burger-menu">
+            <img src="/icons/burger-menu-icon.svg" class="lg:hidden md:w-[32px] w-[25px] order-3 md:order-1"
+                 alt="burger-menu">
             <img v-if="!light" src="/logo-black.svg" alt="logo"
                  class="header__logo mb-1 hover:cursor-pointer xl:w-[246px] lg:w-[232px]  md:w-[182px] sm:w-[166px] xl:h-[49px] lg:h-[46px] md:h-[36px] sm:h-[33px]">
             <img v-else src="/logo-white.svg" alt="logo"
                  class="header__logo mb-1 hover:cursor-pointer xl:w-[246px] lg:w-[232px]  md:w-[182px] sm:w-[166px] xl:h-[49px] lg:h-[46px] md:h-[36px] sm:h-[33px]">
             <nav class="nav">
                 <ul class="menu lg:flex justify-between hidden">
-                    <li v-for="(item, index) in menuItems" :key="index" class="inline-block h-[100px] pt-[39px] hover:border-b-2">
+                    <li v-for="(item, index) in menuItems" :key="index"
+                        class="inline-block h-[100px] pt-[39px] hover:border-b-2" @mouseover="onItemMouseOver(index)"
+                        @mouseleave="onItemMouseLeave">
                         <NuxtLink :to="item.to" class="relative hover:cursor-pointer text-white"
-                                  :data-id="item.id" @mouseover="onMenuItemMouseOver" @mouseleave="onMenuItemMouseLeave">
+                                  :data-id="item.id">
                             {{ item.title }}
+
                         </NuxtLink>
+                        <modals-header :items="collections" v-if="activeItemIndex === index && item.needToShowDropdown"/>
                     </li>
                 </ul>
             </nav>
@@ -89,8 +78,7 @@ function onMenuDropdownMouseLeave() {
             </ul>
             <h3 class="lg:block font-mono text-sm text-white hidden">RU</h3>
         </div>
-        <modals-header :items="activeDropdownItems" :number="number" v-if="activeDropdownItems" @mouseover="onMenuDropdownMouseOver"
-                       @mouseleave="onMenuDropdownMouseLeave"/>
+
     </header>
     <div class="border-b w-full"></div>
 </template>

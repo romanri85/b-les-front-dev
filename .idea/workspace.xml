@@ -8,9 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/header/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/modals/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/modals/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/classic-hero.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/collection images/classic-hero.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/versal-hero.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/collection images/versal-hero.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +111,7 @@
       <workItem from="1680119625214" duration="2395000" />
       <workItem from="1680128273389" duration="627000" />
       <workItem from="1680347329181" duration="56000" />
-      <workItem from="1680347392638" duration="15447000" />
+      <workItem from="1680347392638" duration="23403000" />
     </task>
     <servers />
   </component>
