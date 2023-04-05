@@ -1,12 +1,12 @@
 
 
 <script setup>
-definePageMeta({layout: "light"});
+definePageMeta({layout: "default"});
+
 
 
 const data = await $fetch('http:////64.225.66.244/api/product/collections')
 const collections = data.results
-console.log(collections)
 
 </script>
 
@@ -22,7 +22,7 @@ console.log(collections)
                 :loop="true"
                 :effect="'creative'"
                 :autoplay="{
-      delay: 8000000,
+      delay: 8000,
       disableOnInteraction: true,
     }"
                 :creative-effect="{
@@ -58,7 +58,6 @@ console.log(collections)
                     </div>
 
                 </div>
-
 
             </SwiperSlide>
         </Swiper>
