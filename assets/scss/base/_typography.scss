@@ -1,83 +1,84 @@
-@font-face {
-  font-family: "abchanel-corpo";
-  font-display: swap;
-  src: url("https://fonts.chanel.com/k/29d2ee826a834270fc144dccbb2359ae46f53c3b-l.woff2") format("woff2"), url("https://fonts.chanel.com/k/29d2ee826a834270fc144dccbb2359ae46f53c3b-d.woff") format("woff"), url("https://fonts.chanel.com/k/29d2ee826a834270fc144dccbb2359ae46f53c3b-a.otf") format("opentype");
-  font-style: normal;
-  font-weight: 400
-}
+//@font-face {
+//  font-family: "abchanel-corpo";
+//  font-display: swap;
+//  src: url("https://fonts.chanel.com/k/29d2ee826a834270fc144dccbb2359ae46f53c3b-l.woff2") format("woff2"), url("https://fonts.chanel.com/k/29d2ee826a834270fc144dccbb2359ae46f53c3b-d.woff") format("woff"), url("https://fonts.chanel.com/k/29d2ee826a834270fc144dccbb2359ae46f53c3b-a.otf") format("opentype");
+//  font-style: normal;
+//  font-weight: 400
+//}
+//
+//@font-face {
+//  font-family: "abchanel-corpo";
+//  font-display: swap;
+//  src: url("https://fonts.chanel.com/k/64b14ed9188172fd562480b882a998c1cb8e8eb2-l.woff2") format("woff2"), url("https://fonts.chanel.com/k/64b14ed9188172fd562480b882a998c1cb8e8eb2-d.woff") format("woff"), url("https://fonts.chanel.com/k/64b14ed9188172fd562480b882a998c1cb8e8eb2-a.otf") format("opentype");
+//  font-style: normal;
+//  font-weight: 300
+//}
+//
+//@font-face {
+//  font-family: "abchanel-corpo";
+//  font-display: swap;
+//  src: url("https://fonts.chanel.com/k/4557ee3c5c7e229667c02c3e802771f4feae8659-l.woff2") format("woff2"), url("https://fonts.chanel.com/k/4557ee3c5c7e229667c02c3e802771f4feae8659-d.woff") format("woff"), url("https://fonts.chanel.com/k/4557ee3c5c7e229667c02c3e802771f4feae8659-a.otf") format("opentype");
+//  font-style: normal;
+//  font-weight: 600
+//}
+//
+//@font-face {
+//  font-family: "abchanel-corpo";
+//  font-display: swap;
+//  src: url("https://fonts.chanel.com/k/1b32c8a567ffef9b4919d90a39670b0f25b146bc-l.woff2") format("woff2"), url("https://fonts.chanel.com/k/1b32c8a567ffef9b4919d90a39670b0f25b146bc-d.woff") format("woff"), url("https://fonts.chanel.com/k/1b32c8a567ffef9b4919d90a39670b0f25b146bc-a.otf") format("opentype");
+//  font-style: normal;
+//  font-weight: 200
+//}
 
-@font-face {
-  font-family: "abchanel-corpo";
-  font-display: swap;
-  src: url("https://fonts.chanel.com/k/64b14ed9188172fd562480b882a998c1cb8e8eb2-l.woff2") format("woff2"), url("https://fonts.chanel.com/k/64b14ed9188172fd562480b882a998c1cb8e8eb2-d.woff") format("woff"), url("https://fonts.chanel.com/k/64b14ed9188172fd562480b882a998c1cb8e8eb2-a.otf") format("opentype");
-  font-style: normal;
-  font-weight: 300
-}
+//@font-face {
+//  font-family: "Ag Helvetica";
+//  src: url("~assets/fonts/ag-helvetica.ttf") format("truetype"), url("~assets/fonts/ag-helvetica.woff") format("woff"), url("~assets/fonts/ag-helvetica.woff2") format("woff2");
+//  font-style: normal;
+//  font-weight: 400;
+//}
+//
+//@font-face {
+//  font-family: "Ag Helvetica";
+//  src: url("~assets/fonts/ag-helvetica.ttf") format("truetype"), url("~assets/fonts/
+//  ag-helvetica.woff") format("woff"), url("~assets/fonts/ag-helvetica.woff2") format("woff2");
+//  font-style: normal;
+//  font-weight: 800;
+//}
+//
+//
+//@font-face {
+//  font-family: "ABChanelCorpoRegular";
+//  src: url("~assets/fonts/ABChanelCorpoRegular.woff2") format("woff2"), url("~assets/fonts/ABChanelCorpoRegular.woff") format("woff"), url("~assets/fonts/ABChanelCorpoRegular.ttf") format("trueType");
+//  font-style: normal;
+//  font-weight: 600;
+//}
 
-@font-face {
-  font-family: "abchanel-corpo";
-  font-display: swap;
-  src: url("https://fonts.chanel.com/k/4557ee3c5c7e229667c02c3e802771f4feae8659-l.woff2") format("woff2"), url("https://fonts.chanel.com/k/4557ee3c5c7e229667c02c3e802771f4feae8659-d.woff") format("woff"), url("https://fonts.chanel.com/k/4557ee3c5c7e229667c02c3e802771f4feae8659-a.otf") format("opentype");
-  font-style: normal;
-  font-weight: 600
-}
-
-@font-face {
-  font-family: "abchanel-corpo";
-  font-display: swap;
-  src: url("https://fonts.chanel.com/k/1b32c8a567ffef9b4919d90a39670b0f25b146bc-l.woff2") format("woff2"), url("https://fonts.chanel.com/k/1b32c8a567ffef9b4919d90a39670b0f25b146bc-d.woff") format("woff"), url("https://fonts.chanel.com/k/1b32c8a567ffef9b4919d90a39670b0f25b146bc-a.otf") format("opentype");
-  font-style: normal;
-  font-weight: 200
-}
-
-@font-face {
-  font-family: "Ag Helvetica";
-  src: url("./assets/fonts/ag-helvetica.ttf") format("truetype"), url("../assets/fonts/ag-helvetica.woff") format("woff"), url("../assets/fonts/ag-helvetica.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Ag Helvetica";
-  src: url("./assets/fonts/ag-helvetica.ttf") format("truetype"), url("../assets/fonts/ag-helvetica.woff") format("woff"), url("../assets/fonts/ag-helvetica.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 800;
-}
-
-
-@font-face {
-  font-family: "ABChanelCorpoRegular";
-  src: url("./assets/fonts/ABChanelCorpoRegular.woff2") format("woff2"), url("./assets/fonts/ABChanelCorpoRegular.woff") format("woff"), url("./assets/fonts/ABChanelCorpoRegular.ttf") format("trueType");
-  font-style: normal;
-  font-weight: 600;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
-
-//font-family: 'Open Sans', sans-serif;
-
-@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
-
-//font-family: 'Arimo', sans-serif;
+//@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+//
+////font-family: 'Open Sans', sans-serif;
+//
+//@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
+//
+////font-family: 'Arimo', sans-serif;
 
 
 h1{
-  @apply font-mono font-semibold
+  @apply font-mono font-semibold uppercase
   xl:text-h1-xl lg:text-h1-lg md:text-h1-md sm:text-h1-sm
 }
 
 h2{
-  @apply font-mono font-semibold
+  @apply font-mono font-semibold uppercase
   xl:text-h2-xl lg:text-h2-lg md:text-h2-md sm:text-h2-sm
 }
 
 h3{
-  @apply font-mono font-semibold
+  @apply font-mono font-semibold uppercase
     xl:text-h3-xl lg:text-h3-lg md:text-h3-md sm:text-h3-sm
 }
 
 h4{
-  @apply font-mono font-semibold
+  @apply font-mono font-semibold uppercase
     xl:text-h4-xl lg:text-h4-lg md:text-h4-md sm:text-h4-sm
 }
 

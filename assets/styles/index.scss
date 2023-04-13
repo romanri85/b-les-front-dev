@@ -1,0 +1,12 @@
+@import "stylesheet.css";
+@import "main.css";
+@import "../scss/tailwind.scss";
+@import '../scss/layouts/_layout.scss';
+@import '../scss/base/_typography.scss';
+
+body {
+    /*display: none;*/
+    font-family: "Helvetica", serif;
+    font-weight: 400;
+}
+

@@ -1,15 +1,32 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-import { defineNuxtConfig } from 'nuxt/config'
+import { i18n } from './i18n.config';
 
-export default defineNuxtConfig({
-    css: ['~/assets/scss/index.scss'],
-    modules: [['nuxt-swiper', {
-        // Swiper options
-    }]],
+const config = {
+    css: ['~/assets/styles/index.scss'],
+    modules: [
+        'nuxt-headlessui',
+        '@nuxtjs/i18n',
+        ['nuxt-swiper', {
+            // Swiper options
+        }],
+    ],
     postcss: {
         plugins: {
             tailwindcss: {},
             autoprefixer: {},
         },
     },
-})
+    headlessui: {
+        prefix: 'Headless',
+    },
+    i18n,
+    vite: {
+        define: {
+            'process.env': process.env,
+        },
+        ssr: {
+            noExternal: ['masonry-layout', 'imagesloaded'],
+        },
+    },
+};
+
+export default config;

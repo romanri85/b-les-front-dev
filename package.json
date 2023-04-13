@@ -11,14 +11,21 @@
   "devDependencies": {
     "autoprefixer": "^10.4.14",
     "nuxt": "^3.3.2",
+    "nuxt-headlessui": "^1.1.1",
     "postcss": "^8.4.21",
     "postcss-import": "^15.1.0",
-    "sass": "^1.60.0",
-    "sass-loader": "^13.2.1",
+    "sass": "^1.62.0",
+    "sass-loader": "^13.2.2",
     "tailwindcss": "^3.2.7"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.12",
+    "@heroicons/vue": "^2.0.17",
+    "@nuxtjs/i18n": "^8.0.0-beta.10",
     "@vueuse/core": "^9.13.0",
-    "nuxt-swiper": "^1.0.1"
+    "imagesloaded": "^5.0.0",
+    "masonry-layout": "^4.2.2",
+    "nuxt-swiper": "^1.0.1",
+    "nuxt3": "^3.4.1-28022011.e5d1d29b"
   }
 }
