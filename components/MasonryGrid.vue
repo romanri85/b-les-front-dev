@@ -1,24 +1,17 @@
-<!-- components/MasonryGrid.vue -->
 <template>
-    <div ref="masonry" class="viewer">
+    <div ref="masonry" class="grid">
         <div class="grid-sizer"></div>
-        <div
-                v-for="(image, index) in images"
-                :key="index"
-                class="item"
-        >
-            <img :src="image.path" />
-            <div v-if="image.meta.title" class="image-desc">
-                {{ image.meta.title }}
+        <div v-for="(image, index) in images" :key="index">
+            <div class="grid-item">
+                <img :src="image" @load="onImageLoad" />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useMasonry } from '~/composables/useMasonry';
-import { useNuxtApp } from '#app'; // Updated import statement
 
 const props = defineProps({
     images: {
@@ -28,59 +21,65 @@ const props = defineProps({
 });
 
 const masonry = ref(null);
-const nuxtApp = useNuxtApp();
+let loadedImages = ref(0);
+
+const onGridMounted = async () => {
+    await useMasonry(masonry, {
+        itemSelector: '.grid-item',
+        columnWidth: 100,
+        percentPosition: true,
+    });
+};
+
+const onImageLoad = () => {
+    console.log('Image loaded');
+    loadedImages.value++;
+
+    if (loadedImages.value === props.images.length) {
+        onGridMounted();
+    }
+};
 
 onMounted(() => {
-    useMasonry(masonry, {
-        columnWidth: '.grid-sizer',
-        percentPosition: true,
-        gutter: 10,
-        itemSelector: '.item',
-    });
+    if (props.images.length === 0) {
+        onGridMounted();
+    }
 });
 </script>
 
+<!-- Стили сохранены без изменений -->
+
+
 <style scoped>
-/* Ваши стили из примера */
-.viewer {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -5px; /* половина значения gutter */
+
+
+
+.grid {
+    background: #DDD;
 }
+
+/* clear fix */
+.grid:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* ---- .grid-item ---- */
 
 .grid-sizer,
-.item {
-    width: calc(33.333% - 10px); /* расчет ширины элемента с учетом gutter */
-    margin: 5px; /* половина значения gutter */
-    box-sizing: border-box;
+.grid-item {
+    width: 33.333%;
 }
 
-.item {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    overflow: hidden;
+.grid-item {
+    float: left;
 }
 
-.item img {
-    width: 100%;
-    height: auto;
+.grid-item img {
     display: block;
+    max-width: 100%;
 }
 
-.image-desc {
-    padding: 10px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
 
 </style>

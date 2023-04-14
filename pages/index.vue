@@ -1,3 +1,4 @@
+`
 <script setup>
 import SecondaryButton from "~/components/buttons/SecondaryButton.vue";
 import {baseURL} from "~/config.js";
@@ -11,7 +12,7 @@ const collections = data.results
 
 const tags = await $fetch(`${baseURL}/api/projects/tags`)
 const projects = await $fetch(`${baseURL}/api/projects`)
-
+const projectsImages = projects.map(project => baseURL + project.first_image.image)
 
 
 </script>
@@ -105,13 +106,15 @@ const projects = await $fetch(`${baseURL}/api/projects`)
         <p class="xl:w-[600px] lg:w-[530px]">Our company strives to provide our clients with the opportunity to bring
             their design and technical solutions
             to life. </p>
-<!--        <div class="grid grid-cols-3 gap-4 masonry">-->
-<!--            <div v-for="(image, index) in projects" :key="index" class="flex items-center justify-center">-->
-<!--                <img :src="baseURL+ image.first_image.image" alt="project">-->
+        <!--        <div class="grid grid-cols-3 gap-4 masonry">-->
+        <!--            <div v-for="(image, index) in projects" :key="index" class="flex items-center justify-center">-->
+        <!--                <img :src="baseURL+ image.first_image.image" alt="project">-->
 
-<!--            </div>-->
-<!--        </div>-->
-        <masonry-grid :images="images" />
+        <!--            </div>-->
+        <!--        </div>-->
+        <div>
+            <masonry-grid :images="projectsImages" />
+        </div>
     </div>
 
 
@@ -120,3 +123,4 @@ const projects = await $fetch(`${baseURL}/api/projects`)
 
 </style>
 
+`
