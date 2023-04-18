@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div>
     <Header light/>
-    <NuxtPage/>
+    <slot/>
   </div>
 </template>
 

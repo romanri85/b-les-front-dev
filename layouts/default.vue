@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <Header/>
-    <NuxtPage/>
+    <nuxt-layout :name="activeLayout">
+      <nuxt-page/>
+    </nuxt-layout>
   </div>
 </template>
 
-<script>
-export default {
-  name: "app"
-}
+<script setup>
+import {ref} from 'vue'
+const activeLayout = ref('main')
 </script>
 
 <style scoped>

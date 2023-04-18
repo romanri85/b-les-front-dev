@@ -1,11 +1,11 @@
 <template>
     <div ref="masonry" class="grid">
         <div class="grid-sizer"></div>
-        <div v-for="(image, index) in images" :key="index">
-            <div class="grid-item">
+        <ul>
+            <li v-for="(image, index) in images" :key="index" class="grid-item">
                 <img :src="image" @load="onImageLoad" />
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -61,3 +61,7 @@
 
 
 <!--</style>-->
+
+<style lang="scss">
+
+</style>
