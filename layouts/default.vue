@@ -1,14 +1,12 @@
 <template>
   <div id="app">
     <Header/>
-    <NuxtPage/>
+    <slot/>
   </div>
 </template>
 
 <script>
-export default {
-  name: "app"
-}
+
 </script>
 
 <style scoped>

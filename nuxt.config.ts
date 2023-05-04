@@ -4,6 +4,7 @@ const config = {
     css: ['~/assets/styles/index.scss'],
     modules: [
         'nuxt-headlessui',
+        '@nuxt/image-edge',
         '@nuxtjs/i18n',
         ['nuxt-swiper', {
             // Swiper options
