@@ -114,7 +114,7 @@ const currentMenuItems = computed(() => {
         <ul ref="menuRef" :class="light ? 'text-white' : 'text-black'"
             class="menu lg:flex xl:40px lg:gap-x-[30px] xl:h-[100px] lg:h-[86px] h-[60px] justify-between hidden items-center"
             @mouseenter="textMenuHovered = true" @mouseleave="onTextMenuMouseLeave">
-            <Popover as="li" v-for="(item, index) in textMenuItems" :key="index"
+            <Popover as="li" v-for="(item, index) in textMenuItems" :key="index" class="h-full flex hover:border-b-2"
                      @mouseenter="() => textMenuHovered && (activeItemIndex = index)" @mouseleave="() => !textMenuHovered && (activeItemIndex = null)">
                 <PopoverButton>
                     <h4>{{ $t(item.title) }}</h4>

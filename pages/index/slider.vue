@@ -1,5 +1,5 @@
 <template>
-    <div class="relative z-10 lg:mt-[-86px] w-screen">
+    <div class="relative z-10 xl:mt-[-100px] lg:mt-[-86px] md:mt-[-60px] mt-[-65px] w-screen">
         <client-only>
             <Swiper
                     :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
@@ -26,15 +26,16 @@
 
             >
                 <SwiperSlide v-for="(collection, index) in collections" :key="index">
-                    <div  class="hero bg-cover bg-center h-screen w-screen">
-                        <nuxt-img format="webp" quality="10" :src="collection.image" class="absolute h-screen w-screen -z-10" alt="slider-pic"/>
+                    <div class="hero bg-cover bg-center h-screen w-screen">
+                        <nuxt-img format="webp" quality="50" :src="collection.image"
+                                  class="absolute h-screen w-screen object-cover -z-10" alt="slider-pic"/>
                         <div class="flex flex-col justify-between relative w-screen h-screen">
-                            <div class="text-left relative main-container  text-white lg:mt-[200px] xl:mt-[278px] mt-[100px] xl:max-w-[550px] lg:max-w-screen flex justify-between">
+                            <div class="text-left relative main-container  text-white lg:mt-[200px] xl:mt-[278px] md:mb-[60px] mt-[100px] lg:max-w-screen flex md:flex-row flex-col justify-between items-center lg:order-1 order-2">
                                 <div>
-                                    <h2 class="mb-5">About collection</h2>
+                                    <h2 class="mb-5 lg:text-[23px] md:text-[14px]">About collection</h2>
                                     <p class="lg:w-[448px]">{{ collection.description }}</p>
                                 </div>
-                                <div class="relative w-[75px] h-[64px]">
+                                <div class="relative w-[75px] h-[64px] my:mb-0 my-[60px]">
                                     <svg class="absolute w-full h-full" viewBox="0 0 100 100"
                                          preserveAspectRatio="none">
                                         <line x1="80" y1="20" x2="20" y2="80" stroke="white" stroke-width="1"/>
@@ -47,13 +48,13 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="relative main-container  flex justify-between">
+                            <div class="relative main-container  flex md:justify-between sm:justify-evenly mt-[130px] lg:order-2">
                                 <button class="prev-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] sm:w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] sm:h-[30px]">
                                     <img class="hidden md:block" src="/icons/prev-square-icon.svg" alt="prev">
                                     <img class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev">
                                 </button>
-                                <div class="ml-[228px] xl:mb-[145px] lg:mb-[100px]">
-                                    <h1 class="text-white mb-8">{{ collection.name }}</h1>
+                                <div class="lg:ml-[228px] xl:mb-[145px] lg:mb-[100px]">
+                                    <h1 class="text-white md:mb-8 sm:mb-[60px]">{{ collection.name }}</h1>
                                     <a class="text-white" :href="collection.slug"><h3 class="underline px-1">View
                                         collection</h3></a>
                                 </div>

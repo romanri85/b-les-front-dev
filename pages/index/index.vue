@@ -2,9 +2,6 @@
     <slider/>
     <search/>
     <projects/>
-
-
-
 </template>
 
 <script setup>
@@ -14,19 +11,6 @@ import Projects from "~/pages/index/projects.vue";
 
 definePageMeta({layout: "default"});
 
-
-
-
-
-
-
-
-
-
 </script>
 
-<style lang="scss" scoped>
 
-
-
-</style>

@@ -41,10 +41,11 @@ function toggleLocale() {
             <button type="button" class="lg:block lg:order-4 font-mono text-sm hidden" @click="toggleLocale"><h3
                     :class="light ? 'text-white' : 'text-black'">{{ locale === 'en' ? "EN" : "RU" }}</h3></button>
         </div>
+        <!--    thin line between header and content-->
+
+        <div class="border-b w-full" :class="light ? 'border-white' : 'border-black'"></div>
 
     </header>
 
-  <!--    thin line between header and content-->
 
-    <div class="border-b w-full" :class="light ? 'border-white' : 'border-black'"></div>
 </template>

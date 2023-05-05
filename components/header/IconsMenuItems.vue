@@ -28,11 +28,11 @@ const iconsMenuItems = [
 </script>
 
 <template>
-    <ul class="flex  xl:gap-[40px] lg:gap-x-[35px] gap-[30px] justify-between   md:order-3 order-2">
+    <ul class="flex  xl:gap-[40px] lg:gap-x-[35px] gap-[30px] justify-between md:order-3 order-2 xl:h-[100px] lg:h-[86px] h-[60px]">
         <li v-for="(item, index) in iconsMenuItems" :key="index"
-            :class="item.id !== 'favourite' ? 'hidden' : ''"
-            class=" md:inline-block hover:border-b-2 hover:cursor-pointer relative lg:w-[25px] lg:h-[25] md:w-[22px] sm:w-[22px]">
-            <img :src="light ? item.whiteIconPath : item.blackIconPath" :alt="item.alt">
+            class="flex md:block  hover:cursor-pointer relative lg:w-[25px] md:w-[22px] sm:w-[22px] h-full hover:border-b-2"
+            :class="item.id !== 'favourite' ? 'hidden' : ''">
+                <img :src="light ? item.whiteIconPath : item.blackIconPath" :alt="item.alt" class="h-full">
         </li>
     </ul>
 </template>
