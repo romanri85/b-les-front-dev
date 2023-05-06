@@ -35,7 +35,7 @@
                                     <h2 class="mb-5 lg:text-[23px] md:text-[14px]">About collection</h2>
                                     <p class="lg:w-[448px]">{{ collection.description }}</p>
                                 </div>
-                                <div class="relative w-[75px] h-[64px] my:mb-0 my-[60px]">
+                                <div class="relative w-[75px] h-[64px] my:mb-0 my-[30px]">
                                     <svg class="absolute w-full h-full" viewBox="0 0 100 100"
                                          preserveAspectRatio="none">
                                         <line x1="80" y1="20" x2="20" y2="80" stroke="white" stroke-width="1"/>
@@ -54,7 +54,7 @@
                                     <img class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev">
                                 </button>
                                 <div class="lg:ml-[228px] xl:mb-[145px] lg:mb-[100px]">
-                                    <h1 class="text-white md:mb-8 sm:mb-[60px]">{{ collection.name }}</h1>
+                                    <h1 class="text-white md:mb-8 sm:mb-[30px]">{{ collection.name }}</h1>
                                     <a class="text-white" :href="collection.slug"><h3 class="underline px-1">View
                                         collection</h3></a>
                                 </div>
