@@ -27,12 +27,12 @@
             >
                 <SwiperSlide v-for="(collection, index) in collections" :key="index">
                     <div class="hero bg-cover bg-center h-screen w-screen">
-                        <nuxt-img format="webp" quality="50" :src="collection.image"
+                        <nuxt-img  fetchpriority="high" :preload="index===0" width="1728" height="671"  format="webp" quality="80" :src="collection.image"
                                   class="absolute h-screen w-screen object-cover -z-10" alt="slider-pic"/>
                         <div class="flex flex-col justify-between relative w-screen h-screen">
                             <div class="text-left relative main-container  text-white lg:mt-[200px] xl:mt-[278px] md:mb-[60px] mt-[100px] lg:max-w-screen flex md:flex-row flex-col justify-between items-center lg:order-1 order-2">
                                 <div>
-                                    <h2 class="mb-5 lg:text-[23px] md:text-[14px]">About collection</h2>
+                                    <h2 class="mb-5 lg:text-[23px] md:text-[14px]">{{ $t('aboutCollection') }}</h2>
                                     <p class="lg:w-[448px]">{{ collection.description }}</p>
                                 </div>
                                 <div class="relative w-[75px] h-[64px] my:mb-0 my-[30px]">
@@ -55,8 +55,7 @@
                                 </button>
                                 <div class="lg:ml-[228px] xl:mb-[145px] lg:mb-[100px]">
                                     <h1 class="text-white md:mb-8 sm:mb-[30px]">{{ collection.name }}</h1>
-                                    <a class="text-white" :href="collection.slug"><h3 class="underline px-1">View
-                                        collection</h3></a>
+                                    <a class="text-white" :href="collection.slug"><h3 class="underline px-1">{{ $t('viewCollection') }}</h3></a>
                                 </div>
                                 <button class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] sm:w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] sm:h-[30px]">
                                     <img class="hidden md:block" src="/icons/next-square-icon.svg" alt="next">
@@ -73,10 +72,10 @@
 </template>
 
 <script setup>
-import {baseURL} from "~/config";
+import {useCollections} from "~/composables/useCollections";
 
-const data = await $fetch(`${baseURL}/api/product/collections`)
-const collections = data.results
+
+const {collections} = useCollections()
 </script>
 
 <style scoped>

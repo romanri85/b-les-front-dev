@@ -4,43 +4,43 @@ import {Popover, PopoverButton, PopoverPanel} from "@headlessui/vue";
 defineProps({light: {type: Boolean, default: true}})
 
 const textMenuItems = ref([
-    {id: 'catalog', title: 'catalog', to: '/catalog', needToShowDropdown: true},
-    {id: 'other-elements', title: 'otherElements', to: '/other-elements'},
-    {id: 'where-to-buy', title: 'whereToBuy', to: '/where-to-buy'},
-    {id: 'doors-in-interiour', title: 'doorsInInterior', to: '/doors-in-interiour'},
-    {id: 'about-us', title: 'aboutUs', to: '/about-us'}
+    {id: 'catalog', name: 'catalog', slug: '/catalog', needToShowDropdown: true},
+    {id: 'other-elements', name: 'otherElements', slug: '/other-elements'},
+    {id: 'where-to-buy', name: 'whereToBuy', slug: '/where-to-buy'},
+    {id: 'doors-in-interiour', name: 'doorsInInterior', slug: '/doors-in-interiour'},
+    {id: 'about-us', name: 'aboutUs', slug: '/about-us'}
 ])
 
 const menuItemsProps = {
     "catalog": [
         {
-            name: "Versailles",
+            name: 'versailles',
             image: "/header-modal-img/versailles-modal-img.jpg",
             slug: "/catalog/versailles"
         },
         {
-            name: "Classic",
+            name: 'classic',
             image: "/header-modal-img/classic-modal-img.jpg",
             slug: "/catalog/classic"
 
         },
         {
-            name: "Modern",
+            name: 'modern',
             image: "/header-modal-img/modern-modal-img.jpg",
             slug: "/catalog/modern"
         },
         {
-            name: "Premier",
+            name: 'premier',
             image: "/header-modal-img/premier-modal-img.jpg",
             slug: "/catalog/premier"
         },
         {
-            name: "Rimini",
+            name: 'rimini',
             image: "/header-modal-img/rimini-modal-img.jpg",
             slug: "/catalog/rimini"
         },
         {
-            name:"R-Style",
+            name: 'rStyle',
             image: "/header-modal-img/r-style-modal-img.jpg",
             slug: "/catalog/r-style"
         }
@@ -48,22 +48,22 @@ const menuItemsProps = {
     ],
     "other-elements": [
         {
-            name: "Door systems",
-            image: "/header-modal-img/door-systems.jpg",
-            slug: "/other-items/door-systems"
+            "name": "doorSystems",
+            "image": "/header-modal-img/door-systems.jpg",
+            "slug": "/other-items/door-systems"
         },
         {
-            "name": "Door hardware",
+            "name": "doorHardware",
             "image": "/header-modal-img/door-hardware.jpg",
             "slug": "/other-items/door-hardware"
         },
         {
-            "name": "Plinth",
+            "name": "plinth",
             "image": "/header-modal-img/plinth.jpg",
             "slug": "/other-items/plinth"
         },
         {
-            "name": "Delivery and installation",
+            "name": "deliveryAndInstallation",
             "image": "/header-modal-img/delivery-installation.jpg",
             "slug": "/other-items/delivery-and-installation"
         },
@@ -71,7 +71,7 @@ const menuItemsProps = {
     ],
     "about-us": [
         {
-            "name": "about us",
+            "name": "aboutUs",
             "image": "/header-modal-img/about-us.jpg",
             "slug": "/about-us/about-us"
         },
@@ -81,12 +81,12 @@ const menuItemsProps = {
             "slug": "/about-us/promotions"
         },
         {
-            "name": "to designers",
+            "name": "toDesigners",
             "image": "/header-modal-img/to-designers.jpg",
             "slug": "/about-us/to-designers"
         },
         {
-            "name": "to dealers",
+            "name": "toDealers",
             "image": "/header-modal-img/to-dealers.jpg",
             "slug": "/about-us/to-dealers"
         }]
@@ -117,7 +117,7 @@ const currentMenuItems = computed(() => {
             <Popover as="li" v-for="(item, index) in textMenuItems" :key="index" class="h-full flex hover:border-b-2"
                      @mouseenter="() => textMenuHovered && (activeItemIndex = index)" @mouseleave="() => !textMenuHovered && (activeItemIndex = null)">
                 <PopoverButton>
-                    <h4>{{ $t(item.title) }}</h4>
+                    <h4>{{ $t(item.name) }}</h4>
                 </PopoverButton>
 
                 <div v-if="activeItemIndex === index && currentMenuItems.length !== 0">

@@ -23,10 +23,15 @@
     "@headlessui/vue": "^1.7.12",
     "@heroicons/vue": "^2.0.17",
     "@nuxtjs/i18n": "^8.0.0-beta.10",
+    "@pinia/nuxt": "^0.4.9",
     "@vueuse/core": "^9.13.0",
     "@yeger/vue-masonry-wall": "^3.4.4",
     "imagesloaded": "^5.0.0",
     "nuxt-swiper": "^1.0.1",
-    "nuxt3": "^3.4.1-28022011.e5d1d29b"
+    "nuxt3": "^3.4.1-28022011.e5d1d29b",
+    "pinia": "^2.0.35"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }

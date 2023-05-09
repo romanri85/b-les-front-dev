@@ -1,4 +1,4 @@
-import { i18n } from './i18n.config';
+import {i18n} from './i18n.config';
 
 const config = {
     css: ['~/assets/styles/index.scss'],
@@ -8,7 +8,7 @@ const config = {
         '@nuxtjs/i18n',
         ['nuxt-swiper', {
             // Swiper options
-        }],
+        }], '@pinia/nuxt',
     ],
     postcss: {
         plugins: {

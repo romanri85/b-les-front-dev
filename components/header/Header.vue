@@ -26,8 +26,7 @@ function toggleLocale() {
 
             <!--            logo-->
 
-            <img :src="light ? '/logo-white.svg' : '/logo-black.svg'" alt="logo"
-                 class="hover:cursor-pointer xl:w-[246px] lg:w-[232px]  md:w-[182px] sm:w-[166px] lg:order-1 md:order-2 order-1">
+            <logo/>
 
             <!--                main menu items-->
             <text-menu-items/>
