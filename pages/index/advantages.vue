@@ -9,7 +9,7 @@
         <div class="xl:mx-[50px] lg:mx-[200px] md:mx-[50px] xl:mb-[35px] md:mb-[30px] mb-[20px]">
             <p class="text-center text-primaryGrey">{{ $t('doorsBeautyDescription') }}</p>
         </div>
-        <nuxt-img class=" w-full lg:h-[400px] h-[240px] object-cover" src="/advantages.jpg" />
+        <nuxt-img placeholder class=" w-full lg:h-[400px] h-[240px] object-cover" src="/advantages.jpg" />
 
 
     </div>

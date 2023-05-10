@@ -1,6 +1,6 @@
 <template>
     <div class="relative z-10 xl:mt-[-100px] lg:mt-[-86px] md:mt-[-60px] mt-[-65px] w-screen">
-        <client-only>
+<!--        <client-only>-->
             <Swiper
                     :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
                     :slides-per-view="1"
@@ -27,13 +27,13 @@
             >
                 <SwiperSlide v-for="(collection, index) in collections" :key="index">
                     <div class="hero bg-cover bg-center h-screen w-screen">
-                        <nuxt-img  fetchpriority="high" :preload="index===0" width="1728" height="671"  format="webp" quality="80" :src="collection.image"
+                        <nuxt-img placeholder :src="collection.image"
                                   class="absolute h-screen w-screen object-cover -z-10" alt="slider-pic"/>
                         <div class="flex flex-col justify-between relative w-screen h-screen">
                             <div class="text-left relative main-container  text-white lg:mt-[200px] xl:mt-[278px] md:mb-[60px] mt-[100px] lg:max-w-screen flex md:flex-row flex-col justify-between items-center lg:order-1 order-2">
                                 <div>
                                     <h2 class="mb-5 lg:text-[23px] md:text-[14px]">{{ $t('aboutCollection') }}</h2>
-                                    <p class="lg:w-[448px]">{{ collection.description }}</p>
+                                    <p class="lg:w-[448px]">{{ $t(collection.description) }}</p>
                                 </div>
                                 <div class="relative w-[75px] h-[64px] my:mb-0 my-[30px]">
                                     <svg class="absolute w-full h-full" viewBox="0 0 100 100"
@@ -50,16 +50,16 @@
                             </div>
                             <div class="relative main-container  flex md:justify-between sm:justify-evenly mt-[130px] lg:order-2">
                                 <button class="prev-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] sm:w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] sm:h-[30px]">
-                                    <img class="hidden md:block" src="/icons/prev-square-icon.svg" alt="prev">
-                                    <img class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev">
+                                    <nuxt-img placeholder class="hidden md:block" src="/icons/prev-square-icon.svg" alt="prev"/>
+                                    <nuxt-img placeholder class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev"/>
                                 </button>
                                 <div class="lg:ml-[228px] xl:mb-[145px] lg:mb-[100px]">
-                                    <h1 class="text-white md:mb-8 sm:mb-[30px]">{{ collection.name }}</h1>
+                                    <h1 class="text-white md:mb-8 sm:mb-[30px]">{{ $t(collection.name) }}</h1>
                                     <a class="text-white" :href="collection.slug"><h3 class="underline px-1">{{ $t('viewCollection') }}</h3></a>
                                 </div>
                                 <button class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] sm:w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] sm:h-[30px]">
-                                    <img class="hidden md:block" src="/icons/next-square-icon.svg" alt="next">
-                                    <img class="md:hidden" src="/icons/next-page-icon-small.svg" alt="next">
+                                    <nuxt-img placeholder class="hidden md:block" src="/icons/next-square-icon.svg" alt="next"/>
+                                    <nuxt-img placeholder class="md:hidden" src="/icons/next-page-icon-small.svg" alt="next"/>
                                 </button>
                             </div>
                         </div>
@@ -67,15 +67,51 @@
 
                 </SwiperSlide>
             </Swiper>
-        </client-only>
+<!--        </client-only>-->
     </div>
 </template>
 
 <script setup>
-import {useCollections} from "~/composables/useCollections";
 
 
-const {collections} = useCollections()
+const collections =[
+     {
+        name: 'classic',
+        description: 'classicDescription',
+        image: '/collection images/classic-hero.webp',
+        slug: '/collections/classic'
+    },
+     {
+        name: 'versailles',
+        description: 'versaillesDescription',
+        image: '/collection images/versal-hero.webp',
+        slug: '/collections/versailles'
+    },
+     {
+        name: 'modern',
+        description: 'modernDescription',
+        image: '/collection images/1920Modern-hero.webp',
+        slug: '/collection/modern'
+    },
+     {
+        name: 'premier',
+        description: 'premierDescription',
+        image: '/collection images/classic-hero.webp',
+        slug: '/collections/premier'
+    },
+     {
+        name: 'rimini',
+        description: 'riminiDescription',
+        image: '/collection images/1920Rimini-hero.webp',
+        slug: '/collections/rimini'
+    },
+    {
+        name: 'rStyle',
+        description: 'rStyleDescription',
+        image: '/collection images/1920R-Style-hero.webp',
+        slug: '/collections/rStyle'
+    },
+]
 </script>
 
 <style scoped>

@@ -11,11 +11,17 @@ export const i18n = {
                 doorsInInterior: 'Doors in interior',
                 aboutUs: 'About us',
                 classic: 'Classic',
+                classicDescription: 'Classic is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish.',
                 versailles: 'Versailles',
+                versaillesDescription: 'Versailles is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. Also, the doors are decorated with a special pattern.',
                 premier: 'Premier',
+                premierDescription: 'Premier is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. Also, the doors are decorated with a special pattern with milling.',
                 modern: 'Modern',
+                modernDescription: 'Modern is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the modern style. The doors are made of solid wood, which is covered with a special varnish.',
                 rimini: 'Rimini',
+                riminiDescription: 'Rimini is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the modern style. The doors are made of solid wood, which is covered with a special varnish.',
                 rStyle: 'R-Style',
+                rStyleDescription: 'R-Style is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the modern style. The doors are made of solid wood, which is covered with a special varnish.',
                 doorHardware: 'Door hardware',
                 doorSystems: 'Door systems',
                 plinth: 'Plinth',
@@ -42,7 +48,6 @@ export const i18n = {
                 'handles': 'Handles',
 
 
-
             },
             ru: {
                 catalog: 'Каталог',
@@ -51,11 +56,17 @@ export const i18n = {
                 doorsInInterior: 'Двери в интерьере',
                 aboutUs: 'О нас',
                 classic: 'Классика',
+                classicDescription: 'Классика - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком.',
                 versailles: 'Версаль',
+                versaillesDescription: 'Версаль - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Также двери украшены специальным рисунком.',
                 premier: 'Премьер',
+                premierDescription: 'Премьер - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Также двери украшены специальным рисунком c фрезеровкой.',
                 modern: 'Модерн',
+                modernDescription: 'Модерн - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле модерн. Двери изготовлены из массива дерева, которое покрыто специальным лаком.',
                 rimini: 'Римини',
+                riminiDescription: 'Римини - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле модерн. Двери изготовлены из массива дерева, которое покрыто специальным лаком.',
                 rStyle: 'Р-Стиль',
+                rStyleDescription: 'Р-Стиль - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле модерн. Двери изготовлены из массива дерева, которое покрыто специальным лаком.',
                 doorSystems: 'Дверные системы',
                 doorHardware: 'Фурнитура',
                 plinth: 'Плинтус',
@@ -71,7 +82,7 @@ export const i18n = {
                 ourProjectsDescription: 'Наша компания стремится предоставить нашим клиентам возможность воплотить\n' +
                     '            в жизнь их дизайнерские и технические решения.',
                 michelangelo: 'Микеланджело, скульптор.',
-michelangeloQuote: '"Совершенство складывается из мелочей. Мелочи создают совершенство, а совершенство - не мелочь".',
+                michelangeloQuote: '"Совершенство складывается из мелочей. Мелочи создают совершенство, а совершенство - не мелочь".',
 
                 ourAdvantages: 'Наши преимущества',
                 doorsBeauty: 'природная красота дверей из массива',
