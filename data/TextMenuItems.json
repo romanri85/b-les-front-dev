@@ -1,0 +1,34 @@
+[{
+  "id": "catalog",
+  "name": "catalog",
+  "slug": "/catalog",
+  "needToShowDropdown": true,
+  "itemHeader": "collections"
+},
+  {
+    "id": "other-elements",
+    "name": "otherElements",
+    "slug": "/other-elements",
+    "needToShowDropdown": true,
+    "itemHeader": "otherElementsHeader"
+  },
+  {
+    "id": "where-to-buy",
+    "name": "whereToBuy",
+    "slug": "/where-to-buy",
+    "needToShowDropdown": false
+  },
+  {
+    "id": "doors-in-interiour",
+    "name": "doorsInInterior",
+    "slug": "/doors-in-interiour",
+    "needToShowDropdown": false
+  },
+  {
+    "id": "about-us",
+    "name": "aboutUs",
+    "slug": "/about-us",
+    "needToShowDropdown": true,
+    "itemHeader": "aboutUsHeader"
+  }
+]
