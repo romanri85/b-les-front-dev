@@ -1,46 +1,63 @@
 @import "stylesheet.css";
-@import "main.css";
+@import "components/MultiRangeSliderBarOnly.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 .main-container {
-  @apply xl:mx-[228px] lg:mx-[90px] md:mx-[35px] mx-[20px];
+  @apply lg:mx-24 md:mx-8 mx-5;
+}
+
+.filter-container {
+  @apply lg:w-80;
 }
 
 h1 {
   @apply font-mono font-semibold uppercase
-  xl:text-h1-xl lg:text-h1-lg md:text-h1-md sm:text-h1-sm;
+   lg:text-h1-lg md:text-h1-md text-h1-sm;
 }
 
 h2 {
   @apply font-mono font-semibold uppercase
-  xl:text-h2-xl lg:text-h2-lg md:text-h2-md sm:text-h2-sm;
+   lg:text-h2-lg md:text-h2-md text-h2-sm;
 }
 
 h3 {
   @apply font-mono font-semibold uppercase
-    xl:text-h3-xl lg:text-h3-lg md:text-h3-md sm:text-h3-sm;
+     lg:text-h3-lg md:text-h3-md text-h3-sm;
 }
 
 h4 {
   @apply font-mono font-semibold uppercase
-    xl:text-h4-xl lg:text-h4-lg md:text-h4-md sm:text-h4-sm;
+     lg:text-h4-lg md:text-h4-md text-h4-sm;
 }
 
 h5 {
-  @apply font-sans font-regular
-  xl:text-h5-xl lg:text-h5-lg md:text-h5-md sm:text-h5-sm;
+  @apply font-sans font-light
+   lg:text-h5-lg md:text-h5-md text-h5-sm tracking-wider;
+}
+
+h6 {
+  @apply font-light
+  lg:text-h5-lg md:text-h5-md text-h5-sm tracking-wider;
 }
 
 p {
-  @apply font-sans font-regular
-    xl:text-p-xl lg:text-p-lg md:text-p-md sm:text-p-sm;
+  @apply font-sans font-light
+     lg:text-p-lg md:text-p-md text-p-sm tracking-widest;
+}
+
+.arrow {
+  @apply w-4 h-4;
+}
+
+* {
+  padding: 0;
+  margin: 0;
 }
 
 body {
   /*display: none;*/
-  font-family: "Helvetica", serif;
-  font-weight: 400;
+  color: #141414;
 }
 
 /*# sourceMappingURL=index.css.map */

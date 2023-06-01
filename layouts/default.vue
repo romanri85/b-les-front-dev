@@ -1,16 +1,15 @@
 <template>
-  <div id="app">
-    <nuxt-layout :name="activeLayout">
-      <nuxt-page/>
-    </nuxt-layout>
-  </div>
+    <div id="app">
+        <Header/>
+        <slot/>
+        <Footer/>
+    </div>
 </template>
 
-<script setup>
-import {ref} from 'vue'
-const activeLayout = ref('main')
+<script>
+import {baseURL} from "~/config";
+
+// const data = await $fetch(`${baseURL}/api/product/collections`)
+// const collections = data.results
 </script>
 
-<style scoped>
-
-</style>
