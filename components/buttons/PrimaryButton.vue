@@ -1,6 +1,6 @@
 <template>
     <button>
-        <h3 class="underline px-1"><slot/></h3>
+        <h4 class="underline-offset-4 underline px-1  "><slot/></h4>
     </button>
 </template>
 

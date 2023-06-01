@@ -1,29 +1,37 @@
 <template>
-    <div class=" main-container  bg-white flex flex-col lg:flex-row lg:justify-center justify-around items-center h-[100vh]">
+  <div
+      class=" main-container flex flex-col lg:flex-row lg:justify-center justify-around items-center h-screen">
 
-        <div class="lg:w-[50vw] w-[80vw] text-center flex flex-col justify-between items-center">
-            <h1 class="xl:text-50-mono lg:text-45-mono mb-[30px]">{{ $t('searchByParameters') }}</h1>
-            <div class="lg:block flex flex-wrap">
-                <div v-for="item in tags" :key="item.id" class="">
-                    <h3 class=" lg:pb-[30px] pb-[20px] lg:pr-0 pr-[30px] ">
-                        <span class="md:text-primaryGrey hover:text-black  hover:border-black border-b-2 md:border-transparent border-b-black hover:cursor-pointer">{{ item.name }}</span>
-                    </h3>
-                </div>
-            </div>
+    <div class="lg:w-[50vw] w-[80vw] text-center flex flex-col justify-between items-center">
+      <h2 class="text-25-mono mb-7">{{ $t('searchByParameters') }}</h2>
+      <div class="lg:block flex flex-wrap">
+        <div v-for="item in tagsStore.tags" :key="item.id" class="">
+          <h3 class=" lg:pb-4 pb-5 lg:pr-0 pr-7 ">
+            <span
+                class="md:text-darkGrey hover:text-black  hover:border-black border-b-2 md:border-transparent border-b-black hover:cursor-pointer">
+              {{ item.name }}</span>
+          </h3>
         </div>
-        <div class=" lg:w-[50vw] w-[100vw] flex justify-center lg:h-[70%] h-[50%] items-center">
-            <div class="mx-[35px] bg-[url('/parameters-search.jpg')] bg-cover bg-center lg:w-[70%] w-full h-full flex justify-center items-center ">
-                <buttons-secondary-button class="xl:w-[320px] xl:h-[80px] md:w-[250px] md:h-[70px] w-full h-[60px] md:bg-white sm:bg-primaryDark md:text-black text-white cursor-pointer">{{ $t('searchPhotoByTag') }}
-                </buttons-secondary-button>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class=" lg:w-[50vw] w-[100vw] flex justify-center lg:h-2/3 h-1/2 items-center">
+      <div
+          class="mx-9 bg-[url('/parameters-search.jpg')] bg-cover bg-center lg:w-2/3 w-full h-full flex justify-center items-center ">
+        <buttons-secondary-button class="md:w-64 md:h-20 w-full h-16
+                md:bg-white sm:bg-primaryDark md:text-black text-white cursor-pointer">{{ $t('searchPhotoByTag') }}
+        </buttons-secondary-button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import {baseURL} from "~/config";
+import {useTagsStore} from "~/stores/tagsStore";
 
-const tags = await $fetch(`${baseURL}/api/projects/tags`)
+const tagsStore = useTagsStore()
+tagsStore.fetchTags()
+
+
 </script>
 
 <style scoped>

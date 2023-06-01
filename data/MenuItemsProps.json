@@ -1,0 +1,83 @@
+{
+  "catalog": [{
+    "name": "classic",
+    "description": "classicDescription",
+    "image": "/header-modal-img/classic-modal-img.webp",
+    "slug": "/classic"
+  },
+    {
+      "name": "versailles",
+      "description": "versaillesDescription",
+      "image": "/header-modal-img/versailles-modal-img.webp",
+      "slug": "/versailles"
+    },
+    {
+      "name": "modern",
+      "description": "modernDescription",
+      "image": "/header-modal-img/modern-modal-img.webp",
+      "slug": "/modern"
+    },
+    {
+      "name": "premier",
+      "description": "premierDescription",
+      "image": "/header-modal-img/classic-modal-img.webp",
+      "slug": "/premier"
+    },
+    {
+      "name": "rimini",
+      "description": "riminiDescription",
+      "image": "/header-modal-img/rimini-modal-img.webp",
+      "slug": "/rimini"
+    },
+    {
+      "name": "rStyle",
+      "description": "rStyleDescription",
+      "image": "/header-modal-img/r-style-modal-img.webp",
+      "slug": "/rStyle"
+    }
+  ],
+
+  "other-elements": [{
+    "name": "doorSystems",
+    "image": "/header-modal-img/door-systems.jpg",
+    "slug": "/other-items/door-systems"
+  },
+    {
+      "name": "doorHardware",
+      "image": "/header-modal-img/door-hardware.jpg",
+      "slug": "/other-items/door-hardware"
+    },
+    {
+      "name": "plinth",
+      "image": "/header-modal-img/plinth.jpg",
+      "slug": "/other-items/plinth"
+    },
+    {
+      "name": "deliveryAndInstallation",
+      "image": "/header-modal-img/delivery-installation.jpg",
+      "slug": "/other-items/delivery-and-installation"
+    }
+
+  ],
+  "about-us": [{
+    "name": "aboutUs",
+    "image": "/header-modal-img/about-us.jpg",
+    "slug": "/about-us/about-us"
+  },
+    {
+      "name": "promotions",
+      "image": "/header-modal-img/promotions.jpg",
+      "slug": "/about-us/promotions"
+    },
+    {
+      "name": "toDesigners",
+      "image": "/header-modal-img/to-designers.jpg",
+      "slug": "/about-us/to-designers"
+    },
+    {
+      "name": "toDealers",
+      "image": "/header-modal-img/to-dealers.jpg",
+      "slug": "/about-us/to-dealers"
+    }
+  ]
+}

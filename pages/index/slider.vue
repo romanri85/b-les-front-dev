@@ -1,5 +1,6 @@
 <template>
-    <div class="relative z-10 xl:mt-[-100px] lg:mt-[-86px] md:mt-[-60px] mt-[-65px] w-screen">
+
+    <div   class="lg:mt-[-87px] md:mt-[-65px] mt-[-65px] w-screen">
 <!--        <client-only>-->
             <Swiper
                     :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
@@ -25,15 +26,15 @@
     }"
 
             >
-                <SwiperSlide v-for="(collection, index) in collections" :key="index">
-                    <div class="hero bg-cover bg-center h-screen w-screen">
+                <SwiperSlide v-for="(collection, index) in collections" :key="collection.name">
+                    <div class="hero bg-cover bg-center h-screen w-screen ">
                         <nuxt-img placeholder :src="collection.image"
                                   class="absolute h-screen w-screen object-cover -z-10" alt="slider-pic"/>
                         <div class="flex flex-col justify-between relative w-screen h-screen">
                             <div class="text-left relative main-container  text-white lg:mt-[200px] xl:mt-[278px] md:mb-[60px] mt-[100px] lg:max-w-screen flex md:flex-row flex-col justify-between items-center lg:order-1 order-2">
-                                <div>
-                                    <h2 class="mb-5 lg:text-[23px] md:text-[14px]">{{ $t('aboutCollection') }}</h2>
-                                    <p class="lg:w-[448px]">{{ $t(collection.description) }}</p>
+                                <div class="md:text-left text-center">
+                                    <h2 class="mb-5 lg:text-[23px]">{{ $t('aboutCollection') }}</h2>
+                                    <h5 class="lg:w-[448px] md:w-[350px] font-light">{{ $t(collection.description) }}</h5>
                                 </div>
                                 <div class="relative w-[75px] h-[64px] my:mb-0 my-[30px]">
                                     <svg class="absolute w-full h-full" viewBox="0 0 100 100"
@@ -41,23 +42,24 @@
                                         <line x1="80" y1="20" x2="20" y2="80" stroke="white" stroke-width="1"/>
                                     </svg>
                                     <p class="absolute top-0 left-0 flex items-center justify-center w-1/2 h-1/2 text-sm text-white">
-                                        {{ index + 1 }} <!-- Текущий номер слайда -->
+                                        {{ index + 1 }} <!-- slider count -->
                                     </p>
                                     <p class="absolute bottom-0 right-0 flex items-center justify-center w-1/2 h-1/2 text-sm text-white">
-                                        {{ collections.length }} <!-- Общее количество слайдов -->
+                                        {{ collections.length }} <!-- total slides -->
                                     </p>
                                 </div>
                             </div>
-                            <div class="relative main-container  flex md:justify-between sm:justify-evenly mt-[130px] lg:order-2">
-                                <button class="prev-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] sm:w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] sm:h-[30px]">
+
+                            <div class="relative main-container  flex md:justify-between justify-evenly mt-[130px] lg:order-2">
+                                <button class="prev-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[30px]">
                                     <nuxt-img placeholder class="hidden md:block" src="/icons/prev-square-icon.svg" alt="prev"/>
                                     <nuxt-img placeholder class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev"/>
                                 </button>
                                 <div class="lg:ml-[228px] xl:mb-[145px] lg:mb-[100px]">
-                                    <h1 class="text-white md:mb-8 sm:mb-[30px]">{{ $t(collection.name) }}</h1>
+                                    <h1 class="text-white md:mb-8 mb-[30px]">{{ $t(collection.name) }}</h1>
                                     <a class="text-white" :href="collection.slug"><h3 class="underline px-1">{{ $t('viewCollection') }}</h3></a>
                                 </div>
-                                <button class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] sm:w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] sm:h-[30px]">
+                                <button class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[30px]">
                                     <nuxt-img placeholder class="hidden md:block" src="/icons/next-square-icon.svg" alt="next"/>
                                     <nuxt-img placeholder class="md:hidden" src="/icons/next-page-icon-small.svg" alt="next"/>
                                 </button>
@@ -72,46 +74,12 @@
 </template>
 
 <script setup>
+// import {useSliderCollectionStore} from "~/stores/mainSliderCollectionStore.js";
+// const sliderCollectionStore = useSliderCollectionStore()
+// sliderCollectionStore.fillSliderCollections()
 
+import collections from "~/data/SliderCollections.json";
 
-const collections =[
-     {
-        name: 'classic',
-        description: 'classicDescription',
-        image: '/collection images/classic-hero.webp',
-        slug: '/collections/classic'
-    },
-     {
-        name: 'versailles',
-        description: 'versaillesDescription',
-        image: '/collection images/versal-hero.webp',
-        slug: '/collections/versailles'
-    },
-     {
-        name: 'modern',
-        description: 'modernDescription',
-        image: '/collection images/1920Modern-hero.webp',
-        slug: '/collection/modern'
-    },
-     {
-        name: 'premier',
-        description: 'premierDescription',
-        image: '/collection images/classic-hero.webp',
-        slug: '/collections/premier'
-    },
-     {
-        name: 'rimini',
-        description: 'riminiDescription',
-        image: '/collection images/1920Rimini-hero.webp',
-        slug: '/collections/rimini'
-    },
-    {
-        name: 'rStyle',
-        description: 'rStyleDescription',
-        image: '/collection images/1920R-Style-hero.webp',
-        slug: '/collections/rStyle'
-    },
-]
 </script>
 
 <style scoped>

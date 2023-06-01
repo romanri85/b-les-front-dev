@@ -1,19 +1,25 @@
 <script setup>
-import {useCollections} from "~/composables/useCollections";
-
 defineProps({light: {type: Boolean, default: true}})
 
 import {baseURL} from "~/config";
 
-const {collections} = useCollections()
+import {useSliderCollectionStore} from "~/stores/mainSliderCollectionStore.js";
+const sliderCollectionStore = useSliderCollectionStore()
 
-const tags = await $fetch(`${baseURL}/api/projects/tags`)
+const {locale, setLocale} = useI18n()
 
-const searchByParameters = [
-    {}
-]
 
-const lgMenu = [
+
+function toggleLocale() {
+    const newLocale = locale.value === 'en' ? 'ru' : 'en'
+    setLocale(newLocale)
+}
+
+// const tags = await $fetch(`${baseURL}/api/projects/tags`)
+
+
+
+const xlLgMenu = [
     {
         "name": "searchPhotoByTag",
         "image": "/header-modal-img/delivery-installation.jpg",
@@ -52,7 +58,7 @@ const lgMenu = [
         "slug": "/about-us/to-dealers"
     }]
 
-const menu = [
+const mdSmMenu = [
     {
         "name": "catalog",
         "image": "/header-modal-img/delivery-installation.jpg",
@@ -127,90 +133,105 @@ const menu = [
 
 
 <template>
-    <div class="bg-primaryDark xl:mt-[200px] lg:mt-[130px] md:mt-[80px] mt-[100px] ">
+    <div class="bg-black xl:mt-52 lg:mt-32 md:mt-24 mt-24 ">
         <div class="main-container">
-            <div class=" flex md:flex-row flex-col justify-between xl:pt-[90px] lg:pt-[60px] pt-[50px] md:items-start items-center md:pb-[90px] pb-[60px]">
-                <div class="lg:pr-[60px] ">
-                    <logo class=" xl:mb-[60px] lg:mb-[50px] mb-[30px]"/>
+            <div class=" flex md:flex-row flex-col justify-between xl:pt-24 lg:pt-16 pt-12 md:items-start items-center md:pb-24 pb-12">
+                <div class="lg:pr-16 ">
+                    <logo class=" xl:mb-16 lg:mb-12 mb-5"/>
                     <div class="md:block hidden">
                         <buttons-secondary-button
-                                class="xl:w-[290px] xl:h-[80px] lg:h-[70px] md:h-[60px] lg:w-[250px] md:w-[200px] sm:block sm:border-0 ">
+                                class="xl:w-72 xl:h-20 lg:h-16 md:h-16 lg:w-64 md:w-52 sm:block sm:border-0 ">
                             {{ $t('catalog') }}
                         </buttons-secondary-button>
                     </div>
+                    <button type="button" class="md:block hidden font-mono text-sm py-12"
+                            @click="toggleLocale"><h3
+                            :class="light ? 'text-white' : 'text-black'">{{ locale === 'en' ? "EN" : "RU" }}</h3>
+                    </button>
+
                 </div>
-                <p class="md:hidden text-white w-[150px]"> {{ $t('catalog') }}</p>
+                <p class="md:hidden text-white w-36 ml-12"> {{ $t('catalog') }}</p>
 
 
                 <!--            lgMenu-->
 
 
                 <div class="lg:block hidden">
-                    <h3 class="text-white pt-4 mb-[25px]">{{ $t('collections') }}</h3>
-                    <div v-for="(collection, index) in collections" :key="index" class="mt-[10px]">
-                        <a href=""><p class="text-white ">{{ collection.name }}</p></a>
+                    <h3 class="text-white mt-5 mb-5">{{ $t('collections') }}</h3>
+                    <div v-for="(collection, index) in sliderCollectionStore.collections" :key="collection.name" class="mt-[10px]">
+                        <a href=""><p class="text-normalGrey ">{{ $t(collection.name) }}</p></a>
                     </div>
                 </div>
                 <div class="lg:block hidden">
-                    <h3 class="text-white pt-4 mb-[25px]">{{ $t('searchByParameters') }}</h3>
-                    <div v-for="(tag, index) in tags" :key="index" class="mt-[10px]">
-                        <a href=""><p class="text-white ">{{ tag.name }}</p></a>
-                    </div>
+                    <h3 class="text-white mt-5  mb-5">{{ $t('searchByParameters') }}</h3>
+<!--                    <div v-for="(tag, index) in tags" :key="index" class="mt-2">-->
+<!--                        <a href=""><p class="text-normalGrey">{{ tag.name }}</p></a>-->
+<!--                    </div>-->
                 </div>
                 <div class="text-white lg:block hidden">
-                    <h3 class="pt-4 mb-[25px]">{{ $t('whereToBuy') }}</h3>
-                    <h3 class="pt-4 mb-[25px]">{{ $t('doorHardware') }}</h3>
+                    <h3 class="mb-12 mt-5 ">{{ $t('whereToBuy') }}</h3>
+                    <h3 class="mb-5">{{ $t('doorHardware') }}</h3>
                     <div>
-                        <div class="mt-[10px]">
-                            <a href=""><p>{{ $t('handles') }}</p></a>
+                        <div class="mt-2">
+                            <a href=""><p class="text-normalGrey ">{{ $t('handles') }}</p></a>
                         </div>
-                        <div class="mt-[10px]">
-                            <a href=""><p>{{ $t('hinges') }}</p></a>
+                        <div class="mt-2">
+                            <a href=""><p class="text-normalGrey ">{{ $t('hinges') }}</p></a>
                         </div>
-                        <div class="mt-[25px]">
+                        <div class="mt-12">
                             <a href=""><h3>{{ $t('plinth') }}</h3></a>
                         </div>
                     </div>
-                    <div class="mt-[25px]">
+                    <div class="mt-12">
                         <a href=""><h3>{{ $t('doorSystems') }}</h3></a>
                     </div>
 
                 </div>
                 <div class="text-white lg:block hidden">
-                    <h3 class="text-white pt-4 mb-[25px]">{{ $t('information') }}</h3>
-                    <div v-for="(menuItem, index) in lgMenu" :key="index" class="mt-[10px]">
-                        <a href=""><p class="text-white ">{{ $t(menuItem.name) }}</p></a>
+                    <h3 class="text-white mb-5 mt-5 ">{{ $t('information') }}</h3>
+                    <div v-for="(menuItem, index) in xlLgMenu" :key="menuItem.name" class="mt-2">
+                        <a href=""><p class="text-normalGrey">{{ $t(menuItem.name) }}</p></a>
                     </div>
                 </div>
 
 
                 <!--        menu-->
 
-                <div class="lg:hidden w-[150px]">
-                    <div v-for="(menuItem, index) in menu.slice(1, 5)" :key="index">
+                <div class="lg:hidden w-36 ml-12">
+                    <div v-for="(menuItem, index) in mdSmMenu.slice(1, 5)" :key="menuItem.name">
                         <div class="text-white pt-4">
-                            <a href=""><p class="text-white ">{{ $t(menuItem.name) }}</p></a>
+                            <a href=""><p class="">{{ $t(menuItem.name) }}</p></a>
                         </div>
                     </div>
                 </div>
-                <div class="lg:hidden w-[150px]">
-                    <div v-for="(menuItem, index) in menu.slice(5, 8)" :key="index">
+                <div class="lg:hidden w-36 ml-12">
+                    <div v-for="(menuItem, index) in mdSmMenu.slice(5, 8)" :key="menuItem.name">
                         <div class="text-white pt-4">
-                            <a href=""><p class="text-white ">{{ $t(menuItem.name) }}</p></a>
+                            <a href=""><p class=" ">{{ $t(menuItem.name) }}</p></a>
                         </div>
                     </div>
                 </div>
-                <div class="lg:hidden w-[150px]">
-                    <div class="lg:hidden" v-for="(menuItem, index) in menu.slice(8)" :key="index">
+                <div class="lg:hidden w-36 ml-12">
+                    <div class="lg:hidden" v-for="(menuItem, index) in mdSmMenu.slice(8)" :key="menuItem.name">
                         <div class="text-white pt-4">
-                            <a href=""><p class="text-white ">{{ $t(menuItem.name) }}</p></a>
+                            <a href=""><p class="">{{ $t(menuItem.name) }}</p></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="border-b-[1px] border-[grey] hidden md:block"></div>
-            <div class=" w-full h-[90px] flex md:justify-end justify-center md:items-center items-start">
-                <nuxt-img src="/insta.svg"/>
+            <div class="border-b border-primaryGrey hidden md:block"></div>
+            <div class="h-24 flex md:justify-end justify-center md:items-center items-start">
+                <div class="w-36 ml-12">
+                    <nuxt-img src="/insta.svg"/>
+                </div>
+            </div>
+            <div class="w-full flex justify-center">
+                <div class="w-36 ml-12">
+                    <button type="button" class="md:hidden font-mono text-sm pb-12"
+                            @click="toggleLocale"><h3
+                            :class="light ? 'text-white' : 'text-black'">{{ locale === 'en' ? "EN" : "RU" }}</h3>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

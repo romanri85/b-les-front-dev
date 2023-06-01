@@ -9,4 +9,9 @@ dist
 .DS_Store
 .idea
 .vscode
-
+.nuxt-storybook
+storybook-static
+*.jpg
+*.png
+*.jpeg
+*.webp

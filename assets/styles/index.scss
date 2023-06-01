@@ -1,12 +1,24 @@
 @import "stylesheet.css";
-@import "main.css";
-@import "../scss/tailwind.scss";
-@import '../scss/layouts/_layout.scss';
-@import '../scss/base/_typography.scss';
+//@import "main.css";
+@import "tailwind";
+@import 'layout';
+@import 'typography';
+@import "components/arrow";
+@import "components/MultiRangeSliderBarOnly.css";
+
+* {
+    padding: 0;
+    margin: 0;
+    //box-sizing: border-box;
+
+}
 
 body {
     /*display: none;*/
-    font-family: "Helvetica", serif;
-    font-weight: 400;
+    //font-family: "Helvetica", serif;
+    //font-weight: 400;
+    color: #141414;
+    //@apply bg-normalBeige;
 }
+
 

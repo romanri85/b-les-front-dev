@@ -6,10 +6,13 @@ const config = {
         'nuxt-headlessui',
         '@nuxt/image-edge',
         '@nuxtjs/i18n',
+        'nuxt-icon',
         ['nuxt-swiper', {
             // Swiper options
         }], '@pinia/nuxt',
+
     ],
+
     postcss: {
         plugins: {
             tailwindcss: {},
@@ -19,7 +22,15 @@ const config = {
     headlessui: {
         prefix: 'Headless',
     },
+
     i18n,
+    pinia: {
+        autoImports: [
+            // automatically imports `defineStore`
+            'defineStore', // import { defineStore } from 'pinia'
+            ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
+        ],
+    },
     vite: {
         define: {
             'process.env': process.env,

@@ -45,7 +45,10 @@ export const i18n = {
                 michelangeloQuote: '"Trifles make perfection, and perfection is no trifle".',
                 michelangelo: 'Michelangelo, sculptor.',
                 hinges: 'Hinges',
-                'handles': 'Handles',
+                handles: 'Handles',
+                otherElementsHeader: 'Additional products and services ',
+                aboutUsHeader: 'Information about the company',
+                websiteSearch: 'Website search',
 
 
             },
@@ -94,6 +97,10 @@ export const i18n = {
                 information: 'Информация',
                 hinges: 'Петли',
                 handles: 'Ручки',
+                otherElementsHeader: 'Дополнительные продукты и услуги',
+                aboutUsHeader: 'Информация о компании',
+                websiteSearch: 'Поиск по сайту',
+
 
 
             },

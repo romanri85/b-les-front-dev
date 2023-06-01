@@ -1,10 +1,10 @@
 <template>
-    <div class="bg-white flex flex-col justify-center items-center">
-        <h1 class="xl:text-50-mono lg:text-45-mono mb-8">{{ $t('ourProjects') }}</h1>
-        <p class="xl:w-600 lg:w-530 mb-12">{{ $t('ourProjectsDescription')
-            }} </p>
-        <div class="flex flex-row flex-wrap gap-[6px] justify-center lg:mb-[40px] md:mb-[30px] mb-[20px]">
-            <div v-for="(img,index) in projectsImages" class="lg:w-full lg:flex-1 md:w-[calc(50%-3px)] w-[calc((25%-3x)]" :key="index">
+    <div class="flex flex-col justify-center items-center">
+        <h2 class=" mb-8">{{ $t('ourProjects') }}</h2>
+        <h5 class=" lg:w-530 mb-12 main-container text-primaryDark">{{ $t('ourProjectsDescription')
+            }} </h5>
+        <div class="flex flex-row flex-wrap gap-1 justify-center lg:mb-10 md:mb-7 mb-5">
+            <div v-for="(img,index) in projectsImages" class="lg:w-full lg:flex-1 md:w-[calc(50%-2px)] w-[calc((25%-2x)]" :key="index">
                 <nuxt-img placeholder class="w-full h-full object-cover object-center aspect-square" :src="img"/>
             </div>
         </div>
@@ -18,8 +18,9 @@
 import {baseURL} from "~/config";
 
 
-const projects = await $fetch(`${baseURL}/api/projects`)
-const projectsImages = projects.map(project => baseURL + project.first_image.image)
+// const projects = await $fetch(`${baseURL}/api/projects/`)
+// const projects = await $fetch(`/api/projects/`)
+// const projectsImages = projects.map(project => project.first_image.image)
 </script>
 
 <style scoped>
