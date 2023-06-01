@@ -12,4 +12,3 @@ ENV NUXT_PORT=3000
 
 
 ENTRYPOINT ["node", ".output/server/index.mjs"]
-
