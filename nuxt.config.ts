@@ -36,7 +36,7 @@ const config = {
             'process.env': process.env,
         },
         ssr: {
-            noExternal: ['masonry-layout', 'imagesloaded'],
+            noExternal: ['imagesloaded'],
         },
     },
 };
