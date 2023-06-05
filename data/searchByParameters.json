@@ -1,0 +1,31 @@
+[{
+  "name": "white doors",
+  "filter": {
+    "colorSet": ["Белый"]
+  }
+},
+  {
+    "name": "red doors",
+    "filter": {
+      "colorSet": ["Красный"]
+    }
+  },
+  {
+    "name": "green doors",
+    "filter": {
+      "colorSet": ["Зеленый"]
+    }
+  },
+  {
+    "name": "blue doors",
+    "filter": {
+      "colorSet": ["Синий"]
+    }
+  },
+  {
+    "name": "yellow doors",
+    "filter": {
+      "colorSet": ["Желтый"]
+    }
+  }
+]
