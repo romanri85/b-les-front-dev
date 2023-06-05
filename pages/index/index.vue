@@ -1,11 +1,14 @@
 <template>
+  <client-only>
+    <welcome/>
+  </client-only>
 
-    <slider class="lg:hidden" v-if="isBurgerOpenStore.isBurgerOpen"/>
-    <slider class="lg:block hidden"/>
-    <search/>
-    <projects/>
-    <quote/>
-    <advantages/>
+  <slider class="lg:hidden" v-if="isBurgerOpenStore.isBurgerOpen"/>
+  <slider class="lg:block hidden"/>
+  <search/>
+  <projects/>
+  <quote/>
+  <advantages/>
 </template>
 
 <script setup>
@@ -15,11 +18,13 @@ import Search from "~/pages/index/search.vue";
 import Projects from "~/pages/index/projects.vue";
 import Quote from "~/pages/index/quote.vue";
 import Advantages from "~/pages/index/advantages.vue";
-import { useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
-const isBurgerOpenStore = useIsBurgerOpenStore()
+import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
 
-import { ref } from 'vue'
-import { TransitionRoot } from '@headlessui/vue'
+const isBurgerOpenStore = useIsBurgerOpenStore()
+import Welcome from "~/components/pop-ups/welcome.vue";
+
+import {ref} from 'vue'
+import {TransitionRoot} from '@headlessui/vue'
 
 const isShowing = ref(true)
 

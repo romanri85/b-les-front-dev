@@ -1,36 +1,14 @@
 <script setup lang="js">
 
+import searchByParameters from '~/data/searchByParameters.json'
+
 const emit = defineEmits(['changeFilters'])
 
 const props = defineProps({
   activeFilters: Object
 })
 
-
-
-
-const doorSets = reactive([
-  {
-    name: "white doors",
-    filter: {colorSet: ['Белый']},
-  },
-  {
-    name: "red doors",
-    filter: {colorSet: ['Красный']},
-  },
-  {
-    name: "green doors",
-    filter: {colorSet: ['Зеленый']},
-  },
-  {
-    name: "blue doors",
-    filter: {colorSet: ['Синий']},
-  },
-  {
-    name: "yellow doors",
-    filter: {colorSet: ['Желтый']},
-  },
-])
+const doorSets = reactive(searchByParameters)
 
 
 function chooseDoorSet(doorSet) {

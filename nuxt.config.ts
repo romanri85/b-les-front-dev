@@ -1,4 +1,4 @@
-import {i18n} from './i18n.config';
+// import {i18n} from './i18n.config';
 
 const config = {
     css: ['~/assets/styles/index.scss'],
@@ -23,7 +23,9 @@ const config = {
         prefix: 'Headless',
     },
 
-    i18n,
+    i18n:{
+        vueI18n: './i18n.config.ts' // if you are using custom path, default
+    },
     pinia: {
         autoImports: [
             // automatically imports `defineStore`

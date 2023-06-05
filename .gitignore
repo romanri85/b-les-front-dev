@@ -11,7 +11,4 @@ dist
 .vscode
 .nuxt-storybook
 storybook-static
-*.jpg
-*.png
-*.jpeg
-*.webp
+pics

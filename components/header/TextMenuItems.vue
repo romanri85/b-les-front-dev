@@ -7,7 +7,6 @@ import {ChevronDownIcon} from '@heroicons/vue/24/solid'
 
 defineProps({light: {type: Boolean, default: true}})
 
-const sliderCollectionStore = useSliderCollectionStore()
 
 
 const textMenuItems = ref(TextMenuItems)
