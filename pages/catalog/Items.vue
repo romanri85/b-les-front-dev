@@ -37,13 +37,13 @@ let buttons = [
   }
 ]
 
-const activeCasing = ref("/CasingOakEnamelBeige/PNG/Дуб брашированный Бежевый -  76 тип 1.webp")
+const activeCasing = ref("/CasingOakEnamelBeige/PNG/Дуб брашированный Бежевый - Карниз 120.png")
 
-function changeCasing(path) {
-  // const module = await import(/* @vite-ignore */ `../assets/${iconName}.svg`)
-  // return module.default.replace(/^\/@fs/, '')
-  activeCasing.value = path
-}
+// function changeCasing(path) {
+//   // const module = await import(/* @vite-ignore */ `../assets/${iconName}.svg`)
+//   // return module.default.replace(/^\/@fs/, '')
+//   activeCasing.value = path
+// }
 
 const isClicked = ref(false)
 const toggleArrow = () => {

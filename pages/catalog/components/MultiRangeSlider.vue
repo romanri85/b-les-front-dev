@@ -24,7 +24,7 @@
           @touchstart="onLeftThumbMousedown"
       >
         <div class="caption">
-          <span class="min-caption">{{ minCaption || barMinVal }}</span>
+          <span class="min-caption">{{ minCaption || barMinVal }} app</span>
         </div>
       </div>
       <div class="bar-inner">
@@ -47,7 +47,7 @@
           @touchstart="onRightThumbMousedown"
       >
         <div class="caption">
-          <span class="max-caption">{{ maxCaption || barMaxVal }}</span>
+          <span class="max-caption">{{ maxCaption || barMaxVal }} app</span>
         </div>
       </div>
       <div
@@ -498,6 +498,7 @@ export default {
   color: white;
   box-shadow: 0px 0px 5px black;
   padding: 0px 5px;
+
   white-space: nowrap;
 }
 .multi-range-slider .thumb:active .caption {

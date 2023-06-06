@@ -1,36 +1,14 @@
 <script setup lang="js">
 
+import searchByParameters from '~/data/searchByParameters.json'
+
 const emit = defineEmits(['changeFilters'])
 
 const props = defineProps({
   activeFilters: Object
 })
 
-
-
-
-const doorSets = reactive([
-  {
-    name: "white doors",
-    filter: {colorSet: ['Белый']},
-  },
-  {
-    name: "red doors",
-    filter: {colorSet: ['Красный']},
-  },
-  {
-    name: "green doors",
-    filter: {colorSet: ['Зеленый']},
-  },
-  {
-    name: "blue doors",
-    filter: {colorSet: ['Синий']},
-  },
-  {
-    name: "yellow doors",
-    filter: {colorSet: ['Желтый']},
-  },
-])
+const doorSets = reactive(searchByParameters)
 
 
 function chooseDoorSet(doorSet) {
@@ -38,8 +16,6 @@ function chooseDoorSet(doorSet) {
 
   emit('changeFilters', doorSet)
 }
-
-
 
 
 // add '"All doors" and "More" buttons to tags'
@@ -58,8 +34,10 @@ const doorSetsWithButtonAll = []
       <h3 class="pr-16 whitespace-nowrap">все двери</h3>
     </buttons-primary-button>
     <div class=" flex justify-start gap-x-3 gap-y-3 text-darkGrey flex-wrap">
-      <h3 class=" last:text-black  last:underline last:underline-offset-4 border-black whitespace-nowrap"
-          v-for="doorSet in doorSets" :key="doorSet.name" @click="chooseDoorSet(doorSet.filter)">{{ doorSet.name }}</h3>
+      <h3 v-for="doorSet in doorSets" :key="doorSet.name"
+          class=" last:underline-offset-4 border-black whitespace-nowrap"
+          :class="{underline: activeFilters.colorSet.includes(doorSet.filter.colorSet[0])}"
+          @click="chooseDoorSet(doorSet.filter)">{{ doorSet.name }}</h3>
     </div>
   </div>
 </template>

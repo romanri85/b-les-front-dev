@@ -20,7 +20,7 @@
     {
       "name": "premier",
       "description": "premierDescription",
-      "image": "/header-modal-img/classic-modal-img.webp",
+      "image": "/header-modal-img/premier-modal-img.webp",
       "slug": "/premier"
     },
     {
@@ -39,44 +39,44 @@
 
   "other-elements": [{
     "name": "doorSystems",
-    "image": "/header-modal-img/door-systems.jpg",
+    "image": "/header-modal-img/door-systems.webp",
     "slug": "/other-items/door-systems"
   },
     {
       "name": "doorHardware",
-      "image": "/header-modal-img/door-hardware.jpg",
+      "image": "/header-modal-img/door-hardware.webp",
       "slug": "/other-items/door-hardware"
     },
     {
       "name": "plinth",
-      "image": "/header-modal-img/plinth.jpg",
+      "image": "/header-modal-img/plinth.webp",
       "slug": "/other-items/plinth"
     },
     {
       "name": "deliveryAndInstallation",
-      "image": "/header-modal-img/delivery-installation.jpg",
+      "image": "/header-modal-img/delivery-installation.webp",
       "slug": "/other-items/delivery-and-installation"
     }
 
   ],
   "about-us": [{
     "name": "aboutUs",
-    "image": "/header-modal-img/about-us.jpg",
+    "image": "/header-modal-img/about-us.webp",
     "slug": "/about-us/about-us"
   },
     {
       "name": "promotions",
-      "image": "/header-modal-img/promotions.jpg",
+      "image": "/header-modal-img/promotions.webp",
       "slug": "/about-us/promotions"
     },
     {
       "name": "toDesigners",
-      "image": "/header-modal-img/to-designers.jpg",
+      "image": "/header-modal-img/to-designers.webp",
       "slug": "/about-us/to-designers"
     },
     {
       "name": "toDealers",
-      "image": "/header-modal-img/to-dealers.jpg",
+      "image": "/header-modal-img/to-dealers.webp",
       "slug": "/about-us/to-dealers"
     }
   ]

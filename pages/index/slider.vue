@@ -1,7 +1,7 @@
 <template>
 
     <div   class="lg:mt-[-87px] md:mt-[-65px] mt-[-65px] w-screen">
-<!--        <client-only>-->
+        <client-only>
             <Swiper
                     :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
                     :slides-per-view="1"
@@ -33,6 +33,7 @@
                         <div class="flex flex-col justify-between relative w-screen h-screen">
                             <div class="text-left relative main-container  text-white lg:mt-[200px] xl:mt-[278px] md:mb-[60px] mt-[100px] lg:max-w-screen flex md:flex-row flex-col justify-between items-center lg:order-1 order-2">
                                 <div class="md:text-left text-center">
+
                                     <h2 class="mb-5 lg:text-[23px]">{{ $t('aboutCollection') }}</h2>
                                     <h5 class="lg:w-[448px] md:w-[350px] font-light">{{ $t(collection.description) }}</h5>
                                 </div>
@@ -69,7 +70,7 @@
 
                 </SwiperSlide>
             </Swiper>
-<!--        </client-only>-->
+        </client-only>
     </div>
 </template>
 

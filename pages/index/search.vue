@@ -5,11 +5,11 @@
     <div class="lg:w-[50vw] w-[80vw] text-center flex flex-col justify-between items-center">
       <h2 class="text-25-mono mb-7">{{ $t('searchByParameters') }}</h2>
       <div class="lg:block flex flex-wrap">
-        <div v-for="item in tagsStore.tags" :key="item.id" class="">
+        <div v-for="parameter in parameters" :key="parameter.name" class="">
           <h3 class=" lg:pb-4 pb-5 lg:pr-0 pr-7 ">
             <span
                 class="md:text-darkGrey hover:text-black  hover:border-black border-b-2 md:border-transparent border-b-black hover:cursor-pointer">
-              {{ item.name }}</span>
+              {{ parameter.name }}</span>
           </h3>
         </div>
       </div>
@@ -26,10 +26,11 @@
 </template>
 
 <script setup>
-import {useTagsStore} from "~/stores/tagsStore";
-
-const tagsStore = useTagsStore()
-tagsStore.fetchTags()
+import parameters from "~/data/searchByParameters.json"
+// import {useTagsStore} from "~/stores/tagsStore";
+//
+// const tagsStore = useTagsStore()
+// tagsStore.fetchTags()
 
 
 </script>

@@ -1,10 +1,7 @@
 <script setup>
 defineProps({light: {type: Boolean, default: true}})
 
-import {baseURL} from "~/config";
-
-import {useSliderCollectionStore} from "~/stores/mainSliderCollectionStore.js";
-const sliderCollectionStore = useSliderCollectionStore()
+import collections from '~/data/SliderCollections.json'
 
 const {locale, setLocale} = useI18n()
 
@@ -133,7 +130,7 @@ const mdSmMenu = [
 
 
 <template>
-    <div class="bg-black xl:mt-52 lg:mt-32 md:mt-24 mt-24 ">
+    <div class="bg-black ">
         <div class="main-container">
             <div class=" flex md:flex-row flex-col justify-between xl:pt-24 lg:pt-16 pt-12 md:items-start items-center md:pb-24 pb-12">
                 <div class="lg:pr-16 ">
@@ -158,7 +155,7 @@ const mdSmMenu = [
 
                 <div class="lg:block hidden">
                     <h3 class="text-white mt-5 mb-5">{{ $t('collections') }}</h3>
-                    <div v-for="(collection, index) in sliderCollectionStore.collections" :key="collection.name" class="mt-[10px]">
+                    <div v-for="(collection, index) in collections" :key="collection.name" class="mt-[10px]">
                         <a href=""><p class="text-normalGrey ">{{ $t(collection.name) }}</p></a>
                     </div>
                 </div>

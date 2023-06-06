@@ -29,54 +29,56 @@ async function toggleLocale() {
 </script>
 <template>
   <header class="header relative z-30">
-    <Disclosure v-slot="{open}">
-      <div
-          :class="{'bg-white': open}"
-          class="lg:bg-transparent main-container font-mono whitespace-nowrap flex  justify-between items-center">
+    <client-only>
+      <Disclosure v-slot="{open}">
+        <div
+            :class="{'bg-white': open}"
+            class="lg:bg-transparent main-container font-mono whitespace-nowrap flex  justify-between items-center">
 
 
-        <!--            burger menu-->
+          <!--            burger menu-->
 
-        <div class="lg:hidden md:w-[32px] w-[25px]  md:order-1 order-3">
-          <DisclosureButton>
-            <burger @click="isBurgerOpenStore.toogleIsBurgerOpen"/>
-          </DisclosureButton>
+          <div class="lg:hidden md:w-[32px] w-[25px]  md:order-1 order-3">
+            <DisclosureButton>
+              <burger @click="isBurgerOpenStore.toogleIsBurgerOpen"/>
+            </DisclosureButton>
+          </div>
+
+          <!--            logo-->
+          <div class="md:order-2">
+            <NuxtLink to="/" class="block lg:hidden">
+              <logo :light="!open"/>
+            </NuxtLink>
+            <NuxtLink to="/" class="hidden lg:block">
+              <logo :light="true"/>
+            </NuxtLink>
+          </div>                <!--                main menu items-->
+          <text-menu-items/>
+
+          <!--            contact us, favourite, search menu items-->
+
+          <icons-menu-items class="block lg:hidden" :light="!open"/>
+          <icons-menu-items class="hidden lg:flex " :light="true"/>
+
+          <!--            change language menu item-->
+
+          <button type="button" class="lg:block lg:order-4 font-mono text-sm hidden" @click="toggleLocale">
+            <h3 :class="light ? 'text-white' : 'text-black'">
+              {{ locale === 'en' ? "EN" : "RU" }}
+            </h3>
+          </button>
         </div>
+        <!--    thin line between header and content-->
 
-        <!--            logo-->
-        <div class="md:order-2">
-          <NuxtLink to="/" class="block lg:hidden">
-            <logo :light="!open"/>
-          </NuxtLink>
-          <NuxtLink to="/" class="hidden lg:block">
-            <logo :light="true"/>
-          </NuxtLink>
-        </div>                <!--                main menu items-->
-        <text-menu-items/>
+        <div class="border-b w-full" :class="open ? '' : 'border-white'"></div>
 
-        <!--            contact us, favourite, search menu items-->
+        <!--            burger menu mobile and tablet-->
 
-        <icons-menu-items class="block lg:hidden" :light="!open"/>
-        <icons-menu-items class="hidden lg:flex " :light="true"/>
-
-        <!--            change language menu item-->
-
-        <button type="button" class="lg:block lg:order-4 font-mono text-sm hidden" @click="toggleLocale">
-          <h3 :class="light ? 'text-white' : 'text-black'">
-            {{ locale === 'en' ? "EN" : "RU" }}
-          </h3>
-        </button>
-      </div>
-      <!--    thin line between header and content-->
-
-      <div class="border-b w-full" :class="open ? '' : 'border-white'"></div>
-
-      <!--            burger menu mobile and tablet-->
-
-      <DisclosurePanel class=" w-full lg:hidden">
-        <tablet-mobile-menu/>
-      </DisclosurePanel>
-    </Disclosure>
+        <DisclosurePanel class=" w-full lg:hidden">
+          <tablet-mobile-menu/>
+        </DisclosurePanel>
+      </Disclosure>
+    </client-only>
   </header>
 
 

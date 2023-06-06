@@ -1,21 +1,14 @@
 <script setup lang="ts">
 
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 import FilterType from "~/pages/catalog/components/FilterType.vue";
-import {useCollectionsStore} from "~/stores/collectionsStore";
+import collections from "~/data/SliderCollections.json";
 const props = defineProps({
   value: {
     type: Array,
   }
 })
 const emit = defineEmits(['change'])
-
-const collectionsStore = useCollectionsStore()
-collectionsStore.fetchCollections()
-
-
-
 
 
 let chosenCollections = reactive(props.value)
@@ -38,9 +31,9 @@ function chooseCollection(name){
       <filter-type filterName="Коллекции"/>
     </DisclosureButton>
     <DisclosurePanel class="mb-20">
-      <div v-for="collection in collectionsStore.collections.results" :key=collection.id class="flex gap-x-4 items-center mb-3">
+      <div v-for="collection in collections" :key=collection.id class="flex gap-x-4 items-center mb-3">
 
-        <h5 class="underline-offset-4 cursor-pointer" @click="chooseCollection(collection.name)" :class="{'underline':chosenCollections.includes(collection.name)}">{{collection.name}}</h5>
+        <h5 class="underline-offset-4 cursor-pointer" @click="chooseCollection(collection.name)" :class="{'underline':chosenCollections.includes(collection.name)}">{{$t(collection.name)}}</h5>
       </div>
     </DisclosurePanel>
   </Disclosure>

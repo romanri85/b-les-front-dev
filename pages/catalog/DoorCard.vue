@@ -13,7 +13,7 @@ const props = defineProps({
     <div class="relative pb-8">
       <nuxt-img width="200px" height="auto" :src="props.value" class="h-auto w-48"></nuxt-img>
       <nuxt-img width="200px" height="auto"
-                src="/leafOakEnamelBeige/PNG/Дуб брашированный Бежевый - ДП Калина Г21-8.webp"
+                src="/leafOakEnamelBeige/PNG/Дуб брашированный Бежевый - ДП Калина Г21-8.png"
                 class="h-auto w-48 absolute top-0"></nuxt-img>
     </div>
 
