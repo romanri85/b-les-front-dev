@@ -26,12 +26,14 @@
     "@headlessui/vue": "^1.7.13",
     "@heroicons/vue": "^2.0.18",
     "@pinia/nuxt": "^0.4.10",
+    "@vueuse/core": "^10.1.2",
     "@yeger/vue-masonry-wall": "^3.4.4",
     "imagesloaded": "^5.0.0",
     "install": "^0.13.0",
     "npm": "^9.6.7",
     "nuxt-swiper": "^1.1.0",
     "pinia": "^2.0.36",
+    "vue-awesome-paginate": "^1.1.46",
     "vue-typical": "^2.1.0"
   },
   "overrides": {

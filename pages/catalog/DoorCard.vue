@@ -2,7 +2,7 @@
 
 const props = defineProps({
   value: String,
-  door: Object
+  doorVariant: Object
 })
 
 
@@ -18,22 +18,22 @@ const props = defineProps({
     </div>
 
     <div class="flex flex-col items-center">
-      <h2 class="pb-3">ALPHA</h2>
+      <h2 class="pb-3">{{props.doorVariant.name}}</h2>
 <!--      <h2>{{props.door.name}}</h2>-->
-      <p class="pb-3 uppercase">Коллекция Rossa</p>
+      <p class="pb-3 uppercase">{{props.doorVariant.product.collection.name}}</p>
       <!--        collection can be defined by color at frontend-->
 <!--      <h6>{{props.door.collection}}</h6>-->
       <div class="pb-3 flex">
-        <p>Массив,</p>
+        <p>{{ props.doorVariant.material }}</p>
 <!--        material can be defined by color at frontend-->
 <!--        <p>{{props.door.material + "," + " "}}</p>-->
         <p>&nbsp; Светлый дуб</p>
 <!--        <p>{{props.door.color}}</p>-->
       </div>
 <!--      not necessary at first-->
-      <p class="pb-3">Сатинато бронза</p>
+      <p class="pb-3">{{ props.doorVariant.glass }}</p>
 <!--      <p>{{props.door.glass}}</p>-->
-      <p class="font-regular">54100 R</p>
+      <p class="font-regular">{{ props.doorVariant.price}}R</p>
 <!--      <h6>{{props.door.price}}</h6>-->
     </div>
   </div>

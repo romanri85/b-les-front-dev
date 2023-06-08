@@ -15,7 +15,7 @@
   {
     "id": "where-to-buy",
     "name": "whereToBuy",
-    "slug": "/where-to-buy",
+    "slug": "/pagination",
     "needToShowDropdown": false
   },
   {

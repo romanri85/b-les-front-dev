@@ -3,6 +3,7 @@ import {Popover, PopoverButton, PopoverPanel} from "@headlessui/vue";
 import TextMenuItems from "@/data/TextMenuItems.json"
 import menuItemsProps from "@/data/MenuItemsProps.json"
 import {ChevronDownIcon} from '@heroicons/vue/24/solid'
+import Pagination from "~/pages/Pagination.vue";
 
 defineProps({light: {type: Boolean, default: true}})
 
@@ -41,7 +42,7 @@ const currentMenuItems = computed(() => {
           <PopoverButton class="">
             <div class="flex justify-center items-center h-full"
                  :class="activeItemIndex === index ? '[&>span]:rotate-180' : '' ">
-              <NuxtLink to="/catalog"><h4 class="inline-block pr-2">{{ $t(item.name) }}</h4></NuxtLink>
+              <NuxtLink :to="item.slug"><h4 class="inline-block pr-2">{{ $t(item.name) }}</h4></NuxtLink>
               <span v-if="item.name === 'otherElements' || (item.name === 'aboutUs')">
                             <ChevronDownIcon class="w-5 h-5"/>
                         </span>
