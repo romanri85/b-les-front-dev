@@ -46,6 +46,27 @@ p {
      lg:text-p-lg md:text-p-md text-p-sm tracking-widest;
 }
 
+.underline-direction {
+  position: relative;
+  margin: 3px;
+}
+.underline-direction:hover, .underline-direction:focus, .underline-direction:active {
+  /* cursor: pointer;*/
+}
+.underline-direction:hover:after, .underline-direction:focus:after, .underline-direction:active:after {
+  width: 100%;
+}
+.underline-direction:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  background-color: #000;
+  width: 0;
+  transition: width 0.5s;
+}
+
 .arrow {
   @apply w-4 h-4;
 }

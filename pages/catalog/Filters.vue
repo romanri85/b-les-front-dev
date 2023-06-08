@@ -4,7 +4,8 @@ import ColorFilter from "~/pages/catalog/colorSetFilter.vue";
 import DesignFilter from "~/pages/catalog/designFilter.vue";
 import MaterialColorFilter from "~/pages/catalog/materialColorFilter.vue";
 import CollectionsFilter from "~/pages/catalog/collectionsFilter.vue";
-import PrimaryButton from "~/components/buttons/PrimaryButton.vue";
+import PrimaryButton from "~/components/buttons/PrimaryButtonSmall.vue";
+import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 
 const emit = defineEmits(['changeFilters'])
 const props = defineProps({
@@ -64,9 +65,9 @@ emit('changeFilters', collections)
       <design-filter :value="props.activeFilters.designs" @change="onChangeDesigns"/>
       <material-color-filter :value="props.activeFilters.colors" @change="onChangeColors"/>
       <collections-filter :value="props.activeFilters.collections" @change="onChangeCollections"/>
-      <primary-button class="w-full text-start mt-16">
+      <primary-button-small class="w-full text-start mt-16">
         <h3>Очистить</h3>
-      </primary-button>
+      </primary-button-small>
     </div>
 
   </section>

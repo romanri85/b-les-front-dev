@@ -1,23 +1,37 @@
 <template>
-      <div class="flex flex-col justify-center items-center mt-32">
-  <h2 class=" mb-8">{{ $t('ourProjects') }}</h2>
-  <h5 class=" lg:w-530 mb-12 main-container text-primaryDark">{{
+      <div class="flex flex-col justify-center items-center lg:mt-32 md:mt-20 mt-24 lg:mx-48 md:mx-10  main-container">
+  <h2 class="">{{ $t('ourProjects') }}</h2>
+        <div class="lg:mt-4 md:mt-3 mt-5 lg:mb-12 md:mb-8 mb-5">
+  <h5 class=" text-primaryDark md:text-center">{{
       $t('ourProjectsDescription')
     }} </h5>
+        </div>
   <!--        <div class="flex flex-row flex-wrap gap-1 justify-center lg:mb-10 md:mb-7 mb-5">-->
   <!--            <div v-for="(img,index) in projectsImages" class="lg:w-full lg:flex-1 md:w-[calc(50%-2px)] w-[calc((25%-2x)]" :key="index">-->
   <!--                <nuxt-img placeholder class="w-full h-full object-cover object-center aspect-square" :src="img"/>-->
   <!--            </div>-->
           </div>
 
-  <div class="relative">
+  <div class="relative lg:ml-0 md:ml-8 ml-5" >
   <Swiper
       :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation, SwiperPagination]"
-      :slides-per-view="5"
-      :slides-per-group="5"
+      :breakpoints="{
+      360: {
+      slidesPerView: 2.2,
+      slidesPerGroup: 2,
+      },
+
+      768: {
+      slidesPerView: 3.2,
+      slidesPerGroup: 3,
+      },
+      1440: {
+      slidesPerView: 4,
+      slidesPerGroup: 4,
+      }
+      }"
+      :space-between="5"
       :loop="true"
-      :free-mode="true"
-      :space-between="10"
       :navigation="{
       nextEl: '.next-slide-button',
       prevEl: '.prev-slide-button',
@@ -26,25 +40,19 @@
 <!--    <div v-for="project in projects" :key="project.name">-->
     <SwiperSlide v-for="project in projects" :key="project.name">
       <img
-          class="aspect-[1.7] object-cover"
+          class="w-[480px] lg:h-96 md:h-60 h-48 object-cover"
           :src="project.url"
           :alt="project.name">
     </SwiperSlide>
 <!--    </div>-->
 
-    <div class="flex justify-between ">
-      <button
-          class="prev-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[30px] ">
-        <nuxt-img placeholder class="hidden md:block" src="/icons/prev-square-icon.svg" alt="prev"/>
-        <nuxt-img placeholder class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev"/>
-      </button>
-      <button
-          class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[30px] ">
-        <nuxt-img placeholder class="hidden md:block" src="/icons/next-square-icon.svg" alt="next"/>
-        <nuxt-img placeholder class="md:hidden" src="/icons/next-page-icon-small.svg" alt="next"/>
-      </button>
+      <arrows-arrow-previous-black-and-white
+          class="prev-slide-button absolute z-10 left-10 top-1/2 -translate-y-1/2 hidden lg:block">
+      </arrows-arrow-previous-black-and-white>
+      <arrows-arrow-next-black-and-white
+          class="next-slide-button absolute z-10 right-10 top-1/2 -translate-y-1/2  hidden lg:block">
+      </arrows-arrow-next-black-and-white>
 
-    </div>
   </Swiper>
   </div>
 

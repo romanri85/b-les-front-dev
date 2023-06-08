@@ -7,16 +7,18 @@
 
 <!--    modal-->
     <div  class=" lg:bg-lightGrey lg:p-[48px] lg:absolute  lg:top-[150px] lg:left-[50%] lg:shadow-md lg:shadow-primaryDark lg:-translate-x-[50%] lg:w-1/2 w-full" >
-        <div class="lg:grid lg:grid-cols-3 flex flex-wrap justify-between gap-[30px]   w-full max-w-full">
-            <div v-for="item in currentMenuItems" :key="item.name" class="lg:flex lg:max-w-screen-lg text-center max-w-[31%] lg:flex-col items-center">
+        <div class="lg:grid lg:grid-cols-3 flex flex-wrap justify-start gap-x-5 gap-y-8  w-full max-w-full">
+            <div v-for="item in currentMenuItems" :key="item.name" class="lg:flex lg:max-w-screen-lg text-center max-w-[30%] lg:flex-col items-center">
                 <nuxt-img pref sizes="sm:100vw md:20vw lg:100vw" quality="50" :src="item.image" alt="collection" class="  h-auto object-contain"/>
-                <buttons-primary-button class="text-center text-black mt-2">{{ $t(item.name) }}</buttons-primary-button>
+                <primary-button-small class="text-center text-black mt-2">{{ $t(item.name) }}</primary-button-small>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
+
 defineProps({
     currentMenuItems: {
         type: Array,

@@ -137,7 +137,7 @@ const mdSmMenu = [
                     <logo class=" xl:mb-16 lg:mb-12 mb-5"/>
                     <div class="md:block hidden">
                         <buttons-secondary-button
-                                class="xl:w-72 xl:h-20 lg:h-16 md:h-16 lg:w-64 md:w-52 sm:block sm:border-0 ">
+                                class="xl:w-72 xl:h-20 lg:h-16 md:h-16 lg:w-64 md:w-52 lg:flex sm:block sm:border-0 ">
                             {{ $t('catalog') }}
                         </buttons-secondary-button>
                     </div>

@@ -1,6 +1,7 @@
 <script setup lang="js">
 
 import searchByParameters from '~/data/searchByParameters.json'
+import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 
 const emit = defineEmits(['changeFilters'])
 
@@ -30,9 +31,9 @@ const doorSetsWithButtonAll = []
 
 <template>
   <div class="main-container inline-flex lg:py-[120px] items-start">
-    <buttons-primary-button>
+    <primary-button-small>
       <h3 class="pr-16 whitespace-nowrap">все двери</h3>
-    </buttons-primary-button>
+    </primary-button-small>
     <div class=" flex justify-start gap-x-3 gap-y-3 text-darkGrey flex-wrap">
       <h3 v-for="doorSet in doorSets" :key="doorSet.name"
           class=" last:underline-offset-4 border-black whitespace-nowrap"

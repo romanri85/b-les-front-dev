@@ -27,12 +27,12 @@
 
             >
                 <SwiperSlide v-for="(collection, index) in collections" :key="collection.name">
-                    <div class="hero bg-cover bg-center h-screen w-screen ">
+                    <div class="hero bg-cover bg-center h-screen w-screen  ">
                         <nuxt-img placeholder :src="collection.image"
                                   class="absolute h-screen w-screen object-cover -z-10" alt="slider-pic"/>
-                        <div class="flex flex-col justify-between relative w-screen h-screen">
-                            <div class="text-left relative main-container  text-white lg:mt-[200px] xl:mt-[278px] md:mb-[60px] mt-[100px] lg:max-w-screen flex md:flex-row flex-col justify-between items-center lg:order-1 order-2">
-                                <div class="md:text-left text-center">
+                        <div class="flex flex-col justify-between relative w-full h-full">
+                            <div class="text-left relative main-container md:pb-0 pb-16 text-white lg:mt-[200px]  md:mb-[60px] lg:max-w-screen flex md:flex-row flex-col justify-between items-center lg:order-1 order-2">
+                                <div class="md:text-left text-center  ">
 
                                     <h2 class="mb-5 lg:text-[23px]">{{ $t('aboutCollection') }}</h2>
                                     <h5 class="lg:w-[448px] md:w-[350px] font-light">{{ $t(collection.description) }}</h5>
@@ -51,13 +51,13 @@
                                 </div>
                             </div>
 
-                            <div class="relative main-container  flex md:justify-between justify-evenly mt-[130px] lg:order-2">
+                            <div class="relative main-container  flex md:justify-between justify-evenly lg:mt-[130px] md:mt-64 mt-40 lg:order-2">
                                 <button class="prev-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[30px]">
                                     <nuxt-img placeholder class="hidden md:block" src="/icons/prev-square-icon.svg" alt="prev"/>
                                     <nuxt-img placeholder class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev"/>
                                 </button>
-                                <div class="lg:ml-[228px] xl:mb-[145px] lg:mb-[100px]">
-                                    <h1 class="text-white md:mb-8 mb-[30px]">{{ $t(collection.name) }}</h1>
+                                <div class="lg:ml-[228px] lg:mb-[100px] text-center md:text-left">
+                                    <h1 class="text-white md:mb-8 mb-[20px]">{{ $t(collection.name) }}</h1>
                                     <a class="text-white" :href="collection.slug"><h3 class="underline px-1">{{ $t('viewCollection') }}</h3></a>
                                 </div>
                                 <button class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[30px]">
