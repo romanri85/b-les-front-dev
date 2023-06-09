@@ -18,7 +18,7 @@ const props = defineProps({
     </div>
 
     <div class="flex flex-col items-center">
-      <h2 class="pb-3">{{props.doorVariant.name}}</h2>
+      <h3 class="pb-3">{{props.doorVariant.name}}</h3>
 <!--      <h2>{{props.door.name}}</h2>-->
       <p class="pb-3 uppercase">{{props.doorVariant.product.collection.name}}</p>
       <!--        collection can be defined by color at frontend-->

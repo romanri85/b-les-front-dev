@@ -15,13 +15,15 @@ import FilterType from "~/pages/catalog/components/FilterType.vue";
 const props = defineProps({
   value: {
     type: Array,
-  }
+  },
+  material: Number
 })
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change','changeMaterials'])
 
 let materialColors = [{
   name: "Эмаль",
+  id: 1,
   colors: [
     {
       name: 'Белый',
@@ -72,6 +74,7 @@ let materialColors = [{
 },
   {
     name: "Дуб",
+    id: 2,
     colors: [
       {
         name: 'Светлый',
@@ -92,6 +95,7 @@ let materialColors = [{
   },
   {
     name: "Бук",
+    id:3,
     colors: [
       {
         name: 'Беленый',
@@ -113,6 +117,7 @@ let materialColors = [{
 
 
 let chosenColors = reactive(props.value)
+let chosenMaterial = reactive(props.material)
 
 function chooseColor(name) {
   if (!chosenColors.includes(name)) {
@@ -125,6 +130,10 @@ function chooseColor(name) {
   emit('change', chosenColors)
 }
 
+
+function chooseMaterial(material){
+  emit('changeMaterials', {material:material})
+}
 const activeItem = ref(0)
 
 const setActiveItem = (index: number) => {
@@ -146,7 +155,7 @@ const setActiveItem = (index: number) => {
         <TabList>
           <div class="flex justify-around w-full pr-4">
             <div v-for="(material, index) in materialColors" :key="material.name" class="text-darkGrey">
-              <Tab><h4 @click="setActiveItem(index)" :class="{'text-black':activeItem === index }" class="">{{
+              <Tab><h4 @click="setActiveItem(index);chooseMaterial(material.id)" :class="{'text-black':activeItem === index }" class="">{{
                   material.name
                 }}</h4></Tab>
             </div>

@@ -37,6 +37,10 @@ function onChangeColors(colors) {
   emit('changeFilters', colors)
 }
 
+function onChangeMaterials(materials) {
+  emit('changeFilters', materials)
+}
+
 function onChangeDesigns(designs) {
 emit('changeFilters', designs)
 }
@@ -63,7 +67,7 @@ emit('changeFilters', collections)
       <price-filter :value="props.activeFilters.price" @change="onChangePrice" />
       <color-filter :value="props.activeFilters.colorSet" @change="onChangeColorSet"/>
       <design-filter :value="props.activeFilters.designs" @change="onChangeDesigns"/>
-      <material-color-filter :value="props.activeFilters.colors" @change="onChangeColors"/>
+      <material-color-filter :value="props.activeFilters.colors" :material="props.activeFilters.material" @change="onChangeColors" @changeMaterials="onChangeMaterials"/>
       <collections-filter :value="props.activeFilters.collections" @change="onChangeCollections"/>
       <primary-button-small class="w-full text-start mt-16">
         <h3>Очистить</h3>

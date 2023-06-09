@@ -5,30 +5,24 @@ import {baseURL} from "~/config";
 import Sorting from "~/pages/catalog/components/Sorting.vue";
 
 const props = defineProps({
-  value: {
-    type: Array,
-    // required: true
-  }
+  total: Number,
+  pagesCount: Number,
+  products: Array
 })
+
+const emit = defineEmits(
+  ['changeFilters']
+)
 
 const activeCasing = ref("/CasingOakEnamelBeige/PNG/Дуб брашированный Бежевый - Карниз 120.png")
 
-let products = ref({})
-let page = ref(1)
-const total = ref(0)
-let pagesCount = ref(0)
-
-async function fetchProducts() {
-  products.value = await $fetch(`${baseURL}/api/product/product-variants?page=${page.value}`);
-  total.value = products.value.count
-  pagesCount.value = products.value.page_links.length
-
+const page = ref(1)
+function onChangePage(page) {
+emit("changeFilters", {page})
 }
 
 
-onMounted(() => {
-  fetchProducts()
-})
+
 
 </script>
 
@@ -36,11 +30,11 @@ onMounted(() => {
   <div class="w-full pl-16">
       <div class="text-primaryDark flex justify-between w-full">
        <sorting/>
-        <h6>Всего дверей: {{total}}</h6>
+        <h6>Всего дверей: {{props.total}}</h6>
       </div>
       <div class="mt-16 grid-cols-4 grid-rows-7 grid">
 
-        <div v-for="doorVariant in products.results" :key="products.results.id">
+        <div v-for="doorVariant in props.products" :key="doorVariant.id">
           <door-card class="relative -z-10 hover:border-b border-black"
                      :value="activeCasing"
                      :doorVariant="doorVariant"
@@ -48,8 +42,8 @@ onMounted(() => {
         </div>
     </div>
     <div class="w-full flex justify-center">
-        <pagination :total="pagesCount"
-                    @page-change="fetchProducts"
+        <pagination :total="props.pagesCount"
+                    @page-change="onChangePage"
                     v-model:current-page="page"
         />
     </div>
