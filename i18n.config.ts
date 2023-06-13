@@ -49,6 +49,7 @@ export default defineI18nConfig(() => ({
             otherElementsHeader: 'Additional products and services ',
             aboutUsHeader: 'Information about the company',
             websiteSearch: 'Website search',
+            catalogPageDescription: "Design an interior with our company. Choose doors and we will offer functional solutions in a single style. Accessories will help complete the design.",
 
 
         },
@@ -100,6 +101,7 @@ export default defineI18nConfig(() => ({
             otherElementsHeader: 'Дополнительные продукты и услуги',
             aboutUsHeader: 'Информация о компании',
             websiteSearch: 'Поиск по сайту',
+            catalogPageDescription: 'Создайте интерьер вместе с «Брянский лес». Выберите двери,а мы предложим функциональные решения в едином стиле. Завершить образ помогут аксессуары.',
 
 
         },

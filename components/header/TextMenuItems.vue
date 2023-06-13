@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import {Popover, PopoverButton, PopoverPanel} from "@headlessui/vue";
 import TextMenuItems from "@/data/TextMenuItems.json"
 import menuItemsProps from "@/data/MenuItemsProps.json"
 import {ChevronDownIcon} from '@heroicons/vue/24/solid'
-import Pagination from "~/pages/Pagination.vue";
+import Pagination from "~/components/base/Pagination.vue";
 
 defineProps({light: {type: Boolean, default: true}})
 

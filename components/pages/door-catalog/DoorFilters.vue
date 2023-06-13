@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import PriceFilter from "~/pages/catalog/priceFilter.vue";
-import ColorFilter from "~/pages/catalog/colorSetFilter.vue";
-import DesignFilter from "~/pages/catalog/designFilter.vue";
-import MaterialColorFilter from "~/pages/catalog/materialColorFilter.vue";
-import CollectionsFilter from "~/pages/catalog/collectionsFilter.vue";
+import PriceFilter from "~/components/filters/priceFilter.vue";
+import ColorSetFilter from "~/components/filters/colorSetFilter.vue";
+import DesignFilter from "~/components/filters/designFilter.vue";
+import MaterialColorFilter from "~/components/pages/door-catalog/MaterialColorFilter.vue";
+import DoorCollectionsFilter from "~/components/pages/door-catalog/DoorCollectionsFilter.vue";
 import PrimaryButton from "~/components/buttons/PrimaryButtonSmall.vue";
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 
@@ -15,6 +15,48 @@ const props = defineProps({
 
 const oBarMinValue = ref(0);
 const oBarMaxValue = ref(100000);
+
+let colorSets = [
+  {
+    name: 'Белый',
+    colorCode: 'bg-[#fff]',
+    id: 1
+  },
+  {
+    name: 'Красный',
+    colorCode: 'bg-[red]',
+    id: 2
+  },
+  {
+    name: 'Зеленый',
+    colorCode: 'bg-[green]',
+    id: 3
+  },
+  {
+    name: 'Синий',
+    colorCode: 'bg-[blue]',
+    id: 4
+  },
+  {
+    name: 'Желтый',
+    colorCode: 'bg-[#ff0ff0]',
+    id: 5
+  }]
+
+let designs = [
+  {
+    name: 'Classic',
+    id: 1
+  },
+  {
+    name: 'Modern',
+    id: 2
+  },
+  {
+    name: 'Neoclassic',
+    id: 3
+  }
+]
 
 function update_oBarValues(e) {
   oBarMinValue.value = e.minValue;
@@ -64,11 +106,11 @@ emit('changeFilters', collections)
       </div>
     </div>
     <div class="filter-container">
-      <price-filter :value="props.activeFilters.price" @change="onChangePrice" />
-      <color-filter :value="props.activeFilters.colorSet" @change="onChangeColorSet"/>
-      <design-filter :value="props.activeFilters.designs" @change="onChangeDesigns"/>
+      <price-filter :value="props.activeFilters.price" @change="onChangePrice" :min="30000" :max="100000"/>
+      <color-set-filter :value="props.activeFilters.colorSet" @change="onChangeColorSet" :colorSets="colorSets"/>
+      <design-filter :value="props.activeFilters.designs" @change="onChangeDesigns" :designs="designs"/>
       <material-color-filter :value="props.activeFilters.colors" :material="props.activeFilters.material" @change="onChangeColors" @changeMaterials="onChangeMaterials"/>
-      <collections-filter :value="props.activeFilters.collections" @change="onChangeCollections"/>
+      <door-collections-filter :value="props.activeFilters.collections" @change="onChangeCollections"/>
       <primary-button-small class="w-full text-start mt-16">
         <h3>Очистить</h3>
       </primary-button-small>

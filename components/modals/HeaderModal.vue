@@ -16,7 +16,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 
 defineProps({

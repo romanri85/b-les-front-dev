@@ -1,13 +1,21 @@
 <script setup lang="ts">
 
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
-import MultiRangeSlider from "~/pages/catalog/components/MultiRangeSlider.vue";
-import FilterType from "~/pages/catalog/components/FilterType.vue";
+import MultiRangeSlider from "~/components/filters/MultiRangeSlider.vue";
+import FilterType from "~/components/filters/FilterType.vue";
 import {ref, reactive} from "vue";
 
 const props = defineProps({
   value: {
     type: Object,
+  },
+  min: {
+    type: Number,
+    default: 0
+  },
+  max: {
+    type: Number,
+    default: 100000
   }
 })
 
@@ -55,8 +63,8 @@ const priceMinMax = ref([oBarMinValue.value, oBarMaxValue.value])
             baseClassName="multi-range-slider-bar-only"
             v-model:minValue="oBarMinValue"
             v-model:maxValue="oBarMaxValue"
-            :max="100000"
-            :min="30000"
+            :max="props.max"
+            :min="props.min"
             :step="1"
             :rangeMargin="0"
             @input="update_oBarValues"

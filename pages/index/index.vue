@@ -12,12 +12,12 @@
   <advantages/>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
-import Slider from "~/pages/index/slider.vue";
-import Search from "~/pages/index/search.vue";
-import Projects from "~/pages/index/projects.vue";
-import Advantages from "~/pages/index/advantages.vue";
+import Slider from "~/components/pages/index/slider.vue";
+import Search from "~/components/pages/index/search.vue";
+import Projects from "~/components/pages/index/projects.vue";
+import Advantages from "~/components/pages/index/advantages.vue";
 import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
 
 const isBurgerOpenStore = useIsBurgerOpenStore()
@@ -25,7 +25,7 @@ import Welcome from "~/components/pop-ups/welcome.vue";
 
 import {ref} from 'vue'
 import {TransitionRoot} from '@headlessui/vue'
-import Nature from "~/pages/index/nature.vue";
+import Nature from "~/components/pages/index/nature.vue";
 
 const isShowing = ref(true)
 

@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxt/devtools": "^0.5.5",
     "@nuxt/image-edge": "^1.0.0-28094923.e859bba",
     "@nuxtjs/i18n": "^8.0.0-beta.12",
     "autoprefixer": "^10.4.14",

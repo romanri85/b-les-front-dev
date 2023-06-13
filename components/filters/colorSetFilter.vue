@@ -1,11 +1,14 @@
 <script setup lang="ts">
 
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
-import FilterType from "~/pages/catalog/components/FilterType.vue";
+import FilterType from "~/components/filters/FilterType.vue";
 import {valueToNode} from "@babel/types";
 
 const  props = defineProps({
   value: {
+    type: Array,
+  },
+  colorSets: {
     type: Array,
   }
 })
@@ -14,32 +17,7 @@ const emit = defineEmits(['change'])
 
 
 
-let colorSets = [
-  {
-    name: 'Белый',
-    colorCode: 'bg-[#fff]',
-    id: 1
-  },
-  {
-    name: 'Красный',
-    colorCode: 'bg-[red]',
-    id: 2
-  },
-  {
-    name: 'Зеленый',
-    colorCode: 'bg-[green]',
-    id: 3
-  },
-  {
-    name: 'Синий',
-    colorCode: 'bg-[blue]',
-    id: 4
-  },
-  {
-    name: 'Желтый',
-    colorCode: 'bg-[#ff0ff0]',
-    id: 5
-  }]
+
 
 // let chosenColorSets = reactive(props.value)
 function chooseColorSet(name){
@@ -62,7 +40,7 @@ function chooseColorSet(name){
       <filter-type filterName="Наборы цветов"/>
     </DisclosureButton>
     <DisclosurePanel class="mb-20">
-      <div v-for="colorSet in colorSets" :key=colorSet.id class="flex gap-x-4 items-center mb-3" @click="chooseColorSet(colorSet.name)">
+      <div v-for="colorSet in props.colorSets" :key=colorSet.id class="flex gap-x-4 items-center mb-3" @click="chooseColorSet(colorSet.name)">
         <div class="cursor-pointer pb-1" :class="{'border-b': props.value.includes(colorSet.name), 'border-black':props.value.includes(colorSet.name)}">
           <div :class="colorSet.colorCode" class="w-12 h-12 shadow-darkGrey shadow-sm"></div>
         </div>

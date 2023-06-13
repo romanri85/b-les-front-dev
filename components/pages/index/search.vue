@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import parameters from "~/data/searchByParameters.json"
 import PrimaryButtonBig from "~/components/buttons/PrimaryButtonBig.vue";
 // import {useTagsStore} from "~/stores/tagsStore";

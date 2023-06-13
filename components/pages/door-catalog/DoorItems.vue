@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import DoorCard from "~/pages/catalog/DoorCard.vue";
-import Pagination from "~/pages/Pagination.vue";
+import DoorCard from "~/components/pages/door-catalog/DoorCard.vue";
+import Pagination from "~/components/base/Pagination.vue";
 import {baseURL} from "~/config";
-import Sorting from "~/pages/catalog/components/Sorting.vue";
+import Sorting from "~/components/filters/Sorting.vue";
 
 const props = defineProps({
   total: Number,

@@ -12,6 +12,8 @@ const config = {
         }], '@pinia/nuxt',
 
     ],
+    devtools: { enabled: true },
+
 
     postcss: {
         plugins: {

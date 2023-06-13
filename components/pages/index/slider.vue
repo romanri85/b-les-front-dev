@@ -74,7 +74,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // import {useSliderCollectionStore} from "~/stores/mainSliderCollectionStore.js";
 // const sliderCollectionStore = useSliderCollectionStore()
 // sliderCollectionStore.fillSliderCollections()

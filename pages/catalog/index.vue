@@ -1,15 +1,17 @@
-<script setup lang="js">
-
-import Hero from "~/pages/catalog/hero.vue";
-import DoorSets from "~/pages/catalog/doorSets.vue";
-import Items from "~/pages/catalog/Items.vue";
-import Filters from "~/pages/catalog/Filters.vue";
+<script setup lang="ts">
+import DoorSets from "~/components/pages/door-catalog/DoorSets.vue";
+import DoorItems from "~/components/pages/door-catalog/DoorItems.vue";
+import DoorFilters from "~/components/pages/door-catalog/DoorFilters.vue";
 import {baseURL} from "~/config.js";
+import Hero from "~/components/base/hero.vue";
 
 const activeFilters = ref({
   price:{}, colorSet: [], colors: [], designs: [], collections: []
 })
 
+const heroName = "catalog"
+const heroDescription = "catalogPageDescription"
+const heroImage = "/catalog/catalog-hero.jpg"
 
 let products = ref([])
 let page = ref(1)
@@ -55,11 +57,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <hero/>
-  <door-sets  :activeFilters="activeFilters" @changeFilters="onChangeFilters"/>
+  <hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage"  />
+  <door-sets :activeFilters="activeFilters" @changeFilters="onChangeFilters"/>
   <div class="flex main-container">
-    <filters :activeFilters="activeFilters" @changeFilters="onChangeFilters"/>
-    <items :total="total" :pagesCount="pagesCount" :products="products" @changeFilters="onChangeFilters"/>
+    <door-filters :activeFilters="activeFilters" @changeFilters="onChangeFilters"/>
+    <door-items :total="total" :pagesCount="pagesCount" :products="products" @changeFilters="onChangeFilters"/>
   </div>
 </template>
 

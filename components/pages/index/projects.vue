@@ -62,7 +62,7 @@
   <!--    </div>-->
 </template>
 
-<script setup>
+<script setup lang="ts">
 import projects from "~/data/projects.json"
 
 // const projects = await $fetch(`${baseURL}/api/projects/`)

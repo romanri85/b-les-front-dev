@@ -10,7 +10,7 @@ import {
   TabPanel,
   TabPanels
 } from "@headlessui/vue";
-import FilterType from "~/pages/catalog/components/FilterType.vue";
+import FilterType from "~/components/filters/FilterType.vue";
 
 const props = defineProps({
   value: {

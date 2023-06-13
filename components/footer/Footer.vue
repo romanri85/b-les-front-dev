@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 defineProps({light: {type: Boolean, default: true}})
 
 import collections from '~/data/SliderCollections.json'

@@ -1,10 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import TextMenuItems from "~/components/header/TextMenuItems.vue";
 import IconsMenuItems from "~/components/header/IconsMenuItems.vue";
 import Burger from "~/components/header/Burger.vue";
 import {Disclosure, DisclosureButton, DisclosurePanel} from '@headlessui/vue'
 import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
 import TabletMobileMenu from "~/components/header/TabletMobileMenu.vue";
+import Logo from "~/components/base/Logo.vue";
 
 const isBurgerOpenStore = useIsBurgerOpenStore()
 

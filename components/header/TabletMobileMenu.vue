@@ -1,9 +1,10 @@
-<script setup lang="js">
+<script setup lang="ts">
 
 import menuItemsProps from "~/data/MenuItemsProps.json";
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 import TextMenuItemsFile from "~/data/TextMenuItems.json";
 import {ChevronDownIcon} from "@heroicons/vue/24/solid";
+import DisclosureStateEmitter from "~/components/base/DisclosureStateEmitter.vue";
 
 const textMenuItems = reactive(TextMenuItemsFile)
 

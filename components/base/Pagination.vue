@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {ChevronRightIcon, ChevronLeftIcon} from "@heroicons/vue/24/solid";
 import { ref } from "vue";
 const currentPage = ref(1);

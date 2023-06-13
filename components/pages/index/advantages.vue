@@ -78,7 +78,7 @@
   background-image: url("/gabriella-clare-marino-KYwErCnu8J4-unsplash.jpg");
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 280px) {
   .cd-fixed-bg {
     background-attachment: fixed;
   }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
-import FilterType from "~/pages/catalog/components/FilterType.vue";
+import FilterType from "~/components/filters/FilterType.vue";
 import collections from "~/data/SliderCollections.json";
 const props = defineProps({
   value: {
