@@ -5,38 +5,30 @@ const props = defineProps({
   doorVariant: Object
 })
 
-
 </script>
 
 <template>
+  <client-only>
   <div class="flex flex-col items-center pb-12">
     <div class="relative pb-8">
-      <nuxt-img width="200px" height="auto" :src="props.value" class="h-auto w-48"></nuxt-img>
+      <nuxt-img width="200px" height="auto" :src="props.doorVariant.casing_variant.image" class="h-auto w-48"></nuxt-img>
       <nuxt-img width="200px" height="auto"
-                src="/leafOakEnamelBeige/PNG/Дуб брашированный Бежевый - ДП Калина Г21-8.png"
+                :src="props.doorVariant.leaf_image"
                 class="h-auto w-48 absolute top-0"></nuxt-img>
     </div>
 
     <div class="flex flex-col items-center">
-      <h3 class="pb-3">{{props.doorVariant.name}}</h3>
-<!--      <h2>{{props.door.name}}</h2>-->
-      <p class="pb-3 uppercase">{{props.doorVariant.product.collection.name}}</p>
-      <!--        collection can be defined by color at frontend-->
-<!--      <h6>{{props.door.collection}}</h6>-->
-      <div class="pb-3 flex">
-        <p>{{ props.doorVariant.material }}</p>
-<!--        material can be defined by color at frontend-->
-<!--        <p>{{props.door.material + "," + " "}}</p>-->
-        <p>&nbsp; Светлый дуб</p>
-<!--        <p>{{props.door.color}}</p>-->
+      <h3 class="pb-3">{{props.doorVariant.product_variant.product.name}}</h3>
+
+      <h6 class="pb-3 uppercase">{{props.doorVariant.product_variant.product.collection.name}}</h6>
+      <div class="pb-3 inline-flex">
+        <p>{{ props.doorVariant.product_variant.material.name + ", " + " "}}&nbsp;</p>
+        <p>{{ props.doorVariant.verbose_color}}</p>
       </div>
-<!--      not necessary at first-->
-      <p class="pb-3">{{ props.doorVariant.glass }}</p>
-<!--      <p>{{props.door.glass}}</p>-->
       <p class="font-regular">{{ props.doorVariant.price}}R</p>
-<!--      <h6>{{props.door.price}}</h6>-->
     </div>
   </div>
+  </client-only>
 </template>
 
 <style scoped>

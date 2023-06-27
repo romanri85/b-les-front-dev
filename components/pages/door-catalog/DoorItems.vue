@@ -7,7 +7,8 @@ import Sorting from "~/components/filters/Sorting.vue";
 const props = defineProps({
   total: Number,
   pagesCount: Number,
-  products: Array
+  products: Array,
+  page_size: Number
 })
 
 const emit = defineEmits(
@@ -20,7 +21,6 @@ const page = ref(1)
 function onChangePage(page) {
 emit("changeFilters", {page})
 }
-
 
 
 
@@ -42,7 +42,9 @@ emit("changeFilters", {page})
         </div>
     </div>
     <div class="w-full flex justify-center">
-        <pagination :total="props.pagesCount"
+        <pagination :total="props.total"
+                    :page_size="props.page_size"
+                    :pagesCount="props.pagesCount"
                     @page-change="onChangePage"
                     v-model:current-page="page"
         />

@@ -1,43 +1,51 @@
 <script setup lang="ts">
-
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 import MultiRangeSlider from "~/components/filters/MultiRangeSlider.vue";
 import FilterType from "~/components/filters/FilterType.vue";
-import {ref, reactive} from "vue";
+import {ref} from "vue";
+import _ from "lodash";
 
 const props = defineProps({
-  value: {
-    type: Object,
-  },
+  min_price: Number,
+  max_price: Number,
   min: {
     type: Number,
-    default: 0
   },
   max: {
     type: Number,
-    default: 100000
   }
 })
 
 const emit = defineEmits(['change'])
 
 
+const oBarMinValue = ref(props.min_price)
+const oBarMaxValue = ref(props.max_price);
+const min = props.min_price;
+const max = props.max_price;
 
-
-const oBarMinValue = ref(0);
-const oBarMaxValue = ref(100000);
-
-const oBarValues = reactive(props.value)
+// const oBarValues = reactive(props.value)
+const min_price = ref(props.min_price)
+const max_price = ref(props.max_price)
 
 function update_oBarValues(e) {
+
   oBarMinValue.value = e.minValue;
   oBarMaxValue.value = e.maxValue;
-  oBarValues.minValue = e.minValue;
-  oBarValues.maxValue = e.maxValue;
-  emit('change', oBarValues)
+  min_price.value = e.minValue;
+  max_price.value = e.maxValue;
+  updatePriceRange()
+
 }
 
-const priceMinMax = ref([oBarMinValue.value, oBarMaxValue.value])
+function updatePriceRange() {
+
+  emit('change', min_price.value, max_price.value)
+
+
+
+
+}
 
 
 </script>
@@ -63,9 +71,9 @@ const priceMinMax = ref([oBarMinValue.value, oBarMaxValue.value])
             baseClassName="multi-range-slider-bar-only"
             v-model:minValue="oBarMinValue"
             v-model:maxValue="oBarMaxValue"
-            :max="props.max"
-            :min="props.min"
-            :step="1"
+            :max="max"
+            :min="min"
+            :step="100"
             :rangeMargin="0"
             @input="update_oBarValues"
             class="px-5 "

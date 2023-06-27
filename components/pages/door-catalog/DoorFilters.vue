@@ -13,8 +13,8 @@ const props = defineProps({
 })
 
 
-const oBarMinValue = ref(0);
-const oBarMaxValue = ref(100000);
+// const oBarMinValue = ref(0);
+// const oBarMaxValue = ref(100000);
 
 let colorSets = [
   {
@@ -58,17 +58,17 @@ let designs = [
   }
 ]
 
-function update_oBarValues(e) {
-  oBarMinValue.value = e.minValue;
-  oBarMaxValue.value = e.maxValue;
-}
+// function update_oBarValues(e) {
+//   oBarMinValue.value = e.minValue;
+//   oBarMaxValue.value = e.maxValue;
+// }
 
 
 
 
 
-function onChangePrice(price) {
-  emit('changeFilters', price)
+function onChangePrice(min_price, max_price) {
+  emit('changeFilters', {'max_price':max_price, 'min_price':min_price})
 }
 
 function onChangeColorSet(colorSet) {
@@ -106,7 +106,7 @@ emit('changeFilters', collections)
       </div>
     </div>
     <div class="filter-container">
-      <price-filter :value="props.activeFilters.price" @change="onChangePrice" :min="30000" :max="100000"/>
+      <price-filter :min_price="props.activeFilters.min_price" :max_price="props.activeFilters.max_price"  @change="onChangePrice"/>
       <color-set-filter :value="props.activeFilters.colorSet" @change="onChangeColorSet" :colorSets="colorSets"/>
       <design-filter :value="props.activeFilters.designs" @change="onChangeDesigns" :designs="designs"/>
       <material-color-filter :value="props.activeFilters.colors" :material="props.activeFilters.material" @change="onChangeColors" @changeMaterials="onChangeMaterials"/>

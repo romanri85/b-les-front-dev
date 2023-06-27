@@ -10,11 +10,9 @@ const props = defineProps({
 })
 
 const doorSets = reactive(searchByParameters)
-console.log(doorSets, 'doorSets')
 
 
 function chooseDoorSet(doorSet) {
-  console.log(doorSet, 'doorset')
 
   emit('changeFilters', doorSet)
 }

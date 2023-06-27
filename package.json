@@ -31,6 +31,7 @@
     "@yeger/vue-masonry-wall": "^3.4.4",
     "imagesloaded": "^5.0.0",
     "install": "^0.13.0",
+    "lodash": "^4.17.21",
     "npm": "^9.6.7",
     "nuxt-swiper": "^1.1.0",
     "pinia": "^2.0.36",

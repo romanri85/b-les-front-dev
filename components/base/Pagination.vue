@@ -5,7 +5,7 @@
     <vue-awesome-paginate
         :total-items="total"
         v-model="currentPage"
-        :items-per-page="1"
+        :items-per-page="page_size"
         :max-pages-shown="5"
         :on-click="HandleNewPage"
     >
@@ -21,6 +21,7 @@
         </span>
       </template>
     </vue-awesome-paginate>
+
   </div>
 </template>
 
@@ -31,7 +32,10 @@ const currentPage = ref(1);
 const props = defineProps({
   total: Number,
   currentPage: Number,
+  page_size: Number,
 })
+
+
 
 const emitPagination = defineEmits(['update:currentPage', 'pageChange'])
 
