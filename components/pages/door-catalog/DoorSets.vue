@@ -12,6 +12,7 @@ const props = defineProps({
 const doorSets = reactive(searchByParameters)
 
 
+
 function chooseDoorSet(doorSet) {
 
   emit('changeFilters', doorSet)
@@ -36,7 +37,7 @@ const doorSetsWithButtonAll = []
     <div class=" flex justify-start gap-x-3 gap-y-3 text-darkGrey flex-wrap">
       <h3 v-for="doorSet in doorSets" :key="doorSet.name"
           class=" last:underline-offset-4 border-black whitespace-nowrap text-primaryDark"
-          :class="{underline: activeFilters.colorSet.includes(doorSet.filter.colorSet[0])}"
+          :class="{underline: activeFilters.color_set.includes(doorSet.filter.color_set[0])}"
           @click="chooseDoorSet(doorSet.filter)">{{ doorSet.name }}</h3>
     </div>
   </div>

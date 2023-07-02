@@ -1,31 +1,25 @@
 [{
   "name": "white doors",
   "filter": {
-    "colorSet": ["Белый"]
+    "color_set": [1]
   }
 },
   {
-    "name": "red doors",
+    "name": "grey doors",
     "filter": {
-      "colorSet": ["Красный"]
+      "color_set": [2]
     }
   },
   {
-    "name": "green doors",
+    "name": "light brown doors",
     "filter": {
-      "colorSet": ["Зеленый"]
+      "color_set": [3]
     }
   },
   {
-    "name": "blue doors",
+    "name": "dark brown doors",
     "filter": {
-      "colorSet": ["Синий"]
-    }
-  },
-  {
-    "name": "yellow doors",
-    "filter": {
-      "colorSet": ["Желтый"]
+      "color_set": [4]
     }
   }
 ]

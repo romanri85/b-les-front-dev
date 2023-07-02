@@ -11,6 +11,8 @@ import {
   TabPanels
 } from "@headlessui/vue";
 import FilterType from "~/components/filters/FilterType.vue";
+import {baseURL} from "~/config";
+import {background} from "ipx";
 
 const props = defineProps({
   value: {
@@ -21,99 +23,19 @@ const props = defineProps({
 
 const emit = defineEmits(['change','changeMaterials'])
 
-let materialColors = [{
-  name: "Эмаль",
-  id: 1,
-  colors: [
-    {
-      name: 'Белый',
-      id: 1,
-      colorHex: 'bg-[#85898C]'
-    },
-    {
-      name: 'Черный',
-      id: 2,
-      colorHex: 'bg-[#EDEDED]'
-    },
-    {
-      name: 'Красный',
-      id: 3,
-      colorHex: 'bg-[#DCD4C9]'
-    },
-    {
-      name: 'Синий',
-      id: 4,
-      colorHex: 'bg-[#A69480]'
-    },
-    {
-      name: 'Зеленый',
-      id: 5,
-      colorHex: 'bg-[#85898C]'
-    },
-    {
-      name: 'Желтый',
-      id: 6,
-      colorHex: 'bg-[#DCD4C9]'
-    },
-    {
-      name: 'Оранжевый',
-      id: 7,
-      colorHex: 'bg-[#A69480]'
-    },
-    {
-      name: 'Фиолетовый',
-      id: 8,
-      colorHex: 'bg-[#85898C]'
-    },
-    {
-      name: 'Розовый',
-      id: 9,
-      colorHex: 'bg-[#DCD4C9]'
-    }
-  ]
-},
-  {
-    name: "Дуб",
-    id: 2,
-    colors: [
-      {
-        name: 'Светлый',
-        id: 4,
-        colorHex: 'bg-[#A69480]'
-      },
-      {
-        name: 'Медовый',
-        id: 5,
-        colorHex: 'bg-[#DCD4C9]'
-      },
-      {
-        name: 'Табачный',
-        id: 6,
-        colorHex: 'bg-[#85898C]'
-      }
-    ]
-  },
-  {
-    name: "Бук",
-    id:3,
-    colors: [
-      {
-        name: 'Беленый',
-        id: 7,
-        colorHex: 'bg-[#A69480]'
-      },
-      {
-        name: 'Вишня',
-        id: 8,
-        colorHex: 'bg-[#85898C]'
-      },
-      {
-        name: 'Темный',
-        id: 9,
-        colorHex: 'bg-[#DCD4C9]'
-      }
-    ]
-  }]
+
+let materialColors = ref([])
+
+
+async function fetchMaterialColors() {
+  const response = await $fetch(`${baseURL}/api/product/material-choices`);
+  console.log(response)
+  return response;
+}
+onMounted(async () => {
+  materialColors.value = await fetchMaterialColors()
+})
+
 
 
 let chosenColors = reactive(props.value)
@@ -134,11 +56,10 @@ function chooseColor(name) {
 function chooseMaterial(material){
   emit('changeMaterials', {material:material})
 }
-const activeItem = ref(0)
+const activeItem = ref(null)
 
 const setActiveItem = (index: number) => {
   activeItem.value = index
-  console.log(activeItem.value)
 
 }
 
@@ -155,7 +76,7 @@ const setActiveItem = (index: number) => {
         <TabList>
           <div class="flex justify-around w-full pr-4">
             <div v-for="(material, index) in materialColors" :key="material.name" class="text-darkGrey">
-              <Tab><h4 @click="setActiveItem(index);chooseMaterial(material.id)" :class="{'text-black':activeItem === index }" class="">{{
+              <Tab><h4 @click="setActiveItem(index);chooseMaterial(material.material)" :class="{'text-black':activeItem === index }" class="">{{
                   material.name
                 }}</h4></Tab>
             </div>
@@ -163,6 +84,8 @@ const setActiveItem = (index: number) => {
         </TabList>
         <TabPanels>
           <TabPanel v-for="(material, index) in  materialColors" :key="material.name">
+<!--            <span>{{material}}</span>-->
+
             <div class="grid grid-cols-3 gap-y-6 mb-3 mt-5">
               <div v-for="(color,index) in material.colors" :key="color.id"
                    @click="chooseColor(color.name)">
@@ -170,7 +93,7 @@ const setActiveItem = (index: number) => {
 
                   <div class="pb-1"
                        :class="{'border-b': chosenColors.includes(color.name), 'border-black':chosenColors.includes(color.name)}">
-                    <div class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer" :class="color.colorHex">
+                    <div :style="{ backgroundImage: 'url(' + color.image + ')' }" class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer">
                     </div>
                   </div>
                   <h5 class="pt-2 cursor-pointer" :class="{'font-regular':chosenColors.includes(color.name)}">{{ color.name }}</h5>

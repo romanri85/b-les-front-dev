@@ -5,7 +5,7 @@ const props = defineProps({
   value: {
     type: Array,
   },
-  designs: {
+  design: {
     type: Array,
   }
 })
@@ -13,12 +13,12 @@ const props = defineProps({
 const emit = defineEmits(['change'])
 
 
-let chosenDesigns = reactive(props.value)
-function chooseDesign(name){
-  if(!chosenDesigns.includes(name)){
-    chosenDesigns.push(name)
+let chosenDesigns = reactive(props.value || [])
+function chooseDesign(id){
+  if(!chosenDesigns.includes(id)){
+    chosenDesigns.push(id)
   } else {
-    chosenDesigns.splice(chosenDesigns.indexOf(name), 1)
+    chosenDesigns.splice(chosenDesigns.indexOf(id), 1)
   }
   emit('change', chosenDesigns)
 }
@@ -30,8 +30,8 @@ function chooseDesign(name){
         <filter-type filterName="Дизайн"/>
       </DisclosureButton>
       <DisclosurePanel class="mb-[80px]">
-        <div v-for="design in props.designs" :key=design.id class="flex gap-x-[15px] items-center mb-3">
-          <h5 class="cursor-pointer underline-offset-4" @click="chooseDesign(design.name)" :class="{'underline':chosenDesigns.includes(design.name)}">{{design.name}}</h5>
+        <div v-for="design in props.design" :key=design.id class="flex gap-x-[15px] items-center mb-3">
+          <h5 class="cursor-pointer underline-offset-4" @click="chooseDesign(design.id)" :class="{'underline':chosenDesigns.includes(design.id)}">{{design.name}}</h5>
         </div>
       </DisclosurePanel>
     </Disclosure>

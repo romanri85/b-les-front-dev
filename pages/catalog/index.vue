@@ -7,7 +7,8 @@ import {baseURL} from "~/config.js";
 import Hero from "~/components/base/hero.vue";
 
 const activeFilters = ref({
-  min_price: 0, max_price: 5000, colorSet: [], colors: [], designs: [], collections: []
+  min_price: 0, max_price: 5000, design:[], color_set: [], colors: [], collection: []
+  // colorSet: [], colors: [], designs: [], collections: []
 })
 
 const heroName = "catalog"
@@ -46,6 +47,14 @@ async function onChangeFilters(filters) {
   fetchProducts(query)
 }
 
+async function onResetFilters(){
+  activeFilters.value = {
+    min_price: 0, max_price: 5000, design:[], color_set: [], colors: [], collection: []
+  }
+  const query = "&" + new URLSearchParams(activeFilters.value).toString();
+  fetchProducts(query)
+}
+
 
 onMounted(() => {
   if(route.query.material){
@@ -64,7 +73,7 @@ onMounted(() => {
   <hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage"  />
   <door-sets :activeFilters="activeFilters" @changeFilters="onChangeFilters"/>
   <div class="flex main-container">
-    <door-filters :activeFilters="activeFilters" @changeFilters="onChangeFilters"/>
+    <door-filters :activeFilters="activeFilters" @changeFilters="onChangeFilters" @resetFilters="onResetFilters"/>
     <door-items :total="total"  :page_size="page_size" :pagesCount="pagesCount" :products="products" @changeFilters="onChangeFilters"/>
   </div>
 </template>

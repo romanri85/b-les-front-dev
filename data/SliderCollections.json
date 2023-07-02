@@ -1,37 +1,44 @@
-[{
-  "name": "classic",
-  "description": "classicDescription",
-  "image": "/collection images/classic-hero.webp",
-  "slug": "/classic"
-},
+[
+  {
+    "name": "classic",
+    "description": "classicDescription",
+    "image": "/collection images/classic-hero.webp",
+    "slug": "/classic",
+    "id": 1
+  },
   {
     "name": "versailles",
     "description": "versaillesDescription",
     "image": "/collection images/versal-hero.webp",
-    "slug": "/versailles"
+    "slug": "/versailles",
+    "id": 3
   },
   {
     "name": "modern",
     "description": "modernDescription",
     "image": "/collection images/1920Modern-hero.webp",
-    "slug": "/modern"
+    "slug": "/modern",
+    "id": 4
   },
   {
     "name": "premier",
     "description": "premierDescription",
     "image": "/collection images/classic-hero.webp",
-    "slug": "/premier"
+    "slug": "/premier",
+    "id": 2
   },
   {
     "name": "rimini",
     "description": "riminiDescription",
     "image": "/collection images/1920Rimini-hero.webp",
-    "slug": "/rimini"
+    "slug": "/rimini",
+    "id": 5
   },
   {
     "name": "rStyle",
     "description": "rStyleDescription",
     "image": "/collection images/1920R-Style-hero.webp",
-    "slug": "/rStyle"
+    "slug": "/rStyle",
+    "id": 6
   }
 ]

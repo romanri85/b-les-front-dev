@@ -6,44 +6,18 @@ import MaterialColorFilter from "~/components/pages/door-catalog/MaterialColorFi
 import DoorCollectionsFilter from "~/components/pages/door-catalog/DoorCollectionsFilter.vue";
 import PrimaryButton from "~/components/buttons/PrimaryButtonSmall.vue";
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
+import {baseURL} from "~/config";
 
-const emit = defineEmits(['changeFilters'])
+const emit = defineEmits(['changeFilters', 'resetFilters'])
 const props = defineProps({
   activeFilters: Object
 })
 
 
-// const oBarMinValue = ref(0);
-// const oBarMaxValue = ref(100000);
 
-let colorSets = [
-  {
-    name: 'Белый',
-    colorCode: 'bg-[#fff]',
-    id: 1
-  },
-  {
-    name: 'Красный',
-    colorCode: 'bg-[red]',
-    id: 2
-  },
-  {
-    name: 'Зеленый',
-    colorCode: 'bg-[green]',
-    id: 3
-  },
-  {
-    name: 'Синий',
-    colorCode: 'bg-[blue]',
-    id: 4
-  },
-  {
-    name: 'Желтый',
-    colorCode: 'bg-[#ff0ff0]',
-    id: 5
-  }]
 
-let designs = [
+
+let design = [
   {
     name: 'Classic',
     id: 1
@@ -58,6 +32,21 @@ let designs = [
   }
 ]
 
+let color_sets = ref([])
+
+async function fetchColorSets() {
+  const response = await $fetch(`${baseURL}/api/product/color-sets`);
+  return response;
+}
+onMounted(async () => {
+  color_sets.value = await fetchColorSets()
+})
+
+
+  // window.scrollTo(0, 0);
+
+
+
 // function update_oBarValues(e) {
 //   oBarMinValue.value = e.minValue;
 //   oBarMaxValue.value = e.maxValue;
@@ -71,8 +60,8 @@ function onChangePrice(min_price, max_price) {
   emit('changeFilters', {'max_price':max_price, 'min_price':min_price})
 }
 
-function onChangeColorSet(colorSet) {
-  emit('changeFilters', colorSet)
+function onChangeColorSet(color_set) {
+  emit('changeFilters', color_set)
 }
 
 function onChangeColors(colors) {
@@ -83,12 +72,17 @@ function onChangeMaterials(materials) {
   emit('changeFilters', materials)
 }
 
-function onChangeDesigns(designs) {
-emit('changeFilters', designs)
+function onChangeDesigns(design) {
+emit('changeFilters', design)
 }
 
-function onChangeCollections(collections) {
-emit('changeFilters', collections)
+function onChangeCollections(collection) {
+  console.log(collection)
+emit('changeFilters', collection)
+}
+
+function resetFilters() {
+  emit('resetFilters', {})
 }
 </script>
 
@@ -107,11 +101,11 @@ emit('changeFilters', collections)
     </div>
     <div class="filter-container">
       <price-filter :min_price="props.activeFilters.min_price" :max_price="props.activeFilters.max_price"  @change="onChangePrice"/>
-      <color-set-filter :value="props.activeFilters.colorSet" @change="onChangeColorSet" :colorSets="colorSets"/>
-      <design-filter :value="props.activeFilters.designs" @change="onChangeDesigns" :designs="designs"/>
+      <color-set-filter :value="props.activeFilters.color_set" @change="onChangeColorSet" :color_sets="color_sets"/>
+      <design-filter :value="props.activeFilters.design" @change="onChangeDesigns" :design="design"/>
       <material-color-filter :value="props.activeFilters.colors" :material="props.activeFilters.material" @change="onChangeColors" @changeMaterials="onChangeMaterials"/>
-      <door-collections-filter :value="props.activeFilters.collections" @change="onChangeCollections"/>
-      <primary-button-small class="w-full text-start mt-16">
+      <door-collections-filter :value="props.activeFilters.collection" @change="onChangeCollections"/>
+      <primary-button-small class="w-full text-start mt-16" @click="resetFilters">
         <h3>Очистить</h3>
       </primary-button-small>
     </div>

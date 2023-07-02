@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import {toNumber} from "@vue/shared";
+
 const props = defineProps({
   value: String,
   doorVariant: Object
@@ -23,9 +25,9 @@ const props = defineProps({
       <h6 class="pb-3 uppercase">{{props.doorVariant.product_variant.product.collection.name}}</h6>
       <div class="pb-3 inline-flex">
         <p>{{ props.doorVariant.product_variant.material.name + ", " + " "}}&nbsp;</p>
-        <p>{{ props.doorVariant.verbose_color}}</p>
+        <p>{{ props.doorVariant.color.name}}</p>
       </div>
-      <p class="font-regular">{{ props.doorVariant.price}}R</p>
+      <p class="font-regular">{{ toNumber(props.doorVariant.price) + toNumber(props.doorVariant.casing_variant.price)}}&nbsp;₽</p>
     </div>
   </div>
   </client-only>
