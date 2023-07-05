@@ -7,6 +7,7 @@ import DoorCollectionsFilter from "~/components/pages/door-catalog/DoorCollectio
 import PrimaryButton from "~/components/buttons/PrimaryButtonSmall.vue";
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 import {baseURL} from "~/config";
+import MaterialFilter from "~/components/filters/MaterialFilter.vue";
 
 const emit = defineEmits(['changeFilters', 'resetFilters'])
 const props = defineProps({
@@ -25,11 +26,8 @@ let design = [
   {
     name: 'Modern',
     id: 2
-  },
-  {
-    name: 'Neoclassic',
-    id: 3
   }
+
 ]
 
 let color_sets = ref([])
@@ -64,8 +62,9 @@ function onChangeColorSet(color_set) {
   emit('changeFilters', color_set)
 }
 
-function onChangeColors(colors) {
-  emit('changeFilters', colors)
+function onChangeColors(color) {
+  console.log(color, "color")
+  emit('changeFilters', color)
 }
 
 function onChangeMaterials(materials) {
@@ -103,7 +102,8 @@ function resetFilters() {
       <price-filter :min_price="props.activeFilters.min_price" :max_price="props.activeFilters.max_price"  @change="onChangePrice"/>
       <color-set-filter :value="props.activeFilters.color_set" @change="onChangeColorSet" :color_sets="color_sets"/>
       <design-filter :value="props.activeFilters.design" @change="onChangeDesigns" :design="design"/>
-      <material-color-filter :value="props.activeFilters.colors" :material="props.activeFilters.material" @change="onChangeColors" @changeMaterials="onChangeMaterials"/>
+      <material-filter :material="props.activeFilters.material" @changeMaterials="onChangeMaterials"/>
+      <material-color-filter :value="props.activeFilters.color" :material="props.activeFilters.material" @change="onChangeColors"/>
       <door-collections-filter :value="props.activeFilters.collection" @change="onChangeCollections"/>
       <primary-button-small class="w-full text-start mt-16" @click="resetFilters">
         <h3>Очистить</h3>

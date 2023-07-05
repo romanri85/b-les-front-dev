@@ -15,7 +15,6 @@ const emit = defineEmits(
   ['changeFilters']
 )
 
-const activeCasing = ref("/CasingOakEnamelBeige/PNG/Дуб брашированный Бежевый - Карниз 120.png")
 
 const page = ref(1)
 function onChangePage(page) {
@@ -23,22 +22,23 @@ emit("changeFilters", {page})
 }
 
 
-
 </script>
 
 <template>
   <div class="w-full pl-16">
       <div class="text-primaryDark flex justify-between w-full">
+<!--        <p>{{props.products}}</p>-->
        <sorting/>
         <h6>Всего дверей: {{props.total}}</h6>
       </div>
       <div class="mt-16 grid-cols-4 grid-rows-7 grid">
 
         <div v-for="doorVariant in props.products" :key="doorVariant.id">
+          <NuxtLink :to="`/catalog/${doorVariant.id}`">
           <door-card class="relative -z-10 hover:border-b border-black"
-                     :value="activeCasing"
                      :doorVariant="doorVariant"
           />
+          </NuxtLink>
         </div>
     </div>
     <div class="w-full flex justify-center">

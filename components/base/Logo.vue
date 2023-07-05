@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps({light: {type: Boolean, default: true}})
+defineProps({light: {type: Boolean}})
 </script>
 
 <template>

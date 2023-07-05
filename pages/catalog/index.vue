@@ -7,7 +7,7 @@ import {baseURL} from "~/config.js";
 import Hero from "~/components/base/hero.vue";
 
 const activeFilters = ref({
-  min_price: 0, max_price: 5000, design:[], color_set: [], colors: [], collection: []
+  min_price: 0, max_price: 6000, design:[], color_set: [], color: [], collection: [], material: []
   // colorSet: [], colors: [], designs: [], collections: []
 })
 
@@ -28,13 +28,11 @@ async function fetchProducts(query = "") {
   total.value = response.count
   pagesCount.value = response.page_links.length
   products.value = response.results
-  console.log(response, "response")
   // window.scrollTo(0, 0);
 
 }
 
 async function onChangeFilters(filters) {
-  console.log(filters, "filters")
   if (!Object.keys(filters).includes("page")) {
     filters = {...filters, page: 1}
 
@@ -42,14 +40,13 @@ async function onChangeFilters(filters) {
 
   activeFilters.value = {...activeFilters.value, ...filters}
   const query = "&" + new URLSearchParams(activeFilters.value).toString();
-  console.log(query, "query")
 
   fetchProducts(query)
 }
 
 async function onResetFilters(){
   activeFilters.value = {
-    min_price: 0, max_price: 5000, design:[], color_set: [], colors: [], collection: []
+    min_price: 0, max_price: 6000, design:[], color_set: [], color: [], collection: [], material: []
   }
   const query = "&" + new URLSearchParams(activeFilters.value).toString();
   fetchProducts(query)

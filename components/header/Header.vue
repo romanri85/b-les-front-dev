@@ -12,7 +12,7 @@ const isBurgerOpenStore = useIsBurgerOpenStore()
 
 // set light layout
 
-defineProps({light: {type: Boolean, default: true}})
+const props = defineProps({light: {type: Boolean, default: true}})
 
 
 const {locale, setLocale} = useI18n()
@@ -25,6 +25,7 @@ async function toggleLocale() {
   await nextTick()
 
 }
+
 
 
 </script>
@@ -51,15 +52,15 @@ async function toggleLocale() {
               <logo :light="!open"/>
             </NuxtLink>
             <NuxtLink to="/" class="hidden lg:block">
-              <logo :light="true"/>
+              <logo :light="props.light"/>
             </NuxtLink>
           </div>                <!--                main menu items-->
-          <text-menu-items/>
+          <text-menu-items :light="props.light"/>
 
           <!--            contact us, favourite, search menu items-->
 
           <icons-menu-items class="block lg:hidden" :light="!open"/>
-          <icons-menu-items class="hidden lg:flex " :light="true"/>
+          <icons-menu-items class="hidden lg:flex " :light="props.light"/>
 
           <!--            change language menu item-->
 
