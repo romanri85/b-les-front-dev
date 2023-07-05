@@ -35,7 +35,7 @@ async function fetchDoorVariantData(query = `/${route.params.id}`) {
 async function changeDoorVariantData(query) {
 
   newDoorVariantData.value = await $fetch(query)
-  doorVariantData.valuecre = newDoorVariantData.value.results[0]
+  doorVariantData.value = newDoorVariantData.value.results[0]
   console.log(newDoorVariantData.value.results, 'newDoorVariantData')
 
   // window.scrollTo(0, 0);
