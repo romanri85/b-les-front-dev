@@ -11,115 +11,89 @@ import {
   TabPanels
 } from "@headlessui/vue";
 import FilterType from "~/components/filters/FilterType.vue";
-import {baseURL} from "~/config";
-import {filter} from "domutils";
 // import {background} from "ipx";
 
 const props = defineProps({
   activeFilters: {
     type: Object,
   },
-  material: {
+  productMaterials: {
     type: Array,
+  },
+  material: {
+    type: Number
+  },
+  color: {
+    type: Number
   }
+
 })
 
 const emit = defineEmits(['changeFilter', 'changeMaterials'])
 
-
-let materialColors = ref([])
-
-let availableColors = ref([])
-
-
-async function fetchMaterialColors() {
-  const response = await $fetch(`${baseURL}/api/product/material-choices`);
-  return response;
-}
-
-onMounted(async () => {
-  materialColors.value = await fetchMaterialColors()
-
-  availableColors.value = filterMaterial(materialColors.value, props.material)
-
-
-
-
-})
-
-
-function filterMaterial(inputArr, argArr) {
-  const ids = argArr.map(arg => arg.material); // get the material ids from argument array
-  return inputArr.filter(input => ids.includes(input.material)); // return only those materials that are in the ids array
-}
-
-// function filterByMaterial(array1, array2) {
-//   // Create a set of material values from the second array
-//   let materialSet = new Set(array2.map(item => item.material));
-//   console.log(materialSet, 'materialSet')
 //
-//   // Filter the first array to only include items with a material value in the set
-//   return array1.filter(item => materialSet.has(item.material));
-// }
-const materialActiveindex = ref(3)
-const colorActiveindex = ref(1)
+// onMounted(async () => {
+//
+//
+// })
 
+const materialActiveindex = ref(props.material)
+const colorActiveindex = ref(props.color)
+const productMaterials = ref(props.productMaterials)
 
-
-
-
-// let chosenColors = reactive(props.value)
-// let chosenMaterials = reactive(props.material)
 
 function chooseColor(id) {
   colorActiveindex.value = id
-  // if (!chosenColors.includes(id)) {
-  //   chosenColors.push(id)
-  // } else {
-  //   chosenColors.splice(chosenColors.indexOf(id), 1)
-  // }
-  emit('changeFilter', {"color": id, "material": materialActiveindex.value, "product": props.activeFilters.product})
+
+  emit('changeFilter', {"material": materialActiveindex.value, "color": id})
 }
 
 function chooseMaterial(material) {
   materialActiveindex.value = material
-  console.log(props.activeFilters, 'props.activeFilters')
-  // if (!chosenMaterials.includes(material)) {
-  //   chosenMaterials.push(material)
-  //   console.log(chosenMaterials)
-  // } else {
-  //   chosenMaterials.splice(chosenMaterials.indexOf(material), 1)
-  //   console.log(chosenMaterials)
-  // }
-  // emit('changeMaterials', {"material":chosenMaterials})
+
 }
 
+let materialMap = {3: 0, 2: 1, 1: 2}
+let index = materialMap[props.material]
 
 </script>
 
 <template class="filter-container ">
-<div v-if="availableColors.length==3">
-    <client-only>
-
+<!--<p>{{materialMap[props.material]}}</p>-->
+<div v-if="props.productMaterials[0]">
+  <client-only>
   <Disclosure default-open>
     <DisclosureButton class=" w-full">
       <filter-type filterName="Выбрать цвет"/>
     </DisclosureButton>
     <DisclosurePanel class="mb-20">
-      <TabGroup>
+      <TabGroup v-if="props.productMaterials" :defaultIndex="index">
         <TabList>
-          <div class="flex justify-around w-full pr-4">
-                          <Tab as="template" v-slot="{ selected }" v-for="material in availableColors" :key="material.material" class="text-darkGrey"><h4 @click="chooseMaterial(material.material)"  :class="{'border-b': selected, 'border-black':selected, 'text-primaryDark':selected}">{{
-                              material.name
-                            }}</h4></Tab>
+
+          <div class="flex justify-between w-60">
+            <div v-for="material in props.productMaterials.sort((a,b)=>{
+              if(a.material < b.material) { return 1; }
+              if(a.material > b.material) { return -1; }
+              return 0;
+            })" :key="material.material">
+
+              <Tab as="template" v-slot="{ selected }"
+                   class="text-darkGrey"><h4
+                  @click="chooseMaterial(material.material)"
+                  :class="{'border-b': selected, 'border-black':selected, 'text-primaryDark':selected}">{{
+                  material.name
+                }}</h4></Tab>
+
+
+            </div>
 
           </div>
         </TabList>
-        <TabPanels>
-          <TabPanel v-for="(material, index) in  availableColors" :key="material.material">
-            <div class="grid grid-cols-3 gap-y-6 mb-3 mt-5">
-              <div v-for="(color) in material.color" :key="color.name" @click="chooseColor(color.id)">
-                <div class="flex flex-col items-center">
+        <TabPanels v-if="props.productMaterials">
+          <TabPanel v-if="material" v-for="material of props.productMaterials" :key="material.material">
+            <div v-if="material" class="flex gap-y-6 gap-x-6 mb-3 mt-5 flex-wrap w-2/3">
+              <div v-for="color in material.color" :key="color.id" @click="chooseColor(color.id)">
+                <div class="flex flex-col items-center w-24">
                   <div class="pb-1"
                        :class="{'border-b': color.id === colorActiveindex, 'border-black':color.id === colorActiveindex}">
                     <div :style="{ backgroundImage: 'url(' + color.image + ')' }"
@@ -131,16 +105,16 @@ function chooseMaterial(material) {
               </div>
             </div>
           </TabPanel>
+
         </TabPanels>
       </TabGroup>
+
     </DisclosurePanel>
   </Disclosure>
-        </client-only>
-
+  </client-only>
 </div>
 
 </template>
-
 
 
 <style scoped>

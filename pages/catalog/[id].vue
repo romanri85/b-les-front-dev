@@ -1,84 +1,151 @@
 <script setup lang="ts">
 
 import {baseURL} from "~/config";
-import DoorCard from "~/components/pages/door-catalog/DoorCard.vue";
 import DoorCardDetail from "~/components/pages/door-catalog/DoorCardDetail.vue";
-import MaterialColorFilter from "~/components/pages/door-catalog/MaterialColorFilter.vue";
 import MaterialColorFilterDetail from "~/components/pages/door-catalog/MaterialColorFilterDetail.vue";
+import CasingFilterDetail from "~/components/filters/CasingFilterDetail.vue";
+import {func} from "ts-interface-checker";
+import {filter} from "domutils";
 
 definePageMeta({layout: "dark-header"});
 
 let route = useRoute()
 
-const doorVariantData =ref({})
-const newDoorVariantData =ref({})
-const productName = ref(null)
-const collectionName = ref(null)
-const collectionDescription = ref(null)
-const collectionMaterials = ref([])
+const product = ref({})
+const doorVariantData = ref({})
+const productVariantsData = ref({})
+const productMaterials = ref([])
+const productCasings = ref([])
 const activeFilters = ref({})
+const casingVariants = ref({})
+const color= ref(Number(route.query.color))
+const material = ref(Number(route.query.material))
+const actualCasing = ref(null)
+
+
 
 
 async function fetchDoorVariantData(query = `/${route.params.id}`) {
 
-  doorVariantData.value = await $fetch(`${baseURL}/api/product/product-variants${query}`)
-  productName.value = doorVariantData.value.product_variant.product.name
-  collectionName.value = doorVariantData.value.product_variant.product.collection.name
-  collectionDescription.value = doorVariantData.value.product_variant.product.collection.description
-  collectionMaterials.value = doorVariantData.value.product_variant.product.collection.collection_materials
-  activeFilters.value = {product: doorVariantData.value.product_variant.product.id }
+  product.value = await $fetch(`${baseURL}/api/product${query}`)
+
+  productMaterials.value = product.value.product_variants.map((item) => ({
+    'material': item.material,
+    'name': item.material_name,
+    'color': item.material_colors
+  }));
+
+  getProductCasings()
+  getCasingVariants()
+
+
+  getActualDoorVariantData()
 
   // window.scrollTo(0, 0);
 
 }
+let target = ref(null)
+function getActualDoorVariantData(filterData = {material : material.value, color: color.value}) {
+  color.value = filterData.color
+  material.value = filterData.material
 
-async function changeDoorVariantData(query) {
+  productVariantsData.value = product.value.product_variants.find((item) => item.material === material.value)
+  target.value = productVariantsData.value.material_color_product_variants.sort()
 
-  newDoorVariantData.value = await $fetch(query)
-  doorVariantData.value = newDoorVariantData.value.results[0]
-  console.log(newDoorVariantData.value.results, 'newDoorVariantData')
+  doorVariantData.value = productVariantsData.value.material_color_product_variants.find((item) => item.color.id === Number(color.value))
+  if (actualCasing.value !== null) {
+    changeCasing(actualCasing.value)
+  }
 
-  // window.scrollTo(0, 0);
+
+
+
 
 }
 
-async function onChangeFilters(filters) {
+function changeCasing(casing) {
 
-  activeFilters.value = {...activeFilters.value, ...filters}
-  const query = "?" + new URLSearchParams(activeFilters.value).toString();
-  console.log(`${baseURL}/api/product/product-variants${query}`, 'query')
-  await changeDoorVariantData(`${baseURL}/api/product/product-variants${query}`)
 
-  console.log(filters, 'filters')
+
+  doorVariantData.value.casing_variant = casingVariants.value[casing][color.value][0]
+  actualCasing.value = casing
+
+
+
+
 }
-// const material = doorVariantData.value.product_variant.product.collection.collection_materials
-// console.log(material, 'material')
+
+// TO DO: get casing variants from product^ not from collection
+function getCasingVariants() {
+
+  let data = product.value.collection
+
+  let output = {};
+
+  for (let casing of data.casings) {
+    let casingValue = casing.casing;
+    if (!(casingValue in output)) {
+      output[casingValue] = {};
+    }
+    for (let variant of casing.casing_variants) {
+      let colorValue = variant.color;
+      if (!(colorValue in output[casingValue])) {
+        output[casingValue][colorValue] = [];
+      }
+      output[casingValue][colorValue].push(variant);
+    }
+  }
+  casingVariants.value = output;
+
+}
+
+function getProductCasings() {
+  let data = product.value.collection.casings
+  let materialMap = new Map();
+
+  data.forEach(item => {
+    if (materialMap.has(item.material)) {
+      materialMap.get(item.material).push(item);
+    } else {
+      materialMap.set(item.material, [item]);
+    }
+  });
+  productCasings.value = Object.fromEntries(materialMap);
+}
+
+// let casingMap = {3: 1, 6: 2, 11: 3, 8: 7}
 
 onMounted(() => {
   fetchDoorVariantData()
 })
+
+
 </script>
 
 <template>
-  <client-only>
-  <div v-show="doorVariantData" class="main-container">
-    <div class="h-24 flex justify-start items-center"><h4>Главная / Каталог / {{productName}}</h4></div>
-    <div class="flex gap-20">
-      <div class="left w-[38%]">
-        <door-card-detail :doorVariant="doorVariantData"/>
-      </div>
-      <div class="right">
-        <div class="h-60 flex flex-col justify-start items-start">
-          <h4 class="pb-5">{{collectionName}}</h4>
-          <h1 class="pb-5">{{productName}}</h1>
-          <p>{{collectionDescription}}</p>
+<!--  <client-only>-->
+  <p>{{}}</p>
+    <div v-if="doorVariantData && doorVariantData.casing_variant" class="main-container">
+      <div class="h-24 flex justify-start items-center"><h4>Главная / Каталог / {{ product.name }}</h4></div>
+      <div class="flex gap-20">
+        <div class="left w-[38%]">
+          <door-card-detail :doorVariant="doorVariantData" :product="product" />
         </div>
-        <material-color-filter-detail @change-filter="onChangeFilters" :activeFilters="activeFilters" :material="doorVariantData.product_variant.product.collection.collection_materials"/>
+        <div class="right w-full">
+          <div class="h-60 flex flex-col justify-start items-start">
 
+            <h4 v-if="product && product.collection" class="pb-5">{{ product.collection.name }}</h4>
+            <h1 class="pb-5">{{ product.name }}</h1>
+            <p v-if="product && product.collection">{{ product.collection.description }}</p>
+          </div>
+          <material-color-filter-detail @change-filter="getActualDoorVariantData" :activeFilters="activeFilters"
+                                        :material="material"
+                                        :color="color" :productMaterials="productMaterials"/>
+          <casing-filter-detail v-if="doorVariantData" @change-filter="changeCasing" :material="material" :productCasings="productCasings"
+                                :casingVariants="casingVariants" :color="color" :startCasing="doorVariantData.casing_variant.casing"/>
+        </div>
       </div>
     </div>
-  </div>
-  </client-only>
 
 </template>
 

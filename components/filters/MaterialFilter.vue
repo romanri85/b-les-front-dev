@@ -31,7 +31,6 @@ async function fetchMaterialColors() {
 }
 onMounted(async () => {
   materialColors.value = await fetchMaterialColors()
-  console.log(chosenMaterials, "chosenMaterials")
 })
 
 
@@ -46,10 +45,8 @@ let chosenMaterials = reactive(props.material)
 function chooseMaterial(material){
   if (!chosenMaterials.includes(material)) {
     chosenMaterials.push(material)
-    console.log(chosenMaterials)
   } else {
     chosenMaterials.splice(chosenMaterials.indexOf(material), 1)
-    console.log(chosenMaterials)
   }
   emit('changeMaterials', {"material":chosenMaterials})
 }

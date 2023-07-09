@@ -34,7 +34,7 @@ emit("changeFilters", {page})
       <div class="mt-16 grid-cols-4 grid-rows-7 grid">
 
         <div v-for="doorVariant in props.products" :key="doorVariant.id">
-          <NuxtLink :to="`/catalog/${doorVariant.id}`">
+          <NuxtLink :to="`/catalog/${doorVariant.product_variant.product.id}?material=${doorVariant.product_variant.material.id}&color=${doorVariant.color.id}`">
           <door-card class="relative -z-10 hover:border-b border-black"
                      :doorVariant="doorVariant"
           />

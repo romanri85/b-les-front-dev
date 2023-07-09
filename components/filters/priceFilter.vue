@@ -23,6 +23,7 @@ const oBarMinValue = ref(props.min_price)
 const oBarMaxValue = ref(props.max_price);
 const min = props.min_price;
 const max = props.max_price;
+const updatePriceTimeout = ref(null)
 
 // const oBarValues = reactive(props.value)
 const min_price = ref(props.min_price)
@@ -39,8 +40,11 @@ function update_oBarValues(e) {
 }
 
 function updatePriceRange() {
-
-  emit('change', min_price.value, max_price.value)
+  clearTimeout(updatePriceTimeout.value)
+  updatePriceTimeout.value = setTimeout(() => {
+    emit('change', min_price.value, max_price.value)
+  }, 500)
+  // emit('change', min_price.value, max_price.value)
 
 
 
