@@ -4,8 +4,7 @@ import {baseURL} from "~/config";
 import DoorCardDetail from "~/components/pages/door-catalog/DoorCardDetail.vue";
 import MaterialColorFilterDetail from "~/components/pages/door-catalog/MaterialColorFilterDetail.vue";
 import CasingFilterDetail from "~/components/filters/CasingFilterDetail.vue";
-import {func} from "ts-interface-checker";
-import {filter} from "domutils";
+import GlassTypeFilterDetail from "~/components/filters/GlassTypeFilterDetail.vue";
 
 definePageMeta({layout: "dark-header"});
 
@@ -18,11 +17,10 @@ const productMaterials = ref([])
 const productCasings = ref([])
 const activeFilters = ref({})
 const casingVariants = ref({})
-const color= ref(Number(route.query.color))
+const color = ref(Number(route.query.color))
 const material = ref(Number(route.query.material))
 const actualCasing = ref(null)
-
-
+const newGlass = ref({})
 
 
 async function fetchDoorVariantData(query = `/${route.params.id}`) {
@@ -44,8 +42,10 @@ async function fetchDoorVariantData(query = `/${route.params.id}`) {
   // window.scrollTo(0, 0);
 
 }
+
 let target = ref(null)
-function getActualDoorVariantData(filterData = {material : material.value, color: color.value}) {
+
+function getActualDoorVariantData(filterData = {material: material.value, color: color.value}) {
   color.value = filterData.color
   material.value = filterData.material
 
@@ -58,21 +58,18 @@ function getActualDoorVariantData(filterData = {material : material.value, color
   }
 
 
-
-
-
 }
 
 function changeCasing(casing) {
 
-
-
   doorVariantData.value.casing_variant = casingVariants.value[casing][color.value][0]
   actualCasing.value = casing
+}
 
-
-
-
+function changeGlass(glass) {
+  console.log(glass)
+  newGlass.value = product.value.glass_decor.find((item) => item.glass.id === glass.glass && item.decor.id === glass.decor)
+  console.log(newGlass)
 }
 
 // TO DO: get casing variants from product^ not from collection
@@ -123,29 +120,37 @@ onMounted(() => {
 </script>
 
 <template>
-<!--  <client-only>-->
-  <p>{{}}</p>
-    <div v-if="doorVariantData && doorVariantData.casing_variant" class="main-container">
-      <div class="h-24 flex justify-start items-center"><h4>Главная / Каталог / {{ product.name }}</h4></div>
-      <div class="flex gap-20">
-        <div class="left w-[38%]">
-          <door-card-detail :doorVariant="doorVariantData" :product="product" />
-        </div>
-        <div class="right w-full">
-          <div class="h-60 flex flex-col justify-start items-start">
+  <!--  <client-only>-->
+  <div v-if="doorVariantData && doorVariantData.casing_variant" class="main-container">
+    <div class="h-12 flex justify-start items-end"><h4>Главная / Каталог / {{ product.name }}</h4></div>
+    <div class="flex gap-20">
+      <div class="left w-[38%]">
+        <door-card-detail :doorVariant="doorVariantData" :product="product" :newGlass="newGlass"/>
+<!--        <client-only>-->
+            <glass-type-filter-detail @change-glass-decor="changeGlass" :glass_decor="product.glass_decor" v-if="product.glass_decor && product.glass_decor[0]"/>
 
-            <h4 v-if="product && product.collection" class="pb-5">{{ product.collection.name }}</h4>
-            <h1 class="pb-5">{{ product.name }}</h1>
-            <p v-if="product && product.collection">{{ product.collection.description }}</p>
-          </div>
-          <material-color-filter-detail @change-filter="getActualDoorVariantData" :activeFilters="activeFilters"
-                                        :material="material"
-                                        :color="color" :productMaterials="productMaterials"/>
-          <casing-filter-detail v-if="doorVariantData" @change-filter="changeCasing" :material="material" :productCasings="productCasings"
-                                :casingVariants="casingVariants" :color="color" :startCasing="doorVariantData.casing_variant.casing"/>
+<!--        </client-only>-->
+
+      </div>
+      <div class="right w-full">
+        <div class="h-60 flex flex-col justify-start items-start">
+
+          <h4 v-if="product && product.collection" class="pb-5">{{ product.collection.name }}</h4>
+          <h1 class="pb-5">{{ product.name }}</h1>
+          <p v-if="product && product.collection">{{ product.collection.description }}</p>
         </div>
+        <material-color-filter-detail @change-filter="getActualDoorVariantData" :activeFilters="activeFilters"
+                                      :material="material"
+                                      :color="color" :productMaterials="productMaterials"/>
+        <casing-filter-detail v-if="doorVariantData" @change-filter="changeCasing" :material="material"
+                              :productCasings="productCasings"
+                              :casingVariants="casingVariants" :color="color"
+                              :startCasing="doorVariantData.casing_variant.casing"/>
+        <!--          <p>{{product.glass_decor}}</p>-->
+
       </div>
     </div>
+  </div>
 
 </template>
 
