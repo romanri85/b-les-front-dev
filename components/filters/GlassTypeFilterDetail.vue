@@ -47,22 +47,31 @@ onMounted(async () => {
 
 
 function chooseGlass(glass: number) :void{
-  if (glass === glassDecor.value.glass) {
+  if (glass === glassDecor.value.glass ) {
     return
   }
   glassTypeActiveIndex.value = glass
   glassDecor.value = {...glassDecor.value, "glass": glass}
+  if (glassDecor.value.glass === initialGlass.glass.id && glassDecor.value.decor === initialGlass.decor.id) {
+    emit('changeGlassDecor',  null)
+    return
+  }
 
   emit('changeGlassDecor',  {glass: glassDecor.value.glass, decor: glassDecor.value.decor})
 
 }
 
 function chooseDecor(decor:number) :void{
-  if (decor === glassDecor.value.decor) {
+  if (decor === glassDecor.value.decor ) {
     return
   }
   glassDecorActiveIndex.value = decor
   glassDecor.value = {...glassDecor.value, "decor": decor}
+
+  if (glassDecor.value.glass === initialGlass.glass.id && glassDecor.value.decor === initialGlass.decor.id) {
+    emit('changeGlassDecor',  null)
+    return
+  }
 
   emit('changeGlassDecor',  {glass: glassDecor.value.glass, decor: glassDecor.value.decor})
 }

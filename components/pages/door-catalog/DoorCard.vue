@@ -13,11 +13,13 @@ const props = defineProps({
 <!--    <client-only>-->
         <div class="flex flex-col items-center pb-12">
           <div class="relative pb-8">
-            <nuxt-img width="200px" height="auto" :src="props.doorVariant.casing_variant.image"
-                      class="h-auto w-48"></nuxt-img>
-            <nuxt-img width="200px" height="auto"
-                      :src="props.doorVariant.leaf_image"
-                      class="h-auto w-48 absolute top-0"></nuxt-img>
+<!--            <nuxt-img width="200px" height="auto" :src="props.doorVariant.casing_variant.image"-->
+<!--                      class="h-auto w-48"></nuxt-img>-->
+<!--            <nuxt-img width="200px" height="auto"-->
+<!--                      :src="props.doorVariant.leaf_image"-->
+<!--                      class="h-auto w-48 absolute top-0"></nuxt-img>-->
+                        <nuxt-img width="200px" height="auto" :src="props.doorVariant.merged_image"
+                                  class="h-auto w-48"></nuxt-img>
           </div>
 
           <div class="flex flex-col items-center">

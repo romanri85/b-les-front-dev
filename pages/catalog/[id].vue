@@ -5,6 +5,7 @@ import DoorCardDetail from "~/components/pages/door-catalog/DoorCardDetail.vue";
 import MaterialColorFilterDetail from "~/components/pages/door-catalog/MaterialColorFilterDetail.vue";
 import CasingFilterDetail from "~/components/filters/CasingFilterDetail.vue";
 import GlassTypeFilterDetail from "~/components/filters/GlassTypeFilterDetail.vue";
+import ModelFamilyFilterDetail from "~/components/filters/ModelFamilyFilterDetail.vue";
 
 definePageMeta({layout: "dark-header"});
 
@@ -23,19 +24,33 @@ const actualCasing = ref(null)
 const newGlass = ref({})
 
 
+
 async function fetchDoorVariantData(query = `/${route.params.id}`) {
 
   product.value = await $fetch(`${baseURL}/api/product${query}`)
+  product.value.product_family?.products?.push({id:product.value.id, name: product.value.name, image: product.value.image})
 
-  productMaterials.value = product.value.product_variants.map((item) => ({
-    'material': item.material,
-    'name': item.material_name,
-    'color': item.material_colors
-  }));
+  if (productMaterials.value.length === 0){
+    productMaterials.value = product.value.product_variants.map((item) => ({
+      'material': item.material,
+      'name': item.material_name,
+      'color': item.material_colors
+    }));
+  }
+  // productMaterials.value = product.value.product_variants.map((item) => ({
+  //   'material': item.material,
+  //   'name': item.material_name,
+  //   'color': item.material_colors
+  // }));
 
-  getProductCasings()
-  getCasingVariants()
 
+  if (Object.keys(casingVariants.value).length === 0) {
+    getCasingVariants()
+  }
+  // getCasingVariants()
+  if (productCasings.value.length === 0) {
+    getProductCasings()
+  }
 
   getActualDoorVariantData()
 
@@ -48,16 +63,26 @@ let target = ref(null)
 function getActualDoorVariantData(filterData = {material: material.value, color: color.value}) {
   color.value = filterData.color
   material.value = filterData.material
-
   productVariantsData.value = product.value.product_variants.find((item) => item.material === material.value)
-  target.value = productVariantsData.value.material_color_product_variants.sort()
+  // target.value = productVariantsData.value.material_color_product_variants.sort()
 
   doorVariantData.value = productVariantsData.value.material_color_product_variants.find((item) => item.color.id === Number(color.value))
   if (actualCasing.value !== null) {
     changeCasing(actualCasing.value)
   }
+}
 
+function changeModel(model) {
 
+  fetchDoorVariantData(`/${product.value.product_family.products.find((item) => item.name === model).id}`)
+  // let productFamily = product.value.product_family
+  // console.log(productFamily, 'productFamily')
+  // product.value = product.value.product_family.products.find((item) => item.name === model)
+  // product.value.product_family = productFamily
+  // console.log(product.value, 'new product')
+  getActualDoorVariantData({material: material.value, color: color.value})
+
+  // getActualDoorVariantData({material: material.value, color: color.value}, model)
 }
 
 function changeCasing(casing) {
@@ -67,9 +92,11 @@ function changeCasing(casing) {
 }
 
 function changeGlass(glass) {
-  console.log(glass)
+  if (glass === null) {
+    newGlass.value = {}
+    return
+  }
   newGlass.value = product.value.glass_decor.find((item) => item.glass.id === glass.glass && item.decor.id === glass.decor)
-  console.log(newGlass)
 }
 
 // TO DO: get casing variants from product^ not from collection
@@ -133,12 +160,14 @@ onMounted(() => {
 
       </div>
       <div class="right w-full">
-        <div class="h-60 flex flex-col justify-start items-start">
+        <div class="h-40 flex flex-col justify-start items-start">
 
           <h4 v-if="product && product.collection" class="pb-5">{{ product.collection.name }}</h4>
           <h1 class="pb-5">{{ product.name }}</h1>
           <p v-if="product && product.collection">{{ product.collection.description }}</p>
         </div>
+        <filters-model-family-filter-detail @change-model="changeModel" :product="product" :productVariantsData="productVariantsData"
+                              :modelName="product.name"/>
         <material-color-filter-detail @change-filter="getActualDoorVariantData" :activeFilters="activeFilters"
                                       :material="material"
                                       :color="color" :productMaterials="productMaterials"/>
