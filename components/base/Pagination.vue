@@ -8,6 +8,7 @@
         :items-per-page="page_size"
         :max-pages-shown="3"
         :on-click="HandleNewPage"
+
     >
       <template #prev-button>
         <span>
@@ -34,6 +35,9 @@ const props = defineProps({
   currentPage: Number,
   page_size: Number,
 })
+
+
+
 
 
 

@@ -11,15 +11,16 @@ const props = defineProps({
 const emit = defineEmits(['change'])
 
 
-let chosenCollections = props.value || []
+
 function chooseCollection(id: Number){
-  if(!chosenCollections.includes(id)){
-    chosenCollections.push(id)
+  if(!props.value.includes(id)){
+    emit('change', {collection:[...props.value, id]})
   } else {
-    chosenCollections.splice(chosenCollections.indexOf(id), 1)
+    const updatedCollections = props.value.filter((item)=>{
+      return item !== id
+    })
+    emit('change', {collection: updatedCollections})
   }
-  const collection ={collection:[...chosenCollections]}
-  emit('change', collection)
 }
 
 
@@ -34,7 +35,7 @@ function chooseCollection(id: Number){
     <DisclosurePanel class="mb-20">
       <div v-for="collection in collections" :key=collection.id class="flex gap-x-4 items-center mb-3">
 
-        <h5 class="underline-offset-4 cursor-pointer" @click="chooseCollection(collection.id)" :class="{'underline':chosenCollections.includes(collection.id)}">{{$t(collection.name)}}</h5>
+        <h5 class="underline-offset-4 cursor-pointer" @click="chooseCollection(collection.id)" :class="{'underline':props.value.includes(collection.id)}">{{$t(collection.name)}}</h5>
       </div>
     </DisclosurePanel>
   </Disclosure>

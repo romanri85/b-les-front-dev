@@ -51,7 +51,7 @@ function chooseCasing(casing) {
           <filter-type filterName="Оформление портала"/>
         </DisclosureButton>
         <DisclosurePanel class="mb-20">
-          <div class="flex gap-y-6 gap-x-6 mb-3 mt-5 flex-wrap w-2/3">
+          <div class="flex gap-y-6 gap-x-3 mb-3 mt-5 flex-wrap w-full">
             <div v-for="casing in props.productCasings[props.material]" :key="casing.casing" @click="chooseCasing(casing.casing)">
               <div class="flex flex-col items-center w-24">
                 <div class="pb-1"
@@ -64,8 +64,8 @@ function chooseCasing(casing) {
 }"
                        class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
                 </div>
-                <h5 class="pt-2 cursor-pointer" :class="{'font-regular':casing.casing === casingActiveindex}">
-                  {{ casing.casing_name }}</h5>
+                <p class="pt-2 cursor-pointer whitespace-nowrap" :class="{'font-regular':casing.casing === casingActiveindex}">
+                  {{ casing.casing_name }}</p>
               </div>
             </div>
           </div>

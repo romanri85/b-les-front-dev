@@ -66,7 +66,7 @@ let index = materialMap[props.material]
     <DisclosureButton class=" w-full">
       <filter-type filterName="Выбрать цвет"/>
     </DisclosureButton>
-    <DisclosurePanel class="mb-20">
+    <DisclosurePanel class="mb-10">
       <TabGroup v-if="props.productMaterials" :defaultIndex="index">
         <TabList>
 
@@ -99,7 +99,7 @@ let index = materialMap[props.material]
                     <div :style="{ backgroundImage: 'url(' + color.image + ')' }"
                          class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
                   </div>
-                  <h5 class="pt-2 cursor-pointer" :class="{'font-regular':color.id === colorActiveindex}">
+                  <h5 class="pt-2 cursor-pointer whitespace-nowrap" :class="{'font-regular':color.id === colorActiveindex}">
                     {{ color.name }}</h5>
                 </div>
               </div>

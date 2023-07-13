@@ -42,7 +42,7 @@ emit("changeFilters", {page})
         </div>
     </div>
     <div class="w-full flex justify-center">
-        <pagination :total="props.total"
+        <pagination class="pb-32" :total="props.total"
                     :page_size="props.page_size"
                     :pagesCount="props.pagesCount"
                     @page-change="onChangePage"

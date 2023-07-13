@@ -5,9 +5,10 @@ import DoorItems from "~/components/pages/door-catalog/DoorItems.vue";
 import DoorFilters from "~/components/pages/door-catalog/DoorFilters.vue";
 import {baseURL} from "~/config.js";
 import Hero from "~/components/base/hero.vue";
+import {string} from "postcss-selector-parser";
 
 const activeFilters = ref({
-  min_price: 0, max_price: 6000, design:[], color_set: [], color: [], collection: [], material: []
+  min_price: 0, max_price: 6000, design:[], color_set: [], color: [], collection: [], material: [], glass: string
   // colorSet: [], colors: [], designs: [], collections: []
 })
 
@@ -41,12 +42,14 @@ async function onChangeFilters(filters) {
   activeFilters.value = {...activeFilters.value, ...filters}
   const query = "&" + new URLSearchParams(activeFilters.value).toString();
 
+  console.log(activeFilters.value), 'activeFilters.value'
+
   fetchProducts(query)
 }
 
 async function onResetFilters(){
   activeFilters.value = {
-    min_price: 0, max_price: 6000, design:[], color_set: [], color: [], collection: [], material: []
+    min_price: 0, max_price: 6000, design:[], color_set: [], color: [], collection: [], material: [], glass: string
   }
   const query = "&" + new URLSearchParams(activeFilters.value).toString();
   fetchProducts(query)

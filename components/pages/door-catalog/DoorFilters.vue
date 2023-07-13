@@ -8,6 +8,7 @@ import PrimaryButton from "~/components/buttons/PrimaryButtonSmall.vue";
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 import {baseURL} from "~/config";
 import MaterialFilter from "~/components/filters/MaterialFilter.vue";
+import GlassFilter from "~/components/filters/GlassFilter.vue";
 
 const emit = defineEmits(['changeFilters', 'resetFilters'])
 const props = defineProps({
@@ -63,7 +64,6 @@ function onChangeColorSet(color_set) {
 }
 
 function onChangeColors(color) {
-  console.log(color, "color")
   emit('changeFilters', color)
 }
 
@@ -76,8 +76,12 @@ emit('changeFilters', design)
 }
 
 function onChangeCollections(collection) {
-  console.log(collection)
 emit('changeFilters', collection)
+}
+
+function onChangeGlass(glass) {
+  console.log(glass)
+  emit('changeFilters', glass)
 }
 
 function resetFilters() {
@@ -105,7 +109,8 @@ function resetFilters() {
       <material-filter :material="props.activeFilters.material" @changeMaterials="onChangeMaterials"/>
       <material-color-filter :value="props.activeFilters.color" :material="props.activeFilters.material" @change="onChangeColors"/>
       <door-collections-filter :value="props.activeFilters.collection" @change="onChangeCollections"/>
-      <primary-button-small class="w-full text-start mt-16" @click="resetFilters">
+      <glass-filter :value="props.activeFilters.glass"   @changeGlass="onChangeGlass" :design="design"/>
+      <primary-button-small class="w-full text-start " @click="resetFilters">
         <h3>Очистить</h3>
       </primary-button-small>
     </div>

@@ -37,6 +37,7 @@ async function fetchMaterialColors() {
 onMounted(async () => {
   materialColors.value = await fetchMaterialColors()
   chooseMaterial(3)
+  console.log(props.value, 'props.value')
 })
 
 const materialActiveindex = ref(3)
@@ -46,12 +47,17 @@ let chosenColors = reactive(props.value)
 let chosenMaterials = reactive(props.material)
 
 function chooseColor(id) {
-  if (!chosenColors.includes(id)) {
-    chosenColors.push(id)
+  if (!props.value.includes(id)) {
+    emit('change', {"color": [...props.value, id]})
+    console.log((props.value[0]), 'color')
   } else {
-    chosenColors.splice(chosenColors.indexOf(id), 1)
+    const updatedColors = props.value.filter((item) => {
+      return item !== id
+    })
+    emit('change', {"color": updatedColors})
+    console.log((props.value[0]), 'color')
   }
-  emit('change', {"color": chosenColors})
+
 }
 
 
@@ -77,14 +83,14 @@ function chooseMaterial(material) {
             <!--                  material.name-->
             <!--                }}</h4></Tab>-->
             <!--          </div>-->
-            <Tab as="template" v-slot="{ selected }" class="text-darkGrey"><h4 @click="chooseMaterial(3)"
-                                                                               :class="{'border-b': selected, 'border-black':selected, 'text-primaryDark':selected}"
+            <Tab  class="text-darkGrey"><h4 @click="chooseMaterial(3)"
+                                                                               :class="{'border-b': materialActiveindex===3, 'border-black':materialActiveindex===3, 'text-primaryDark':materialActiveindex===3}"
                                                                                class="">Эмаль</h4></Tab>
-            <Tab as="template" v-slot="{ selected }" class="text-darkGrey"><h4 @click="chooseMaterial(2)"
-                                                                               :class="{'border-b': selected, 'border-black':selected, 'text-primaryDark':selected}"
+            <Tab  class="text-darkGrey"><h4 @click="chooseMaterial(2)"
+                                                                               :class="{'border-b': materialActiveindex===2, 'border-black':materialActiveindex===2, 'text-primaryDark':materialActiveindex===2}"
                                                                                class="">Бук</h4></Tab>
-            <Tab as="template" v-slot="{ selected }" class="text-darkGrey"><h4 @click="chooseMaterial(1)"
-                                                                               :class="{'border-b': selected, 'border-black':selected, 'text-primaryDark':selected}"
+            <Tab  class="text-darkGrey"><h4 @click="chooseMaterial(1)"
+                                                                               :class="{'border-b': materialActiveindex===1, 'border-black':materialActiveindex===1, 'text-primaryDark':materialActiveindex===1}"
                                                                                class="">Дуб</h4></Tab>
           </div>
         </TabList>
@@ -94,11 +100,11 @@ function chooseMaterial(material) {
               <div v-for="(color) in material.color" :key="color.name" @click="chooseColor(color.id)">
                 <div class="flex flex-col items-center">
                   <div class="pb-1"
-                       :class="{'border-b': chosenColors.includes(color.id), 'border-black':chosenColors.includes(color.id)}">
+                       :class="{'border-b': props.value.includes(color.id), 'border-black':props.value.includes(color.id)}">
                     <div :style="{ backgroundImage: 'url(' + color.image + ')' }"
                          class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
                   </div>
-                  <h5 class="pt-2 cursor-pointer" :class="{'font-regular':chosenColors.includes(color.id)}">
+                  <h5 class="pt-2 cursor-pointer" :class="{'font-regular':props.value.includes(color.id)}">
                     {{ color.name }}</h5>
                 </div>
               </div>

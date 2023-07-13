@@ -26,7 +26,6 @@ let materialColors = ref([])
 
 async function fetchMaterialColors() {
   const response = await $fetch(`${baseURL}/api/product/material-choices`);
-  console.log(response, "material colors")
   return response;
 }
 onMounted(async () => {
@@ -36,22 +35,34 @@ onMounted(async () => {
 
 
 
-let chosenMaterials = reactive(props.material)
 
 
 
 
 
 function chooseMaterial(material){
-  if (!chosenMaterials.includes(material)) {
-    chosenMaterials.push(material)
+  if (!props.material.includes(material)) {
+    emit("changeMaterials",{material: [...props.material, material]})
   } else {
-    chosenMaterials.splice(chosenMaterials.indexOf(material), 1)
+    const updatedMaterials = props.material.filter((item)=>{
+      return item !== material
+    })
+    emit('changeMaterials', {"material": updatedMaterials})
   }
-  emit('changeMaterials', {"material":chosenMaterials})
 }
 
-
+// function chooseColorSet(id){
+//   if(!props.value.includes(id)){
+//     console.log({color_set:[...props.value, id]})
+//     emit('change', {color_set:[...props.value, id]})
+//
+//   } else {
+//     const updatedColorSets = props.value.filter((set)=>{
+//       return set !== id
+//     })
+//     console.log({color_set: updatedColorSets})
+//     emit('change', {color_set: updatedColorSets})
+//   }
 
 
 </script>
@@ -64,7 +75,7 @@ function chooseMaterial(material){
     <DisclosurePanel class="mb-20">
           <div class="flex justify-around w-full pr-4">
             <div v-for="(material) in materialColors" :key="material.material" class="text-darkGrey">
-              <h4 @click="chooseMaterial(material.material)"  :class="{'border-b': chosenMaterials.includes(material.material), 'border-black':chosenMaterials.includes(material.material), 'text-primaryDark':chosenMaterials.includes(material.material)}" class="">{{
+              <h4 @click="chooseMaterial(material.material)"  :class="{'border-b': props.material.includes(material.material), 'border-black':props.material.includes(material.material), 'text-primaryDark':props.material.includes(material.material)}" class="">{{
                   material.name
                 }}</h4>
             </div>

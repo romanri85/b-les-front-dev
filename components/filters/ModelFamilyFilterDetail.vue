@@ -17,7 +17,10 @@ const props = defineProps({
   },
   modelName: {
     type: String
-  }
+  },
+  activeCasing: {
+    type: Number
+  },
 })
 
 
@@ -29,7 +32,6 @@ if(props.product.product_family) {
 }
 
 onMounted(async () => {
-console.log(props.product.product_family.products)
 
 
 })
@@ -51,14 +53,14 @@ function chooseModel(model) {
   <div v-if="product.product_family && product.product_family.products">
     <client-only>
       <Disclosure default-open>
-        <DisclosureButton class=" w-full">
+        <DisclosureButton class="w-full">
           <filter-type filterName="Форма"/>
         </DisclosureButton>
-        <DisclosurePanel class="mb-20">
+        <DisclosurePanel class="mb-10">
           <client-only>
-            <div class="flex gap-y-6 gap-x-6 mb-3 mt-5 flex-wrap w-2/3">
+            <div class="flex gap-y-6 gap-x-6 mb-2 mt-0 flex-nowrap w-full">
                 <div v-if="productFamily" v-for="model in productFamily"
-                     :key="model.name" @click="chooseModel(model.name)" class="flex flex-col items-center pb-12">
+                     :key="model.name" @click="chooseModel(model.name)" class="flex flex-col items-center">
                   <div class="relative pb-1"
                        :class="{'border-b': model.name === modelActiveName, 'border-black':model.name === modelActiveName}">
                     <!--            <nuxt-img width="200px" height="auto" :src="props.doorVariant.casing_variant.image"-->
@@ -66,12 +68,14 @@ function chooseModel(model) {
                     <!--            <nuxt-img width="200px" height="auto"-->
                     <!--                      :src="props.doorVariant.leaf_image"-->
                     <!--                      class="h-auto w-48 absolute top-0"></nuxt-img>-->
-                    <nuxt-img v-if="model.image" key=0 width="100px" height="auto"
+
+                    <nuxt-img  v-if="model.image" key=0 width="100px" height="auto"
                               :src="model.image"
                               class="h-auto w-16"></nuxt-img>
                   </div>
 <!--                  <div class="text-center text-sm">{{ model.name }}</div>-->
               </div>
+<!-- -->
             </div>
           </client-only>
         </DisclosurePanel>
