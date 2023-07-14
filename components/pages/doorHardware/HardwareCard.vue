@@ -4,7 +4,7 @@ import {toNumber} from "@vue/shared";
 import {baseURL} from "~/config";
 
 const props = defineProps({
-  doorVariant: Object
+  hardwareVariant: Object
 })
 
 </script>
@@ -18,20 +18,18 @@ const props = defineProps({
 <!--            <nuxt-img width="200px" height="auto"-->
 <!--                      :src="props.doorVariant.leaf_image"-->
 <!--                      class="h-auto w-48 absolute top-0"></nuxt-img>-->
-                        <nuxt-img width="200px" height="auto" :src="props.doorVariant.merged_image"
+                        <nuxt-img width="200px" height="auto" :src="props.hardwareVariant.image"
                                   class="h-auto w-48"></nuxt-img>
           </div>
 
           <div class="flex flex-col items-center">
-            <h3 class="pb-3">{{ props.doorVariant.product_variant.name }}</h3>
+            <h3 class="pb-3">{{ props.hardwareVariant.hardware.name }}</h3>
 
-            <h6 class="pb-3 uppercase">{{ props.doorVariant.product_variant.collection_name }}</h6>
             <div class="pb-3 inline-flex">
-              <p>{{ props.doorVariant.product_variant.material.name + ", " + " " }}&nbsp;</p>
-              <p>{{ props.doorVariant.color.name }}</p>
+              <p>{{ props.hardwareVariant.color.color }}</p>
             </div>
             <p class="font-regular">
-              {{ toNumber(props.doorVariant.leaf_casing_price) }}&nbsp;₽</p>
+              {{ toNumber(props.hardwareVariant.price)}}&nbsp;₽</p>
           </div>
         </div>
 <!--    </client-only>-->

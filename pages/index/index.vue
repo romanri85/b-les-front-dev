@@ -21,7 +21,7 @@ import Advantages from "~/components/pages/index/advantages.vue";
 import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
 
 const isBurgerOpenStore = useIsBurgerOpenStore()
-import Welcome from "~/components/pop-ups/welcome.vue";
+import Welcome from "~/components/pop-ups/allCollectionsModalDetail.vue";
 
 import {ref} from 'vue'
 import {TransitionRoot} from '@headlessui/vue'

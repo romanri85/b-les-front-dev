@@ -16,37 +16,21 @@ const sortFilters = [
     value: '-price'
   },
   {
-    name: 'По названию продукта: с начала',
-    value: 'product_variant__name'
+    name: 'По названию ручки: с начала',
+    value: 'hardware__name'
   },
   {
-    name: 'По названию продукта: с конца',
-    value: '-product_variant__name'
+    name: 'По названию ручки: с конца',
+    value: '-hardware__name'
   },
   {
     name: 'По названию цвета: с начала',
-    value: 'color__name'
+    value: 'color__color'
   },
   {
     name: 'По названию цвета: с конца',
-    value: '-color__name'
+    value: '-color__color'
   },
-  {
-    name: 'По названию материала: с начала',
-    value: 'material_order'
-  },
-  {
-    name: 'По названию материала: с конца',
-    value: '-material_order'
-  },
-  {
-    name: "По названию коллекции: с начала",
-    value: "product_variant__product__collection__name"
-  },
-  {
-    name: "По названию коллекции: с конца",
-    value: "-product_variant__product__collection__name"
-  }
 ]
 
 const emit = defineEmits(['changeSorting'])
@@ -67,7 +51,6 @@ function sortDoors(sorting: string) {
 
 
   <Menu>
-
     <MenuButton>
       <div class="flex" @click="toggleArrow">
         <h3>Сортировка</h3>
@@ -75,7 +58,7 @@ function sortDoors(sorting: string) {
       </div>
     </MenuButton>
     <div class="absolute">
-      <MenuItems class="mt-10 z-10 absolute">
+      <MenuItems class="mt-10 absolute z-10">
         <div v-for="sorting in sortFilters"
             class="whitespace-nowrap  shadow-sm shadow-darkGrey bg-white p-4 [&>a]:p-2 min-w-[320px]">
           <MenuItem @click="sortDoors(sorting.value)" v-slot="{ active }" class="cursor-pointer">

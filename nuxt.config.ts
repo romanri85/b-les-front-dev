@@ -10,9 +10,12 @@ const config = {
         ['nuxt-swiper', {
             // Swiper options
         }], '@pinia/nuxt',
+        ['@formkit/nuxt']
 
     ],
     devtools: { enabled: true },
+    plugins: [
+        '~/plugins/auto-animate.js'],
 
 
     postcss: {

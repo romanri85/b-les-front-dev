@@ -25,7 +25,7 @@ function chooseGlass(bool_str: string){
   } else {
     chosenGlass.value = ''
   }
-  emit('changeGlass', {glass: chosenGlass})
+  emit('changeGlass', {glass: chosenGlass.value})
 }
 
 

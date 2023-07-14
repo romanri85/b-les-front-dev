@@ -26,10 +26,7 @@ const props = defineProps({
 
 const emit = defineEmits(['changeModel'])
 
-const productFamily = ref(null)
-if(props.product.product_family) {
-  productFamily.value = props.product.product_family.products
-}
+
 
 onMounted(async () => {
 
@@ -37,20 +34,18 @@ onMounted(async () => {
 })
 
 
-const modelActiveName = ref(props.modelName)
 
 
 function chooseModel(model) {
-  modelActiveName.value = model
 
-  emit('changeModel', modelActiveName.value)
+  emit('changeModel', model)
 }
 
 
 </script>
 
 <template class="filter-container">
-  <div v-if="product.product_family && product.product_family.products">
+  <div v-if="props.product.product_family && props.product.product_family.products">
     <client-only>
       <Disclosure default-open>
         <DisclosureButton class="w-full">
@@ -59,16 +54,15 @@ function chooseModel(model) {
         <DisclosurePanel class="mb-10">
           <client-only>
             <div class="flex gap-y-6 gap-x-6 mb-2 mt-0 flex-nowrap w-full">
-                <div v-if="productFamily" v-for="model in productFamily"
-                     :key="model.name" @click="chooseModel(model.name)" class="flex flex-col items-center">
+                <div v-if="props.product.product_family.products" v-for="model in props.product.product_family.products"
+                     :key="model.name" @click="chooseModel(model)" class="flex flex-col items-center">
                   <div class="relative pb-1"
-                       :class="{'border-b': model.name === modelActiveName, 'border-black':model.name === modelActiveName}">
+                       :class="{'border-b': model.name === props.product.name, 'border-black':model.name === props.product.name}">
                     <!--            <nuxt-img width="200px" height="auto" :src="props.doorVariant.casing_variant.image"-->
                     <!--                      class="h-auto w-48"></nuxt-img>-->
                     <!--            <nuxt-img width="200px" height="auto"-->
                     <!--                      :src="props.doorVariant.leaf_image"-->
                     <!--                      class="h-auto w-48 absolute top-0"></nuxt-img>-->
-
                     <nuxt-img  v-if="model.image" key=0 width="100px" height="auto"
                               :src="model.image"
                               class="h-auto w-16"></nuxt-img>

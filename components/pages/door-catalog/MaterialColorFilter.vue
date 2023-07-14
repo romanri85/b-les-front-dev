@@ -12,6 +12,8 @@ import {
 } from "@headlessui/vue";
 import FilterType from "~/components/filters/FilterType.vue";
 import {baseURL} from "~/config";
+
+
 // import {background} from "ipx";
 
 const props = defineProps({

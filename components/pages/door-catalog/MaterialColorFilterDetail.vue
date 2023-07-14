@@ -66,7 +66,7 @@ let index = materialMap[props.material]
     <DisclosureButton class=" w-full">
       <filter-type filterName="Выбрать цвет"/>
     </DisclosureButton>
-    <DisclosurePanel class="mb-10">
+    <DisclosurePanel class="mb-8">
       <TabGroup v-if="props.productMaterials" :defaultIndex="index">
         <TabList>
 
@@ -91,7 +91,7 @@ let index = materialMap[props.material]
         </TabList>
         <TabPanels v-if="props.productMaterials">
           <TabPanel v-if="material" v-for="material of props.productMaterials" :key="material.material">
-            <div v-if="material" class="flex gap-y-6 gap-x-6 mb-3 mt-5 flex-wrap w-2/3">
+            <div v-if="material" class="flex gap-y-6 gap-x-6 mb-3 mt-5 flex-wrap w-full">
               <div v-for="color in material.color" :key="color.id" @click="chooseColor(color.id)">
                 <div class="flex flex-col items-center w-24">
                   <div class="pb-1"
