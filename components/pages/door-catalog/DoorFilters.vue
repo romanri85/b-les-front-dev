@@ -11,96 +11,25 @@ import MaterialFilter from "~/components/filters/MaterialFilter.vue";
 import GlassFilter from "~/components/filters/GlassFilter.vue";
 import PriceSlider from "~/components/base/PriceSlider.vue";
 import {bool} from "sharp";
+import {useFiltersStore} from "~/stores/filtersStore";
 
-const emit = defineEmits(['changeFilters', 'resetFilters', 'changePrice'])
-const props = defineProps({
-  activeFilters: Object,
-  filterCount: Object
-})
 
-const isSliderMoved = ref(false)
+const filtersStore = useFiltersStore()
 
 
 
 
 
-let design = [
-  {
-    name: 'Classic',
-    id: 1
-  },
-  {
-    name: 'Modern',
-    id: 2
-  }
-
-]
-
-const color_sets = ref([])
-const filterCountPrice = ref(props.filterCount.price)
-
-async function fetchColorSets() {
-  const response = await $fetch(`${baseURL}/api/product/color-sets`);
-  return response;
-}
-onMounted(async () => {
-  color_sets.value = await fetchColorSets()
-})
-
-
-  // window.scrollTo(0, 0);
-
-
-
-// function update_oBarValues(e) {
-//   oBarMinValue.value = e.minValue;
-//   oBarMaxValue.value = e.maxValue;
-// }
 
 
 
 
 
-function onChangePrice(price) {
-  // console.log(price, 'doorFilters')
-  console.log(price, 'onChangePrice')
-  isSliderMoved.value = true
-  emit('changePrice', price)
-}
 
-function onChangeColorSet(color_set) {
-  isSliderMoved.value = false
-  emit('changeFilters', color_set)
-}
 
-function onChangeColors(color) {
-  isSliderMoved.value = false
-  emit('changeFilters', color)
-}
 
-function onChangeMaterials(materials) {
-  isSliderMoved.value = false
-  emit('changeFilters', materials)
-}
 
-function onChangeDesigns(design) {
-  isSliderMoved.value = false
-emit('changeFilters', design)
-}
 
-function onChangeCollections(collection) {
-  isSliderMoved.value = false
-emit('changeFilters', collection)
-}
-
-function onChangeGlass(glass) {
-  isSliderMoved.value = false
-  emit('changeFilters', glass)
-}
-
-function resetFilters() {
-  emit('resetFilters', {})
-}
 </script>
 
 <template>
@@ -118,16 +47,15 @@ function resetFilters() {
     </div>
     <div class="filter-container">
 <!--      <p>{{props.filterCount}}</p>-->
-<!--      <price-filter :min_price="props.activeFilters.min_price" :max_price="props.activeFilters.max_price" :filterCountPrice="props.filterCount.price" @change="onChangePrice"/>-->
-      <price-slider :isSliderMoved="isSliderMoved" :min_price="props.activeFilters.min_price" :max_price="props.activeFilters.max_price" :filterCountPrice="props.filterCount.price" @change="onChangePrice"/>
+      <price-filter/>
 
-      <color-set-filter :value="props.activeFilters.color_set" @change="onChangeColorSet" :color_sets="color_sets" />
-      <design-filter :value="props.activeFilters.design" @change="onChangeDesigns" :design="design"/>
-      <material-filter :material="props.activeFilters.material" @changeMaterials="onChangeMaterials" />
-      <material-color-filter :value="props.activeFilters.color" :material="props.activeFilters.material" @change="onChangeColors" />
-      <door-collections-filter :value="props.activeFilters.collection" @change="onChangeCollections" />
-      <glass-filter :value="props.activeFilters.glass"   @changeGlass="onChangeGlass" :design="design"/>
-      <primary-button-small class="w-full text-start " @click="resetFilters">
+      <color-set-filter/>
+      <design-filter/>
+      <material-filter/>
+      <material-color-filter/>
+      <door-collections-filter/>
+      <glass-filter/>
+      <primary-button-small class="w-full text-start " @click="">
         <h3>Очистить</h3>
       </primary-button-small>
     </div>

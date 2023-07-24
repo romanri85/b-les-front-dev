@@ -8,64 +8,61 @@ import {
 import FilterType from "~/components/filters/FilterType.vue";
 import {baseURL} from "~/config";
 // import {background} from "ipx";
+import {useFiltersStore} from "~/stores/filtersStore";
+import {storeToRefs} from "pinia";
 
-const props = defineProps({
-  value: {
-    type: Array,
-  },
-  material: {
-    type: Array,
-  }
-})
+const filtersStore = useFiltersStore()
+const {activeFilters, materialColors, filterCount} = storeToRefs(filtersStore)
 
-const emit = defineEmits(['changeMaterials'])
-
-
-let materialColors = ref([])
-
-
-async function fetchMaterialColors() {
-  const response = await $fetch(`${baseURL}/api/product/material-choices`);
-  return response;
-}
 onMounted(async () => {
-  materialColors.value = await fetchMaterialColors()
+  await filtersStore.fetchMaterialColors()
 })
-
-
-
-
-
-
-
-
 
 function chooseMaterial(material){
-  if (!props.material.includes(material)) {
-    emit("changeMaterials",{material: [...props.material, material]})
+  filtersStore.isFilterCountPriceBlocked = false
+  if (!filtersStore.activeFilters.material.includes(material)) {
+    filtersStore.onChangeFilters({material: [...filtersStore.activeFilters.material, material]})
+
   } else {
-    const updatedMaterials = props.material.filter((item)=>{
-      return item !== material
+    filterCount.value.color.filter((item) =>{
+      return item.material !== material
+
+
     })
-    emit('changeMaterials', {"material": updatedMaterials})
+    const updatedMaterials = filtersStore.activeFilters.material.filter((item)=>{
+      return item !== material
+
+
+
+      // activeFilters.value.color.filter((item) =>{
+      // })
+    })
+
+    const materials= [{material:3,colors:[1,2]}, {material:2, colors:[3,4,5,6]}, {material:1,colors:[7,8,9,10,11,12,13,14,15]}]
+    let materialToDelete = materials.filter((item) =>{
+      return item.material === material
+    })
+    const updatedColors = filtersStore.activeFilters.color.filter((color) => {
+      return !materialToDelete[0].colors.includes(color)
+    })
+    filtersStore.onChangeFilters( {"material": updatedMaterials, "color": updatedColors})
+
   }
 }
 
-// function chooseColorSet(id){
-//   if(!props.value.includes(id)){
-//     console.log({color_set:[...props.value, id]})
-//     emit('change', {color_set:[...props.value, id]})
-//
-//   } else {
-//     const updatedColorSets = props.value.filter((set)=>{
-//       return set !== id
-//     })
-//     console.log({color_set: updatedColorSets})
-//     emit('change', {color_set: updatedColorSets})
-//   }
 
 
+function isMaterialAvailable(material) {
+  for(let item of filterCount.value.material) {
+    if(item["material"] === material) {
+      return item["count"] > 0;
+    }
+  }
+  return false;  // return false if no matching color_set is found
+}
 </script>
+
+
 
 <template class="filter-container ">
   <Disclosure default-open>
@@ -74,8 +71,10 @@ function chooseMaterial(material){
     </DisclosureButton>
     <DisclosurePanel class="mb-20">
           <div class="flex justify-around w-full pr-4">
-            <div v-for="(material) in materialColors" :key="material.material" class="text-darkGrey">
-              <h4 @click="chooseMaterial(material.material)"  :class="{'border-b': props.material.includes(material.material), 'border-black':props.material.includes(material.material), 'text-primaryDark':props.material.includes(material.material)}" class="">{{
+            <div v-for="(material) in filtersStore.materialColors" :key="material.material" class="text-primaryDark">
+              <h4 @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"  :class="{
+                'border-b': filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'border-black':filtersStore.activeFilters.material.includes(material.material), 'text-primaryDark':filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'cursor-pointer': isMaterialAvailable(material.material), 'text-gray-400': !isMaterialAvailable(material.material)
+              }" class="">{{
                   material.name
                 }}</h4>
             </div>

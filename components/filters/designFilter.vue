@@ -1,30 +1,50 @@
 <script setup lang="ts">
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 import FilterType from "~/components/filters/FilterType.vue";
+import {useFiltersStore} from "~/stores/filtersStore";
+import {storeToRefs} from "pinia";
 
-const props = defineProps({
-  value: {
-    type: Array,
+
+let designs = [
+  {
+    name: 'Classic',
+    id: 1
   },
-  design: {
-    type: Array,
+  {
+    name: 'Modern',
+    id: 2
   }
-})
 
-const emit = defineEmits(['change'])
+]
+
+const filtersStore = useFiltersStore()
+const {activeFilters,filterCount} = storeToRefs(filtersStore)
 
 
-// let chosenDesigns = reactive(props.value || [])
+const designDisabled = (designId) => {
+  return !filtersStore.filterCount.design.find(item => item.design === designId)
+}
+
+function isDesignAvailable(design) {
+  for(let item of filterCount.value.design) {
+    if(item["design"] === design) {
+      return item["count"] > 0;
+    }
+  }
+  return false;  // return false if no matching color_set is found
+}
+
+
 function chooseDesign(design) {
-  if (!props.value.includes(design)) {
-    emit('change', {design: [...props.value, design]})
+  filtersStore.isFilterCountPriceBlocked = false
+  if (!filtersStore.activeFilters.design.includes(design)) {
+    filtersStore.onChangeFilters({design: [...filtersStore.activeFilters.design, design]})
   } else {
-    const updatedDesigns = props.value.filter((item) => {
+    const updatedDesigns = filtersStore.activeFilters.design.filter((item) => {
       return item !== design
     })
-    emit('change', {design: updatedDesigns})
+    filtersStore.onChangeFilters({design: updatedDesigns})
   }
-
 }
 </script>
 
@@ -34,9 +54,11 @@ function chooseDesign(design) {
       <filter-type filterName="Дизайн"/>
     </DisclosureButton>
     <DisclosurePanel class="mb-[80px]">
-      <div v-for="design in props.design" :key=design.id class="flex gap-x-[15px] items-center mb-3">
-        <h5 class="cursor-pointer underline-offset-4" @click="chooseDesign(design.id)"
-            :class="{'underline':props.value.includes(design.id)}">{{ design.name }}</h5>
+      <div v-for="design in designs" :key=design.id class="flex gap-x-[15px] items-center mb-3">
+        <h5 class="underline-offset-4" @click="!isDesignAvailable(design.id) ? null : chooseDesign(design.id)"
+            :class="{
+          'underline':filtersStore.activeFilters.design.includes(design.id), 'text-gray-400': !isDesignAvailable(design.id), 'cursor-pointer': isDesignAvailable(design.id)
+        }">{{ design.name }}</h5>
       </div>
     </DisclosurePanel>
   </Disclosure>

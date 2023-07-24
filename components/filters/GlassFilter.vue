@@ -1,48 +1,57 @@
 <script setup lang="ts">
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 import FilterType from "~/components/filters/FilterType.vue";
-import {string} from "postcss-selector-parser";
-const props = defineProps({
-  value: {
-    type: String
-  },
-  design: {
-    type: Array,
+import {useFiltersStore} from "~/stores/filtersStore";
+import {storeToRefs} from "pinia";
+import {bool} from "sharp";
+
+const filtersStore = useFiltersStore()
+const {activeFilters, filterCount} = storeToRefs(filtersStore)
+
+const withGlassDisabled = computed(() => filterCount.value.glass[0]?.with_glass === 0)
+const withoutGlassDisabled = computed(() => filterCount.value.glass[0]?.without_glass === 0)
+
+function chooseGlass(bool_str: string) {
+  if (filtersStore.activeFilters.glass === '') {
+    filtersStore.onChangeFilters({glass: bool_str})
   }
-})
-
-const emit = defineEmits(['changeGlass'])
-
-
-let chosenGlass = ref(props.value)
-
-onMounted(() => {
-})
-
-function chooseGlass(bool_str: string){
-  if(props.value !== bool_str){
-    chosenGlass.value = bool_str
-  } else {
-    chosenGlass.value = ''
+  else if (filtersStore.activeFilters.glass === bool_str) {
+    filtersStore.onChangeFilters({glass:''})
   }
-  emit('changeGlass', {glass: chosenGlass.value})
+  else {
+
+    filtersStore.onChangeFilters({glass: bool_str})
+
+  }
 }
-
-
 </script>
 
-<template class="filter-container ">
-  <Disclosure default-open>
-    <DisclosureButton class=" w-full">
-      <filter-type filterName="Стекло"/>
-    </DisclosureButton>
-    <DisclosurePanel class="mb-[80px]">
-      <div  class="flex flex-col gap-y-4 items-start mb-3">
-        <h5 class="cursor-pointer underline-offset-4" @click="chooseGlass('true')" :class="{'underline':props.value==='true'}">Со стеклом</h5>
-        <h5 class="cursor-pointer underline-offset-4" @click="chooseGlass('false')" :class="{'underline':props.value==='false'}">Без стекла</h5>
-      </div>
-    </DisclosurePanel>
-  </Disclosure>
+<template>
+  <div class="filter-container">
+    <Disclosure default-open>
+      <DisclosureButton class="w-full">
+        <filter-type filterName="Стекло" />
+      </DisclosureButton>
+      <DisclosurePanel class="mb-[80px]">
+        <div class="flex flex-col gap-y-4 items-start mb-3">
+          <h5
+              class="underline-offset-4"
+              @click="withGlassDisabled ? null : chooseGlass('true')"
+              :class="{'underline': filtersStore.activeFilters.glass === 'true', 'text-gray-400': withGlassDisabled, 'cursor-pointer': !withGlassDisabled}"
+          >
+            Со стеклом
+          </h5>
+          <h5
+              class=" underline-offset-4"
+              @click="withoutGlassDisabled ? null : chooseGlass('false')"
+              :class="{'underline': filtersStore.activeFilters.glass === 'false', 'text-gray-400': withoutGlassDisabled, 'cursor-pointer': !withoutGlassDisabled}"
+          >
+            Без стекла
+          </h5>
+        </div>
+      </DisclosurePanel>
+    </Disclosure>
+  </div>
 </template>
 
 <style scoped>

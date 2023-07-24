@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import {Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
+import {useFiltersStore} from "~/stores/filtersStore";
+import {storeToRefs} from "pinia";
 
 
 const sortFilters = [
@@ -49,15 +51,15 @@ const sortFilters = [
   }
 ]
 
-const emit = defineEmits(['changeSorting'])
+const filtersStore = useFiltersStore()
+
 const isClicked = ref(false)
 const toggleArrow = () => {
   isClicked.value = !isClicked.value
 }
 
 function sortDoors(sorting: string) {
-  console.log('sortProducts')
-  emit('changeSorting', {ordering: sorting})
+  filtersStore.onChangeFilters({ordering: sorting})
 
 }
 

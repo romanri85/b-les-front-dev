@@ -11,63 +11,70 @@ import {
   TabPanels
 } from "@headlessui/vue";
 import FilterType from "~/components/filters/FilterType.vue";
-import {baseURL} from "~/config";
 
+import {useFiltersStore} from "~/stores/filtersStore";
+import {storeToRefs} from "pinia";
 
-// import {background} from "ipx";
+const filtersStore = useFiltersStore()
+const {activeFilters, materialColors,filterCount} = storeToRefs(filtersStore)
 
-const props = defineProps({
-  value: {
-    type: Array,
-  },
-  material: {
-    type: Array,
-  }
-})
-
-const emit = defineEmits(['change'])
-
-
-let materialColors = ref([])
-
-
-async function fetchMaterialColors() {
-  const response = await $fetch(`${baseURL}/api/product/material-choices`);
-  return response;
-}
-
-onMounted(async () => {
-  materialColors.value = await fetchMaterialColors()
-  chooseMaterial(3)
-  console.log(props.value, 'props.value')
-})
-
-const materialActiveindex = ref(3)
-
-
-let chosenColors = reactive(props.value)
-let chosenMaterials = reactive(props.material)
+const materialActiveindex = ref(0)
 
 function chooseColor(id) {
-  if (!props.value.includes(id)) {
-    emit('change', {"color": [...props.value, id]})
-    console.log((props.value[0]), 'color')
+  if (!filtersStore.activeFilters.color.includes(id)) {
+    filtersStore.onChangeFilters({"color": [...filtersStore.activeFilters.color, id]})
   } else {
-    const updatedColors = props.value.filter((item) => {
+    const updatedColors = filtersStore.activeFilters.color.filter((item) => {
       return item !== id
     })
-    emit('change', {"color": updatedColors})
-    console.log((props.value[0]), 'color')
+    filtersStore.onChangeFilters({"color": updatedColors})
   }
-
 }
 
+const materialMap = {
+  1: 2,
+  2: 1,
+  3: 0
+}
+
+
+
+function isMaterialAvailable(materialValue) {
+  for(let i = 0; i < filterCount.value.color.length; i++) {
+    if(filterCount.value.color[i].material === materialValue) {
+      for(let j = 0; j < filterCount.value.color[i].colors.length; j++) {
+        if(filterCount.value.color[i].colors[j].count > 0) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+
+function isColorAvailable(color, material) {
+  for(let item of material.colors) {
+    if(item["color"] === color.color) {
+      return item["count"] > 0;
+    }
+  }
+  return false;  // return false if no matching color_set is found
+}
 
 function chooseMaterial(material) {
   materialActiveindex.value = material
 
 }
 
+
+watch(() => filterCount.value.color, (newVal) => {
+  if (!newVal.find((material) => material.material === materialActiveindex.value)) {
+    materialActiveindex.value = newVal[newVal.length - 1].material;
+  }
+})
+const enamel = computed(() => filterCount.value.color.find((material) => material.material === 3))
+const beech = computed(() => filterCount.value.color.find((material) => material.material === 2))
+const oak = computed(() => filterCount.value.color.find((material) => material.material === 1))
 
 </script>
 
@@ -77,36 +84,70 @@ function chooseMaterial(material) {
       <filter-type filterName="Выбрать цвет"/>
     </DisclosureButton>
     <DisclosurePanel class="mb-20">
-      <TabGroup>
+      <TabGroup :selectedIndex="materialMap[materialActiveindex] ">
         <TabList>
           <div class="flex justify-around w-full pr-4">
-            <!--            <div v-for="(material) in materialColors" :key="material.material" class="text-darkGrey">-->
-            <!--              <Tab v-for="material in materialColors" :key="material.material" class="text-darkGrey"><h4 @click="chooseMaterial(material.material)"  :class="{'border-b': materialActiveindex === material.material, 'border-black':materialActiveindex === material.material, 'text-primaryDark':materialActiveindex === material.material}" class="">{{-->
-            <!--                  material.name-->
-            <!--                }}</h4></Tab>-->
-            <!--          </div>-->
-            <Tab  class="text-darkGrey"><h4 @click="chooseMaterial(3)"
-                                                                               :class="{'border-b': materialActiveindex===3, 'border-black':materialActiveindex===3, 'text-primaryDark':materialActiveindex===3}"
-                                                                               class="">Эмаль</h4></Tab>
-            <Tab  class="text-darkGrey"><h4 @click="chooseMaterial(2)"
-                                                                               :class="{'border-b': materialActiveindex===2, 'border-black':materialActiveindex===2, 'text-primaryDark':materialActiveindex===2}"
-                                                                               class="">Бук</h4></Tab>
-            <Tab  class="text-darkGrey"><h4 @click="chooseMaterial(1)"
-                                                                               :class="{'border-b': materialActiveindex===1, 'border-black':materialActiveindex===1, 'text-primaryDark':materialActiveindex===1}"
-                                                                               class="">Дуб</h4></Tab>
+            <Tab index=3 :disabled="!isMaterialAvailable(3)" class="text-primaryDark">
+              <h4 @click="!isMaterialAvailable(3) ? null : chooseMaterial(3)"
+                  :class="{'border-b': materialActiveindex===3, 'border-black':materialActiveindex===3, 'text-gray-400':!isMaterialAvailable(3)}"
+                  class="">Эмаль</h4></Tab>
+            <Tab index=2 :disabled="!isMaterialAvailable(2)" class="text-primaryDark">
+              <h4 @click="!isMaterialAvailable(2) ? null : chooseMaterial(2)"
+                  :class="{'border-b': materialActiveindex===2, 'border-black':materialActiveindex===2, 'text-gray-400':!isMaterialAvailable(2)}"
+                  class="">Бук</h4></Tab>
+            <Tab index="1" :disabled="!isMaterialAvailable(1)" class="text-primaryDark">
+              <h4 @click="!isMaterialAvailable(1) ? null : chooseMaterial(1)"
+                  :class="{'border-b': materialActiveindex===1, 'border-black':materialActiveindex===1, 'text-gray-400':!isMaterialAvailable(1)}"
+                  class="">Дуб</h4></Tab>
           </div>
         </TabList>
         <TabPanels>
-          <TabPanel v-for="(material, index) in  materialColors" :key="material.material">
-            <div class="grid grid-cols-3 gap-y-6 mb-3 mt-5">
-              <div v-for="(color) in material.color" :key="color.name" @click="chooseColor(color.id)">
-                <div class="flex flex-col items-center">
+          <TabPanel >
+            <div v-if="enamel" class="grid grid-cols-3 gap-y-6 mb-3 mt-5">
+              <div v-for="(color) in enamel.colors" :key="color.color" @click="chooseColor(color.color)">
+                <div v-if="isColorAvailable(color, enamel)" class="flex flex-col items-center">
                   <div class="pb-1"
-                       :class="{'border-b': props.value.includes(color.id), 'border-black':props.value.includes(color.id)}">
-                    <div :style="{ backgroundImage: 'url(' + color.image + ')' }"
+                       :class="{'border-b': activeFilters.color.includes(color.color), 'border-black':activeFilters.color.includes(color.color)}">
+                    <div :style="{ backgroundImage: 'url(https://b-les-storage.ams3.digitaloceanspaces.com/media/' + color.image + ')' }"
                          class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
+
                   </div>
-                  <h5 class="pt-2 cursor-pointer" :class="{'font-regular':props.value.includes(color.id)}">
+                  <h5 class="pt-2 cursor-pointer"
+                      :class="{'font-regular':activeFilters.color.includes(color.color)}">
+                    {{ color.name }}</h5>
+                </div>
+              </div>
+            </div>
+          </TabPanel>
+          <TabPanel >
+            <div v-if="beech" class="grid grid-cols-3 gap-y-6 mb-3 mt-5">
+              <div v-for="(color) in beech.colors" :key="color.color" @click="chooseColor(color.color)">
+                <div v-if="isColorAvailable(color, beech)" class="flex flex-col items-center">
+                  <div class="pb-1"
+                       :class="{'border-b': activeFilters.color.includes(color.color), 'border-black':activeFilters.color.includes(color.color)}">
+                    <div :style="{ backgroundImage: 'url(https://b-les-storage.ams3.digitaloceanspaces.com/media/' + color.image + ')' }"
+                         class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
+
+                  </div>
+                  <h5 class="pt-2 cursor-pointer"
+                      :class="{'font-regular':activeFilters.color.includes(color.color)}">
+                    {{ color.name }}</h5>
+                </div>
+              </div>
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div v-if="oak" class="grid grid-cols-3 gap-y-6 mb-3 mt-5">
+              <div v-for="(color) in oak.colors" :key="color.color" @click="chooseColor(color.color)">
+                <div v-if="isColorAvailable(color, oak)" class="flex flex-col items-center">
+                  <div class="pb-1"
+                       :class="{'border-b': activeFilters.color.includes(color.color), 'border-black':activeFilters.color.includes(color.color)}">
+                    <div :style="{ backgroundImage: 'url(https://b-les-storage.ams3.digitaloceanspaces.com/media/' + color.image + ')' }"
+                         class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
+
+                  </div>
+                  <h5 class="pt-2 cursor-pointer"
+                      :class="{'font-regular':activeFilters.color.includes(color.color)}">
                     {{ color.name }}</h5>
                 </div>
               </div>
