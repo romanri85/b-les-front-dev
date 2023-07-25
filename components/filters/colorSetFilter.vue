@@ -2,7 +2,6 @@
 
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 import FilterType from "~/components/filters/FilterType.vue";
-import {valueToNode} from "@babel/types";
 import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
 
@@ -12,28 +11,25 @@ filtersStore.fetchColorSets()
 const {color_sets, activeFilters, filterCount} = storeToRefs(filtersStore)
 
 
-function chooseColorSet(id){
+function chooseColorSet(id) {
 
-  if(!activeFilters.value.color_set.includes(id)){
-    filtersStore.onChangeFilters({color_set:[...activeFilters.value.color_set, id]})
+  if (!activeFilters.value.color_set.includes(id)) {
+    filtersStore.onChangeFilters({color_set: [...activeFilters.value.color_set, id]})
   } else {
-    const updatedColorSets = activeFilters.value.color_set.filter((set)=>{
+    const updatedColorSets = activeFilters.value.color_set.filter((set) => {
       return set !== id
     })
-    filtersStore.onChangeFilters({color_set:updatedColorSets})
-    if(!activeFilters.value.color_set){
-      filtersStore.onChangeFilters({color_set:[]})
+    filtersStore.onChangeFilters({color_set: updatedColorSets})
+    if (!activeFilters.value.color_set) {
+      filtersStore.onChangeFilters({color_set: []})
     }
   }
 }
 
-const colorSetDisabled = (colorSetId) => {
-  return filtersStore.filterCount.color_set.find(item => item.color_set === colorSetId)
-}
 
 function isColorSetAvailable(colorSet) {
-  for(let item of filterCount.value.color_set) {
-    if(item["color_set"] === colorSet) {
+  for (let item of filterCount.value.color_set) {
+    if (item["color_set"] === colorSet) {
       return item["count"] > 0;
     }
   }
@@ -41,20 +37,7 @@ function isColorSetAvailable(colorSet) {
 }
 
 
-// onMounted(
-//     () => {
-//
-//       if (!activeFilters.value.color_set) {
-//         console.log('no color set')
-//         activeFilters.value.color_set = []
-//         console.log(activeFilters.value.color_set, 'color set created')
-//         console.log(Boolean(activeFilters.value.color_set), 'color set boolean')
-//       }
-//       else{
-//         console.log('color set', activeFilters.value)
-//       }
-//     }
-// )
+
 </script>
 
 <template class="filter-container ">
@@ -63,15 +46,16 @@ function isColorSetAvailable(colorSet) {
       <filter-type filterName="Наборы цветов"/>
     </DisclosureButton>
     <DisclosurePanel class="mb-20">
-      <div  v-for="color_set in filtersStore.color_sets" :key=color_set.id class="flex gap-x-4 items-center mb-3" @click="!isColorSetAvailable(color_set.id) ? null : chooseColorSet(color_set.id)">
+      <div v-for="color_set in filtersStore.color_sets" :key=color_set.id class="flex gap-x-4 items-center mb-3"
+           @click="!isColorSetAvailable(color_set.id) ? null : chooseColorSet(color_set.id)">
         <div class=" pb-1" :class="{
           'border-b': filtersStore.activeFilters.color_set.includes(color_set.id), 'border-black':filtersStore.activeFilters.color_set.includes(color_set.id), 'cursor-pointer': isColorSetAvailable(color_set.id)
         }">
           <div :style="{ backgroundColor: color_set.hex_code }" class="w-12 h-12 shadow-darkGrey shadow-sm"></div>
         </div>
-        <h5  :class="{
+        <h5 :class="{
           'font-regular':filtersStore.activeFilters.color_set.includes(color_set.id),  'text-gray-400': !isColorSetAvailable(color_set.id), 'cursor-pointer': isColorSetAvailable(color_set.id)
-        }">{{color_set.name}}</h5>
+        }">{{ color_set.name }}</h5>
       </div>
     </DisclosurePanel>
   </Disclosure>

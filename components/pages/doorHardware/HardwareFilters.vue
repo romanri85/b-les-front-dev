@@ -1,79 +1,15 @@
 <script setup lang="ts">
-import PriceFilter from "~/components/filters/priceFilter.vue";
-import ColorSetFilter from "~/components/filters/colorSetFilter.vue";
-import DesignFilter from "~/components/filters/designFilter.vue";
-import MaterialColorFilter from "~/components/pages/door-catalog/MaterialColorFilter.vue";
-import DoorCollectionsFilter from "~/components/pages/door-catalog/DoorCollectionsFilter.vue";
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
-import {baseURL} from "~/config";
 import PriceFilterHardware from "~/components/pages/doorHardware/priceFilterHardware.vue";
 import ColorCollectionFilterHardware from "~/components/pages/doorHardware/colorCollectionFilterHardware.vue";
 import DesignFilterHardware from "~/components/pages/doorHardware/designFilterHardware.vue";
-import HardwareCollectionsFilter from "~/components/pages/doorHardware/HardwareCollectionsFilter.vue";
+import {useHardwareFiltersStore} from "~/stores/hardwareFiltersStore";
 
-const emit = defineEmits(['changeFilters', 'resetFilters'])
-const props = defineProps({
-  activeFilters: Object
-})
-
-
-
-
-
-let design = [
-  {
-    name: 'Classic',
-    id: 1
-  },
-  {
-    name: 'Modern',
-    id: 2
-  }
-
-]
-
-const colorCollections = ref([])
-
-async function fetchColorCollections() {
-  return await $fetch(`${baseURL}/api/hardware/hardware-color-sets`);
-}
-onMounted(async () => {
-  colorCollections.value = await fetchColorCollections()
-})
+const hardwareFiltersStore = useHardwareFiltersStore()
 
 
 // window.scrollTo(0, 0);
 
-
-
-// function update_oBarValues(e) {
-//   oBarMinValue.value = e.minValue;
-//   oBarMaxValue.value = e.maxValue;
-// }
-
-
-
-
-
-function onChangePrice(min_price, max_price) {
-  emit('changeFilters', {'max_price':max_price, 'min_price':min_price})
-}
-
-function onChangeColorCollection(colorCollection) {
-  emit('changeFilters', colorCollection)
-}
-
-
-function onChangeDesigns(design) {
-  emit('changeFilters', design)
-}
-
-
-
-
-function resetFilters() {
-  emit('resetFilters', {})
-}
 </script>
 
 <template>
@@ -90,10 +26,10 @@ function resetFilters() {
       </div>
     </div>
     <div class="filter-container">
-      <price-filter-hardware :min_price="props.activeFilters.min_price" :max_price="props.activeFilters.max_price"  @change="onChangePrice"/>
-      <color-collection-filter-hardware :value="props.activeFilters.color_collection" @change="onChangeColorCollection" :colorCollection="colorCollections"/>
-      <design-filter-hardware :value="props.activeFilters.design" @change="onChangeDesigns" :design="design"/>
-      <primary-button-small class="w-full text-start " @click="resetFilters">
+      <price-filter-hardware/>
+      <color-collection-filter-hardware/>
+      <design-filter-hardware/>
+      <primary-button-small class="w-full text-start " @click="">
         <h3>Очистить</h3>
       </primary-button-small>
     </div>

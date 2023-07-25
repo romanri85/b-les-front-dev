@@ -46,7 +46,6 @@ const filtersStore = useFiltersStore()
       </div>
     </div>
     <div class="filter-container">
-<!--      <p>{{props.filterCount}}</p>-->
       <price-filter/>
 
       <color-set-filter/>
@@ -59,12 +58,7 @@ const filtersStore = useFiltersStore()
         <h3>Очистить</h3>
       </primary-button-small>
     </div>
-<!--    :filterCountColorSet="props.filterCount.color_set"-->
-<!--    :filterCountDesign="props.filterCount.design"-->
-<!--    :filterCountMaterial="props.filterCount.material"-->
-<!--    :filterCountColor="props.filterCount.color"-->
-<!--    :filterCountCollection="props.filterCount.collection"-->
-<!--    :filterCountGlass="props.filterCount.glass"-->
+
   </section>
 </template>
 

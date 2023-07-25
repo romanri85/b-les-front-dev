@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {baseURL} from "~/config";
 
-export const useFiltersStore = defineStore("filtersStore", () => {
+export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () => {
 
     const activeFilters = ref({
         ordering: "",
@@ -9,23 +9,16 @@ export const useFiltersStore = defineStore("filtersStore", () => {
         // min_price: Number,
         // max_price: Number,
         design: [],
-        color_set: [],
-        color: [],
-        collection: [],
-        material: [],
-        glass: "",
+        color_collection: [],
         // colorSet: [], colors: [], designs: [], collections: []
     })
 
     const filterCount = ref({
         price: {},
         design: [],
-        color_set: [],
-        color: [],
-        collection: [],
-        material: [],
-        glass: {},
+        color_collection: [],
     })
+
 
     const route = useRoute()
     let products = ref([])
@@ -33,8 +26,8 @@ export const useFiltersStore = defineStore("filtersStore", () => {
     const total = ref(0)
     let pagesCount = ref(0)
     const page_size = 12
-    const color_sets = ref([])
-    const materialColors = ref([])
+    const colorCollections = ref([])
+
 
     async function onChangeFilters(filters) {
         if (!Object.keys(activeFilters.value).includes("page")) {
@@ -44,21 +37,17 @@ export const useFiltersStore = defineStore("filtersStore", () => {
         activeFilters.value = {...activeFilters.value, ...filters}
 
 
-
         let query = new URLSearchParams(activeFilters.value).toString();
 
         await fetchProducts(query)
-
 
 
         await checkFilters(query)
     }
 
 
-
-
     async function fetchProducts(query = "") {
-        const response = await $fetch(`${baseURL}/api/product/product-variants?page_size=${page_size +'&'+ query}`);
+        const response = await $fetch(`${baseURL}/api/hardware/hardware-variants?page_size=${page_size + query}`);
         total.value = response.count
         pagesCount.value = response.page_links.length
         products.value = response.results
@@ -66,7 +55,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
     }
 
     async function checkFilters(query = "") {
-        const response = await $fetch(`${baseURL}/api/product/filters?${query}`);
+        const response = await $fetch(`${baseURL}/api/hardware/hardware-filters/?${query}`);
 
 
         filterCount.value = response.counts
@@ -90,20 +79,17 @@ export const useFiltersStore = defineStore("filtersStore", () => {
         await fetchProducts(query)
     }
 
-    async function fetchColorSets() {
-        color_sets.value = await $fetch(`${baseURL}/api/product/color-sets`)
+    async function fetchColorCollections() {
+        colorCollections.value = await $fetch(`${baseURL}/api/hardware/hardware-color-sets`);
     }
 
-    async function fetchMaterialColors() {
-        materialColors.value = await $fetch(`${baseURL}/api/product/material-choices`);
-    }
+
 
     return {
         fetchProducts,
         onChangeFilters,
         onResetFilters,
-        fetchColorSets,
-        fetchMaterialColors,
+        fetchColorCollections,
         checkFilters,
         activeFilters,
         filterCount,
@@ -112,7 +98,6 @@ export const useFiltersStore = defineStore("filtersStore", () => {
         total,
         pagesCount,
         page_size,
-        color_sets,
-        materialColors,
+        colorCollections,
     }
 });

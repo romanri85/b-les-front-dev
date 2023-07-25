@@ -10,23 +10,20 @@ const filtersStore = useFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(filtersStore)
 
 
-function chooseCollection(id: Number){
-  if(!activeFilters.value.collection.includes(id)){
-    filtersStore.onChangeFilters({collection:[...filtersStore.activeFilters.collection, id]})
+function chooseCollection(id: Number) {
+  if (!activeFilters.value.collection.includes(id)) {
+    filtersStore.onChangeFilters({collection: [...filtersStore.activeFilters.collection, id]})
   } else {
-    const updatedCollections = filtersStore.activeFilters.collection.filter((item)=>{
+    const updatedCollections = filtersStore.activeFilters.collection.filter((item) => {
       return item !== id
     })
     filtersStore.onChangeFilters({collection: updatedCollections})
   }
 }
-const collectionDisabled = (collectionId) => {
-  return !filterCount.value.collection.find(item => item.collection === collectionId)
-}
 
 function isCollectionAvailable(collection) {
-  for(let item of filterCount.value.collection) {
-    if(item["collection"] === collection) {
+  for (let item of filterCount.value.collection) {
+    if (item["collection"] === collection) {
       return item["count"] > 0;
     }
   }
@@ -44,9 +41,10 @@ function isCollectionAvailable(collection) {
     <DisclosurePanel class="mb-20">
       <div v-for="collection in collections" :key=collection.id class="flex gap-x-4 items-center mb-3">
 
-        <h5 class="underline-offset-4" @click="!isCollectionAvailable(collection.id) ? null :chooseCollection(collection.id)" :class="{
+        <h5 class="underline-offset-4"
+            @click="!isCollectionAvailable(collection.id) ? null :chooseCollection(collection.id)" :class="{
           'underline':activeFilters.collection.includes(collection.id), 'text-gray-400': !isCollectionAvailable(collection.id), 'cursor-pointer': isCollectionAvailable(collection.id)
-        }">{{$t(collection.name)}}</h5>
+        }">{{ $t(collection.name) }}</h5>
       </div>
     </DisclosurePanel>
   </Disclosure>

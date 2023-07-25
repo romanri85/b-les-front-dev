@@ -49,6 +49,6 @@ function updateSliderValues([newMin, newMax]) {
   </div>
 </template>
 
-<style scoped src="@vueform/slider/themes/default.css">
+<style scoped >
 
 </style>

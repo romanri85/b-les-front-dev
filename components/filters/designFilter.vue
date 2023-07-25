@@ -18,16 +18,12 @@ let designs = [
 ]
 
 const filtersStore = useFiltersStore()
-const {activeFilters,filterCount} = storeToRefs(filtersStore)
+const {activeFilters, filterCount} = storeToRefs(filtersStore)
 
-
-const designDisabled = (designId) => {
-  return !filtersStore.filterCount.design.find(item => item.design === designId)
-}
 
 function isDesignAvailable(design) {
-  for(let item of filterCount.value.design) {
-    if(item["design"] === design) {
+  for (let item of filterCount.value.design) {
+    if (item["design"] === design) {
       return item["count"] > 0;
     }
   }
@@ -36,7 +32,6 @@ function isDesignAvailable(design) {
 
 
 function chooseDesign(design) {
-  filtersStore.isFilterCountPriceBlocked = false
   if (!filtersStore.activeFilters.design.includes(design)) {
     filtersStore.onChangeFilters({design: [...filtersStore.activeFilters.design, design]})
   } else {

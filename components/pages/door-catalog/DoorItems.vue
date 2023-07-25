@@ -15,12 +15,7 @@ filtersStore.fetchProducts()
 
 const [parent] = useAutoAnimate()
 
-const props = defineProps({
-  total: Number,
-  pagesCount: Number,
-  products: Array,
-  page_size: Number
-})
+
 
 
 
