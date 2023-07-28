@@ -85,6 +85,6 @@ module.exports = {
 
         },
     },
-    plugins: [FormKitVariants, require('@vueform/slider/tailwind')]
+    plugins: [FormKitVariants]
 
 }

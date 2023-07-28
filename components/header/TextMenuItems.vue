@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 import {Popover, PopoverButton, PopoverPanel} from "@headlessui/vue";
 import TextMenuItems from "@/data/TextMenuItems.json"
 import menuItemsProps from "@/data/MenuItemsProps.json"

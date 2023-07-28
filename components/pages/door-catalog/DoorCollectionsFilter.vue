@@ -43,7 +43,7 @@ function isCollectionAvailable(collection) {
 
         <h5 class="underline-offset-4"
             @click="!isCollectionAvailable(collection.id) ? null :chooseCollection(collection.id)" :class="{
-          'underline':activeFilters.collection.includes(collection.id), 'text-gray-400': !isCollectionAvailable(collection.id), 'cursor-pointer': isCollectionAvailable(collection.id)
+          'underline':activeFilters.collection.includes(collection.id),  'font-regular':activeFilters.collection.includes(collection.id),'text-gray-400': !isCollectionAvailable(collection.id), 'cursor-pointer': isCollectionAvailable(collection.id)
         }">{{ $t(collection.name) }}</h5>
       </div>
     </DisclosurePanel>

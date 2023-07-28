@@ -10,7 +10,7 @@ const config = {
         ['nuxt-swiper', {
             // Swiper options
         }], '@pinia/nuxt',
-        ['@formkit/nuxt']
+        ['@formkit/nuxt'],
 
     ],
     devtools: { enabled: true },
@@ -46,6 +46,7 @@ const config = {
             noExternal: ['imagesloaded'],
         },
     },
+
 };
 
 export default config;

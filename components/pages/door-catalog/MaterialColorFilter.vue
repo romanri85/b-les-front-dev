@@ -88,17 +88,17 @@ const oak = computed(() => filterCount.value.color.find((material) => material.m
         <TabList>
           <div class="flex justify-around w-full pr-4">
             <Tab index=3 :disabled="!isMaterialAvailable(3)" class="text-primaryDark">
-              <h4 @click="!isMaterialAvailable(3) ? null : chooseMaterial(3)"
-                  :class="{'border-b': materialActiveindex===3, 'border-black':materialActiveindex===3, 'text-gray-400':!isMaterialAvailable(3)}"
-                  class="">Эмаль</h4></Tab>
+              <h5 @click="!isMaterialAvailable(3) ? null : chooseMaterial(3)"
+                  :class="{'border-b': materialActiveindex===3, 'border-black':materialActiveindex===3, 'font-regular':materialActiveindex===3,'text-gray-400':!isMaterialAvailable(3)}"
+                  class="">Эмаль</h5></Tab>
             <Tab index=2 :disabled="!isMaterialAvailable(2)" class="text-primaryDark">
-              <h4 @click="!isMaterialAvailable(2) ? null : chooseMaterial(2)"
-                  :class="{'border-b': materialActiveindex===2, 'border-black':materialActiveindex===2, 'text-gray-400':!isMaterialAvailable(2)}"
-                  class="">Бук</h4></Tab>
+              <h5 @click="!isMaterialAvailable(2) ? null : chooseMaterial(2)"
+                  :class="{'border-b': materialActiveindex===2, 'border-black':materialActiveindex===2, 'font-regular':materialActiveindex===2, 'text-gray-400':!isMaterialAvailable(2)}"
+                  class="">Бук</h5></Tab>
             <Tab index="1" :disabled="!isMaterialAvailable(1)" class="text-primaryDark">
-              <h4 @click="!isMaterialAvailable(1) ? null : chooseMaterial(1)"
-                  :class="{'border-b': materialActiveindex===1, 'border-black':materialActiveindex===1, 'text-gray-400':!isMaterialAvailable(1)}"
-                  class="">Дуб</h4></Tab>
+              <h5 @click="!isMaterialAvailable(1) ? null : chooseMaterial(1)"
+                  :class="{'border-b': materialActiveindex===1, 'border-black':materialActiveindex===1,'font-regular':materialActiveindex===1, 'text-gray-400':!isMaterialAvailable(1)}"
+                  class="">Дуб</h5></Tab>
           </div>
         </TabList>
         <TabPanels>

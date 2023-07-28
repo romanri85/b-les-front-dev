@@ -72,11 +72,11 @@ function isMaterialAvailable(material) {
     <DisclosurePanel class="mb-20">
           <div class="flex justify-around w-full pr-4">
             <div v-for="(material) in filtersStore.materialColors" :key="material.material" class="text-primaryDark">
-              <h4 @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"  :class="{
-                'border-b': filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'border-black':filtersStore.activeFilters.material.includes(material.material), 'text-primaryDark':filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'cursor-pointer': isMaterialAvailable(material.material), 'text-gray-400': !isMaterialAvailable(material.material)
+              <h5 @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"  :class="{
+                'border-b': filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'border-black':filtersStore.activeFilters.material.includes(material.material), 'font-regular':filtersStore.activeFilters.material.includes(material.material), 'text-primaryDark':filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'cursor-pointer': isMaterialAvailable(material.material), 'text-gray-400': !isMaterialAvailable(material.material)
               }" class="">{{
                   material.name
-                }}</h4>
+                }}</h5>
             </div>
           </div>
     </DisclosurePanel>

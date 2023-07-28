@@ -48,7 +48,6 @@ p {
 
 .underline-direction {
   position: relative;
-  margin: 3px;
 }
 .underline-direction:hover, .underline-direction:focus, .underline-direction:active {
   /* cursor: pointer;*/
