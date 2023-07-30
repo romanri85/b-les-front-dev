@@ -1,5 +1,5 @@
 <template>
-  <div class="filter-bar">
+  <div class="filter-bar mb-4">
     <div class="pb-4">
       <h3>{{props.total }} {{ getStoreWordForm(props.total) }}</h3>
     </div>
@@ -7,13 +7,13 @@
     <FormKit
         v-model="isOpen"
         type="checkbox"
-        :options="{ open: 'Только открытые магазины', monoBrand: 'Только моно-брендовые магазины' }"
-        decorator-icon="circle"
+        :options="{ open: 'Только открытые магазины', monoBrand: 'Только монобрендовые магазины' }"
+        decorator-icon="check"
         @input="changeFilter"
     />
 
 
-    <pre wrap>{{ filter }}</pre>
+<!--    <pre wrap>{{ filter }}</pre>-->
   </div>
 </template>
 

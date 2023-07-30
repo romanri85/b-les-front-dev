@@ -1,22 +1,29 @@
 <template>
   <div style="display: flex;">
     <div id="map" style="width: 50%; height: 700px;"></div>
-    <div class="pl-10" id="placemark-list" style="width: 50%; height: 800px; overflow: scroll;">
-      <filter-bar :total="totalPlacemarks"
-                  @filter-change="filterChange"
-      />
-      <place-mark-info v-if="visibleAddressData.length" v-for="address in visibleAddressData" :key="address.id"
-                       :address="address"/>
+    <div class="pl-10" style="width: 50%; height: 800px; overflow: auto;">
+      <div id="placemark-list" style="position: relative; width: 100%;">
+        <filter-bar :total="totalPlacemarks"
+                    @filter-change="filterChange"
+                    style="position: sticky; top: 0; z-index: 1;" class="bg-white border-b border-gray-400"
+        />
+        <place-mark-info v-if="visibleAddressData.length" v-for="address in visibleAddressData" :key="address.id"
+                         :address="address" @center-change="changeMapCenterAndZoom"/>
+      </div>
     </div>
   </div>
 </template>
 
+
 <script setup>
 import {onMounted, reactive, ref} from 'vue'
-import {baseURL} from "~/config.js";
 import PlaceMarkInfo from "~/components/pages/where-to-buy/PlaceMarkInfo.vue";
 import FilterBar from "~/components/pages/where-to-buy/FilterBar.vue";
-import {generateAddressData} from '~/utils/helpers.js';
+import {findCity, generateAddressData} from '~/utils/helpers.js';
+import {getRoute} from "~/services/getRouteService.js";
+
+const emits = defineEmits(['city-change'])
+
 
 let myMap; // Moved to global scope
 let clusterer; // Moved to global scope
@@ -26,8 +33,31 @@ const filter = ref('all')
 
 const addresses = ref({})
 
-async function getAddresses() {
-  addresses.value = await $fetch(`${baseURL}/api/shops/`)
+const geo = ref({})
+const city = ref({})
+
+const props = defineProps({
+  city: Object,
+  addresses: Object,
+  geo: Object
+})
+
+watch(props, (newProps) => {
+  if (newProps.city.latitude && newProps.city.longitude) {
+    if (myMap) { // check if map is already initialized
+      myMap.setCenter([parseFloat(newProps.city.latitude), parseFloat(newProps.city.longitude)]);
+      if (newProps.city.zoom_level) {
+        myMap.setZoom(parseFloat(newProps.city.zoom_level));
+      }
+    }
+  }
+});
+
+const changeMapCenterAndZoom = (address) => {
+  if (myMap && address.latitude && address.longitude) { // check if map is already initialized and coordinates are provided
+    myMap.setCenter([parseFloat(address.latitude), parseFloat(address.longitude)]);
+      myMap.setZoom(13);
+  }
 }
 
 let visibleAddressData = reactive([])
@@ -49,10 +79,19 @@ useHead({
 })
 
 onMounted(async () => {
-  await getAddresses()
-  await initMap()
-
+  addresses.value = props.addresses
+  geo.value = props.geo
+  if (geo.value.region && addresses.value) {
+    city.value = findCity(addresses.value.cities, geo.value.region);
+    console.log(city.value, 'city')
+  }
+  if (city.value.city.latitude && city.value.city.longitude) {
+    await initMap();
+  } else {
+    console.log('city.value.latitude or city.value.longitude is not defined');
+  }
 })
+
 
 // Move declaration outside
 async function initMap() {
@@ -63,12 +102,13 @@ async function initMap() {
   }
 
   ymaps.ready(function () {
-    myMap = new ymaps.Map('map', { // <-- here
-      center: [55.751574, 37.573856],
-      zoom: 11
+    myMap = new ymaps.Map('map', {
+      center: [parseFloat(props.city.latitude), parseFloat(props.city.longitude)], // access properties directly from `city`
+      zoom: city.value.city.zoom_level,
     }, {
       searchControlProvider: 'yandex#search'
     });
+
 
     updatePlacemarks();
 
@@ -78,7 +118,6 @@ async function initMap() {
     updateVisiblePlacemarks();
   });
 }
-
 
 
 function updateVisiblePlacemarks() {
@@ -112,7 +151,7 @@ async function updatePlacemarks() {
   myMap.geoObjects.removeAll();
 
   let MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
-      '<div style="color: #000000; font-weight: normal;">$[properties.iconContent]</div>'
+      '<div style="color: #000000; font-family: abchanel-corpo,monospace; font-weight: normal;">$[properties.iconContent]</div>'
   );
 
   let originalSize = [45, 30];
@@ -189,11 +228,34 @@ async function updatePlacemarks() {
     groupByCoordinates: false,
     clusterDisableClickZoom: true,
     clusterHideIconOnBalloonOpen: false,
-    geoObjectHideIconOnBalloonOpen: false
+    geoObjectHideIconOnBalloonOpen: false,
+clusterBalloonContentLayout: 'cluster#balloonCarousel',
+    clusterBalloonContentLayoutHeight: 350,
   });
+
+
 
   clusterer.add(placemarks);
   myMap.geoObjects.add(clusterer);
+
+  myMap.geoObjects.events.add('balloonopen', function (e) {
+    // Add a delay to make sure the DOM has been updated
+    setTimeout(function() {
+      let balloonElement = document.querySelector('.ymaps-2-1-79-balloon__content');
+      if (balloonElement) {
+        // Get the route button inside the balloon
+        let routeBtn = balloonElement.querySelector('[id^="routeBtn_"]');
+        if (routeBtn) {
+          // Add event listener to the route button
+          routeBtn.addEventListener('click', function () {
+            let address = addresses.value.addresses[parseInt(this.id.replace('routeBtn_', ''), 10)];
+            getRoute(address);
+          });
+        }
+      }
+    }, 100); // You might need to adjust this delay value
+  });
+
 }
 
 

@@ -66,5 +66,31 @@ export function generateAddressData(address) {
         saturday_working_hours_to: address.saturday_working_hours_to,
         working_days_working_hours_to: address.working_days_working_hours_to,
         isMonoBrand: address.isMonoBrand,
+        doors_inside: address.doors_inside,
     };
+}
+
+export function findCity(cities, geoValueRegion) {
+    // Default city object with name "Москва"
+    let defaultCity = cities.find(city => city.name === "Москва");
+
+    for(let city of cities) {
+        if(city.ip_check_names.includes(geoValueRegion)) {
+            return {
+                isFound: true,
+                city: city
+            }
+        }
+    }
+
+    // Return the default object if no city found
+    return {
+        isFound: false,
+        city: defaultCity
+    }
+}
+
+export function geoCookieFromStringToObject(escapedJSON) {
+    let unescapedString = escapedJSON.replace(/\\\"/g, "\"").slice(1, -1);
+    return JSON.parse(unescapedString);
 }

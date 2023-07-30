@@ -1,32 +1,71 @@
 <script setup lang="ts">
 
 import WhereToBuyMap from "~/components/pages/where-to-buy/WhereToBuyMap.vue";
-import Cookies from 'js-cookie'
+import CityDialog from "~/components/pop-ups/CityDialog.vue";
+import {baseURL} from "~/config";
+import Cookies from "js-cookie";
+import {findCity} from "~/utils/helpers";
+import {onMounted} from "vue";
 
 
 definePageMeta({layout: "dark-header"});
 
+const city = ref({})
+const cities = ref([])
+const addresses = ref({})
 const geo = ref({})
-onMounted(() => {
+const shouldOpenModal = ref(0)
+
+
+const isCityLoaded = computed(() => Object.keys(city.value).length > 0)
+const isCityFound = ref(true)
+
+
+async function getAddresses() {
+  addresses.value = await $fetch(`${baseURL}/api/shops/`)
   geo.value = Cookies.get('geolocation')
-//   if (geo.value) {
-//     geo.value = JSON.parse(geo.value);
-// }
+  geo.value = typeof geo.value === "object" ? geo.value : JSON.parse(geo.value)
+  cities.value = addresses.value.cities
+  city.value = findCity(addresses.value.cities, geo.value.region);
+  isCityFound.value = city.value.isFound
+  city.value = city.value.city
+  // changeCity(city.value)
+}
+
+onMounted(async () => {
+  await getAddresses()
+  // console.log(cities.value, 'city')
 })
+
+
+function changeCity(newCityId) {
+  const foundCity = cities.value.find(city => city.id === newCityId);
+  if (foundCity) {
+    city.value = foundCity;
+    // console.log(city.value, 'city after change')
+  } else {
+    // console.log('City with provided id not found');
+  }
+}
+function onParentButtonClick() {
+  shouldOpenModal.value = shouldOpenModal.value + 1
+}
 
 </script>
 
 <template>
-  <p>{{geo}}</p>
   <div class="main-container">
     <div class="mt-10 pr-72">
       <div class=" flex justify-start items-end"><h4>Главная / Где купить</h4></div>
     </div>
 
+    <h1 @click="onParentButtonClick" v-if="isCityLoaded && city" class="mt-10 pb-5">Салоны в <span
+        class="border-b-2 border-b-black cursor-pointer">{{ city.dative_case_name || 'Москве' }}</span></h1>
+    <!--    <city-choice-autocomplete v-if="isCitiesChoiceOpen" :city="city" :cities="cities"/>-->
+    <h5 class="pb-4" v-if="!isCityFound">К сожалению, в вашем регионе нет наших магазинов, или представителей. Но мы можем доставить двери в любой регион России.</h5>
 
-    <h1 class="mt-10 pb-5">Салоны в Москве</h1>
-
-    <where-to-buy-map/>
+    <city-dialog :should-open-modal="shouldOpenModal" :city="city" :cities="cities" @change-city="changeCity"/>
+    <where-to-buy-map v-if="addresses && geo.region && city" :city="city" :addresses="addresses" :geo="geo"/>
   </div>
 </template>
 

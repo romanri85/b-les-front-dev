@@ -1,34 +1,61 @@
 <template>
   <div class="placemark-data  " :class="{closed: props.address.isOpenData.isOpen === 'Закрыто'}">
     <div class="pb-4 border-b border-darkGreyGray">
-      <h3 class="pb-2">{{ props.address.name }}</h3>
-      <p class="pb-4">{{ props.address.address }}</p>
-      <p class="pb-2" v-if="props.address.metro_station">метро {{props.address.metro_station}}</p>
+      <h3 class="pb-2 cursor-pointer" @click="moveToAddress">{{ props.address.name }}</h3>
+      <p class="pb-4 cursor-pointer" @click="moveToAddress">{{ props.address.address }}</p>
+      <p class="pb-2" v-if="props.address.metro_station">метро {{ props.address.metro_station }}</p>
       <a href="tel:{{props.address.phone}}">{{ props.address.phone }}</a>
-      <p class="pt-2" v-for="interval of  props.address.workingHours" :key="interval">{{ interval }}</p>
+      <div>
+        <Disclosure>
+          <DisclosureButton class="pt-4">
+            <address-working-hours-curric filter-name="График работы"/>
+          </DisclosureButton>
+          <DisclosurePanel>
+            <p class="pt-2" v-for="interval of  props.address.workingHours" :key="interval">{{ interval }}</p>
+          </DisclosurePanel>
+        </Disclosure>
+      </div>
       <div class="status pt-4 pb-4">
         <div class="status-color" :style="{backgroundColor: props.address.isOpenData.color}"></div>
         <p>{{ props.address.isOpenData.isOpen }}</p>
         <p v-if="remainingTime">, будет работать еще {{ remainingTime }}</p>
-        <p v-if="props.address.isOpenData.isOpen === 'Закрыто'">{{ openText }} {{ props.address.isOpenData.tomorrowOpeningTime }}</p>
-
+        <p v-if="props.address.isOpenData.isOpen === 'Закрыто'">{{ openText }}
+          {{ props.address.isOpenData.tomorrowOpeningTime }}</p>
       </div>
-      <buttons-primary-button-small class="pt-4" @click="getRoute">Маршрут</buttons-primary-button-small>
+      <div class="flex flex-col items-start">
+        <buttons-primary-button-small @click="openDoorsInside">Образцы дверей в магазине</buttons-primary-button-small>
+
+        <buttons-primary-button-small class="pt-4" @click="getRoute(props.address)">Маршрут
+        </buttons-primary-button-small>
+      </div>
 
     </div>
+
+    <address-doors-inside-modal v-if="isAddressDoorsInsideModelOpen" @close="isAddressDoorsInsideModelOpen = false"
+                                :doorsInside="props.address.doors_inside" @close-modal="closeDoorsInside"
+                                :address="props.address"/>
   </div>
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref, computed } from 'vue';
+import {computed, onMounted, onUnmounted, ref} from 'vue';
+import AddressDoorsInsideModal from "~/components/pop-ups/AddressDoorsInsideModal.vue";
+import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
+import AddressWorkingHoursCurric from "~/components/pages/where-to-buy/AddressWorkingHoursCurric.vue";
+import {getRoute} from "~/services/getRouteService.js";
 
 const props = defineProps({
   address: Object,
 });
 
+const emits = defineEmits(['center-change']);
 
 const remainingTime = ref(null);
 let intervalId;
+
+function moveToAddress() {
+  emits('center-change', props.address);
+}
 
 function getCorrectDeclension(number, words) {
   const cases = [2, 0, 1, 1, 1, 2];
@@ -65,7 +92,7 @@ onMounted(async () => {
   let closingTime;
   const currentDay = new Date().getDay();
 
-  switch(currentDay) {
+  switch (currentDay) {
     case 0: // Sunday
       closingTime = props.address.sunday_working_hours_to;
       break;
@@ -98,29 +125,15 @@ const openText = computed(() => {
   }
 });
 
-async function getRoute() {
-  if (!navigator.geolocation) {
-    console.log("Geolocation is not supported by this browser.");
-    return;
-  }
 
-  try {
-    navigator.geolocation.getCurrentPosition(async function(position) {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
+const isAddressDoorsInsideModelOpen = ref(false)
 
-      const destinationLat = props.address.latitude;
-      const destinationLon = props.address.longitude;
+function openDoorsInside() {
+  isAddressDoorsInsideModelOpen.value = true
+}
 
-      // Construct Yandex Maps URL with user's current location and destination
-      const url = `https://maps.yandex.ru/?rtext=${lat},${lon}~${destinationLat},${destinationLon}`;
-
-      // Open Yandex Maps in a new tab
-      window.open(url, '_blank');
-    });
-  } catch (error) {
-    console.log("Error obtaining geolocation: ", error);
-  }
+function closeDoorsInside() {
+  isAddressDoorsInsideModelOpen.value = false
 }
 </script>
 

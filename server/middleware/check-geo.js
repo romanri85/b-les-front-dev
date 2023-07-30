@@ -16,5 +16,7 @@ export default defineEventHandler(async (event) => {
                     maxAge: 60 * 60 * 24 * 30,
                 })
         }
+        console.log('  no cookie', cookies.geolocation)
     }
+    console.log('  have cookie', cookies.geolocation)
 })
