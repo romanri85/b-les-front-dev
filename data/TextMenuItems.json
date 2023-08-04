@@ -19,9 +19,15 @@
     "needToShowDropdown": false
   },
   {
-    "id": "doors-in-interiour",
+    "id": "doors-in-interior",
     "name": "doorsInInterior",
-    "slug": "/doors-in-interiour",
+    "slug": "/interior",
+    "needToShowDropdown": false
+  },
+  {
+    "id": "search-tags",
+    "name": "doorsInInterior",
+    "slug": "/search-tags",
     "needToShowDropdown": false
   },
   {

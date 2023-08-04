@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import {Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
+import {useFiltersStore} from "~/stores/filtersStore";
+import {storeToRefs} from "pinia";
+import {useHardwareFiltersStore} from "~/stores/hardwareFiltersStore";
+
+const hardwareFiltersStore = useHardwareFiltersStore()
+const isClicked = ref(false)
 
 
 const sortFilters = [
@@ -33,15 +39,14 @@ const sortFilters = [
   },
 ]
 
-const emit = defineEmits(['changeSorting'])
-const isClicked = ref(false)
+
 const toggleArrow = () => {
   isClicked.value = !isClicked.value
 }
 
-function sortDoors(sorting: string) {
+function sortHardware(sorting: string) {
   console.log('sortProducts')
-  emit('changeSorting', {ordering: sorting})
+  hardwareFiltersStore.onChangeFilters({ordering: sorting})
 
 }
 
@@ -61,7 +66,7 @@ function sortDoors(sorting: string) {
       <MenuItems class="mt-10 absolute z-10">
         <div v-for="sorting in sortFilters"
             class="whitespace-nowrap  shadow-sm shadow-darkGrey bg-white p-4 [&>a]:p-2 min-w-[320px]">
-          <MenuItem @click="sortDoors(sorting.value)" v-slot="{ active }" class="cursor-pointer">
+          <MenuItem @click="sortHardware(sorting.value)" v-slot="{ active }" class="cursor-pointer">
               <h6 :class='{ "font-regular": active }'>{{ sorting.name }}</h6>
           </MenuItem>
 <!--          <MenuItem v-slot="{ active }">-->

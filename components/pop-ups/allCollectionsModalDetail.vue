@@ -52,7 +52,7 @@ onMounted(() => {
 <template>
 
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" @close="closeModal" class="relative z-10">
+    <Dialog as="div" @close="closeModal" class="relative z-30">
       <TransitionChild
           as="template"
           enter="duration-300 ease-out"
@@ -100,7 +100,7 @@ onMounted(() => {
 
                     <nuxt-img v-if="product.merged_image" key=0 width="100px" height="auto"
                               :src="product.merged_image"
-                              class="h-auto w-32"></nuxt-img>
+                              class="h-auto w-32 cursor-pointer"></nuxt-img>
 
                   </div>
                   <h3 class="pt-4">{{ product.name }}</h3>

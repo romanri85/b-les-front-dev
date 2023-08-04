@@ -61,3 +61,26 @@ p{
   }
 }
 
+.underline-direction-white{
+  position: relative;
+  //margin: 3px;
+  &:hover,
+  &:focus,
+  &:active {
+    /* cursor: pointer;*/
+    &:after {
+      width: 100%;
+    }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -3px;
+    height: 1px;
+    background-color: #fff;
+    width: 0;
+    transition: width .5s;
+  }
+}
+

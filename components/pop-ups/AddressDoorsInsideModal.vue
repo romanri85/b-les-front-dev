@@ -95,8 +95,8 @@ function chooseProduct(product) {
                               class="h-auto w-32"></nuxt-img>
 
                   </div>
-                  <h4 class="pt-4  border-b border-transparent group-hover:border-black transform translate-y-2">{{ door.product_variant_name }}</h4>
-                  <h5 class="pt-2">{{ door.color_name }}</h5>
+                  <h4 class="pt-2  border-b border-transparent group-hover:border-black transform translate-y-2">{{ door.product_variant_name }}</h4>
+                  <h5 class="pt-4">{{ door.color_name }}</h5>
                   </NuxtLink>
 
                   <!--                  <div class="text-center text-sm">{{ model.name }}</div>-->

@@ -51,6 +51,7 @@ export default defineI18nConfig(() => ({
             websiteSearch: 'Website search',
             catalogPageDescription: "Design an interior with our company. Choose doors and we will offer functional solutions in a single style. Accessories will help complete the design.",
             doorHardwarePageDescription: "Door hardware is an important element of the door. It is important to choose the right door hardware for the door. We offer a wide range of door hardware.",
+            interiorHeader: "Doors in interior",
 
         },
         ru: {
@@ -103,6 +104,7 @@ export default defineI18nConfig(() => ({
             websiteSearch: 'Поиск по сайту',
             catalogPageDescription: 'Создайте интерьер вместе с «Брянский лес». Выберите двери,а мы предложим функциональные решения в едином стиле. Завершить образ помогут аксессуары.',
             doorHardwarePageDescription: 'Фурнитура для дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева.',
+            interiorHeader: "Двери в интерьере",
 
         },
     }

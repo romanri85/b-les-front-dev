@@ -47,15 +47,15 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
 
 
     async function fetchProducts(query = "") {
-        const response = await $fetch(`${baseURL}/api/hardware/hardware-variants?page_size=${page_size + query}`);
+        const response = await $fetch(`${baseURL}/api/hardware/hardware-variants?page_size=${page_size}&${query}`);
         total.value = response.count
         pagesCount.value = response.page_links.length
         products.value = response.results
-        // window.scrollTo(0, 0);
     }
 
+
     async function checkFilters(query = "") {
-        const response = await $fetch(`${baseURL}/api/hardware/hardware-filters/?${query}`);
+        const response = await $fetch(`${baseURL}/api/hardware/hardware-filters?${query}`);
 
 
         filterCount.value = response.counts

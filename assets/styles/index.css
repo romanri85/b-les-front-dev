@@ -11,6 +11,10 @@
   @apply lg:w-80;
 }
 
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 h1 {
   @apply font-mono font-semibold uppercase
    lg:text-h1-lg md:text-h1-md text-h1-sm;
@@ -62,6 +66,26 @@ p {
   bottom: -3px;
   height: 1px;
   background-color: #000;
+  width: 0;
+  transition: width 0.5s;
+}
+
+.underline-direction-white {
+  position: relative;
+}
+.underline-direction-white:hover, .underline-direction-white:focus, .underline-direction-white:active {
+  /* cursor: pointer;*/
+}
+.underline-direction-white:hover:after, .underline-direction-white:focus:after, .underline-direction-white:active:after {
+  width: 100%;
+}
+.underline-direction-white:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  background-color: #fff;
   width: 0;
   transition: width 0.5s;
 }

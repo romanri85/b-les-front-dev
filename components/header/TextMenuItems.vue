@@ -42,7 +42,7 @@ const currentMenuItems = computed(() => {
           <PopoverButton class="">
             <div class="flex justify-center items-center h-full"
                  :class="activeItemIndex === index ? '[&>span]:rotate-180' : '' ">
-              <NuxtLink :to="item.slug"><h4 class="inline-block pr-2">{{ $t(item.name) }}</h4></NuxtLink>
+              <NuxtLink :to="item.slug"><h4 class="inline-block pr-2 text-shadow">{{ $t(item.name) }}</h4></NuxtLink>
               <span v-if="item.name === 'otherElements' || (item.name === 'aboutUs')">
                             <ChevronDownIcon class="w-5 h-5"/>
                         </span>

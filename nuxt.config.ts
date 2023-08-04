@@ -15,7 +15,8 @@ const config = {
     ],
     devtools: { enabled: true },
     plugins: [
-        '~/plugins/auto-animate.js'],
+        '~/plugins/auto-animate.js',
+    '~/plugins/masonry.client.ts'],
 
 
     postcss: {

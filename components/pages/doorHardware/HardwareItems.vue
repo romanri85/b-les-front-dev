@@ -12,6 +12,12 @@ import { storeToRefs } from "pinia";
 
 const hardwareFiltersStore = useHardwareFiltersStore()
 const {total, pagesCount, products, page_size,page} = storeToRefs(hardwareFiltersStore)
+// console.log(products.value, 'products')
+// console.log(page.value, 'page')
+// console.log(page_size.value, 'page_size')
+// console.log(pagesCount.value, 'pagesCount')
+// console.log(total.value, 'total')
+
 
 
 
@@ -19,7 +25,7 @@ const {total, pagesCount, products, page_size,page} = storeToRefs(hardwareFilter
 
 // const page = ref(1)
 function onChangePage(page) {
-  filtersStore.onChangeFilters({page: page})
+  hardwareFiltersStore.onChangeFilters({page: page})
   // parent.animate()
 }
 

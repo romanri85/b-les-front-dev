@@ -6,7 +6,7 @@
         :total-items="total"
         v-model="currentPage"
         :items-per-page="page_size"
-        :max-pages-shown="3"
+        :max-pages-shown="2"
         :on-click="HandleNewPage"
 
     >

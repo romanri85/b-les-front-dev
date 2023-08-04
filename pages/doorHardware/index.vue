@@ -10,9 +10,7 @@ import {storeToRefs} from "pinia";
 
 const hardwareFiltersStore = useHardwareFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(hardwareFiltersStore)
-// const activeFilters = ref({
-//   min_price: 500, max_price: 2000, design:[], color_collection: [], ordering: ""
-// })
+
 
 const heroName = "doorHardware"
 const heroDescription = "doorHardwarePageDescription"
@@ -26,35 +24,6 @@ const page_size = 20
 
 const route = useRoute()
 
-// async function fetchProducts(query = "") {
-//   const response = await $fetch(`${baseURL}/api/hardware/hardware-variants?page_size=${page_size + query}`);
-//   total.value = response.count
-//   pagesCount.value = response.page_links.length
-//   products.value = response.results
-//   // window.scrollTo(0, 0);
-//
-// }
-//
-// async function onChangeFilters(filters) {
-//   if (!Object.keys(filters).includes("page")) {
-//     filters = {...filters, page: 1}
-//
-//   }console.log(filters)
-//   console.log(activeFilters.value), 'activeFilters.value'
-//
-//   activeFilters.value = {...activeFilters.value, ...filters}
-//   const query = "&" + new URLSearchParams(activeFilters.value).toString();
-//
-//
-//   fetchProducts(query)
-// }
-//
-// async function onResetFilters(){
-//   activeFilters.value = {
-//     min_price: 500, max_price: 2000, design:[], color_collection: [], ordering: ""  }
-//   const query = "&" + new URLSearchParams(activeFilters.value).toString();
-//   fetchProducts(query)
-// }
 
 
 onMounted(() => {

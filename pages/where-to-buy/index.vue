@@ -23,12 +23,16 @@ const isCityFound = ref(true)
 
 async function getAddresses() {
   addresses.value = await $fetch(`${baseURL}/api/shops/`)
-  geo.value = Cookies.get('geolocation')
+  geo.value = Cookies.get('geolocation') || {"country": "Netherlands", "city": "Amsterdam", "region": "North Holland"}
   geo.value = typeof geo.value === "object" ? geo.value : JSON.parse(geo.value)
+  console.log(geo.value.region, 'geo object')
   cities.value = addresses.value.cities
   city.value = findCity(addresses.value.cities, geo.value.region);
   isCityFound.value = city.value.isFound
   city.value = city.value.city
+  console.log(city.value, 'city')
+  console.log(geo.value.region, 'region')
+  console.log(addresses.value, 'addresses')
   // changeCity(city.value)
 }
 
@@ -39,14 +43,9 @@ onMounted(async () => {
 
 
 function changeCity(newCityId) {
-  const foundCity = cities.value.find(city => city.id === newCityId);
-  if (foundCity) {
-    city.value = foundCity;
-    // console.log(city.value, 'city after change')
-  } else {
-    // console.log('City with provided id not found');
-  }
+  city.value = cities.value.find(city => city.id === newCityId);
 }
+
 function onParentButtonClick() {
   shouldOpenModal.value = shouldOpenModal.value + 1
 }
@@ -59,10 +58,9 @@ function onParentButtonClick() {
       <div class=" flex justify-start items-end"><h4>Главная / Где купить</h4></div>
     </div>
 
-    <h1 @click="onParentButtonClick" v-if="isCityLoaded && city" class="mt-10 pb-5">Салоны в <span
+    <h1 @click="onParentButtonClick" v-if="isCityLoaded && city" class="mt-10 pb-8">Салоны в <span
         class="border-b-2 border-b-black cursor-pointer">{{ city.dative_case_name || 'Москве' }}</span></h1>
-    <!--    <city-choice-autocomplete v-if="isCitiesChoiceOpen" :city="city" :cities="cities"/>-->
-    <h5 class="pb-4" v-if="!isCityFound">К сожалению, в вашем регионе нет наших магазинов, или представителей. Но мы можем доставить двери в любой регион России.</h5>
+    <!--    <h5 class="pb-4" v-if="!isCityFound">К сожалению, в вашем регионе нет наших магазинов, или представителей. Но мы можем доставить двери в любой регион России.</h5>-->
 
     <city-dialog :should-open-modal="shouldOpenModal" :city="city" :cities="cities" @change-city="changeCity"/>
     <where-to-buy-map v-if="addresses && geo.region && city" :city="city" :addresses="addresses" :geo="geo"/>
