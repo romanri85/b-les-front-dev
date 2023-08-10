@@ -6,13 +6,14 @@ import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 
 const filtersStore = useFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(filtersStore)
-
+const firstUpdateSliderAfterMount = ref(true);
 
 function updateSliderValues([newMin, newMax]) {
-
+  if (firstUpdateSliderAfterMount.value) {
+    firstUpdateSliderAfterMount.value = false;
+    return;
+  }
   filtersStore.onChangeFilters({'min_price': newMin, 'max_price': newMax});
-
-
 }
 
 

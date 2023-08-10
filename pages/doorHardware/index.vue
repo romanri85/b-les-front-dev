@@ -24,20 +24,23 @@ const page_size = 20
 
 const route = useRoute()
 
+onMounted(async () => {
+  // if(route.query.material){
+  //   activeFilters.value.material = route.query.material
+  //   const query = "&" + new URLSearchParams(activeFilters.value).toString();
+  //   hardwareFiltersStore.onChangeFilters({page: 1})
+  //   return
+  // }
 
+  // if (!activeFilters.value.color_collection) {
+  //   activeFilters.value.color_collection = []
+  // }
 
-onMounted(() => {
-  if(route.query.material){
-    activeFilters.value.material = route.query.material
-    const query = "&" + new URLSearchParams(activeFilters.value).toString();
-    hardwareFiltersStore.onChangeFilters({page: 1})
-    return
-  }
-
-  hardwareFiltersStore.onChangeFilters({page: 1})
-
+  await hardwareFiltersStore.onChangeFilters({page: 1});
 
 })
+
+
 
 </script>
 

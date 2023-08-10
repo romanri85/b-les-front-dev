@@ -25,7 +25,8 @@ const {total, pagesCount, products, page_size,page} = storeToRefs(hardwareFilter
 
 // const page = ref(1)
 function onChangePage(page) {
-  hardwareFiltersStore.onChangeFilters({page: page})
+  hardwareFiltersStore.page = page
+  hardwareFiltersStore.onChangeFilters({page: hardwareFiltersStore.page})
   // parent.animate()
 }
 
@@ -54,7 +55,7 @@ const [parent] = useAutoAnimate()
                     :page_size="page_size"
                     :pagesCount="pagesCount"
                     @page-change="onChangePage"
-                    v-model:current-page="page"
+                    v-model:current-page="hardwareFiltersStore.page"
         />
     </div>
   </div>

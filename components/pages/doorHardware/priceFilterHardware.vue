@@ -6,10 +6,14 @@ import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 
 const hardwareFiltersStore = useHardwareFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(hardwareFiltersStore)
+// const firstUpdateSliderAfterMount = ref(true);
 
 
 function updateSliderValues([newMin, newMax]) {
-
+  // if (firstUpdateSliderAfterMount.value) {
+  //   firstUpdateSliderAfterMount.value = false;
+  //   return;
+  // }
   hardwareFiltersStore.onChangeFilters({'min_price': newMin, 'max_price': newMax});
 
 

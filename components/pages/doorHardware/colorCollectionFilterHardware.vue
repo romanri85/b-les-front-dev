@@ -18,7 +18,6 @@ hardwareFiltersStore.fetchColorCollections()
 
 
 function chooseColorCollection(id){
-  console.log('chooseColorCollection', id)
   if(!activeFilters.value.color_collection.includes(id)){
     hardwareFiltersStore.onChangeFilters({color_collection:[...activeFilters.value.color_collection, id]})
   } else {

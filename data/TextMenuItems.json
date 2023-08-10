@@ -24,12 +24,7 @@
     "slug": "/interior",
     "needToShowDropdown": false
   },
-  {
-    "id": "search-tags",
-    "name": "doorsInInterior",
-    "slug": "/search-tags",
-    "needToShowDropdown": false
-  },
+
   {
     "id": "about-us",
     "name": "aboutUs",

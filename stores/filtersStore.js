@@ -5,7 +5,6 @@ export const useFiltersStore = defineStore("filtersStore", () => {
 
     const activeFilters = ref({
         ordering: "",
-        page: 1,
         // min_price: Number,
         // max_price: Number,
         design: [],
@@ -37,39 +36,48 @@ export const useFiltersStore = defineStore("filtersStore", () => {
     const materialColors = ref([])
 
     async function onChangeFilters(filters) {
-        if (!Object.keys(activeFilters.value).includes("page")) {
-            activeFilters.value = {...activeFilters.value, page: 1}
+        if(!filters.page){
+            activeFilters.value.page = 1
+            page.value = 1
         }
+        // if (!Object.keys(activeFilters.value).includes("page")) {
+        //     activeFilters.value = {...activeFilters.value, page: 1}
+        // }
+
 
         activeFilters.value = {...activeFilters.value, ...filters}
 
 
-
         let query = new URLSearchParams(activeFilters.value).toString();
-
         await fetchProducts(query)
-
 
 
         await checkFilters(query)
     }
 
 
-
-
     async function fetchProducts(query = "") {
-        const response = await $fetch(`${baseURL}/api/product/product-variants?page_size=${page_size +'&'+ query}`);
-        total.value = response.count
-        pagesCount.value = response.page_links.length
-        products.value = response.results
+        const {data} = await useFetch(`${baseURL}/api/product/product-variants?page_size=${page_size + '&' + query}`, {key:'results',cache: true});
+        if (data.value) {
+            total.value = data.value.count
+            pagesCount.value = data.value.page_links.length
+            products.value = data.value.results
+        }
+        else {
+            console.log('no data')
+        }
         // window.scrollTo(0, 0);
     }
 
     async function checkFilters(query = "") {
-        const response = await $fetch(`${baseURL}/api/product/filters?${query}`);
+        const {data} = await useFetch(`${baseURL}/api/product/filters?${query}`, {key:'query',cache: true});
+        if (data.value) {
+            filterCount.value = data.value.counts
+        }
+        else {
+            console.log('no data')
+        }
 
-
-        filterCount.value = response.counts
         // window.scrollTo(0, 0);
 
     }
@@ -91,11 +99,13 @@ export const useFiltersStore = defineStore("filtersStore", () => {
     }
 
     async function fetchColorSets() {
-        color_sets.value = await $fetch(`${baseURL}/api/product/color-sets`)
+        const {data} = await useFetch(`${baseURL}/api/product/color-sets`,{key:'color-sets',cache: true})
+        color_sets.value = data.value
     }
 
     async function fetchMaterialColors() {
-        materialColors.value = await $fetch(`${baseURL}/api/product/material-choices`);
+        const {data} = await useFetch(`${baseURL}/api/product/material-choices`, {key:'material-choices',cache: true})
+        materialColors.value = data.value
     }
 
     return {

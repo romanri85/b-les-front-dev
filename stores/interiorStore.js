@@ -9,17 +9,73 @@ export const useInteriorStore = defineStore("interiorStore", () => {
     let pagesCount = ref(0)
     const page_size = 6
     const page = ref(1)
+    const tags = ref([])
+    const tagsForForm = ref([])
+    const selectedImages = ref([])
 
 
-
-    async function getProjects(page=1) {
+    async function getProjects(page = 1) {
         let response = await $fetch(`${baseURL}/api/projects?page=${page}`)
-        projects.value = response.results
-        total.value = response.count
-        pagesCount.value = response.page_links.length
+        const {data} = await useFetch(`${baseURL}/api/projects?page=${page}`, {key:'results',cache: true});
+        if (data.value) {
+            response = data.value
+            projects.value = data.value.results
+            total.value = data.value.count
+            pagesCount.value = data.value.page_links.length
+        }
+        else {
+            console.log('no data')
+        }
+
 
 
     }
+
+    async function getTags() {
+        tags.value = await $fetch(`${baseURL}/api/projects/tags`);
+        const {data} = await useFetch(`${baseURL}/api/projects/tags`, {key:'id',cache: true});
+        if (data.value) {
+            tags.value = data.value
+        }
+        else {
+            console.log('no data')
+        }
+    }
+
+    async function transformTags() {
+        if (tags.value.length > 0) {
+            tagsForForm.value = tags.value.map(tag => {
+                return {
+                    label: tag.name,
+                    value: tag.id
+                };
+            });
+        }
+    }
+
+    async function getImagesByTags(tagIds, page = 1) {
+        // Join the tagIds into a query string
+
+        const tagsQueryString = new URLSearchParams({
+            tags: tagIds.join(",")
+        }).toString();
+        const url = `http://localhost:8000/api/projects/images?${tagsQueryString}&page=${page}`;
+
+
+        selectedImages.value = await $fetch(url)
+        const {data} = await useFetch(url, {key:'results',cache: true});
+        if (data.value) {
+            selectedImages.value = data.value
+        }
+        else {
+            console.log('no data')
+        }
+        total.value = selectedImages.value.count
+        pagesCount.value = selectedImages.value.page_links.length
+
+    }
+
+    // Build the URL, including the tags query and page number
 
 
     return {
@@ -28,8 +84,14 @@ export const useInteriorStore = defineStore("interiorStore", () => {
         total,
         pagesCount,
         page_size,
-        page
+        page,
+        getTags,
+        tags,
+        tagsForForm,
+        transformTags,
+        getImagesByTags,
+        selectedImages,
 
 
     }
-});
+})

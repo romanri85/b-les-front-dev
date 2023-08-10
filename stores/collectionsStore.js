@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import {baseURL} from "~/config";
+
 export const useCollectionsStore = defineStore("collectionsStore", {
     state: () => {
         return {
@@ -7,8 +8,15 @@ export const useCollectionsStore = defineStore("collectionsStore", {
         };
     },
     actions: {
+
         async fetchCollections() {
-            this.collections = await $fetch(`${baseURL}/api/product/collections`);
+            const {data} = await useFetch(`${baseURL}/api/product/collections`, {key: 'results', cache: true});
+            if (data.value) {
+                this.collections = data.value
+            } else {
+                console.log('no data')
+            }
+
         }
     }
 });

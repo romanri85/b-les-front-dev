@@ -23,7 +23,8 @@ const [parent] = useAutoAnimate()
 // const page = ref(1)
 
 function onChangePage(page) {
-  filtersStore.onChangeFilters({page: page})
+  filtersStore.page = page
+  filtersStore.onChangeFilters({page: filtersStore.page})
   // parent.animate()
 }
 

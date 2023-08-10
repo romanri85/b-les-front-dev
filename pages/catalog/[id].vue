@@ -7,6 +7,9 @@ import CasingFilterDetail from "~/components/filters/CasingFilterDetail.vue";
 import GlassTypeFilterDetail from "~/components/filters/GlassTypeFilterDetail.vue";
 import {toNumber} from "@vue/shared";
 import AllCollectionsModalDetail from "~/components/pop-ups/allCollectionsModalDetail.vue";
+import Pagination from "~/components/base/Pagination.vue";
+import {ref} from "vue";
+import ImageModal from "~/components/pop-ups/imageModal.vue";
 
 definePageMeta({layout: "dark-header"});
 
@@ -30,6 +33,11 @@ const actualCasing = ref(null)
 const newGlass = ref({})
 const collectionProducts = ref([])
 
+const total = ref(0)
+let pagesCount = ref(0)
+const page_size = 9
+const page = ref(1)
+
 
 type productMaterials = productMaterialsObject[]
 
@@ -46,16 +54,66 @@ interface product {
   }
 }
 
+const layoutImages = computed(() => {
+  if (product.value && product.value.images) {
+
+    let images = product.value.images.images.map((image: { height: number; width: number }) => {
+      const aspectRatio = image.height / image.width;
+      if (aspectRatio > 1) {
+        return {...image, layout: 'narrow'};  // Portrait images (taller than wide)
+      } else {
+        return {...image, layout: 'wide'};    // Landscape images (wider than tall)
+      }
+    });
+
+    // Get the number of narrow images
+    const numberOfNarrowImages = images.filter(image => image.layout === 'narrow').length;
+
+    // Check if the remainder of division of the number of narrow images by 3 is equal to 1
+    if (numberOfNarrowImages % 3 === 1) {
+      // Check if there is at least one element with layout: wide
+      const wideIndex = images.findIndex(image => image.layout === 'wide');
+
+      // If an element with layout: wide exists, change its layout to 'narrow'
+      if (wideIndex !== -1) {
+        images[wideIndex].layout = '';
+        images[wideIndex].square = true;
+      }
+    }
+
+    return images;
+  }
+  return [];
+});
+
+const imgModal = ref(null);
+const selectedImage = ref(null); // this will store the selected/clicked image data
+
+const triggerModal = (image) => {
+  selectedImage.value = image;
+  if (imgModal.value && imgModal.value.openModal) {
+    imgModal.value.openModal();
+  } else {
+    console.error('Method not available or component not initialized.');
+  }
+};
 async function fetchDoorVariantData(query = `/${route.params.id}`) {
 
+  // product.value = await $fetch(`${baseURL}/api/product${query}`);
   product.value = await $fetch(`${baseURL}/api/product${query}`);
+    total.value = product.value.images.count
+    pagesCount.value =product.value.images.page_links.length
 
-  if (productMaterials.value.length === 0) {
-    productMaterials.value = product.value.product_variants.map((item) => ({
-      'material': item.material,
-      'name': item.material_name,
-      'color': item.material_colors
-    }));
+    if (productMaterials.value.length === 0) {
+      productMaterials.value = product.value.product_variants.map((item) => ({
+        'material': item.material,
+        'name': item.material_name,
+        'color': item.material_colors
+      }));
+
+
+
+
   }
 
   if (Object.keys(casingVariants.value).length === 0) {
@@ -126,11 +184,12 @@ function changeGlass(glass) {
 
 function getCasingVariants() {
 
-  let data = product.value.collection
+
+  let casingData = product.value.collection
 
   let output = {};
 
-  for (let casing of data.casings) {
+  for (let casing of casingData.casings) {
     let casingValue = casing.casing;
     if (!(casingValue in output)) {
       output[casingValue] = {};
@@ -148,10 +207,10 @@ function getCasingVariants() {
 }
 
 function getProductCasings() {
-  let data = product.value.collection.casings
+  let productCasingData = product.value.collection.casings
   let materialMap = new Map();
 
-  data.forEach(item => {
+  productCasingData.forEach(item => {
     if (materialMap.has(item.material)) {
       materialMap.get(item.material).push(item);
     } else {
@@ -174,6 +233,11 @@ function openCollection() {
 function closeCollection() {
   isCollectionModelOpen.value = false
 }
+
+function onChangePage(page) {
+  fetchDoorVariantData(`/${route.params.id}?page=${page}`)
+
+}
 </script>
 
 <template>
@@ -185,12 +249,10 @@ function closeCollection() {
     <div class="flex gap-20">
       <div class="left w-[38%]">
         <door-card-detail :doorVariant="doorVariantData" :product="product" :newGlass="newGlass"/>
-        <!--        <client-only>-->
         <casing-filter-detail v-if="doorVariantData" @change-filter="changeCasing" :material="material"
                               :productCasings="productCasings"
                               :casingVariants="casingVariants" :color="color"
                               :startCasing="doorVariantData.casing_variant.casing"/>
-        <!--        </client-only>-->
 
       </div>
       <div class="right w-full">
@@ -243,10 +305,71 @@ function closeCollection() {
         </div>
       </div>
     </div>
+
+    <div class="image-container">
+      <div v-for="(image, index) in layoutImages" :key="image.id"
+           :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
+        <nuxt-img  @click="triggerModal(image)" :src="image.image" class="object-cover" :alt="image.project_name"/>
+      </div>
+    </div>
+    <image-modal :image="selectedImage" ref="imgModal"/>
+    <pagination v-if="page" class="pb-32 flex justify-center" :total="total"
+                :page_size="page_size"
+                :pagesCount="pagesCount"
+                @page-change="onChangePage"
+                v-model:current-page="page"/>
   </div>
 
 </template>
 
 <style scoped>
+/* Add to your scoped styles */
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.image-wrapper {
+  flex: 0 0 auto; /* Default for non-square images */
+}
+
+.image-wrapper.narrow {
+  flex: 0 0 calc(33.33% - 16px); /* 3 images in a row, consider the gap */
+}
+
+.image-wrapper.square {
+  flex: 0 0 calc(66.6% - 16px);
+  height: 100%;
+  object-fit: contain; /* 4 images in a row, consider the gap */
+}
+
+.image-wrapper.wide {
+  flex: 0 0 calc(50% - 16px); /* 2 images in a row, consider the gap */
+}
+
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+}
+
+.image-wrapper.narrow img {
+  aspect-ratio: 2/3; /* Narrow images are tall (aspect ratio of height to width is 2:3) */
+}
+
+.image-wrapper.wide img {
+  object-fit: fill;
+  aspect-ratio: 3/2; /* Wide images are wide (aspect ratio of width to height is 3:2) */
+}
+
+.image-wrapper.square img {
+  aspect-ratio: 2.7 / 2; /* Adjust this value to desired ratio */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 
 </style>

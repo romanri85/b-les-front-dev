@@ -6,32 +6,38 @@ import {useInteriorStore} from "~/stores/interiorStore";
 import {storeToRefs} from "pinia";
 import Pagination from "~/components/base/Pagination.vue";
 import buttons from "~/data/interiorButtons.json";
+import { useRouter, useRoute } from 'vue-router';
 
 const interiorStore = useInteriorStore()
 const {projects} = storeToRefs(interiorStore)
 
-
 const heroName = "interiorHeader"
 const heroDescription = ""
 const heroImage = "/interior/bg-interior.png"
-
+const route = useRoute();
+const router = useRouter();
 
 let products = ref([])
 
-const route = useRoute()
 
 
 onMounted(
     async () => {
-      await interiorStore.getProjects()
-
+      // await interiorStore.getProjects()
+      const currentPage = route.query.page ? parseInt(route.query.page as string) : 1;
+      interiorStore.page = currentPage
+      await interiorStore.getProjects(currentPage);
+      console.log(interiorStore.page, 'interior page')
     }
+
 )
+
 
 
 function onChangePage(page){
   console.log(page, 'page')
   interiorStore.getProjects(page)
+  router.push({ query: { page: page.toString() } }); // Ensure page is a string
 }
 
 </script>

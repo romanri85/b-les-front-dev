@@ -1,12 +1,10 @@
-
-
 <template>
   <div class="example-six">
     <vue-awesome-paginate
-        :total-items="total"
+        :total-items="props.total"
         v-model="currentPage"
-        :items-per-page="page_size"
-        :max-pages-shown="2"
+        :items-per-page="props.page_size"
+        :max-pages-shown="3"
         :on-click="HandleNewPage"
 
     >
@@ -27,21 +25,22 @@
 </template>
 
 <script setup lang="ts">
-import {ChevronRightIcon, ChevronLeftIcon} from "@heroicons/vue/24/solid";
-import { ref } from "vue";
-const currentPage = ref(1);
+import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/24/solid";
+import {computed, ref} from "vue";
+
 const props = defineProps({
   total: Number,
   currentPage: Number,
   page_size: Number,
 })
-
-
-
-
+const currentPage = computed({
+  get: () => props.currentPage,
+  set: (value) => emitPagination('update:currentPage', value)
+})
 
 
 const emitPagination = defineEmits(['update:currentPage', 'pageChange'])
+
 
 const HandleNewPage = (current) => {
   emitPagination('update:currentPage', current)
@@ -53,6 +52,7 @@ const HandleNewPage = (current) => {
   column-gap: 10px;
   align-items: center;
 }
+
 .paginate-buttons {
   height: 60px;
   width: 60px;
@@ -69,18 +69,20 @@ const HandleNewPage = (current) => {
   color: black;
   height: 60px;
   width: 60px;
-  border:black 1px solid;
+  border: black 1px solid;
   margin-inline: 35px;
   @apply shadow-darkGrey shadow-sm;
 }
+
 .active-page {
   @apply bg-black text-white;
 }
+
 .paginate-buttons:hover {
 }
+
 .active-page:hover {
 }
-
 
 
 .back-button:hover,
@@ -95,6 +97,6 @@ const HandleNewPage = (current) => {
 
 .back-button:hover,
 .next-button:hover {
-background-color: white;
+  background-color: white;
 }
 </style>

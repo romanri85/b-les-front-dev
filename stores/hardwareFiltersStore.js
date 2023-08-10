@@ -30,15 +30,14 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
 
 
     async function onChangeFilters(filters) {
-        if (!Object.keys(activeFilters.value).includes("page")) {
-            activeFilters.value = {...activeFilters.value, page: 1}
+        if(!filters.page){
+            activeFilters.value.page = 1
+            page.value = 1
         }
 
         activeFilters.value = {...activeFilters.value, ...filters}
 
-
         let query = new URLSearchParams(activeFilters.value).toString();
-
         await fetchProducts(query)
 
 
@@ -47,18 +46,29 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
 
 
     async function fetchProducts(query = "") {
-        const response = await $fetch(`${baseURL}/api/hardware/hardware-variants?page_size=${page_size}&${query}`);
-        total.value = response.count
-        pagesCount.value = response.page_links.length
-        products.value = response.results
+        const {data} = await useFetch(`${baseURL}/api/hardware/hardware-variants?${page_size + '&' + query}`, {key:query,cache: true});
+        if (data.value) {
+            total.value = data.value.count
+            pagesCount.value = data.value.page_links.length
+            products.value = data.value.results
+        }
+        else {
+            console.log('no data')
+        }
+
     }
 
 
     async function checkFilters(query = "") {
-        const response = await $fetch(`${baseURL}/api/hardware/hardware-filters?${query}`);
+        const {data} = await useFetch(`${baseURL}/api/hardware/hardware-filters?${query}`, {key:'counts',cache: true});
+        if (data.value) {
+            filterCount.value = data.value.counts
+        }
+        else {
+            console.log('no data')
+        }
 
 
-        filterCount.value = response.counts
         // window.scrollTo(0, 0);
 
     }
@@ -80,7 +90,13 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
     }
 
     async function fetchColorCollections() {
-        colorCollections.value = await $fetch(`${baseURL}/api/hardware/hardware-color-sets`);
+        const {data} = await useFetch(`${baseURL}/api/hardware/hardware-color-sets`, {key:'id',cache: true});
+        if (data.value) {
+            colorCollections.value = data.value
+        }
+        else {
+            console.log('no data')
+        }
     }
 
 
