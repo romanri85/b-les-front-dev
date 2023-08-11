@@ -8,7 +8,7 @@
   {
     "id": "other-elements",
     "name": "otherElements",
-    "slug": "/other-elements",
+    "slug": "/",
     "needToShowDropdown": true,
     "itemHeader": "otherElementsHeader"
   },

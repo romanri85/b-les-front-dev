@@ -11,6 +11,7 @@ import ImageModal from "~/components/pop-ups/imageModal.vue";
 
 const interiorStore = useInteriorStore()
 const {projects} = storeToRefs(interiorStore)
+import { classifyImageLayout, adjustLayoutForNarrowImages } from '~/services/imageLayoutService';  // Assuming the service is in the same directory
 
 import { ref } from 'vue';
 
@@ -86,30 +87,13 @@ function onChangePage(page){
 }
 
 const layoutImages = computed(() => {
-  if (project.value.images && project.value.images.images) {
-    let images = project.value.images.images.map((image: { height: number; width: number }) => {
-      const aspectRatio = image.height / image.width;
-      if (aspectRatio > 1) {
-        return { ...image, layout: 'narrow' };  // Portrait images (taller than wide)
-      } else {
-        return { ...image, layout: 'wide' };    // Landscape images (wider than tall)
-      }
-    });
+  if (project.value && project.value.images) {
+    let images = project.value.images.images.map(classifyImageLayout);
 
     // Get the number of narrow images
     const numberOfNarrowImages = images.filter(image => image.layout === 'narrow').length;
 
-    // Check if the remainder of division of the number of narrow images by 3 is equal to 1
-    if (numberOfNarrowImages % 3 === 1) {
-      // Check if there is at least one element with layout: wide
-      const wideIndex = images.findIndex(image => image.layout === 'wide');
-
-      // If an element with layout: wide exists, change its layout to 'narrow'
-      if (wideIndex !== -1) {
-        images[wideIndex].layout = '';
-        images[wideIndex].square = true;
-      }
-    }
+    adjustLayoutForNarrowImages(images, numberOfNarrowImages);
 
     return images;
   }

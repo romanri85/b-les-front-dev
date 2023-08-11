@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import {getCasingVariants, getMaterialColorVariantsByColorId, getProductCasings} from "~/utils/catalogUtils";
 import {baseURL} from "~/config";
 import DoorCardDetail from "~/components/pages/door-catalog/DoorCardDetail.vue";
 import MaterialColorFilterDetail from "~/components/pages/door-catalog/MaterialColorFilterDetail.vue";
@@ -10,6 +10,12 @@ import AllCollectionsModalDetail from "~/components/pop-ups/allCollectionsModalD
 import Pagination from "~/components/base/Pagination.vue";
 import {ref} from "vue";
 import ImageModal from "~/components/pop-ups/imageModal.vue";
+import { useRouter } from 'vue-router'
+import { classifyImageLayout, adjustLayoutForNarrowImages } from '~/services/imageLayoutService';  // Assuming the service is in the same directory
+
+
+
+const router = useRouter()
 
 definePageMeta({layout: "dark-header"});
 
@@ -37,6 +43,7 @@ const total = ref(0)
 let pagesCount = ref(0)
 const page_size = 9
 const page = ref(1)
+const currentProductId = ref(null)
 
 
 type productMaterials = productMaterialsObject[]
@@ -56,30 +63,12 @@ interface product {
 
 const layoutImages = computed(() => {
   if (product.value && product.value.images) {
-
-    let images = product.value.images.images.map((image: { height: number; width: number }) => {
-      const aspectRatio = image.height / image.width;
-      if (aspectRatio > 1) {
-        return {...image, layout: 'narrow'};  // Portrait images (taller than wide)
-      } else {
-        return {...image, layout: 'wide'};    // Landscape images (wider than tall)
-      }
-    });
+    let images = product.value.images.images.map(classifyImageLayout);
 
     // Get the number of narrow images
     const numberOfNarrowImages = images.filter(image => image.layout === 'narrow').length;
 
-    // Check if the remainder of division of the number of narrow images by 3 is equal to 1
-    if (numberOfNarrowImages % 3 === 1) {
-      // Check if there is at least one element with layout: wide
-      const wideIndex = images.findIndex(image => image.layout === 'wide');
-
-      // If an element with layout: wide exists, change its layout to 'narrow'
-      if (wideIndex !== -1) {
-        images[wideIndex].layout = '';
-        images[wideIndex].square = true;
-      }
-    }
+    adjustLayoutForNarrowImages(images, numberOfNarrowImages);
 
     return images;
   }
@@ -97,30 +86,33 @@ const triggerModal = (image) => {
     console.error('Method not available or component not initialized.');
   }
 };
+
 async function fetchDoorVariantData(query = `/${route.params.id}`) {
-
-  // product.value = await $fetch(`${baseURL}/api/product${query}`);
-  product.value = await $fetch(`${baseURL}/api/product${query}`);
-    total.value = product.value.images.count
-    pagesCount.value =product.value.images.page_links.length
-
-    if (productMaterials.value.length === 0) {
-      productMaterials.value = product.value.product_variants.map((item) => ({
-        'material': item.material,
-        'name': item.material_name,
-        'color': item.material_colors
-      }));
+  // currentProductId.value = route.params.id
+  product.value = await $fetch(`${baseURL}/api/product${query}`, {key: 'images'})
+  console.log(`${baseURL}/api/product${query}`, 'query')
+//   const {data} = await useFetch(`${baseURL}/api/product${query}`, {key: 'id'});
+// console.log(data.value, 'data')
+//   product.value = data?.value
+  total.value = product.value.images.count
+  pagesCount.value = product.value.images.page_links.length
 
 
+  if (productMaterials.value.length === 0) {
+    productMaterials.value = product.value.product_variants.map((item) => ({
+      'material': item.material,
+      'name': item.material_name,
+      'color': item.material_colors
+    }));
 
 
   }
 
   if (Object.keys(casingVariants.value).length === 0) {
-    await getCasingVariants();
+    casingVariants.value = getCasingVariants(product.value);
   }
   if (productCasings.value.length === 0) {
-    await getProductCasings();
+    productCasings.value = getProductCasings(product.value);
   }
 
   await getActualDoorVariantData();
@@ -141,30 +133,10 @@ function getActualDoorVariantData(filterData = {material: material.value, color:
   }
 }
 
-function getMaterialColorVariantsByColorId(products: [], colorId: number) {
-  return products.reduce((output, product) => {
-    product.product_variants.forEach(variant => {
-      const matchingColors = variant.material_color_variant.filter(item => item.color === colorId);
-      matchingColors.forEach(color => {
-        output.push({
-          name: product.name,
-          material: variant.material,
-          color: color.color,
-          price: color.price,
-          id: product.id,
-          leaf_image: color.leaf_image,
-          merged_image: color.merged_image
-        });
-      });
-    });
-    return output;
-  }, []);
-}
 
 function changeModel(model) {
-  fetchDoorVariantData(`/${product.value.collection.products.find((item) => item.id === model.id).id}`)
-  getActualDoorVariantData({material: material.value, color: color.value})
-  actualCasing.value = doorVariantData.value.casing_variant.casing
+  router.push({path: `/catalog/${model.id}`, query: {color: color.value, material: material.value}})
+
 }
 
 function changeCasing(casing) {
@@ -182,44 +154,6 @@ function changeGlass(glass) {
 
 }
 
-function getCasingVariants() {
-
-
-  let casingData = product.value.collection
-
-  let output = {};
-
-  for (let casing of casingData.casings) {
-    let casingValue = casing.casing;
-    if (!(casingValue in output)) {
-      output[casingValue] = {};
-    }
-    for (let variant of casing.casing_variants) {
-      let colorValue = variant.color;
-      if (!(colorValue in output[casingValue])) {
-        output[casingValue][colorValue] = [];
-      }
-      output[casingValue][colorValue].push(variant);
-    }
-  }
-  casingVariants.value = output;
-
-}
-
-function getProductCasings() {
-  let productCasingData = product.value.collection.casings
-  let materialMap = new Map();
-
-  productCasingData.forEach(item => {
-    if (materialMap.has(item.material)) {
-      materialMap.get(item.material).push(item);
-    } else {
-      materialMap.set(item.material, [item]);
-    }
-  });
-  productCasings.value = Object.fromEntries(materialMap);
-}
-
 onMounted(async () => {
   await fetchDoorVariantData();
 });
@@ -235,7 +169,7 @@ function closeCollection() {
 }
 
 function onChangePage(page) {
-  fetchDoorVariantData(`/${route.params.id}?page=${page}`)
+  fetchDoorVariantData(`/${product.value.id}?page=${page}`)
 
 }
 </script>
@@ -245,6 +179,9 @@ function onChangePage(page) {
   <div v-if="doorVariantData && doorVariantData.casing_variant" class="main-container">
     <div class="flex justify-between pr-72">
       <div class="h-12 flex justify-start items-end"><h4>Главная / Каталог / {{ product.name }}</h4></div>
+      <pre>product images {{product.images.images.length}}</pre>
+      <pre>layout images {{layoutImages.length}}</pre>
+      <pre>pages count {{pagesCount}}</pre>
     </div>
     <div class="flex gap-20">
       <div class="left w-[38%]">
@@ -309,11 +246,11 @@ function onChangePage(page) {
     <div class="image-container">
       <div v-for="(image, index) in layoutImages" :key="image.id"
            :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
-        <nuxt-img  @click="triggerModal(image)" :src="image.image" class="object-cover" :alt="image.project_name"/>
+        <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover" :alt="image.project_name"/>
       </div>
     </div>
     <image-modal :image="selectedImage" ref="imgModal"/>
-    <pagination v-if="page" class="pb-32 flex justify-center" :total="total"
+    <pagination class="pb-32 flex justify-center" :total="total"
                 :page_size="page_size"
                 :pagesCount="pagesCount"
                 @page-change="onChangePage"
@@ -370,6 +307,5 @@ function onChangePage(page) {
   height: auto;
   object-fit: cover;
 }
-
 
 </style>
