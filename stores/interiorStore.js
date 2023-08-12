@@ -15,10 +15,10 @@ export const useInteriorStore = defineStore("interiorStore", () => {
 
 
     async function getProjects(page = 1) {
-        let response = await $fetch(`${baseURL}/api/projects?page=${page}`)
-        const {data} = await useFetch(`${baseURL}/api/projects?page=${page}`, {key:'results',cache: true});
+        // let response = await $fetch(`${baseURL}/api/projects?page=${page}`)
+        const {data} = await useFetch(`${baseURL}/api/projects?page=${page}`);
         if (data.value) {
-            response = data.value
+            // response = data.value
             projects.value = data.value.results
             total.value = data.value.count
             pagesCount.value = data.value.page_links.length
@@ -32,7 +32,7 @@ export const useInteriorStore = defineStore("interiorStore", () => {
     }
 
     async function getTags() {
-        tags.value = await $fetch(`${baseURL}/api/projects/tags`);
+        // tags.value = await $fetch(`${baseURL}/api/projects/tags`);
         const {data} = await useFetch(`${baseURL}/api/projects/tags`, {key:'id',cache: true});
         if (data.value) {
             tags.value = data.value
@@ -85,6 +85,7 @@ export const useInteriorStore = defineStore("interiorStore", () => {
         pagesCount,
         page_size,
         page,
+
         getTags,
         tags,
         tagsForForm,

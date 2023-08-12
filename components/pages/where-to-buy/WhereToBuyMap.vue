@@ -69,16 +69,28 @@ let totalPlacemarks = computed(() => {
 })
 
 // dynamically add the Yandex Maps JavaScript API
-useHead({
-  script: [
-    {
-      src: 'https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=en_US',
-      async: true,
-    },
-  ],
-})
+// useHead({
+//   script: [
+//     {
+//       src: 'https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=en_US',
+//       async: true,
+//     },
+//   ],
+// })
 
 onMounted(async () => {
+  if (typeof ymaps === 'undefined') {
+    useHead({
+      script: [
+        {
+          src: 'https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=en_US',
+          async: true,
+        },
+      ],
+    });
+  }
+
+
   addresses.value = props.addresses
   geo.value = props.geo
   if (geo.value.region && addresses.value) {
@@ -93,12 +105,20 @@ onMounted(async () => {
 })
 
 
-// Move declaration outside
+let maxRetries = 10;
+let interval = 30;  // Starting interval
 async function initMap() {
   // Make sure the API is loaded
   if (typeof ymaps === 'undefined') {
-    setTimeout(initMap, 300)
-    return
+    if (maxRetries > 0) {
+      setTimeout(initMap, interval);
+      maxRetries--;
+      interval += 30;  // Increase interval by 30ms for the next retry
+      return;
+    } else {
+      console.error('Failed to initialize ymaps after multiple attempts.');
+      return;
+    }
   }
 
   ymaps.ready(function () {

@@ -2,19 +2,15 @@
 
 import {baseURL} from "~/config";
 import Hero from "~/components/base/hero.vue";
-import MasonryWall from '@yeger/vue-masonry-wall'
 import Pagination from "~/components/base/Pagination.vue";
 import {useInteriorStore} from "~/stores/interiorStore";
 import {storeToRefs} from "pinia";
-import {isNewScope} from "ast-walker-scope";
 import ImageModal from "~/components/pop-ups/imageModal.vue";
+import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService'; // Assuming the service is in the same directory
+import {ref} from 'vue';
 
 const interiorStore = useInteriorStore()
 const {projects} = storeToRefs(interiorStore)
-import { classifyImageLayout, adjustLayoutForNarrowImages } from '~/services/imageLayoutService';  // Assuming the service is in the same directory
-
-import { ref } from 'vue';
-
 
 
 const imgModal = ref(null);
@@ -40,22 +36,21 @@ const project = ref({
   }
 });
 
-const response = ref({})
+// const response = ref({})
 let page = ref(1)
 const total = ref(0)
 let pagesCount = ref(0)
 const page_size = 10
 
 
-
 const heroImage = "/interior/bg-interior.png"
-
 
 
 async function getProjectData(query = `/${route.params.id}`) {
   try {
-    project.value = await $fetch(`${baseURL}/api/projects${query}`);
-    response.value = project.value.images;
+    const {data} = await useFetch(`${baseURL}/api/projects${query}`, {key: "images", cache: true});
+    project.value = data.value
+    // response.value = project.value.images;
     pagesCount.value = project.value.images.page_links.length;
   } catch (error) {
     console.error("Error fetching project data:", error);
@@ -63,26 +58,14 @@ async function getProjectData(query = `/${route.params.id}`) {
 }
 
 
-
-
-
-
 // Layout determination logic
 
-onMounted(async () => {
-  await getProjectData()
 
-  response.value = project.value.images
-  // total.value = project.value.count
-  pagesCount.value = project.value.images.page_links.length
-  // console.log(total.value, 'total')
 
-  console.log(pagesCount.value, 'pagesCount')
-  console.log(page_size, 'page_size')
-  console.log(page.value, 'page')
-})
+await getProjectData()
 
-function onChangePage(page){
+
+function onChangePage(page) {
   getProjectData(`/${route.params.id}?page=${page}`)
 }
 
@@ -104,86 +87,42 @@ const layoutImages = computed(() => {
 </script>
 
 <template>
-  <hero v-if="project && project.first_image" class="mb-24" :heroName="project.name" hero-description="" :heroImage="project.first_image.image"/>
-  <div v-if="project" class="flex justify-center mb-24"><p>{{project.description}}</p></div>
+  <hero v-if="project && project.first_image" class="mb-24" :heroName="project.name" hero-description=""
+        :heroImage="project.first_image.image"/>
+  <div v-if="project" class="flex justify-center mb-24"><p>{{ project.description }}</p></div>
 
-
-  <div class="image-container">
-    <div v-for="(image, index) in layoutImages" :key="index"
-         :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
-      <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover" :alt="image.project_name" />
+  <div class="layout-images">
+    <div class="image-container">
+      <div v-for="(image, index) in layoutImages" :key="index"
+           :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
+        <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover" :alt="image.project_name"/>
+      </div>
     </div>
   </div>
   <image-modal :image="selectedImage" ref="imgModal"/>
   <div class="main-container">
-  <div class="mt-16 mb-16">
-    <h3 v-if="project.designer">Автор проекта:{{ ' ' + project.designer.name + ' ' + (project.designer.middle_name ? project.designer.middle_name : '') + ' ' + project.designer.surname}}</h3>
-  </div>
+    <div class="mt-16 mb-16">
+      <h3 v-if="project.designer">Автор
+        проекта:{{
+          ' ' + project.designer.name + ' ' + (project.designer.middle_name ? project.designer.middle_name : '') + ' ' + project.designer.surname
+        }}</h3>
+    </div>
     <div class="flex justify-center">
-  <pagination
-      v-if="project.images && project.images.page_links"
-      class="pb-32"
-      :total="project.images.count"
-      :page_size="page_size"
-      :pagesCount="pagesCount"
-      @page-change="onChangePage"
-      v-model:current-page="page"/>
+      <pagination
+          v-if="project.images && project.images.page_links"
+          class="pb-32"
+          :total="project.images.count"
+          :page_size="page_size"
+          :pagesCount="pagesCount"
+          @page-change="onChangePage"
+          v-model:current-page="page"/>
     </div>
 
-
-    </div>
+  </div>
 </template>
 
 <style scoped>
 /* Add to your scoped styles */
-
-.image-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.image-wrapper {
-  flex: 0 0 auto; /* Default for non-square images */
-}
-
-.image-wrapper.narrow {
-  flex: 0 0 calc(33.33% - 16px);  /* 3 images in a row, consider the gap */
-}
-
-.image-wrapper.square {
-  flex: 0 0 calc(66.6% - 16px);
-  height: 100%;
-  object-fit: contain;/* 4 images in a row, consider the gap */
-}
-
-.image-wrapper.wide {
-  flex: 0 0 calc(50% - 16px);     /* 2 images in a row, consider the gap */
-}
-
-
-.image-wrapper img {
-  width: 100%;
-  height: auto;
-}
-
-.image-wrapper.narrow img {
-  aspect-ratio: 2/3;  /* Narrow images are tall (aspect ratio of height to width is 2:3) */
-}
-
-.image-wrapper.wide img {
-  object-fit: fill;
-  aspect-ratio: 3/2;  /* Wide images are wide (aspect ratio of width to height is 3:2) */
-}
-
-.image-wrapper.square img {
-  aspect-ratio: 2.7 / 2; /* Adjust this value to desired ratio */
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-
 
 </style>
 

@@ -10,8 +10,9 @@ import AllCollectionsModalDetail from "~/components/pop-ups/allCollectionsModalD
 import Pagination from "~/components/base/Pagination.vue";
 import {ref} from "vue";
 import ImageModal from "~/components/pop-ups/imageModal.vue";
-import { useRouter } from 'vue-router'
-import { classifyImageLayout, adjustLayoutForNarrowImages } from '~/services/imageLayoutService';  // Assuming the service is in the same directory
+import {useRouter} from 'vue-router'
+import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService'; // Assuming the service is in the same directory
+
 
 
 
@@ -21,12 +22,7 @@ definePageMeta({layout: "dark-header"});
 
 let route = useRoute()
 
-const product = ref<product>({
-  product_variants: [],
-  collection: {
-    products: []
-  }
-})
+const product = ref({})
 const doorVariantData = ref({})
 const productVariantsData = ref({})
 const productMaterials = ref<productMaterials>([])
@@ -43,7 +39,9 @@ const total = ref(0)
 let pagesCount = ref(0)
 const page_size = 9
 const page = ref(1)
-const currentProductId = ref(null)
+
+await fetchDoorVariantData();
+
 
 
 type productMaterials = productMaterialsObject[]
@@ -54,12 +52,12 @@ interface productMaterialsObject {
   color: []
 }
 
-interface product {
-  product_variants: []
-  collection: {
-    products: []
-  }
-}
+// interface product {
+//   product_variants: []
+//   collection: {
+//     products: []
+//   }
+// }
 
 const layoutImages = computed(() => {
   if (product.value && product.value.images) {
@@ -88,34 +86,31 @@ const triggerModal = (image) => {
 };
 
 async function fetchDoorVariantData(query = `/${route.params.id}`) {
-  // currentProductId.value = route.params.id
-  product.value = await $fetch(`${baseURL}/api/product${query}`, {key: 'images'})
-  console.log(`${baseURL}/api/product${query}`, 'query')
-//   const {data} = await useFetch(`${baseURL}/api/product${query}`, {key: 'id'});
-// console.log(data.value, 'data')
-//   product.value = data?.value
-  total.value = product.value.images.count
-  pagesCount.value = product.value.images.page_links.length
+  const {data} = await useFetch(`${baseURL}/api/product${query}`, {key: query});
+  if (data.value && data.value.images){
+    product.value = data.value
+    total.value = data.value.images.count
+    pagesCount.value = data.value.images.page_links.length
+
+    if (productMaterials.value.length === 0) {
+      productMaterials.value = product.value.product_variants.map((item) => ({
+        'material': item.material,
+        'name': item.material_name,
+        'color': item.material_colors
+      }));
 
 
-  if (productMaterials.value.length === 0) {
-    productMaterials.value = product.value.product_variants.map((item) => ({
-      'material': item.material,
-      'name': item.material_name,
-      'color': item.material_colors
-    }));
+    }
 
+    if (Object.keys(casingVariants.value).length === 0) {
+      casingVariants.value = getCasingVariants(product.value);
+    }
+    if (productCasings.value.length === 0) {
+      productCasings.value = getProductCasings(product.value);
+    }
 
+    getActualDoorVariantData();
   }
-
-  if (Object.keys(casingVariants.value).length === 0) {
-    casingVariants.value = getCasingVariants(product.value);
-  }
-  if (productCasings.value.length === 0) {
-    productCasings.value = getProductCasings(product.value);
-  }
-
-  await getActualDoorVariantData();
 
 }
 
@@ -154,9 +149,7 @@ function changeGlass(glass) {
 
 }
 
-onMounted(async () => {
-  await fetchDoorVariantData();
-});
+
 
 const isCollectionModelOpen = ref(false)
 
@@ -179,9 +172,6 @@ function onChangePage(page) {
   <div v-if="doorVariantData && doorVariantData.casing_variant" class="main-container">
     <div class="flex justify-between pr-72">
       <div class="h-12 flex justify-start items-end"><h4>Главная / Каталог / {{ product.name }}</h4></div>
-      <pre>product images {{product.images.images.length}}</pre>
-      <pre>layout images {{layoutImages.length}}</pre>
-      <pre>pages count {{pagesCount}}</pre>
     </div>
     <div class="flex gap-20">
       <div class="left w-[38%]">
@@ -242,11 +232,12 @@ function onChangePage(page) {
         </div>
       </div>
     </div>
-
-    <div class="image-container">
-      <div v-for="(image, index) in layoutImages" :key="image.id"
-           :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
-        <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover" :alt="image.project_name"/>
+    <div class="layout-images">
+      <div class="image-container">
+        <div v-for="(image, index) in layoutImages" :key="image.id"
+             :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
+          <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover" :alt="image.project_name"/>
+        </div>
       </div>
     </div>
     <image-modal :image="selectedImage" ref="imgModal"/>
@@ -260,52 +251,5 @@ function onChangePage(page) {
 </template>
 
 <style scoped>
-/* Add to your scoped styles */
-
-.image-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.image-wrapper {
-  flex: 0 0 auto; /* Default for non-square images */
-}
-
-.image-wrapper.narrow {
-  flex: 0 0 calc(33.33% - 16px); /* 3 images in a row, consider the gap */
-}
-
-.image-wrapper.square {
-  flex: 0 0 calc(66.6% - 16px);
-  height: 100%;
-  object-fit: contain; /* 4 images in a row, consider the gap */
-}
-
-.image-wrapper.wide {
-  flex: 0 0 calc(50% - 16px); /* 2 images in a row, consider the gap */
-}
-
-
-.image-wrapper img {
-  width: 100%;
-  height: auto;
-}
-
-.image-wrapper.narrow img {
-  aspect-ratio: 2/3; /* Narrow images are tall (aspect ratio of height to width is 2:3) */
-}
-
-.image-wrapper.wide img {
-  object-fit: fill;
-  aspect-ratio: 3/2; /* Wide images are wide (aspect ratio of width to height is 3:2) */
-}
-
-.image-wrapper.square img {
-  aspect-ratio: 2.7 / 2; /* Adjust this value to desired ratio */
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
 
 </style>

@@ -14,9 +14,6 @@ import {storeToRefs} from "pinia";
 const filtersStore = useFiltersStore()
 const {activeFilters, materialColors, filterCount} = storeToRefs(filtersStore)
 
-onMounted(async () => {
-  await filtersStore.fetchMaterialColors()
-})
 
 function chooseMaterial(material){
   filtersStore.isFilterCountPriceBlocked = false
@@ -71,7 +68,7 @@ function isMaterialAvailable(material) {
     </DisclosureButton>
     <DisclosurePanel class="mb-20">
           <div class="flex justify-around w-full pr-4">
-            <div v-for="(material) in filtersStore.materialColors" :key="material.material" class="text-primaryDark">
+            <div v-for="(material) in materialColors" :key="material.material" class="text-primaryDark">
               <h5 @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"  :class="{
                 'border-b': filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'border-black':filtersStore.activeFilters.material.includes(material.material), 'font-regular':filtersStore.activeFilters.material.includes(material.material), 'text-primaryDark':filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'cursor-pointer': isMaterialAvailable(material.material), 'text-gray-400': !isMaterialAvailable(material.material)
               }" class="">{{

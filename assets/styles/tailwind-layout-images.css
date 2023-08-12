@@ -1,0 +1,38 @@
+@layer utilities {
+    .layout-images .image-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+    .layout-images .image-wrapper {
+        flex: 0 0 auto;
+    }
+    .layout-images .image-wrapper.narrow {
+        flex: 0 0 calc(33.33% - 16px);
+    }
+    .layout-images .image-wrapper.square {
+        flex: 0 0 calc(66.6% - 16px);
+        height: 100%;
+        object-fit: contain;
+    }
+    .layout-images .image-wrapper.wide {
+        flex: 0 0 calc(50% - 16px);
+    }
+    .layout-images .image-wrapper img {
+        width: 100%;
+        height: auto;
+    }
+    .layout-images .image-wrapper.narrow img {
+        aspect-ratio: 2/3;
+    }
+    .layout-images .image-wrapper.wide img {
+        object-fit: fill;
+        aspect-ratio: 3/2;
+    }
+    .layout-images .image-wrapper.square img {
+        aspect-ratio: 2.7 / 2;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+}

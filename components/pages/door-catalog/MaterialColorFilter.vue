@@ -20,6 +20,8 @@ const {activeFilters, materialColors,filterCount} = storeToRefs(filtersStore)
 
 const materialActiveindex = ref(0)
 
+filtersStore.fetchMaterialColors()
+
 function chooseColor(id) {
   if (!filtersStore.activeFilters.color.includes(id)) {
     filtersStore.onChangeFilters({"color": [...filtersStore.activeFilters.color, id]})

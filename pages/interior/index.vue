@@ -6,7 +6,7 @@ import {useInteriorStore} from "~/stores/interiorStore";
 import {storeToRefs} from "pinia";
 import Pagination from "~/components/base/Pagination.vue";
 import buttons from "~/data/interiorButtons.json";
-import { useRouter, useRoute } from 'vue-router';
+import {useRoute, useRouter} from 'vue-router';
 
 const interiorStore = useInteriorStore()
 const {projects} = storeToRefs(interiorStore)
@@ -16,28 +16,20 @@ const heroDescription = ""
 const heroImage = "/interior/bg-interior.png"
 const route = useRoute();
 const router = useRouter();
+const currentPage = ref(route.query.page ? parseInt(route.query.page as string) : 1);
 
 let products = ref([])
 
 
+await interiorStore.getProjects(currentPage.value);
+watch(() => route.query.page, (newPage) => {
+  currentPage.value = parseInt(newPage as string); // Update currentPage value
+  interiorStore.getProjects(currentPage.value);
+});
 
-onMounted(
-    async () => {
-      // await interiorStore.getProjects()
-      const currentPage = route.query.page ? parseInt(route.query.page as string) : 1;
-      interiorStore.page = currentPage
-      await interiorStore.getProjects(currentPage);
-      console.log(interiorStore.page, 'interior page')
-    }
-
-)
-
-
-
-function onChangePage(page){
-  console.log(page, 'page')
+function onChangePage(page) {
+  router.push({query: {page: page.toString()}}); // Ensure page is a string
   interiorStore.getProjects(page)
-  router.push({ query: { page: page.toString() } }); // Ensure page is a string
 }
 
 </script>
@@ -73,7 +65,7 @@ function onChangePage(page){
               :page_size="interiorStore.page_size"
               :pagesCount="interiorStore.pagesCount"
               @page-change="onChangePage"
-              v-model:current-page="interiorStore.page"/>
+              v-model:current-page="currentPage"/>
 </template>
 
 

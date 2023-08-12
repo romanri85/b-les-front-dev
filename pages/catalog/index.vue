@@ -12,10 +12,6 @@ const filtersStore = useFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(filtersStore)
 
 
-
-
-
-
 const heroName = "catalog"
 const heroDescription = "catalogPageDescription"
 const heroImage = "/catalog/catalog-hero.jpg"
@@ -29,15 +25,14 @@ const page_size = 12
 
 const route = useRoute()
 
-
-
-
-
 onMounted(() => {
 
   filtersStore.onChangeFilters({page: 1})
   if (!activeFilters.value.color_set) {
     activeFilters.value.color_set = []
+  }
+  if (!activeFilters.value.material) {
+    activeFilters.value.material = []
   }
 });
 
@@ -47,9 +42,9 @@ onMounted(() => {
   <hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage"/>
 
 
-<!--  <door-sets :activeFilters="activeFilters" @changeFilters="onChangeFilters"/>-->
+  <!--  <door-sets :activeFilters="activeFilters" @changeFilters="onChangeFilters"/>-->
   <div class="flex main-container mt-24">
-    <door-filters />
+    <door-filters/>
     <door-items/>
   </div>
 </template>

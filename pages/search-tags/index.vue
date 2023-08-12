@@ -9,7 +9,7 @@ import {baseURL} from "~/config";
 import ImageModal from "~/components/pop-ups/imageModal.vue";
 import {useRoute} from "vue-router";
 
-import { classifyImageLayout, adjustLayoutForNarrowImages } from '~/services/imageLayoutService';  // Assuming the service is in the same directory
+import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService'; // Assuming the service is in the same directory
 
 
 let route = useRoute()
@@ -42,20 +42,17 @@ onMounted(
 
       await (async () => {
         if (route.query.tags) {
-          console.log(route.query.tags, 'route.query.tags')
           initialTags.value = [String(route.query.tags)]; // assuming tags is a single value. If it's multiple values separated by commas, split it: route.query.tags.split(',')
           selectedTags.value = initialTags.value;
-        await getImagesByTags(selectedTags.value)
-        return
+          await getImagesByTags(selectedTags.value)
+          return
         }
       })()
-
 
 
       await getImagesByTags(selectedTags.value)
     }
 )
-
 
 
 const layoutImages = computed(() => {
@@ -77,7 +74,7 @@ async function getTags() {
 }
 
 async function transformTags() {
-  if (tags.value.length > 0) {
+  if ( tags.value.length > 0) {
     tagsForForm.value = tags.value.map(tag => {
       return {
         label: tag.name,
@@ -126,108 +123,67 @@ const triggerModal = (image) => {
 };
 
 function handleChooseTag(tag) {
-  selectedTags.value = [...selectedTags.value, String(tag.id)]
-  // page.value = 1
-  getImagesByTags(selectedTags.value)
-  page.value = 1
+  let tagId = String(tag.id);
+
+  // Convert the array to a Set to remove duplicates, then convert it back to an array
+  selectedTags.value = [...new Set([...selectedTags.value, tagId])];
+
+  getImagesByTags(selectedTags.value);
+  page.value = 1;
 }
+
 
 </script>
 
 <template>
   <div>
-  <hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
+    <hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
 
-  <div class="flex justify-center">
+    <div class="flex justify-center">
 
 
-    <FormKit
-        type="form"
-        #default="{ value }"
-        :actions="false"
-
-    >
       <FormKit
-          type="taglist"
-          name="taglist"
-          label="Taglist with max prop set to 2"
-          :options="tagsForForm"
-          max="10"
-          :key="selectedTags"
-          :value="selectedTags || []"
-          select-icon="caretDown"
-          @input="selectTag"
-          remove-icon="close"
-          :filter="(option, search) =>
+          type="form"
+          #default="{ value }"
+          :actions="false"
+
+      >
+        <FormKit
+            type="taglist"
+            name="taglist"
+            label="Taglist with max prop set to 2"
+            :options="tagsForForm"
+            max="10"
+            :key="selectedTags"
+            :value="selectedTags"
+            select-icon="caretDown"
+            @input="selectTag"
+            remove-icon="close"
+            :filter="(option, search) =>
         option.label.toLowerCase().startsWith(search.toLowerCase())"
-      />
-      <!--      <pre wrap>{{ value }}</pre>-->
-    </FormKit>
-  </div>
-  <div class="image-container">
-    <div v-for="(image, index) in layoutImages" :key="index"
-         :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
-      <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover" :alt="image.project_name"/>
+        />
+        <!--      <pre wrap>{{ value }}</pre>-->
+      </FormKit>
     </div>
-  </div>
-  <image-modal :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
-  <pagination v-if="page" class="pb-32 flex justify-center" :total="total"
-              :page_size="page_size"
-              :pagesCount="pagesCount"
-              @page-change="onChangePage"
-              v-model:current-page="page"/>
+    <div class="layout-images">
+      <div class="image-container">
+        <div v-for="(image, index) in layoutImages" :key="index"
+             :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
+          <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover" :alt="image.project_name"/>
+        </div>
+      </div>
+    </div>
+    <image-modal :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
+    <pagination v-if="page" class="pb-32 flex justify-center" :total="total"
+                :page_size="page_size"
+                :pagesCount="pagesCount"
+                @page-change="onChangePage"
+                v-model:current-page="page"/>
   </div>
 </template>
 
 
 <style scoped>
 /* Add to your scoped styles */
-
-.image-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.image-wrapper {
-  flex: 0 0 auto; /* Default for non-square images */
-}
-
-.image-wrapper.narrow {
-  flex: 0 0 calc(33.33% - 16px); /* 3 images in a row, consider the gap */
-}
-
-.image-wrapper.square {
-  flex: 0 0 calc(66.6% - 16px);
-  height: 100%;
-  object-fit: contain; /* 4 images in a row, consider the gap */
-}
-
-.image-wrapper.wide {
-  flex: 0 0 calc(50% - 16px); /* 2 images in a row, consider the gap */
-}
-
-
-.image-wrapper img {
-  width: 100%;
-  height: auto;
-}
-
-.image-wrapper.narrow img {
-  aspect-ratio: 2/3; /* Narrow images are tall (aspect ratio of height to width is 2:3) */
-}
-
-.image-wrapper.wide img {
-  object-fit: fill;
-  aspect-ratio: 3/2; /* Wide images are wide (aspect ratio of width to height is 3:2) */
-}
-
-.image-wrapper.square img {
-  aspect-ratio: 2.7 / 2; /* Adjust this value to desired ratio */
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
 
 </style>

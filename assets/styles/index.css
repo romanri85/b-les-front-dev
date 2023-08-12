@@ -1,5 +1,6 @@
 @import "stylesheet.css";
 @import "components/MultiRangeSliderBarOnly.css";
+@import "tailwind-layout-images.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

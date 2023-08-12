@@ -36,7 +36,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
     const materialColors = ref([])
 
     async function onChangeFilters(filters) {
-        if(!filters.page){
+        if (!filters.page) {
             activeFilters.value.page = 1
             page.value = 1
         }
@@ -57,24 +57,27 @@ export const useFiltersStore = defineStore("filtersStore", () => {
 
 
     async function fetchProducts(query = "") {
-        const {data} = await useFetch(`${baseURL}/api/product/product-variants?page_size=${page_size + '&' + query}`, {key:'results',cache: true});
+        const {
+            data,
+
+        } = await useFetch(`${baseURL}/api/product/product-variants?page_size=${page_size + '&' + query}`, {
+            key: query
+        });
         if (data.value) {
             total.value = data.value.count
             pagesCount.value = data.value.page_links.length
             products.value = data.value.results
-        }
-        else {
+        } else {
             console.log('no data')
         }
         // window.scrollTo(0, 0);
     }
 
     async function checkFilters(query = "") {
-        const {data} = await useFetch(`${baseURL}/api/product/filters?${query}`, {key:'query',cache: true});
+        const {data} = await useFetch(`${baseURL}/api/product/filters?${query}`, {key: query});
         if (data.value) {
             filterCount.value = data.value.counts
-        }
-        else {
+        } else {
             console.log('no data')
         }
 
@@ -99,13 +102,16 @@ export const useFiltersStore = defineStore("filtersStore", () => {
     }
 
     async function fetchColorSets() {
-        const {data} = await useFetch(`${baseURL}/api/product/color-sets`,{key:'color-sets',cache: true})
+        const {data} = await useFetch(`${baseURL}/api/product/color-sets`, {key: 'color-sets'})
         color_sets.value = data.value
     }
 
     async function fetchMaterialColors() {
-        const {data} = await useFetch(`${baseURL}/api/product/material-choices`, {key:'material-choices',cache: true})
-        materialColors.value = data.value
+        const {data} = await useFetch(`${baseURL}/api/product/material-choices`, {key: 'material-choices'})
+        if (data.value) {
+            materialColors.value = data.value
+
+        }
     }
 
     return {

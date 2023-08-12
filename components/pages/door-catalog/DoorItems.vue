@@ -9,15 +9,11 @@ import {storeToRefs} from "pinia";
 
 const filtersStore = useFiltersStore()
 
-const {total, pagesCount, products, page_size,page} = storeToRefs(filtersStore)
+const {total, pagesCount, products, page_size, page} = storeToRefs(filtersStore)
 filtersStore.fetchProducts()
 
 
 const [parent] = useAutoAnimate()
-
-
-
-
 
 
 // const page = ref(1)
@@ -27,9 +23,6 @@ function onChangePage(page) {
   filtersStore.onChangeFilters({page: filtersStore.page})
   // parent.animate()
 }
-
-
-
 
 
 </script>
