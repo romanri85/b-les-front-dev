@@ -7,7 +7,11 @@ import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 const filtersStore = useFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(filtersStore)
 const firstUpdateSliderAfterMount = ref(true);
+import {useViewportSize} from "~/composables/useViewportSize";
 
+
+// console.log(props.isOpen, 'props')
+// console.log(open.value, 'open')
 function updateSliderValues([newMin, newMax]) {
   if (firstUpdateSliderAfterMount.value) {
     firstUpdateSliderAfterMount.value = false;
@@ -16,40 +20,42 @@ function updateSliderValues([newMin, newMax]) {
   filtersStore.onChangeFilters({'min_price': newMin, 'max_price': newMax});
 }
 
+const viewport = useViewportSize()
+const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTablet === true)
 
 </script>
-
 <template class="filter-container ">
-
-  <Disclosure default-open>
-    <DisclosureButton class="w-full">
-      <filter-type filterName="Цена"/>
-    </DisclosureButton>
-    <DisclosurePanel class="mb-20 mt-8" >
-      <div class="px-5">
-
-        <FormKit  v-if="filterCount && filterCount.price && filterCount.price[0]"
-                 type="slider"
-                 name="slider"
-                 tooltip="true"
-                 :tooltip-format="(v) => `${v} ₽`"
-                 :value="[2800, 6000]"
-                 :key="filterCount.price[0]['min_price'] + filterCount.price[0]['max_price']"
-                 :min="filterCount.price[0]['min_price'] || 2800"
-                 :max="filterCount.price[0]['max_price'] || 6000"
-                 @input="updateSliderValues"
-
-
-        />
-      </div>
-    </DisclosurePanel>
-
-  </Disclosure>
   <div>
-<!--    <div class="h-24"></div>-->
+    <Disclosure :key="isNotMobile" :default-open="isNotMobile">
+
+      <DisclosureButton class="w-full">
+        <filter-type filterName="Цена"/>
+      </DisclosureButton>
+      <DisclosurePanel class="mb-20 mt-8">
+        <div class="px-5">
+
+          <FormKit v-if="filterCount && filterCount.price && filterCount.price[0]"
+                   type="slider"
+                   name="slider"
+                   tooltip="true"
+                   :tooltip-format="(v) => `${v} ₽`"
+                   :value="[2800, 6000]"
+                   :key="filterCount.price[0]['min_price'] + filterCount.price[0]['max_price']"
+                   :min="filterCount.price[0]['min_price'] || 2800"
+                   :max="filterCount.price[0]['max_price'] || 6000"
+                   @input="updateSliderValues"
+
+
+          />
+        </div>
+      </DisclosurePanel>
+    </Disclosure>
+    <div>
+      <!--    <div class="h-24"></div>-->
+    </div>
   </div>
 </template>
 
-<style scoped >
+<style scoped>
 
 </style>

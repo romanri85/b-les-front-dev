@@ -4,7 +4,7 @@ import Hero from "~/components/base/hero.vue";
 import {onMounted, ref} from "vue";
 import {useInteriorStore} from "~/stores/interiorStore";
 import buttons from "~/data/interiorButtons.json";
-import Pagination from "~/components/base/Pagination.vue";
+import Pagination from "~/components/base/pagination/Pagination.vue";
 import {baseURL} from "~/config";
 import ImageModal from "~/components/pop-ups/imageModal.vue";
 import {useRoute} from "vue-router";

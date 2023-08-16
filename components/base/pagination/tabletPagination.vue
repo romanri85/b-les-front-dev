@@ -4,7 +4,7 @@
         :total-items="props.total"
         v-model="currentPage"
         :items-per-page="props.page_size"
-        :max-pages-shown="3"
+        :max-pages-shown="1"
         :on-click="HandleNewPage"
 
     >
@@ -27,6 +27,7 @@
 <script setup lang="ts">
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/24/solid";
 import {computed, ref} from "vue";
+import {VueAwesomePaginate} from "vue-awesome-paginate";
 
 const props = defineProps({
   total: Number,
@@ -69,7 +70,6 @@ const HandleNewPage = (current) => {
   color: black;
   height: 60px;
   width: 60px;
-  border: black 1px solid;
   margin-inline: 35px;
   @apply shadow-darkGrey shadow-sm;
 }

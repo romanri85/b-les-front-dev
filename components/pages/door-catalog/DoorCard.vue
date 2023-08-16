@@ -19,7 +19,7 @@ const props = defineProps({
 <!--                      :src="props.doorVariant.leaf_image"-->
 <!--                      class="h-auto w-48 absolute top-0"></nuxt-img>-->
                         <nuxt-img width="200px" height="auto" :src="props.doorVariant.merged_image"
-                                  class="h-auto w-48"></nuxt-img>
+                                  class="h-auto w-48 mdLg:w-48"></nuxt-img>
           </div>
 
           <div class="flex flex-col items-center">

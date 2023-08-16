@@ -5,11 +5,11 @@
 
   <slider class="lg:hidden" v-if="isBurgerOpenStore.isBurgerOpen"/>
   <slider class="lg:block hidden"/>
-  <search/>
-  <nature/>
-  <projects/>
+  <lazy-pages-index-search/>
+  <lazy-pages-index-nature/>
+  <lazy-pages-index-projects/>
 <!--  <quote/>-->
-  <advantages/>
+  <lazy-pages-index-advantages/>
 </template>
 
 <script setup lang="ts">

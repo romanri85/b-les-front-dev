@@ -4,11 +4,16 @@ import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 import FilterType from "~/components/filters/FilterType.vue";
 import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
+import {baseURL} from "~/config";
+import {useViewportSize} from "~/composables/useViewportSize";
 
 
 const filtersStore = useFiltersStore()
-filtersStore.fetchColorSets()
 const {color_sets, activeFilters, filterCount} = storeToRefs(filtersStore)
+
+await filtersStore.fetchColorSets()
+
+
 
 
 function chooseColorSet(id) {
@@ -37,11 +42,13 @@ function isColorSetAvailable(colorSet) {
 }
 
 
+const viewport = useViewportSize()
+const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTablet === true)
 
 </script>
 
 <template class="filter-container ">
-  <Disclosure default-open>
+  <Disclosure :key="isNotMobile" :default-open="isNotMobile">
     <DisclosureButton class=" w-full">
       <filter-type filterName="Наборы цветов"/>
     </DisclosureButton>

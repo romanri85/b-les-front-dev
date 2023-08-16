@@ -3,6 +3,7 @@ import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 import FilterType from "~/components/filters/FilterType.vue";
 import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
+import {useViewportSize} from "~/composables/useViewportSize";
 
 
 let designs = [
@@ -41,10 +42,14 @@ function chooseDesign(design) {
     filtersStore.onChangeFilters({design: updatedDesigns})
   }
 }
+
+const viewport = useViewportSize()
+const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTablet === true)
+
 </script>
 
 <template class="filter-container ">
-  <Disclosure default-open>
+  <Disclosure  :key="isNotMobile" :default-open="isNotMobile">
     <DisclosureButton class=" w-full">
       <filter-type filterName="Дизайн"/>
     </DisclosureButton>

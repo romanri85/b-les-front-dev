@@ -5,6 +5,7 @@ import FilterType from "~/components/filters/FilterType.vue";
 import collections from "~/data/SliderCollections.json";
 import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
+import {useViewportSize} from "~/composables/useViewportSize";
 
 const filtersStore = useFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(filtersStore)
@@ -29,12 +30,14 @@ function isCollectionAvailable(collection) {
   }
   return false;  // return false if no matching color_set is found
 }
+const viewport = useViewportSize()
+const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTablet === true)
 
 
 </script>
 
 <template class="filter-container ">
-  <Disclosure default-open>
+  <Disclosure :key="isNotMobile" :default-open="isNotMobile">
     <DisclosureButton class=" w-full">
       <filter-type filterName="Коллекции"/>
     </DisclosureButton>

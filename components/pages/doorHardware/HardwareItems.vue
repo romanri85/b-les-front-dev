@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DoorCard from "~/components/pages/door-catalog/DoorCard.vue";
-import Pagination from "~/components/base/Pagination.vue";
+import Pagination from "~/components/base/pagination/Pagination.vue";
 import {baseURL} from "~/config";
 import Sorting from "~/components/filters/Sorting.vue";
 import HardwareCard from "~/components/pages/doorHardware/HardwareCard.vue";

@@ -3,6 +3,7 @@ import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 import FilterType from "~/components/filters/FilterType.vue";
 import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
+import {useViewportSize} from "~/composables/useViewportSize";
 
 const filtersStore = useFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(filtersStore)
@@ -21,11 +22,15 @@ function chooseGlass(bool_str: string) {
 
   }
 }
+
+const viewport = useViewportSize()
+const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTablet === true)
+
 </script>
 
 <template>
   <div class="filter-container">
-    <Disclosure default-open>
+    <Disclosure :key="isNotMobile" :default-open="isNotMobile">
       <DisclosureButton class="w-full">
         <filter-type filterName="Стекло"/>
       </DisclosureButton>

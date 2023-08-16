@@ -28,7 +28,7 @@ const iconsMenuItems = [
 </script>
 
 <template>
-    <ul class="flex  xl:gap-8 lg:gap-x-8 gap-8 justify-between md:order-3 order-2 xl:h-[100px] lg:h-[86px] h-[60px]">
+    <ul class="flex  xl:gap-8 lg:gap-x-8 gap-8 justify-between xl:h-[100px] lg:h-[86px] h-[60px]">
         <li v-for="(item, index) in iconsMenuItems" :key="index"
             class=" flex md:block  hover:cursor-pointer relative lg:w-5 md:w-5 w-5 h-full hover:border-b-2"
             :class="item.id !== 'favourite' ? 'hidden' : ''">

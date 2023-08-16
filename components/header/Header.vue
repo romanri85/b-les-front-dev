@@ -6,6 +6,10 @@ import {Disclosure, DisclosureButton, DisclosurePanel} from '@headlessui/vue'
 import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
 import TabletMobileMenu from "~/components/header/TabletMobileMenu.vue";
 import Logo from "~/components/base/Logo.vue";
+import {useViewportSize} from "~/composables/useViewportSize";
+import HeaderMobile from "~/components/header/HeaderMobile.vue";
+import HeaderTablet from "~/components/header/HeaderTablet.vue";
+import HeaderDesktop from "~/components/header/HeaderDesktop.vue";
 
 const isBurgerOpenStore = useIsBurgerOpenStore()
 
@@ -13,6 +17,7 @@ const isBurgerOpenStore = useIsBurgerOpenStore()
 // set light layout
 
 const props = defineProps({light: {type: Boolean, default: true}})
+const viewport = useViewportSize();
 
 
 const {locale, setLocale} = useI18n()
@@ -27,60 +32,15 @@ async function toggleLocale() {
 }
 
 
-
 </script>
 <template>
   <header class="header relative z-30">
-    <client-only>
-      <Disclosure v-slot="{open}">
-        <div
-            :class="{'bg-white': open}"
-            class="lg:bg-transparent main-container font-mono whitespace-nowrap flex  justify-between items-center">
+    <div>
+      <header-mobile v-if="viewport.isMobile" key="mobile" />
+      <header-tablet v-else-if="viewport.isTablet" key="tablet" />
+      <header-desktop v-else-if="viewport.isDesktop" :toggle-locale="toggleLocale" key="desktop" />
+    </div>
 
-
-          <!--            burger menu-->
-
-          <div class="lg:hidden md:w-[32px] w-[25px]  md:order-1 order-3">
-            <DisclosureButton>
-              <burger @click="isBurgerOpenStore.toogleIsBurgerOpen"/>
-            </DisclosureButton>
-          </div>
-
-          <!--            logo-->
-          <div class="md:order-2">
-            <NuxtLink to="/" class="block lg:hidden">
-              <logo :light="!open"/>
-            </NuxtLink>
-            <NuxtLink to="/" class="hidden lg:block">
-              <logo :light="props.light"/>
-            </NuxtLink>
-          </div>                <!--                main menu items-->
-          <text-menu-items :light="props.light"/>
-
-          <!--            contact us, favourite, search menu items-->
-
-          <icons-menu-items class="block lg:hidden" :light="!open"/>
-          <icons-menu-items class="hidden lg:flex " :light="props.light"/>
-
-          <!--            change language menu item-->
-
-          <button type="button" class="lg:block lg:order-4 font-mono text-sm hidden" @click="toggleLocale">
-            <h3 :class="light ? 'text-white' : 'text-black'">
-              {{ locale === 'en' ? "EN" : "RU" }}
-            </h3>
-          </button>
-        </div>
-        <!--    thin line between header and content-->
-
-        <div class="border-b w-full" :class="open ? '' : 'border-white'"></div>
-
-        <!--            burger menu mobile and tablet-->
-
-        <DisclosurePanel class=" w-full lg:hidden">
-          <tablet-mobile-menu/>
-        </DisclosurePanel>
-      </Disclosure>
-    </client-only>
   </header>
 
 

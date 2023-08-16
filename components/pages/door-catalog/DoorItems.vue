@@ -1,19 +1,24 @@
 <script setup lang="js">
 import DoorCard from "~/components/pages/door-catalog/DoorCard.vue";
-import Pagination from "~/components/base/Pagination.vue";
+import Pagination from "~/components/base/pagination/Pagination.vue";
 import Sorting from "~/components/filters/Sorting.vue";
 import {ref} from 'vue'
 import {useAutoAnimate} from '@formkit/auto-animate/vue'
 import {useFiltersStore} from "~/stores/filtersStore.js";
 import {storeToRefs} from "pinia";
+import {useViewportSize} from "~/composables/useViewportSize.js";
 
 const filtersStore = useFiltersStore()
 
-const {total, pagesCount, products, page_size, page} = storeToRefs(filtersStore)
+const {total, pagesCount, products, page_size,page} = storeToRefs(filtersStore)
 filtersStore.fetchProducts()
 
 
 const [parent] = useAutoAnimate()
+
+const viewport = useViewportSize()
+
+
 
 
 // const page = ref(1)
@@ -21,20 +26,34 @@ const [parent] = useAutoAnimate()
 function onChangePage(page) {
   filtersStore.page = page
   filtersStore.onChangeFilters({page: filtersStore.page})
+  if(viewport.isMobile){
+    window.scrollTo(0, 250)
+  }
+  else if(viewport.isTablet){
+    window.scrollTo(0, 300)
+  }
+  else{
+    window.scrollTo(0, 500)
+  }
   // parent.animate()
 }
+
+
+
 
 
 </script>
 
 <template>
-  <div class="w-full pl-16">
-    <div class="text-primaryDark flex justify-between w-full">
+  <div class="w-full md:pl-5 lg:pl-16 overflow-hidden">
+    <div class="text-primaryDark flex justify-center md:justify-between w-full">
       <!--        <p>{{props.products}}</p>-->
       <sorting/>
-      <h6>Всего дверей: {{ filtersStore.total }}</h6>
+      <div>
+      <h6 class=" mt-14  md:mt-0" >Всего дверей: {{ filtersStore.total }}</h6>
+      </div>
     </div>
-    <div class="mt-16 grid-cols-4 grid-rows-7 grid" ref="parent">
+    <div class="mt-4 md:mt-16 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid" ref="parent">
 
       <div v-for="doorVariant in filtersStore.products" :key="doorVariant.id">
         <NuxtLink
@@ -46,7 +65,7 @@ function onChangePage(page) {
       </div>
     </div>
     <div class="w-full flex justify-center">
-      <pagination class="pb-32" :total="filtersStore.total"
+      <lazy-base-pagination class="pb-32" :total="filtersStore.total"
                   :page_size="filtersStore.page_size"
                   :pagesCount="filtersStore.pagesCount"
                   @page-change="onChangePage"

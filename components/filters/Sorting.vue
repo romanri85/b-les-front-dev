@@ -66,8 +66,8 @@ function sortDoors(sorting: string) {
 </script>
 
 <template>
-
-
+<client-only>
+<div class="hidden md:block">
   <Menu>
 
     <MenuButton>
@@ -99,8 +99,10 @@ function sortDoors(sorting: string) {
         </div>
       </MenuItems>
     </div>
-
   </Menu>
+</div>
+
+</client-only>
 </template>
 
 <style scoped>

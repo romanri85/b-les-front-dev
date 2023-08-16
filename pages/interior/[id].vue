@@ -2,7 +2,7 @@
 
 import {baseURL} from "~/config";
 import Hero from "~/components/base/hero.vue";
-import Pagination from "~/components/base/Pagination.vue";
+import Pagination from "~/components/base/pagination/Pagination.vue";
 import {useInteriorStore} from "~/stores/interiorStore";
 import {storeToRefs} from "pinia";
 import ImageModal from "~/components/pop-ups/imageModal.vue";

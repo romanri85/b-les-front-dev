@@ -7,13 +7,11 @@ import CasingFilterDetail from "~/components/filters/CasingFilterDetail.vue";
 import GlassTypeFilterDetail from "~/components/filters/GlassTypeFilterDetail.vue";
 import {toNumber} from "@vue/shared";
 import AllCollectionsModalDetail from "~/components/pop-ups/allCollectionsModalDetail.vue";
-import Pagination from "~/components/base/Pagination.vue";
+import Pagination from "~/components/base/pagination/Pagination.vue";
 import {ref} from "vue";
 import ImageModal from "~/components/pop-ups/imageModal.vue";
 import {useRouter} from 'vue-router'
 import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService'; // Assuming the service is in the same directory
-
-
 
 
 const router = useRouter()
@@ -40,9 +38,36 @@ let pagesCount = ref(0)
 const page_size = 9
 const page = ref(1)
 
-await fetchDoorVariantData();
+
+onMounted(
+    async () => {
+      await fetchDoorVariantData();
+      if (product.value && product.value.images) {
+        // product.value = data.value
+        total.value = product.value.images.count
+        pagesCount.value = product.value.images.page_links.length
+      }
 
 
+      if (product.value && productMaterials.value.length === 0  && product.value.product_variants) {
+        productMaterials.value = product.value.product_variants.map((item) => ({
+          'material': item.material,
+          'name': item.material_name,
+          'color': item.material_colors
+        }));
+
+    }
+
+      if (Object.keys(casingVariants.value).length === 0) {
+        casingVariants.value = getCasingVariants(product.value);
+      }
+      if (productCasings.value.length === 0) {
+        productCasings.value = getProductCasings(product.value);
+      }
+
+      getActualDoorVariantData();
+    }
+)
 
 type productMaterials = productMaterialsObject[]
 
@@ -87,32 +112,15 @@ const triggerModal = (image) => {
 
 async function fetchDoorVariantData(query = `/${route.params.id}`) {
   const {data} = await useFetch(`${baseURL}/api/product${query}`, {key: query});
-  if (data.value && data.value.images){
-    product.value = data.value
-    total.value = data.value.images.count
-    pagesCount.value = data.value.images.page_links.length
-
-    if (productMaterials.value.length === 0) {
-      productMaterials.value = product.value.product_variants.map((item) => ({
-        'material': item.material,
-        'name': item.material_name,
-        'color': item.material_colors
-      }));
-
-
-    }
-
-    if (Object.keys(casingVariants.value).length === 0) {
-      casingVariants.value = getCasingVariants(product.value);
-    }
-    if (productCasings.value.length === 0) {
-      productCasings.value = getProductCasings(product.value);
-    }
-
-    getActualDoorVariantData();
-  }
-
+  product.value = data.value
 }
+
+
+
+
+
+
+
 
 let target = ref(null)
 
@@ -148,7 +156,6 @@ function changeGlass(glass) {
   newGlass.value = product.value.glass_decor.find((item) => item.glass.id === glass.glass && item.decor.id === glass.decor)
 
 }
-
 
 
 const isCollectionModelOpen = ref(false)

@@ -4,7 +4,7 @@ import Hero from "~/components/base/hero.vue";
 import {onMounted} from "vue";
 import {useInteriorStore} from "~/stores/interiorStore";
 import {storeToRefs} from "pinia";
-import Pagination from "~/components/base/Pagination.vue";
+import Pagination from "~/components/base/pagination/Pagination.vue";
 import buttons from "~/data/interiorButtons.json";
 import {useRoute, useRouter} from 'vue-router';
 

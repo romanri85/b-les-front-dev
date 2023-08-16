@@ -10,9 +10,14 @@ import {baseURL} from "~/config";
 // import {background} from "ipx";
 import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
+import {useViewportSize} from "~/composables/useViewportSize";
 
 const filtersStore = useFiltersStore()
 const {activeFilters, materialColors, filterCount} = storeToRefs(filtersStore)
+
+await filtersStore.fetchMaterialColors()
+
+
 
 
 function chooseMaterial(material){
@@ -57,17 +62,20 @@ function isMaterialAvailable(material) {
   }
   return false;  // return false if no matching color_set is found
 }
+const viewport = useViewportSize()
+const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTablet === true)
+
 </script>
 
 
 
 <template class="filter-container ">
-  <Disclosure default-open>
+  <Disclosure :key="isNotMobile" :default-open="isNotMobile">
     <DisclosureButton class=" w-full">
       <filter-type filterName="Выбрать отделку"/>
     </DisclosureButton>
     <DisclosurePanel class="mb-20">
-          <div class="flex justify-around w-full pr-4">
+          <div class="flex justify-start gap-x-8 md:justify-around w-full pr-4">
             <div v-for="(material) in materialColors" :key="material.material" class="text-primaryDark">
               <h5 @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"  :class="{
                 'border-b': filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'border-black':filtersStore.activeFilters.material.includes(material.material), 'font-regular':filtersStore.activeFilters.material.includes(material.material), 'text-primaryDark':filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'cursor-pointer': isMaterialAvailable(material.material), 'text-gray-400': !isMaterialAvailable(material.material)

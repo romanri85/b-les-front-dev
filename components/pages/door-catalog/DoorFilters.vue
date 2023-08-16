@@ -4,30 +4,13 @@ import ColorSetFilter from "~/components/filters/colorSetFilter.vue";
 import DesignFilter from "~/components/filters/designFilter.vue";
 import MaterialColorFilter from "~/components/pages/door-catalog/MaterialColorFilter.vue";
 import DoorCollectionsFilter from "~/components/pages/door-catalog/DoorCollectionsFilter.vue";
-import PrimaryButton from "~/components/buttons/PrimaryButtonSmall.vue";
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
-import {baseURL} from "~/config";
 import MaterialFilter from "~/components/filters/MaterialFilter.vue";
 import GlassFilter from "~/components/filters/GlassFilter.vue";
-import PriceSlider from "~/components/base/PriceSlider.vue";
-import {bool} from "sharp";
 import {useFiltersStore} from "~/stores/filtersStore";
 
 
 const filtersStore = useFiltersStore()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>
@@ -35,7 +18,7 @@ const filtersStore = useFiltersStore()
 <template>
 
   <section class="">
-    <div class=" lg:mb-[80px] md:mb-[70px] flex gap-">
+    <div class=" lg:mb-[80px] md:mb-[70px] flex justify-center md:justify-start gap-3">
       <div class="inline-flex gap-x-3">
         <svg class="w-[20px] h-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
              strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -46,17 +29,19 @@ const filtersStore = useFiltersStore()
       </div>
     </div>
     <div class="filter-container">
-      <price-filter/>
+      <client-only>
+        <price-filter/>
 
-      <color-set-filter/>
-      <design-filter/>
-      <material-filter/>
-      <material-color-filter/>
-      <door-collections-filter/>
-      <glass-filter/>
-      <primary-button-small class="w-full text-start " @click="">
-        <h3>Очистить</h3>
-      </primary-button-small>
+        <color-set-filter/>
+        <design-filter/>
+        <material-filter/>
+        <material-color-filter/>
+        <door-collections-filter/>
+        <glass-filter/>
+        <primary-button-small class="w-full text-start " @click="">
+          <h3>Очистить</h3>
+        </primary-button-small>
+      </client-only>
     </div>
 
   </section>

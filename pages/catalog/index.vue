@@ -7,9 +7,12 @@ import {baseURL} from "~/config.js";
 import Hero from "~/components/base/hero.vue";
 import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
+import DoorFiltersMobile from "~/components/pages/door-catalog/DoorFiltersMobile.vue";
+import {useViewportSize} from "~/composables/useViewportSize";
 
+const viewport = useViewportSize()
 const filtersStore = useFiltersStore()
-const {activeFilters, filterCount} = storeToRefs(filtersStore)
+const {activeFilters, filterCount, materialColors} = storeToRefs(filtersStore)
 
 
 const heroName = "catalog"
@@ -24,18 +27,61 @@ const page_size = 12
 // const filterCount = ref({})
 
 const route = useRoute()
+// filtersStore.fetchMaterialColors()
+
+
+
 
 onMounted(() => {
-
-  filtersStore.onChangeFilters({page: 1})
-  if (!activeFilters.value.color_set) {
-    activeFilters.value.color_set = []
+  if (route.query.collection) {
+    // If it exists, add it to the onChangeFilters
+    filtersStore.activeFilters = ({...filtersStore.activeFilters, 'collection':[ parseInt(route.query.collection)] });
   }
-  if (!activeFilters.value.material) {
-    activeFilters.value.material = []
-  }
+if(!filtersStore.activeFilters.collection.color_set){
+  filtersStore.activeFilters.color_set = []
+}
+if(!filtersStore.activeFilters.material){
+  filtersStore.activeFilters.material = []
+}
+  filtersStore.onChangeFilters({...activeFilters.value, page: 1})
 });
-
+watch(() => route.query.collection, (newValue) => {
+  if (newValue) {
+    filtersStore.activeFilters = ({...filtersStore.activeFilters, 'collection': [parseInt(newValue) ]});
+    filtersStore.onChangeFilters(filtersStore.activeFilters);
+  }
+  else {
+    filtersStore.activeFilters= ({
+      ordering: "",
+      // min_price: Number,
+      // max_price: Number,
+      design: [],
+      color_set: [],
+      color: [],
+      collection: [],
+      material: [],
+      glass: "",
+      page: 1,
+      // colorSet: [], colors: [], designs: [], collections: []
+    });
+    filtersStore.onChangeFilters(filtersStore.activeFilters)
+  }
+}, { immediate: true });
+onUnmounted(() => {
+  filtersStore.activeFilters= ({
+    ordering: "",
+    // min_price: Number,
+    // max_price: Number,
+    design: [],
+    color_set: [],
+    color: [],
+    collection: [],
+    material: [],
+    glass: "",
+    page: 1,
+    // colorSet: [], colors: [], designs: [], collections: []
+  });
+})
 </script>
 
 <template>
@@ -43,8 +89,11 @@ onMounted(() => {
 
 
   <!--  <door-sets :activeFilters="activeFilters" @changeFilters="onChangeFilters"/>-->
-  <div class="flex main-container mt-24">
-    <door-filters/>
+  <div class="flex main-container md:flex-row flex-col mt-12 md:mt-24">
+    <client-only>
+    <door-filters v-if="viewport.isDesktop || viewport.isTablet"/>
+    <door-filters-mobile v-else-if="viewport.isMobile"/>
+    </client-only>
     <door-items/>
   </div>
 </template>
