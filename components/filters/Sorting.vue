@@ -77,6 +77,14 @@ function sortDoors(sorting: string) {
       </div>
     </MenuButton>
     <div class="absolute">
+      <transition
+          enter-active-class="transition duration-500 ease-out"
+          enter-from-class="transform scale-95 opacity-0"
+          enter-to-class="transform scale-100 opacity-100"
+          leave-active-class="transition duration-300 ease-out"
+          leave-from-class="transform scale-100 opacity-100"
+          leave-to-class="transform scale-95 opacity-0"
+      >
       <MenuItems class="mt-10 z-10 absolute">
         <div v-for="sorting in sortFilters"
             class="whitespace-nowrap  shadow-sm shadow-darkGrey bg-white p-4 [&>a]:p-2 min-w-[320px]">
@@ -98,6 +106,7 @@ function sortDoors(sorting: string) {
 
         </div>
       </MenuItems>
+      </transition>
     </div>
   </Menu>
 </div>

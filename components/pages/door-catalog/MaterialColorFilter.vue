@@ -24,15 +24,40 @@ const materialActiveindex = ref(0)
 // filtersStore.fetchMaterialColors()
 
 function chooseColor(id) {
+  const materials = [
+    { material: 3, colors: [1, 2] },
+    { material: 2, colors: [3, 4, 5, 6] },
+    { material: 1, colors: [7, 8, 9, 10, 11, 12, 13, 14, 15] },
+  ];
+
   if (!filtersStore.activeFilters.color.includes(id)) {
-    filtersStore.onChangeFilters({"color": [...filtersStore.activeFilters.color, id]})
+    filtersStore.onChangeFilters({ "color": [...filtersStore.activeFilters.color, id] });
+
+    // Find the material(s) containing the color ID and add to the activeFilters.material
+    // materials.forEach((mat) => {
+    //   if (mat.colors.includes(id) && (!filtersStore.activeFilters.material.includes(mat.material))) {
+    //     filtersStore.activeFilters.material.push(mat.material);
+    //   }
+    // });
   } else {
     const updatedColors = filtersStore.activeFilters.color.filter((item) => {
-      return item !== id
-    })
-    filtersStore.onChangeFilters({"color": updatedColors})
+      return item !== id;
+    });
+
+    filtersStore.onChangeFilters({ "color": updatedColors });
+
+    // Remove the material from activeFilters.material if the color ID is no longer active
+    materials.forEach((mat) => {
+      if (mat.colors.includes(id)) {
+        const index = filtersStore.activeFilters.material.indexOf(mat.material);
+        if (index > -1) {
+          filtersStore.activeFilters.material.splice(index, 1);
+        }
+      }
+    });
   }
 }
+
 
 const materialMap = {
   1: 2,
@@ -64,6 +89,7 @@ function isColorAvailable(color, material) {
 }
 
 function chooseMaterial(material) {
+  // filtersStore.checkDoorSetApplied()
   materialActiveindex.value = material
 
 }
@@ -71,12 +97,30 @@ function chooseMaterial(material) {
 
 watch(() => filterCount.value.color, (newVal) => {
   if (!newVal.find((material) => material.material === materialActiveindex.value)) {
-    materialActiveindex.value = newVal[newVal.length - 1].material;
+    materialActiveindex.value = newVal[newVal.length - 1]?.material;
   }
-})
-const enamel = computed(() => filterCount.value.color.find((material) => material.material === 3))
-const beech = computed(() => filterCount.value.color.find((material) => material.material === 2))
-const oak = computed(() => filterCount.value.color.find((material) => material.material === 1))
+});
+const sortColors = (material) => {
+  if (material.colors) {
+    material.colors.sort((a, b) => a.color - b.color);
+  }
+  return material;
+}
+
+const enamel = computed(() => sortColors(filterCount.value.color?.find((material) => material.material === 3) || {}));
+const beech = computed(() => sortColors(filterCount.value.color?.find((material) => material.material === 2) || {}));
+const oak = computed(() => sortColors(filterCount.value.color?.find((material) => material.material === 1) || {}));
+
+
+const enamelColors = enamel.value.colors.map((color) => color.color);
+const beechColors = beech.value.colors.map((color) => color.color);
+const oakColors = oak.value.colors.map((color) => color.color);
+
+
+const enamelCount = computed(() => activeFilters.value.color?.filter((color) => enamelColors.includes(color)).length || 0);
+const beechCount = computed(() => activeFilters.value.color?.filter((color) => beechColors.includes(color)).length || 0);
+const oakCount = computed(() => activeFilters.value.color?.filter((color) => oakColors.includes(color)).length || 0);
+
 
 const viewport = useViewportSize()
 const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTablet === true)
@@ -89,74 +133,100 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
       <DisclosureButton class=" w-full">
         <filter-type filterName="Выбрать цвет"/>
       </DisclosureButton>
+      <transition
+          enter-active-class="transition duration-500 ease-out"
+          enter-from-class="transform scale-95 opacity-0"
+          enter-to-class="transform scale-100 opacity-100"
+          leave-active-class="transition duration-300 ease-out"
+          leave-from-class="transform scale-100 opacity-100"
+          leave-to-class="transform scale-95 opacity-0"
+      >
       <DisclosurePanel class="mb-20">
+
         <TabGroup :selectedIndex="materialMap[materialActiveindex] ">
           <TabList>
-            <div class="flex justify-start gap-x-8 md:justify-around w-full pr-4">
+            <div class="flex justify-start gap-x-12 lg:gap-x-20 w-full pr-4">
               <Tab index=3 :disabled="!isMaterialAvailable(3)" class="text-primaryDark">
-                <h5 @click="!isMaterialAvailable(3) ? null : chooseMaterial(3)"
-                    :class="{'border-b': materialActiveindex===3, 'border-black':materialActiveindex===3, 'font-regular':materialActiveindex===3,'text-gray-400':!isMaterialAvailable(3)}"
-                    class="">Эмаль</h5></Tab>
+                <div class="relative">
+                  <span v-if="enamelCount > 0" class="text-primaryDark absolute text-xs -right-2 -top-1">{{
+                      enamelCount
+                    }}</span>
+                  <h5 @click="!isMaterialAvailable(3) ? null : chooseMaterial(3)"
+                      :class="{'underline': materialActiveindex===3,'cursor-default': materialActiveindex===3, 'text-gray-400':!isMaterialAvailable(3)}"
+                      class="underline-offset-4">Эмаль</h5>
+                </div>
+              </Tab>
               <Tab index=2 :disabled="!isMaterialAvailable(2)" class="text-primaryDark">
-                <h5 @click="!isMaterialAvailable(2) ? null : chooseMaterial(2)"
-                    :class="{'border-b': materialActiveindex===2, 'border-black':materialActiveindex===2, 'font-regular':materialActiveindex===2, 'text-gray-400':!isMaterialAvailable(2)}"
-                    class="">Бук</h5></Tab>
+                <div class="relative">
+                  <span v-if="beechCount > 0" class="text-primaryDark absolute text-xs -right-2 -top-1">{{
+                      beechCount
+                    }}</span>
+                  <h5 @click="!isMaterialAvailable(2) ? null : chooseMaterial(2)"
+                      :class="{'underline': materialActiveindex===2,'cursor-default': materialActiveindex===2, 'text-gray-400':!isMaterialAvailable(2)}"
+                      class="underline-offset-4">Бук</h5>
+                </div>
+              </Tab>
               <Tab index="1" :disabled="!isMaterialAvailable(1)" class="text-primaryDark">
-                <h5 @click="!isMaterialAvailable(1) ? null : chooseMaterial(1)"
-                    :class="{'border-b': materialActiveindex===1, 'border-black':materialActiveindex===1,'font-regular':materialActiveindex===1, 'text-gray-400':!isMaterialAvailable(1)}"
-                    class="">Дуб</h5></Tab>
+                <div class="relative">
+                  <span v-if="oakCount > 0" class="text-primaryDark absolute text-xs -right-2 -top-1">{{
+                      oakCount
+                    }}</span>
+                  <h5 @click="!isMaterialAvailable(1) ? null : chooseMaterial(1)"
+                      :class="{'underline': materialActiveindex===1,'cursor-default': materialActiveindex===1, 'text-gray-400':!isMaterialAvailable(1)}"
+                      class="underline-offset-4">Дуб</h5>
+                </div>
+              </Tab>
             </div>
           </TabList>
+
+
           <TabPanels>
             <TabPanel>
-              <div v-if="enamel" class="grid custom-grid-cols gap-x-8 gap-y-6 mb-3 mt-5">
+              <div v-if="enamel" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
                 <div v-for="(color) in enamel.colors" :key="color.color" @click="chooseColor(color.color)">
-                  <div v-if="isColorAvailable(color, enamel)" class="flex flex-col items-center max-w-[52px]">
-                    <div class="pb-1"
-                         :class="{'border-b': activeFilters.color.includes(color.color), 'border-black':activeFilters.color.includes(color.color)}">
+                  <div v-if="isColorAvailable(color, enamel)" class="flex flex-col items-start max-w-[52px]">
+                    <div class="pb-1 border-b-4"
+                         :class="{'border-transparent': !activeFilters.color.includes(color.color), 'border-black':activeFilters.color.includes(color.color)}">
                       <div
                           :style="{ backgroundImage: 'url(https://b-les-storage.ams3.digitaloceanspaces.com/media/' + color.image + ')' }"
                           class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
 
                     </div>
-                    <h5 class="hidden lg:block pt-2 cursor-pointer"
-                        :class="{'font-regular':activeFilters.color.includes(color.color)}">
+                    <h5 class="hidden lg:block pt-2 cursor-pointer whitespace-nowrap overflow-visible">
                       {{ color.name }}</h5>
                   </div>
                 </div>
               </div>
             </TabPanel>
             <TabPanel>
-              <div v-if="beech" class="grid custom-grid-cols gap-x-8 gap-y-6 mb-3 mt-5">
+              <div v-if="beech" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
                 <div v-for="(color) in beech.colors" :key="color.color" @click="chooseColor(color.color)">
-                  <div v-if="isColorAvailable(color, beech)" class="flex flex-col items-center max-w-[52px]">
-                    <div class="pb-1"
-                         :class="{'border-b': activeFilters.color.includes(color.color), 'border-black':activeFilters.color.includes(color.color)}">
+                  <div v-if="isColorAvailable(color, beech)" class="flex flex-col items-start max-w-[52px]">
+                    <div class="pb-1 border-b-4"
+                         :class="{'border-transparent': !activeFilters.color.includes(color.color), 'border-black':activeFilters.color.includes(color.color)}">
                       <div
                           :style="{ backgroundImage: 'url(https://b-les-storage.ams3.digitaloceanspaces.com/media/' + color.image + ')' }"
                           class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
 
                     </div>
-                    <h5 class="hidden lg:block pt-2 cursor-pointer"
-                        :class="{'font-regular':activeFilters.color.includes(color.color)}">
+                    <h5 class="hidden lg:block pt-2 cursor-pointer whitespace-nowrap overflow-visible">
                       {{ color.name }}</h5>
                   </div>
                 </div>
               </div>
             </TabPanel>
             <TabPanel>
-              <div v-if="oak" class="grid custom-grid-cols gap-x-8 gap-y-6 mb-3 mt-5">
-                <div v-for="(color) in oak.colors" :key="color.color" @click="chooseColor(color.color)">
-                  <div v-if="isColorAvailable(color, oak)" class="flex flex-col items-center max-w-[52px]">
-                    <div class="pb-1"
-                         :class="{'border-b': activeFilters.color.includes(color.color), 'border-black':activeFilters.color.includes(color.color)}">
+              <div v-if="oak" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
+                <div v-for="(color) in oak.colors.sort()" :key="color.color" @click="chooseColor(color.color)">
+                  <div v-if="isColorAvailable(color, oak)" class="flex flex-col items-start max-w-[52px]">
+                    <div class="pb-1 border-b-4"
+                         :class="{'border-transparent': !activeFilters.color.includes(color.color), 'border-black':activeFilters.color.includes(color.color)}">
                       <div
                           :style="{ backgroundImage: 'url(https://b-les-storage.ams3.digitaloceanspaces.com/media/' + color.image + ')' }"
                           class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
 
                     </div>
-                    <h5 class="hidden lg:block pt-2 cursor-pointer"
-                        :class="{'font-regular':activeFilters.color.includes(color.color)}">
+                    <h5 class="hidden lg:block pt-2 cursor-pointer whitespace-nowrap overflow-visible">
                       {{ color.name }}</h5>
                   </div>
                 </div>
@@ -165,6 +235,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
           </TabPanels>
         </TabGroup>
       </DisclosurePanel>
+      </transition>
     </Disclosure>
   </client-only>
 </template>

@@ -31,16 +31,19 @@ export const useFiltersStore = defineStore("filtersStore", () => {
         let page = ref(1)
         const total = ref(0)
         let pagesCount = ref(0)
-        const page_size = 12
+        const page_size = 24
         const color_sets = ref([])
         const materialColors = ref([])
         const isMobileFiltersOpen = ref(true)
+        const isDoorSetApplied = ref(false)
 
         async function onChangeFilters(filters) {
             if (!filters.page) {
                 activeFilters.value.page = 1
                 page.value = 1
             }
+
+
             // if (!Object.keys(activeFilters.value).includes("page")) {
             //     activeFilters.value = {...activeFilters.value, page: 1}
             // }
@@ -74,6 +77,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
                 total.value = data.value.count
                 pagesCount.value = data.value.page_links.length
                 products.value = data.value.results
+
             } else {
                 console.log('no data')
             }
@@ -106,19 +110,27 @@ export const useFiltersStore = defineStore("filtersStore", () => {
             }
             const query = "&" + new URLSearchParams(activeFilters.value).toString();
             await fetchProducts(query)
+
+
+            await checkFilters(query)
+        }
+
+        async function checkDoorSetApplied() {
+            if (isDoorSetApplied.value) {
+                console.log('reset')
+                await onResetFilters()
+                isDoorSetApplied.value = false
+            }
         }
 
         async function fetchColorSets() {
-            const {data} = await useFetch(`${baseURL}/api/product/color-sets`, {key: 'color-sets'})
-            color_sets.value = data.value
+            color_sets.value = await $fetch(`${baseURL}/api/product/color-sets`)
         }
 
         async function fetchMaterialColors() {
-            const {data} = await useFetch(`${baseURL}/api/product/material-choices`, {key: 'material-choices'})
-            if (data.value) {
-                materialColors.value = data.value
 
-            }
+            materialColors.value = await $fetch(`${baseURL}/api/product/material-choices`)
+
         }
 
         return {
@@ -128,6 +140,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
             fetchColorSets,
             fetchMaterialColors,
             checkFilters,
+            checkDoorSetApplied,
             activeFilters,
             filterCount,
             products,
@@ -137,7 +150,8 @@ export const useFiltersStore = defineStore("filtersStore", () => {
             page_size,
             color_sets,
             materialColors,
-            isMobileFiltersOpen
+            isMobileFiltersOpen,
+            isDoorSetApplied
         }
     })
 ;

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 
 import {
   Disclosure,
@@ -60,7 +60,7 @@ let index = materialMap[props.material]
 
 <template class="filter-container ">
 <!--<p>{{materialMap[props.material]}}</p>-->
-<div v-if="props.productMaterials[0]">
+<div v-if="props.productMaterials[0]" class="w-full lg:w-1/2 ">
   <client-only>
   <Disclosure default-open>
     <DisclosureButton class=" w-full">
@@ -70,7 +70,7 @@ let index = materialMap[props.material]
       <TabGroup v-if="props.productMaterials" :defaultIndex="index">
         <TabList>
 
-          <div class="flex justify-between w-60">
+          <div class="flex justify-start gap-x-12 lg:gap-x-20 w-full">
             <div v-for="material in props.productMaterials.sort((a,b)=>{
               if(a.material < b.material) { return 1; }
               if(a.material > b.material) { return -1; }
@@ -78,7 +78,7 @@ let index = materialMap[props.material]
             })" :key="material.material">
 
               <Tab as="template" v-slot="{ selected }"
-                   class="text-darkGrey"><h4
+                   class="text-darkGrey cursor-pointer"><h4
                   @click="chooseMaterial(material.material)"
                   :class="{'border-b': selected, 'border-black':selected, 'text-primaryDark':selected}">{{
                   material.name
@@ -93,15 +93,17 @@ let index = materialMap[props.material]
           <TabPanel v-if="material" v-for="material of props.productMaterials" :key="material.material">
             <div v-if="material" class="flex gap-y-6 gap-x-6 mb-3 mt-5 flex-wrap w-full">
               <div v-for="color in material.color" :key="color.id" @click="chooseColor(color.id)">
-                <div class="flex flex-col items-center w-24">
-                  <div class="pb-1"
-                       :class="{'border-b': color.id === colorActiveindex, 'border-black':color.id === colorActiveindex}">
+                <div class="flex flex-col items-start w-24">
+                  <div class="pb-1 border-b-4"
+                       :class="{'border-transparent': color.id === !colorActiveindex,'border-black': color.id === colorActiveindex, 'border-b border-transparent': color.id !== colorActiveindex}">
                     <div :style="{ backgroundImage: 'url(' + color.image + ')' }"
                          class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
                   </div>
-                  <h5 class="pt-2 cursor-pointer whitespace-nowrap" :class="{'font-regular':color.id === colorActiveindex}">
-                    {{ color.name }}</h5>
+                  <h5  class=" pt-2 cursor-pointer whitespace-nowrap">
+                    {{ color.name }}
+                  </h5>
                 </div>
+
               </div>
             </div>
           </TabPanel>

@@ -120,11 +120,11 @@ const decors = props.glass_decor.reduce((acc: GlassDecorItem[], item: GlassDecor
     </DisclosureButton>
     <DisclosurePanel class="mb-16 ">
       <div class="flex justify-start  items-start gap-x-20">
-        <div class="flex gap-y-6 gap-x-6 mb-3 mt-3 flex-wrap">
+        <div class="flex gap-y-6 gap-x-6 mb-3  flex-wrap">
           <div v-for="glass in glass_types" :key="glass.glass" @click="chooseGlass(glass.glass)">
             <div class="flex flex-col items-center w-20">
-              <div class="pb-1" v-if="glassTypeActiveIndex"
-                   :class="{'border-b': glass.glass === glassTypeActiveIndex, 'border-black':glass.glass === glassTypeActiveIndex}">
+              <div class="pb-1 border-b-4" v-if="glassTypeActiveIndex"
+                   :class="{'border-transparent': glass.glass !== glassTypeActiveIndex, 'border-black':glass.glass === glassTypeActiveIndex}">
                 <div :style="{
   backgroundImage: 'url(' + glass.image + ')',
   backgroundSize: 'cover',
@@ -133,16 +133,16 @@ const decors = props.glass_decor.reduce((acc: GlassDecorItem[], item: GlassDecor
 }"
                      class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
               </div>
-              <p class="pt-2 cursor-pointer" :class="{'font-regular':glass.glass === glassTypeActiveIndex}">
+              <p class="pt-2 cursor-pointer">
                 {{ glass.glass_name }}</p>
             </div>
           </div>
         </div>
-        <div class="flex gap-y-6 gap-x-6 mb-3 mt-3 flex-wrap">
+        <div class="flex gap-y-6 gap-x-6 mb-3 flex-wrap">
           <div v-for="decor in decors" :key="decor.decor" @click="chooseDecor(decor.decor)">
             <div class="flex flex-col items-center w-20">
-              <div class="pb-1" v-if="glassDecorActiveIndex"
-                   :class="{'border-b': decor.decor === glassDecorActiveIndex, 'border-black':decor.decor ===  glassDecorActiveIndex}">
+              <div class="pb-1 border-b-4" v-if="glassDecorActiveIndex"
+                   :class="{'border-transparent': decor.decor !== glassDecorActiveIndex, 'border-black':decor.decor ===  glassDecorActiveIndex}">
                 <div :style="{
   backgroundImage: 'url(' + decor.image + ')',
   backgroundSize: 'cover',
@@ -151,7 +151,7 @@ const decors = props.glass_decor.reduce((acc: GlassDecorItem[], item: GlassDecor
 }"
                      class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
               </div>
-              <p class="pt-2 cursor-pointer" :class="{'font-regular':decor.decor ===  glassDecorActiveIndex  }">
+              <p class="pt-2 cursor-pointer">
                 {{ decor.decor_name }}</p>
             </div>
           </div>

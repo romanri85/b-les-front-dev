@@ -12,12 +12,12 @@ h2{
 }
 
 h3{
-  @apply font-mono font-semibold uppercase
+  @apply font-mono font-medium uppercase
      lg:text-h3-lg md:text-h3-md text-h3-sm
 }
 
 h4{
-  @apply font-mono font-semibold uppercase
+  @apply font-mono font-medium uppercase
      lg:text-h4-lg md:text-h4-md text-h4-sm
 }
 
@@ -27,7 +27,7 @@ h5{
 }
 
 h6{
-  @apply font-light
+  @apply font-sans font-light
   lg:text-h5-lg md:text-h5-md text-h5-sm tracking-wider
 }
 
@@ -42,8 +42,7 @@ p{
   position: relative;
   //margin: 3px;
   &:hover,
-  &:focus,
-  &:active {
+  {
     /* cursor: pointer;*/
     &:after {
       width: 100%;
@@ -60,6 +59,7 @@ p{
     transition: width .5s;
   }
 }
+
 
 .underline-direction-white{
   position: relative;
@@ -81,6 +81,19 @@ p{
     background-color: #fff;
     width: 0;
     transition: width .5s;
+  }
+}
+
+.underline-static {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -3px;
+    height: 1px;
+    background-color: #000;  /* Default to black, can be adjusted */
+    width: 100%;
   }
 }
 

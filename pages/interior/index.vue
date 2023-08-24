@@ -55,11 +55,13 @@ function onChangePage(page) {
       </div>
       <div class="pb-4">
         <div v-for="tag in project.tags" class="inline-block">
-          <p>#{{ tag.name }}&nbsp;&nbsp;</p>
+          <NuxtLink :to="{ path: '/search-tags', query: { tags: tag.id } }">
+            <p class="underline-direction inline">#{{ tag.name }}</p><span>&nbsp;&nbsp;</span>
+          </NuxtLink>
         </div>
+
       </div>
     </div>
-
   </div>
   <pagination class="pb-32 flex justify-center" :total="interiorStore.total"
               :page_size="interiorStore.page_size"

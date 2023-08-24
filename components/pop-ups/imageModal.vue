@@ -51,21 +51,21 @@
               <div class="mt-2">
                 <nuxt-img :src="image.image" class=" h-[80vh] w-full object-contain"
                           :alt="image.project_name"></nuxt-img>
-                <div class="flex justify-start flex-wrap">
+                <div class="inline-flex justify-start flex-wrap">
 
-                  <div v-for="tag in image.tags"  class=" text-sm text-gray-500 cursor-pointer">&nbsp;
+                  <div v-for="tag in image.tags"  class=" text-sm text-primaryDark cursor-pointer">&nbsp;
 
                     &nbsp;
 
 
-                      <p @click="chooseTag(tag)" >#{{ tag.name }}</p>
+                    <span>&nbsp;</span> <p class="underline-direction inline" @click="chooseTag(tag)" > #{{ tag.name }}</p>
                   </div>
 
                 </div>
               </div>
 
               <div class="text-center mt-4">
-               <buttons-primary-button-small @click="closeModal">Закрыть</buttons-primary-button-small>
+               <buttons-primary-button-small @click="closeModal"><h3>Закрыть</h3></buttons-primary-button-small>
               </div>
             </DialogPanel>
           </TransitionChild>
@@ -92,7 +92,7 @@ defineExpose({
 
 const props = defineProps({
   image: {
-    type: Object,
+    type: null,
     required: true
   }
 })

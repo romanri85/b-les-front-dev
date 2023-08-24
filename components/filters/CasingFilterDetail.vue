@@ -35,38 +35,44 @@ const casingActiveindex = ref(props.startCasing)
 function chooseCasing(casing) {
   casingActiveindex.value = casing
 
-  emit('changeFilter',  casingActiveindex.value)
+  emit('changeFilter', casingActiveindex.value)
 }
-
 
 
 </script>
 
 <template class="filter-container ">
-  <div v-if="props.productCasings" >
+  <div v-if="props.productCasings">
     <client-only>
 
       <Disclosure default-open>
         <DisclosureButton class=" w-full">
-          <filter-type filterName="Оформление портала"/>
+          <filter-type class="whitespace-nowrap" filterName="Оформление портала"/>
         </DisclosureButton>
-        <DisclosurePanel class="mb-20">
-          <div class="flex gap-y-6 gap-x-3 mb-3 mt-5 flex-wrap w-full">
-            <div v-for="casing in props.productCasings[props.material]" :key="casing.casing" @click="chooseCasing(casing.casing)">
-              <div class="flex flex-col items-center w-24">
-                <div class="pb-1"
-                     :class="{'border-b': casing.casing === casingActiveindex, 'border-black':casing.casing === casingActiveindex}">
-                  <div  :style="{
-  backgroundImage: 'url(' + casing.image + ')',
-  backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center center'
-}"
-                       class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
+        <DisclosurePanel class="">
+          <div class="flex gap-y-6 gap-x-10  mb-3 flex-wrap w-full">
+            <div v-for="casing in props.productCasings[props.material]" :key="casing.casing"
+                 @click="chooseCasing(casing.casing)">
+              <div class="flex flex-col items-start ">
+                <div class="pb-1 border-b-4"
+                     :class="{
+             'border-black': casing.casing === casingActiveindex,
+             'border-transparent': casing.casing !== casingActiveindex
+         }">
+                  <div :style="{
+              backgroundImage: 'url(' + casing.image + ')',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center center'
+          }"
+                       class="w-16 h-16 shadow-darkGrey shadow-sm cursor-pointer"></div>
                 </div>
-                <p class="pt-2 cursor-pointer whitespace-nowrap" :class="{'font-regular':casing.casing === casingActiveindex}">
+
+                <p class="hidden lg:block pt-2 cursor-pointer whitespace-nowrap">
                   {{ casing.casing_name }}</p>
               </div>
+
+
             </div>
           </div>
         </DisclosurePanel>

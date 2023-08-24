@@ -1,7 +1,9 @@
 @layer utilities {
+
     .layout-images .image-container {
         display: flex;
         flex-wrap: wrap;
+        margin-right: -16px;
         gap: 16px;
     }
     .layout-images .image-wrapper {

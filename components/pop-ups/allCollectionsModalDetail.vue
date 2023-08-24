@@ -90,8 +90,8 @@ onMounted(() => {
               <div class="flex gap-y-6 gap-x-8 mb-2 mt-0 flex-nowrap justify-center w-full">
                 <div v-if="props.collectionProducts" v-for="product in collectionProducts"
                      :key="product.id" @click="chooseProduct(product)" class="flex flex-col items-center">
-                  <div class="relative pb-2 border-b"
-                       :class="{'border-b': product.id === props.product.id, 'border-black':product.id === props.product.id, 'border-transparent': product.id!== props.product.id}">
+                  <div class="relative pb-4 px-2 border-b-4"
+                       :class="{'border-black':product.id === props.product.id, 'border-transparent': product.id !== props.product.id}">
                     <!--            <nuxt-img width="200px" height="auto" :src="props.doorVariant.casing_variant.image"-->
                     <!--                      class="h-auto w-48"></nuxt-img>-->
                     <!--            <nuxt-img width="200px" height="auto"-->
@@ -112,10 +112,10 @@ onMounted(() => {
               <div class=" text-center mt-12">
                 <primary-button-small
                     type="button"
-                    class="inline-flex justify-center border border-transparent bg-black-100 px-4 py-2  hover:bg-black-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-black-500 focus-visible:ring-offset-2"
+                    class=""
                     @click="closeModal"
                 >
-                  Закрыть
+                  <p class="underline-direction font-regular">Закрыть</p>
                 </primary-button-small>
               </div>
             </DialogPanel>

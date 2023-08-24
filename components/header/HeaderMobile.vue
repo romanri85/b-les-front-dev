@@ -5,9 +5,14 @@ import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 import TabletMobileMenu from "~/components/header/TabletMobileMenu.vue";
 import IconsMenuItems from "~/components/header/IconsMenuItems.vue";
 import Logo from "~/components/base/Logo.vue";
-import Burger from "~/components/header/Burger.vue";
+import Burger from "~/components/header/BurgerWhite.vue";
+import BurgerWhite from "~/components/header/BurgerWhite.vue";
+import BurgerBlack from "~/components/header/BurgerBlack.vue";
 
 const isBurgerOpenStore = useIsBurgerOpenStore()
+const props = defineProps({light: {type: Boolean}})
+const burgerComponent = computed(() => (!open.value && props.light) ? BurgerWhite : BurgerBlack);
+
 
 const {locale, setLocale} = useI18n()
 
@@ -18,21 +23,21 @@ const {locale, setLocale} = useI18n()
   <!--  <header class="header relative z-30">-->
 
 <!--  <client-only>-->
-    <Disclosure v-slot="{open}">
+    <Disclosure as="div" v-slot="{open}">
       <div
           :class="{'bg-white': open}"
           class="lg:bg-transparent main-container font-mono whitespace-nowrap flex  justify-between items-center">
         <!--            logo-->
         <NuxtLink to="/" class="block lg:hidden">
-          <logo :light="!open"/>
+          <logo :light="props.light && !open"/>
         </NuxtLink>
         <!--            contact us, favourite, search menu items-->
         <div class="flex gap-8 items-center">
-          <icons-menu-items :light="!open"/>
+          <icons-menu-items :light="props.light && !open"/>
           <!--            burger menu-->
           <div class="w-[25px]  ">
             <DisclosureButton>
-              <burger @click="isBurgerOpenStore.toogleIsBurgerOpen"/>
+              <component :is="burgerComponent" @click="isBurgerOpenStore.toogleIsBurgerOpen"/>
             </DisclosureButton>
           </div>
         </div>

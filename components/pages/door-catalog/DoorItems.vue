@@ -26,15 +26,15 @@ const viewport = useViewportSize()
 function onChangePage(page) {
   filtersStore.page = page
   filtersStore.onChangeFilters({page: filtersStore.page})
-  if(viewport.isMobile){
-    window.scrollTo(0, 250)
-  }
-  else if(viewport.isTablet){
-    window.scrollTo(0, 300)
-  }
-  else{
-    window.scrollTo(0, 500)
-  }
+  // if(viewport.isMobile && filtersStore.activeFilters.page > 1){
+  //   window.scrollTo(0, 250)
+  // }
+  // else if(viewport.isTablet){
+  //   window.scrollTo(0, 300)
+  // }
+  // else{
+  //   window.scrollTo(0, 500)
+  // }
   // parent.animate()
 }
 
@@ -45,27 +45,27 @@ function onChangePage(page) {
 </script>
 
 <template>
-  <div class="w-full md:pl-5 lg:pl-16 overflow-hidden">
-    <div class="text-primaryDark flex justify-center md:justify-between w-full">
+  <div class="md:pl-5 lg:pl-16">
+    <div class="text-primaryDark flex justify-center md:justify-between">
       <!--        <p>{{props.products}}</p>-->
       <sorting/>
       <div>
-      <h6 class=" mt-14  md:mt-0" >Всего дверей: {{ filtersStore.total }}</h6>
+      <p class=" mt-14  md:mt-0" >Всего дверей: {{ filtersStore.total }}</p>
       </div>
     </div>
-    <div class="mt-4 md:mt-16 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid" ref="parent">
+    <div class="mt-4 md:mt-16 gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid" ref="parent">
 
       <div v-for="doorVariant in filtersStore.products" :key="doorVariant.id">
         <NuxtLink
             :to="`/catalog/${doorVariant.product_variant.product_id}?material=${doorVariant.product_variant.material.id}&color=${doorVariant.color.id}`">
-          <door-card class="relative -z-10 hover:border-b border-black"
+          <door-card class="relative  transition-all duration-300 pb-6 mb-6"
                      :doorVariant="doorVariant"
           />
         </NuxtLink>
       </div>
     </div>
     <div class="w-full flex justify-center">
-      <lazy-base-pagination class="pb-32" :total="filtersStore.total"
+      <base-pagination class="pb-32" :total="filtersStore.total"
                   :page_size="filtersStore.page_size"
                   :pagesCount="filtersStore.pagesCount"
                   @page-change="onChangePage"

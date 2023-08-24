@@ -16,8 +16,7 @@ const config = {
     ],
     devtools: {enabled: true},
     plugins: [
-        '~/plugins/auto-animate.js',
-        '~/plugins/masonry.client.ts'],
+        '~/plugins/auto-animate.js'],
     vueQuery: {
         // useState key used by nuxt for the vue query state.
         stateKey: "vue-query-nuxt", // default

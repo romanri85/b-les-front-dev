@@ -11,10 +11,10 @@ const props = defineProps({
 
 <template>
   <div
-      class="xl:mt-[-100px] lg:mt-[-95px] md:mt-[-65px] mt-[-65px] w-screen h-[240px] md:h-[300px] lg:h-[500px] xl:h-[550px] relative w-full">
-    <div class="text-white absolute left-1/2 top-[40%] -translate-x-1/2">
+      class="xl:mt-[-100px] lg:mt-[-112px] md:mt-[-65px] mt-[-65px] w-screen h-[240px] md:h-[300px] lg:h-[560px]">
+    <div class="text-white absolute left-1/2 lg:top-[180px] md:top-[120px] top-[120px] -translate-x-1/2">
       <h1 class="text-center text-shadow">{{$t(props.heroName)}}</h1>
-      <h6 class="w-[90vw] md:w-[500px] text-white text-center pt-6">{{$t(props.heroDescription)}}</h6>
+      <h6  class="hidden md:block w-[90vw] md:w-[500px] text-white text-center pt-6">{{$t(props.heroDescription)}}</h6>
       <div v-if="props.buttons" class="flex gap-10 justify-center">
         <NuxtLink :to="props.buttons.searchPicByTag.link">
           <primary-button-bigger>{{ props.buttons.searchPicByTag.name}}</primary-button-bigger>

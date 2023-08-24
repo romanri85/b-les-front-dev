@@ -34,13 +34,13 @@ const filtersStore = useFiltersStore()
 
         <color-set-filter/>
         <design-filter/>
-        <material-filter/>
+        <material-filter />
         <material-color-filter/>
         <door-collections-filter/>
         <glass-filter/>
-        <primary-button-small class="w-full text-start " @click="">
-          <h3>Очистить</h3>
-        </primary-button-small>
+        <div class="w-full text-start " @click="filtersStore.onResetFilters()">
+          <h3 ><span class="underline-direction cursor-pointer">Все двери</span></h3>
+        </div>
       </client-only>
     </div>
 

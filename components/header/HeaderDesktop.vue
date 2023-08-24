@@ -8,11 +8,18 @@ import IconsMenuItems from "~/components/header/IconsMenuItems.vue";
 
 const {locale, setLocale} = useI18n()
 
+async function toggleLocale() {
+
+  const newLocale = locale.value === 'en' ? 'ru' : 'en'
+  await setLocale(newLocale)
+  await nextTick()
+
+}
 
 const props = defineProps({
-  toggleLocale: {
-    type: Function,
-    required: true
+  light: {
+    type: Boolean,
+    default: true
   }
 });
 
@@ -27,18 +34,18 @@ const props = defineProps({
         class=" bg-transparent main-container font-mono whitespace-nowrap flex  justify-between items-center">
       <!--            logo-->
       <NuxtLink to="/">
-        <logo :light="true"/>
+        <logo :light="props.light"/>
       </NuxtLink>
 
-      <text-menu-items :light="true"/>
+      <text-menu-items :light="props.light"/>
 
       <!--            contact us, favourite, search menu items-->
 
-      <icons-menu-items class="flex " :light="true"/>
+      <icons-menu-items class="flex " :light="props.light"/>
 
       <!--            change language menu item-->
       <div>
-        <button type="button" class=" font-mono text-sm " @click="props.toggleLocale">
+        <button type="button" class=" font-mono text-sm " @click="toggleLocale">
           <h3 :class="'text-white'">
             {{ locale === 'en' ? "EN" : "RU" }}
           </h3>

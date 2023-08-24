@@ -61,7 +61,7 @@
                   class="relative main-container  flex md:justify-between justify-evenly lg:mt-[130px] md:mt-64 mt-40 lg:order-2">
                 <button
                     class="prev-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[30px]">
-                  <nuxt-img placeholder class="hidden md:block" src="/icons/prev-square-icon.svg" alt="prev"/>
+                  <nuxt-img placeholder width="130" class="hidden md:block" src="/icons/prev-square-icon.svg" alt="prev"/>
                   <nuxt-img placeholder class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev"/>
                 </button>
                 <div class="lg:ml-[228px] lg:mb-[100px] text-center md:text-left">
@@ -72,7 +72,7 @@
                 </div>
                 <button
                     class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[30px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[30px]">
-                  <nuxt-img placeholder class="hidden md:block" src="/icons/next-square-icon.svg" alt="next"/>
+                  <nuxt-img placeholder width="130" class="hidden md:block" src="/icons/next-square-icon.svg" alt="next"/>
                   <nuxt-img placeholder class="md:hidden" src="/icons/next-page-icon-small.svg" alt="next"/>
                 </button>
               </div>

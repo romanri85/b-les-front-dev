@@ -12,6 +12,7 @@ const withGlassDisabled = computed(() => filterCount.value.glass[0]?.with_glass 
 const withoutGlassDisabled = computed(() => filterCount.value.glass[0]?.without_glass === 0)
 
 function chooseGlass(bool_str: string) {
+  filtersStore.checkDoorSetApplied()
   if (filtersStore.activeFilters.glass === '') {
     filtersStore.onChangeFilters({glass: bool_str})
   } else if (filtersStore.activeFilters.glass === bool_str) {
@@ -34,24 +35,33 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
       <DisclosureButton class="w-full">
         <filter-type filterName="Стекло"/>
       </DisclosureButton>
+      <transition
+          enter-active-class="transition duration-500 ease-out"
+          enter-from-class="transform scale-95 opacity-0"
+          enter-to-class="transform scale-100 opacity-100"
+          leave-active-class="transition duration-300 ease-out"
+          leave-from-class="transform scale-100 opacity-100"
+          leave-to-class="transform scale-95 opacity-0"
+      >
       <DisclosurePanel class="mb-[80px]">
         <div class="flex flex-col gap-y-4 items-start mb-3">
           <h5
               class="underline-offset-4"
               @click="withGlassDisabled ? null : chooseGlass('true')"
-              :class="{'underline': filtersStore.activeFilters.glass === 'true','font-regular': filtersStore.activeFilters.glass === 'true', 'text-gray-400': withGlassDisabled, 'cursor-pointer': !withGlassDisabled}"
+              :class="{'underline': filtersStore.activeFilters.glass === 'true', 'text-gray-400': withGlassDisabled, 'cursor-pointer': !withGlassDisabled}"
           >
             Со стеклом
           </h5>
           <h5
               class=" underline-offset-4"
               @click="withoutGlassDisabled ? null : chooseGlass('false')"
-              :class="{'underline': filtersStore.activeFilters.glass === 'false','font-regular': filtersStore.activeFilters.glass === 'false', 'text-gray-400': withoutGlassDisabled, 'cursor-pointer': !withoutGlassDisabled}"
+              :class="{'underline': filtersStore.activeFilters.glass === 'false', 'text-gray-400': withoutGlassDisabled, 'cursor-pointer': !withoutGlassDisabled}"
           >
             Без стекла
           </h5>
         </div>
       </DisclosurePanel>
+      </transition>
     </Disclosure>
   </div>
 </template>

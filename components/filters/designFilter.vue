@@ -33,6 +33,7 @@ function isDesignAvailable(design) {
 
 
 function chooseDesign(design) {
+  filtersStore.checkDoorSetApplied()
   if (!filtersStore.activeFilters.design.includes(design)) {
     filtersStore.onChangeFilters({design: [...filtersStore.activeFilters.design, design]})
   } else {
@@ -53,14 +54,23 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
     <DisclosureButton class=" w-full">
       <filter-type filterName="Дизайн"/>
     </DisclosureButton>
+    <transition
+        enter-active-class="transition duration-500 ease-out"
+        enter-from-class="transform scale-95 opacity-0"
+        enter-to-class="transform scale-100 opacity-100"
+        leave-active-class="transition duration-300 ease-out"
+        leave-from-class="transform scale-100 opacity-100"
+        leave-to-class="transform scale-95 opacity-0"
+    >
     <DisclosurePanel class="mb-[80px]">
       <div v-for="design in designs" :key=design.id class="flex gap-x-[15px] items-center mb-3">
         <h5 class="underline-offset-4" @click="!isDesignAvailable(design.id) ? null : chooseDesign(design.id)"
             :class="{
-          'underline':filtersStore.activeFilters.design.includes(design.id),'font-regular':filtersStore.activeFilters.design.includes(design.id), 'text-gray-400': !isDesignAvailable(design.id), 'cursor-pointer': isDesignAvailable(design.id)
+          'underline':filtersStore.activeFilters.design.includes(design.id), 'text-gray-400': !isDesignAvailable(design.id), 'cursor-pointer': isDesignAvailable(design.id)
         }">{{ design.name }}</h5>
       </div>
     </DisclosurePanel>
+    </transition>
   </Disclosure>
 </template>
 

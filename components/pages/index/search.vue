@@ -5,12 +5,13 @@
     <div class="lg:w-[50vw] w-[80vw] text-center flex flex-col justify-between items-center">
       <h2 class="text-25-mono mb-7">{{ $t('searchByParameters') }}</h2>
       <div class="lg:block flex flex-wrap">
-        <div v-for="parameter in parameters" :key="parameter.name" class="">
-          <primary-button-big class=" lg:pb-4 pb-5 lg:pr-0 pr-7 ">
-              {{ parameter.name }}
-          </primary-button-big>
+        <div v-for="parameter in parameters" :key="parameter.name" class="py-2">
+          <NuxtLink :to="{ path: '/catalog', query: { filters: parameter.id } }" class="lg:pb-4 pb-5 lg:pr-0 pr-7">
+            <h3 class="inline-block underline-direction">{{ parameter.name }}</h3>
+          </NuxtLink>
         </div>
       </div>
+
     </div>
     <div class=" lg:w-[50vw] w-[100vw] flex justify-center lg:h-2/3 h-1/2 items-center ">
       <div

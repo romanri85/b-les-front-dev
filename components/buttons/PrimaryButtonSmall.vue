@@ -1,6 +1,6 @@
 <template>
-    <button class="">
-        <h4 class="underline-direction  "><slot/></h4>
+    <button class="underline-direction">
+        <slot/>
     </button>
 </template>
 

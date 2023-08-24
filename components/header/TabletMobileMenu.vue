@@ -1,7 +1,11 @@
 <script setup lang="ts">
 
 import menuItemsProps from "~/data/MenuItemsProps.json";
-import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from '@headlessui/vue'
 import TextMenuItemsFile from "~/data/TextMenuItems.json";
 import {ChevronDownIcon} from "@heroicons/vue/24/solid";
 import DisclosureStateEmitter from "~/components/base/DisclosureStateEmitter.vue";
@@ -52,7 +56,7 @@ const hideOther = (id) => {
     </div>
 
     <div>
-      <Disclosure
+      <Disclosure as="div"
           v-for="(item, index) in textMenuItems"
           :key="item.id"
           v-slot="{ open, close }"

@@ -126,7 +126,7 @@ function handleChooseTag(tag) {
   let tagId = String(tag.id);
 
   // Convert the array to a Set to remove duplicates, then convert it back to an array
-  selectedTags.value = [...new Set([...selectedTags.value, tagId])];
+  selectedTags.value = [...new Set([tagId])];
 
   getImagesByTags(selectedTags.value);
   page.value = 1;

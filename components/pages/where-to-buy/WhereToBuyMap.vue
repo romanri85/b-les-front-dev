@@ -24,6 +24,9 @@ import {getRoute} from "~/services/getRouteService.js";
 
 const emits = defineEmits(['city-change'])
 
+const browserLang = navigator.language || navigator.userLanguage;
+const isRussian = browserLang.startsWith('ru');
+const langParam = isRussian ? 'ru_RU' : 'en_US';
 
 let myMap; // Moved to global scope
 let clusterer; // Moved to global scope
@@ -79,11 +82,12 @@ let totalPlacemarks = computed(() => {
 // })
 
 onMounted(async () => {
+
   if (typeof ymaps === 'undefined') {
     useHead({
       script: [
         {
-          src: 'https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=en_US',
+          src: `https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=${langParam}`,
           async: true,
         },
       ],
@@ -106,14 +110,14 @@ onMounted(async () => {
 
 
 let maxRetries = 10;
-let interval = 30;  // Starting interval
+let interval = 100;  // Starting interval
 async function initMap() {
   // Make sure the API is loaded
   if (typeof ymaps === 'undefined') {
     if (maxRetries > 0) {
       setTimeout(initMap, interval);
       maxRetries--;
-      interval += 30;  // Increase interval by 30ms for the next retry
+      interval += 100;  // Increase interval by 30ms for the next retry
       return;
     } else {
       console.error('Failed to initialize ymaps after multiple attempts.');

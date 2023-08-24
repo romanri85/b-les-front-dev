@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TextMenuItems from "~/components/header/TextMenuItems.vue";
 import IconsMenuItems from "~/components/header/IconsMenuItems.vue";
-import Burger from "~/components/header/Burger.vue";
+import Burger from "~/components/header/BurgerWhite.vue";
 import {Disclosure, DisclosureButton, DisclosurePanel} from '@headlessui/vue'
 import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
 import TabletMobileMenu from "~/components/header/TabletMobileMenu.vue";
@@ -23,22 +23,17 @@ const viewport = useViewportSize();
 const {locale, setLocale} = useI18n()
 
 
-async function toggleLocale() {
 
-  const newLocale = locale.value === 'en' ? 'ru' : 'en'
-  setLocale(newLocale)
-  await nextTick()
-
-}
 
 
 </script>
 <template>
-  <header class="header relative z-30">
+  <header class=" relative z-30">
+
     <div>
-      <header-mobile v-if="viewport.isMobile" key="mobile" />
-      <header-tablet v-else-if="viewport.isTablet" key="tablet" />
-      <header-desktop v-else-if="viewport.isDesktop" :toggle-locale="toggleLocale" key="desktop" />
+      <header-mobile :light="props.light" v-if="viewport.isMobile"  />
+      <header-tablet :light="props.light" v-else-if="viewport.isTablet"  />
+      <header-desktop :light="props.light" v-else-if="viewport.isDesktop" />
     </div>
 
   </header>

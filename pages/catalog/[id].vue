@@ -11,7 +11,8 @@ import Pagination from "~/components/base/pagination/Pagination.vue";
 import {ref} from "vue";
 import ImageModal from "~/components/pop-ups/imageModal.vue";
 import {useRouter} from 'vue-router'
-import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService'; // Assuming the service is in the same directory
+import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService';
+// import {$fetch} from "ofetch";
 
 
 const router = useRouter()
@@ -49,14 +50,14 @@ onMounted(
       }
 
 
-      if (product.value && productMaterials.value.length === 0  && product.value.product_variants) {
+      if (product.value && productMaterials.value.length === 0 && product.value.product_variants) {
         productMaterials.value = product.value.product_variants.map((item) => ({
           'material': item.material,
           'name': item.material_name,
           'color': item.material_colors
         }));
 
-    }
+      }
 
       if (Object.keys(casingVariants.value).length === 0) {
         casingVariants.value = getCasingVariants(product.value);
@@ -77,18 +78,11 @@ interface productMaterialsObject {
   color: []
 }
 
-// interface product {
-//   product_variants: []
-//   collection: {
-//     products: []
-//   }
-// }
 
 const layoutImages = computed(() => {
   if (product.value && product.value.images) {
     let images = product.value.images.images.map(classifyImageLayout);
 
-    // Get the number of narrow images
     const numberOfNarrowImages = images.filter(image => image.layout === 'narrow').length;
 
     adjustLayoutForNarrowImages(images, numberOfNarrowImages);
@@ -99,7 +93,7 @@ const layoutImages = computed(() => {
 });
 
 const imgModal = ref(null);
-const selectedImage = ref(null); // this will store the selected/clicked image data
+const selectedImage = ref(null);
 
 const triggerModal = (image) => {
   selectedImage.value = image;
@@ -111,16 +105,10 @@ const triggerModal = (image) => {
 };
 
 async function fetchDoorVariantData(query = `/${route.params.id}`) {
-  const {data} = await useFetch(`${baseURL}/api/product${query}`, {key: query});
-  product.value = data.value
+  // const {data} = await useFetch(`${baseURL}/api/product${query}`, {key: query});
+  // product.value = data.value
+  product.value = await $fetch(`${baseURL}/api/product${query}`)
 }
-
-
-
-
-
-
-
 
 let target = ref(null)
 
@@ -177,25 +165,17 @@ function onChangePage(page) {
 <template>
   <!--  <client-only>-->
   <div v-if="doorVariantData && doorVariantData.casing_variant" class="main-container">
-    <div class="flex justify-between pr-72">
+    <div class="hidden lg:flex justify-between">
       <div class="h-12 flex justify-start items-end"><h4>Главная / Каталог / {{ product.name }}</h4></div>
     </div>
-    <div class="flex gap-20">
-      <div class="left w-[38%]">
+    <div class="block md:flex gap-10 lg:gap-20">
+      <div class="left md:w-[38%]">
         <door-card-detail :doorVariant="doorVariantData" :product="product" :newGlass="newGlass"/>
-        <casing-filter-detail v-if="doorVariantData" @change-filter="changeCasing" :material="material"
-                              :productCasings="productCasings"
-                              :casingVariants="casingVariants" :color="color"
-                              :startCasing="doorVariantData.casing_variant.casing"/>
+        <div class="flex md:hidden h-40 flex-col justify-start items-start mb-12 md:mb-3">
+          <buttons-primary-button-big @click="openCollection" class="pt-4 lg:pt-0 flex flex-col lg:flex-row items-start justify-between w-full pb-4"><h2 class="underline-static font-regular">
+            {{ product.collection.name }}</h2>
 
-      </div>
-      <div class="right w-full">
-        <div class="h-40 flex flex-col justify-start items-start mb-3">
-          <div class="flex justify-between w-full"><h3>
-            {{ product.collection.name }}</h3>
-            <buttons-primary-button-big class="pb-1" @click="openCollection">все модели коллекции
-            </buttons-primary-button-big>
-          </div>
+          </buttons-primary-button-big>
           <all-collections-modal-detail v-if="isCollectionModelOpen" @close="isCollectionModelOpen = false"
                                         @close-modal="closeCollection" @change-model="changeModel" :color="color"
                                         :collectionProducts="collectionProducts" :product="product"/>
@@ -204,22 +184,44 @@ function onChangePage(page) {
             <p v-if="product && product.collection">{{ product.collection.description }}</p>
           </div>
         </div>
-        <div class="flex justify-start">
-          <filters-model-family-filter-detail class="min-w-[200px]" @change-model="changeModel" :product="product"
-                                              :productVariantsData="productVariantsData"
-                                              :modelName="product.name" :material="material" :color="color"
-                                              :activeCasing="actualCasing"/>
-          <material-color-filter-detail class="pl-8" @change-filter="getActualDoorVariantData"
-                                        :activeFilters="activeFilters"
-                                        :material="material"
-                                        :color="color" :productMaterials="productMaterials"/>
+        <casing-filter-detail class="mb-8 md:mb-0 lg:pt-2" v-if="doorVariantData" @change-filter="changeCasing" :material="material"
+                              :productCasings="productCasings"
+                              :casingVariants="casingVariants" :color="color"
+                              :startCasing="doorVariantData.casing_variant.casing"/>
 
+      </div>
+      <div class="right w-full ">
+        <div class="hidden md:flex h-40 flex-col justify-start items-start mb-3">
+          <buttons-primary-button-big @click="openCollection" class="pt-4 lg:pt-0 flex flex-col lg:flex-row items-start justify-between w-full pb-4"><h2 class="underline-static font-regular">
+            {{ product.collection.name }}</h2>
+
+          </buttons-primary-button-big>
+          <all-collections-modal-detail v-if="isCollectionModelOpen" @close="isCollectionModelOpen = false"
+                                        @close-modal="closeCollection" @change-model="changeModel" :color="color"
+                                        :collectionProducts="collectionProducts" :product="product"/>
+          <h1 class="pb-5">{{ product.name }}</h1>
+          <div class="flex justify-between">
+            <p v-if="product && product.collection">{{ product.collection.description }}</p>
+          </div>
         </div>
+        <div class="lg:min-h-[430px]">
+          <div class="flex flex-col lg:flex-row justify-start ">
+            <filters-model-family-filter-detail class="lg:min-w-[200px]" @change-model="changeModel" :product="product"
+                                                :productVariantsData="productVariantsData"
+                                                :modelName="product.name" :material="material" :color="color"
+                                                :activeCasing="actualCasing"/>
+            <material-color-filter-detail class="pt-0 md:pt-12 lg:pt-0  lg:pl-8" @change-filter="getActualDoorVariantData"
+                                          :activeFilters="activeFilters"
+                                          :material="material"
+                                          :color="color" :productMaterials="productMaterials"/>
 
-        <glass-type-filter-detail @change-glass-decor="changeGlass" :glass_decor="product.glass_decor"
-                                  v-if="product.glass_decor && product.glass_decor[0]" :newGlass="newGlass"/>
-        <div class="w-full flex items-start">
-          <div class="">
+          </div>
+
+          <glass-type-filter-detail @change-glass-decor="changeGlass" :glass_decor="product.glass_decor"
+                                    v-if="product.glass_decor && product.glass_decor[0]" :newGlass="newGlass"/>
+        </div>
+        <div class="w-full flex flex-col justify-between items-start">
+          <div class="pb-8">
             <div v-if="product.glass_decor.length > 0">
               <h2 v-if="doorVariantData && doorVariantData.casing_variant " class="font-regular">
                 {{
@@ -231,15 +233,20 @@ function onChangePage(page) {
                 {{ toNumber(doorVariantData.price) + toNumber(doorVariantData.casing_variant.price) }}&nbsp;₽</h2>
             </div>
           </div>
-          <div class="flex justify-start gap-x-10 w-full pl-32 pb-8">
-            <buttons-primary-button-big class="w-60 h-16 bg-primaryDark text-white">Купить</buttons-primary-button-big>
-            <buttons-primary-button-big class="w-60 h-16 bg-primaryDark text-white">В избранное
+          <div class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full">
+            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark text-white">Купить
+            </buttons-primary-button-big>
+            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В
+              избранное
             </buttons-primary-button-big>
           </div>
+
+
         </div>
       </div>
     </div>
-    <div class="layout-images">
+
+    <div class="layout-images pt-16 lg:pt-24">
       <div class="image-container">
         <div v-for="(image, index) in layoutImages" :key="image.id"
              :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
@@ -248,7 +255,7 @@ function onChangePage(page) {
       </div>
     </div>
     <image-modal :image="selectedImage" ref="imgModal"/>
-    <pagination class="pb-32 flex justify-center" :total="total"
+    <pagination class="pt-12 pb-32 flex justify-center" :total="total"
                 :page_size="page_size"
                 :pagesCount="pagesCount"
                 @page-change="onChangePage"

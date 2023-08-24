@@ -1,25 +1,181 @@
-[{
-  "name": "white doors",
-  "filter": {
-    "color_set": [1]
-  }
-},
+[
   {
-    "name": "grey doors",
+    "name": "white enamel doors",
+    "id": "1",
     "filter": {
-      "color_set": [2]
+      "color_set": [
+        1
+      ],
+      "material": [
+        3
+      ]
     }
   },
   {
-    "name": "light brown doors",
+    "name": "grey enamel doors",
+    "id": "2",
     "filter": {
-      "color_set": [3]
+      "color_set": [
+        2
+      ],
+      "material": [
+        3
+      ]
     }
   },
   {
-    "name": "dark brown doors",
+    "name": "oak light brown doors",
+    "id": "3",
     "filter": {
-      "color_set": [4]
+      "color_set": [
+        3
+      ],
+      "material": [
+        1
+      ]
+    }
+  },
+  {
+    "name": "oak dark brown doors",
+    "id": "4",
+    "filter": {
+      "color_set": [
+        4
+      ],
+      "material": [
+        1
+      ]
+    }
+  },
+  {
+    "name": "solid wood doors",
+    "id": "5",
+    "filter": {
+      "material": [
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "name": "white enamel doors with glass",
+    "id": "6",
+    "filter": {
+      "color_set": [
+        1
+      ],
+      "material": [
+        3
+      ],
+      "glass": "true"
+    }
+  },
+  {
+    "name": "oak doors with glass",
+    "id": "8",
+    "filter": {
+      "material": [
+        1
+      ],
+      "glass": "true"
+    }
+  },
+  {
+    "name": "solid wood doors with glass",
+    "id": "10",
+    "filter": {
+      "material": [
+        1,
+        2
+      ],
+      "glass": "true"
+    }
+  },
+  {
+    "name": "oak doors",
+    "id": "7",
+    "filter": {
+      "material": [
+        1
+      ]
+    }
+  },
+  {
+    "name": "beech doors",
+    "id": "9",
+    "filter": {
+      "material": [
+        2
+      ]
+    }
+  },
+  {
+    "name": "enamel doors",
+    "id": "11",
+    "filter": {
+      "material": [
+        3
+      ]
+    }
+  },
+  {
+    "name": "classic white doors",
+    "id": "12",
+    "filter": {
+      "color_set": [
+        1
+      ],
+      "design": [
+        1
+      ]
+    }
+  },
+  {
+    "name": "classic oak doors",
+    "id": "13",
+    "filter": {
+      "material": [
+        1
+      ],
+      "design": [
+        1
+      ]
+    }
+  },
+  {
+    "name": "modern white doors",
+    "id": "14",
+    "filter": {
+      "color_set": [
+        1
+      ],
+      "design": [
+        2
+      ]
+    }
+  },
+  {
+    "name": "modern oak doors",
+    "id": "15",
+    "filter": {
+      "design": [
+        2
+      ],
+      "material": [
+        1
+      ]
+    }
+  },
+  {
+    "name": "modern beech doors",
+    "id": "16",
+    "filter": {
+      "material": [
+        2
+      ],
+      "design": [
+        2
+      ]
     }
   }
 ]

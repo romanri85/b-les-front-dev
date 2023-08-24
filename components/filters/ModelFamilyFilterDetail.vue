@@ -45,7 +45,7 @@ function chooseModel(model) {
 </script>
 
 <template class="filter-container">
-  <div v-if="props.product.product_family && props.product.product_family.products">
+  <div v-if="props.product.product_family && props.product.product_family.products" class="w-full lg:w-1/3">
     <client-only>
       <Disclosure default-open>
         <DisclosureButton class="w-full">
@@ -53,11 +53,11 @@ function chooseModel(model) {
         </DisclosureButton>
         <DisclosurePanel class="mb-10">
           <client-only>
-            <div class="flex gap-y-6 gap-x-6 mb-2 mt-0 flex-nowrap w-full">
+            <div class="flex gap-x-6 mb-2 mt-0 flex-nowrap w-full">
                 <div v-if="props.product.product_family.products" v-for="model in props.product.product_family.products"
                      :key="model.name" @click="chooseModel(model)" class="flex flex-col items-center">
-                  <div class="relative pb-1"
-                       :class="{'border-b': model.name === props.product.name, 'border-black':model.name === props.product.name}">
+                  <div v-if="model.image !== null" class="relative pb-1 cursor-pointer border-b-4 px-4"
+                       :class="{'border-transparent': model.name !== props.product.name, 'border-black':model.name === props.product.name}">
                     <!--            <nuxt-img width="200px" height="auto" :src="props.doorVariant.casing_variant.image"-->
                     <!--                      class="h-auto w-48"></nuxt-img>-->
                     <!--            <nuxt-img width="200px" height="auto"-->
@@ -65,7 +65,7 @@ function chooseModel(model) {
                     <!--                      class="h-auto w-48 absolute top-0"></nuxt-img>-->
                     <nuxt-img  v-if="model.image" key=0 width="100px" height="auto"
                               :src="model.image"
-                              class="h-auto w-16"></nuxt-img>
+                              class="h-auto w-16 pb-3"></nuxt-img>
                   </div>
 <!--                  <div class="text-center text-sm">{{ model.name }}</div>-->
               </div>

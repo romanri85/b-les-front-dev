@@ -1,7 +1,7 @@
 <template>
         <Header :light="true"/>
         <slot/>
-        <LazyFooter/>
+        <Footer/>
 </template>
 
 <script>
