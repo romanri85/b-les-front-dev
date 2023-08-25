@@ -3,7 +3,7 @@
 <!--    <welcome/>-->
   </client-only>
 
-  <slider class="lg:hidden" v-if="isBurgerOpenStore.isBurgerOpen"/>
+  <slider class="lg:hidden"/>
   <slider class="lg:block hidden"/>
   <lazy-pages-index-search/>
   <lazy-pages-index-nature/>

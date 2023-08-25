@@ -8,13 +8,15 @@ import DoorSets from "~/components/pages/door-catalog/DoorSets.vue";
 import DoorFiltersMobile from "~/components/pages/door-catalog/DoorFiltersMobile.vue";
 import {useResizeObserver} from '@vueuse/core'
 import DoorFilters from "~/components/pages/door-catalog/DoorFilters.vue";
+import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore.js";
+
 // definePageMeta({layout: "catalog"})
 
 
 const viewport = useViewportSize()
 const filtersStore = useFiltersStore()
 const {activeFilters, filterCount, materialColors} = storeToRefs(filtersStore)
-
+const isBurgerOpenStore = useIsBurgerOpenStore()
 
 const heroName = "catalog"
 const heroDescription = "catalogPageDescription"
@@ -63,7 +65,7 @@ setTimeout(
     }, 500
 )
 onMounted(async () => {
-
+isBurgerOpenStore.isBurgerOpen=false
 
   if (route.query.collection) {
     // If it exists, add it to the onChangeFilters

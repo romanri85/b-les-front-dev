@@ -9,7 +9,9 @@ import {
 import TextMenuItemsFile from "~/data/TextMenuItems.json";
 import {ChevronDownIcon} from "@heroicons/vue/24/solid";
 import DisclosureStateEmitter from "~/components/base/DisclosureStateEmitter.vue";
+import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
 
+const isBurgerOpenStore = useIsBurgerOpenStore()
 const textMenuItems = reactive(TextMenuItemsFile)
 
 const activeItemIndex = ref(null)
@@ -24,9 +26,7 @@ const currentMenuItems = computed(() => {
 });
 
 const elements = ref([]);
-const doClose = (close) => {
-  close();
-};
+
 
 const hideOther = (id) => {
   const items = elements.value.filter((elm) => {
@@ -40,8 +40,8 @@ const hideOther = (id) => {
 </script>
 
 <template>
-  <div class=" bg-white main-container">
-    <div class="relative ">
+  <div class=" bg-white z-20 absolute w-full">
+    <div class="relative main-container">
       <input type="text"
              class=" w-full border-b-2 border-gray-300 bg-white h-[72px]   text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
              :placeholder=" $t('websiteSearch') ">
@@ -55,21 +55,33 @@ const hideOther = (id) => {
       </div>
     </div>
 
-    <div>
+    <div class="main-container">
       <Disclosure as="div"
           v-for="(item, index) in textMenuItems"
           :key="item.id"
           v-slot="{ open, close }"
+
       >
         <DisclosureButton
             class=" flex justify-between items-center h-[17.5vh] max-h-16 w-full py-2 text-left border-b border-secondaryGrey"
-            @click="activeItemIndex = index"
+            @click="activeItemIndex = index; "
         >
-          <h3><span>{{ $t(item.name) }}</span></h3>
+          <template v-if="(!item.needToShowDropdown || item.name === 'catalog')">
+            <NuxtLink :to="item.slug">
+              <h3 >
+                <span>{{ $t(item.name) }}</span>
+              </h3>
+            </NuxtLink>
+          </template>
+          <template v-else>
+            <h3>
+              <span>{{ $t(item.name) }}</span>
+            </h3>
+          </template>
 
           <!--                            arrows for  menu items with dropdown-->
 
-          <div v-if="item.needToShowDropdown">
+          <div v-if="item.needToShowDropdown && item.name !== 'catalog'">
             <ChevronDownIcon
                 :class="open ? 'duration-200' : 'duration-200 rotate-180'"
                 class="w-5 h-5"
@@ -77,14 +89,14 @@ const hideOther = (id) => {
           </div>
         </DisclosureButton>
         <DisclosurePanel
-            class="panel transition-all opacity-0 duration-200 max-h-0 overflow-hidden"
+            class="panel transition-all opacity-0 duration-300 max-h-0 overflow-hidden"
             :class="open && 'max-h-screen opacity-100'"
-            static
+
         >
 
           <!--                                dropdowns for menu items with dropdown for tablet-->
 
-          <div v-if="item.needToShowDropdown"
+          <div v-if="item.needToShowDropdown && item.name !== 'catalog'"
                class=" pt-4 pb-4 text-sm text-gray-500  md:block hidden">
             <modals-header-modal class="main-container hidden"
                                  :currentMenuItems="currentMenuItems"

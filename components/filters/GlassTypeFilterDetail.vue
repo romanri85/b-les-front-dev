@@ -118,7 +118,7 @@ const decors = props.glass_decor.reduce((acc: GlassDecorItem[], item: GlassDecor
     <DisclosureButton class=" w-full">
       <filter-type filterName="Тип стекла и декора"/>
     </DisclosureButton>
-    <DisclosurePanel class="mb-16 ">
+    <DisclosurePanel class="mb-16">
       <div class="flex justify-start  items-start gap-x-20">
         <div class="flex gap-y-6 gap-x-6 mb-3  flex-wrap">
           <div v-for="glass in glass_types" :key="glass.glass" @click="chooseGlass(glass.glass)">

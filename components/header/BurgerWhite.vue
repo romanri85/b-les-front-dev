@@ -26,7 +26,8 @@
 
 <script setup lang="ts">
 
-
+import  {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
+const isBurgerOpenStore = useIsBurgerOpenStore();
 const isOpen = ref(false);
 const props = defineProps({light: {type: Boolean}})
 function toggleBurger() {

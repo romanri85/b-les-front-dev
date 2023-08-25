@@ -53,7 +53,7 @@ function onParentButtonClick() {
 </script>
 
 <template>
-  <div class="main-container">
+  <div class=" relative z-10 main-container">
     <div class="mt-10 pr-72">
       <div class=" flex justify-start items-end"><h4>Главная / Где купить</h4></div>
     </div>
