@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 
 import menuItemsProps from "~/data/MenuItemsProps.json";
 import {
@@ -35,7 +35,9 @@ const hideOther = (id) => {
   items.forEach((elm) => elm.click());
 };
 
-
+function doClose(close) {
+  close()
+}
 
 </script>
 
@@ -110,7 +112,9 @@ const hideOther = (id) => {
           <div v-if="item.needToShowDropdown" class="md:hidden mt-[25px]">
 
             <div v-for="item in currentMenuItems" :key="item.name" class="flex justify-start">
-              <h5 class="border-b border-black uppercase mb-[25px]">{{ $t(item.name) }}</h5>
+              <NuxtLink :to="item.slug">
+                <h5 class="border-b border-black uppercase mb-[25px]">{{ $t(item.name) }}</h5>
+              </NuxtLink>
 
             </div>
           </div>

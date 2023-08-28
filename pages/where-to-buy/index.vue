@@ -54,7 +54,7 @@ function onParentButtonClick() {
 
 <template>
   <div class=" relative z-10 main-container">
-    <div class="mt-10 pr-72">
+    <div class="mt-10 lg:pr-72">
       <div class=" flex justify-start items-end"><h4>Главная / Где купить</h4></div>
     </div>
 

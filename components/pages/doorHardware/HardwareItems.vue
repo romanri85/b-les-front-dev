@@ -35,12 +35,12 @@ const [parent] = useAutoAnimate()
 
 <template>
   <div class="w-full pl-16">
-      <div class="text-primaryDark flex justify-between w-full">
+      <div class="hidden text-primaryDark md:flex justify-between w-full">
 <!--        <p>{{props.products}}</p>-->
        <sorting-hardware/>
         <h6>Всего ручек: {{total}}</h6>
       </div>
-      <div class="mt-16 grid-cols-4 grid-rows-7 grid" ref="parent">
+      <div class="mt-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-rows-7 grid" ref="parent">
 
         <div v-for="hardwareVariant in products" :key="hardwareVariant.id">
 <!--          <NuxtLink :to="`/catalog/${doorVariant.product_variant.product.id}?material=${doorVariant.product_variant.material.id}&color=${doorVariant.color.id}`">-->
@@ -52,7 +52,7 @@ const [parent] = useAutoAnimate()
     </div>
     <div class="w-full flex justify-center">
         <pagination class="pb-32" :total="total"
-                    :page_size="page_size"
+                    :page_size="hardwareFiltersStore.page_size"
                     :pagesCount="pagesCount"
                     @page-change="onChangePage"
                     v-model:current-page="hardwareFiltersStore.page"

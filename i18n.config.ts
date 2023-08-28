@@ -52,6 +52,7 @@ export default defineI18nConfig(() => ({
             catalogPageDescription: "Design an interior with our company. Choose doors and we will offer functional solutions in a single style. Accessories will help complete the design.",
             doorHardwarePageDescription: "Door hardware is an important element of the door. It is important to choose the right door hardware for the door. We offer a wide range of door hardware.",
             interiorHeader: "Doors in interior",
+            aboutUsPageDescription:'The company "Bryansky Les" is a modern enterprise that specializes in the production of solid wood doors. Our company strives to provide our clients with the opportunity to bring their design and technical solutions to life. We offer a wide range of solid wood doors that are of high quality and reliability. Our doors are made of solid wood, which is covered with a special varnish. We also offer additional services for the delivery and installation of doors.',
 
         },
         ru: {
@@ -105,6 +106,7 @@ export default defineI18nConfig(() => ({
             catalogPageDescription: 'Создайте интерьер вместе с «Брянский лес». Выберите двери,а мы предложим функциональные решения в едином стиле. Завершить образ помогут аксессуары.',
             doorHardwarePageDescription: 'Фурнитура для дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева.',
             interiorHeader: "Двери в интерьере",
+            aboutUsPageDescription:'Компания «Брянский лес» - это современное предприятие, которое специализируется на производстве дверей из массива дерева. Наша компания стремится предоставить нашим клиентам возможность воплотить в жизнь их дизайнерские и технические решения. Мы предлагаем широкий ассортимент дверей из массива дерева, которые отличаются высоким качеством и надежностью. Наши двери изготавливаются из массива дерева, которое покрыто специальным лаком. Также мы предлагаем дополнительные услуги по доставке и монтажу дверей.'
 
         },
     }

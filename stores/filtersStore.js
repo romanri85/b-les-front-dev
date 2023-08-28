@@ -85,15 +85,9 @@ export const useFiltersStore = defineStore("filtersStore", () => {
         }
 
         async function checkFilters(query = "") {
-            const {data} = await useFetch(`${baseURL}/api/product/filters?${query}`, {key: query});
-            if (data.value) {
-                filterCount.value = data.value.counts
-            } else {
-                console.log('no data')
-            }
-
+            const data = await $fetch(`${baseURL}/api/product/filters?${query}`);
+                filterCount.value = data.counts
             // window.scrollTo(0, 0);
-
         }
 
         async function onResetFilters() {

@@ -137,8 +137,8 @@ const minusIcon = `
 
 <template>
   <div class="main-container lg:py-24 md:py-16 py-14">
-    <div class="inline-flex items-start">
-      <div class="pr-16 whitespace-nowrap" @click="filtersStore.onResetFilters()">
+    <div class="md:inline-flex flex md:flex-row flex-col-reverse items-start">
+      <div  class="hidden md:block pr-16 whitespace-nowrap" @click="filtersStore.onResetFilters()">
         <h3 class=""><buttons-primary-button-small>все двери</buttons-primary-button-small></h3>
       </div>
 
@@ -149,6 +149,7 @@ const minusIcon = `
            @click="chooseDoorSet(doorSet)">#{{ doorSet.name }}</p>
         <div class="h-[30px]"></div>
       </div>
+
     </div>
     <primary-button-small class="mt-4 lg:mt-0" @click="toggleDoorSetsVisibility">
       <h4>
@@ -157,6 +158,9 @@ const minusIcon = `
         <span v-else class="inline-block relative top-1" v-html="plusIcon" />
       </h4>
     </primary-button-small>
+    <div  class="block md:hidden pr-16 pt-8 whitespace-nowrap" @click="filtersStore.onResetFilters()">
+      <h3 class=""><buttons-primary-button-small>все двери</buttons-primary-button-small></h3>
+    </div>
   </div>
 </template>
 

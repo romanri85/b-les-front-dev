@@ -7,6 +7,7 @@ import {storeToRefs} from "pinia";
 import Pagination from "~/components/base/pagination/Pagination.vue";
 import buttons from "~/data/interiorButtons.json";
 import {useRoute, useRouter} from 'vue-router';
+import HeroInteriour from "~/components/pages/interiour/heroInteriour.vue";
 
 const interiorStore = useInteriorStore()
 const {projects} = storeToRefs(interiorStore)
@@ -35,8 +36,8 @@ function onChangePage(page) {
 </script>
 
 <template>
-  <hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
-  <div v-if="projects" class="main-container mt-24 grid grid-cols-3 gap-5">
+  <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
+  <div v-if="projects" class="main-container mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
     <div v-for="project in projects" class="min-w-80">
       <div class="relative group">
         <div class="w-full h-60 cursor-pointer">
@@ -56,7 +57,7 @@ function onChangePage(page) {
       <div class="pb-4">
         <div v-for="tag in project.tags" class="inline-block">
           <NuxtLink :to="{ path: '/search-tags', query: { tags: tag.id } }">
-            <p class="underline-direction inline">#{{ tag.name }}</p><span>&nbsp;&nbsp;</span>
+            <p class="underline-direction inline">#{{ tag.name }}&nbsp;</p><span>&nbsp;&nbsp;</span>
           </NuxtLink>
         </div>
 

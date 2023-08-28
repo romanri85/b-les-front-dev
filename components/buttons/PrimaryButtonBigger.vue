@@ -1,6 +1,6 @@
 <template>
   <button class="">
-    <h2 class="underline-direction-white  "><slot/></h2>
+    <h2 class="  "><slot/></h2>
   </button>
 </template>
 

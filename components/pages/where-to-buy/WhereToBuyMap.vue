@@ -1,9 +1,9 @@
 <template>
-  <div style="display: flex;">
-    <div id="map" style="width: 50%; height: 700px;"></div>
-    <div class="pl-10" style="width: 50%; height: 800px; overflow: auto;">
-      <div id="placemark-list" style="position: relative; width: 100%;">
-        <filter-bar :total="totalPlacemarks"
+  <div class="block lg:flex ">
+    <div id="map" class="lg:w-[50%] w-full h-[700px]"></div>
+    <div class="lg:pl-10 lg:w-[50%] w-full h-[800px] overflow-auto">
+      <div id="placemark-list" class="mt-8 lg:mt-0 relative w-full">
+        <filter-bar  :total="totalPlacemarks"
                     @filter-change="filterChange"
                     style="position: sticky; top: 0; z-index: 1;" class="bg-white border-b border-gray-400"
         />
@@ -110,14 +110,14 @@ onMounted(async () => {
 
 
 let maxRetries = 10;
-let interval = 100;  // Starting interval
+let interval = 500;  // Starting interval
 async function initMap() {
   // Make sure the API is loaded
   if (typeof ymaps === 'undefined') {
     if (maxRetries > 0) {
       setTimeout(initMap, interval);
       maxRetries--;
-      interval += 100;  // Increase interval by 30ms for the next retry
+      // interval += 100;  // Increase interval by 30ms for the next retry
       return;
     } else {
       console.error('Failed to initialize ymaps after multiple attempts.');

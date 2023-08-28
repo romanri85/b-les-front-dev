@@ -16,6 +16,16 @@ const props = defineProps({
       <h1 class="hidden md:block text-center whitespace-nowrap text-shadow">{{$t(props.heroName)}}</h1>
       <h2 class="md:hidden text-center whitespace-nowrap text-shadow">{{$t(props.heroName)}}</h2>
       <h6  class="hidden md:block w-[90vw] md:w-[500px] text-white text-center pt-6">{{$t(props.heroDescription)}}</h6>
+      <div v-if="props.buttons" class="flex gap-10 justify-center">
+        <NuxtLink :to="props.buttons.searchPicByTag.link">
+          <primary-button-bigger class="hidden md:block underline"><h2>{{ props.buttons.searchPicByTag.name}}</h2></primary-button-bigger>
+          <primary-button-bigger class="md:hidden pt-6 md:pt-0 underline"><h3>{{ props.buttons.searchPicByTag.name}}</h3></primary-button-bigger>
+        </NuxtLink>
+        <NuxtLink :to="props.buttons.projects.link">
+        <primary-button-bigger class="hidden md:block underline"><h2>{{ props.buttons.projects.name }}</h2></primary-button-bigger>
+        <primary-button-bigger class="md:hidden pt-6 md:pt-0 underline"><h3>{{ props.buttons.projects.name }}</h3></primary-button-bigger>
+        </NuxtLink>
+      </div>
     </div>
     <nuxt-img :src="props.heroImage" class="w-full h-full object-cover object-right"></nuxt-img>
   </div>

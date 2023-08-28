@@ -25,7 +25,7 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
     let page = ref(1)
     const total = ref(0)
     let pagesCount = ref(0)
-    const page_size = 12
+    const page_size = 24
     const colorCollections = ref([])
 
 
@@ -46,11 +46,11 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
 
 
     async function fetchProducts(query = "") {
-        const {data} = await useFetch(`${baseURL}/api/hardware/hardware-variants?${page_size + '&' + query}`, {key:query,cache: true});
-        if (data.value) {
-            total.value = data.value.count
-            pagesCount.value = data.value.page_links.length
-            products.value = data.value.results
+        const data = await $fetch(`${baseURL}/api/hardware/hardware-variants?${page_size + '&' + query}`);
+        if (data) {
+            total.value = data.count
+            pagesCount.value = data.page_links.length
+            products.value = data.results
         }
         else {
             console.log('no data')
@@ -90,13 +90,7 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
     }
 
     async function fetchColorCollections() {
-        const {data} = await useFetch(`${baseURL}/api/hardware/hardware-color-sets`, {key:'id',cache: true});
-        if (data.value) {
-            colorCollections.value = data.value
-        }
-        else {
-            console.log('no data')
-        }
+        colorCollections.value = await $fetch(`${baseURL}/api/hardware/hardware-color-sets`)
     }
 
 

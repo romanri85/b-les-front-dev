@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import PriceFilter from "~/components/filters/priceFilter.vue";
-import ColorSetFilter from "~/components/filters/colorSetFilter.vue";
-import DesignFilter from "~/components/filters/designFilter.vue";
-import MaterialColorFilter from "~/components/pages/door-catalog/MaterialColorFilter.vue";
-import DoorCollectionsFilter from "~/components/pages/door-catalog/DoorCollectionsFilter.vue";
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
-import MaterialFilter from "~/components/filters/MaterialFilter.vue";
-import GlassFilter from "~/components/filters/GlassFilter.vue";
 import {useFiltersStore} from "~/stores/filtersStore";
 import SecondaryButton from "~/components/buttons/SecondaryButton.vue";
 import SortingMobile from "~/components/filters/SortingMobile.vue";
+import PriceFilterHardware from "~/components/pages/doorHardware/priceFilterHardware.vue";
+import ColorCollectionFilterHardware from "~/components/pages/doorHardware/colorCollectionFilterHardware.vue";
+import DesignFilterHardware from "~/components/pages/doorHardware/designFilterHardware.vue";
+import SortingHardware from "~/components/pages/doorHardware/SortingHardware.vue";
+import {useHardwareFiltersStore} from "~/stores/hardwareFiltersStore";
+import SortingHardwareMobile from "~/components/pages/doorHardware/SortingHardwareMobile.vue";
 
-
+const hardwareFiltersStore = useHardwareFiltersStore()
 const filtersStore = useFiltersStore()
 const isFiltersOpen = ref(false)
 const isSortingOpen = ref(false)
@@ -38,6 +37,9 @@ function toggleSortingOpen() {
   <client-only>
 
     <section class="">
+      <div class="main-container">
+
+      </div>
       <div class=" lg:mb-[80px] md:mb-[70px] flex justify-center md:justify-start gap-3">
         <secondary-button
             @click="toggleFiltersOpen"
@@ -61,23 +63,19 @@ function toggleSortingOpen() {
         </div>
       </div>
       <div v-if="isSortingOpen">
-        <sorting-mobile @close-sorting="isSortingOpen=false"/>
+        <sorting-hardware-mobile @close-sorting="isSortingOpen=false"/>
       </div>
       <div class="w-full flex justify-center pt-12 ">
-  <h4>
-    Всего дверей: {{ filtersStore.total }}
-  </h4>
+      <buttons-primary-button-small class="">
+        <h4>Всего ручек: {{hardwareFiltersStore.total}}</h4>
+      </buttons-primary-button-small>
       </div>
 
       <div class=" mt-16 filter-container relative z-20" v-if="isFiltersOpen">
-        <price-filter/>
+        <price-filter-hardware/>
 
-        <color-set-filter/>
-        <design-filter/>
-        <material-filter/>
-        <material-color-filter/>
-        <door-collections-filter/>
-        <glass-filter/>
+        <color-collection-filter-hardware/>
+        <design-filter-hardware/>
         <primary-button-small class="w-full text-start " @click="">
           <h3>Очистить</h3>
         </primary-button-small>

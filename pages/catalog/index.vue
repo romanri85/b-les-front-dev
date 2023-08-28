@@ -53,6 +53,7 @@ const route = useRoute()
 await filtersStore.onChangeFilters({...activeFilters.value, page: 1})
 
 const sidebar = ref(null)
+
 setTimeout(
     () => {
       sidebar.value = new StickySidebar('.sidebar', {
@@ -65,7 +66,6 @@ setTimeout(
     }, 500
 )
 onMounted(async () => {
-isBurgerOpenStore.isBurgerOpen=false
 
   if (route.query.collection) {
     // If it exists, add it to the onChangeFilters

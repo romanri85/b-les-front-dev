@@ -15,6 +15,7 @@ const hardwareFiltersStore = useHardwareFiltersStore()
 <template>
 
   <section class="">
+    <client-only>
     <div class=" lg:mb-[80px] md:mb-[70px] flex gap-">
       <div class="inline-flex gap-x-3">
         <svg class="w-[20px] h-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -33,7 +34,7 @@ const hardwareFiltersStore = useHardwareFiltersStore()
         <h3>Очистить</h3>
       </primary-button-small>
     </div>
-
+    </client-only>
   </section>
 </template>
 
