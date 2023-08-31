@@ -43,7 +43,7 @@
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
     "npm": "^9.6.7",
-    "nuxt-swiper": "^1.1.0",
+    "nuxt-swiper": "^1.2.2",
     "pinia": "^2.0.36",
     "resize-sensor": "^0.0.6",
     "sticky-sidebar": "^3.3.1",

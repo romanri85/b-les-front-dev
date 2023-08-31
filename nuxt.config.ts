@@ -9,6 +9,7 @@ const config = {
         'nuxt-icon',
         ['nuxt-swiper', {
             // Swiper options
+
         }], '@pinia/nuxt',
         ['@formkit/nuxt'],
         "@hebilicious/vue-query-nuxt",
