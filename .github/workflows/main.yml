@@ -28,6 +28,9 @@ jobs:
   pull:
     runs-on: ubuntu-latest
     needs: [ push ]
+    env:
+      DOCKER_CONTAINER_NAME: "b-les-front"
+      DOCKER_IMAGE_TAG: "romanri85/b-les-front:latest"
     steps:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v0.1.10
@@ -39,8 +42,8 @@ jobs:
           script: |
             cd b-les-front
             docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-            docker compose stop
-            docker rmi -f romanri85/b-les-frontend:latest
-            docker pull romanri85/b-les-frontend:latest
-            docker run -p 3000:3000 -d -it --name b-les-frontend-container b-les-frontend
+            docker rm -f ${{ env.DOCKER_CONTAINER_NAME }}
+            docker rmi -f ${{ env.DOCKER_IMAGE_TAG }}
+            docker pull ${{ env.DOCKER_IMAGE_TAG }}
+            docker run -p 3000:3000 -d -it --name ${{ env.DOCKER_CONTAINER_NAME }} ${{ env.DOCKER_IMAGE_TAG }}
             docker logout

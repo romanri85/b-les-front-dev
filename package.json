@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxt/devtools": "^0.5.5",
     "@nuxt/image-edge": "^1.0.0-28094923.e859bba",
     "@nuxtjs/i18n": "^8.0.0-beta.12",
     "autoprefixer": "^10.4.14",
@@ -23,16 +24,30 @@
     "tailwindcss": "^3.2.7"
   },
   "dependencies": {
-    "@headlessui/vue": "^1.7.13",
+    "@formkit/auto-animate": "^0.7.0",
+    "@formkit/icons": "^0.17.4",
+    "@formkit/nuxt": "^0.17.4",
+    "@formkit/pro": "^0.112.7",
+    "@formkit/themes": "^0.17.4",
+    "@headlessui/vue": "^1.7.16",
+    "@hebilicious/vue-query-nuxt": "^0.2.0",
     "@heroicons/vue": "^2.0.18",
+    "@intlify/bundle-utils": "^7.0.2",
     "@pinia/nuxt": "^0.4.10",
-    "@yeger/vue-masonry-wall": "^3.4.4",
+    "@tanstack/vue-query": "^4.32.6",
+    "@vueuse/core": "^10.1.2",
+    "axios": "^1.4.0",
+    "h3": "^1.7.1",
     "imagesloaded": "^5.0.0",
     "install": "^0.13.0",
+    "js-cookie": "^3.0.5",
+    "lodash": "^4.17.21",
     "npm": "^9.6.7",
     "nuxt-swiper": "^1.1.0",
     "pinia": "^2.0.36",
-    "vue-typical": "^2.1.0"
+    "resize-sensor": "^0.0.6",
+    "sticky-sidebar": "^3.3.1",
+    "vue-awesome-paginate": "^1.1.46"
   },
   "overrides": {
     "vue": "latest"

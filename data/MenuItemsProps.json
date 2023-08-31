@@ -3,81 +3,87 @@
     "name": "classic",
     "description": "classicDescription",
     "image": "/header-modal-img/classic-modal-img.webp",
-    "slug": "/classic"
+    "slug": "/classic",
+    "id": "1"
   },
     {
       "name": "versailles",
       "description": "versaillesDescription",
       "image": "/header-modal-img/versailles-modal-img.webp",
-      "slug": "/versailles"
+      "slug": "/versailles",
+        "id": "2"
     },
     {
       "name": "modern",
       "description": "modernDescription",
       "image": "/header-modal-img/modern-modal-img.webp",
-      "slug": "/modern"
+      "slug": "/modern",
+        "id": "4"
     },
     {
       "name": "premier",
       "description": "premierDescription",
       "image": "/header-modal-img/premier-modal-img.webp",
-      "slug": "/premier"
+      "slug": "/premier",
+        "id": "3"
     },
     {
       "name": "rimini",
       "description": "riminiDescription",
       "image": "/header-modal-img/rimini-modal-img.webp",
-      "slug": "/rimini"
+      "slug": "/rimini",
+        "id": "5"
     },
     {
       "name": "rStyle",
       "description": "rStyleDescription",
       "image": "/header-modal-img/r-style-modal-img.webp",
-      "slug": "/rStyle"
+      "slug": "/rStyle",
+        "id": "6"
     }
   ],
 
   "other-elements": [{
     "name": "doorSystems",
     "image": "/header-modal-img/door-systems.webp",
-    "slug": "/other-items/door-systems"
+    "slug": "/systems"
   },
     {
       "name": "doorHardware",
       "image": "/header-modal-img/door-hardware.webp",
-      "slug": "/other-items/door-hardware"
+      "slug": "/doorHardware"
     },
     {
       "name": "plinth",
       "image": "/header-modal-img/plinth.webp",
-      "slug": "/other-items/plinth"
+      "slug": "/plinth"
     },
     {
       "name": "deliveryAndInstallation",
       "image": "/header-modal-img/delivery-installation.webp",
-      "slug": "/other-items/delivery-and-installation"
+      "slug": "/delivery-and-installation"
     }
 
   ],
   "about-us": [{
     "name": "aboutUs",
     "image": "/header-modal-img/about-us.webp",
-    "slug": "/about-us/about-us"
+    "slug": "/about-us"
   },
     {
       "name": "promotions",
       "image": "/header-modal-img/promotions.webp",
-      "slug": "/about-us/promotions"
+      "slug": "/promotions"
     },
     {
       "name": "toDesigners",
       "image": "/header-modal-img/to-designers.webp",
-      "slug": "/about-us/to-designers"
+      "slug": "/to-designers"
     },
     {
       "name": "toDealers",
       "image": "/header-modal-img/to-dealers.webp",
-      "slug": "/about-us/to-dealers"
+      "slug": "/to-dealers"
     }
   ]
 }

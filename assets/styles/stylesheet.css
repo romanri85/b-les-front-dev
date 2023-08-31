@@ -49,10 +49,16 @@
     font-family: "Helvetica";
     src: url("/assets/styles/fonts/helvetica/ag-helvetica.woff2") format("woff2"),
     url("/assets/styles/fonts/helvetica/ag-helvetica.woff") format("woff");
-    font-weight: 400;
+    font-weight: 300;
     font-style: normal;
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Helvetica Neue LT Pro 55 Roman';
+    src: url("/assets/styles/fonts/HelveticaNeueLTPRo55Roman.otf") format('opentype');
+    font-weight: 400; /* Roman typically corresponds to a regular font weight */
+    font-style: normal;
+}
 
 

@@ -1,0 +1,58 @@
+<script setup lang="ts">
+import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
+import FilterType from "~/components/filters/FilterType.vue";
+import {useHardwareFiltersStore} from "~/stores/hardwareFiltersStore.js";
+import {storeToRefs} from "pinia";
+
+let designs = [
+  {
+    name: 'Classic',
+    id: 1
+  },
+  {
+    name: 'Modern',
+    id: 2
+  }
+]
+
+const hardwareFiltersStore = useHardwareFiltersStore()
+const {activeFilters, filterCount} = storeToRefs(hardwareFiltersStore)
+
+function isDesignAvailable(design) {
+  for (let item of filterCount.value.design) {
+    if (item["design"] === design) {
+      return item["count"] > 0;
+    }
+  }
+  return false;  // return false if no matching color_set is found
+}
+function chooseDesign(design) {
+  if (!hardwareFiltersStore.activeFilters.design.includes(design)) {
+    hardwareFiltersStore.onChangeFilters({design: [...hardwareFiltersStore.activeFilters.design, design]})
+  } else {
+    const updatedDesigns = hardwareFiltersStore.activeFilters.design.filter((item) => {
+      return item !== design
+    })
+    hardwareFiltersStore.onChangeFilters({design: updatedDesigns})
+  }
+
+}
+</script>
+
+<template class="filter-container ">
+  <Disclosure default-open>
+    <DisclosureButton class=" w-full">
+      <filter-type filterName="Дизайн"/>
+    </DisclosureButton>
+    <DisclosurePanel class="mb-[80px]">
+      <div v-for="design in designs" :key=design.id class="flex gap-x-[15px] items-center mb-3">
+        <h5 class="cursor-pointer underline-offset-4" @click="!isDesignAvailable(design.id) ? null :chooseDesign(design.id)"
+            :class="{'underline':hardwareFiltersStore.activeFilters.design.includes(design.id)}">{{ design.name }}</h5>
+      </div>
+    </DisclosurePanel>
+  </Disclosure>
+</template>
+
+<style scoped>
+
+</style>

@@ -2,7 +2,7 @@ import {defineStore} from "pinia";
 export const useIsBurgerOpenStore = defineStore("isBurgerOpen", {
     state: () => {
         return {
-            isBurgerOpen: true,
+            isBurgerOpen: false,
         };
     },
     actions: {

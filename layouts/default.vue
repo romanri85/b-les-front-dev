@@ -1,5 +1,5 @@
 <template>
-        <Header/>
+        <Header :light="true"/>
         <slot/>
         <Footer/>
 </template>

@@ -8,7 +8,7 @@
   {
     "id": "other-elements",
     "name": "otherElements",
-    "slug": "/other-elements",
+    "slug": "/",
     "needToShowDropdown": true,
     "itemHeader": "otherElementsHeader"
   },
@@ -19,11 +19,12 @@
     "needToShowDropdown": false
   },
   {
-    "id": "doors-in-interiour",
+    "id": "doors-in-interior",
     "name": "doorsInInterior",
-    "slug": "/doors-in-interiour",
+    "slug": "/interior",
     "needToShowDropdown": false
   },
+
   {
     "id": "about-us",
     "name": "aboutUs",

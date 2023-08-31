@@ -1,0 +1,10 @@
+{
+  "swingDoors": {
+    "name": "systemsSwingDoors",
+    "link": "/"
+  },
+  "slidingDoors": {
+    "name": "systemsSlidingDoors",
+    "link": "/"
+  }
+}

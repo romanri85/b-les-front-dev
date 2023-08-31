@@ -3,30 +3,29 @@
 <!--    <welcome/>-->
   </client-only>
 
-  <slider class="lg:hidden" v-if="isBurgerOpenStore.isBurgerOpen"/>
+  <slider class="lg:hidden"/>
   <slider class="lg:block hidden"/>
-  <search/>
-  <nature/>
-  <projects/>
+  <lazy-pages-index-search/>
+  <lazy-pages-index-nature/>
+  <lazy-pages-index-projects/>
 <!--  <quote/>-->
-  <advantages/>
+  <lazy-pages-index-advantages/>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
-import Slider from "~/pages/index/slider.vue";
-import Search from "~/pages/index/search.vue";
-import Projects from "~/pages/index/projects.vue";
-import Quote from "~/pages/index/quote.vue";
-import Advantages from "~/pages/index/advantages.vue";
+import Slider from "~/components/pages/index/slider.vue";
+import Search from "~/components/pages/index/search.vue";
+import Projects from "~/components/pages/index/projects.vue";
+import Advantages from "~/components/pages/index/advantages.vue";
 import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
 
 const isBurgerOpenStore = useIsBurgerOpenStore()
-import Welcome from "~/components/pop-ups/welcome.vue";
+import Welcome from "~/components/pop-ups/allCollectionsModalDetail.vue";
 
 import {ref} from 'vue'
 import {TransitionRoot} from '@headlessui/vue'
-import Nature from "~/pages/index/nature.vue";
+import Nature from "~/components/pages/index/nature.vue";
 
 const isShowing = ref(true)
 

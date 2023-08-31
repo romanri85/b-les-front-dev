@@ -1,6 +1,9 @@
-/** @type {import('tailwindcss').Config} */
+
+const FormKitVariants = require('@formkit/themes/tailwindcss')
+
 module.exports = {
     content: [
+        './tailwind-theme.js',
         "./components/**/*.{js,vue,ts}",
         "./layouts/**/*.vue",
         "./pages/**/*.vue",
@@ -23,7 +26,8 @@ module.exports = {
             },
             fontFamily: {
                 sans: [
-                    '"Helvetica Neue"',
+                    'HelveticaNeueLTPro-Roman',
+                    'Helvetica Neue',
                     'Arial',
                     'Roboto',
                 ],
@@ -76,11 +80,13 @@ module.exports = {
             screens: {
                 sm: '362px',
                 md: '770px',
+                mdLg: '1024px',
                 lg: '1442px',
                 xl: '1922px',
             },
 
         },
-        plugins: [],
-    }
+    },
+    plugins: [FormKitVariants]
+
 }
