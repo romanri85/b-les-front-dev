@@ -30,7 +30,7 @@ jobs:
     needs: [ push ]
     env:
       DOCKER_CONTAINER_NAME: "b-les-front"
-      DOCKER_IMAGE_TAG: "romanri85/b-les-front:latest"
+      DOCKER_IMAGE_TAG: "romanri85/b-les-frontend:latest"
     steps:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v0.1.10
