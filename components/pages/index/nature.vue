@@ -76,7 +76,7 @@
   color: white;
 }
 .cd-fixed-bg.cd-bg-1 {
-  background-image: url("/sebastian-unrau-sp-p7uuT0tw-unsplash.jpg");
+  background-image: url("/sebastian-unrau-sp-p7uuT0tw-unsplash.jpeg");
 }
 
 

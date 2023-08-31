@@ -46,7 +46,7 @@
   "other-elements": [{
     "name": "doorSystems",
     "image": "/header-modal-img/door-systems.webp",
-    "slug": "/other-items/door-systems"
+    "slug": "/systems"
   },
     {
       "name": "doorHardware",
@@ -56,12 +56,12 @@
     {
       "name": "plinth",
       "image": "/header-modal-img/plinth.webp",
-      "slug": "/other-items/plinth"
+      "slug": "/plinth"
     },
     {
       "name": "deliveryAndInstallation",
       "image": "/header-modal-img/delivery-installation.webp",
-      "slug": "/other-items/delivery-and-installation"
+      "slug": "/delivery-and-installation"
     }
 
   ],

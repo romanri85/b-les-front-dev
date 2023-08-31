@@ -1,0 +1,30 @@
+<script setup lang="ts">
+import Hero from "~/components/base/hero.vue";
+import HeroWithoutDescription from "~/components/base/heroWithoutDescription.vue";
+
+const heroName = "toDealersPageHeader"
+const heroImage = "/toDealers/toDealers-bg.png"
+</script>
+
+<template>
+  <hero-without-description :heroName="heroName"  :heroImage="heroImage"/>
+  <section class="main-container">
+    <div class="lg:px-[255px] mdLg:px-52 md:px-16  lg:pt-24 pt-16 lg:pb-32 pb-20">
+      <h6 class="lg:pb-6 pb-4">{{$t('toDealersPageDescription')}}</h6>
+      <h6 class="lg:pb-10 pb-8">{{$t('toDealersInvitation')}}</h6>
+      <h3 class="flex justify-center pb-8">{{$t('toDealersContactsTitle')}}</h3>
+
+      <h5 class="bold pb-2">{{$t('toDealersPhoneNumber')}}</h5>
+      <h5 class="bold">e-mail: ponamarev@b-les.com</h5>
+    </div>
+
+  </section>
+
+</template>
+
+<style scoped>
+
+.bold{
+  font-weight: normal;
+}
+</style>

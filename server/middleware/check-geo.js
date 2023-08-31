@@ -2,28 +2,33 @@ import { defineEventHandler, parseCookies, setCookie } from 'h3'
 import { baseURL } from "~/config.js";
 
 export default defineEventHandler(async (event) => {
-    const cookies = parseCookies(event)
-    console.log(cookies, 'cookies exist')
+    try {
+        const cookies = parseCookies(event)
+        console.log(cookies, 'cookies exist')
 
-    if(!cookies.geolocation) {
-        console.log('cookies not exist')
-        const response = await fetch(`${baseURL}/api/geolocation/`)
+        if (!cookies.geolocation) {
+            console.log('cookies not exist');
+            const response = await $fetch(`${baseURL}/api/geolocation/`);
 
-        if (!response.ok) {
-            console.error(`HTTP error! status: ${response.status}`);
-        } else {
+            if (!response.ok) {
+                console.error(`HTTP error! status: ${response.status}`);
+                // Perhaps, respond to the event with an error message here
+                return;
+            }
+
             const geo = await response.text();
-            setCookie(event, 'geolocation', geo,
-                {
-                    maxAge: 60 * 60 * 24 * 30,
-                })
+            const maxAge = 60 * 60 * 24 * 30;
 
-            // send a response with the cookie
+            setCookie(event, 'geolocation', geo, { maxAge });
+
             event.respondWith(new Response('OK', {
                 headers: {
-                    'Set-Cookie': `geolocation=${geo}; Max-Age=${60 * 60 * 24 * 30};`
+                    'Set-Cookie': `geolocation=${geo}; Max-Age=${maxAge};`
                 }
             }));
         }
+    } catch (error) {
+        console.error('An error occurred:', error);
+        // Handle the error as you see fit
     }
-})
+});

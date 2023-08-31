@@ -16,12 +16,12 @@ export const useInteriorStore = defineStore("interiorStore", () => {
 
     async function getProjects(page = 1) {
         // let response = await $fetch(`${baseURL}/api/projects?page=${page}`)
-        const {data} = await useFetch(`${baseURL}/api/projects?page=${page}`);
-        if (data.value) {
+        const data = await $fetch(`${baseURL}/api/projects?page=${page}`);
+        if (data) {
             // response = data.value
-            projects.value = data.value.results
-            total.value = data.value.count
-            pagesCount.value = data.value.page_links.length
+            projects.value = data.results
+            total.value = data.count
+            pagesCount.value = data.page_links.length
         }
         else {
             console.log('no data')
@@ -59,7 +59,7 @@ export const useInteriorStore = defineStore("interiorStore", () => {
         const tagsQueryString = new URLSearchParams({
             tags: tagIds.join(",")
         }).toString();
-        const url = `http://localhost:8000/api/projects/images?${tagsQueryString}&page=${page}`;
+        const url = `${baseURL}/api/projects/images?${tagsQueryString}&page=${page}`;
 
 
         selectedImages.value = await $fetch(url)

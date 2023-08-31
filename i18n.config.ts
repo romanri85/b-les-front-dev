@@ -1,114 +1,22 @@
-import {defineI18nConfig} from "#i18n";
-
+import { defineI18nConfig } from "#i18n";
+import ruCommon from "./i18n/ru/ruCommon";
+import enCommon from "./i18n/en/enCommon";
+import enToDesigners from "~/i18n/en/enToDesigners";
+import ruToDesigners from "~/i18n/ru/ruToDesigners";
+import enAboutUs from "~/i18n/en/enAboutUs";
+import ruAboutUs from "~/i18n/ru/ruAboutUs";
+import enToDealers from "~/i18n/en/enToDealers";
+import ruToDealers from "~/i18n/ru/ruToDealers";
+import enDeliveryInstallation from "~/i18n/en/enDeliveryInstallation";
+import ruDeliveryInstallation from "~/i18n/ru/ruDeliveryInstallation";
+import ruSystems from "~/i18n/ru/ruSystems";
+import enSystems from "~/i18n/en/enSystems";
 export default defineI18nConfig(() => ({
     legacy: false,
     locale: 'en',
     messages: {
-        en: {
-            catalog: 'Catalog',
-            otherElements: 'Other elements',
-            whereToBuy: 'Where to buy',
-            doorsInInterior: 'Doors in interior',
-            aboutUs: 'About us',
-            classic: 'Classic',
-            classicDescription: 'Classic is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish.',
-            versailles: 'Versailles',
-            versaillesDescription: 'Versailles is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. Also, the doors are decorated with a special pattern.',
-            premier: 'Premier',
-            premierDescription: 'Premier is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. Also, the doors are decorated with a special pattern with milling.',
-            modern: 'Modern',
-            modernDescription: 'Modern is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the modern style. The doors are made of solid wood, which is covered with a special varnish.',
-            rimini: 'Rimini',
-            riminiDescription: 'Rimini is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the modern style. The doors are made of solid wood, which is covered with a special varnish.',
-            rStyle: 'R-Style',
-            rStyleDescription: 'R-Style is a collection of doors made of solid wood. The collection is made in the style of classicism. The doors are made of solid wood, which is covered with a special varnish. The collection is made in the modern style. The doors are made of solid wood, which is covered with a special varnish.',
-            doorHardware: 'Door hardware',
-            doorSystems: 'Door systems',
-            plinth: 'Plinth',
-            deliveryAndInstallation: 'Delivery and installation',
-            promotions: 'Promotions',
-            toDesigners: 'To designers',
-            toDealers: 'To dealers',
-            aboutCollection: 'About collection',
-            viewCollection: 'View collection',
-            searchByParameters: 'Search by parameters',
-            searchPhotoByTag: 'Search photo by tag',
-            ourProjects: 'Our projects',
-            ourProjectsDescription: 'Our company strives to provide our clients with the opportunity to bring\n' +
-                '            their design and technical solutions to life.',
-            ourAdvantages: 'Our advantages',
-            doorsBeauty: 'The natural beauty of solid wood doors',
-            doorsBeautyDescription: 'During project execution, we discuss the areas of application for our products while meeting the preferences and requirements of our clients. We believe that doors should uplift the mood.',
-            viewMore: 'View more',
-            collections: 'Collections',
-            information: 'Information',
-            michelangeloQuote: '"Trifles make perfection, and perfection is no trifle".',
-            michelangelo: 'Michelangelo, sculptor.',
-            hinges: 'Hinges',
-            handles: 'Handles',
-            otherElementsHeader: 'Additional products and services ',
-            aboutUsHeader: 'Information about the company',
-            websiteSearch: 'Website search',
-            catalogPageDescription: "Design an interior with our company. Choose doors and we will offer functional solutions in a single style. Accessories will help complete the design.",
-            doorHardwarePageDescription: "Door hardware is an important element of the door. It is important to choose the right door hardware for the door. We offer a wide range of door hardware.",
-            interiorHeader: "Doors in interior",
-            aboutUsPageDescription:'The company "Bryansky Les" is a modern enterprise that specializes in the production of solid wood doors. Our company strives to provide our clients with the opportunity to bring their design and technical solutions to life. We offer a wide range of solid wood doors that are of high quality and reliability. Our doors are made of solid wood, which is covered with a special varnish. We also offer additional services for the delivery and installation of doors.',
-
-        },
-        ru: {
-            catalog: 'Каталог',
-            otherElements: 'Другие элементы',
-            whereToBuy: 'Где купить',
-            doorsInInterior: 'Двери в интерьере',
-            aboutUs: 'О нас',
-            classic: 'Классика',
-            classicDescription: 'Классика - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком.',
-            versailles: 'Версаль',
-            versaillesDescription: 'Версаль - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Также двери украшены специальным рисунком.',
-            premier: 'Премьер',
-            premierDescription: 'Премьер - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Также двери украшены специальным рисунком c фрезеровкой.',
-            modern: 'Модерн',
-            modernDescription: 'Модерн - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле модерн. Двери изготовлены из массива дерева, которое покрыто специальным лаком.',
-            rimini: 'Римини',
-            riminiDescription: 'Римини - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле модерн. Двери изготовлены из массива дерева, которое покрыто специальным лаком.',
-            rStyle: 'Р-Стиль',
-            rStyleDescription: 'Р-Стиль - это коллекция дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева, которое покрыто специальным лаком. Коллекция выполнена в стиле модерн. Двери изготовлены из массива дерева, которое покрыто специальным лаком.',
-            doorSystems: 'Дверные системы',
-            doorHardware: 'Фурнитура',
-            plinth: 'Плинтус',
-            deliveryAndInstallation: 'Доставка и монтаж',
-            promotions: 'Акции',
-            toDealers: 'Для дилеров',
-            toDesigners: 'Для дизайнеров',
-            aboutCollection: 'О коллекции',
-            viewCollection: 'Подробнее',
-            searchByParameters: 'Поиск по параметрам',
-            searchPhotoByTag: 'Поиск фото по тегу',
-            ourProjects: 'Наши проекты',
-            ourProjectsDescription: 'Наша компания стремится предоставить нашим клиентам возможность воплотить\n' +
-                '            в жизнь их дизайнерские и технические решения.',
-            michelangelo: 'Микеланджело, скульптор.',
-            michelangeloQuote: '"Совершенство складывается из мелочей. Мелочи создают совершенство, а совершенство - не мелочь".',
-
-            ourAdvantages: 'Наши преимущества',
-            doorsBeauty: 'природная красота дверей из массива',
-            doorsBeautyDescription: 'В ходе выполнения проектов мы обсуждаем области использования предлагаемых нами продуктов и удовлетворяем\n' +
-                '                предпочтения и требования наших клиентов. Мы верим, что двери должны способствовать поднятию\n' +
-                '                настроения.',
-            viewMore: 'Показать еще',
-            collections: 'Коллекции',
-            information: 'Информация',
-            hinges: 'Петли',
-            handles: 'Ручки',
-            otherElementsHeader: 'Дополнительные продукты и услуги',
-            aboutUsHeader: 'Информация о компании',
-            websiteSearch: 'Поиск по сайту',
-            catalogPageDescription: 'Создайте интерьер вместе с «Брянский лес». Выберите двери,а мы предложим функциональные решения в едином стиле. Завершить образ помогут аксессуары.',
-            doorHardwarePageDescription: 'Фурнитура для дверей из массива дерева. Коллекция выполнена в стиле классицизма. Двери изготовлены из массива дерева.',
-            interiorHeader: "Двери в интерьере",
-            aboutUsPageDescription:'Компания «Брянский лес» - это современное предприятие, которое специализируется на производстве дверей из массива дерева. Наша компания стремится предоставить нашим клиентам возможность воплотить в жизнь их дизайнерские и технические решения. Мы предлагаем широкий ассортимент дверей из массива дерева, которые отличаются высоким качеством и надежностью. Наши двери изготавливаются из массива дерева, которое покрыто специальным лаком. Также мы предлагаем дополнительные услуги по доставке и монтажу дверей.'
-
-        },
+        en: {...enCommon, ...enToDesigners, ...enAboutUs, ...enToDealers, ...enDeliveryInstallation, ...enSystems},
+        ru: {...ruCommon, ...ruToDesigners, ...ruAboutUs, ...ruToDealers, ...ruDeliveryInstallation, ...ruSystems}
     }
+}));
 
-}))

@@ -90,7 +90,7 @@ async function getImagesByTags(tagIds, page = 1) {
   const tagsQueryString = new URLSearchParams({
     tags: tagIds.join(",")
   }).toString();
-  const url = `http://localhost:8000/api/projects/images?${tagsQueryString}&page=${page}`;
+  const url = `${baseURL}/api/projects/images?${tagsQueryString}&page=${page}`;
   console.log(url, 'url')
 
 

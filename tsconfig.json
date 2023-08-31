@@ -3,6 +3,7 @@
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "types": [
       "nuxt3",
       "@nuxt/types",
