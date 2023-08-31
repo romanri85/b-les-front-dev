@@ -3,7 +3,6 @@ import {ref} from 'vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot,} from '@headlessui/vue'
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 import {baseURL} from "~/config.js";
-import collections from "~/.output/server/chunks/app/_nuxt/SliderCollections-7749036a.mjs";
 
 const isOpen = ref(true)
 const emit = defineEmits(['closeModal', 'changeModel'])
