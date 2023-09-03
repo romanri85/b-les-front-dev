@@ -20,11 +20,13 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@v4
+
         with:
           context: .
           push: true
           tags: romanri85/b-les-frontend:latest
           file: docker/Dockerfile
+#          build-args: FORMKIT_PRO_KEY=${{ secrets.FORMKIT_PRO_KEY }}
   pull:
     runs-on: ubuntu-latest
     needs: [ push ]
