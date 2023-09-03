@@ -15,6 +15,12 @@ const config = {
         "@hebilicious/vue-query-nuxt",
 
     ],
+    runtimeConfig: {
+        FORMKIT_PRO_KEY: process.env.FORMKIT_PRO_KEY,
+        public: {
+            FORMKIT_PRO_KEY: process.env.FORMKIT_PRO_KEY,
+        },
+    },
     devtools: {enabled: true},
     plugins: [
         '~/plugins/auto-animate.js'],
