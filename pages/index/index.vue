@@ -26,7 +26,6 @@ import Welcome from "~/components/pop-ups/allCollectionsModalDetail.vue";
 import {ref} from 'vue'
 import {TransitionRoot} from '@headlessui/vue'
 import Nature from "~/components/pages/index/nature.vue";
-console.log(process.env.FORMKIT_PRO_KEY)
 const isShowing = ref(true)
 
 definePageMeta({layout: "default"});

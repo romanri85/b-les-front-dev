@@ -16,7 +16,7 @@ export default defineFormKitConfig(() => {
     const config = useRuntimeConfig()
     const classes = generateClasses(myTailwindTheme)
     // and we can use the variables to import secrets
-    const pro = createProPlugin(process.env.FORMKIT_PRO_KEY, inputs)
+    const pro = createProPlugin(config.public.FORMKIT_PRO_KEY, inputs)
     const icons = {
         ...genesisIcons,
     }
