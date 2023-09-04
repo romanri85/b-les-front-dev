@@ -4,7 +4,6 @@ import {generateClasses} from '@formkit/themes'
 import myTailwindTheme from './tailwind-theme.js'
 import {genesisIcons} from "@formkit/icons";
 import {createProPlugin, inputs} from '@formkit/pro'
-import {plugins} from "nitropack/dist/runtime/virtual/plugins";
 // import '@formkit/themes/genesis'
 // import '@formkit/pro/genesis'
 // formkit.config.js
@@ -18,7 +17,7 @@ export default defineFormKitConfig(() => {
     const config = useRuntimeConfig()
     const classes = generateClasses(myTailwindTheme)
     // and we can use the variables to import secrets
-    const pro = createProPlugin(config.public.FORMKIT_PRO_KEY, inputs)
+    const pro = createProPlugin(config.public.FORMKIT_PRO_KEY || 'fk-6d63cbb736', inputs)
     const icons = {
         ...genesisIcons,
     }
