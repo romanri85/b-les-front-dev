@@ -16,7 +16,6 @@ const config = {
 
     ],
     runtimeConfig: {
-        FORMKIT_PRO_KEY: process.env.FORMKIT_PRO_KEY,
         public: {
             FORMKIT_PRO_KEY: process.env.FORMKIT_PRO_KEY,
         },
@@ -53,6 +52,7 @@ const config = {
     i18n: {
         vueI18n: './i18n.config.ts' // if you are using custom path, default
     },
+    ssr: false,
     pinia: {
         autoImports: [
             // automatically imports `defineStore`
