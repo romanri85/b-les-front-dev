@@ -47,5 +47,5 @@ jobs:
             docker rm -f ${{ env.DOCKER_CONTAINER_NAME }}
             docker rmi -f ${{ env.DOCKER_IMAGE_TAG }}
             docker pull ${{ env.DOCKER_IMAGE_TAG }}
-            docker run -p 3000:3000 -d -it --restart always --name ${{ env.DOCKER_CONTAINER_NAME }} ${{ env.DOCKER_IMAGE_TAG }}
+            docker run -p 3000:3000 -d -e FORMKIT_PRO_KEY=${{ secrets.FORMKIT_PRO_KEY }}  -it --restart always --name ${{ env.DOCKER_CONTAINER_NAME }} ${{ env.DOCKER_IMAGE_TAG }}
             docker logout
