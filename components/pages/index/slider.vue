@@ -1,7 +1,7 @@
 <template>
 
   <div class="lg:mt-[-87px] md:mt-[-65px] mt-[-65px] w-screen">
-<!--    <client-only>-->
+    <client-only>
       <Swiper
           :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
           :slides-per-view="1"
@@ -81,7 +81,7 @@
 
         </SwiperSlide>
       </Swiper>
-<!--    </client-only>-->
+    </client-only>
   </div>
 </template>
 

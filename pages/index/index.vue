@@ -1,10 +1,7 @@
 <template>
-  <client-only>
-<!--    <welcome/>-->
-  </client-only>
 
-  <slider class="lg:hidden"/>
-  <slider class="lg:block hidden"/>
+
+  <slider/>
   <lazy-pages-index-search/>
   <lazy-pages-index-nature/>
   <lazy-pages-index-projects/>
