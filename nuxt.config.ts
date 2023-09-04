@@ -17,7 +17,7 @@ const config = {
     ],
     runtimeConfig: {
         public: {
-            FORMKIT_PRO_KEY: process.env.FORMKIT_PRO_KEY,
+            FORMKIT_PRO_KEY: process.env.NUXT_PUBLIC_FORMKIT_PRO_KEY,
         },
     },
     devtools: {enabled: true},
