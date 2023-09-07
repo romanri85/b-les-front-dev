@@ -2,7 +2,6 @@ import {defineStore} from "pinia";
 import {baseURL} from "~/config";
 
 export const useFiltersStore = defineStore("filtersStore", () => {
-
         const activeFilters = ref({
             ordering: "",
             // min_price: Number,
@@ -86,7 +85,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
 
         async function checkFilters(query = "") {
             const data = await $fetch(`${baseURL}/api/product/filters?${query}`);
-                filterCount.value = data.counts
+            filterCount.value = data.counts
             // window.scrollTo(0, 0);
         }
 

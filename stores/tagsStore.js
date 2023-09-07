@@ -1,5 +1,7 @@
 import {defineStore} from "pinia";
-import {baseURL} from "~/config";
+// import {baseURL} from "~/config";
+
+const config = useRuntimeConfig()
 export const useTagsStore = defineStore("tagsStore", {
     state: () => {
         return {
@@ -8,7 +10,7 @@ export const useTagsStore = defineStore("tagsStore", {
     },
     actions: {
         async fetchTags() {
-            this.tags = await $fetch(`${baseURL}/api/projects/tags`);
+            this.tags = await $fetch(`${config.public.baseURL}/api/projects/tags`);
         }
     }
 });

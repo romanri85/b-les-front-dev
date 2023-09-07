@@ -1,5 +1,7 @@
 import {defineStore} from "pinia";
-import {baseURL} from "~/config";
+// import {baseURL} from "~/config";
+
+const config = useRuntimeConfig()
 
 export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () => {
 
@@ -46,7 +48,7 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
 
 
     async function fetchProducts(query = "") {
-        const data = await $fetch(`${baseURL}/api/hardware/hardware-variants?${page_size + '&' + query}`);
+        const data = await $fetch(`${config.public.baseURL}/api/hardware/hardware-variants?${page_size + '&' + query}`);
         if (data) {
             total.value = data.count
             pagesCount.value = data.page_links.length
@@ -60,7 +62,7 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
 
 
     async function checkFilters(query = "") {
-        const {data} = await useFetch(`${baseURL}/api/hardware/hardware-filters?${query}`, {key:'counts',cache: true});
+        const {data} = await useFetch(`${config.public.baseURL}/api/hardware/hardware-filters?${query}`, {key:'counts',cache: true});
         if (data.value) {
             filterCount.value = data.value.counts
         }
@@ -90,7 +92,7 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
     }
 
     async function fetchColorCollections() {
-        colorCollections.value = await $fetch(`${baseURL}/api/hardware/hardware-color-sets`)
+        colorCollections.value = await $fetch(`${config.public.baseURL}/api/hardware/hardware-color-sets`)
     }
 
 

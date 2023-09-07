@@ -131,7 +131,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-<!--  <client-only>Ω-->
+  <client-only>Ω
     <div ref="catalogElement">
       <hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>
       <door-sets/>
@@ -145,7 +145,7 @@ onUnmounted(() => {
         <door-items class="md:w-[calc(100%-320px)] lg:min-h-[3540px] "/>
       </div>
     </div>
-<!--  </client-only>-->
+  </client-only>
 </template>
 
 <style scoped>

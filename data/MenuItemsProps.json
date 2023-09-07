@@ -46,7 +46,7 @@
   "other-elements": [{
     "name": "doorSystems",
     "image": "/header-modal-img/door-systems.webp",
-    "slug": "/systems"
+    "slug": "/systems/swing"
   },
     {
       "name": "doorHardware",

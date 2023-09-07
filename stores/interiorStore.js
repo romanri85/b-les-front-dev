@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {baseURL} from "~/config";
 
+// const config = useRuntimeConfig()
 export const useInteriorStore = defineStore("interiorStore", () => {
 
 

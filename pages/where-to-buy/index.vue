@@ -46,7 +46,7 @@ function changeCity(newCityId) {
   city.value = cities.value.find(city => city.id === newCityId);
 }
 
-function onParentButtonClick() {
+function openCityModal() {
   shouldOpenModal.value = shouldOpenModal.value + 1
 }
 
@@ -58,7 +58,7 @@ function onParentButtonClick() {
       <div class=" flex justify-start items-end"><h4>Главная / Где купить</h4></div>
     </div>
 
-    <h1 @click="onParentButtonClick" v-if="isCityLoaded && city" class="mt-10 pb-8">Салоны в <span
+    <h1 @click="openCityModal" v-if="isCityLoaded && city" class="mt-10 pb-8">Салоны в <span
         class="border-b-2 border-b-black cursor-pointer">{{ city.dative_case_name || 'Москве' }}</span></h1>
     <!--    <h5 class="pb-4" v-if="!isCityFound">К сожалению, в вашем регионе нет наших магазинов, или представителей. Но мы можем доставить двери в любой регион России.</h5>-->
 

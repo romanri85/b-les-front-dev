@@ -39,7 +39,7 @@ module.exports = {
             },
             fontSize: {
 
-                'h1-lg': ['50px', {lineHeight: '60px'}],
+                'h1-lg': ['40px', {lineHeight: '45px'}],
                 '40-mono': ['40px', {lineHeight: '45px'}],
                 '30-mono': ['30px', {lineHeight: '36px'}],
                 '25-mono': ['25px', {lineHeight: '31px'}],
