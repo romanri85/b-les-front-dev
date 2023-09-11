@@ -8,7 +8,7 @@ const props = defineProps({
 
 <template>
 <div>
-  <h3 class="whitespace-nowrap pt-4" v-if="props.doorVariantData.is_sale_active">
+  <h3 class="whitespace-nowrap pt-4" v-if="props.doorVariantData.sale">
     <!-- Check if doorVariantData.sale is equal to 1 -->
     <span v-if="props.doorVariantData.sale.sale_type === 1">
     - {{ props.doorVariantData.sale.discount }}% на полотно

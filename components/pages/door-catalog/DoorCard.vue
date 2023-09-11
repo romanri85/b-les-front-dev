@@ -29,7 +29,7 @@ const mouseLeave = () => {
   <div  @mouseover="mouseOver"
         @mouseleave="mouseLeave" class="relative flex flex-col items-center">
     <div
-        v-if="props.doorVariant.is_sale_active"
+        v-if="props.doorVariant.sale"
         class="absolute top-0 left-4  p-1">
       <h4 class="font-regular">Акция</h4>
     </div>
@@ -50,13 +50,13 @@ const mouseLeave = () => {
       <p class="font-regular">
         <!-- First span: Displayed only if is_sale_active is true -->
         <span
-            v-if="props.doorVariant.is_sale_active">
-    {{ toNumber(props.doorVariant.sale_leaf_casing_price) }}₽&nbsp;&nbsp;
+            v-if="props.doorVariant.sale">
+    {{ toNumber(props.doorVariant.sale.sale_leaf_casing_price) }}₽&nbsp;&nbsp;
   </span>
 
         <!-- Second span: Line-through and gray color only if is_sale_active is true -->
         <span
-            :class="props.doorVariant.is_sale_active ? 'line-through text-gray-400' : ''">
+            :class="props.doorVariant.sale ? 'line-through text-gray-400' : ''">
     {{ toNumber(props.doorVariant.leaf_casing_price) }}&nbsp;₽
   </span>
       </p>
