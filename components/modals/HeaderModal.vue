@@ -1,6 +1,7 @@
 <template>
 
 <!--    collections if catalog chosen-->
+
     <div ref="menuRef"  class="lg:absolute  lg:top-[85px] lg:left-[50%] lg:-translate-x-[50%] w-[100%] h-[65px] flex justify-center items-center" >
         <h3 class="lg:text-white text-black">{{ $t(props.activeMenuItemKey) }}</h3></div>
 <!--    <div v-else ref="menuRef"  class=" lg:fixed top-[85px] left-[50%] -translate-x-[50%] w-[100%] h-[65px] " ></div>-->

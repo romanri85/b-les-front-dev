@@ -3,8 +3,8 @@ import {Popover, PopoverButton, PopoverPanel} from "@headlessui/vue";
 import TextMenuItems from "@/data/TextMenuItems.json"
 import menuItemsProps from "@/data/MenuItemsProps.json"
 import {ChevronDownIcon} from '@heroicons/vue/24/solid'
-import Pagination from "~/components/base/pagination/Pagination.vue";
 import {ref} from "vue";
+import {useRoute} from "vue-router";
 
 defineProps({light: {type: Boolean, default: true}})
 
@@ -16,6 +16,14 @@ const activeItemIndex = ref(null)
 const textMenuHovered = ref(false)
 
 const borderedItemIndex = ref(null);
+
+const route = useRoute()
+
+watch(
+    () => route.path,
+    (newValue, oldValue) => {
+      activeItemIndex.value = null
+    })
 
 function onTextMenuMouseLeave() {
   textMenuHovered.value = false
@@ -37,7 +45,7 @@ const currentMenuItems = computed(() => {
     <ul ref="menuRef" :class="light ? 'text-white' : 'text-black'"
         class="menu lg:flex xl:40px lg:gap-x-[30px] xl:h-[100px] lg:h-[86px] h-[60px] justify-between hidden  items-center"
         @mouseenter="textMenuHovered = true" @mouseleave="onTextMenuMouseLeave">
-<!--      <client-only>-->
+      <!--      <client-only>-->
       <Popover v-for="(item, index) in textMenuItems" :key="item.name" as="li"
                class="h-full flex menu-item">
         <PopoverButton class="">

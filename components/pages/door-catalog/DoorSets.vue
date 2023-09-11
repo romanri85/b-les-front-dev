@@ -10,7 +10,7 @@ const filtersStore = useFiltersStore()
 const { activeFilters, filterCount, materialColors,isDoorSetApplied } = storeToRefs(filtersStore)
 
 const doorSets = reactive(searchByParameters)
-const activeDoorSetIndex = ref(0)
+const activeDoorSetIndex = ref(null)
 import { useRoute } from "vue-router";
 const route = useRoute()
 
@@ -31,15 +31,8 @@ onMounted(() => {
     }
   }
 });
-function chooseDoorSet(doorSet) {
-  // Reset activeFilters to its initial state
-  if(filtersStore.isDoorSetApplied){
-    filtersStore.isDoorSetApplied = false
-    filtersStore.onResetFilters()
-    return
-  }
-  filtersStore.onResetFilters()
 
+function changeDoorset(doorSet) {
   const filterKeys = Object.keys(doorSet.filter);
 
   filterKeys.forEach(filterType => {
@@ -65,8 +58,26 @@ function chooseDoorSet(doorSet) {
     }
     filtersStore.onChangeFilters(activeFilters.value);
     filtersStore.isDoorSetApplied = true
+    activeDoorSetIndex.value = doorSets.indexOf(doorSet);
 
   });
+}
+function chooseDoorSet(doorSet) {
+  // Reset activeFilters to its initial state
+  if(filtersStore.isDoorSetApplied){
+    filtersStore.isDoorSetApplied = false
+    filtersStore.onResetFilters()
+    if (activeDoorSetIndex.value === doorSets.indexOf(doorSet)) {
+      activeDoorSetIndex.value = null;
+      return
+    } else{
+      changeDoorset(doorSet)
+    }
+
+  }
+  filtersStore.onResetFilters()
+  changeDoorset(doorSet)
+
 }
 
 const initialFilters = {

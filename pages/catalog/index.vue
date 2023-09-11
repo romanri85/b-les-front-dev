@@ -131,7 +131,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <client-only>Ω
+  <client-only>
     <div ref="catalogElement">
       <hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>
       <door-sets/>

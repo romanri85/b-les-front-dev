@@ -100,6 +100,10 @@ function doClose(close) {
 
           <div v-if="item.needToShowDropdown && item.name !== 'catalog'"
                class=" pt-4 pb-4 text-sm text-gray-500  md:block hidden">
+<!--            <modals-header-modal-->
+<!--                                 :currentMenuItems="currentMenuItems"-->
+<!--                                 :menuItemsProps="menuItemsProps"-->
+<!--                                 :activeMenuItemKey="item.itemHeader"/>-->
             <modals-header-modal class="main-container hidden"
                                  :currentMenuItems="currentMenuItems"
                                  :menuItemsProps="menuItemsProps"

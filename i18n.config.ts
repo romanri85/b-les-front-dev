@@ -11,12 +11,14 @@ import enDeliveryInstallation from "~/i18n/en/enDeliveryInstallation";
 import ruDeliveryInstallation from "~/i18n/ru/ruDeliveryInstallation";
 import ruSystems from "~/i18n/ru/ruSystems";
 import enSystems from "~/i18n/en/enSystems";
+import enSale from "~/i18n/en/enSale";
+import ruSale from "~/i18n/ru/ruSale";
 export default defineI18nConfig(() => ({
     legacy: false,
     locale: 'en',
     messages: {
-        en: {...enCommon, ...enToDesigners, ...enAboutUs, ...enToDealers, ...enDeliveryInstallation, ...enSystems},
-        ru: {...ruCommon, ...ruToDesigners, ...ruAboutUs, ...ruToDealers, ...ruDeliveryInstallation, ...ruSystems}
+        en: {...enCommon, ...enToDesigners, ...enAboutUs, ...enToDealers, ...enDeliveryInstallation, ...enSystems, ...enSale},
+        ru: {...ruCommon, ...ruToDesigners, ...ruAboutUs, ...ruToDealers, ...ruDeliveryInstallation, ...ruSystems, ...ruSale}
     }
 }));
 

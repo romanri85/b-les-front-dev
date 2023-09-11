@@ -50,7 +50,7 @@ function onChangePage(page) {
       <!--        <p>{{props.products}}</p>-->
       <sorting/>
       <div  class="hidden md:block">
-      <p class=" mt-14  md:mt-0" >Всего дверей: {{ filtersStore.total }}</p>
+      <p class=" mt-14  md:mt-0 font-regular" >Всего дверей: {{ filtersStore.total }}</p>
       </div>
     </div>
     <div class="mt-4 md:mt-16 gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid" ref="parent">
