@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import Hero from "~/components/base/hero.vue";
+import BaseHero from "~/components/base/BaseHero.vue";
 import {onMounted, ref} from "vue";
 import {useInteriorStore} from "~/stores/interiorStore";
 import buttons from "~/data/interiorButtons.json";
@@ -137,7 +137,7 @@ function handleChooseTag(tag) {
 
 <template>
   <div>
-    <hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
+    <base-hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
 
     <div class="flex justify-center">
 

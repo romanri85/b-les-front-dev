@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {baseURL} from "~/config";
-import Hero from "~/components/base/hero.vue";
+import BaseHero from "~/components/base/BaseHero.vue";
 import Pagination from "~/components/base/pagination/Pagination.vue";
 import {useInteriorStore} from "~/stores/interiorStore";
 import {storeToRefs} from "pinia";
@@ -87,7 +87,7 @@ const layoutImages = computed(() => {
 </script>
 
 <template>
-  <hero v-if="project && project.first_image" class="mb-24" :heroName="project.name" hero-description=""
+  <base-hero v-if="project && project.first_image" class="mb-24" :heroName="project.name" hero-description=""
         :heroImage="project.first_image.image"/>
   <div v-if="project" class="flex justify-center mb-24"><p>{{ project.description }}</p></div>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import Hero from "~/components/base/hero.vue";
+import BaseHero from "~/components/base/BaseHero.vue";
 import { useInterval } from '@vueuse/core'
 import { useIntersectionObserver } from '@vueuse/core'
 
@@ -59,7 +59,7 @@ const heroImage = "/aboutUs/aboutUs-bg.png"
 </script>
 
 <template>
-  <hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage"/>
+  <base-hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage"/>
   <section class="main-container ">
     <div class="main-container flex md:flex-row flex-col  justify-between  gap-x-16 lg:gap-x-24">
       <div class="flex flex-col mt-12 md:mt-0 justify-center md:w-1/2 gap-y-4  lg:gap-y-10">

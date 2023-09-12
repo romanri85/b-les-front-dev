@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import Hero from "~/components/base/hero.vue";
-import HeroWithoutDescription from "~/components/base/heroWithoutDescription.vue";
+import BaseHeroWithoutDescription from "~/components/base/BaseHeroWithoutDescription.vue";
 
 const heroName = "toDealersPageHeader"
 const heroImage = "/toDealers/toDealers-bg.png"
 </script>
 
 <template>
-  <hero-without-description :heroName="heroName"  :heroImage="heroImage"/>
+  <base-hero-without-description :heroName="heroName"  :heroImage="heroImage"/>
   <section class="main-container">
     <div class="lg:px-[255px] mdLg:px-52 md:px-16  lg:pt-24 pt-16 lg:pb-32 pb-20">
       <h6 class="lg:pb-6 pb-4">{{$t('toDealersPageDescription')}}</h6>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 // import Header from "~/components/header/Header.vue";
-import Logo from "~/components/base/Logo.vue";
+import BaseLogo from "~/components/base/BaseLogo.vue";
 import TextMenuItems from "~/components/header/TextMenuItems.vue";
 import IconsMenuItems from "~/components/header/IconsMenuItems.vue";
 
@@ -34,7 +34,7 @@ const props = defineProps({
         class=" bg-transparent main-container font-mono whitespace-nowrap flex  justify-between items-center">
       <!--            logo-->
       <NuxtLink to="/">
-        <logo :light="props.light"/>
+        <base-logo :light="props.light"/>
       </NuxtLink>
 
       <text-menu-items :light="props.light"/>

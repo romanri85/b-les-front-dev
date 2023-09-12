@@ -1,6 +1,6 @@
 <script setup lang="js">
 import DoorItems from "~/components/pages/door-catalog/DoorItems.vue";
-import Hero from "~/components/base/hero.vue";
+import BaseHero from "~/components/base/BaseHero.vue";
 import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
 import {useViewportSize} from "~/composables/useViewportSize";
@@ -133,7 +133,7 @@ onUnmounted(() => {
 <template>
   <client-only>
     <div ref="catalogElement">
-      <hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>
+      <base-hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>
       <door-sets/>
       <div class="main-content flex main-container md:flex-row flex-col md:mt-0 ">
         <div v-if="viewport.isDesktop || viewport.isTablet" class="md:w-[320px] sidebar">

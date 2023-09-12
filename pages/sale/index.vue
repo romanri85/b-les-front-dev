@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HeroWithoutDescription from "~/components/base/heroWithoutDescription.vue";
+import BaseHeroWithoutDescription from "~/components/base/BaseHeroWithoutDescription.vue";
 import {useSaleStore} from "~/stores/saleStore.js";
 
 
@@ -34,7 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <hero-without-description :heroName="heroName" :heroImage="heroImage"/>
+  <base-hero-without-description :heroName="heroName" :heroImage="heroImage"/>
   <section class="pb-20 lg:pb-32">
     <div class="main-container">
 

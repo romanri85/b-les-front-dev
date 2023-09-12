@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Hero from "~/components/base/hero.vue";
+import BaseHero from "~/components/base/BaseHero.vue";
 import {baseURL} from "~/config";
 
 const heroName = "plinthHeader"
@@ -15,7 +15,7 @@ await fetchPlinths()
 </script>
 
 <template>
-  <hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage"/>
+  <base-hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage"/>
   <article class="main-container">
     <p class="lg:px-[230px] px-[40px] py-[60px] lg:py-[90px]">
     Плинтус - декоративный элемент, позволяющий оформить интерьер в едином стиле с межкомнатными дверьми. С его помощью

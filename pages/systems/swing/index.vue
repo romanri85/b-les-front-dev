@@ -3,7 +3,7 @@
 import HeroSystems from "~/components/pages/systems/heroSystems.vue";
 import buttons from "~/data/systemsButtons.json";
 import OpeningType from "~/components/pages/systems/OpeningType.vue";
-import SystemsModal from "#build/components/pop-ups/systemsModal.vue";
+import SystemsModal from "#build/components/pop-ups/SystemsModal.vue";
 
 const heroName = "systemsPageHeader"
 const heroImage = "/systems/systems-bg.png"

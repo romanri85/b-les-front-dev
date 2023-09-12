@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HeroWithoutDescription from "~/components/base/heroWithoutDescription.vue";
+import BaseHeroWithoutDescription from "~/components/base/BaseHeroWithoutDescription.vue";
 
 const heroName = "deliveryInstallationPageHeader"
 const heroDescription = "toDesignersPageDescription"
@@ -7,7 +7,7 @@ const heroImage = "/delivery-and-installation/delivery-installation-bg.png"
 </script>
 
 <template>
-  <hero-without-description :heroName="heroName" :heroImage="heroImage"/>
+  <base-hero-without-description :heroName="heroName" :heroImage="heroImage"/>
   <section class="main-container">
     <div class="lg:px-[255px] mdLg:px-52 md:px-16 lg:pt-24 pt-16 lg:pb-32 pb-20">
       <div class="  ">

@@ -3,9 +3,11 @@
 const config = {
     css: ['~/assets/styles/index.scss'],
     modules: [
+        '@nuxtjs/algolia',
         'nuxt-headlessui',
         '@nuxt/image-edge',
         '@nuxtjs/i18n',
+        'nuxt-lodash',
         'nuxt-icon',
         ['nuxt-swiper', {
             // Swiper options
@@ -13,11 +15,21 @@ const config = {
         }], '@pinia/nuxt',
         ['@formkit/nuxt'],
         "@hebilicious/vue-query-nuxt",
+        '@nuxtjs/eslint-module',
 
     ],
+    algolia: {
+        apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
+        applicationId: process.env.ALGOLIA_APPLICATION_ID,
+        instantSearch: {
+            theme: 'algolia'
+        }
+    },
     runtimeConfig: {
         public: {
             FORMKIT_PRO_KEY: process.env.NUXT_PUBLIC_FORMKIT_PRO_KEY,
+            ALGOLIA_SEARCH_API_KEY: process.env.ALGOLIA_SEARCH_API_KEY,
+            ALGOLIA_APPLICATION_ID: process.env.ALGOLIA_APPLICATION_ID,
             baseURL: process.env.BASE_URL,
         },
     },

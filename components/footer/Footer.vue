@@ -2,7 +2,7 @@
 defineProps({light: {type: Boolean, default: true}})
 
 import collections from '~/data/SliderCollections.json'
-import Logo from "~/components/base/Logo.vue";
+import BaseLogo from "~/components/base/BaseLogo.vue";
 
 const {locale, setLocale} = useI18n()
 
@@ -135,7 +135,7 @@ const mdSmMenu = [
         <div class="main-container">
             <div class=" flex md:flex-row flex-col justify-between xl:pt-24 lg:pt-16 pt-12 md:items-start items-center md:pb-24 pb-12">
                 <div class="lg:pr-16 ">
-                    <logo light class=" xl:mb-16 lg:mb-12 mb-5"/>
+                    <BaseLogo light class=" xl:mb-16 lg:mb-12 mb-5"/>
                     <div class="md:block hidden">
                         <buttons-secondary-button
                                 class="xl:w-72 xl:h-20 lg:h-16 md:h-16 lg:w-64 md:w-52 lg:flex sm:block sm:border-0 ">

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 // import Header from "~/components/header/Header.vue";
-import Logo from "~/components/base/Logo.vue";
+import BaseLogo from "~/components/base/BaseLogo.vue";
 import IconsMenuItems from "~/components/header/IconsMenuItems.vue";
 import TabletMobileMenu from "~/components/header/TabletMobileMenu.vue";
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
@@ -55,7 +55,7 @@ watch(
           </DisclosureButton>
         </div>
         <NuxtLink to="/">
-          <logo :light="!open && props.light"/>
+          <base-logo :light="!open && props.light"/>
         </NuxtLink>
         <!--        <pre>{{burgerComponent}}</pre>-->
         <icons-menu-items :light="!open && props.light"/>

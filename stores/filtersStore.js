@@ -60,22 +60,17 @@ export const useFiltersStore = defineStore("filtersStore", () => {
 
 
         async function fetchProducts(query = "") {
-            const {
-                data,
-
-            } = await useFetch(`${baseURL}/api/product/product-variants?page_size=${page_size + '&' + query}`, {
-                key: 'product-variants',
-            });
+            const data= await $fetch(`${baseURL}/api/product/product-variants?page_size=${page_size + '&' + query}`);
             // const {data} = useQuery({
             //     queryKey: ['product-variants',query],
             //     queryFn: () => $fetch(`${baseURL}/api/product/product-variants?page_size=${page_size + '&' + query}`),
             // })
 
 
-            if (data.value) {
-                total.value = data.value.count
-                pagesCount.value = data.value.page_links.length
-                products.value = data.value.results
+            if (data) {
+                total.value = data.count
+                pagesCount.value = data.page_links.length
+                products.value = data.results
 
             } else {
                 console.log('no data')
