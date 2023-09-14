@@ -142,7 +142,7 @@ onUnmounted(() => {
           </div>
         </div>
         <door-filters-mobile v-else-if="viewport.isMobile"/>
-        <door-items class="md:w-[calc(100%-320px)] lg:min-h-[3540px] "/>
+        <door-items class="md:w-[calc(100%-320px)]  "/>
       </div>
     </div>
   </client-only>

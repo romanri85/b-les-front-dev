@@ -11,11 +11,11 @@ const sortFilters = [
   },
   {
     name: 'По возрастанию цены',
-    value: 'price'
+    value: 'effective_leaf_casing_price'
   },
   {
     name: 'По убыванию цены',
-    value: '-price'
+    value: '-effective_leaf_casing_price'
   },
   {
     name: 'По названию продукта: с начала',

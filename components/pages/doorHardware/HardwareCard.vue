@@ -2,25 +2,37 @@
 
 import {toNumber} from "@vue/shared";
 import {baseURL} from "~/config";
+import HardwareImageModal from "~/components/pop-ups/HardwareImageModal.vue";
+import {ref} from "vue";
 
 const props = defineProps({
   hardwareVariant: Object
 })
 
+const imgModal = ref(null);
+
+
+
+const triggerModal = (image) => {
+  if (imgModal.value && imgModal.value.openModal) {
+    imgModal.value.openModal();
+  } else {
+    console.error('Method not available or component not initialized.');
+  }
+};
+
+
 </script>
 
 <template>
-<!--    <client-only>-->
-        <div class="flex flex-col items-center pb-12">
+    <client-only>
+        <div  @click="triggerModal(props.hardwareVariant.image)" class="flex flex-col items-center pb-12 cursor-pointer">
           <div class="relative pb-8">
-<!--            <nuxt-img width="200px" height="auto" :src="props.doorVariant.casing_variant.image"-->
-<!--                      class="h-auto w-48"></nuxt-img>-->
-<!--            <nuxt-img width="200px" height="auto"-->
-<!--                      :src="props.doorVariant.leaf_image"-->
-<!--                      class="h-auto w-48 absolute top-0"></nuxt-img>-->
+
                         <nuxt-img width="200px" height="auto" :src="props.hardwareVariant.image"
                                   class="h-auto w-36 lg:w-48"></nuxt-img>
           </div>
+          <hardware-image-modal :image="props.hardwareVariant.image" ref="imgModal"/>
 
           <div class="flex flex-col items-center">
             <h3 class="pb-3">{{ props.hardwareVariant.hardware.name }}</h3>
@@ -32,7 +44,7 @@ const props = defineProps({
               {{ toNumber(props.hardwareVariant.price)}}&nbsp;₽</p>
           </div>
         </div>
-<!--    </client-only>-->
+    </client-only>
 
 </template>
 

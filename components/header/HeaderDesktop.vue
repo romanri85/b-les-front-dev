@@ -46,7 +46,7 @@ const props = defineProps({
       <!--            change language menu item-->
       <div>
         <button type="button" class=" font-mono text-sm " @click="toggleLocale">
-          <h3 :class="'text-white'">
+          <h3 :class="{ 'text-white': props.light }">
             {{ locale === 'en' ? "EN" : "RU" }}
           </h3>
         </button>

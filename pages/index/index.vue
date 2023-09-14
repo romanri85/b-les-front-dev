@@ -2,7 +2,7 @@
 
 
   <index-slider/>
-  <lazy-pages-index-search/>
+  <lazy-pages-index-search class="mt-24 md:mt-0"/>
   <lazy-pages-index-nature/>
   <lazy-pages-index-projects/>
 <!--  <quote/>-->

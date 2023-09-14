@@ -93,6 +93,7 @@ onMounted(async () => {
       </div>
       <hardware-filters-mobile v-else-if="viewport.isMobile"/>
       <hardware-items class="md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)] min-h-[2440px]"/>
+
     </div>
   </div>
 </template>

@@ -24,9 +24,7 @@ import {getRoute} from "~/services/getRouteService.js";
 
 const emits = defineEmits(['city-change'])
 
-const browserLang = navigator.language || navigator.userLanguage;
-const isRussian = browserLang.startsWith('ru');
-const langParam = isRussian ? 'ru_RU' : 'en_US';
+
 
 let myMap; // Moved to global scope
 let clusterer; // Moved to global scope
@@ -82,6 +80,10 @@ let totalPlacemarks = computed(() => {
 // })
 
 onMounted(async () => {
+
+  const browserLang = navigator.language || navigator.userLanguage;
+  const isRussian = browserLang.startsWith('ru');
+  const langParam = isRussian ? 'ru_RU' : 'en_US';
 
   if (typeof ymaps === 'undefined') {
     useHead({

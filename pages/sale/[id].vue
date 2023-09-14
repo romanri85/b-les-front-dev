@@ -65,10 +65,10 @@ const sentences = computed(() => {
       {{ formatDate(sale.end_date).getFullYear() }}
     </h4>
 
-    <p class="pt-10">{{ sale.description }}</p>
+    <h5 class="pt-10">{{ sale.description }}</h5>
     <ul class="pt-10">
       <li v-for="(sentence, index) in sentences" :key="index">
-        <h5 class="pt-1">{{ sentence.trim() }}</h5>
+        <p class="pt-1">{{ sentence.trim() }}</p>
       </li>
     </ul>
     <client-only>

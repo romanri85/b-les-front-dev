@@ -36,6 +36,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
         const isMobileFiltersOpen = ref(true)
         const isDoorSetApplied = ref(false)
 
+
         async function onChangeFilters(filters) {
             if (!filters.page) {
                 activeFilters.value.page = 1
@@ -85,6 +86,8 @@ export const useFiltersStore = defineStore("filtersStore", () => {
         }
 
         async function onResetFilters() {
+            isDoorSetApplied.value = false
+            console.log('reset')
             activeFilters.value = {
                 min_price: 0.00,
                 max_price: 6000.00,

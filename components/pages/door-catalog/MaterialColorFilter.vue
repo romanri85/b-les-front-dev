@@ -112,9 +112,10 @@ const beech = computed(() => sortColors(filterCount.value.color?.find((material)
 const oak = computed(() => sortColors(filterCount.value.color?.find((material) => material.material === 1) || {}));
 
 
-const enamelColors = enamel.value.colors.map((color) => color.color);
-const beechColors = beech.value.colors.map((color) => color.color);
-const oakColors = oak.value.colors.map((color) => color.color);
+const enamelColors = enamel.value.colors ? enamel.value.colors.map((color) => color.color) : [];
+const beechColors = beech.value.colors ? beech.value.colors.map((color) => color.color) : [];
+const oakColors = oak.value.colors ? oak.value.colors.map((color) => color.color) : [];
+
 
 
 const enamelCount = computed(() => activeFilters.value.color?.filter((color) => enamelColors.includes(color)).length || 0);
@@ -182,7 +183,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
 
           <TabPanels>
             <TabPanel>
-              <div v-if="enamel" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
+              <div v-if="enamel && enamel.colors" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
                 <div v-for="(color) in enamel.colors" :key="color.color" @click="chooseColor(color.color)">
                   <div v-if="isColorAvailable(color, enamel)" class="flex flex-col items-start max-w-[52px]">
                     <div class="pb-1 border-b-4"
@@ -199,7 +200,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
               </div>
             </TabPanel>
             <TabPanel>
-              <div v-if="beech" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
+              <div v-if="beech && beech.colors" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
                 <div v-for="(color) in beech.colors" :key="color.color" @click="chooseColor(color.color)">
                   <div v-if="isColorAvailable(color, beech)" class="flex flex-col items-start max-w-[52px]">
                     <div class="pb-1 border-b-4"
@@ -216,7 +217,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
               </div>
             </TabPanel>
             <TabPanel>
-              <div v-if="oak" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
+              <div v-if="oak && oak.colors" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
                 <div v-for="(color) in oak.colors.sort()" :key="color.color" @click="chooseColor(color.color)">
                   <div v-if="isColorAvailable(color, oak)" class="flex flex-col items-start max-w-[52px]">
                     <div class="pb-1 border-b-4"

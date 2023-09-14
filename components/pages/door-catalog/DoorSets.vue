@@ -1,18 +1,31 @@
 <script setup lang="ts">
 
-import { ref, reactive } from 'vue';
+import {reactive, ref} from 'vue';
 import searchByParameters from '~/data/searchByParameters.json'
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
-import { useFiltersStore } from "~/stores/filtersStore";
-import { storeToRefs } from "pinia";
+import {useFiltersStore} from "~/stores/filtersStore";
+import {storeToRefs} from "pinia";
+import {useRoute} from "vue-router";
+const key = ref(0);
 
 const filtersStore = useFiltersStore()
-const { activeFilters, filterCount, materialColors,isDoorSetApplied } = storeToRefs(filtersStore)
+const {activeFilters, filterCount, materialColors, isDoorSetApplied} = storeToRefs(filtersStore)
 
 const doorSets = reactive(searchByParameters)
 const activeDoorSetIndex = ref(null)
-import { useRoute } from "vue-router";
+
 const route = useRoute()
+
+const initialFilters = {
+  design: [],
+  color_set: [],
+  color: [],
+  collection: [],
+  material: [],
+  glass: '',
+  ordering: ''
+};
+
 
 
 onMounted(() => {
@@ -26,11 +39,14 @@ onMounted(() => {
     if (doorSet) {
       chooseDoorSet(doorSet);
       checkToUnderline(doorSet)
+      console.log('checkToUnderline(doorSet)')
     } else {
       console.warn(`No doorSet found with id ${filtersId}`);
     }
   }
 });
+
+
 
 function changeDoorset(doorSet) {
   const filterKeys = Object.keys(doorSet.filter);
@@ -56,44 +72,63 @@ function changeDoorset(doorSet) {
     } else {  // Handle String values
       activeFilters.value[filterType] = activeFilters.value[filterType] === currentValue ? initialFilters[filterType] : currentValue;
     }
-    filtersStore.onChangeFilters(activeFilters.value);
-    filtersStore.isDoorSetApplied = true
-    activeDoorSetIndex.value = doorSets.indexOf(doorSet);
-
   });
+
+  // Call this only once after the loop
+  filtersStore.onChangeFilters(activeFilters.value);
+  filtersStore.isDoorSetApplied = true;
+  activeDoorSetIndex.value = doorSets.indexOf(doorSet);
 }
+
+
 function chooseDoorSet(doorSet) {
+  key.value++;
   // Reset activeFilters to its initial state
-  if(filtersStore.isDoorSetApplied){
-    filtersStore.isDoorSetApplied = false
-    filtersStore.onResetFilters()
+  if (filtersStore.isDoorSetApplied) {
     if (activeDoorSetIndex.value === doorSets.indexOf(doorSet)) {
-      activeDoorSetIndex.value = null;
+      filtersStore.onResetFilters()
+
+
       return
-    } else{
+    } else {
+      filtersStore.isDoorSetApplied = false
+
+      isDoorSetApplied.value = false
+      activeFilters.value = {
+        design: [],
+        color_set: [],
+        color: [],
+        collection: [],
+        material: [],
+        glass: '',
+        ordering: ''
+      }
       changeDoorset(doorSet)
+      return;
     }
 
   }
-  filtersStore.onResetFilters()
+  isDoorSetApplied.value = false
+  activeFilters.value = {
+    design: [],
+    color_set: [],
+    color: [],
+    collection: [],
+    material: [],
+    glass: '',
+    ordering: ''
+  }
   changeDoorset(doorSet)
-
 }
 
-const initialFilters = {
-  design: [],
-  color_set: [],
-  color: [],
-  collection: [],
-  material: [],
-  glass: '',
-  ordering: ''
-};
+
+
 function checkToUnderline(doorSet) {
   for (const filterKey in doorSet.filter) {
     const filterValue = activeFilters.value[filterKey];
 
     if (Array.isArray(doorSet.filter[filterKey])) {
+
       if (!filterValue || !doorSet.filter[filterKey].every(val => filterValue.includes(val))) {
         return false;
       }
@@ -116,10 +151,8 @@ function checkToUnderline(doorSet) {
       }
     }
   }
-
   return true;
 }
-
 
 
 function onScroll() {
@@ -147,14 +180,18 @@ const minusIcon = `
 </script>
 
 <template>
-  <div class="main-container lg:py-24 md:py-16 py-14">
+  <div   class="main-container lg:py-24 md:py-16 py-14">
     <div class="md:inline-flex flex md:flex-row flex-col-reverse items-start">
-      <div  class="hidden md:block pr-16 whitespace-nowrap" @click="filtersStore.onResetFilters()">
-        <h3 class=""><buttons-primary-button-small>все двери</buttons-primary-button-small></h3>
+      <div class="hidden md:block pr-16 whitespace-nowrap" @click="filtersStore.onResetFilters()">
+        <h3 class="">
+          Все двери
+        </h3>
       </div>
 
-      <div class="flex justify-start items-start gap-x-3 gap-y-3 text-darkGrey flex-wrap doorsets-container" :class="{ 'show-all': showAll }">
-        <p v-for="doorSet in doorSets" :key="doorSet.name"
+      <div :key="key" class="flex justify-start items-start gap-x-3 gap-y-3 text-darkGrey flex-wrap doorsets-container"
+           :class="{ 'show-all': showAll }">
+        <p  v-for="doorSet in doorSets"    :key="doorSet.name"
+
            class="underline-direction border-black cursor-pointer whitespace-nowrap text-primaryDark text-16-mono"
            :class="{'underline-static': checkToUnderline(doorSet)}"
            @click="chooseDoorSet(doorSet)">#{{ doorSet.name }}</p>
@@ -165,26 +202,28 @@ const minusIcon = `
     <primary-button-small class="mt-4 lg:mt-0" @click="toggleDoorSetsVisibility">
       <h4>
         {{ showAll ? 'Свернуть' : 'Показать все' }}&nbsp;
-        <span  v-if="showAll" class="inline-block relative top-1" v-html="minusIcon" />
-        <span v-else class="inline-block relative top-1" v-html="plusIcon" />
+        <span v-if="showAll" class="inline-block relative top-1" v-html="minusIcon"/>
+        <span v-else class="inline-block relative top-1" v-html="plusIcon"/>
       </h4>
     </primary-button-small>
-    <div  class="block md:hidden pr-16 pt-8 whitespace-nowrap" @click="filtersStore.onResetFilters()">
-      <h3 class=""><buttons-primary-button-small>все двери</buttons-primary-button-small></h3>
+    <div class="block md:hidden pr-16 pt-8 whitespace-nowrap" @click="filtersStore.onResetFilters()">
+      <h3 class="">
+        <buttons-primary-button-small>все двери</buttons-primary-button-small>
+      </h3>
     </div>
   </div>
 </template>
 
 <style scoped>
 .doorsets-container {
-  height: 65px;  /* Assuming each row is 55px. Adjust this accordingly. */
+  height: 65px; /* Assuming each row is 55px. Adjust this accordingly. */
   overflow: hidden;
   transition: height .3s ease; /* Add this line */
 }
 
 .doorsets-container.show-all {
   height: 100px; /* Remove max-height restriction */
-  //overflow: visible;
+//overflow: visible;
 }
 
 </style>
