@@ -75,22 +75,22 @@ const heroImage = "/aboutUs/aboutUs-bg.png"
 
   </section>
   <section class="main-container">
-
-    <div class="flex md:flex-row flex-col gap-8 md:gap-0 items-center md:justify-between px-[60px] md:px-[105px] lg:px-[270px]" ref="target">
-      <div class="flex flex-col justify-between">
-        <h1>{{yearsCounter}} </h1>
+    <div class="flex flex-col md:flex-row gap-8 md:gap-0 items-center justify-between px-[60px] md:px-[105px] lg:px-[270px]" ref="target">
+      <div class="flex flex-col items-center md:items-start justify-between">
+        <h1>{{ yearsCounter }} </h1>
         <h5>{{ $t('yearsOnMarketNumber') }}</h5>
       </div>
-      <div class="flex flex-col justify-between">
-        <h1>{{ employeeCounter}}</h1>
+      <div class="flex flex-col items-center md:items-start justify-between">
+        <h1>{{ employeeCounter }}</h1>
         <h5>{{ $t('employeesNumber') }}</h5>
       </div>
-      <div class="flex flex-col justify-between">
-        <h1>{{shopsCounter}} </h1>
+      <div class="flex flex-col items-center md:items-start justify-between">
+        <h1>{{ shopsCounter }} </h1>
         <h5>{{ $t('shopsNumber') }}</h5>
       </div>
     </div>
   </section>
+
   <section class="main-container">
     <div class="main-container flex md:flex-row flex-col-reverse justify-between gap-x-16 lg:gap-x-24">
       <div class="py-24 md:py-20 lg:py-28 md:w-1/2 flex items-center">

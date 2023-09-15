@@ -127,6 +127,7 @@ function getActualDoorVariantData(filterData = {material: material.value, color:
 
 
 function changeModel(model) {
+  console.log(model, 'model')
   router.push({path: `/catalog/${model.id}`, query: {color: color.value, material: material.value}})
 
 }
@@ -164,7 +165,7 @@ function onChangePage(page) {
 </script>
 
 <template>
-  <!--  <client-only>-->
+
   <div v-if="doorVariantData && doorVariantData.casing_variant" class="main-container">
     <div class="hidden lg:flex justify-between">
       <div class="h-12 flex justify-start items-end"><h4>Главная / Каталог / {{ product.name }}</h4></div>
@@ -178,7 +179,7 @@ function onChangePage(page) {
 
           </buttons-primary-button-big>
           <all-collections-modal-detail v-if="isCollectionModelOpen" @close="isCollectionModelOpen = false"
-                                        @close-modal="closeCollection" @change-model="changeModel" :color="color"
+                                        @close-modal="closeCollection" @change-model="changeModel" :color="color" :material="material"
                                         :collectionProducts="collectionProducts" :product="product"/>
           <h1 class="pb-5">{{ product.name }}</h1>
           <div class="flex justify-between">
@@ -203,7 +204,7 @@ function onChangePage(page) {
             <sale-info-detail :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
           </div>
           <all-collections-modal-detail v-if="isCollectionModelOpen" @close="isCollectionModelOpen = false"
-                                        @close-modal="closeCollection" @change-model="changeModel" :color="color"
+                                        @close-modal="closeCollection" @change-model="changeModel" :color="color" :material="material"
                                         :collectionProducts="collectionProducts" :product="product"/>
           <h1 class="pb-5">{{ product.name }}</h1>
           <div class="flex justify-between">
@@ -224,8 +225,8 @@ function onChangePage(page) {
 
           </div>
 
-          <glass-type-filter-detail @change-glass-decor="changeGlass" :glass_decor="product.glass_decor"
-                                    v-if="product.glass_decor && product.glass_decor[0]" :newGlass="newGlass"/>
+<!--          <glass-type-filter-detail @change-glass-decor="changeGlass" :glass_decor="product.glass_decor"-->
+<!--                                    v-if="product.glass_decor && product.glass_decor[0]" :newGlass="newGlass"/>-->
         </div>
         <div class="w-full flex flex-col justify-between items-start">
           <div class="pb-8">
@@ -258,9 +259,9 @@ function onChangePage(page) {
           <div class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full">
             <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark text-white">Купить
             </buttons-primary-button-big>
-            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В
-              избранное
-            </buttons-primary-button-big>
+<!--            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В-->
+<!--              избранное-->
+<!--            </buttons-primary-button-big>-->
           </div>
 
 

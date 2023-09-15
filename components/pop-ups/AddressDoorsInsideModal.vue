@@ -3,6 +3,7 @@ import {ref} from 'vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot,} from '@headlessui/vue'
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 import {baseURL} from "~/config.js";
+import PrimaryButtonBig from "~/components/buttons/PrimaryButtonBig.vue";
 
 const isOpen = ref(true)
 const emit = defineEmits(['closeModal', 'changeModel'])
@@ -82,35 +83,38 @@ function chooseProduct(product) {
               >
                 Образцы дверей в магазине {{ props.address.address }}
               </DialogTitle>
-              <div class="px-12  flex max-w-[100%] gap-y-6 gap-x-8 mb-2 mt-0 flex-wrap justify-center w-full">
+              <div class="px-12 md:grid lg:grid-cols-4 md:grid-cols-3 block  lg:gap-y-16 gap-y-8 mb-2 mt-0 w-full">
                 <div v-if="props.doorsInside" v-for="door in props.doorsInside"
-                     :key="door.id"  class="flex flex-col items-center">
+                     :key="door.id" class="flex flex-col items-center">
                   <NuxtLink class="group"
-                      :to="`/catalog/${door.product_variant.product}?material=${door.product_variant.material}&color=${door.color}`">
+                            :to="`/catalog/${door.product_variant.product}?material=${door.product_variant.material}&color=${door.color}`">
 
-                  <div class="relative pb-2" >
-                    <nuxt-img v-if="door.merged_image" key=0 width="100px" height="auto"
-                              :src="door.merged_image"
-                              class="h-auto w-32"></nuxt-img>
+                    <div class="relative w-full flex flex-col items-center group pb-10 md:pb-2">
+                      <nuxt-img v-if="door.merged_image" key=0 width="100px" height="auto"
+                                :src="door.merged_image"
+                                class="h-auto w-32"></nuxt-img>
 
-                  </div>
-                  <h4 class="pt-2  border-b border-transparent group-hover:border-black transform translate-y-2">{{ door.product_variant_name }}</h4>
-                  <h5 class="pt-4">{{ door.color_name }}</h5>
+                      <!-- Div element with black border that appears on hover -->
+                      <div class="hidden lg:block border-b-2 w-[300px]  pt-10 border-transparent group-hover:border-black"></div>
+
+                      <h4 class="pt-6 pb-4  transform translate-y-2">{{ door.product_variant_name }}</h4>
+                      <h5 class="">{{ door.color_name }}</h5>
+                    </div>
                   </NuxtLink>
 
-                  <!--                  <div class="text-center text-sm">{{ model.name }}</div>-->
+                  <!-- <div class="text-center text-sm">{{ model.name }}</div> -->
                 </div>
-                <!-- -->
               </div>
+                <!-- -->
 
               <div class=" text-center mt-12">
-                <primary-button-small
+                <primary-button-big
                     type="button"
                     class="inline-flex justify-center border border-transparent bg-black-100 px-4 py-2  hover:bg-black-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-black-500 focus-visible:ring-offset-2"
                     @click="closeModal"
                 >
                   Закрыть
-                </primary-button-small>
+                </primary-button-big>
               </div>
             </DialogPanel>
           </TransitionChild>

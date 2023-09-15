@@ -50,6 +50,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                                tooltip="true"
                                :tooltip-format="(v) => `${v} ₽`"
                                :value="[2800, 6000]"
+                               :delay="100"
                                :key="filterCount.price[0]['min_price'] + filterCount.price[0]['max_price']"
                                :min="filterCount.price[0]['min_price'] || 2800"
                                :max="filterCount.price[0]['max_price'] || 6000"

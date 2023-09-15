@@ -3,6 +3,7 @@ import {ref} from 'vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot,} from '@headlessui/vue'
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 import {baseURL} from "~/config.js";
+import PrimaryButtonBig from "~/components/buttons/PrimaryButtonBig.vue";
 
 const isOpen = ref(true)
 const emit = defineEmits(['closeModal', 'changeModel'])
@@ -15,7 +16,16 @@ const props = defineProps({
   product:
       {
         type: Object,
-      }
+      },
+  isOpen: {
+    type: Boolean,
+  },
+  material: {
+    type: Number
+  },
+  color: {
+    type: Number
+  },
 })
 
 const activeProductId = ref(1)
@@ -31,6 +41,7 @@ function openModal() {
 }
 
 function chooseProduct(product) {
+  console.log('chooseProduct', product)
   activeProductId.value = product.id
   emit('changeModel', product)
   emit('closeModal')
@@ -45,13 +56,14 @@ onMounted(() => {
 
 
 })
-
+// TODO: add @close="closeModal" to Dialog to close modal on click outside
 </script>
 
 <template>
-<client-only>
+  <div>
+    <client-only>
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" @close="closeModal" class="relative z-30">
+    <Dialog as="div"  class="relative z-30">
       <TransitionChild
           as="template"
           enter="duration-300 ease-out"
@@ -86,10 +98,11 @@ onMounted(() => {
               >
                 Все модели коллекции
               </DialogTitle>
-              <div class="flex gap-y-6 gap-x-8 mb-2 mt-0 flex-nowrap justify-center w-full">
+              <div class="flex flex-col md:flex-row gap-y-6 gap-x-8 mb-2 mt-0 flex-nowrap justify-center w-full">
                 <div v-if="props.collectionProducts" v-for="product in collectionProducts"
-                     :key="product.id" @click="chooseProduct(product)" class="flex flex-col items-center">
-                  <div class="relative pb-4 px-2 border-b-4"
+                     :key="product.id"  class="flex flex-col items-center">
+
+                  <div @click="chooseProduct(product)" class="relative pb-4 px-4 border-b-2 flex flex-col items-center cursor-pointer"
                        :class="{'border-black':product.id === props.product.id, 'border-transparent': product.id !== props.product.id}">
                     <!--            <nuxt-img width="200px" height="auto" :src="props.doorVariant.casing_variant.image"-->
                     <!--                      class="h-auto w-48"></nuxt-img>-->
@@ -97,25 +110,26 @@ onMounted(() => {
                     <!--                      :src="props.doorVariant.leaf_image"-->
                     <!--                      class="h-auto w-48 absolute top-0"></nuxt-img>-->
 
-                    <nuxt-img v-if="product.merged_image" key=0 width="100px" height="auto"
+                    <nuxt-img v-if="product.merged_image"  width="100px" height="auto"
                               :src="product.merged_image"
                               class="h-auto w-32 cursor-pointer"></nuxt-img>
 
+                    <h4 class="pt-4">{{ product.name }}</h4>
                   </div>
-                  <h3 class="pt-4">{{ product.name }}</h3>
+
                   <!--                  <div class="text-center text-sm">{{ model.name }}</div>-->
                 </div>
                 <!-- -->
               </div>
 
               <div class=" text-center mt-12">
-                <primary-button-small
+                <primary-button-big
                     type="button"
-                    class=""
+                    class="inline-flex justify-center border border-transparent bg-black-100 px-4 py-2  hover:bg-black-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-black-500 focus-visible:ring-offset-2"
                     @click="closeModal"
                 >
-                  <p class="underline-direction font-regular">Закрыть</p>
-                </primary-button-small>
+                  Закрыть
+                </primary-button-big>
               </div>
             </DialogPanel>
           </TransitionChild>
@@ -123,7 +137,8 @@ onMounted(() => {
       </div>
     </Dialog>
   </TransitionRoot>
-  </client-only>
+    </client-only>
+  </div>
 </template>
 
 

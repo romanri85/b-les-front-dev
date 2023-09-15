@@ -4,7 +4,7 @@ import {ChevronRightIcon} from "@heroicons/vue/24/solid";
 
 <template>
   <div class="w-16 h-16 bg-primaryDark text-white cursor-pointer shadow-sm shadow-primaryDark flex items-center justify-center">
-    <chevron-right-icon class="absolute top-[33%] left-[30%] w-5 h-5"/>
+    <chevron-right-icon class=" w-5 h-5"/>
   </div>
 
 </template>

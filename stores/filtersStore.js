@@ -84,10 +84,10 @@ export const useFiltersStore = defineStore("filtersStore", () => {
             filterCount.value = data.counts
             // window.scrollTo(0, 0);
         }
-
+//TODO: change onResetFilters to function without backend request in filters
         async function onResetFilters() {
+
             isDoorSetApplied.value = false
-            console.log('reset')
             activeFilters.value = {
                 min_price: 0.00,
                 max_price: 6000.00,

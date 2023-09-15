@@ -3,6 +3,8 @@
 
 import {program} from "@babel/types";
 import systemsModal from "~/components/pop-ups/systemsModal.vue";
+import SystemsOpeningTypePrevArrow from "~/components/pages/systems/SystemsOpeningTypePrevArrow.vue";
+import SystemsOpeningTypeNextArrow from "~/components/pages/systems/SystemsOpeningTypeNextArrow.vue";
 
 const props = defineProps({
   systems: {
@@ -139,12 +141,12 @@ onMounted(() => {
             </div>
 
             <div class="prev-slide-button hidden md:block pl-20 pr-8">
-              <arrows-arrow-previous-black-and-white
-                  :class="{ 'arrow-disabled': isLeftButtonDisabled }"></arrows-arrow-previous-black-and-white>
+              <systems-opening-type-prev-arrow
+                  :class="{ 'arrow-disabled': isLeftButtonDisabled }"></systems-opening-type-prev-arrow>
             </div>
             <div class="next-slide-button hidden md:block">
-              <arrows-arrow-next-black-and-white
-                  :class="{ 'arrow-disabled': isRightButtonDisabled }"></arrows-arrow-next-black-and-white>
+              <systems-opening-type-next-arrow
+                  :class="{ 'arrow-disabled': isRightButtonDisabled }"></systems-opening-type-next-arrow>
             </div>
           </div>
         </Swiper>
