@@ -9,7 +9,7 @@
 <!--    </button>-->
 <!--  </div>-->
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" @close="closeModal" class="relative z-10">
+    <Dialog as="div" @close="closeModal" class="relative z-30">
       <TransitionChild
           as="template"
           enter="duration-300 ease-out"
@@ -37,8 +37,8 @@
           >
             <DialogPanel
                 :class="{
-    'w-1/2': isTallImage,
-    'w-3/4': isWideImage
+    'md:w-1/2 lg:w-1/3 w-full': isTallImage,
+    'md:w-3/4 w-full': isWideImage
   }"
                 class="transform overflow-hidden bg-white p-6 text-left align-middle shadow-xl transition-all"
             >

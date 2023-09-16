@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 import PriceFilterHardware from "~/components/pages/doorHardware/priceFilterHardware.vue";
 import ColorCollectionFilterHardware from "~/components/pages/doorHardware/colorCollectionFilterHardware.vue";
 import DesignFilterHardware from "~/components/pages/doorHardware/designFilterHardware.vue";
 import {useHardwareFiltersStore} from "~/stores/hardwareFiltersStore";
+import PrimaryButtonBigger from "~/components/buttons/PrimaryButtonBigger.vue";
 
 const hardwareFiltersStore = useHardwareFiltersStore()
 
@@ -30,9 +30,9 @@ const hardwareFiltersStore = useHardwareFiltersStore()
       <price-filter-hardware/>
       <color-collection-filter-hardware/>
       <design-filter-hardware/>
-      <primary-button-small class="w-full text-start " @click="">
+      <primary-button-bigger class="w-full text-start " @click="hardwareFiltersStore.onResetFilters">
         <h3>Очистить</h3>
-      </primary-button-small>
+      </primary-button-bigger>
     </div>
     </client-only>
   </section>

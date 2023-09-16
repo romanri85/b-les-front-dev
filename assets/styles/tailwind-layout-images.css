@@ -1,24 +1,26 @@
 @layer utilities {
 
+
     .layout-images .image-container {
         display: flex;
         flex-wrap: wrap;
-        margin-right: -16px;
-        gap: 16px;
+        margin-right: -5px; /* Added */
+        gap: 4px;
+        box-sizing: border-box;
     }
     .layout-images .image-wrapper {
         flex: 0 0 auto;
     }
     .layout-images .image-wrapper.narrow {
-        flex: 0 0 calc(33.33% - 16px);
+        flex: 0 0 calc(33.33% - 4px);
     }
     .layout-images .image-wrapper.square {
-        flex: 0 0 calc(66.6% - 16px);
+        flex: 0 0 calc(66.6% - 4px);
         height: 100%;
         object-fit: contain;
     }
     .layout-images .image-wrapper.wide {
-        flex: 0 0 calc(50% - 16px);
+        flex: 0 0 calc(50% - 4px);
     }
     .layout-images .image-wrapper img {
         width: 100%;

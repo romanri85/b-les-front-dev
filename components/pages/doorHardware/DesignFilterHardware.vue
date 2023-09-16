@@ -46,8 +46,8 @@ function chooseDesign(design) {
     </DisclosureButton>
     <DisclosurePanel class="mb-[80px]">
       <div v-for="design in designs" :key=design.id class="flex gap-x-[15px] items-center mb-3">
-        <h5 class="cursor-pointer underline-offset-4" @click="!isDesignAvailable(design.id) ? null :chooseDesign(design.id)"
-            :class="{'underline':hardwareFiltersStore.activeFilters.design.includes(design.id)}">{{ design.name }}</h5>
+        <h5 class="underline-offset-4" @click="!isDesignAvailable(design.id) ? null :chooseDesign(design.id)"
+            :class="{'underline':hardwareFiltersStore.activeFilters.design.includes(design.id), 'text-gray-400': !isDesignAvailable(design.id), 'cursor-pointer': isDesignAvailable(design.id) }">{{ design.name }}</h5>
       </div>
     </DisclosurePanel>
   </Disclosure>

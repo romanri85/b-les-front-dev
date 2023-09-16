@@ -11,9 +11,13 @@
       <div class="flex md:flex-row flex-col justify-between pt-12">
       <form-kit
           type="search"
+          prefixIcon="search"
           v-model="searchQuery"
           @input="updateQueryAndSearch"
-          placeholder="Search..."
+
+
+
+          placeholder="Вводите..."
       >
       </form-kit>
       <div class="">

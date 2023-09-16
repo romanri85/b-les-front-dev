@@ -46,6 +46,7 @@ const emitPagination = defineEmits(['update:currentPage', 'pageChange'])
 const HandleNewPage = (current) => {
   emitPagination('update:currentPage', current)
   emitPagination('pageChange', current)
+  window.scrollTo(0, 550);
 }
 </script>
 <style>

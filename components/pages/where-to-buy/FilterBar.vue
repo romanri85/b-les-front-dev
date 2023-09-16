@@ -1,15 +1,16 @@
 <template>
-  <div class="filter-bar mb-4">
+  <div class="filter-bar mb-4" >
     <div class="pb-4">
       <h3>{{props.total }} {{ getStoreWordForm(props.total) }}</h3>
     </div>
 
     <FormKit
 
+
         v-model="isOpen"
         type="checkbox"
-        :options="{ open: 'Только открытые магазины', monoBrand: 'Только монобрендовые магазины' }"
         decorator-icon="check"
+        :options="{ open: 'Только открытые магазины', monoBrand: 'Только монобрендовые магазины' }"
         @input="changeFilter"
     />
 
@@ -23,6 +24,8 @@
 import {ref} from 'vue'
 
 let isOpen = ref(false)
+
+const filterKey = ref(0)
 
 const props = defineProps({
   total: Number,
@@ -55,6 +58,7 @@ function getStoreWordForm(count) {
 
 
 function changeFilter(value) {
+  filterKey.value++
 
 
   if (value.length ===2) {

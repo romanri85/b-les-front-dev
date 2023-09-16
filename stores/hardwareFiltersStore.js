@@ -8,8 +8,8 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
     const activeFilters = ref({
         ordering: "",
         page: 1,
-        // min_price: Number,
-        // max_price: Number,
+        min_price: 0,
+        max_price: 6000,
         design: [],
         color_collection: [],
         // colorSet: [], colors: [], designs: [], collections: []
@@ -62,9 +62,11 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
 
 
     async function checkFilters(query = "") {
-        const {data} = await useFetch(`${baseURL}/api/hardware/hardware-filters?${query}`, {key:'counts',cache: true});
-        if (data.value) {
-            filterCount.value = data.value.counts
+        const data = await $fetch(`${baseURL}/api/hardware/hardware-filters?${query}`);
+        console.log(query, 'query')
+        if (data) {
+            console.log(data, 'data')
+            filterCount.value = data.counts
         }
         else {
             console.log('no data')
@@ -77,15 +79,13 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
 
     async function onResetFilters() {
         activeFilters.value = {
-            min_price: 0.00,
-            max_price: 6000.00,
+            ordering: "",
+            page: 1,
+            min_price: 0,
+            max_price: 6000,
             design: [],
-            color_set: [],
-            color: [],
-            collection: [],
-            material: [],
-            glass: '',
-            ordering: ''
+            color_collection: [],
+            // colorSet: [], colors: [], designs: [], collections: []
         }
         const query = "&" + new URLSearchParams(activeFilters.value).toString();
         await fetchProducts(query)

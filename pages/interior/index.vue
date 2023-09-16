@@ -37,7 +37,7 @@ function onChangePage(page) {
 
 <template>
   <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
-  <div v-if="projects" class="main-container mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+  <div v-if="projects" class="main-container pb-0 md:pb-16 mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
     <div v-for="project in projects" class="min-w-80">
       <div class="relative group">
         <div class="w-full h-60 cursor-pointer">

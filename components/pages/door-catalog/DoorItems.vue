@@ -49,6 +49,7 @@ function onChangePage(page) {
     <div class="text-primaryDark flex justify-center md:justify-between">
       <!--        <p>{{props.products}}</p>-->
       <sorting/>
+<!--        <pre>{{filtersStore.activeFilters}}</pre>-->
       <div  class="hidden md:block">
       <p class=" mt-14  md:mt-0 font-regular" >Всего дверей: {{ filtersStore.total }}</p>
       </div>

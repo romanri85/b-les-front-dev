@@ -9,7 +9,8 @@ import {baseURL} from "~/config";
 import ImageModal from "~/components/pop-ups/imageModal.vue";
 import {useRoute} from "vue-router";
 
-import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService'; // Assuming the service is in the same directory
+import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService';
+import HeroInteriour from "~/components/pages/interiour/heroInteriour.vue"; // Assuming the service is in the same directory
 
 
 let route = useRoute()
@@ -33,6 +34,7 @@ const page_size = 9
 const page = ref(1)
 const tags = ref([])
 const tagsForForm = ref([])
+const taglistKey = ref(0)
 
 
 onMounted(
@@ -44,6 +46,13 @@ onMounted(
         if (route.query.tags) {
           initialTags.value = [String(route.query.tags)]; // assuming tags is a single value. If it's multiple values separated by commas, split it: route.query.tags.split(',')
           selectedTags.value = initialTags.value;
+          taglistKey.value++
+          await getImagesByTags(selectedTags.value)
+          return
+        }
+        if(!selectedTags.value[0]){
+          selectedTags.value = [String(tags.value[1].id)];
+          taglistKey.value++
           await getImagesByTags(selectedTags.value)
           return
         }
@@ -85,13 +94,11 @@ async function transformTags() {
 }
 
 async function getImagesByTags(tagIds, page = 1) {
-  console.log(tagIds, 'tagIds')
   // Join the tagIds into a query string
   const tagsQueryString = new URLSearchParams({
     tags: tagIds.join(",")
   }).toString();
   const url = `${baseURL}/api/projects/images?${tagsQueryString}&page=${page}`;
-  console.log(url, 'url')
 
 
   selectedImages.value = await $fetch(url)
@@ -105,14 +112,38 @@ function onChangePage(page) {
 
 }
 
-function selectTag(tag) {
-  // getImagesByTags(tag, 1)
-  selectedTags.value = tag
-  page.value = 1
-  getImagesByTags(tag, 1)
+// function selectTag(tag) {
+//   // getImagesByTags(tag, 1)
+//   console.log(tag, 'tag')
+//   selectedTags.value = tag
+//   page.value = 1
+//   getImagesByTags(tag, 1)
+//
+// }
 
+function selectTag(tag) {
+  taglistKey.value ++
+  // if (selectedTags.value == tag) {
+  //   return;
+  // }
+  // get the last element from the tag array
+  const lastTag = tag.slice(-1)[0];
+
+  // Log the entire tag array and the last element
+
+  // set selectedTags.value to the last element of tag array
+  selectedTags.value = [lastTag];
+
+  page.value = 1;
+  getImagesByTags([lastTag], 1);
+  window.scrollTo(0, 400);
 }
 
+watch(selectedTags, (newValue, oldValue) => {
+  if (!newValue[0]) {
+    selectedTags.value = oldValue
+  }
+}, { deep: true });
 const triggerModal = (image) => {
   selectedImage.value = image;
   if (imgModal.value && imgModal.value.openModal) {
@@ -130,19 +161,20 @@ function handleChooseTag(tag) {
 
   getImagesByTags(selectedTags.value);
   page.value = 1;
+  taglistKey.value++;
 }
 
 
 </script>
 
 <template>
-  <div>
-    <base-hero :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
+  <div class="">
+    <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
 
-    <div class="flex justify-center">
-
+    <div class="flex justify-center pt-16 pb-16">
 
       <FormKit
+
           type="form"
           #default="{ value }"
           :actions="false"
@@ -151,30 +183,33 @@ function handleChooseTag(tag) {
         <FormKit
             type="taglist"
             name="taglist"
-            label="Taglist with max prop set to 2"
             :options="tagsForForm"
             max="10"
-            :key="selectedTags"
+            :key="taglistKey"
             :value="selectedTags"
-            select-icon="caretDown"
+            select-icon="add"
+            help="Выберите тег"
+            prefixIcon="tag"
+            placeholdr="Тег не выбран"
+            open-on-click
+
             @input="selectTag"
-            remove-icon="close"
             :filter="(option, search) =>
         option.label.toLowerCase().startsWith(search.toLowerCase())"
         />
         <!--      <pre wrap>{{ value }}</pre>-->
       </FormKit>
     </div>
-    <div class="layout-images">
+    <div class="layout-images pb-16 lg:pb-24">
       <div class="image-container">
         <div v-for="(image, index) in layoutImages" :key="index"
              :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
-          <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover" :alt="image.project_name"/>
+          <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover cursor-pointer" :alt="image.project_name"/>
         </div>
       </div>
     </div>
     <image-modal :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
-    <pagination v-if="page" class="pb-32 flex justify-center" :total="total"
+    <pagination v-if="page" class="md:pb-32 pb-20 flex justify-center" :total="total"
                 :page_size="page_size"
                 :pagesCount="pagesCount"
                 @page-change="onChangePage"
@@ -185,5 +220,6 @@ function handleChooseTag(tag) {
 
 <style scoped>
 /* Add to your scoped styles */
+
 
 </style>

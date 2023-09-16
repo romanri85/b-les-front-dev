@@ -77,6 +77,7 @@ const currentMenuItems = computed(() => {
         <div v-if="activeItemIndex === index && currentMenuItems.length !== 0">
           <PopoverPanel static>
             <modals-header-modal :currentMenuItems="currentMenuItems"
+                                 :light="light"
                                  :menuItemsProps="menuItemsProps"
                                  :activeMenuItemKey="item.itemHeader"/>
           </PopoverPanel>

@@ -147,9 +147,9 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
         <TabGroup :selectedIndex="materialMap[materialActiveindex] ">
           <TabList>
             <div class="flex justify-start gap-x-12 lg:gap-x-20 w-full pr-4">
-              <Tab index=3 :disabled="!isMaterialAvailable(3)" class="text-primaryDark">
+              <Tab index=3 :disabled="!isMaterialAvailable(3) " class="text-primaryDark">
                 <div class="relative">
-                  <span v-if="enamelCount > 0" class="text-primaryDark absolute text-xs -right-2 -top-1">{{
+                  <span v-if="enamelCount > 0 " class="text-primaryDark absolute text-xs -right-2 -top-1">{{
                       enamelCount
                     }}</span>
                   <h5 @click="!isMaterialAvailable(3) ? null : chooseMaterial(3)"
@@ -159,7 +159,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
               </Tab>
               <Tab index=2 :disabled="!isMaterialAvailable(2)" class="text-primaryDark">
                 <div class="relative">
-                  <span v-if="beechCount > 0" class="text-primaryDark absolute text-xs -right-2 -top-1">{{
+                  <span v-if="beechCount > 0 " class="text-primaryDark absolute text-xs -right-2 -top-1">{{
                       beechCount
                     }}</span>
                   <h5 @click="!isMaterialAvailable(2) ? null : chooseMaterial(2)"
@@ -169,7 +169,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
               </Tab>
               <Tab index="1" :disabled="!isMaterialAvailable(1)" class="text-primaryDark">
                 <div class="relative">
-                  <span v-if="oakCount > 0" class="text-primaryDark absolute text-xs -right-2 -top-1">{{
+                  <span v-if="oakCount > 0 " class="text-primaryDark absolute text-xs -right-2 -top-1">{{
                       oakCount
                     }}</span>
                   <h5 @click="!isMaterialAvailable(1) ? null : chooseMaterial(1)"

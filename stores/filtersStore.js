@@ -38,6 +38,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
 
 
         async function onChangeFilters(filters) {
+
             if (!filters.page) {
                 activeFilters.value.page = 1
                 page.value = 1
@@ -53,6 +54,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
 
 
             let query = new URLSearchParams(activeFilters.value).toString();
+            console.log(query, 'query')
             await fetchProducts(query)
 
 

@@ -19,7 +19,10 @@ await filtersStore.fetchMaterialColors()
 function chooseMaterial(material) {
   filtersStore.checkDoorSetApplied()
   filtersStore.isFilterCountPriceBlocked = false
-  const materials = [{material: 3, colors: [1, 2]}, {material: 2, colors: [3, 4, 5, 6]}, {material: 1, colors: [7, 8, 9, 10, 11, 12, 13, 14, 15]}]
+  const materials = [{material: 3, colors: [1, 2]}, {material: 2, colors: [3, 4, 5, 6]}, {
+    material: 1,
+    colors: [7, 8, 9, 10, 11, 12, 13, 14, 15]
+  }]
   let materialToDelete = materials.filter((item) => {
     return item.material === material
   })
@@ -27,7 +30,7 @@ function chooseMaterial(material) {
     return !materialToDelete[0].colors.includes(color)
   })
   if (!filtersStore.activeFilters.material.includes(material)) {
-    filtersStore.onChangeFilters({material: [...filtersStore.activeFilters.material, material], color: updatedColors})
+    filtersStore.onChangeFilters({material: [...filtersStore.activeFilters.material, material], color:[]})
 
   } else {
     filterCount.value.color.filter((item) => {
@@ -39,13 +42,12 @@ function chooseMaterial(material) {
       return item !== material
 
 
-      // activeFilters.value.color.filter((item) =>{
-      // })
     })
 
-
+    console.log(updatedColors)
     filtersStore.onChangeFilters({"material": updatedMaterials, "color": updatedColors})
-    // filtersStore.onChangeFilters({"material": updatedMaterials})
+
+
 
   }
 }
@@ -79,23 +81,23 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
     >
-    <DisclosurePanel class="mb-20">
-      <div  class="flex justify-start gap-x-12 w-full pr-4">
-        <div v-for="(material) in materialColors" :key="material.material" class="text-primaryDark">
-          <h5 @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"
-              :class="{
+      <DisclosurePanel class="mb-20">
+        <div class="flex justify-start gap-x-12 w-full pr-4">
+          <div v-for="(material) in materialColors" :key="material.material" class="text-primaryDark">
+            <h5 @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"
+                :class="{
                 'underline': filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material),  'text-primaryDark':filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'cursor-pointer': isMaterialAvailable(material.material) , 'text-gray-400': !isMaterialAvailable(material.material)
               }" class="underline-offset-4">{{
-              material.name
-            }}</h5>
+                material.name
+              }}</h5>
+          </div>
         </div>
-      </div>
-<!--      <div v-if="activeFilters.color.length > 0">-->
-<!--        <buttons-primary-button-small class="" @click="filtersStore.onResetFilters()">-->
-<!--          <p class="uppercase">Показать все материалы</p>-->
-<!--        </buttons-primary-button-small>-->
-<!--      </div>-->
-    </DisclosurePanel>
+        <!--      <div v-if="activeFilters.color.length > 0">-->
+        <!--        <buttons-primary-button-small class="" @click="filtersStore.onResetFilters()">-->
+        <!--          <p class="uppercase">Показать все материалы</p>-->
+        <!--        </buttons-primary-button-small>-->
+        <!--      </div>-->
+      </DisclosurePanel>
     </transition>
   </Disclosure>
 </template>
