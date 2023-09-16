@@ -38,7 +38,7 @@
           }"
     >
       <!--    <div v-for="project in projects" :key="project.name">-->
-      <SwiperSlide v-if="interiorStore && interiorStore.projects" v-for="project in interiorStore.projects" :key="project.id">
+      <SwiperSlide v-if="projects" v-for="project in projects" :key="project.id">
         <NuxtLink :to="{ path: `/interior/${project.id}`}">
           <img
               class="w-[480px] lg:h-96 md:h-60 h-48 object-cover"
@@ -65,16 +65,13 @@
 </template>
 
 <script setup lang="js">
-// import projects from "~/data/projects.json"
-import {useInteriorStore} from "~/stores/interiorStore";
-import {storeToRefs} from "pinia";
 
-const interiorStore = useInteriorStore()
-const {projects} = storeToRefs(interiorStore)
-interiorStore.getProjects()
-// const projects = await $fetch(`${baseURL}/api/projects/`)
-// const projects = await $fetch(`/api/projects/`)
-// const projectsImages = projects.map(project => project.first_image.image)
+import {baseURL} from "~/config";
+
+const projects = ref([])
+
+
+projects.value = await $fetch(`${baseURL}/api/projects/projects-without-pagination`)
 </script>
 
 <style scoped>

@@ -4,7 +4,7 @@
 export default {
     // Global styles apply to _all_ inputs with matching section keys
     global: {
-        fieldset: 'max-w-md border border-gray-400 rounded px-2 pb-1',
+        fieldset: 'max-w-md border border-gray-400 px-2 pb-1',
         help: 'text-xs text-gray-500',
         inner: 'formkit-disabled:bg-gray-200 formkit-disabled:cursor-not-allowed formkit-disabled:pointer-events-none',
         input: 'appearance-none bg-transparent focus:outline-none focus:ring-0 focus:shadow-none',
@@ -20,12 +20,12 @@ export default {
 
     // Family styles apply to all inputs that share a common family
     'family:box': {
-        decorator: 'block relative h-5 w-5 mr-2 rounded bg-white bg-gradient-to-b from-transparent to-gray-200 ring-1 ring-gray-400 peer-checked:ring-gray-500 text-transparent peer-checked:text-black',
+        decorator: 'block relative h-5 w-5 mr-2 bg-white bg-gradient-to-b from-transparent to-gray-200 ring-1 ring-gray-400 peer-checked:ring-gray-500 text-transparent peer-checked:text-black',
         decoratorIcon: 'flex p-[3px] w-full h-full absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
         help: 'mb-2 mt-1.5',
         input: 'absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none peer',
-        inner: '$remove:formkit-disabled:bg-gray-200',
-        label: '$reset text-sm text-gray-700 mt-1 select-none',
+        inner: '$remove:formkit-disabled:bg-gray-200 mt-2',
+        label: '$reset text-sm text-gray-700 mt-1 select-none mt-3',
         wrapper: 'flex items-center mb-1',
 
     },
@@ -38,11 +38,11 @@ export default {
     'family:dropdown': {
         dropdownWrapper: 'my-2 w-full shadow-lg rounded [&::-webkit-scrollbar]:hidden',
         emptyMessageInner: 'flex items-center justify-center text-sm p-2 text-center w-full text-gray-500 [&>span]:mr-3 [&>span]:ml-0',
-        inner: 'max-w-md relative flex ring-1 ring-gray-400 focus-within:ring-gray-500 focus-within:ring-2 rounded mb-1 formkit-disabled:focus-within:ring-gray-400 formkit-disabled:focus-within:ring-1 [&>span:first-child]:focus-within:text-gray-500',
+        inner: 'max-w-md relative flex ring-1 ring-gray-400 focus-within:ring-gray-500 focus-within:ring-2 mb-1 formkit-disabled:focus-within:ring-gray-400 formkit-disabled:focus-within:ring-1 [&>span:first-child]:focus-within:text-gray-500',
         input: 'w-full px-3 py-2',
         listbox: 'bg-white shadow-lg rounded overflow-hidden',
         listboxButton: 'flex w-12 self-stretch justify-center mx-auto',
-        listitem: 'pl-7 relative hover:bg-gray-300 data-[is-active="true"]:bg-gray-300 data-[is-active="true"]:aria-selected:bg-gray-600 aria-selected:bg-gray-600 aria-selected:text-white',
+        listitem: 'pl-7 relative hover:bg-gray-300 data-[is-active="true"]:bg-gray-300 data-[is-active="true"]:aria-selected:bg-gray-500 aria-selected:bg-gray-500 aria-selected:text-white',
         loaderIcon: 'ml-auto',
         loadMoreInner: 'flex items-center justify-center text-sm p-2 text-center w-full text-gray-500 formkit-loading:text-gray-500 cursor-pointer [&>span]:mr-3 [&>span]:ml-0',
         option: 'p-2.5',
@@ -209,12 +209,12 @@ export default {
     },
     taglist: {
         inner:'max-w-[320px] md:max-w-[500px]',
-        input: 'px-1 py-1 w-full grow hidden',
+        input: 'px-1 py-1 w-full grow',
         removeSelection: 'w-2.5 mx-1 self-center text-black leading-none',
         tag: 'flex items-center my-1 p-1 text-sm md:text-md lg:text-lg font-mono',
         tagWrapper: 'mr-1 focus:outline-none focus:text-white [&>div]:focus:bg-gray-500 [&>div>button]:focus:text-white',
         tagLabel: 'pl-2 pr-1',
-        tags: 'flex justify-center items-center flex-wrap w-full  md:pt-1.5 lg:pt-0.5 px-2 h-[70px] md:overflow-y-hidden',
+        tags: 'flex justify-center items-center flex-wrap w-full  md:pt-1.5 lg:pt-0.5 px-2 ',
         wrapper: 'w-[320px]  md:w-[500px]'
     },
     toggle: {

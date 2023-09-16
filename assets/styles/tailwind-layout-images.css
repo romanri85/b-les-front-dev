@@ -34,7 +34,7 @@
         aspect-ratio: 3/2;
     }
     .layout-images .image-wrapper.square img {
-        aspect-ratio: 2.7 / 2;
+        aspect-ratio: 2.675 / 2;
         width: 100%;
         height: auto;
         object-fit: cover;

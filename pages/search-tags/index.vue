@@ -136,7 +136,7 @@ function selectTag(tag) {
 
   page.value = 1;
   getImagesByTags([lastTag], 1);
-  window.scrollTo(0, 400);
+  window.scrollTo(0, 350);
 }
 
 watch(selectedTags, (newValue, oldValue) => {
@@ -190,7 +190,6 @@ function handleChooseTag(tag) {
             select-icon="add"
             help="Выберите тег"
             prefixIcon="tag"
-            placeholdr="Тег не выбран"
             open-on-click
 
             @input="selectTag"
