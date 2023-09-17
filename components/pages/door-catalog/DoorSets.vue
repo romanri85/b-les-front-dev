@@ -29,7 +29,11 @@ const initialFilters = {
 
 
 onMounted(() => {
-  const filtersId = route.query.filters;
+  const router = useRouter();
+  const filtersId = router.currentRoute.value.query.filters;
+
+  console.log('Router:', router);
+  console.log('Current Route:', router.currentRoute.value);
 
   if (filtersId) {
     // Use the find method to get the doorSet by its id
@@ -38,8 +42,12 @@ onMounted(() => {
     // Check if doorSet was found, then execute the function
     if (doorSet) {
       chooseDoorSet(doorSet);
-      checkToUnderline(doorSet)
-      console.log('checkToUnderline(doorSet)')
+      checkToUnderline(doorSet);
+
+      router.replace({ path: '/catalog' }).then(() => {
+      }).catch(err => {
+        console.log('Route replace failed:', err);
+      });
     } else {
       console.warn(`No doorSet found with id ${filtersId}`);
     }

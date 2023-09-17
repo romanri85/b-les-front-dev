@@ -8,6 +8,7 @@ import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 import MaterialFilter from "~/components/filters/MaterialFilter.vue";
 import GlassFilter from "~/components/filters/GlassFilter.vue";
 import {useFiltersStore} from "~/stores/filtersStore";
+import SaleFilter from "~/components/filters/SaleFilter.vue";
 
 
 const filtersStore = useFiltersStore()
@@ -38,6 +39,7 @@ const filtersStore = useFiltersStore()
         <material-color-filter/>
         <door-collections-filter/>
         <glass-filter/>
+        <sale-filter/>
         <div class="w-full text-start " @click="filtersStore.onResetFilters()">
           <h3 ><span class="underline-static cursor-pointer">Все двери</span></h3>
         </div>

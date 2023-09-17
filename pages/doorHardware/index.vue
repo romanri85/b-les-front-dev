@@ -53,6 +53,7 @@ setTimeout(
         bottomSpacing: 50,
         resizeSensor: true,
       });
+
     }, 500
 )
 
@@ -104,7 +105,7 @@ onMounted(async () => {
 }
 
 .sidebar__inner {
-  transform: translate(0, 0); /* For browsers don't support translate3d. */
+  //transform: translate(0, 0); /* For browsers don't support translate3d. */
   transform: translate3d(0, 0, 0);
   will-change: position, transform;
 }

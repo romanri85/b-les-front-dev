@@ -11,6 +11,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
             color: [],
             collection: [],
             material: [],
+            sale: "",
             glass: "",
             // colorSet: [], colors: [], designs: [], collections: []
         })
@@ -22,6 +23,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
             color: [],
             collection: [],
             material: [],
+            sale: {},
             glass: {},
         })
 
@@ -59,6 +61,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
 
 
             await checkFilters(query)
+
         }
 
 
@@ -99,6 +102,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
                 collection: [],
                 material: [],
                 glass: '',
+                sale: '',
                 ordering: ''
             }
             const query = "&" + new URLSearchParams(activeFilters.value).toString();

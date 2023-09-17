@@ -22,6 +22,8 @@ function updateSliderValues([newMin, newMax]) {
   filtersStore.onChangeFilters({'min_price': newMin, 'max_price': newMax});
 }
 
+
+
 const viewport = useViewportSize()
 const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTablet === true)
 
@@ -43,17 +45,16 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
       >
         <DisclosurePanel class="mb-20 mt-8">
           <div class="px-5">
-
                       <FormKit v-if="filterCount && filterCount.price && filterCount.price[0]"
                                type="slider"
                                name="slider"
                                tooltip="true"
                                :tooltip-format="(v) => `${v} ₽`"
-                               :value="[2800, 6000]"
+                               :value="[0, 6000]"
                                :delay="100"
                                :key="filterCount.price[0]['min_price'] + filterCount.price[0]['max_price']"
-                               :min="filterCount.price[0]['min_price'] || 2800"
-                               :max="filterCount.price[0]['max_price'] || 6000"
+                               :min="filtersStore.filterCount.price[0]['min_price'] || 0"
+                               :max="filtersStore.filterCount.price[0]['max_price'] || 6000"
                                @input="updateSliderValues"
 
 

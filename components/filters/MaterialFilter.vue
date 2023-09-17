@@ -31,7 +31,6 @@ function chooseMaterial(material) {
   })
   if (!filtersStore.activeFilters.material.includes(material)) {
     filtersStore.onChangeFilters({material: [...filtersStore.activeFilters.material, material], color:[]})
-
   } else {
     filterCount.value.color.filter((item) => {
       return item.material !== material
@@ -44,12 +43,12 @@ function chooseMaterial(material) {
 
     })
 
-    console.log(updatedColors)
     filtersStore.onChangeFilters({"material": updatedMaterials, "color": updatedColors})
 
 
 
   }
+
 }
 
 
@@ -91,6 +90,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                 material.name
               }}</h5>
           </div>
+          <pre>{{filtersStore.isDoorSetApplied}}</pre>
         </div>
         <!--      <div v-if="activeFilters.color.length > 0">-->
         <!--        <buttons-primary-button-small class="" @click="filtersStore.onResetFilters()">-->

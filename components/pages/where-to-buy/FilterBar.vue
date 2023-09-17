@@ -3,7 +3,7 @@
     <div class="pb-4">
       <h3>{{props.total }} {{ getStoreWordForm(props.total) }}</h3>
     </div>
-
+<client-only>
     <FormKit
         decoratorIcon="check"
         v-model="isOpen"
@@ -11,6 +11,7 @@
         :options="{ open: 'Только открытые магазины', monoBrand: 'Только монобрендовые магазины' }"
         @input="changeFilter"
     />
+</client-only>
 
 
 <!--    <pre wrap>{{ filter }}</pre>-->
