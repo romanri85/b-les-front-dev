@@ -10,6 +10,7 @@ import GlassFilter from "~/components/filters/GlassFilter.vue";
 import {useFiltersStore} from "~/stores/filtersStore";
 import SecondaryButton from "~/components/buttons/SecondaryButton.vue";
 import SortingMobile from "~/components/filters/SortingMobile.vue";
+import SaleFilter from "~/components/filters/SaleFilter.vue";
 
 
 const filtersStore = useFiltersStore()
@@ -70,6 +71,9 @@ function toggleSortingOpen() {
       </div>
 
       <div class=" mt-16 filter-container relative z-20" v-if="isFiltersOpen">
+        <primary-button-small class="pb-8 text-start " @click="">
+          <h3 class="underline-static">Все двери</h3>
+        </primary-button-small>
         <price-filter/>
 
         <color-set-filter/>
@@ -78,8 +82,9 @@ function toggleSortingOpen() {
         <material-color-filter/>
         <door-collections-filter/>
         <glass-filter/>
-        <primary-button-small class="w-full text-start " @click="">
-          <h3>Очистить</h3>
+        <sale-filter/>
+        <primary-button-small class="pb-8 text-start " @click="">
+          <h3 class="underline-static">Все двери</h3>
         </primary-button-small>
       </div>
 

@@ -15,7 +15,7 @@ import HeroInteriour from "~/components/pages/interiour/heroInteriour.vue"; // A
 
 let route = useRoute()
 
-
+const router = useRouter();
 const interiorStore = useInteriorStore()
 
 
@@ -152,6 +152,22 @@ const triggerModal = (image) => {
     console.error('Method not available or component not initialized.');
   }
 };
+
+watch(() => router.currentRoute.value.query.tags, (newValue) => {
+  if (newValue) {
+    initialTags.value = [String(newValue)]; // assuming tags is a single value. If it's multiple values separated by commas, split it: route.query.tags.split(',')
+    selectedTags.value = initialTags.value;
+    taglistKey.value++
+    getImagesByTags(selectedTags.value)
+    return
+  }
+  // if(!selectedTags.value[0]){
+  //   selectedTags.value = [String(tags.value[1].id)];
+  //   taglistKey.value++
+  //   getImagesByTags(selectedTags.value)
+  //   return
+  // }
+});
 
 function handleChooseTag(tag) {
   let tagId = String(tag.id);

@@ -40,11 +40,11 @@
       <!--    <div v-for="project in projects" :key="project.name">-->
       <SwiperSlide v-if="projects" v-for="project in projects" :key="project.id">
         <NuxtLink :to="{ path: `/interior/${project.id}`}">
-          <img
+          <nuxt-img
               class="w-[480px] lg:h-96 md:h-60 h-48 object-cover"
               :src="project.first_image.image"
               :alt="project.name"
-          >
+          />
         </NuxtLink>
       </SwiperSlide>
       <!--    </div>-->

@@ -89,7 +89,7 @@ const layoutImages = computed(() => {
 <template>
   <base-hero v-if="project && project.first_image" class="mb-24" :heroName="project.name" hero-description=""
         :heroImage="project.first_image.image"/>
-  <div v-if="project" class="flex justify-center mb-24"><p>{{ project.description }}</p></div>
+<!--  <div v-if="project" class="flex justify-center mb-24"><p>{{ project.description }}</p></div>-->
 
   <div class="layout-images">
     <div class="image-container">

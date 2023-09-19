@@ -1,16 +1,21 @@
-import {defineStore} from "pinia";
-// import {baseURL} from "~/config";
+// useTagsStore.js
+import {ref} from 'vue';
+import {baseURL} from '~/config';
 
-const config = useRuntimeConfig()
-export const useTagsStore = defineStore("tagsStore", {
-    state: () => {
-        return {
-            tags: [],
-        };
-    },
-    actions: {
-        async fetchTags() {
-            this.tags = await $fetch(`${config.public.baseURL}/api/projects/tags`);
+export function useTagsStore() {
+    const tags = ref([]);
+
+    async function fetchTags() {
+        try {
+            const data = await $fetch(`${baseURL}/api/projects/tags`);
+            if(data) {
+                tags.value = data;
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
         }
+
     }
-});
+
+    return { tags, fetchTags };
+}

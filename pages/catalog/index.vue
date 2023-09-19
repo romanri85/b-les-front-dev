@@ -6,12 +6,11 @@ import {storeToRefs} from "pinia";
 import {useViewportSize} from "~/composables/useViewportSize";
 import DoorSets from "~/components/pages/door-catalog/DoorSets.vue";
 import DoorFiltersMobile from "~/components/pages/door-catalog/DoorFiltersMobile.vue";
-import {useResizeObserver} from '@vueuse/core'
+import {useElementVisibility, useResizeObserver} from '@vueuse/core'
 import DoorFilters from "~/components/pages/door-catalog/DoorFilters.vue";
 import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore.js";
-import { debounce } from 'lodash';
-import { useElementVisibility } from '@vueuse/core'
 import {useRoute} from "vue-router";
+import {watch} from "vue";
 
 definePageMeta({layout: "catalog"});
 
@@ -73,62 +72,62 @@ setTimeout(
       });
     }, 500)
 
-onMounted(async () => {
-  const route = useRoute();
-  const router = useRouter();
-  const collectionId = route.query.collection;
+// onMounted(async () => {
+//   const route = useRoute();
+//   const router = useRouter();
+//   let collectionId = null;
+//   if (route.query.collection) {
+//     collectionId = route.query.collection;
+//
+//     if (collectionId) {
+//       // If it exists, add it to the onChangeFilters
+//       filtersStore.activeFilters = {
+//         ...filtersStore.activeFilters,
+//         'collection': [parseInt(collectionId)]
+//       };
+//       await filtersStore.onChangeFilters(filtersStore.activeFilters);
+//
+//       // Remove 'collection' from the URL query and update the path
+//       const query = {...route.query};
+//       delete query.collection;
+//
+//       await router.replace({
+//         path: '/catalog',
+//         query,
+//       }).then(() => {
+//         console.log('Route replaced successfully');
+//       }).catch(err => {
+//         console.log('Route replace failed:', err);
+//       });
+//     } else {
+//       console.warn(`No collection found with id ${collectionId}`);
+//     }
+//   }
+//
+// });
 
-  console.log('Router:', collectionId);
-
-  if (collectionId) {
-    // If it exists, add it to the onChangeFilters
-    filtersStore.activeFilters = {
-      ...filtersStore.activeFilters,
-      'collection': [parseInt(collectionId)]
-    };
-    await filtersStore.onChangeFilters(filtersStore.activeFilters);
-
-    // Remove 'collection' from the URL query and update the path
-    const query = { ...route.query };
-    delete query.collection;
-
-    await router.replace({
-      path: '/catalog',
-      query,
-    }).then(() => {
-      console.log('Route replaced successfully');
-    }).catch(err => {
-      console.log('Route replace failed:', err);
-    });
+watch(() => route.query.collection, (newValue) => {
+  if (newValue) {
+    filtersStore.activeFilters = ({...filtersStore.activeFilters, 'collection': [parseInt(newValue)]});
+    filtersStore.onChangeFilters(filtersStore.activeFilters);
   }
-  else {
-    console.warn(`No collection found with id ${collectionId}`);
-  }
-});
-
-
+}, {immediate: true});
 
 watch([() => catalogElementHeight.value, () => doorFiltersHeight.value, filtersStore.activeFilters], () => {
   if (sidebar.value) {
     sidebar.value.updateSticky();
-  if (footerIsVisible.value) {
-    // Scroll 50px up
-    window.scrollBy(0, -5);
+    if (footerIsVisible.value) {
+      // Scroll 50px up
+      window.scrollBy(0, -5);
 
-    // Then scroll 50px down after a delay (e.g., 300 milliseconds)
-    setTimeout(() => {
-      window.scrollBy(0, 5);
-    }, 300);
-  }
+      // Then scroll 50px down after a delay (e.g., 300 milliseconds)
+      setTimeout(() => {
+        window.scrollBy(0, 5);
+      }, 300);
+    }
 
   }
 });
-
-// watch(catalogElementHeight.value < doorFiltersHeight.value, () => {
-//   if (sidebar.value) {
-//     sidebar.value.updateSticky();
-//   }
-// });
 
 
 
@@ -174,23 +173,23 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div ref="catalogElement" class="">
-<!--      <client-only>-->
+  <div ref="catalogElement" class="">
+    <!--      <client-only>-->
 
-      <base-hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>
-      <door-sets/>
-      <div  class="main-content flex main-container md:flex-row flex-col md:mt-0  ">
-        <div v-if="viewport.isDesktop || viewport.isTablet" class="md:w-[320px] sidebar">
-          <div  class="sidebar__inner">
-            <door-filters ref="doorFilters"  class="pb-32"/>
-          </div>
+    <base-hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>
+    <door-sets/>
+    <div class="main-content flex main-container md:flex-row flex-col md:mt-0  ">
+      <div v-if="viewport.isDesktop || viewport.isTablet" class="md:w-[320px] sidebar">
+        <div class="sidebar__inner">
+          <door-filters ref="doorFilters" class="pb-32"/>
         </div>
-        <door-filters-mobile v-else-if="viewport.isMobile"/>
-        <door-items  class="md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)]  "/>
       </div>
-      <Footer ref="footerElement"/>
-<!--      </client-only>-->
+      <door-filters-mobile v-else-if="viewport.isMobile"/>
+      <door-items class="md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)]  "/>
     </div>
+    <Footer ref="footerElement"/>
+    <!--      </client-only>-->
+  </div>
 </template>
 
 <style scoped>

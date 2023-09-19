@@ -90,7 +90,6 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                 material.name
               }}</h5>
           </div>
-          <pre>{{filtersStore.isDoorSetApplied}}</pre>
         </div>
         <!--      <div v-if="activeFilters.color.length > 0">-->
         <!--        <buttons-primary-button-small class="" @click="filtersStore.onResetFilters()">-->

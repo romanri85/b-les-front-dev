@@ -15,7 +15,7 @@ import enSale from "~/i18n/en/enSale";
 import ruSale from "~/i18n/ru/ruSale";
 export default defineI18nConfig(() => ({
     legacy: false,
-    locale: 'en',
+    locale: 'ru',
     messages: {
         en: {...enCommon, ...enToDesigners, ...enAboutUs, ...enToDealers, ...enDeliveryInstallation, ...enSystems, ...enSale},
         ru: {...ruCommon, ...ruToDesigners, ...ruAboutUs, ...ruToDealers, ...ruDeliveryInstallation, ...ruSystems, ...ruSale}

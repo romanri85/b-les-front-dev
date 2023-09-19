@@ -30,7 +30,7 @@
           <div class="hero bg-cover bg-center h-screen w-screen  ">
             <div>
 
-              <nuxt-img loading="lazy" :src="collection.image"
+              <nuxt-img :src="collection.image"
                         class="absolute h-screen w-screen object-cover -z-10" alt="slider-pic"/>
               <div class="swiper-lazy-preloader"></div>
             </div>

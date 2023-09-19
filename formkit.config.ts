@@ -4,6 +4,8 @@ import {generateClasses} from '@formkit/themes'
 import myTailwindTheme from './tailwind-theme.js'
 import {genesisIcons} from "@formkit/icons";
 import {createProPlugin, inputs} from '@formkit/pro'
+import { ru, en } from '@formkit/i18n'
+
 // import '@formkit/themes/genesis'
 // import '@formkit/pro/genesis'
 // formkit.config.js
@@ -24,8 +26,8 @@ export default defineFormKitConfig(() => {
 
     return {
         plugins: [pro],
-        locales: {fr},
-        locale: 'fr',
+        locales: {ru, en, },
+        locale: 'ru',
         config: {
             classes, icons
         }

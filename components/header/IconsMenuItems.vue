@@ -1,6 +1,14 @@
 <script setup lang="ts">
 
+import ContactUsModal from "~/components/pop-ups/ContactUsModal.vue";
+
 defineProps({light: {type: Boolean, default: true}})
+
+const shouldOpenModal = ref(0)
+
+function openContactUsModal() {
+  shouldOpenModal.value = shouldOpenModal.value + 1
+}
 
 const iconsMenuItems = [
     {
@@ -28,14 +36,27 @@ const iconsMenuItems = [
 </script>
 
 <template>
-    <ul class="flex  xl:gap-8 lg:gap-x-8 gap-8 justify-between xl:h-[100px] lg:h-[86px] h-[60px]">
-        <li v-for="(item, index) in iconsMenuItems" :key="index"
-            class=" flex md:block  hover:cursor-pointer relative lg:w-5 md:w-5 w-5 h-full"
-            :class="item.id !== 'search' ? 'hidden' : ''">
-            <nuxt-link :to="item.to">
-                <img :src="light ? item.whiteIconPath : item.blackIconPath" :alt="item.alt" class=" h-full">
-            </nuxt-link>
-        </li>
-    </ul>
+  <ul class="flex xl:gap-8 lg:gap-x-8 md:gap-8 gap-6 justify-between xl:h-[100px] lg:h-[86px] h-[60px]">
+    <li
+        @click="item.id === 'contact-us' ? openContactUsModal() : ''"
+        v-for="(item, index) in iconsMenuItems"
+        :key="index"
+        class="flex md:block hover:cursor-pointer relative lg:w-5 md:w-5 w-5 h-full"
+    >
+
+      <template v-if="item.id === 'search'">
+        <nuxt-link :to="item.to">
+          <img :src="light ? item.whiteIconPath : item.blackIconPath" :alt="item.alt" class="h-full">
+        </nuxt-link>
+      </template>
+      <template v-else>
+        <img :src="light ? item.whiteIconPath : item.blackIconPath" :alt="item.alt" class="h-full">
+      </template>
+
+    </li>
+    <contact-us-modal :should-open-modal="shouldOpenModal"/>
+
+  </ul>
 </template>
+
 

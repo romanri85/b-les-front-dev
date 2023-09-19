@@ -1,13 +1,13 @@
 <script setup lang="js">
 
 import BaseHero from "~/components/base/BaseHero.vue";
-import HardwareFilters from "~/components/pages/doorHardware/HardwareFilters.vue";
-import HardwareItems from "~/components/pages/doorHardware/HardwareItems.vue";
+import HardwareFilters from "~/components/pages/door-hardware/HardwareFilters.vue";
+import HardwareItems from "~/components/pages/door-hardware/HardwareItems.vue";
 import {useHardwareFiltersStore} from "~/stores/hardwareFiltersStore";
 import {storeToRefs} from "pinia";
 import {useViewportSize} from "~/composables/useViewportSize";
 import {useResizeObserver} from '@vueuse/core'
-import HardwareFiltersMobile from "~/components/pages/doorHardware/HardwareFiltersMobile.vue";
+import HardwareFiltersMobile from "~/components/pages/door-hardware/HardwareFiltersMobile.vue";
 
 const viewport = useViewportSize()
 const hardwareFiltersStore = useHardwareFiltersStore()
@@ -16,7 +16,7 @@ const {activeFilters, filterCount} = storeToRefs(hardwareFiltersStore)
 
 const heroName = "doorHardware"
 const heroDescription = "doorHardwarePageDescription"
-const heroImage = "/doorHardware/doorHardware.jpg"
+const heroImage = "/door-hardware/door-hardware.jpg"
 
 let products = ref([])
 let page = ref(1)

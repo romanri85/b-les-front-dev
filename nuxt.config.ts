@@ -15,9 +15,11 @@ const config = {
         }], '@pinia/nuxt',
         ['@formkit/nuxt'],
         "@hebilicious/vue-query-nuxt",
-        '@nuxtjs/eslint-module',
+        // '@nuxtjs/eslint-module',
+        "nuxt-csurf",
 
     ],
+
     algolia: {
         apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
         applicationId: process.env.ALGOLIA_APPLICATION_ID,

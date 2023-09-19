@@ -30,7 +30,7 @@ export default {
 
     },
     'family:button': {
-        input: '$reset inline-flex items-center bg-gray-600 text-white text-sm font-normal py-3 px-6 rounded focus-visible:outline-2 focus-visible:outline-gray-600 focus-visible:outline-offset-2 formkit-disabled:bg-gray-400 formkit-loading:before:w-4 formkit-loading:before:h-4 formkit-loading:before:mr-2 formkit-loading:before:border formkit-loading:before:border-2 formkit-loading:before:border-r-transparent formkit-loading:before:rounded-3xl formkit-loading:before:border-white formkit-loading:before:animate-spin',
+        input: '$reset inline-flex items-center bg-primaryDark text-white text-sm font-normal py-3 px-6 focus-visible:outline-2 focus-visible:outline-gray-600 focus-visible:outline-offset-2 formkit-disabled:bg-gray-400 formkit-loading:before:w-4 formkit-loading:before:h-4 formkit-loading:before:mr-2 formkit-loading:before:border formkit-loading:before:border-2 formkit-loading:before:border-r-transparent formkit-loading:before:rounded-3xl formkit-loading:before:border-white formkit-loading:before:animate-spin',
         wrapper: 'mb-1',
         prefixIcon: '$reset block w-4 -ml-2 mr-2 stretch',
         suffixIcon: '$reset block w-4 ml-2 stretch',
@@ -53,7 +53,7 @@ export default {
         selectIcon: 'flex box-content w-4 px-2 self-stretch grow-0 shrink-0 [&>svg]:w-[1em]',
     },
     'family:text': {
-        inner: 'flex items-center max-w-md ring-1 ring-gray-400 focus-within:ring-gray-500 focus-within:ring-2 [&>label:first-child]:focus-within:text-gray-500 rounded mb-1',
+        inner: 'flex items-center max-w-md ring-1 ring-gray-400 focus-within:ring-gray-500 focus-within:ring-2 [&>label:first-child]:focus-within:text-gray-500 mb-1',
         input: 'w-full px-3 py-2 border-none text-base text-gray-700 placeholder-gray-400',
     },
     'family:date': {
@@ -96,7 +96,7 @@ export default {
         option: 'formkit-multiple:p-3 formkit-multiple:text-sm text-gray-700'
     },
     textarea: {
-        inner: 'flex max-w-md rounded mb-1 ring-1 ring-gray-400 focus-within:ring-gray-500 [&>label:first-child]:focus-within:text-gray-500',
+        inner: 'flex max-w-md mb-1 ring-1 ring-gray-400 focus-within:ring-gray-500 [&>label:first-child]:focus-within:text-gray-500',
         input: 'block w-full h-32 px-3 py-3 border-none text-base text-gray-700 placeholder-gray-400 focus:shadow-outline',
     },
 

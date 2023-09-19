@@ -4,7 +4,7 @@ defineProps({light: {type: Boolean}})
 
 <template>
     <img :src="light ? '/logo-white.svg' : '/logo-black.svg'" alt="logo"
-         class="hover:cursor-pointer xl:w-[246px] lg:min-w-[232px]  md:w-[182px] w-[162px] lg:order-1 md:order-2 order-1"></template>
+         class="hover:cursor-pointer xl:w-[246px] lg:min-w-[232px]  md:w-[182px] w-[132px] lg:order-1 md:order-2 order-1"></template>
 
 <style scoped>
 

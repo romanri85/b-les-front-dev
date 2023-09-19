@@ -32,8 +32,6 @@ onMounted(() => {
   const router = useRouter();
   const filtersId = router.currentRoute.value.query.filters;
 
-  console.log('Router:', router);
-  console.log('Current Route:', router.currentRoute.value);
 
   if (filtersId) {
     // Use the find method to get the doorSet by its id

@@ -1,22 +1,14 @@
 <script setup lang="ts">
-import DoorCard from "~/components/pages/door-catalog/DoorCard.vue";
 import Pagination from "~/components/base/pagination/Pagination.vue";
-import {baseURL} from "~/config";
-import Sorting from "~/components/filters/Sorting.vue";
-import HardwareCard from "~/components/pages/doorHardware/HardwareCard.vue";
-import SortingHardware from "~/components/pages/doorHardware/SortingHardware.vue";
-import { ref } from 'vue'
+import HardwareCard from "~/components/pages/door-hardware/HardwareCard.vue";
+import SortingHardware from "~/components/pages/door-hardware/SortingHardware.vue";
 import { useAutoAnimate } from '@formkit/auto-animate/vue'
 import { useHardwareFiltersStore } from "~/stores/hardwareFiltersStore";
 import { storeToRefs } from "pinia";
 
 const hardwareFiltersStore = useHardwareFiltersStore()
 const {total, pagesCount, products, page_size,page} = storeToRefs(hardwareFiltersStore)
-// console.log(products.value, 'products')
-// console.log(page.value, 'page')
-// console.log(page_size.value, 'page_size')
-// console.log(pagesCount.value, 'pagesCount')
-// console.log(total.value, 'total')
+
 
 
 

@@ -3,12 +3,11 @@ import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 import {useFiltersStore} from "~/stores/filtersStore";
 import SecondaryButton from "~/components/buttons/SecondaryButton.vue";
 import SortingMobile from "~/components/filters/SortingMobile.vue";
-import PriceFilterHardware from "~/components/pages/doorHardware/priceFilterHardware.vue";
-import ColorCollectionFilterHardware from "~/components/pages/doorHardware/colorCollectionFilterHardware.vue";
-import DesignFilterHardware from "~/components/pages/doorHardware/designFilterHardware.vue";
-import SortingHardware from "~/components/pages/doorHardware/SortingHardware.vue";
+import PriceFilterHardware from "~/components/pages/door-hardware/priceFilterHardware.vue";
+import ColorCollectionFilterHardware from "~/components/pages/door-hardware/colorCollectionFilterHardware.vue";
+import DesignFilterHardware from "~/components/pages/door-hardware/designFilterHardware.vue";
 import {useHardwareFiltersStore} from "~/stores/hardwareFiltersStore";
-import SortingHardwareMobile from "~/components/pages/doorHardware/SortingHardwareMobile.vue";
+import SortingHardwareMobile from "~/components/pages/door-hardware/SortingHardwareMobile.vue";
 
 const hardwareFiltersStore = useHardwareFiltersStore()
 const filtersStore = useFiltersStore()

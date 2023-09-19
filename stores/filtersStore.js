@@ -56,7 +56,6 @@ export const useFiltersStore = defineStore("filtersStore", () => {
 
 
             let query = new URLSearchParams(activeFilters.value).toString();
-            console.log(query, 'query')
             await fetchProducts(query)
 
 
