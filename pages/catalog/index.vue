@@ -8,7 +8,6 @@ import DoorSets from "~/components/pages/door-catalog/DoorSets.vue";
 import DoorFiltersMobile from "~/components/pages/door-catalog/DoorFiltersMobile.vue";
 import {useElementVisibility, useResizeObserver} from '@vueuse/core'
 import DoorFilters from "~/components/pages/door-catalog/DoorFilters.vue";
-import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore.js";
 import {useRoute} from "vue-router";
 import {watch} from "vue";
 
@@ -16,13 +15,11 @@ definePageMeta({layout: "catalog"});
 
 const footerElement = ref(null)
 const footerIsVisible = useElementVisibility(footerElement)
-// definePageMeta({layout: "catalog"})
 
 
 const viewport = useViewportSize()
 const filtersStore = useFiltersStore()
-const {activeFilters, filterCount, materialColors} = storeToRefs(filtersStore)
-const isBurgerOpenStore = useIsBurgerOpenStore()
+const {activeFilters, filterCount} = storeToRefs(filtersStore)
 
 const heroName = "catalog"
 const heroDescription = "catalogPageDescription"
@@ -52,10 +49,8 @@ let page = ref(1)
 const total = ref(0)
 let pagesCount = ref(0)
 const page_size = 24
-// const filterCount = ref({})
 
 const route = useRoute()
-// filtersStore.fetchMaterialColors()
 
 await filtersStore.onChangeFilters({...activeFilters.value, page: 1})
 
@@ -72,39 +67,6 @@ setTimeout(
       });
     }, 500)
 
-// onMounted(async () => {
-//   const route = useRoute();
-//   const router = useRouter();
-//   let collectionId = null;
-//   if (route.query.collection) {
-//     collectionId = route.query.collection;
-//
-//     if (collectionId) {
-//       // If it exists, add it to the onChangeFilters
-//       filtersStore.activeFilters = {
-//         ...filtersStore.activeFilters,
-//         'collection': [parseInt(collectionId)]
-//       };
-//       await filtersStore.onChangeFilters(filtersStore.activeFilters);
-//
-//       // Remove 'collection' from the URL query and update the path
-//       const query = {...route.query};
-//       delete query.collection;
-//
-//       await router.replace({
-//         path: '/catalog',
-//         query,
-//       }).then(() => {
-//         console.log('Route replaced successfully');
-//       }).catch(err => {
-//         console.log('Route replace failed:', err);
-//       });
-//     } else {
-//       console.warn(`No collection found with id ${collectionId}`);
-//     }
-//   }
-//
-// });
 
 watch(() => route.query.collection, (newValue) => {
   if (newValue) {
@@ -113,7 +75,7 @@ watch(() => route.query.collection, (newValue) => {
   }
 }, {immediate: true});
 
-watch([() => catalogElementHeight.value, () => doorFiltersHeight.value, filtersStore.activeFilters], () => {
+watch([() => catalogElementHeight.value, () => doorFiltersHeight.value], () => {
   if (sidebar.value) {
     sidebar.value.updateSticky();
     if (footerIsVisible.value) {
@@ -129,29 +91,6 @@ watch([() => catalogElementHeight.value, () => doorFiltersHeight.value, filtersS
   }
 });
 
-
-
-// watch(() => route.query.collection, (newValue) => {
-//   if (newValue) {
-//     filtersStore.activeFilters = ({...filtersStore.activeFilters, 'collection': [parseInt(newValue)]});
-//     filtersStore.onChangeFilters(filtersStore.activeFilters);
-//   } else {
-//     filtersStore.activeFilters = ({
-//       ordering: "",
-//       // min_price: Number,
-//       // max_price: Number,
-//       design: [],
-//       color_set: [],
-//       color: [],
-//       collection: [],
-//       material: [],
-//       glass: "",
-//       page: 1,
-//       // colorSet: [], colors: [], designs: [], collections: []
-//     });
-//     filtersStore.onChangeFilters(filtersStore.activeFilters)
-//   }
-// }, {immediate: true});
 
 onUnmounted(() => {
   filtersStore.activeFilters = ({
@@ -174,7 +113,6 @@ onUnmounted(() => {
 
 <template>
   <div ref="catalogElement" class="">
-    <!--      <client-only>-->
 
     <base-hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>
     <door-sets/>
@@ -188,7 +126,6 @@ onUnmounted(() => {
       <door-items class="md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)]  "/>
     </div>
     <Footer ref="footerElement"/>
-    <!--      </client-only>-->
   </div>
 </template>
 

@@ -38,7 +38,7 @@
             <DialogPanel
                 :class="{
     'md:w-1/2 lg:w-1/3 w-full': isTallImage,
-    'md:w-3/4 w-full': isWideImage
+    'md:w-3/4 lg:w-2/3 w-full': isWideImage
   }"
                 class="transform overflow-hidden bg-white p-6 text-left align-middle shadow-xl transition-all"
             >
@@ -49,7 +49,7 @@
 
               </DialogTitle>
               <div class="mt-2">
-                <nuxt-img :src="image.image" class=" h-[80vh] w-full object-contain"
+                <nuxt-img :src="image.image" class=" w-full object-contain"
                           :alt="image.project_name"></nuxt-img>
                 <div class="inline-flex justify-start flex-wrap">
 
@@ -99,7 +99,7 @@ const props = defineProps({
 
 
 const isTallImage = computed(() => props.image.height / props.image.width > 1);
-const isWideImage = computed(() => props.image.height / props.image.width < 1);
+const isWideImage = computed(() => props.image.height / props.image.width <= 1);
 
 
 const isOpen = ref(false)

@@ -53,10 +53,10 @@ function chooseModel(model) {
         </DisclosureButton>
         <DisclosurePanel class="mb-10">
           <client-only>
-            <div class="flex gap-x-6 mb-2 mt-0 flex-nowrap w-full">
+            <div class="flex mb-2 mt-0 flex-nowrap w-full justify-start">
                 <div v-if="props.product.product_family.products" v-for="model in props.product.product_family.products"
                      :key="model.name" @click="chooseModel(model)" class="flex flex-col items-center">
-                  <div v-if="model.image !== null" class="relative pb-1 cursor-pointer border-b-4 px-4"
+                  <div v-if="model.image !== null" class="relative flex flex-col justify-center pb-1 px-4 cursor-pointer border-b-4"
                        :class="{'border-transparent': model.name !== props.product.name, 'border-black':model.name === props.product.name}">
                     <!--            <nuxt-img width="200px" height="auto" :src="props.doorVariant.casing_variant.image"-->
                     <!--                      class="h-auto w-48"></nuxt-img>-->

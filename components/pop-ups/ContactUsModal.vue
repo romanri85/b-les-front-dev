@@ -159,10 +159,10 @@ async function fetchCities() {
     // cityLookup[city.name] = String(city.id);
     return city.name
   })
-
+console.log(cities.value, 'cities')
 }
 
-fetchCities()
+// fetchCities()
 
 
 function getCookie(name) {
@@ -197,7 +197,6 @@ async function handleSubmit(data) {
     console.error("There was an error sending the request", error);
   }
 }
-// sendPostRequest();
 const {shouldOpenModal} = toRefs(props)
 
 watch(shouldOpenModal, (newValue) => {
@@ -214,6 +213,7 @@ function closeModal() {
 
 function openModal() {
   isOpen.value = true
+  fetchCities()
 }
 
 

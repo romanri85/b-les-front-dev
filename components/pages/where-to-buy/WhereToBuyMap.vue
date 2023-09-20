@@ -119,7 +119,7 @@ async function initMap() {
     if (maxRetries > 0) {
       setTimeout(initMap, interval);
       maxRetries--;
-      // interval += 100;  // Increase interval by 30ms for the next retry
+      interval += 250;  // Increase interval by 30ms for the next retry
       return;
     } else {
       console.error('Failed to initialize ymaps after multiple attempts.');

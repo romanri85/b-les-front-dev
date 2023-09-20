@@ -6,12 +6,16 @@ import HardwareItems from "~/components/pages/door-hardware/HardwareItems.vue";
 import {useHardwareFiltersStore} from "~/stores/hardwareFiltersStore";
 import {storeToRefs} from "pinia";
 import {useViewportSize} from "~/composables/useViewportSize";
-import {useResizeObserver} from '@vueuse/core'
 import HardwareFiltersMobile from "~/components/pages/door-hardware/HardwareFiltersMobile.vue";
+import {useElementVisibility, useResizeObserver} from '@vueuse/core'
 
+definePageMeta({layout: "catalog"});
+
+const footerElement = ref(null)
 const viewport = useViewportSize()
 const hardwareFiltersStore = useHardwareFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(hardwareFiltersStore)
+const footerIsVisible = useElementVisibility(footerElement)
 
 
 const heroName = "doorHardware"
@@ -60,21 +64,21 @@ setTimeout(
 watch([() => catalogElementHeight.value, () => hardwareFiltersHeight.value], () => {
   if (sidebar.value) {
     sidebar.value.updateSticky();
+    if (footerIsVisible.value) {
+      // Scroll 50px up
+      window.scrollBy(0, -5);
+
+      // Then scroll 50px down after a delay (e.g., 300 milliseconds)
+      setTimeout(() => {
+        window.scrollBy(0, 5);
+      }, 300);
+    }
 
   }
 });
 
 onMounted(async () => {
-  // if(route.query.material){
-  //   activeFilters.value.material = route.query.material
-  //   const query = "&" + new URLSearchParams(activeFilters.value).toString();
-  //   hardwareFiltersStore.onChangeFilters({page: 1})
-  //   return
-  // }
 
-  // if (!activeFilters.value.color_collection) {
-  //   activeFilters.value.color_collection = []
-  // }
 
   await hardwareFiltersStore.onChangeFilters({page: 1});
 
@@ -93,20 +97,13 @@ onMounted(async () => {
         </div>
       </div>
       <hardware-filters-mobile v-else-if="viewport.isMobile"/>
-      <hardware-items class="md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)] min-h-[2440px]"/>
+      <hardware-items class="md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)]"/>
 
     </div>
+    <Footer ref="footerElement"/>
   </div>
 </template>
 
 <style scoped>
-.sidebar {
-  will-change: min-height;
-}
 
-.sidebar__inner {
-  //transform: translate(0, 0); /* For browsers don't support translate3d. */
-  transform: translate3d(0, 0, 0);
-  will-change: position, transform;
-}
 </style>

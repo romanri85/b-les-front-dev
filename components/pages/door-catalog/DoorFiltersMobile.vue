@@ -71,9 +71,7 @@ function toggleSortingOpen() {
       </div>
 
       <div class=" mt-16 filter-container relative z-20" v-if="isFiltersOpen">
-        <primary-button-small class="pb-8 text-start " @click="">
-          <h3 class="underline-static">Все двери</h3>
-        </primary-button-small>
+
         <price-filter/>
 
         <color-set-filter/>

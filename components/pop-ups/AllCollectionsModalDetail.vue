@@ -103,7 +103,7 @@ onMounted(() => {
                      :key="product.id"  class="flex flex-col items-center">
 
                   <div @click="chooseProduct(product)" class="relative pb-4 px-4 border-b-2 flex flex-col items-center cursor-pointer"
-                       :class="{'border-black':product.id === props.product.id, 'border-transparent': product.id !== props.product.id}">
+                       :class="{'border-primaryDark':product.id === props.product.id, 'border-transparent': product.id !== props.product.id}">
                     <!--            <nuxt-img width="200px" height="auto" :src="props.doorVariant.casing_variant.image"-->
                     <!--                      class="h-auto w-48"></nuxt-img>-->
                     <!--            <nuxt-img width="200px" height="auto"-->

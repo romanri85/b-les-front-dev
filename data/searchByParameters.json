@@ -58,14 +58,11 @@
     }
   },
   {
-    "name": "white enamel doors with glass",
+    "name": "white doors with glass",
     "id": "6",
     "filter": {
       "color_set": [
         1
-      ],
-      "material": [
-        3
       ],
       "glass": "true"
     }
