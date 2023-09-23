@@ -5,7 +5,7 @@ const config = {
     modules: [
         '@nuxtjs/algolia',
         'nuxt-headlessui',
-        '@nuxt/image-edge',
+        '@nuxt/image',
         '@nuxtjs/i18n',
         'nuxt-lodash',
         'nuxt-icon',
