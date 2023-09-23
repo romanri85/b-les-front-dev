@@ -3,11 +3,11 @@
     <div id="map" class="lg:w-[50%] w-full h-[70vh]"></div>
     <div class="lg:pl-10 lg:w-[50%] w-full h-[100vh] overflow-auto">
       <div id="placemark-list" class="lg:mt-0 relative w-full">
-        <filter-bar  :total="totalPlacemarks"
+        <filter-bar @touchmove.stop  :total="totalPlacemarks"
                     @filter-change="filterChange"
-                    style="position: sticky; top: 0; z-index: 1;" class="relative z-30 lg:pt-0 pt-4 bg-white border-b border-gray-400"
+                    style="position: sticky; top: 0; z-index: 1;" class=" lg:pt-0 pt-4 bg-white border-b border-gray-400"
         />
-        <place-mark-info class="relative -z-10" v-if="visibleAddressData.length" v-for="address in visibleAddressData" :key="address.id"
+        <place-mark-info v-if="visibleAddressData.length" v-for="address in visibleAddressData" :key="address.id"
                          :address="address" @center-change="changeMapCenterAndZoom"/>
       </div>
     </div>
@@ -293,5 +293,10 @@ function filterChange(newFilter) {
 
 
 </script>
+<style scoped>
+filter-bar {
+  pointer-events: auto; /* Enables pointer events for the filter bar */
+}
+</style>
 
 
