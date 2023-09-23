@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import PriceFilterHardware from "~/components/pages/door-hardware/priceFilterHardware.vue";
-import ColorCollectionFilterHardware from "~/components/pages/door-hardware/colorCollectionFilterHardware.vue";
-import DesignFilterHardware from "~/components/pages/door-hardware/designFilterHardware.vue";
+import PriceFilterHardware from "~/components/pages/door-hardware/PriceFilterHardware.vue";
+import ColorCollectionFilterHardware from "~/components/pages/door-hardware/ColorCollectionFilterHardware.vue";
+import DesignFilterHardware from "~/components/pages/door-hardware/DesignFilterHardware.vue";
 import {useHardwareFiltersStore} from "~/stores/hardwareFiltersStore";
 import PrimaryButtonBigger from "~/components/buttons/PrimaryButtonBigger.vue";
 
