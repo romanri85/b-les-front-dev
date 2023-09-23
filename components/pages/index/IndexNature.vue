@@ -81,7 +81,7 @@
 
 
 
-@media only screen and (min-width: 280px) {
+@media only screen and (min-width: 780px) {
   .cd-fixed-bg {
     background-attachment: fixed;
   }
