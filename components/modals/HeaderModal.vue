@@ -14,7 +14,7 @@
         <div class="pb-10 md:pb-0 lg:pb-10 lg:grid lg:grid-cols-3 flex flex-wrap justify-start gap-x-5 gap-y-8  w-full max-w-full">
             <div v-for="item in props.currentMenuItems" :key="item.name" class="lg:flex lg:max-w-screen-lg text-center max-w-[30%] lg:flex-col items-center">
               <NuxtLink :to="props.activeMenuItemKey === 'collections' ? `/catalog?collection=${item.id}` : item.slug">
-                <nuxt-img pref sizes="sm:100vw md:20vw lg:100vw" quality="50" :src="item.image" alt="collection" class="h-auto object-contain"/>
+                <nuxt-img pref preload placeholder sizes="sm:100vw md:20vw lg:100vw" quality="50" :src="item.image" alt="collection" class="h-auto object-contain"/>
                 <primary-button-small class="text-center text-black mt-8"><h4>{{ $t(item.name) }}</h4></primary-button-small>
               </NuxtLink>
             </div>
