@@ -1,5 +1,5 @@
 <template>
-<client-only>
+<!--<client-only>-->
 <!--    collections if catalog chosen-->
 
   <div ref="menuRef"  class="text-black lg:absolute lg:top-[85px] lg:left-[50%] lg:-translate-x-[50%] w-[100%] h-[65px] flex justify-center items-center">
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-</client-only>
+<!--</client-only>-->
 </template>
 
 <script setup lang="ts">
