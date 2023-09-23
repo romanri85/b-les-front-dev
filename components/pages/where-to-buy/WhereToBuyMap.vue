@@ -1,6 +1,6 @@
 <template>
   <div class="block lg:flex ">
-    <div id="map" class="lg:w-[50%] w-full h-[80vh]"></div>
+    <div id="map" class="lg:w-[50%] w-full h-[70vh]"></div>
     <div class="lg:pl-10 lg:w-[50%] w-full h-[100vh] overflow-auto">
       <div id="placemark-list" class="lg:mt-0 relative w-full">
         <filter-bar  :total="totalPlacemarks"
