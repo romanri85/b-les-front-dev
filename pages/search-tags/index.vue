@@ -6,7 +6,7 @@ import {useInteriorStore} from "~/stores/interiorStore";
 import buttons from "~/data/interiorButtons.json";
 import Pagination from "~/components/base/pagination/Pagination.vue";
 import {baseURL} from "~/config";
-import ImageModal from "~/components/pop-ups/imageModal.vue";
+import ImageModal from "~/components/pop-ups/ImageModal.vue";
 import {useRoute} from "vue-router";
 
 import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService';
