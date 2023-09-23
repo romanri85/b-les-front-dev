@@ -14,7 +14,7 @@ const {projects} = storeToRefs(interiorStore)
 
 const heroName = "interiorHeader"
 const heroDescription = ""
-const heroImage = "/interior/bg-interior.png"
+const heroImage = "/interior/bg-interior.webp"
 const route = useRoute();
 const router = useRouter();
 const currentPage = ref(route.query.page ? parseInt(route.query.page as string) : 1);

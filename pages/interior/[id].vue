@@ -95,7 +95,7 @@ const layoutImages = computed(() => {
     <div class="image-container">
       <div v-for="(image, index) in layoutImages" :key="index"
            :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
-        <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover" :alt="image.project_name"/>
+        <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover cursor-pointer" :alt="image.project_name"/>
       </div>
     </div>
   </div>

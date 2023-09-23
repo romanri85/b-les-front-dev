@@ -21,7 +21,7 @@ const interiorStore = useInteriorStore()
 
 const heroName = "interiorHeader"
 const heroDescription = ""
-const heroImage = "/interior/bg-interior.png"
+const heroImage = "/interior/bg-interior.webp"
 
 const initialTags = ref([]);
 const imgModal = ref(null);
