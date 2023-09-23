@@ -2,7 +2,7 @@
 // import {baseURL} from "~/config.js";
 
 import {program} from "@babel/types";
-import systemsModal from "~/components/pop-ups/systemsModal.vue";
+import systemsModal from "~/components/pop-ups/SystemsModal.vue";
 import SystemsOpeningTypePrevArrow from "~/components/pages/systems/SystemsOpeningTypePrevArrow.vue";
 import SystemsOpeningTypeNextArrow from "~/components/pages/systems/SystemsOpeningTypeNextArrow.vue";
 
