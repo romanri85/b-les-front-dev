@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import {baseURL} from "~/config.js";
+import {baseURL} from "~/config";
 import HeroSystems from "~/components/pages/systems/heroSystems.vue";
 import buttons from "~/data/systemsButtons.json";
 import OpeningType from "~/components/pages/systems/OpeningType.vue";
@@ -11,7 +11,6 @@ const heroImage = "/systems/systems-bg.png"
 const swingSystems = ref([])
 
 
-const baseURL = 'http://localhost:8000'
 
 
 async function fetchSwingSystems() {
