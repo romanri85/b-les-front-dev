@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import PriceFilter from "~/components/filters/priceFilter.vue";
-import ColorSetFilter from "~/components/filters/colorSetFilter.vue";
-import DesignFilter from "~/components/filters/designFilter.vue";
+import PriceFilter from "~/components/filters/PriceFilter.vue";
+import ColorSetFilter from "~/components/filters/ColorSetFilter.vue";
+import DesignFilter from "~/components/filters/DesignFilter.vue";
 import MaterialColorFilter from "~/components/pages/door-catalog/MaterialColorFilter.vue";
 import DoorCollectionsFilter from "~/components/pages/door-catalog/DoorCollectionsFilter.vue";
 import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
