@@ -7,7 +7,7 @@ import PrimaryButtonBigger from "~/components/buttons/PrimaryButtonBigger.vue";
 
 const hardwareFiltersStore = useHardwareFiltersStore()
 
-
+//
 // window.scrollTo(0, 0);
 
 </script>
@@ -31,7 +31,7 @@ const hardwareFiltersStore = useHardwareFiltersStore()
       <color-collection-filter-hardware/>
       <design-filter-hardware/>
       <primary-button-bigger class="w-full text-start " @click="hardwareFiltersStore.onResetFilters">
-        <h3>Очистить</h3>
+        <h3>Все ручки</h3>
       </primary-button-bigger>
     </div>
     </client-only>
