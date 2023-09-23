@@ -5,9 +5,9 @@
       <div id="placemark-list" class="lg:mt-0 relative w-full">
         <filter-bar  :total="totalPlacemarks"
                     @filter-change="filterChange"
-                    style="position: sticky; top: 0; z-index: 1;" class="lg:pt-0 pt-4 bg-white border-b border-gray-400"
+                    style="position: sticky; top: 0; z-index: 1;" class="relative z-30 lg:pt-0 pt-4 bg-white border-b border-gray-400"
         />
-        <place-mark-info v-if="visibleAddressData.length" v-for="address in visibleAddressData" :key="address.id"
+        <place-mark-info class="relative -z-10" v-if="visibleAddressData.length" v-for="address in visibleAddressData" :key="address.id"
                          :address="address" @center-change="changeMapCenterAndZoom"/>
       </div>
     </div>
