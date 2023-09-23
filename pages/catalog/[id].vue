@@ -9,7 +9,7 @@ import {toNumber} from "@vue/shared";
 import AllCollectionsModalDetail from "~/components/pop-ups/AllCollectionsModalDetail.vue";
 import Pagination from "~/components/base/pagination/Pagination.vue";
 import {ref} from "vue";
-import ImageModal from "~/components/pop-ups/imageModal.vue";
+import ImageModal from "~/components/pop-ups/ImageModal.vue";
 import {useRouter} from 'vue-router'
 import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService';
 import SaleInfoDetail from "~/components/pages/door-catalog/SaleInfoDetail.vue";
