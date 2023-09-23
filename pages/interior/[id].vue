@@ -5,7 +5,7 @@ import BaseHero from "~/components/base/BaseHero.vue";
 import Pagination from "~/components/base/pagination/Pagination.vue";
 import {useInteriorStore} from "~/stores/interiorStore";
 import {storeToRefs} from "pinia";
-import ImageModal from "~/components/pop-ups/imageModal.vue";
+import ImageModal from "~/components/pop-ups/ImageModal.vue";
 import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService'; // Assuming the service is in the same directory
 import {ref} from 'vue';
 
