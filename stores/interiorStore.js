@@ -17,6 +17,9 @@ export const useInteriorStore = defineStore("interiorStore", () => {
 
     async function getProjects(page = 1) {
         // let response = await $fetch(`${baseURL}/api/projects?page=${page}`)
+        if (!page) {
+            page = 1
+        }
         const data = await $fetch(`${baseURL}/api/projects?page=${page}`);
         if (data) {
             // response = data.value

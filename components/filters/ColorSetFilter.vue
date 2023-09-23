@@ -93,6 +93,7 @@ function isColorSetAvailable(colorSet) {
 }
 
 
+
 const viewport = useViewportSize()
 const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTablet === true)
 
@@ -112,16 +113,17 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
         leave-to-class="transform scale-95 opacity-0"
     >
     <DisclosurePanel class="mb-20">
-      <div v-if="filtersStore.color_sets" v-for="color_set in filtersStore.color_sets" :key=color_set.id class="flex gap-x-4 items-center mb-3"
+      <div  v-if="filtersStore.color_sets" v-for="color_set in filtersStore.color_sets" :key=color_set.id class="flex gap-x-4 items-center mb-3"
            @click="!isColorSetAvailable(color_set.id) ? null : chooseColorSet(color_set.id)">
-        <div class=" pb-1 border-b-4" :class="{
-          'border-b': filtersStore.activeFilters.color_set.includes(color_set.id),'border-transparent': !filtersStore.activeFilters.color_set.includes(color_set.id), 'border-black':filtersStore.activeFilters.color_set.includes(color_set.id), 'cursor-pointer': isColorSetAvailable(color_set.id)
-        }">
+        <div :style="{ 'borderBottomColor': isColorSetAvailable(color_set.id) && activeFilters.color_set.includes(color_set.id) ? 'black' : 'transparent' }" class="pb-1 border-b-4" :class="{
+      'cursor-pointer': isColorSetAvailable(color_set.id)
+    }">
           <div :style="{ backgroundColor: color_set.hex_code }" class="w-12 h-12 shadow-darkGrey shadow-sm"></div>
         </div>
         <h5 :class="{
             'text-gray-400': !isColorSetAvailable(color_set.id), 'cursor-pointer': isColorSetAvailable(color_set.id)
         }">{{ color_set.name }}</h5>
+
       </div>
     </DisclosurePanel>
     </transition>

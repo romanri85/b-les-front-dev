@@ -63,9 +63,7 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
 
     async function checkFilters(query = "") {
         const data = await $fetch(`${baseURL}/api/hardware/hardware-filters?${query}`);
-        console.log(query, 'query')
         if (data) {
-            console.log(data, 'data')
             filterCount.value = data.counts
         }
         else {

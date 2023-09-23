@@ -75,7 +75,7 @@
 }
 
 .cd-fixed-bg.cd-bg-1 {
-  background-image: url("/gabriella-clare-marino-KYwErCnu8J4-unsplash.jpg");
+  background-image: url("/advantages.webp");
 }
 
 @media only screen and (min-width: 280px) {

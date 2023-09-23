@@ -47,7 +47,7 @@ function onChangePage(page) {
             <div
                 class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
               <div class="text-center">
-                <h2 class="text-white">{{ project.collection.name }}</h2>
+                <h2 v-if="project.collection" class="text-white">{{ project.collection.name }}</h2>
                 <p class="text-white">{{ project.name }}</p>
               </div>
             </div>

@@ -20,8 +20,8 @@ export default {
 
     // Family styles apply to all inputs that share a common family
     'family:box': {
-        decorator: 'block relative h-5 w-5 mr-2 bg-white bg-gradient-to-b from-transparent to-gray-200 ring-1 ring-gray-400 peer-checked:ring-gray-500 text-transparent peer-checked:text-black',
-        decoratorIcon: 'flex p-[3px] w-full h-full absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
+        decorator: 'block relative h-5 w-5 mr-2 bg-white bg-gradient-to-b from-transparent to-gray-200 ring-1 ring-gray-400 peer-checked:ring-gray-500 text-transparent peer-checked:text-gray-800 cursor-pointer',
+        decoratorIcon: 'flex p-[3px] w-full h-full absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 peer-checked:text-gray-800',
         help: 'mb-2 mt-1.5',
         input: 'absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none peer',
         inner: '$remove:formkit-disabled:bg-gray-200 mt-2',

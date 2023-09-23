@@ -5,7 +5,7 @@
     </div>
 <!--<client-only>-->
     <FormKit
-        decoratorIcon="check"
+        decorator-icon="check"
         v-model="isOpen"
         type="checkbox"
         :options="{ open: 'Только открытые магазины', monoBrand: 'Только монобрендовые магазины' }"

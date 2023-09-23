@@ -15,7 +15,7 @@
     </div>
     <div class=" lg:w-[50vw] w-[100vw] flex justify-center lg:h-2/3 md:h-1/2 h-[240px] items-center mb-24 md:mb-0 mt-10 md:mt-0">
       <div
-          class=" bg-[url('/parameters-search.jpg')] bg-cover bg-center lg:w-2/3 w-full h-full flex justify-center items-center main-container">
+          class=" bg-[url('/parameters-search.webp')] bg-cover bg-center lg:w-2/3 w-full h-full flex justify-center items-center main-container">
         <buttons-secondary-button class="md:w-64 md:h-20 w-full h-16
                 md:bg-white sm:bg-primaryDark md:text-black text-white cursor-pointer">
           <nuxt-link to="/search-tags">
