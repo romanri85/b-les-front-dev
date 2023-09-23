@@ -6,7 +6,7 @@ import MaterialColorFilterDetail from "~/components/pages/door-catalog/MaterialC
 import CasingFilterDetail from "~/components/filters/CasingFilterDetail.vue";
 import GlassTypeFilterDetail from "~/components/filters/GlassTypeFilterDetail.vue";
 import {toNumber} from "@vue/shared";
-import AllCollectionsModalDetail from "~/components/pop-ups/allCollectionsModalDetail.vue";
+import AllCollectionsModalDetail from "~/components/pop-ups/AllCollectionsModalDetail.vue";
 import Pagination from "~/components/base/pagination/Pagination.vue";
 import {ref} from "vue";
 import ImageModal from "~/components/pop-ups/imageModal.vue";
