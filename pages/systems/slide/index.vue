@@ -6,7 +6,7 @@ import OpeningType from "~/components/pages/systems/OpeningType.vue";
 
 
 const heroName = "systemsPageHeader"
-const heroImage = "/systems/systems-bg.png"
+const heroImage = "/systems/systems-bg.webp"
 
 const swingSystems = ref([])
 

@@ -54,7 +54,7 @@ watch(shopsCounter, (newCounterValue) => {
 
 const heroName = "aboutUs"
 const heroDescription = "aboutUsPageDescription"
-const heroImage = "/aboutUs/aboutUs-bg.png"
+const heroImage = "/aboutUs/aboutUs-bg.webp"
 
 </script>
 
@@ -69,7 +69,7 @@ const heroImage = "/aboutUs/aboutUs-bg.png"
           }}</h5>
       </div>
       <div class="py-20 lg:py-28 md:w-1/2">
-        <nuxt-img class="h-[345px] lg:h-[665px] object-cover w-full" src="/aboutUs/about-us-2.png" alt="aboutUs-1"/>
+        <nuxt-img class="h-[345px] lg:h-[665px] object-cover w-full" src="/aboutUs/about-us-2.webp" alt="aboutUs-1"/>
       </div>
     </div>
 
@@ -94,7 +94,7 @@ const heroImage = "/aboutUs/aboutUs-bg.png"
   <section class="main-container">
     <div class="main-container flex md:flex-row flex-col-reverse justify-between gap-x-16 lg:gap-x-24">
       <div class="py-24 md:py-20 lg:py-28 md:w-1/2 flex items-center">
-        <nuxt-img class="h-[345px] lg:h-[665px] object-cover w-full" src="/aboutUs/about-us-3.png" alt="aboutUs-1"/>
+        <nuxt-img class="h-[345px] lg:h-[665px] object-cover w-full" src="/aboutUs/about-us-3.webp" alt="aboutUs-1"/>
       </div>
       <div class="flex flex-col pt-24 md:pt-0 justify-center md:w-1/2 gap-y-4 lg:gap-y-10">
         <h2> {{$t('woodWorkingTechnologiesTitle')}}</h2>

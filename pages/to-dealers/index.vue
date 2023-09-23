@@ -2,7 +2,7 @@
 import BaseHeroWithoutDescription from "~/components/base/BaseHeroWithoutDescription.vue";
 
 const heroName = "toDealersPageHeader"
-const heroImage = "/toDealers/toDealers-bg.png"
+const heroImage = "/toDealers/toDealers-bg.webp"
 </script>
 
 <template>

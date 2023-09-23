@@ -3,7 +3,7 @@ import BaseHeroWithoutDescription from "~/components/base/BaseHeroWithoutDescrip
 
 const heroName = "toDesignersHeader"
 const heroDescription = "toDesignersPageDescription"
-const heroImage = "/to-designers/to-designers-bg.png"
+const heroImage = "/to-designers/to-designers-bg.webp"
 </script>
 
 <template>

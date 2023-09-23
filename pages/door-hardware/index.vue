@@ -20,7 +20,7 @@ const footerIsVisible = useElementVisibility(footerElement)
 
 const heroName = "doorHardware"
 const heroDescription = "doorHardwarePageDescription"
-const heroImage = "/door-hardware/door-hardware.jpg"
+const heroImage = "/door-hardware/door-hardware.webp"
 
 let products = ref([])
 let page = ref(1)

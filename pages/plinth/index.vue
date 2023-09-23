@@ -4,7 +4,7 @@ import {baseURL} from "~/config";
 
 const heroName = "plinthHeader"
 const heroDescription = ""
-const heroImage = "/plinth/plinth-bg.png"
+const heroImage = "/plinth/plinth-bg.webp"
 const plinths = ref([])
 
 async function fetchPlinths() {

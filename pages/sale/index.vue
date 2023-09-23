@@ -6,7 +6,7 @@ import {useSaleStore} from "~/stores/saleStore.js";
 const saleStore = useSaleStore()
 const heroName = "Акции"
 const heroDescription = ""
-const heroImage = "/sale/sale-bg.png"
+const heroImage = "/sale/sale-bg.webp"
 
 // const now = new Date();
 // const newYear = new Date(now.getFullYear() + 1, 0, 1);
