@@ -8,11 +8,11 @@ import {useViewportSize} from "~/composables/useViewportSize";
 
 let designs = [
   {
-    name: 'Classic',
+    name: 'Классика',
     id: 1
   },
   {
-    name: 'Modern',
+    name: 'Современный',
     id: 2
   }
 

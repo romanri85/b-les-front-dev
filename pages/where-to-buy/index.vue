@@ -23,7 +23,7 @@ const isCityFound = ref(true)
 
 async function getAddresses() {
   addresses.value = await $fetch(`${baseURL}/api/shops/`)
-  geo.value = Cookies.get('geolocation') || {"country": "Netherlands", "city": "Amsterdam", "region": "North Holland"}
+  geo.value = Cookies.get('geolocation') || {"country": "Russia", "city": "Moscow", "region": "Moscow"}
   geo.value = typeof geo.value === "object" ? geo.value : JSON.parse(geo.value)
   console.log(geo.value.region, 'geo object')
   cities.value = addresses.value.cities
