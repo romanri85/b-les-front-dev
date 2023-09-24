@@ -1,5 +1,4 @@
 <template>
-  <Header :light="true"/>
   <slot/>
 </template>
 

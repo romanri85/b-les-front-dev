@@ -185,6 +185,7 @@ function handleChooseTag(tag) {
 </script>
 
 <template>
+  <Header :light="true"/>
   <div class="">
     <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
 

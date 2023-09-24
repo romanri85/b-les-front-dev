@@ -113,7 +113,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="catalogElement" class="">
-
+<Header :light="true"/>
     <base-hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>
     <door-sets/>
     <div class="main-content flex main-container md:flex-row flex-col md:mt-0  ">
