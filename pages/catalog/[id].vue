@@ -185,9 +185,6 @@ function onChangePage(page) {
             {{ product.collection.name }}</h2>
 
           </buttons-primary-button-big>
-          <all-collections-modal-detail v-if="isCollectionModelOpen" @close="isCollectionModelOpen = false"
-                                        @close-modal="closeCollection" @change-model="changeModel" :color="color" :material="material"
-                                        :collectionProducts="collectionProducts" :product="product"/>
           <h1 class="pb-5">{{ product.name }}</h1>
           <div class="flex justify-between">
             <p v-if="product && product.collection">{{ product.collection.description }}</p>

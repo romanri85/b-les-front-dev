@@ -63,7 +63,7 @@ onMounted(() => {
   <div>
     <client-only>
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div"  class="relative z-30">
+    <Dialog as="div" @close="closeModal" class="relative z-30">
       <TransitionChild
           as="template"
           enter="duration-300 ease-out"

@@ -50,7 +50,11 @@ const currentMenuItems = computed(() => {
                class="h-full flex menu-item">
         <PopoverButton class="">
           <div class="flex justify-center items-center h-full cursor-default border-b-2 border-transparent"
-               :class="[borderedItemIndex === index ? 'border-white' : '', activeItemIndex === index ? '[&>span]:rotate-180' : '']">
+               :class="[
+      borderedItemIndex === index ? 'border-white' : '',
+      activeItemIndex === index ? '[&>span]:rotate-180' : '',
+      light ? 'text-shadow' : ''
+    ]">
             <NuxtLink
                 v-if="item.name !== 'otherElements' && item.name !== 'aboutUs'"
                 :to="item.slug"

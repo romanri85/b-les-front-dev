@@ -1,13 +1,13 @@
 <template>
-<!--  <div class=" flex items-center justify-center">-->
-<!--    <button-->
-<!--        type="button"-->
-<!--        @click="openModal"-->
-<!--        class="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"-->
-<!--    >-->
-<!--      Open dialog-->
-<!--    </button>-->
-<!--  </div>-->
+  <!--  <div class=" flex items-center justify-center">-->
+  <!--    <button-->
+  <!--        type="button"-->
+  <!--        @click="openModal"-->
+  <!--        class="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"-->
+  <!--    >-->
+  <!--      Open dialog-->
+  <!--    </button>-->
+  <!--  </div>-->
   <TransitionRoot appear :show="isOpen" as="template">
     <Dialog as="div" @close="closeModal" class="relative z-30">
       <TransitionChild
@@ -51,21 +51,25 @@
               <div class="mt-2">
                 <nuxt-img :src="image.image" class=" w-full object-contain"
                           :alt="image.project_name"></nuxt-img>
+                <nuxt-link :to="`/interior/${image.project}`">
+                  <div class="text-center py-2 "><h4 class="underline-direction inline">{{ image.project_name }}</h4></div>
+                </nuxt-link>
                 <div class="inline-flex justify-start flex-wrap">
 
-                  <div v-for="tag in image.tags"  class=" text-sm text-primaryDark cursor-pointer">&nbsp;
+                  <div v-for="tag in image.tags" class=" text-sm text-primaryDark cursor-pointer">&nbsp;
 
                     &nbsp;
 
 
-                    <span>&nbsp;</span> <p class="underline-direction inline" @click="chooseTag(tag)" > #{{ tag.name }}</p>
+                    <span>&nbsp;</span>
+                    <p class=" underline-direction inline" @click="chooseTag(tag)"> #{{ tag.name }}</p>
                   </div>
 
                 </div>
               </div>
 
               <div class="text-center mt-4">
-               <buttons-primary-button-small @click="closeModal"><h3>Закрыть</h3></buttons-primary-button-small>
+                <buttons-primary-button-small @click="closeModal"><h3>Закрыть</h3></buttons-primary-button-small>
               </div>
             </DialogPanel>
           </TransitionChild>
@@ -78,7 +82,7 @@
 <script setup>
 import {computed, defineExpose, ref} from 'vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot,} from '@headlessui/vue'
-import { useRouter } from 'vue-router'
+import {useRouter} from 'vue-router'
 
 
 const router = useRouter()
@@ -110,6 +114,7 @@ function chooseTag(tag) {
   closeModal()
   router.push({path: '/search-tags', query: {tags: tag.id}})
 }
+
 function closeModal() {
   isOpen.value = false
 }
