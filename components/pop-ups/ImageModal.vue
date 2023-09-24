@@ -40,7 +40,7 @@
     'md:w-1/2 lg:w-1/3 w-full': isTallImage,
     'md:w-3/4 lg:w-2/3 w-full': isWideImage
   }"
-                class="transform overflow-hidden bg-white p-6 text-left align-middle shadow-xl transition-all"
+                class="transform overflow-x-hidden overflow-y-scroll bg-white p-6 text-left align-middle shadow-xl transition-all"
             >
               <DialogTitle
                   as="h3"
@@ -52,7 +52,7 @@
                 <nuxt-img :src="image.image" class=" w-full object-contain"
                           :alt="image.project_name"></nuxt-img>
                 <nuxt-link :to="`/interior/${image.project}`">
-                  <div class="text-center py-2 "><h4 class="underline-direction inline">{{ image.project_name }}</h4></div>
+                  <div class="text-center py-2 "><h4 class="inline">{{ image.project_name }}</h4></div>
                 </nuxt-link>
                 <div class="inline-flex justify-start flex-wrap">
 
@@ -62,7 +62,7 @@
 
 
                     <span>&nbsp;</span>
-                    <p class=" underline-direction inline" @click="chooseTag(tag)"> #{{ tag.name }}</p>
+                    <p class="inline" @click="chooseTag(tag)"> #{{ tag.name }}</p>
                   </div>
 
                 </div>
