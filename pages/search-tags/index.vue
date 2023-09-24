@@ -12,6 +12,7 @@ import {useRoute} from "vue-router";
 import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService';
 import HeroInteriour from "~/components/pages/interiour/heroInteriour.vue"; // Assuming the service is in the same directory
 
+definePageMeta({layout: "catalog"})
 
 let route = useRoute()
 
@@ -148,9 +149,6 @@ const triggerModal = (image) => {
   selectedImage.value = image;
   if (imgModal.value && imgModal.value.openModal) {
     imgModal.value.openModal();
-    setTimeout(() => {
-      window.scrollTo(0, 100);
-    }, 100);
   } else {
     console.error('Method not available or component not initialized.');
   }
@@ -233,6 +231,7 @@ function handleChooseTag(tag) {
                 @page-change="onChangePage"
                 v-model:current-page="page"/>
   </div>
+  <Footer/>
 </template>
 
 
