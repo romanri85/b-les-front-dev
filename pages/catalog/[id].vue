@@ -188,7 +188,7 @@ function onChangePage(page) {
           <sale-info-detail class="pt-8 pb-4" :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
 
         </div>
-        <casing-filter-detail class="mb-8 md:mb-0 lg:pt-2" v-if="doorVariantData" @change-filter="changeCasing" :material="material"
+        <casing-filter-detail class="lg:mb-8 md:mb-0 lg:pt-2" v-if="doorVariantData" @change-filter="changeCasing" :material="material"
                               :productCasings="productCasings"
                               :casingVariants="casingVariants" :color="color"
                               :startCasing="doorVariantData.casing_variant.casing"/>

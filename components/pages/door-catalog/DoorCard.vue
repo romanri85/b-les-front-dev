@@ -34,7 +34,7 @@ const mouseLeave = () => {
       <h4 class="font-regular">Акция</h4>
     </div>
 
-    <div ref="imageDiv" class="relative top-4 w-full flex justify-center pb-8 mb-5 border-b-2 border-transparent transition-all duration-300 ease-in-out">
+    <div ref="imageDiv" class="relative top-4 w-full flex justify-center pb-8 md:mb-5 border-b-2 border-transparent transition-all duration-300 ease-in-out">
       <nuxt-img width="160" height="auto" :src="props.doorVariant.merged_image"
                 class="h-auto w-48 mdLg:w-40"></nuxt-img>
     </div>

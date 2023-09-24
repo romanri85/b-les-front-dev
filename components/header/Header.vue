@@ -1,17 +1,9 @@
 <script setup lang="ts">
-import TextMenuItems from "~/components/header/TextMenuItems.vue";
-import IconsMenuItems from "~/components/header/IconsMenuItems.vue";
-import Burger from "~/components/header/BurgerWhite.vue";
-import {Disclosure, DisclosureButton, DisclosurePanel} from '@headlessui/vue'
-import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
-import TabletMobileMenu from "~/components/header/TabletMobileMenu.vue";
-import Logo from "~/components/base/Logo.vue";
 import {useViewportSize} from "~/composables/useViewportSize";
 import HeaderMobile from "~/components/header/HeaderMobile.vue";
 import HeaderTablet from "~/components/header/HeaderTablet.vue";
 import HeaderDesktop from "~/components/header/HeaderDesktop.vue";
 
-const isBurgerOpenStore = useIsBurgerOpenStore()
 
 
 // set light layout

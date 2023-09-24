@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-// import Header from "~/components/header/Header.vue";
 import BaseLogo from "~/components/base/BaseLogo.vue";
 import TextMenuItems from "~/components/header/TextMenuItems.vue";
 import IconsMenuItems from "~/components/header/IconsMenuItems.vue";

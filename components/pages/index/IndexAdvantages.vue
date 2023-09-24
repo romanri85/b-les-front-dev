@@ -78,7 +78,7 @@
   background-image: url("/advantages.webp");
 }
 
-@media only screen and (min-width: 780px) {
+@media only screen and (min-width: 1024px) {
   .cd-fixed-bg {
     background-attachment: fixed;
   }
