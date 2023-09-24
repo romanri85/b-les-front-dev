@@ -43,7 +43,7 @@ let pagesCount = ref(0)
 const page_size = 10
 
 
-const heroImage = "/interior/bg-interior.png"
+const heroImage = "/interior/bg-interior.webp"
 
 
 async function getProjectData(query = `/${route.params.id}`) {
@@ -59,7 +59,6 @@ async function getProjectData(query = `/${route.params.id}`) {
 
 
 // Layout determination logic
-
 
 
 await getProjectData()
@@ -87,36 +86,40 @@ const layoutImages = computed(() => {
 </script>
 
 <template>
-  <base-hero v-if="project && project.first_image" class="mb-24" :heroName="project.name" hero-description=""
-        :heroImage="project.first_image.image"/>
-<!--  <div v-if="project" class="flex justify-center mb-24"><p>{{ project.description }}</p></div>-->
+  <div>
+    <base-hero v-if="project && project.first_image" class="mb-24" :heroName="project.name" hero-description=""
+               :heroImage="project.first_image.image"/>
+    <!--  <div v-if="project" class="flex justify-center mb-24"><p>{{ project.description }}</p></div>-->
 
-  <div class="layout-images">
-    <div class="image-container">
-      <div v-for="(image, index) in layoutImages" :key="index"
-           :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
-        <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover cursor-pointer" :alt="image.project_name"/>
+    <div class="layout-images">
+      <div class="image-container">
+        <div v-for="(image, index) in layoutImages" :key="index"
+             :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
+          <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover cursor-pointer"
+                    :alt="image.project_name"/>
+        </div>
       </div>
     </div>
-  </div>
-  <image-modal :image="selectedImage" ref="imgModal"/>
-  <div class="main-container">
-    <div class="mt-16 mb-16">
-      <h3 v-if="project.designer">Автор
-        проекта:{{
-          ' ' + project.designer.name + ' ' + (project.designer.middle_name ? project.designer.middle_name : '') + ' ' + project.designer.surname
-        }}</h3>
+    <div class="main-container">
+      <div class="mt-16 mb-16">
+        <h3 v-if="project.designer">Автор
+          проекта:{{
+            ' ' + project.designer.name + ' ' + (project.designer.middle_name ? project.designer.middle_name : '') + ' ' + project.designer.surname
+          }}</h3>
+      </div>
+      <div class="flex justify-center">
+        <pagination
+            v-if="project.images && project.images.page_links"
+            class="pb-32"
+            :total="project.images.count"
+            :page_size="page_size"
+            :pagesCount="pagesCount"
+            @page-change="onChangePage"
+            v-model:current-page="page"/>
+      </div>
+
     </div>
-    <div class="flex justify-center">
-      <pagination
-          v-if="project.images && project.images.page_links"
-          class="pb-32"
-          :total="project.images.count"
-          :page_size="page_size"
-          :pagesCount="pagesCount"
-          @page-change="onChangePage"
-          v-model:current-page="page"/>
-    </div>
+    <image-modal class="absolute z-30" :image="selectedImage" ref="imgModal"/>
 
   </div>
 </template>
