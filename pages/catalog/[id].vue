@@ -13,6 +13,7 @@ import ImageModal from "~/components/pop-ups/ImageModal.vue";
 import {useRouter} from 'vue-router'
 import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService';
 import SaleInfoDetail from "~/components/pages/door-catalog/SaleInfoDetail.vue";
+import ContactUsModal from "~/components/pop-ups/ContactUsModal.vue";
 // import {$fetch} from "ofetch";
 
 
@@ -39,6 +40,12 @@ const total = ref(0)
 let pagesCount = ref(0)
 const page_size = 9
 const page = ref(1)
+
+const shouldOpenModal = ref(0)
+
+function openContactUsModal() {
+  shouldOpenModal.value = shouldOpenModal.value + 1
+}
 
 
 onMounted(
@@ -256,8 +263,8 @@ function onChangePage(page) {
             </div>
 <!--             <pre>{{doorVariantData}}</pre>-->
           </div>
-          <div class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full">
-            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark text-white">Купить
+          <div @click="openContactUsModal" class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full">
+            <buttons-primary-button-big  class="w-1/2 lg:w-60 h-16 bg-primaryDark text-white">Купить
             </buttons-primary-button-big>
 <!--            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В-->
 <!--              избранное-->
@@ -278,6 +285,7 @@ function onChangePage(page) {
       </div>
     </div>
     <image-modal :image="selectedImage" ref="imgModal"/>
+    <contact-us-modal  :should-open-modal="shouldOpenModal"/>
     <pagination class="pt-12 pb-32 flex justify-center" :total="total"
                 :page_size="page_size"
                 :pagesCount="pagesCount"

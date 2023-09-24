@@ -33,11 +33,5 @@
     "image": "/collection images/1920Rimini-hero.webp",
     "slug": "/rimini",
     "id": 5
-  },
-  {
-    "name": "rStyle",
-    "description": "rStyleDescription",
-    "image": "/collection images/1920R-Style-hero.webp",
-    "id": 6
   }
 ]

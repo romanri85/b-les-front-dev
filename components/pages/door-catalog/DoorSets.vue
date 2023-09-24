@@ -198,7 +198,7 @@ const minusIcon = `
            :class="{ 'show-all': showAll }">
         <p  v-for="doorSet in doorSets"    :key="doorSet.name"
 
-           class="underline-direction border-black cursor-pointer whitespace-nowrap text-primaryDark text-16-mono"
+           class="border-black cursor-pointer whitespace-nowrap text-primaryDark text-16-mono"
            :class="{'underline-static': checkToUnderline(doorSet)}"
            @click="chooseDoorSet(doorSet)">#{{ doorSet.name }}</p>
         <div class="h-[30px]"></div>

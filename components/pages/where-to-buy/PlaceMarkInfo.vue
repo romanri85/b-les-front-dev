@@ -17,16 +17,15 @@
       </div>
       <div class="status pt-4 pb-4">
         <div class="status-color" :style="{backgroundColor: props.address.isOpenData.color}"></div>
-        <p>{{ props.address.isOpenData.isOpen }}</p>
-        <p v-if="remainingTime">, будет работать еще {{ remainingTime }}</p>
-        <p v-if="props.address.isOpenData.isOpen === 'Закрыто'">{{ openText }}
-          {{ props.address.isOpenData.tomorrowOpeningTime }}</p>
+        <p>{{props.address.isOpenData.isOpen}}<span v-if="remainingTime">, будет работать еще {{ remainingTime }}</span>
+          <span v-if="props.address.isOpenData.isOpen === 'Закрыто'">, {{ openText }} {{ props.address.isOpenData.tomorrowOpeningTime }}</span>
+        </p>
       </div>
       <div class="flex flex-col items-start">
-        <buttons-primary-button-small @click="openDoorsInside">Образцы дверей в магазине</buttons-primary-button-small>
+        <h4 class="underline-static"><buttons-primary-button-small @click="openDoorsInside">Образцы дверей в магазине</buttons-primary-button-small></h4>
 
-        <buttons-primary-button-small class="pt-4" @click="getRoute(props.address)">Маршрут
-        </buttons-primary-button-small>
+        <h4 class="underline-static"><buttons-primary-button-small class="pt-4" @click="getRoute(props.address)">Маршрут
+        </buttons-primary-button-small></h4>
       </div>
 
     </div>
