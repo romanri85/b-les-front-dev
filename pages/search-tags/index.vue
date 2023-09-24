@@ -185,7 +185,7 @@ function handleChooseTag(tag) {
 </script>
 
 <template>
-  <Header :light="true"/>
+
   <div class="">
     <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
 
@@ -225,7 +225,7 @@ function handleChooseTag(tag) {
         </div>
       </div>
     </div>
-    <image-modal :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
+    <image-modal class="absolute z-50" :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
     <pagination v-if="page" class="md:pb-32 pb-20 flex justify-center" :total="total"
                 :page_size="page_size"
                 :pagesCount="pagesCount"
