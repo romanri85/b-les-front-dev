@@ -119,7 +119,7 @@ const layoutImages = computed(() => {
       </div>
 
     </div>
-    <image-modal class="absolute z-30" :image="selectedImage" ref="imgModal"/>
+    <image-modal class="" :image="selectedImage" ref="imgModal"/>
 
   </div>
 </template>

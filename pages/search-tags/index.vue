@@ -148,6 +148,9 @@ const triggerModal = (image) => {
   selectedImage.value = image;
   if (imgModal.value && imgModal.value.openModal) {
     imgModal.value.openModal();
+    setTimeout(() => {
+      window.scrollTo(0, 100);
+    }, 100);
   } else {
     console.error('Method not available or component not initialized.');
   }
@@ -223,7 +226,7 @@ function handleChooseTag(tag) {
         </div>
       </div>
     </div>
-    <image-modal class="absolute z-30" :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
+    <image-modal :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
     <pagination v-if="page" class="md:pb-32 pb-20 flex justify-center" :total="total"
                 :page_size="page_size"
                 :pagesCount="pagesCount"
