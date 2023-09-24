@@ -1,6 +1,6 @@
 [
   {
-    "name": "white enamel doors",
+    "name": "белые двери эмаль",
     "id": "1",
     "filter": {
       "color_set": [
@@ -12,7 +12,7 @@
     }
   },
   {
-    "name": "grey enamel doors",
+    "name": "серые двери эмаль",
     "id": "2",
     "filter": {
       "color_set": [
@@ -24,7 +24,7 @@
     }
   },
   {
-    "name": "oak light brown doors",
+    "name": "светло-коричневые двери дуб",
     "id": "3",
     "filter": {
       "color_set": [
@@ -36,7 +36,7 @@
     }
   },
   {
-    "name": "oak dark brown doors",
+    "name": "темно-коричневые двери дуб",
     "id": "4",
     "filter": {
       "color_set": [
@@ -48,7 +48,7 @@
     }
   },
   {
-    "name": "solid wood doors",
+    "name": "двери из массива",
     "id": "5",
     "filter": {
       "material": [
@@ -58,7 +58,7 @@
     }
   },
   {
-    "name": "white doors with glass",
+    "name": "белые двери со стеклом",
     "id": "6",
     "filter": {
       "color_set": [
@@ -68,7 +68,7 @@
     }
   },
   {
-    "name": "oak doors with glass",
+    "name": "дубовые двери со стеклом",
     "id": "8",
     "filter": {
       "material": [
@@ -78,7 +78,7 @@
     }
   },
   {
-    "name": "solid wood doors with glass",
+    "name": "двери из массива со стеклом",
     "id": "10",
     "filter": {
       "material": [
@@ -89,7 +89,7 @@
     }
   },
   {
-    "name": "oak doors",
+    "name": "дубовые двери",
     "id": "7",
     "filter": {
       "material": [
@@ -98,7 +98,7 @@
     }
   },
   {
-    "name": "beech doors",
+    "name": "двери из бука",
     "id": "9",
     "filter": {
       "material": [
@@ -107,7 +107,7 @@
     }
   },
   {
-    "name": "enamel doors",
+    "name": "двери эмаль",
     "id": "11",
     "filter": {
       "material": [
@@ -116,7 +116,7 @@
     }
   },
   {
-    "name": "classic white doors",
+    "name": "классические белые двери",
     "id": "12",
     "filter": {
       "color_set": [
@@ -128,7 +128,7 @@
     }
   },
   {
-    "name": "classic oak doors",
+    "name": "классические дубовые двери",
     "id": "13",
     "filter": {
       "material": [
@@ -140,7 +140,7 @@
     }
   },
   {
-    "name": "modern white doors",
+    "name": "современные белые двери",
     "id": "14",
     "filter": {
       "color_set": [
@@ -152,7 +152,7 @@
     }
   },
   {
-    "name": "modern oak doors",
+    "name": "современные дубовые двери",
     "id": "15",
     "filter": {
       "design": [
@@ -164,7 +164,7 @@
     }
   },
   {
-    "name": "modern beech doors",
+    "name": "современные двери из бука",
     "id": "16",
     "filter": {
       "material": [
