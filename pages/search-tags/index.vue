@@ -185,7 +185,7 @@ function handleChooseTag(tag) {
 
 <template>
 
-  <div class="">
+  <div class="overflow-auto">
     <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
 
     <div class="flex justify-center pt-16 pb-16">

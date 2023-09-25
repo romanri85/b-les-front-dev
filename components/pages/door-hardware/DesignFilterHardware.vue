@@ -44,10 +44,10 @@ function chooseDesign(design) {
     <DisclosureButton class=" w-full">
       <filter-type filterName="Дизайн"/>
     </DisclosureButton>
-    <DisclosurePanel class="mb-[80px]">
+    <DisclosurePanel class="mb-10 mt-6">
       <div v-for="design in designs" :key=design.id class="flex gap-x-[15px] items-center mb-3">
-        <h5 class="underline-offset-4" @click="!isDesignAvailable(design.id) ? null :chooseDesign(design.id)"
-            :class="{'underline':hardwareFiltersStore.activeFilters.design.includes(design.id), 'text-gray-400': !isDesignAvailable(design.id), 'cursor-pointer': isDesignAvailable(design.id) }">{{ design.name }}</h5>
+        <h4 class="underline-offset-4 pb-2 font-light" @click="!isDesignAvailable(design.id) ? null :chooseDesign(design.id)"
+            :class="{'underline':hardwareFiltersStore.activeFilters.design.includes(design.id), 'text-gray-400': !isDesignAvailable(design.id), 'cursor-pointer': isDesignAvailable(design.id) }">{{ design.name }}</h4>
       </div>
     </DisclosurePanel>
   </Disclosure>
