@@ -214,7 +214,7 @@ const minusIcon = `
     </primary-button-small>
     <div class="block md:hidden pr-16 pt-8 whitespace-nowrap" @click="filtersStore.onResetFilters()">
       <h3 class="">
-        <buttons-primary-button-small>все двери</buttons-primary-button-small>
+        <buttons-primary-button-big>Все двери</buttons-primary-button-big>
       </h3>
     </div>
   </div>
@@ -228,9 +228,31 @@ const minusIcon = `
 }
 
 .doorsets-container.show-all {
-  height: 100px; /* Remove max-height restriction */
-//overflow: visible;
+  @media screen and (min-width: 1440px) {
+    height: 100px; /* Set height to 100px */
+  }
+
+  @media screen and (max-width: 1439px) and (min-width: 1025px) {
+    height: 150px; /* Set height to 200px */
+  }
+
+  @media screen and (max-width: 1024px) and (min-width: 768px) {
+    height: 200px; /* Set height to 200px */
+  }
+
+
+  @media screen and (max-width: 767px) and (min-width: 480px) {
+    height: 250px; /* Set height to 200px */
+  }
+
+  @media screen and (max-width: 479px) {
+    height: 320px; /* Set height to 200px */
+  }
+
+
+
 }
+
 
 </style>
 

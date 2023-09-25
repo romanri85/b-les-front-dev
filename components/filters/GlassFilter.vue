@@ -54,7 +54,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
             СО СТЕКЛОМ
           </h4>
           <h4
-              class=" underline-offset-4"
+              class=" underline-offset-4 font-light"
               @click="withoutGlassDisabled ? null : chooseGlass('false')"
               :class="{'underline': filtersStore.activeFilters.glass === 'false', 'text-gray-400': withoutGlassDisabled, 'cursor-pointer': !withoutGlassDisabled}"
           >

@@ -18,7 +18,7 @@
       <div class="status pt-4 pb-4">
         <div class="status-color" :style="{backgroundColor: props.address.isOpenData.color}"></div>
         <p>{{props.address.isOpenData.isOpen}}<span v-if="remainingTime">, будет работать еще {{ remainingTime }}</span>
-          <span v-if="props.address.isOpenData.isOpen === 'Закрыто'">, {{ openText }} {{ props.address.isOpenData.tomorrowOpeningTime }}</span>
+          <span v-if="props.address.isOpenData.isOpen === 'Закрыто'"> {{ openText }} {{ props.address.isOpenData.tomorrowOpeningTime }}</span>
         </p>
       </div>
       <div class="flex flex-col items-start">

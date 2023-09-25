@@ -1,11 +1,11 @@
 <template>
   <div class="block lg:flex ">
-    <div id="map" class="lg:w-[50%] w-full h-[70vh]">
+    <div id="map" class="lg:w-[50%] w-full h-[70vh] lg:h-[85vh]">
 
       </div>
     <div class="hidden lg:block">
 
-      <div class="lg:pl-10 lg:w-[50vw] w-full h-[100vh] overflow-auto">
+      <div class="lg:pl-10 lg:w-[50vw] w-full h-[85vh] overflow-auto">
         <div id="placemark-list" class="lg:mt-0 relative w-full">
           <filter-bar @touchmove.stop  :total="totalPlacemarks"
 
