@@ -14,7 +14,8 @@ import enSystems from "~/i18n/en/enSystems";
 import enSale from "~/i18n/en/enSale";
 import ruSale from "~/i18n/ru/ruSale";
 export default defineI18nConfig(() => ({
-    legacy: false,
+    //TODO: add legacy
+    // legacy: false,
     locale: 'ru',
     messages: {
         en: {...enCommon, ...enToDesigners, ...enAboutUs, ...enToDealers, ...enDeliveryInstallation, ...enSystems, ...enSale},
