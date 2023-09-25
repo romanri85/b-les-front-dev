@@ -10,7 +10,7 @@
   <!--  </div>-->
   <client-only>
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" class="relative z-50 overflow-auto" @close="closeModal">
+    <Dialog as="div" class="relative z-50 lg:overflow-visible overflow-auto " @close="closeModal">
 <!--      <TransitionChild-->
 <!--          as="template"-->
 <!--          enter="duration-300 ease-out"-->

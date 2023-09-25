@@ -185,7 +185,7 @@ function handleChooseTag(tag) {
 
 <template>
 
-  <div class="overflow-auto">
+  <div class="">
     <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
 
     <div class="flex justify-center pt-16 pb-16">
@@ -229,7 +229,7 @@ function handleChooseTag(tag) {
                 :pagesCount="pagesCount"
                 @page-change="onChangePage"
                 v-model:current-page="page"/>
-    <image-modal class="absolute z-50 overflow-auto" :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
+    <image-modal class="absolute z-50 lg:overflow-visible overflow-auto" :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
 
   </div>
 
