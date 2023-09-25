@@ -40,9 +40,9 @@ watch(
 </script>
 <template>
   <!--<header class="header relative z-30">-->
+    <client-only>
 
   <div class=""  :class="{ 'overlay': isOpen }"></div> <!-- Add this line -->
-  <!--  <client-only>-->
 
   <Disclosure class="z-20" :key="disclosureNumber + route.path" ref="target" as="div" v-slot="{open, close}">
 
@@ -75,12 +75,12 @@ watch(
       >
       <DisclosurePanel class=" w-full">
 
-        <tablet-mobile-menu/>
+        <tablet-mobile-menu @closeBurgerMenu="onClickOutside"/>
       </DisclosurePanel>
       </transition>
     </div>
   </Disclosure>
-  <!--  </client-only>-->
+    </client-only>
   <!--</header>-->
 </template>
 

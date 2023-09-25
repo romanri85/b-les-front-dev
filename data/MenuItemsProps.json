@@ -3,42 +3,42 @@
     "name": "classic",
     "description": "classicDescription",
     "image": "/header-modal-img/classic-modal-img.webp",
-    "slug": "/classic",
+    "slug": "/catalog?collection=1",
     "id": "1"
   },
     {
       "name": "versailles",
       "description": "versaillesDescription",
       "image": "/header-modal-img/versailles-modal-img.webp",
-      "slug": "/versailles",
+      "slug": "/catalog?collection=2",
         "id": "2"
     },
     {
       "name": "modern",
       "description": "modernDescription",
       "image": "/header-modal-img/modern-modal-img.webp",
-      "slug": "/modern",
+      "slug": "/catalog?collection=4",
         "id": "4"
     },
     {
       "name": "premier",
       "description": "premierDescription",
       "image": "/header-modal-img/premier-modal-img.webp",
-      "slug": "/premier",
+      "slug": "/catalog?collection=3",
         "id": "3"
     },
     {
       "name": "rimini",
       "description": "riminiDescription",
       "image": "/header-modal-img/rimini-modal-img.webp",
-      "slug": "/rimini",
+      "slug": "/catalog?collection=5",
         "id": "5"
     },
     {
       "name": "rStyle",
       "description": "rStyleDescription",
       "image": "/header-modal-img/r-style-modal-img.webp",
-      "slug": "/rStyle",
+      "slug": "/catalog?collection=6",
         "id": "6"
     }
   ],

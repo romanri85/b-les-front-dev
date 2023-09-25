@@ -83,7 +83,7 @@ function doClose(close) {
 
           <!--                            arrows for  menu items with dropdown-->
 
-          <div v-if="item.needToShowDropdown && item.name !== 'catalog'">
+          <div v-if="item.needToShowDropdown ">
             <ChevronDownIcon
                 :class="open ? 'duration-200' : 'duration-200 rotate-180'"
                 class="w-5 h-5"
@@ -129,6 +129,8 @@ function doClose(close) {
               </NuxtLink>
 
             </div>
+            <button @click="doClose(close)">Close</button>
+
           </div>
         </DisclosurePanel>
           </transition>
@@ -137,7 +139,7 @@ function doClose(close) {
             :ref="(el) => (elements[index] = el)"
             :data-id="item.id"
             v-show="false"
-            @click="doClose(close)"
+            @click="isBurgerOpenStore.isBurgerOpen = false"
         ></button>
         <DisclosureStateEmitter :show="open" @show="hideOther(item.id)"/>
       </Disclosure>

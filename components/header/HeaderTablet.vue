@@ -10,7 +10,6 @@ import BurgerWhite from "~/components/header/BurgerWhite.vue";
 import BurgerBlack from "~/components/header/BurgerBlack.vue";
 import { onClickOutside } from '@vueuse/core'
 
-const isBurgerOpenStore = useIsBurgerOpenStore()
 const props = defineProps({light: {type: Boolean}})
 const burgerComponent = computed(() => (!open.value && props.light) ? BurgerWhite : BurgerBlack);
 const route = useRoute()
@@ -40,6 +39,7 @@ watch(
 </script>
 <template>
   <!--<header class="header relative z-30">-->
+  <client-only>
   <div class=""  :class="{ 'overlay': isOpen }"></div> <!-- Add this line -->
 
 <!--  <client-only>-->
@@ -65,11 +65,11 @@ watch(
       <!--            burger menu mobile and tablet-->
       <DisclosurePanel class=" w-full">
 
-        <tablet-mobile-menu/>
+        <tablet-mobile-menu @closeBurgerMenu="onClickOutside"/>
       </DisclosurePanel>
       </div>
     </Disclosure>
-<!--  </client-only>-->
+  </client-only>
   <!--</header>-->
 </template>
 

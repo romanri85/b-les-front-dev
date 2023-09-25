@@ -120,7 +120,7 @@ onUnmounted(() => {
     <div class="mt-10 lg:pr-72">
       <div class=" flex justify-start items-end"><h4>Главная / Каталог</h4></div>
     </div>
-    <div class="flex justify-center mt-10">
+    <div class="flex justify-center mt-12">
       <h1>Каталог</h1>
     </div>
     <door-sets/>
