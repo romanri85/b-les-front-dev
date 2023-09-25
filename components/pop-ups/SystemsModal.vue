@@ -20,12 +20,12 @@
         >
           <TransitionChild
               as="template"
-              enter="duration-300 ease-out"
-              enter-from="opacity-0 scale-95"
-              enter-to="opacity-100 scale-100"
-              leave="duration-200 ease-in"
-              leave-from="opacity-100 scale-100"
-              leave-to="opacity-0 scale-95"
+              enter="transition ease-in-out duration-300 transform"
+              enter-from="translate-x-full"
+              enter-to="translate-x-0"
+              leave="transition ease-in-out duration-300 transform"
+              leave-from="translate-x-0"
+              leave-to="translate-x-full"
           >
             <DialogPanel
                 class="fixed right-0 top-0 h-screen w-full md:w-[60%] lg:w-[45%] overflow-y-auto bg-white p-6 text-left align-middle shadow-xl transition-all"

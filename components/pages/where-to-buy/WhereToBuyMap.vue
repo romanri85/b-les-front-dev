@@ -21,7 +21,6 @@ import PlaceMarkInfo from "~/components/pages/where-to-buy/PlaceMarkInfo.vue";
 import FilterBar from "~/components/pages/where-to-buy/FilterBar.vue";
 import {findCity, generateAddressData} from '~/utils/helpers.js';
 import {getRoute} from "~/services/getRouteService.js";
-
 const emits = defineEmits(['city-change'])
 
 
@@ -80,6 +79,7 @@ let totalPlacemarks = computed(() => {
 // })
 
 onMounted(async () => {
+
 
   const browserLang = navigator.language || navigator.userLanguage;
   const isRussian = browserLang.startsWith('ru');

@@ -22,9 +22,9 @@
         </p>
       </div>
       <div class="flex flex-col items-start">
-        <h4 class="underline-static"><buttons-primary-button-small @click="openDoorsInside">Образцы дверей в магазине</buttons-primary-button-small></h4>
+        <h4 class=""><buttons-primary-button-small @click="openDoorsInside">Образцы дверей в магазине</buttons-primary-button-small></h4>
 
-        <h4 class="underline-static"><buttons-primary-button-small class="pt-4" @click="getRoute(props.address)">Маршрут
+        <h4 class=""><buttons-primary-button-small class="pt-4" @click="getRoute(props.address)">Маршрут
         </buttons-primary-button-small></h4>
       </div>
 

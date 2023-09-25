@@ -40,9 +40,10 @@ watch(
 </script>
 <template>
   <!--<header class="header relative z-30">-->
-  <div class=""  :class="{ 'overlay': isOpen }"></div> <!-- Add this line -->
 
+  <div class=""  :class="{ 'overlay': isOpen }"></div> <!-- Add this line -->
   <!--  <client-only>-->
+
   <Disclosure class="z-20" :key="disclosureNumber + route.path" ref="target" as="div" v-slot="{open, close}">
 
     <div :class="{ 'bg-white': open }">
@@ -50,6 +51,7 @@ watch(
           :class="{'bg-white': open}"
           class=" main-container font-mono whitespace-nowrap flex  justify-between items-center">
         <div class="w-[32px]">
+
           <DisclosureButton @click="isOpen=!isOpen">
             <component :is="burgerComponent" />
           </DisclosureButton>
@@ -63,10 +65,19 @@ watch(
       <!--    thin line between header and content-->
       <div class="border-b w-full" :class="open ? '' : 'border-white'"></div>
       <!--            burger menu mobile and tablet-->
+      <transition
+          enter-active-class="transition ease-out duration-500"
+          enter-from-class="-translate-y-20 opacity-0"
+          enter-to-class=" translate-y-0 opacity-100"
+          leave-active-class="transition ease-in duration-500"
+          leave-from-class=" translate-y-0 opacity-100"
+          leave-to-class=" -translate-y-20 opacity-0"
+      >
       <DisclosurePanel class=" w-full">
 
         <tablet-mobile-menu/>
       </DisclosurePanel>
+      </transition>
     </div>
   </Disclosure>
   <!--  </client-only>-->
@@ -83,6 +94,11 @@ watch(
   background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
   z-index: -1; /* Sit on top */
 }
-
+.translate-y--100 {
+  transform: translateY(-100%);
+}
+.translate-y-0 {
+  transform: translateY(0);
+}
 
 </style>
