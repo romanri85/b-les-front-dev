@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 import {baseURL} from "~/config";
 import HeroSystems from "~/components/pages/systems/heroSystems.vue";
 import buttons from "~/data/systemsButtons.json";
@@ -34,14 +34,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.square {
-  position: relative;
-  width: 100%;
-}
-
-.media-element {
-  width: 20%;
-}
 
 
 </style>

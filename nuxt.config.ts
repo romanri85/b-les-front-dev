@@ -1,6 +1,7 @@
 // import {i18n} from './i18n.config';
 
-const config = {
+export default defineNuxtConfig({
+
     css: ['~/assets/styles/index.scss'],
     modules: [
         '@nuxtjs/algolia',
@@ -86,6 +87,5 @@ const config = {
         },
     },
 
-};
+});
 
-export default config;

@@ -1,5 +1,4 @@
-<script setup lang="ts">
-import PrimaryButtonBigger from "~/components/buttons/PrimaryButtonBigger.vue";
+<script setup lang="js">
 const props = defineProps({
   heroName: String,
   heroDescription: String,

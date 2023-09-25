@@ -1,9 +1,8 @@
-<script setup lang="ts">
+<script setup lang="js">
 import {baseURL} from "~/config";
 import HeroSystems from "~/components/pages/systems/heroSystems.vue";
 import buttons from "~/data/systemsButtons.json";
 import OpeningType from "~/components/pages/systems/OpeningType.vue";
-import SystemsModal from "#build/components/pop-ups/SystemsModal.vue";
 
 const heroName = "systemsPageHeader"
 const heroImage = "/systems/systems-bg.webp"
@@ -37,14 +36,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.square {
-  position: relative;
-  width: 100%;
-}
 
-.media-element {
-  width: 20%;
-}
 
 
 </style>

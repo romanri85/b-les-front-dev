@@ -1,7 +1,5 @@
-<script setup lang="ts">
+<script setup lang="js">
 
-import Hero from "~/components/base/hero.vue";
-import {onMounted} from "vue";
 import {useInteriorStore} from "~/stores/interiorStore";
 import {storeToRefs} from "pinia";
 import Pagination from "~/components/base/pagination/Pagination.vue";
@@ -17,14 +15,16 @@ const heroDescription = ""
 const heroImage = "/interior/bg-interior.webp"
 const route = useRoute();
 const router = useRouter();
-const currentPage = ref(route.query.page ? parseInt(route.query.page as string) : 1);
+// const currentPage = ref(route.query.page ? parseInt(route.query.page as string) : 1);
+const currentPage = ref(route.query.page ? parseInt(route.query.page) : 1);
 
 let products = ref([])
 
 
 await interiorStore.getProjects(currentPage.value);
 watch(() => route.query.page, (newPage) => {
-  currentPage.value = parseInt(newPage as string); // Update currentPage value
+  // currentPage.value = parseInt(newPage as string); // Update currentPage value
+  currentPage.value = parseInt(newPage); // Update currentPage value
   interiorStore.getProjects(currentPage.value);
 });
 

@@ -1,5 +1,5 @@
 <script setup>
-import {useFiltersStore} from "~/stores/filtersStore.js";
+import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
 import FilterType from "~/components/filters/FilterType.vue";
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";

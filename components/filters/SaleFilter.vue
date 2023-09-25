@@ -46,7 +46,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
         <DisclosurePanel class="mb-10 mt-6">
           <div class="flex flex-col gap-y-4 items-start mb-3">
             <h4
-                class="underline-offset-4"
+                class="underline-offset-4 font-light"
                 @click="withSaleDisabled ? null : chooseSale('true')"
                 :class="{'underline': filtersStore.activeFilters.sale === 'true', 'text-gray-400': withSaleDisabled, 'cursor-pointer': !withSaleDisabled}"
             >

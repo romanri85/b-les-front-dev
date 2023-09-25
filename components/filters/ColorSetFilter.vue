@@ -121,8 +121,9 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
           <div :style="{ backgroundColor: color_set.hex_code }" class="w-12 h-12 shadow-darkGrey shadow-sm"></div>
         </div>
         <h4 :class="{
-            'text-gray-400': !isColorSetAvailable(color_set.id), 'cursor-pointer': isColorSetAvailable(color_set.id)
-        }">{{ color_set.name }}</h4>
+            'text-gray-400': !isColorSetAvailable(color_set.id), 'cursor-pointer': isColorSetAvailable(color_set.id)}"
+        class="font-light"
+        >{{ color_set.name }}</h4>
 
       </div>
     </DisclosurePanel>

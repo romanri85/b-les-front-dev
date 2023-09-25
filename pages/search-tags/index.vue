@@ -1,6 +1,5 @@
-<script setup lang="ts">
+<script setup lang="js">
 
-import BaseHero from "~/components/base/BaseHero.vue";
 import {onMounted, ref} from "vue";
 import {useInteriorStore} from "~/stores/interiorStore";
 import buttons from "~/data/interiorButtons.json";

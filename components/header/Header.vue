@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 import {useViewportSize} from "~/composables/useViewportSize";
 import HeaderMobile from "~/components/header/HeaderMobile.vue";
 import HeaderTablet from "~/components/header/HeaderTablet.vue";

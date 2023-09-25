@@ -11,7 +11,7 @@ import DoorFilters from "~/components/pages/door-catalog/DoorFilters.vue";
 import {useRoute} from "vue-router";
 import {watch} from "vue";
 
-definePageMeta({layout: "catalog"});
+definePageMeta({layout: "catalog"},);
 
 const footerElement = ref(null)
 const footerIsVisible = useElementVisibility(footerElement)

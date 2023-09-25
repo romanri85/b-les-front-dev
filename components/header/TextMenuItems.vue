@@ -53,13 +53,14 @@ const currentMenuItems = computed(() => {
                :class="[
       borderedItemIndex === index ? 'border-white' : '',
       activeItemIndex === index ? '[&>span]:rotate-180' : '',
+      activeItemIndex === index ? '[&>span]:duration-200' : '[&>span]:duration-200',
       light ? 'text-shadow' : ''
     ]">
             <NuxtLink
                 v-if="item.name !== 'otherElements' && item.name !== 'aboutUs'"
                 :to="item.slug"
                 @click.native="activeItemIndex = null">
-              <h4 class="inline-block pr-2"
+              <h4 class="inline-block pr-2 py-1"
                   @mouseenter="() => { textMenuHovered && (activeItemIndex = index); borderedItemIndex = index; }"
                   @mouseleave="() => { !textMenuHovered && (activeItemIndex = null); borderedItemIndex = null; }">
                 {{ $t(item.name) }}
@@ -80,10 +81,17 @@ const currentMenuItems = computed(() => {
 
         <div v-if="activeItemIndex === index && currentMenuItems.length !== 0">
           <PopoverPanel static>
+            <transition enter="duration-300 ease-out"
+                        enter-from="opacity-0 scale-95"
+                        enter-to="opacity-100 scale-100"
+                        leave="duration-200 ease-in"
+                        leave-from="opacity-100 scale-100"
+                        leave-to="opacity-0 scale-95">
             <modals-header-modal :currentMenuItems="currentMenuItems"
                                  :light="light"
                                  :menuItemsProps="menuItemsProps"
                                  :activeMenuItemKey="item.itemHeader"/>
+            </transition>
           </PopoverPanel>
         </div>
       </Popover>

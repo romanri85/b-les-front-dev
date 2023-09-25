@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 
 import {baseURL} from "~/config";
 import BaseHero from "~/components/base/BaseHero.vue";

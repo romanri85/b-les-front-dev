@@ -52,7 +52,10 @@
                 <nuxt-img :src="image.image" class=" w-full object-contain"
                           :alt="image.project_name"></nuxt-img>
                 <nuxt-link :to="`/interior/${image.project}`">
-                  <div class="text-center py-2 "><h4 class="inline">{{ image.project_name }}</h4></div>
+                  <div v-if="!route.path.startsWith('/interior')" class="text-center py-2">
+                    <h4 class="inline">{{ image.project_name }}</h4>
+                  </div>
+                  <div v-else class="py-2"></div>
                 </nuxt-link>
                 <div class="inline-flex justify-start flex-wrap">
 
@@ -83,9 +86,11 @@
 import {computed, defineExpose, ref} from 'vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot,} from '@headlessui/vue'
 import {useRouter} from 'vue-router'
+import {useRoute} from 'vue-router'
 
 
 const router = useRouter()
+const route = useRoute()
 
 const emit = defineEmits(['chooseTag'])
 

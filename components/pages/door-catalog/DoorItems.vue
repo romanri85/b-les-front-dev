@@ -1,12 +1,10 @@
 <script setup lang="js">
 import DoorCard from "~/components/pages/door-catalog/DoorCard.vue";
-import Pagination from "~/components/base/pagination/Pagination.vue";
 import Sorting from "~/components/filters/Sorting.vue";
-import {ref} from 'vue'
 import {useAutoAnimate} from '@formkit/auto-animate/vue'
-import {useFiltersStore} from "~/stores/filtersStore.js";
+import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
-import {useViewportSize} from "~/composables/useViewportSize.js";
+import {useViewportSize} from "~/composables/useViewportSize";
 
 const filtersStore = useFiltersStore()
 
@@ -47,9 +45,7 @@ function onChangePage(page) {
 <template>
   <div class="md:pl-5 lg:pl-16">
     <div class="text-primaryDark flex justify-center md:justify-between">
-      <!--        <p>{{props.products}}</p>-->
       <sorting/>
-<!--        <pre>{{filtersStore.activeFilters}}</pre>-->
       <div  class="hidden md:block">
       <p class=" mt-14  md:mt-0 font-regular" >Всего дверей: {{ filtersStore.total }}</p>
       </div>
