@@ -43,7 +43,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
           leave-from-class="transform scale-100 opacity-100"
           leave-to-class="transform scale-95 opacity-0"
       >
-        <DisclosurePanel class="mb-20 mt-8">
+        <DisclosurePanel class="mb-10 mt-14">
           <div class="px-5">
                       <FormKit v-if="filterCount && filterCount.price && filterCount.price[0]"
                                type="slider"

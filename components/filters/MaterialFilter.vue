@@ -80,15 +80,15 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
     >
-      <DisclosurePanel class="mb-20">
+      <DisclosurePanel class="mb-10 mt-6">
         <div class="flex justify-start gap-x-12 w-full pr-4">
           <div v-for="(material) in materialColors" :key="material.material" class="text-primaryDark">
-            <h5 @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"
+            <h4 @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"
                 :class="{
                 'underline': filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material),  'text-primaryDark':filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'cursor-pointer': isMaterialAvailable(material.material) , 'text-gray-400': !isMaterialAvailable(material.material)
               }" class="underline-offset-4">{{
-                material.name
-              }}</h5>
+                material.name.toUpperCase()
+              }}</h4>
           </div>
         </div>
         <!--      <div v-if="activeFilters.color.length > 0">-->

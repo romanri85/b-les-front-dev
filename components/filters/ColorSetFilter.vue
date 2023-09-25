@@ -112,7 +112,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
     >
-    <DisclosurePanel class="mb-20">
+    <DisclosurePanel class="mb-10 mt-6">
       <div  v-if="filtersStore.color_sets" v-for="color_set in filtersStore.color_sets" :key=color_set.id class="flex gap-x-4 items-center mb-3"
            @click="!isColorSetAvailable(color_set.id) ? null : chooseColorSet(color_set.id)">
         <div :style="{ 'borderBottomColor': isColorSetAvailable(color_set.id) && activeFilters.color_set.includes(color_set.id) ? 'black' : 'transparent' }" class="pb-1 border-b-4" :class="{
@@ -120,9 +120,9 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
     }">
           <div :style="{ backgroundColor: color_set.hex_code }" class="w-12 h-12 shadow-darkGrey shadow-sm"></div>
         </div>
-        <h5 :class="{
+        <h4 :class="{
             'text-gray-400': !isColorSetAvailable(color_set.id), 'cursor-pointer': isColorSetAvailable(color_set.id)
-        }">{{ color_set.name }}</h5>
+        }">{{ color_set.name }}</h4>
 
       </div>
     </DisclosurePanel>

@@ -152,9 +152,9 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                   <span v-if="enamelCount > 0 " class="text-primaryDark absolute text-xs -right-2 -top-1">{{
                       enamelCount
                     }}</span>
-                  <h5 @click="!isMaterialAvailable(3) ? null : chooseMaterial(3)"
+                  <h4 @click="!isMaterialAvailable(3) ? null : chooseMaterial(3)"
                       :class="{'underline': materialActiveindex===3,'cursor-default': materialActiveindex===3, 'text-gray-400':!isMaterialAvailable(3)}"
-                      class="underline-offset-4">Эмаль</h5>
+                      class="underline-offset-4">ЭМАЛЬ</h4>
                 </div>
               </Tab>
               <Tab index=2 :disabled="!isMaterialAvailable(2)" class="text-primaryDark">
@@ -162,9 +162,9 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                   <span v-if="beechCount > 0 " class="text-primaryDark absolute text-xs -right-2 -top-1">{{
                       beechCount
                     }}</span>
-                  <h5 @click="!isMaterialAvailable(2) ? null : chooseMaterial(2)"
+                  <h4 @click="!isMaterialAvailable(2) ? null : chooseMaterial(2)"
                       :class="{'underline': materialActiveindex===2,'cursor-default': materialActiveindex===2, 'text-gray-400':!isMaterialAvailable(2)}"
-                      class="underline-offset-4">Бук</h5>
+                      class="underline-offset-4">БУК</h4>
                 </div>
               </Tab>
               <Tab index="1" :disabled="!isMaterialAvailable(1)" class="text-primaryDark">
@@ -172,9 +172,9 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                   <span v-if="oakCount > 0 " class="text-primaryDark absolute text-xs -right-2 -top-1">{{
                       oakCount
                     }}</span>
-                  <h5 @click="!isMaterialAvailable(1) ? null : chooseMaterial(1)"
+                  <h4 @click="!isMaterialAvailable(1) ? null : chooseMaterial(1)"
                       :class="{'underline': materialActiveindex===1,'cursor-default': materialActiveindex===1, 'text-gray-400':!isMaterialAvailable(1)}"
-                      class="underline-offset-4">Дуб</h5>
+                      class="underline-offset-4">ДУБ</h4>
                 </div>
               </Tab>
             </div>

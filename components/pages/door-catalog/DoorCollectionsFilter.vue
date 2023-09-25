@@ -50,13 +50,13 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
     >
-    <DisclosurePanel class="mb-20">
+    <DisclosurePanel class="mb-10 mt-6">
       <div v-for="collection in collections" :key=collection.id class="flex gap-x-4 items-center mb-3">
 
-        <h5 class="underline-offset-4"
+        <h4 class="underline-offset-4"
             @click="!isCollectionAvailable(collection.id) ? null :chooseCollection(collection.id)" :class="{
           'underline':activeFilters.collection.includes(collection.id), 'text-gray-400': !isCollectionAvailable(collection.id), 'cursor-pointer': isCollectionAvailable(collection.id)
-        }">{{ $t(collection.name) }}</h5>
+        }">{{ collection.name.toUpperCase() }}</h4>
       </div>
     </DisclosurePanel>
     </transition>

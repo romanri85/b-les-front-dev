@@ -62,12 +62,12 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
     >
-    <DisclosurePanel class="mb-[80px]">
+    <DisclosurePanel class="mb-10 mt-6">
       <div v-for="design in designs" :key=design.id class="flex gap-x-[15px] items-center mb-3">
-        <h5 class="underline-offset-4" @click="!isDesignAvailable(design.id) ? null : chooseDesign(design.id)"
+        <h4 class="underline-offset-4" @click="!isDesignAvailable(design.id) ? null : chooseDesign(design.id)"
             :class="{
           'underline':filtersStore.activeFilters.design.includes(design.id), 'text-gray-400': !isDesignAvailable(design.id), 'cursor-pointer': isDesignAvailable(design.id)
-        }">{{ design.name }}</h5>
+        }">{{ design.name.toUpperCase() }}</h4>
       </div>
     </DisclosurePanel>
     </transition>
