@@ -52,13 +52,13 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
           >
             СО СТЕКЛОМ
           </h4>
-          <h5
+          <h4
               class=" underline-offset-4"
               @click="withoutGlassDisabled ? null : chooseGlass('false')"
               :class="{'underline': filtersStore.activeFilters.glass === 'false', 'text-gray-400': withoutGlassDisabled, 'cursor-pointer': !withoutGlassDisabled}"
           >
             БЕЗ СТЕКЛА
-          </h5>
+          </h4>
         </div>
       </DisclosurePanel>
       </transition>
