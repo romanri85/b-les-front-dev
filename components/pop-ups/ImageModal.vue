@@ -8,7 +8,6 @@
   <!--      Open dialog-->
   <!--    </button>-->
   <!--  </div>-->
-  <client-only>
   <TransitionRoot appear :show="isOpen" as="template">
     <Dialog as="div" class="relative z-50 lg:overflow-visible overflow-auto " @close="closeModal">
 <!--      <TransitionChild-->
@@ -81,7 +80,6 @@
       </div>
     </Dialog>
   </TransitionRoot>
-  </client-only>
 </template>
 
 <script setup>

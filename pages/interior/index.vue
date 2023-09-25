@@ -3,9 +3,7 @@
 import {useInteriorStore} from "~/stores/interiorStore";
 import {storeToRefs} from "pinia";
 import Pagination from "~/components/base/pagination/Pagination.vue";
-import buttons from "~/data/interiorButtons.json";
 import {useRoute, useRouter} from 'vue-router';
-import HeroInteriour from "~/components/pages/interiour/heroInteriour.vue";
 
 const interiorStore = useInteriorStore()
 const {projects} = storeToRefs(interiorStore)
@@ -15,6 +13,8 @@ const heroDescription = ""
 const heroImage = "/interior/bg-interior.webp"
 const route = useRoute();
 const router = useRouter();
+
+definePageMeta({layout: "dark-header"})
 // const currentPage = ref(route.query.page ? parseInt(route.query.page as string) : 1);
 const currentPage = ref(route.query.page ? parseInt(route.query.page) : 1);
 
@@ -36,39 +36,48 @@ function onChangePage(page) {
 </script>
 
 <template>
-  <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
-  <div v-if="projects" class="main-container pb-0 md:pb-16 mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-    <div v-for="project in projects" class="min-w-80">
-      <div class="relative group">
-        <div class="w-full h-60 cursor-pointer">
-          <NuxtLink :to="`/interior/${project.id}`">
-            <nuxt-img :src="project.first_image.image" :alt="project.name"
-                      class="w-full h-full transition-all duration-500 ease-in-out group-hover:brightness-50 object-cover"/>
-            <div
-                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-              <div class="text-center">
-                <h2 v-if="project.collection" class="text-white">{{ project.collection.name }}</h2>
-                <p class="text-white">{{ project.name }}</p>
+  <div class="main-container">
+    <div class="mt-10 lg:pr-72">
+      <div class=" flex justify-start items-end"><h4>Главная / Проекты</h4></div>
+    </div>
+    <div class="flex justify-center mt-10">
+      <h1>Проекты</h1>
+    </div>
+    <!--  <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>-->
+    <div v-if="projects"
+         class=" pb-0 md:pb-16 mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div v-for="project in projects" class="min-w-80">
+        <div class="relative group">
+          <div class="w-full h-60 cursor-pointer">
+            <NuxtLink :to="`/interior/${project.id}`">
+              <nuxt-img :src="project.first_image.image" :alt="project.name"
+                        class="w-full h-full transition-all duration-500 ease-in-out group-hover:brightness-50 object-cover"/>
+              <div
+                  class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                <div class="text-center">
+                  <h2 v-if="project.collection" class="text-white">{{ project.collection.name }}</h2>
+                  <p class="text-white">{{ project.name }}</p>
+                </div>
               </div>
-            </div>
-          </NuxtLink>
+            </NuxtLink>
+          </div>
         </div>
-      </div>
-      <div class="pb-4">
-        <div v-for="tag in project.tags" class="inline-block">
-          <NuxtLink :to="{ path: '/search-tags', query: { tags: tag.id } }">
-            <p class="underline-direction inline">#{{ tag.name }}&nbsp;</p><span>&nbsp;&nbsp;</span>
-          </NuxtLink>
-        </div>
+        <div class="pb-4">
+          <div v-for="tag in project.tags" class="inline-block">
+            <NuxtLink :to="{ path: '/search-tags', query: { tags: tag.id } }">
+              <p class="underline-direction inline">#{{ tag.name }}&nbsp;</p><span>&nbsp;&nbsp;</span>
+            </NuxtLink>
+          </div>
 
+        </div>
       </div>
     </div>
+    <pagination class="pb-32 flex justify-center" :total="interiorStore.total"
+                :page_size="interiorStore.page_size"
+                :pagesCount="interiorStore.pagesCount"
+                @page-change="onChangePage"
+                v-model:current-page="currentPage"/>
   </div>
-  <pagination class="pb-32 flex justify-center" :total="interiorStore.total"
-              :page_size="interiorStore.page_size"
-              :pagesCount="interiorStore.pagesCount"
-              @page-change="onChangePage"
-              v-model:current-page="currentPage"/>
 </template>
 
 

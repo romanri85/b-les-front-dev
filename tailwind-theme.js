@@ -8,7 +8,7 @@ export default {
         help: 'text-xs text-gray-500',
         inner: 'formkit-disabled:bg-gray-200 formkit-disabled:cursor-not-allowed formkit-disabled:pointer-events-none',
         input: 'appearance-none bg-transparent focus:outline-none focus:ring-0 focus:shadow-none',
-        label: 'block mb-1 font-bold text-sm',
+        label: 'block mb-2  text-lg font-regular font-sans',
         legend: 'font-bold text-sm',
         loaderIcon: 'inline-flex items-center w-4 text-gray-600 animate-spin',
         message: 'text-red-500 mb-1 text-xs',
@@ -213,7 +213,8 @@ export default {
         removeSelection: 'w-2.5 mx-1 self-center text-black leading-none',
         tag: 'flex items-center my-1 p-1 text-sm md:text-md lg:text-lg font-mono',
         tagWrapper: 'mr-1 focus:outline-none focus:text-white [&>div]:focus:bg-gray-500 [&>div>button]:focus:text-white',
-        tagLabel: 'pl-2 pr-1',
+        tagLabel: 'pl-2 pr-1 ',
+
         tags: 'flex justify-center items-center flex-wrap w-full  md:pt-1.5 lg:pt-0.5 px-2 ',
         wrapper: 'w-[320px]  md:w-[500px]'
     },

@@ -24,6 +24,13 @@
     "slug": "/interior",
     "needToShowDropdown": false
   },
+  {
+    "id": "search-tags",
+    "name": "Фото",
+    "slug": "/search-tags",
+    "needToShowDropdown": false
+  },
+
 
   {
     "id": "about-us",

@@ -2,15 +2,15 @@
 
 import {onMounted, ref} from "vue";
 import {useInteriorStore} from "~/stores/interiorStore";
-import buttons from "~/data/interiorButtons.json";
 import Pagination from "~/components/base/pagination/Pagination.vue";
 import {baseURL} from "~/config";
 import ImageModal from "~/components/pop-ups/ImageModal.vue";
 import {useRoute} from "vue-router";
 
 import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService';
-import HeroInteriour from "~/components/pages/interiour/heroInteriour.vue"; // Assuming the service is in the same directory
 
+
+definePageMeta({layout: "dark-header"})
 
 let route = useRoute()
 
@@ -49,7 +49,7 @@ onMounted(
           await getImagesByTags(selectedTags.value)
           return
         }
-        if(!selectedTags.value[0]){
+        if (!selectedTags.value[0]) {
           selectedTags.value = [String(tags.value[1].id)];
           taglistKey.value++
           await getImagesByTags(selectedTags.value)
@@ -82,7 +82,7 @@ async function getTags() {
 }
 
 async function transformTags() {
-  if ( tags.value.length > 0) {
+  if (tags.value.length > 0) {
     tagsForForm.value = tags.value.map(tag => {
       return {
         label: tag.name,
@@ -122,7 +122,7 @@ function onChangePage(page) {
 // }
 
 function selectTag(tag) {
-  taglistKey.value ++
+  taglistKey.value++
   // if (selectedTags.value == tag) {
   //   return;
   // }
@@ -143,7 +143,7 @@ watch(selectedTags, (newValue, oldValue) => {
   if (!newValue[0]) {
     selectedTags.value = oldValue
   }
-}, { deep: true });
+}, {deep: true});
 const triggerModal = (image) => {
   selectedImage.value = image;
   if (imgModal.value && imgModal.value.openModal) {
@@ -184,11 +184,13 @@ function handleChooseTag(tag) {
 </script>
 
 <template>
-
   <div class="overflow-auto">
-    <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
+    <div class="mt-10 lg:pr-72 main-container">
+      <div class=" flex justify-start items-end"><h4>Главная / Где купить</h4></div>
+    </div>
+    <!--    <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>-->
 
-    <div class="flex justify-center pt-16 pb-16">
+    <div class="flex justify-center pt-10 pb-16">
 
       <FormKit
 
@@ -200,6 +202,7 @@ function handleChooseTag(tag) {
         <FormKit
             type="taglist"
             name="taglist"
+            label="Поиск фото по тегам"
             :options="tagsForForm"
             max="10"
             :key="taglistKey"
@@ -220,7 +223,8 @@ function handleChooseTag(tag) {
       <div class="image-container">
         <div v-for="(image, index) in layoutImages" :key="index"
              :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
-          <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover cursor-pointer" :alt="image.project_name"/>
+          <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover cursor-pointer"
+                    :alt="image.project_name"/>
         </div>
       </div>
     </div>
@@ -229,7 +233,8 @@ function handleChooseTag(tag) {
                 :pagesCount="pagesCount"
                 @page-change="onChangePage"
                 v-model:current-page="page"/>
-    <image-modal class="absolute z-50 lg:overflow-visible overflow-auto" :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
+    <image-modal class="absolute z-50 lg:overflow-visible overflow-auto" :image="selectedImage"
+                 @chooseTag="handleChooseTag" ref="imgModal"/>
 
   </div>
 
