@@ -46,9 +46,10 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
       <DisclosurePanel class="mb-10 mt-6">
         <div class="flex flex-col gap-y-4 items-start mb-3">
           <h4
-              class="underline-offset-4"
+              class="underline-offset-4 pb-2"
               @click="withGlassDisabled ? null : chooseGlass('true')"
               :class="{'underline': filtersStore.activeFilters.glass === 'true', 'text-gray-400': withGlassDisabled, 'cursor-pointer': !withGlassDisabled}"
+
           >
             СО СТЕКЛОМ
           </h4>

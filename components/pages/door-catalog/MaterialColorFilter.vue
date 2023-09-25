@@ -142,7 +142,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
           leave-from-class="transform scale-100 opacity-100"
           leave-to-class="transform scale-95 opacity-0"
       >
-      <DisclosurePanel class="mb-20">
+      <DisclosurePanel class="mb-10 mt-6">
 
         <TabGroup :selectedIndex="materialMap[materialActiveindex] ">
           <TabList>
