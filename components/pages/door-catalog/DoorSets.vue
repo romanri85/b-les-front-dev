@@ -6,6 +6,7 @@ import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
 import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
 import {useRoute} from "vue-router";
+import PrimaryButtonBig from "~/components/buttons/PrimaryButtonBig.vue";
 const key = ref(0);
 
 const filtersStore = useFiltersStore()

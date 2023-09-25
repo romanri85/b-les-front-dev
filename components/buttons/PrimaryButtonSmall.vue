@@ -1,5 +1,5 @@
 <template>
-    <button class="underline-direction">
+    <button class="">
         <slot/>
     </button>
 </template>

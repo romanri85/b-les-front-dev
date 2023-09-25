@@ -6,11 +6,11 @@ import {storeToRefs} from "pinia";
 
 let designs = [
   {
-    name: 'Classic',
+    name: 'Классика',
     id: 1
   },
   {
-    name: 'Modern',
+    name: 'Современный',
     id: 2
   }
 ]

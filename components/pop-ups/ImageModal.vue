@@ -53,7 +53,7 @@
                           :alt="image.project_name"></nuxt-img>
                 <nuxt-link :to="`/interior/${image.project}`">
                   <div v-if="!route.path.startsWith('/interior')" class="text-center py-2">
-                    <h4 class="inline">{{ image.project_name }}</h4>
+                    <h3 class="inline">{{ image.project_name }}</h3>
                   </div>
                   <div v-else class="py-2"></div>
                 </nuxt-link>
@@ -65,14 +65,14 @@
 
 
                     <span>&nbsp;</span>
-                    <p class="inline" @click="chooseTag(tag)"> #{{ tag.name }}</p>
+                    <p class="inline text-lg" @click="chooseTag(tag)"> #{{ tag.name }}</p>
                   </div>
 
                 </div>
               </div>
 
               <div class="text-center mt-4">
-                <buttons-primary-button-small @click="closeModal"><h3>Закрыть</h3></buttons-primary-button-small>
+                <buttons-primary-button-big @click="closeModal"><h3>Закрыть</h3></buttons-primary-button-big>
               </div>
             </DialogPanel>
 <!--          </TransitionChild>-->

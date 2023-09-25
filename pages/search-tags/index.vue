@@ -90,6 +90,7 @@ async function transformTags() {
         value: String(tag.id)
       };
     });
+    tagsForForm.value.sort((a, b) => a.label.localeCompare(b.label));
   }
 }
 
