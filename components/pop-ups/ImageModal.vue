@@ -10,7 +10,7 @@
   <!--  </div>-->
   <client-only>
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" class="relative z-50" @close="closeModal">
+    <Dialog as="div" class="relative z-50 overflow-auto" @close="closeModal">
 <!--      <TransitionChild-->
 <!--          as="template"-->
 <!--          enter="duration-300 ease-out"-->
@@ -60,7 +60,7 @@
                 </nuxt-link>
                 <div class="inline-flex justify-start flex-wrap">
 
-                  <div v-for="tag in image.tags" class=" text-sm text-primaryDark cursor-pointer">&nbsp;
+                  <div v-for="tag in image.tags.sort((a, b) => a.name.localeCompare(b.name))" class=" text-sm text-primaryDark cursor-pointer">&nbsp;
 
                     &nbsp;
 

@@ -11,7 +11,6 @@ import {useRoute} from "vue-router";
 import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService';
 import HeroInteriour from "~/components/pages/interiour/heroInteriour.vue"; // Assuming the service is in the same directory
 
-definePageMeta({layout: "catalog"})
 
 let route = useRoute()
 
@@ -186,7 +185,7 @@ function handleChooseTag(tag) {
 
 <template>
 
-  <div class="">
+  <div class="overflow-auto">
     <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>
 
     <div class="flex justify-center pt-16 pb-16">
@@ -230,9 +229,9 @@ function handleChooseTag(tag) {
                 :pagesCount="pagesCount"
                 @page-change="onChangePage"
                 v-model:current-page="page"/>
+    <image-modal class="absolute z-50 overflow-auto" :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
+
   </div>
-  <Footer/>
-  <image-modal class="absolute z-50" :image="selectedImage" @chooseTag="handleChooseTag" ref="imgModal"/>
 
 </template>
 
