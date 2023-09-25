@@ -30,6 +30,8 @@ const catalogElementHeight = ref(null)
 const doorFilters = ref(null)
 const doorFiltersHeight = ref(null)
 
+definePageMeta({layout: "dark-header"})
+
 
 useResizeObserver(catalogElement, (entries) => {
   const entry = entries[0];
@@ -112,11 +114,17 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="catalogElement" class="">
+  <div ref="catalogElement" class="main-container">
 
-    <base-hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>
+<!--    <base-hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>-->
+    <div class="mt-10 lg:pr-72">
+      <div class=" flex justify-start items-end"><h4>Главная / Каталог</h4></div>
+    </div>
+    <div class="flex justify-center mt-10">
+      <h1>Каталог</h1>
+    </div>
     <door-sets/>
-    <div class="main-content flex main-container md:flex-row flex-col md:mt-0  ">
+    <div class="main-content flex md:flex-row flex-col md:mt-0  ">
       <div v-if="viewport.isDesktop || viewport.isTablet" class="md:w-[320px] sidebar">
         <div class="sidebar__inner">
           <door-filters ref="doorFilters" class="pb-32"/>
@@ -125,7 +133,6 @@ onUnmounted(() => {
       <door-filters-mobile v-else-if="viewport.isMobile"/>
       <door-items class="md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)]  "/>
     </div>
-    <Footer ref="footerElement"/>
   </div>
 </template>
 

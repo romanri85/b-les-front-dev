@@ -13,20 +13,8 @@
     "slug": "/versailles",
     "id": 3
   },
-  {
-    "name": "modern",
-    "description": "modernDescription",
-    "image": "/collection images/1920Modern-hero.webp",
-    "slug": "/modern",
-    "id": 4
-  },
-  {
-    "name": "premier",
-    "description": "premierDescription",
-    "image": "/collection images/classic-hero.webp",
-    "slug": "/premier",
-    "id": 2
-  },
+
+
   {
     "name": "rimini",
     "description": "riminiDescription",

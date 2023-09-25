@@ -45,15 +45,15 @@ function onChangePage(page) {
     </div>
     <!--  <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>-->
     <div v-if="projects"
-         class=" pb-0 md:pb-16 mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+         class=" pb-0 md:pb-16 mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8">
       <div v-for="project in projects" class="min-w-80">
         <div class="relative group">
           <div class="w-full h-60 cursor-pointer">
             <NuxtLink :to="`/interior/${project.id}`">
               <nuxt-img :src="project.first_image.image" :alt="project.name"
-                        class="w-full h-full transition-all duration-500 ease-in-out group-hover:brightness-50 object-cover"/>
+                        class="w-full h-full transition-all duration-500 ease-in-out  brightness-50 lg:brightness-100 group-hover:brightness-50 object-cover"/>
               <div
-                  class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                  class="absolute inset-0 flex items-center justify-center lg:opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
                 <div class="text-center">
                   <h2 v-if="project.collection" class="text-white">{{ project.collection.name }}</h2>
                   <p class="text-white">{{ project.name }}</p>
@@ -62,10 +62,10 @@ function onChangePage(page) {
             </NuxtLink>
           </div>
         </div>
-        <div class="pb-4">
-          <div v-for="tag in project.tags" class="inline-block">
+        <div class="pb-4 pt-4">
+          <div v-for="tag in project.tags" class="inline-block ">
             <NuxtLink :to="{ path: '/search-tags', query: { tags: tag.id } }">
-              <p class="underline-direction inline">#{{ tag.name }}&nbsp;</p><span>&nbsp;&nbsp;</span>
+              <p class="text-lg inline">#{{ tag.name }}&nbsp;</p><span>&nbsp;&nbsp;</span>
             </NuxtLink>
           </div>
 

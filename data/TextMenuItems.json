@@ -20,13 +20,13 @@
   },
   {
     "id": "doors-in-interior",
-    "name": "doorsInInterior",
+    "name": "Проекты",
     "slug": "/interior",
     "needToShowDropdown": false
   },
   {
     "id": "search-tags",
-    "name": "Фото",
+    "name": "Поиск фото",
     "slug": "/search-tags",
     "needToShowDropdown": false
   },

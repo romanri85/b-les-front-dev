@@ -187,7 +187,7 @@ const minusIcon = `
 </script>
 
 <template>
-  <div   class="main-container lg:py-24 md:py-16 py-14">
+  <div   class=" lg:pb-24 lg:pt-14 md:py-16 py-14">
     <div class="md:inline-flex flex md:flex-row flex-col-reverse items-start">
       <div class="hidden md:block pr-16 whitespace-nowrap" @click="filtersStore.onResetFilters()">
         <h3 class="cursor-pointer underline-static">
