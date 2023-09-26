@@ -30,9 +30,8 @@
           <div class="hero bg-cover bg-center h-screen w-screen  ">
             <div>
 
-              <nuxt-img loading="lazy" placeholder :src="collection.image"
-                        class="absolute h-screen w-screen object-cover -z-10" alt="slider-pic"/>
-              <div class="swiper-lazy-preloader"></div>
+              <nuxt-img placeholder :src="collection.image"
+                        class="absolute h-screen w-screen object-cover -z-10" />
             </div>
 
             <div class="flex flex-col justify-between relative w-full h-full">
