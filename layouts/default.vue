@@ -1,6 +1,8 @@
 <template>
         <Header :light="true"/>
-        <slot/>
+  <NuxtLoadingIndicator /> <!-- here -->
+
+  <slot/>
         <Footer/>
 </template>
 
