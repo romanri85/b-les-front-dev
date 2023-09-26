@@ -16,7 +16,7 @@ const props = defineProps({
       <h2 class=" w-full md:hidden text-center text-shadow">{{$t(props.heroName)}}</h2>
       <h6  class=" hidden md:block m-auto w-[90vw] md:w-[500px] text-white text-center text-shadow pt-6">{{$t(props.heroDescription)}}</h6>
     </div>
-    <nuxt-img :src="props.heroImage" class="w-full h-full object-cover object-right "></nuxt-img>
+    <nuxt-img :src="props.heroImage" placeholder loading="lazy" class="w-full h-full object-cover object-right "></nuxt-img>
   </div>
 </template>
 
