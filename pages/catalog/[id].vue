@@ -167,6 +167,7 @@ function closeCollection() {
 
 function onChangePage(page) {
   fetchDoorVariantData(`/${product.value.id}?page=${page}`)
+  window.scrollTo(0, 300);
 
 }
 </script>

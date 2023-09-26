@@ -136,7 +136,7 @@ function selectTag(tag) {
 
   page.value = 1;
   getImagesByTags([lastTag], 1);
-  window.scrollTo(0, 350);
+  window.scrollTo(0, 300);
 }
 
 watch(selectedTags, (newValue, oldValue) => {
