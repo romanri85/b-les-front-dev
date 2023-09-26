@@ -58,11 +58,11 @@ const props = defineProps({
 
 .opacity-hidden {
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.7s ease-in-out;
 }
 
 .opacity-visible {
   opacity: 1;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.7s ease-in-out;
 }
 </style>

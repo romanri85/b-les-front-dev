@@ -51,9 +51,9 @@
               <div class="mt-2">
                 <nuxt-img :src="image.image" class=" w-full object-contain"
                           :alt="image.project_name"></nuxt-img>
-                <nuxt-link :to="`/interior/${image.project}`">
-                  <div v-if="!route.path.startsWith('/interior')" class="text-center py-2">
-                    <h3 class="inline">{{ image.project_name }}</h3>
+                <nuxt-link class="outline-none" :to="`/interior/${image.project}`">
+                  <div v-if="!route.path.startsWith('/interior')" class="outline-none text-center py-2">
+                    <h3 class="inline outline-none">{{ image.project_name }}</h3>
                   </div>
                   <div v-else class="py-2"></div>
                 </nuxt-link>
