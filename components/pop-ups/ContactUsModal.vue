@@ -1,7 +1,7 @@
 <template>
   <client-only>
     <TransitionRoot appear :show="isOpen" as="template">
-      <Dialog as="div" @close="closeModal" class="relative z-40">
+      <Dialog as="div" @close="closeModal" class="relative z-30">
         <TransitionChild
             as="template"
             enter="duration-300 ease-out"
@@ -27,7 +27,7 @@
                 leave-to="opacity-0"
             >
               <DialogPanel
-                  class="w-full  h-auto overflow-visible md:max-w-md transform  bg-white p-6 text-left align-middle shadow-xl transition-all"
+                  class="w-full  h-auto overflow-visible max-h-screen md:max-w-md transform  bg-white p-6 text-left align-middle shadow-xl transition-all"
               >
                 <DialogTitle
                     as="h3"
@@ -131,6 +131,11 @@
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot,} from '@headlessui/vue'
 import {ref, toRefs, watch} from 'vue'
 import {baseURL} from "~/config";
+import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore.js";
+import {useIsContactUsOpenStore} from "~/stores/isContactUsOpenStore.js";
+
+const isBurgerOpenStore = useIsBurgerOpenStore()
+const isContactUsOpenStore = useIsContactUsOpenStore()
 
 const value = ref([])
 
@@ -207,10 +212,12 @@ watch(shouldOpenModal, (newValue) => {
 const isOpen = ref(false)
 
 function closeModal() {
+  isContactUsOpenStore.isContactUsModalOpen = false
   isOpen.value = false
 }
 
 function openModal() {
+  isContactUsOpenStore.isContactUsModalOpen = true
   isOpen.value = true
   fetchCities()
 }

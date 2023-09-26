@@ -121,18 +121,13 @@ function chooseTag(tag) {
 }
 
 function closeModal() {
+
   isOpen.value = false
 }
 
 function openModal() {
   isOpen.value = true;
 
-  // Scroll 5px up
-  window.scrollBy(0, -5);
 
-  // Then scroll 5px down
-  nextTick(() => {
-    window.scrollBy(0, 5);
-  });
 }
 </script>

@@ -5,12 +5,13 @@ import BaseLogo from "~/components/base/BaseLogo.vue";
 import IconsMenuItems from "~/components/header/IconsMenuItems.vue";
 import TabletMobileMenu from "~/components/header/TabletMobileMenu.vue";
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
-import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
+import {useIsContactUsOpenStore} from "~/stores/isContactUsOpenStore";
 import BurgerWhite from "~/components/header/BurgerWhite.vue";
 import BurgerBlack from "~/components/header/BurgerBlack.vue";
 import { onClickOutside } from '@vueuse/core'
 
-const isBurgerOpenStore = useIsBurgerOpenStore()
+const isContactUsOpenStore = useIsContactUsOpenStore()
+
 const props = defineProps({light: {type: Boolean}})
 const burgerComponent = computed(() => (!open.value && props.light) ? BurgerWhite : BurgerBlack);
 const route = useRoute()
@@ -22,12 +23,14 @@ function closeBurger() {
   isOpen.value = false;
   disclosureNumber.value++
 
-  console.log('closeBurger')
 }
 
 onClickOutside(target, (event) =>{
-  disclosureNumber.value++
-  isOpen.value = false;
+  if (isOpen.value && !isContactUsOpenStore.isContactUsModalOpen) {
+    disclosureNumber.value++
+    isOpen.value = false;
+  }
+
 })
 
 watch(
