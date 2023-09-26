@@ -68,9 +68,9 @@
                 </button>
                 <div class="lg:ml-[228px] lg:mb-[100px] text-center md:text-left">
                   <h1 class="text-white md:mb-8 mb-[20px]">{{ $t(collection.name) }}</h1>
-                  <a class="text-white" :href="collection.slug"><h3 class="underline px-1">{{
+                  <nuxt-link :to="`/catalog?collection=${collection.id}`" class="text-white"><h3 class="underline px-1">{{
                       $t('viewCollection')
-                    }}</h3></a>
+                    }}</h3></nuxt-link>
                 </div>
                 <button
                     class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[40px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[40px]">

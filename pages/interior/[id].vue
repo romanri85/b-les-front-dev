@@ -17,6 +17,10 @@ const imgModal = ref(null);
 
 const selectedImage = ref(null); // this will store the selected/clicked image data
 
+const imagesBlock = ref(null);
+const scrollToImagesBlock = () => {
+  imagesBlock.value.scrollIntoView({behavior: 'smooth'});
+};
 const triggerModal = (image) => {
   selectedImage.value = image;
   if (imgModal.value && imgModal.value.openModal) {
@@ -66,6 +70,7 @@ await getProjectData()
 
 function onChangePage(page) {
   getProjectData(`/${route.params.id}?page=${page}`)
+  scrollToImagesBlock()
 }
 
 const layoutImages = computed(() => {
@@ -91,7 +96,7 @@ const layoutImages = computed(() => {
                :heroImage="project.first_image.image"/>
     <!--  <div v-if="project" class="flex justify-center mb-24"><p>{{ project.description }}</p></div>-->
 
-    <div class="layout-images">
+    <div ref="imagesBlock" class="layout-images">
       <div class="image-container">
         <div v-for="(image, index) in layoutImages" :key="index"
              :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">

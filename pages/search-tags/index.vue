@@ -17,6 +17,11 @@ let route = useRoute()
 const router = useRouter();
 const interiorStore = useInteriorStore()
 
+const tagsBlock = ref(null)
+const scrollToTagsBlock = () => {
+  tagsBlock.value.scrollIntoView({ behavior: 'smooth' });
+};
+
 
 const heroName = "interiorHeader"
 const heroDescription = ""
@@ -109,6 +114,7 @@ async function getImagesByTags(tagIds, page = 1) {
 
 function onChangePage(page) {
   getImagesByTags(selectedTags.value, page)
+  scrollToTagsBlock()
 
 }
 
@@ -136,7 +142,6 @@ function selectTag(tag) {
 
   page.value = 1;
   getImagesByTags([lastTag], 1);
-  window.scrollTo(0, 300);
 }
 
 watch(selectedTags, (newValue, oldValue) => {
@@ -219,7 +224,7 @@ function handleChooseTag(tag) {
         <!--      <pre wrap>{{ value }}</pre>-->
       </FormKit>
     </div>
-    <div class="layout-images pb-16 lg:pb-24">
+    <div ref="tagsBlock" class="layout-images pb-16 lg:pb-24">
       <div class="image-container">
         <div v-for="(image, index) in layoutImages" :key="index"
              :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">

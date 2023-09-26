@@ -5,6 +5,7 @@ import {useAutoAnimate} from '@formkit/auto-animate/vue'
 import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
 import {useViewportSize} from "~/composables/useViewportSize";
+import {ref} from "vue";
 
 const filtersStore = useFiltersStore()
 
@@ -17,6 +18,11 @@ const [parent] = useAutoAnimate()
 const viewport = useViewportSize()
 
 
+const scrollToDoorsBlock = () => {
+  parent.value.scrollIntoView({ behavior: 'smooth' });
+};
+
+
 
 
 // const page = ref(1)
@@ -24,6 +30,7 @@ const viewport = useViewportSize()
 function onChangePage(page) {
   filtersStore.page = page
   filtersStore.onChangeFilters({page: filtersStore.page})
+  scrollToDoorsBlock()
   // if(viewport.isMobile && filtersStore.activeFilters.page > 1){
   //   window.scrollTo(0, 250)
   // }
@@ -44,13 +51,13 @@ function onChangePage(page) {
 
 <template>
   <div class="md:pl-5 lg:pl-16">
-    <div class="text-primaryDark flex justify-center md:justify-between">
+    <div  class="text-primaryDark flex justify-center md:justify-between">
       <sorting/>
       <div  class="hidden md:block">
       <p class=" mt-14  md:mt-0 font-regular" >Всего дверей: {{ filtersStore.total }}</p>
       </div>
     </div>
-    <div class="mt-4 md:mt-16  md:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid" ref="parent">
+    <div  class="mt-4 md:mt-16  md:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid" ref="parent">
 
       <div v-for="doorVariant in filtersStore.products" :key="doorVariant.id">
         <NuxtLink

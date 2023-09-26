@@ -43,6 +43,11 @@ const page = ref(1)
 
 const shouldOpenModal = ref(0)
 
+const imagesBlock = ref(null)
+const scrollToImagesBlock = () => {
+  imagesBlock.value.scrollIntoView({behavior: 'smooth'});
+};
+
 function openContactUsModal() {
   shouldOpenModal.value = shouldOpenModal.value + 1
 }
@@ -167,7 +172,7 @@ function closeCollection() {
 
 function onChangePage(page) {
   fetchDoorVariantData(`/${product.value.id}?page=${page}`)
-  window.scrollTo(0, 300);
+  scrollToImagesBlock()
 
 }
 </script>
@@ -274,7 +279,7 @@ function onChangePage(page) {
       </div>
     </div>
 
-    <div class="layout-images pt-16 lg:pt-24">
+    <div ref="imagesBlock" class="layout-images pt-16 lg:pt-24">
       <div class="image-container">
         <div v-for="(image, index) in layoutImages" :key="image.id" class="cursor-pointer"
              :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">

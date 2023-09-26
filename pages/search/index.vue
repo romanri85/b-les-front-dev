@@ -27,7 +27,7 @@
       <!-- Results -->
 
 
-      <div class="text-primaryDark flex justify-center md:justify-between">
+      <div ref="hitsBlock" class="text-primaryDark flex justify-center md:justify-between">
 
       </div>
       <div class="mt-4 md:mt-16 gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid"
@@ -75,6 +75,13 @@ const totalHits = ref(0);  // New property to hold total hits
 const currentPage = ref(1);
 const nbPages = ref(0);
 
+const hitsBlock = ref(null);
+const scrollToHitsBlock = () => {
+  if (hitsBlock.value) {
+    hitsBlock.value.scrollIntoView({behavior: 'smooth'});
+  }
+};
+
 const performSearch = async (page = 0) => {
   if (searchQuery.value) {
     const response = await index.search(searchQuery.value, {
@@ -106,6 +113,6 @@ onMounted(() => {
 const handleNewPage = (newPage) => {
   currentPage.value = newPage;
   performSearchDebounced(newPage);
-  window.scrollTo(0, 0);
+  scrollToHitsBlock();
 };
 </script>

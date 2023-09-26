@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 import Pagination from "~/components/base/pagination/Pagination.vue";
 import HardwareCard from "~/components/pages/door-hardware/HardwareCard.vue";
 import SortingHardware from "~/components/pages/door-hardware/SortingHardware.vue";
@@ -8,7 +8,12 @@ import { storeToRefs } from "pinia";
 
 const hardwareFiltersStore = useHardwareFiltersStore()
 const {total, pagesCount, products, page_size,page} = storeToRefs(hardwareFiltersStore)
-
+const hardwareItemsBlock = ref(null);
+const [parent] = useAutoAnimate()
+const scrollToHardwareItemsBlock = () => {
+  parent.value.scrollIntoView({ behavior: 'smooth' });
+  console.log('scrollToHardwareItemsBlock')
+};
 
 
 
@@ -19,12 +24,14 @@ const {total, pagesCount, products, page_size,page} = storeToRefs(hardwareFilter
 function onChangePage(page) {
   hardwareFiltersStore.page = page
   hardwareFiltersStore.onChangeFilters({page: hardwareFiltersStore.page})
+  scrollToHardwareItemsBlock()
+  scrollTo(0, 500)
   // parent.animate()
 }
 
 
 
-const [parent] = useAutoAnimate()
+
 
 
 
@@ -33,8 +40,8 @@ const [parent] = useAutoAnimate()
 </script>
 
 <template>
-  <div class="w-full pl-16">
-      <div class="hidden text-primaryDark md:flex justify-between w-full">
+  <div  class="w-full pl-16">
+      <div ref="hardwareItemsBlock"  class="hidden text-primaryDark md:flex justify-between w-full">
 <!--        <p>{{props.products}}</p>-->
        <sorting-hardware/>
         <h6 class="font-regular">Всего ручек: {{total}}</h6>

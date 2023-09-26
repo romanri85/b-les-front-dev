@@ -14,6 +14,11 @@ const heroImage = "/interior/bg-interior.webp"
 const route = useRoute();
 const router = useRouter();
 
+const interiorsBlock = ref(null);
+const scrollToInteriorsBlock = () => {
+  interiorsBlock.value.scrollIntoView({behavior: 'smooth'});
+};
+
 definePageMeta({layout: "dark-header"})
 // const currentPage = ref(route.query.page ? parseInt(route.query.page as string) : 1);
 const currentPage = ref(route.query.page ? parseInt(route.query.page) : 1);
@@ -31,6 +36,7 @@ watch(() => route.query.page, (newPage) => {
 function onChangePage(page) {
   router.push({query: {page: page.toString()}}); // Ensure page is a string
   interiorStore.getProjects(page)
+  scrollToInteriorsBlock()
 }
 
 </script>
@@ -40,11 +46,11 @@ function onChangePage(page) {
     <div class="mt-10 lg:pr-72">
       <div class=" flex justify-start items-end"><h4>Главная / Проекты</h4></div>
     </div>
-    <div class="flex justify-center mt-12">
+    <div ref="interiorsBlock" class="flex justify-center mt-12">
       <h1>Проекты</h1>
     </div>
     <!--  <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>-->
-    <div v-if="projects"
+    <div  v-if="projects"
          class=" pb-0 md:pb-16 mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8">
       <div v-for="project in projects" class="min-w-80">
         <div class="relative group">
