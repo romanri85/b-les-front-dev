@@ -10,7 +10,10 @@ import TextMenuItemsFile from "~/data/TextMenuItems.json";
 import {ChevronDownIcon} from "@heroicons/vue/24/solid";
 import DisclosureStateEmitter from "~/components/base/DisclosureStateEmitter.vue";
 import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
+import { defineEmits } from 'vue'
+import {useRoute, useRouter} from 'vue-router';
 
+const  route = useRoute()
 const isBurgerOpenStore = useIsBurgerOpenStore()
 const textMenuItems = reactive(TextMenuItemsFile)
 
@@ -21,11 +24,23 @@ const currentMenuItems = computed(() => {
     return [];
   }
   const activeMenuItemKey = textMenuItems[activeItemIndex.value].id;
-  console.log(menuItemsProps[activeMenuItemKey])
   return menuItemsProps[activeMenuItemKey] || [];
 });
 
 const elements = ref([]);
+const emit = defineEmits()
+const handleCloseBurger = () => {
+  emit('close-burger')
+}
+
+
+function checkSamePath(item) {
+  console.log(item)
+  // if(item.slug === route.path) {
+    console.log('same path')
+    handleCloseBurger()
+  // }
+}
 
 
 const hideOther = (id) => {
@@ -43,6 +58,7 @@ function doClose(close) {
 
 <template>
   <div class=" bg-white z-20 absolute w-full">
+
     <div class="relative main-container">
 <!--      <input type="text"-->
 <!--             class=" w-full border-b-2 border-gray-300 bg-white h-[72px]   text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"-->
@@ -70,7 +86,7 @@ function doClose(close) {
         >
           <template v-if="(!item.needToShowDropdown || item.name === 'catalog')">
             <NuxtLink :to="item.slug">
-              <h3 >
+              <h3 @click="checkSamePath(item)">
                 <span>{{ $t(item.name) }}</span>
               </h3>
             </NuxtLink>
@@ -125,12 +141,9 @@ function doClose(close) {
 
             <div v-for="item in currentMenuItems" :key="item.name" class="flex justify-start">
               <NuxtLink :to="item.slug">
-                <h5 class="border-b border-black uppercase mb-[25px]">{{ $t(item.name) }}</h5>
+                <h5 @click="checkSamePath(item)" class="border-b border-black uppercase mb-[25px]">{{ $t(item.name) }}</h5>
               </NuxtLink>
-
             </div>
-            <button @click="doClose(close)">Close</button>
-
           </div>
         </DisclosurePanel>
           </transition>

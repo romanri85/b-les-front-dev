@@ -18,7 +18,12 @@ const target = ref(null)
 const disclosureNumber = ref(0);
 const isOpen = ref(false);
 
+function closeBurger() {
+  isOpen.value = false;
+  disclosureNumber.value++
 
+  console.log('closeBurger')
+}
 
 onClickOutside(target, (event) =>{
   disclosureNumber.value++
@@ -75,7 +80,7 @@ watch(
       >
       <DisclosurePanel class=" w-full">
 
-        <tablet-mobile-menu @closeBurgerMenu="onClickOutside"/>
+        <tablet-mobile-menu @close-burger="closeBurger"/>
       </DisclosurePanel>
       </transition>
     </div>

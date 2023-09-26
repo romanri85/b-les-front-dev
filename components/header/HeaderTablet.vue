@@ -65,7 +65,7 @@ watch(
       <!--            burger menu mobile and tablet-->
       <DisclosurePanel class=" w-full">
 
-        <tablet-mobile-menu @closeBurgerMenu="onClickOutside"/>
+        <tablet-mobile-menu/>
       </DisclosurePanel>
       </div>
     </Disclosure>
