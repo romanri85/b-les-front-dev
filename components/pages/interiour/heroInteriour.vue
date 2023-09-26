@@ -13,9 +13,9 @@ const props = defineProps({
 
 const imageLoaded = ref(false);  // Create a ref to hold the image load state
 
-const handleImageLoad = () => {
-  imageLoaded.value = true; // Update the ref once the image has loaded
-};
+onMounted(() => {
+  imageLoaded.value = true; // Set the initial state to false
+});
 
 
 
@@ -50,7 +50,7 @@ const handleImageLoad = () => {
       </div>
 
     </div>
-    <nuxt-img @load="handleImageLoad" :src="props.heroImage" class="w-full h-full object-cover object-right"></nuxt-img>
+    <nuxt-img  :src="props.heroImage" class="w-full h-full object-cover object-right"></nuxt-img>
   </div>
 
 </template>
