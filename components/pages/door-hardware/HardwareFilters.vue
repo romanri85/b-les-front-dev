@@ -31,7 +31,7 @@ const hardwareFiltersStore = useHardwareFiltersStore()
       <color-collection-filter-hardware/>
       <design-filter-hardware/>
       <primary-button-bigger class="w-full text-start " @click="hardwareFiltersStore.onResetFilters">
-        <h3>Все ручки</h3>
+        <h3 class="inline underline-static">Все ручки</h3>
       </primary-button-bigger>
     </div>
     </client-only>

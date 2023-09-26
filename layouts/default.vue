@@ -1,12 +1,12 @@
 <template>
 
   <Header :light="true"/>
-
   <slot/>
   <Footer/>
 </template>
 
 <script>
+
 
 import {baseURL} from "~/config";
 
