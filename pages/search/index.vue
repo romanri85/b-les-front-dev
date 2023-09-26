@@ -57,7 +57,6 @@
 <script setup lang="ts">
 import {onMounted, ref} from 'vue';
 import algoliasearch from 'algoliasearch/lite';
-import {debounce} from 'lodash';
 import SearchDoorCard from "~/pages/search/SearchDoorCard.vue";
 
 definePageMeta({layout: "dark-header"});
@@ -90,7 +89,7 @@ const performSearch = async (page = 0) => {
     totalHits.value = 0;  // Resetting total hits to 0
   }
 };
-const performSearchDebounced = debounce(performSearch, 100);  // 100ms delay
+const performSearchDebounced = useDebounce(performSearch, 100);  // 100ms delay
 
 
 const updateQueryAndSearch = async (newQuery: string) => {

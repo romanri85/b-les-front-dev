@@ -44,17 +44,17 @@ const iconsMenuItems = [
     <li
         @click="item.id === 'contact-us' ? openContactUsModal() : ''"
         v-for="(item, index) in iconsMenuItems"
-        :key="item.id"
+        :key="index"
         class="flex md:block hover:cursor-pointer relative lg:w-5 md:w-5 w-5 h-full"
     >
 
       <template v-if="item.id === 'search'">
         <nuxt-link :to="item.to">
-          <nuxt-img :src="light ? item.whiteIconPath : item.blackIconPath" :alt="item.alt" class="h-full"/>
+          <img :src="light ? item.whiteIconPath : item.blackIconPath" :alt="item.alt" class="h-full"/>
         </nuxt-link>
       </template>
       <template v-else>
-        <nuxt-img :src="light ? item.whiteIconPath : item.blackIconPath" :alt="item.alt" class="h-full"/>
+        <nuxt-img  :src="light ? item.whiteIconPath : item.blackIconPath" :alt="item.alt" class="h-full"/>
       </template>
 
     </li>

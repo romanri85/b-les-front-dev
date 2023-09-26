@@ -1,6 +1,5 @@
 import {defineStore} from "pinia";
 import {baseURL} from "~/config";
-import {value} from "lodash/seq.js";
 
 // const config = useRuntimeConfig()
 export const useSaleStore = defineStore("saleStore", () => {
