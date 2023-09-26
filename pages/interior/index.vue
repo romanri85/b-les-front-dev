@@ -14,6 +14,13 @@ const heroImage = "/interior/bg-interior.webp"
 const route = useRoute();
 const router = useRouter();
 
+definePageMeta({
+  pageTransition: {
+    name: 'bounce',
+    mode: 'out-in' // default
+  }
+})
+
 const interiorsBlock = ref(null);
 const scrollToInteriorsBlock = () => {
   interiorsBlock.value.scrollIntoView({behavior: 'smooth'});
