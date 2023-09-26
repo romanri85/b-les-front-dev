@@ -50,7 +50,7 @@ function onChangePage(page) {
         <div class="relative group">
           <div class="w-full h-60 cursor-pointer">
             <NuxtLink :to="`/interior/${project.id}`">
-              <nuxt-img :src="project.first_image.image" :alt="project.name"
+              <nuxt-img placeholder :src="project.first_image.image" :alt="project.name"
                         class="w-full h-full transition-all duration-500 ease-in-out  brightness-50 lg:brightness-100 group-hover:brightness-50 object-cover"/>
               <div
                   class="absolute inset-0 flex items-center justify-center lg:opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">

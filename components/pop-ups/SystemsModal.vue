@@ -48,7 +48,7 @@
               <div class="mt-8 mb-8">
                 <div v-for="system in systems">
                   <h2 class="cursor-pointer mb-8 inline-block" >{{system.name}}</h2>
-                  <nuxt-img :src="system.image" class="w-full h-auto object-contain" :alt="system.name"></nuxt-img>
+                  <nuxt-img placeholder :src="system.image" class="w-full h-auto object-contain" :alt="system.name"></nuxt-img>
                   <h5 class="pt-5 pb-20">{{system.description}}</h5>
                 </div>
                 <!--                <city-choice-autocomplete class="h-auto" :cities="props.cities" :city="props.city"/>-->

@@ -33,7 +33,7 @@ const props = defineProps({
         </NuxtLink>
       </div>
     </div>
-    <nuxt-img :src="props.heroImage" class="w-full h-full object-cover object-right"></nuxt-img>
+    <nuxt-img placeholder loading="lazy" :src="props.heroImage" class="w-full h-full object-cover object-right"></nuxt-img>
   </div>
 </template>
 
