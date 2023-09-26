@@ -180,7 +180,7 @@ function onChangePage(page) {
     <div class="block md:flex gap-10 lg:gap-20">
       <div class="left md:w-[38%]">
         <door-card-detail :doorVariant="doorVariantData" :product="product" :newGlass="newGlass"/>
-        <div class="flex md:hidden  flex-col justify-start items-start mb-12 md:mb-3">
+        <div class="flex md:hidden  flex-col justify-start items-start mb-2 md:mb-3">
           <buttons-primary-button-big @click="openCollection" class="pt-4 lg:pt-0 flex flex-col lg:flex-row items-start justify-between w-full pb-4"><h2 class="underline-static font-regular">
             {{ product.collection.name }}</h2>
 
@@ -189,7 +189,7 @@ function onChangePage(page) {
           <div class="flex justify-between">
             <p v-if="product && product.collection">{{ product.collection.description }}</p>
           </div>
-          <sale-info-detail class="pt-8 pb-4" :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
+          <sale-info-detail class="pt-6 pb-4" :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
 
         </div>
         <casing-filter-detail class="lg:mb-8 md:mb-0 lg:pt-2" v-if="doorVariantData" @change-filter="changeCasing" :material="material"
