@@ -1,7 +1,7 @@
 <template>
   <client-only>
     <TransitionRoot appear :show="isOpen" as="template">
-      <Dialog as="div" @close="closeModal" class="relative z-50">
+      <Dialog as="div" @close="closeModal" class="relative z-40">
         <TransitionChild
             as="template"
             enter="duration-300 ease-out"
@@ -27,7 +27,7 @@
                 leave-to="opacity-0"
             >
               <DialogPanel
-                  class="w-full  h-auto overflow-visible max-h-screen md:max-w-md transform  bg-white p-6 text-left align-middle shadow-xl transition-all"
+                  class="w-full  h-auto overflow-visible md:max-w-md transform  bg-white p-6 text-left align-middle shadow-xl transition-all"
               >
                 <DialogTitle
                     as="h3"
