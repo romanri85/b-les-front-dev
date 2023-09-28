@@ -14,13 +14,12 @@ import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/image
 import SaleInfoDetail from "~/components/pages/door-catalog/SaleInfoDetail.vue";
 import ContactUsModal from "~/components/pop-ups/ContactUsModal.vue";
 import {useViewportSize} from "~/composables/useViewportSize";
-import { useWindowScroll } from '@vueuse/core'
+import {useWindowScroll} from '@vueuse/core'
 import {ArrowDownIcon} from '@heroicons/vue/24/solid'
 
-const { x, y } = useWindowScroll()
+const {x, y} = useWindowScroll()
 
 const viewport = useViewportSize()
-
 
 
 const router = useRouter()
@@ -185,18 +184,18 @@ function onChangePage(page) {
 
 <template>
 
-  <div   v-if="doorVariantData && doorVariantData.casing_variant" class=" main-container">
+  <div v-if="doorVariantData && doorVariantData.casing_variant" class=" main-container">
     <div class="hidden lg:flex justify-between">
       <div class="h-12 flex justify-start items-end"><h4>Главная / Каталог / {{ product.name }}</h4></div>
     </div>
 
-<!-- door image and filters block    -->
+    <!-- door image and filters block    -->
 
-<!--    desktop and tablet screen-->
+    <!--    desktop and tablet screen-->
 
     <div v-if="!viewport.isMobile" class="block md:flex gap-10 lg:gap-20">
       <div class="left md:w-[38%]">
-        <door-card-detail  class="door-card-detail" :doorVariant="doorVariantData" :product="product"
+        <door-card-detail class="door-card-detail" :doorVariant="doorVariantData" :product="product"
                           :newGlass="newGlass"/>
         <div class="flex md:hidden  flex-col justify-start items-start mb-2 md:mb-3">
           <buttons-primary-button-big @click="openCollection"
@@ -269,7 +268,7 @@ function onChangePage(page) {
                 <!-- Always display the original price, conditionally grayed out and line-through -->
                 <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
         {{
-                    toNumber(doorVariantData.leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
+                    toNumber(doorVariantData.leaf_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
                   }}&nbsp;₽
       </span>
               </h2>
@@ -282,7 +281,7 @@ function onChangePage(page) {
       </span>
                 <!-- Always display the original price, conditionally grayed out and line-through -->
                 <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
-        {{ toNumber(doorVariantData.leaf_casing_price) }}&nbsp;₽
+        {{ toNumber(doorVariantData.leaf_price)  +  toNumber(doorVariantData.casing_variant.price)}}&nbsp;₽
       </span>
               </h2>
             </div>
@@ -301,13 +300,48 @@ function onChangePage(page) {
       </div>
     </div>
 
-<!--mobile screen-->
+    <!--mobile screen-->
 
-    <div    v-if="viewport.isMobile" class=" block md:flex gap-10 lg:gap-20">
-      <door-card-detail  class="door-card-detail" :doorVariant="doorVariantData" :product="product"
-                         :class="{'border-b border-gray-300': y !== 0}"
+    <div v-if="viewport.isMobile" class=" block md:flex gap-10 lg:gap-20">
+      <div class="door-card-detail" :class="{'border-b border-gray-300': y !== 0}">
+      <door-card-detail class="" :doorVariant="doorVariantData" :product="product"
+
                         :newGlass="newGlass"/>
-      <div class="h-4 flex justify-end" >
+
+        <div class="pb-4 flex justify-center">
+          <div v-if="product.glass_decor.length > 0">
+            <h2 v-if="doorVariantData && doorVariantData.casing_variant" class="font-regular">
+              <!-- Display sale price with glass price if is_sale_active is true -->
+              <span v-if="doorVariantData.sale">
+        {{
+                  toNumber(doorVariantData.sale.sale_leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
+                }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+              <!-- Always display the original price, conditionally grayed out and line-through -->
+              <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
+        {{
+                  toNumber(doorVariantData.leaf_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
+                }}&nbsp;₽
+      </span>
+            </h2>
+          </div>
+          <div v-else>
+            <h2 class="font-bold">
+              <!-- Display sale price if is_sale_active is true -->
+              <span v-if="doorVariantData.sale">
+        {{ toNumber(doorVariantData.sale.sale_leaf_casing_price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+              <!-- Always display the original price, conditionally grayed out and line-through -->
+              <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
+        {{ toNumber(doorVariantData.leaf_price) + toNumber(doorVariantData.casing_variant.price) }}&nbsp;₽
+      </span>
+            </h2>
+          </div>
+          <!--             <pre>{{doorVariantData}}</pre>-->
+        </div>
+      </div>
+
+      <div class="h-4 flex justify-end">
         <ArrowDownIcon v-if="y===0" class="h-8"></ArrowDownIcon>
         <div v-else class="h-4  "></div>
       </div>
@@ -327,7 +361,8 @@ function onChangePage(page) {
           <sale-info-detail class="pt-6 pb-4" :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
 
         </div>
-        <casing-filter-detail class="lg:mb-8 md:mb-0 lg:pt-2 md:pl-0 pl-1" v-if="doorVariantData" @change-filter="changeCasing"
+        <casing-filter-detail class="lg:mb-8 md:mb-0 lg:pt-2 md:pl-0 pl-1" v-if="doorVariantData"
+                              @change-filter="changeCasing"
                               :material="material"
                               :productCasings="productCasings"
                               :casingVariants="casingVariants" :color="color"
@@ -373,38 +408,9 @@ function onChangePage(page) {
           <!--                                    v-if="product.glass_decor && product.glass_decor[0]" :newGlass="newGlass"/>-->
         </div>
         <div class="w-full flex flex-col justify-between items-start">
-          <div class="pb-8">
-            <div v-if="product.glass_decor.length > 0">
-              <h2 v-if="doorVariantData && doorVariantData.casing_variant" class="font-regular">
-                <!-- Display sale price with glass price if is_sale_active is true -->
-                <span v-if="doorVariantData.sale">
-        {{
-                    toNumber(doorVariantData.sale.sale_leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
-                  }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
-      </span>
-                <!-- Always display the original price, conditionally grayed out and line-through -->
-                <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
-        {{
-                    toNumber(doorVariantData.leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
-                  }}&nbsp;₽
-      </span>
-              </h2>
-            </div>
-            <div v-else>
-              <h2 class="font-bold">
-                <!-- Display sale price if is_sale_active is true -->
-                <span v-if="doorVariantData.sale">
-        {{ toNumber(doorVariantData.sale.sale_leaf_casing_price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
-      </span>
-                <!-- Always display the original price, conditionally grayed out and line-through -->
-                <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
-        {{ toNumber(doorVariantData.leaf_casing_price) }}&nbsp;₽
-      </span>
-              </h2>
-            </div>
-            <!--             <pre>{{doorVariantData}}</pre>-->
-          </div>
-          <div @click="openContactUsModal" class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full md:pl-0 pl-1">
+
+          <div @click="openContactUsModal"
+               class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full md:pl-0 pl-1">
             <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark text-white ">Купить
             </buttons-primary-button-big>
             <!--            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В-->
