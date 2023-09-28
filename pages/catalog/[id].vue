@@ -16,6 +16,7 @@ import ContactUsModal from "~/components/pop-ups/ContactUsModal.vue";
 import {useViewportSize} from "~/composables/useViewportSize";
 import {useWindowScroll} from '@vueuse/core'
 import {ArrowDownIcon} from '@heroicons/vue/24/solid'
+import DoorCardPriceDetail from "~/components/pages/door-catalog/DoorCardPriceDetail.vue";
 
 const {x, y} = useWindowScroll()
 
@@ -256,37 +257,7 @@ function onChangePage(page) {
           <!--                                    v-if="product.glass_decor && product.glass_decor[0]" :newGlass="newGlass"/>-->
         </div>
         <div class="w-full flex flex-col justify-between items-start">
-          <div class="pb-8">
-            <div v-if="product.glass_decor.length > 0">
-              <h2 v-if="doorVariantData && doorVariantData.casing_variant" class="font-regular">
-                <!-- Display sale price with glass price if is_sale_active is true -->
-                <span v-if="doorVariantData.sale">
-        {{
-                    toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
-                  }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
-      </span>
-                <!-- Always display the original price, conditionally grayed out and line-through -->
-                <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
-        {{
-                    toNumber(doorVariantData.leaf_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
-                  }}&nbsp;₽
-      </span>
-              </h2>
-            </div>
-            <div v-else>
-              <h2 class="font-bold">
-                <!-- Display sale price if is_sale_active is true -->
-                <span v-if="doorVariantData.sale">
-        {{ toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.casing_variant.price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
-      </span>
-                <!-- Always display the original price, conditionally grayed out and line-through -->
-                <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
-        {{ toNumber(doorVariantData.leaf_price)  +  toNumber(doorVariantData.casing_variant.price)}}&nbsp;₽
-      </span>
-              </h2>
-            </div>
-            <!--             <pre>{{doorVariantData}}</pre>-->
-          </div>
+          <door-card-price-detail class="pb-8" :doorVariantData="doorVariantData" :product="product" :newGlass="newGlass"/>
           <div @click="openContactUsModal" class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full">
             <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark text-white">Купить
             </buttons-primary-button-big>
@@ -307,38 +278,8 @@ function onChangePage(page) {
       <door-card-detail class="" :doorVariant="doorVariantData" :product="product"
 
                         :newGlass="newGlass"/>
-<!--        <pre>{{doorVariantData}}</pre>-->
-        <div class="pb-2 md:pb-4 flex justify-center">
-          <div v-if="product.glass_decor.length > 0">
-            <h2 v-if="doorVariantData && doorVariantData.casing_variant" class="font-regular">
-              <!-- Display sale price with glass price if is_sale_active is true -->
-              <span v-if="doorVariantData.sale">
-        {{
-                  toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
-                }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
-      </span>
-              <!-- Always display the original price, conditionally grayed out and line-through -->
-              <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
-        {{
-                  toNumber(doorVariantData.leaf_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
-                }}&nbsp;₽
-      </span>
-            </h2>
-          </div>
-          <div v-else>
-            <h2 class="font-bold">
-              <!-- Display sale price if is_sale_active is true -->
-              <span v-if="doorVariantData.sale">
-        {{ toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.casing_variant.price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
-      </span>
-              <!-- Always display the original price, conditionally grayed out and line-through -->
-              <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
-        {{ toNumber(doorVariantData.leaf_price) + toNumber(doorVariantData.casing_variant.price) }}&nbsp;₽
-      </span>
-            </h2>
-          </div>
-          <!--             <pre>{{doorVariantData}}</pre>-->
-        </div>
+        <door-card-price-detail class="pb-2 md:pb-4 flex justify-center" :doorVariantData="doorVariantData" :product="product" :newGlass="newGlass"/>
+
       </div>
 
       <div class="h-4 flex justify-end">
@@ -356,9 +297,7 @@ function onChangePage(page) {
 
           </div>
           <h1 class="pb-5">{{ product.name }}</h1>
-<!--          <div class="flex justify-between">-->
-<!--            <p v-if="product && product.collection">{{ product.collection.description }}</p>-->
-<!--          </div>-->
+
 
           <sale-info-detail class="pt-6 pb-4" :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
 
