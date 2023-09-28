@@ -348,16 +348,16 @@ function onChangePage(page) {
       <div class="left md:w-[38%]">
 
         <div class="flex md:hidden  flex-col justify-start items-start mb-2 md:mb-3">
-          <buttons-primary-button-big @click="openCollection"
-                                      class="pt-8 lg:pt-0 flex flex-col lg:flex-row items-start justify-between w-full pb-4">
-            <h2 class="underline-static font-regular">
-              {{ product.collection.name }}</h2>
+          <div
+                                      class="pt-4 lg:pt-0 inline-flex flex-col lg:flex-row items-start justify-between w-full pb-2">
+            <h2  @click="openCollection" class="px-2 py-2 mb-2   c font-regular">
+             <span class="underline-static"> {{ product.collection.name }}</span></h2>
 
-          </buttons-primary-button-big>
-          <h1 class="pb-5">{{ product.name }}</h1>
-          <div class="flex justify-between">
-            <p v-if="product && product.collection">{{ product.collection.description }}</p>
           </div>
+          <h1 class="pb-5">{{ product.name }}</h1>
+<!--          <div class="flex justify-between">-->
+<!--            <p v-if="product && product.collection">{{ product.collection.description }}</p>-->
+<!--          </div>-->
           <sale-info-detail class="pt-6 pb-4" :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
 
         </div>
