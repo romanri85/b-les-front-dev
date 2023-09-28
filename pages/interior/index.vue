@@ -27,14 +27,14 @@ let products = ref([])
 
 
 await interiorStore.getProjects(currentPage.value);
-watch(() => route.query.page, (newPage) => {
-  // currentPage.value = parseInt(newPage as string); // Update currentPage value
-  currentPage.value = parseInt(newPage); // Update currentPage value
-  interiorStore.getProjects(currentPage.value);
-});
+// watch(() => route.query.page, (newPage) => {
+//   // currentPage.value = parseInt(newPage as string); // Update currentPage value
+//   currentPage.value = parseInt(newPage); // Update currentPage value
+//   interiorStore.getProjects(currentPage.value);
+// });
 
 function onChangePage(page) {
-  router.push({query: {page: page.toString()}}); // Ensure page is a string
+  // router.push({query: {page: page.toString()}}); // Ensure page is a string
   interiorStore.getProjects(page)
   scrollToInteriorsBlock()
 }
@@ -52,7 +52,7 @@ function onChangePage(page) {
     <!--  <hero-interiour :heroName="heroName" :hero-description="heroDescription" :heroImage="heroImage" :buttons="buttons"/>-->
     <div  v-if="projects"
          class=" pb-0 md:pb-16 mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8">
-      <div v-for="project in projects" class="min-w-80">
+      <div v-for="project in projects" :key="project.id" class="min-w-80">
         <div class="relative group">
           <div class="w-full h-60 cursor-pointer">
             <NuxtLink :to="`/interior/${project.id}`">

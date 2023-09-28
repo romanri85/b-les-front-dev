@@ -4,6 +4,7 @@ import {baseURL} from "~/config";
 import DoorCardDetail from "~/components/pages/door-catalog/DoorCardDetail.vue";
 import MaterialColorFilterDetail from "~/components/pages/door-catalog/MaterialColorFilterDetail.vue";
 import CasingFilterDetail from "~/components/filters/CasingFilterDetail.vue";
+import GlassTypeFilterDetail from "~/components/filters/GlassTypeFilterDetail.vue";
 import {toNumber} from "@vue/shared";
 import AllCollectionsModalDetail from "~/components/pop-ups/AllCollectionsModalDetail.vue";
 import Pagination from "~/components/base/pagination/Pagination.vue";
@@ -13,14 +14,7 @@ import {useRouter} from 'vue-router'
 import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService';
 import SaleInfoDetail from "~/components/pages/door-catalog/SaleInfoDetail.vue";
 import ContactUsModal from "~/components/pop-ups/ContactUsModal.vue";
-import {useViewportSize} from "~/composables/useViewportSize";
-import { useWindowScroll } from '@vueuse/core'
-import {ArrowDownIcon} from '@heroicons/vue/24/solid'
-
-const { x, y } = useWindowScroll()
-
-const viewport = useViewportSize()
-
+// import {$fetch} from "ofetch";
 
 
 const router = useRouter()
@@ -185,24 +179,16 @@ function onChangePage(page) {
 
 <template>
 
-  <div   v-if="doorVariantData && doorVariantData.casing_variant" class=" main-container">
+  <div v-if="doorVariantData && doorVariantData.casing_variant" class="main-container">
     <div class="hidden lg:flex justify-between">
       <div class="h-12 flex justify-start items-end"><h4>Главная / Каталог / {{ product.name }}</h4></div>
     </div>
-
-<!-- door image and filters block    -->
-
-<!--    desktop and tablet screen-->
-
-    <div v-if="!viewport.isMobile" class="block md:flex gap-10 lg:gap-20">
+    <div class="block md:flex gap-10 lg:gap-20">
       <div class="left md:w-[38%]">
-        <door-card-detail  class="door-card-detail" :doorVariant="doorVariantData" :product="product"
-                          :newGlass="newGlass"/>
+        <door-card-detail class="door-card-detail" :doorVariant="doorVariantData" :product="product" :newGlass="newGlass"/>
         <div class="flex md:hidden  flex-col justify-start items-start mb-2 md:mb-3">
-          <buttons-primary-button-big @click="openCollection"
-                                      class="pt-4 lg:pt-0 flex flex-col lg:flex-row items-start justify-between w-full pb-4">
-            <h2 class="underline-static font-regular">
-              {{ product.collection.name }}</h2>
+          <buttons-primary-button-big @click="openCollection" class="pt-4 lg:pt-0 flex flex-col lg:flex-row items-start justify-between w-full pb-4"><h2 class="underline-static font-regular">
+            {{ product.collection.name }}</h2>
 
           </buttons-primary-button-big>
           <h1 class="pb-5">{{ product.name }}</h1>
@@ -212,26 +198,23 @@ function onChangePage(page) {
           <sale-info-detail class="pt-6 pb-4" :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
 
         </div>
-        <casing-filter-detail class="lg:mb-8 md:mb-0 lg:pt-2" v-if="doorVariantData" @change-filter="changeCasing"
-                              :material="material"
+        <casing-filter-detail class="lg:mb-8 md:mb-0 lg:pt-2" v-if="doorVariantData" @change-filter="changeCasing" :material="material"
                               :productCasings="productCasings"
                               :casingVariants="casingVariants" :color="color"
                               :startCasing="doorVariantData.casing_variant.casing"/>
+
       </div>
       <div class="right w-full ">
         <div class="hidden md:flex h-40 flex-col justify-start items-start mb-3">
           <div class="flex w-full">
-            <buttons-primary-button-big @click="openCollection"
-                                        class="pt-4 lg:pt-0 flex flex-col lg:flex-row items-start justify-between w-full pb-4">
-              <h2 class="underline-static font-regular">
-                {{ product.collection.name }}</h2>
+            <buttons-primary-button-big @click="openCollection" class="pt-4 lg:pt-0 flex flex-col lg:flex-row items-start justify-between w-full pb-4"><h2 class="underline-static font-regular">
+              {{ product.collection.name }}</h2>
 
             </buttons-primary-button-big>
             <sale-info-detail :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
           </div>
           <all-collections-modal-detail v-if="isCollectionModelOpen" @close="isCollectionModelOpen = false"
-                                        @close-modal="closeCollection" @change-model="changeModel" :color="color"
-                                        :material="material"
+                                        @close-modal="closeCollection" @change-model="changeModel" :color="color" :material="material"
                                         :collectionProducts="collectionProducts" :product="product"/>
           <h1 class="pb-5">{{ product.name }}</h1>
           <div class="flex justify-between">
@@ -245,8 +228,7 @@ function onChangePage(page) {
                                                 :productVariantsData="productVariantsData"
                                                 :modelName="product.name" :material="material" :color="color"
                                                 :activeCasing="actualCasing"/>
-            <material-color-filter-detail class="pt-0 md:pt-12 lg:pt-0  lg:pl-8"
-                                          @change-filter="getActualDoorVariantData"
+            <material-color-filter-detail class="pt-0 md:pt-12 lg:pt-0  lg:pl-8" @change-filter="getActualDoorVariantData"
                                           :activeFilters="activeFilters"
                                           :material="material"
                                           :color="color" :productMaterials="productMaterials"/>
@@ -262,15 +244,11 @@ function onChangePage(page) {
               <h2 v-if="doorVariantData && doorVariantData.casing_variant" class="font-regular">
                 <!-- Display sale price with glass price if is_sale_active is true -->
                 <span v-if="doorVariantData.sale">
-        {{
-                    toNumber(doorVariantData.sale.sale_leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
-                  }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
+        {{ toNumber(doorVariantData.sale.sale_leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
                 <!-- Always display the original price, conditionally grayed out and line-through -->
                 <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
-        {{
-                    toNumber(doorVariantData.leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
-                  }}&nbsp;₽
+        {{ toNumber(doorVariantData.leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price) }}&nbsp;₽
       </span>
               </h2>
             </div>
@@ -289,7 +267,7 @@ function onChangePage(page) {
             <!--             <pre>{{doorVariantData}}</pre>-->
           </div>
           <div @click="openContactUsModal" class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full">
-            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark text-white">Купить
+            <buttons-primary-button-big  class="w-1/2 lg:w-60 h-16 bg-primaryDark text-white">Купить
             </buttons-primary-button-big>
             <!--            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В-->
             <!--              избранное-->
@@ -300,124 +278,6 @@ function onChangePage(page) {
         </div>
       </div>
     </div>
-
-<!--mobile screen-->
-
-    <div    v-if="viewport.isMobile" class=" block md:flex gap-10 lg:gap-20">
-      <door-card-detail  class="door-card-detail" :doorVariant="doorVariantData" :product="product"
-                         :class="{'border-b border-gray-300': y !== 0}"
-                        :newGlass="newGlass"/>
-      <div class="h-4 flex justify-end" >
-        <ArrowDownIcon v-if="y===0" class="h-8"></ArrowDownIcon>
-        <div v-else class="h-4  "></div>
-      </div>
-      <div class="left md:w-[38%]">
-
-        <div class="flex md:hidden  flex-col justify-start items-start mb-2 md:mb-3">
-          <buttons-primary-button-big @click="openCollection"
-                                      class="pt-8 lg:pt-0 flex flex-col lg:flex-row items-start justify-between w-full pb-4">
-            <h2 class="underline-static font-regular">
-              {{ product.collection.name }}</h2>
-
-          </buttons-primary-button-big>
-          <h1 class="pb-5">{{ product.name }}</h1>
-          <div class="flex justify-between">
-            <p v-if="product && product.collection">{{ product.collection.description }}</p>
-          </div>
-          <sale-info-detail class="pt-6 pb-4" :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
-
-        </div>
-        <casing-filter-detail class="lg:mb-8 md:mb-0 lg:pt-2 md:pl-0 pl-1" v-if="doorVariantData" @change-filter="changeCasing"
-                              :material="material"
-                              :productCasings="productCasings"
-                              :casingVariants="casingVariants" :color="color"
-                              :startCasing="doorVariantData.casing_variant.casing"/>
-
-      </div>
-      <div class="right w-full ">
-        <div class="hidden md:flex h-40 flex-col justify-start items-start mb-3">
-          <div class="flex w-full">
-            <buttons-primary-button-big @click="openCollection"
-                                        class="pt-4 lg:pt-0 flex flex-col lg:flex-row items-start justify-between w-full pb-4">
-              <h2 class="underline-static font-regular">
-                {{ product.collection.name }}</h2>
-
-            </buttons-primary-button-big>
-            <sale-info-detail :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
-          </div>
-          <all-collections-modal-detail v-if="isCollectionModelOpen" @close="isCollectionModelOpen = false"
-                                        @close-modal="closeCollection" @change-model="changeModel" :color="color"
-                                        :material="material"
-                                        :collectionProducts="collectionProducts" :product="product"/>
-          <h1 class="pb-5">{{ product.name }}</h1>
-          <div class="flex justify-between">
-            <p v-if="product && product.collection">{{ product.collection.description }}</p>
-          </div>
-        </div>
-        <div class="lg:min-h-[430px]">
-          <div class="flex flex-col lg:flex-row justify-start ">
-
-            <filters-model-family-filter-detail class="lg:min-w-[200px]" @change-model="changeModel" :product="product"
-                                                :productVariantsData="productVariantsData"
-                                                :modelName="product.name" :material="material" :color="color"
-                                                :activeCasing="actualCasing"/>
-            <material-color-filter-detail class="pt-0 md:pt-12 lg:pt-0  lg:pl-8  md:pl-0 pl-1"
-                                          @change-filter="getActualDoorVariantData"
-                                          :activeFilters="activeFilters"
-                                          :material="material"
-                                          :color="color" :productMaterials="productMaterials"/>
-
-          </div>
-
-          <!--          <glass-type-filter-detail @change-glass-decor="changeGlass" :glass_decor="product.glass_decor"-->
-          <!--                                    v-if="product.glass_decor && product.glass_decor[0]" :newGlass="newGlass"/>-->
-        </div>
-        <div class="w-full flex flex-col justify-between items-start">
-          <div class="pb-8">
-            <div v-if="product.glass_decor.length > 0">
-              <h2 v-if="doorVariantData && doorVariantData.casing_variant" class="font-regular">
-                <!-- Display sale price with glass price if is_sale_active is true -->
-                <span v-if="doorVariantData.sale">
-        {{
-                    toNumber(doorVariantData.sale.sale_leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
-                  }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
-      </span>
-                <!-- Always display the original price, conditionally grayed out and line-through -->
-                <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
-        {{
-                    toNumber(doorVariantData.leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
-                  }}&nbsp;₽
-      </span>
-              </h2>
-            </div>
-            <div v-else>
-              <h2 class="font-bold">
-                <!-- Display sale price if is_sale_active is true -->
-                <span v-if="doorVariantData.sale">
-        {{ toNumber(doorVariantData.sale.sale_leaf_casing_price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
-      </span>
-                <!-- Always display the original price, conditionally grayed out and line-through -->
-                <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
-        {{ toNumber(doorVariantData.leaf_casing_price) }}&nbsp;₽
-      </span>
-              </h2>
-            </div>
-            <!--             <pre>{{doorVariantData}}</pre>-->
-          </div>
-          <div @click="openContactUsModal" class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full md:pl-0 pl-1">
-            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark text-white ">Купить
-            </buttons-primary-button-big>
-            <!--            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В-->
-            <!--              избранное-->
-            <!--            </buttons-primary-button-big>-->
-          </div>
-
-
-        </div>
-      </div>
-    </div>
-
-    <!-- door image and filters block end  -->
 
     <div ref="imagesBlock" class="layout-images pt-16 lg:pt-24">
       <div class="image-container">
@@ -428,7 +288,7 @@ function onChangePage(page) {
       </div>
     </div>
     <image-modal :image="selectedImage" ref="imgModal"/>
-    <contact-us-modal :should-open-modal="shouldOpenModal"/>
+    <contact-us-modal  :should-open-modal="shouldOpenModal"/>
     <pagination class="pt-12 pb-32 flex justify-center" :total="total"
                 :page_size="page_size"
                 :pagesCount="pagesCount"
@@ -439,15 +299,11 @@ function onChangePage(page) {
 </template>
 
 <style scoped>
-
-.door-card-detail {
-  @media screen and (max-width: 768px) {
-    position: sticky !important;
-    top: 0;
-    z-index: 2;
-    background-color: white;
-  }
-
+.door-card-detail{
+  position: sticky!important;
+  top: 0;
+  z-index: 2;
+  background-color: white;
 
 }
 </style>
