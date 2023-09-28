@@ -308,7 +308,7 @@ function onChangePage(page) {
 
                         :newGlass="newGlass"/>
 <!--        <pre>{{doorVariantData}}</pre>-->
-        <div class="pb-4 flex justify-center">
+        <div class="pb-2 md:pb-4 flex justify-center">
           <div v-if="product.glass_decor.length > 0">
             <h2 v-if="doorVariantData && doorVariantData.casing_variant" class="font-regular">
               <!-- Display sale price with glass price if is_sale_active is true -->
