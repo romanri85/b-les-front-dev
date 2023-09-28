@@ -10,7 +10,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="pb-8">
+  <div class="">
     <div v-if="product.glass_decor.length > 0">
       <h2 v-if="doorVariantData && doorVariantData.casing_variant" class="font-regular">
         <!-- Display sale price with glass price if is_sale_active is true -->
@@ -28,7 +28,7 @@ const props = defineProps({
       </h2>
     </div>
     <div v-else>
-      <h2 class="font-bold">
+      <h2 class="font-regular'">
         <!-- Display sale price if is_sale_active is true -->
         <span v-if="doorVariantData.sale">
         {{ toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.casing_variant.price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
