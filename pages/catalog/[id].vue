@@ -262,7 +262,7 @@ function onChangePage(page) {
                 <!-- Display sale price with glass price if is_sale_active is true -->
                 <span v-if="doorVariantData.sale">
         {{
-                    toNumber(doorVariantData.sale.sale_leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
+                    toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
                   }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
                 <!-- Always display the original price, conditionally grayed out and line-through -->
@@ -277,7 +277,7 @@ function onChangePage(page) {
               <h2 class="font-bold">
                 <!-- Display sale price if is_sale_active is true -->
                 <span v-if="doorVariantData.sale">
-        {{ toNumber(doorVariantData.sale.sale_leaf_casing_price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
+        {{ toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.casing_variant.price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
                 <!-- Always display the original price, conditionally grayed out and line-through -->
                 <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
@@ -307,14 +307,14 @@ function onChangePage(page) {
       <door-card-detail class="" :doorVariant="doorVariantData" :product="product"
 
                         :newGlass="newGlass"/>
-
+<!--        <pre>{{doorVariantData}}</pre>-->
         <div class="pb-4 flex justify-center">
           <div v-if="product.glass_decor.length > 0">
             <h2 v-if="doorVariantData && doorVariantData.casing_variant" class="font-regular">
               <!-- Display sale price with glass price if is_sale_active is true -->
               <span v-if="doorVariantData.sale">
         {{
-                  toNumber(doorVariantData.sale.sale_leaf_casing_price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
+                  toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
                 }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
               <!-- Always display the original price, conditionally grayed out and line-through -->
@@ -329,7 +329,7 @@ function onChangePage(page) {
             <h2 class="font-bold">
               <!-- Display sale price if is_sale_active is true -->
               <span v-if="doorVariantData.sale">
-        {{ toNumber(doorVariantData.sale.sale_leaf_casing_price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
+        {{ toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.casing_variant.price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
               <!-- Always display the original price, conditionally grayed out and line-through -->
               <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
@@ -343,14 +343,15 @@ function onChangePage(page) {
 
       <div class="h-4 flex justify-end">
         <ArrowDownIcon v-if="y===0" class="h-8"></ArrowDownIcon>
-        <div v-else class="h-4  "></div>
+        <div v-else class="h-4  ">
+        </div>
       </div>
       <div class="left md:w-[38%]">
 
         <div class="flex md:hidden  flex-col justify-start items-start mb-2 md:mb-3">
           <div
                                       class="pt-4 lg:pt-0 inline-flex flex-col lg:flex-row items-start justify-between w-full pb-2">
-            <h2  @click="openCollection" class="px-2 py-2 mb-2   c font-regular">
+            <h2  @click="openCollection" class=" py-2 mb-2   c font-regular">
              <span class="underline-static"> {{ product.collection.name }}</span></h2>
 
           </div>
@@ -358,6 +359,7 @@ function onChangePage(page) {
 <!--          <div class="flex justify-between">-->
 <!--            <p v-if="product && product.collection">{{ product.collection.description }}</p>-->
 <!--          </div>-->
+
           <sale-info-detail class="pt-6 pb-4" :door-variant-data="doorVariantData" v-if="doorVariantData.sale"/>
 
         </div>
