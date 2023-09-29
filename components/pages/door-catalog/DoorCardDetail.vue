@@ -17,7 +17,7 @@ const initialGlass = props.product.glass_decor.find((item: GlassDecorItem) => it
 <!--  <client-only>-->
 
     <div v-if="props.doorVariant" class="flex flex-col items-center pb-2 md:pb-10 relative">
-      <div v-if="props.doorVariant.casing_variant" class="relative md:pb-8">
+      <div v-if="props.doorVariant.casing_variant" class="relative md:pb-8 lg:pb-5">
         <nuxt-img placeholder width="290px" height="auto" :src="props.doorVariant.casing_variant.image"
                   class="h-auto w-40 md:w-52 lg:w-72"></nuxt-img>
         <nuxt-img placeholder width="290px" height="auto"

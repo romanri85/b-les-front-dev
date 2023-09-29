@@ -26,7 +26,9 @@ export default defineNuxtConfig({
         applicationId: process.env.ALGOLIA_APPLICATION_ID,
         instantSearch: {
             theme: 'algolia'
-        }
+        },
+        cache: true,
+
     },
     runtimeConfig: {
         public: {

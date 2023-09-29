@@ -12,7 +12,7 @@
       <form-kit
           type="search"
           prefixIcon="search"
-          v-model="searchQuery"
+          v-model="SearchQuery"
           @input="updateQueryAndSearch"
 
 
@@ -21,19 +21,21 @@
       >
       </form-kit>
       <div class="">
-        <p class=" mt-8  md:mt-0 font-regular">Всего дверей: {{ totalHits }}</p>
+        <p class=" mt-8  md:mt-0 font-regular">Всего дверей: {{ MaterialColorProductVariantTotalHits }}</p>
       </div>
       </div>
       <!-- Results -->
 
 
-      <div ref="hitsBlock" class="text-primaryDark flex justify-center md:justify-between">
+<!--      <div ref="hitsBlock" class="text-primaryDark flex justify-center md:justify-between">-->
+<!--<pre>{{ImageSearchResults}}</pre>-->
+<!--      </div>-->
 
-      </div>
       <div class="mt-4 md:mt-16 gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid"
            ref="parent">
-
-        <div v-for="hit in searchResults" :key="hit.objectID">
+<!--        <pre>{{MaterialColorProductVariantResponse.hits}}</pre>-->
+<!--        <pre>{{MaterialColorProductVariantSearchResults}}</pre>-->
+        <div v-for="hit in MaterialColorProductVariantSearchResults" :key="hit.objectID">
           <NuxtLink
               :to="`/catalog/${hit.product_variant.product}?material=${hit.color.material}&color=${hit.color.id}`">
             <search-door-card class="relative  transition-all duration-300 pb-6 mb-6"
@@ -44,10 +46,10 @@
         </div>
       </div>
 <div class="flex justify-center">
-      <base-pagination v-if="totalHits" class="pb-32" :total="totalHits"
+      <base-pagination v-if="MaterialColorProductVariantTotalHits" class="pb-32" :total="MaterialColorProductVariantTotalHits"
                        :page_size="24"
                        @page-change="handleNewPage"
-                       v-model:current-page="currentPage"
+                       v-model:current-page="MaterialColorProductVariantCurrentPage"
       />
 </div>
     </client-only>
@@ -58,22 +60,30 @@
 import {onMounted, ref} from 'vue';
 import algoliasearch from 'algoliasearch/lite';
 import SearchDoorCard from "~/pages/search/SearchDoorCard.vue";
+import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService';
 
 definePageMeta({layout: "dark-header"});
 
+
+const selectedImages = ref([])
 const config = useRuntimeConfig()
 
 // Initialize Algolia client
 const client = algoliasearch(config.public.ALGOLIA_APPLICATION_ID, config.public.ALGOLIA_SEARCH_API_KEY);
-const index = client.initIndex('MaterialColorProductVariant');
+const MaterialColorProductVariantIndex = client.initIndex('MaterialColorProductVariant');
+const ImageIndex = client.initIndex('Image');
+
+const ImageSearchResults = ref([]);
+const ImageTotalHits = ref(0);
 
 // State
+const MaterialColorProductVariantResponse = ref(null);
 
-const searchQuery = ref('');
-const searchResults = ref([]);
-const totalHits = ref(0);  // New property to hold total hits
-const currentPage = ref(1);
-const nbPages = ref(0);
+const SearchQuery = ref('');
+const MaterialColorProductVariantSearchResults = ref([]);
+const MaterialColorProductVariantTotalHits = ref(0);  // New property to hold total hits
+const MaterialColorProductVariantCurrentPage = ref(1);
+const MaterialColorProductVariantNbPages = ref(0);
 
 const hitsBlock = ref(null);
 const scrollToHitsBlock = () => {
@@ -83,24 +93,50 @@ const scrollToHitsBlock = () => {
 };
 
 const performSearch = async (page = 0) => {
-  if (searchQuery.value) {
-    const response = await index.search(searchQuery.value, {
+  if (SearchQuery.value) {
+    const MaterialColorProductVariantPromise = MaterialColorProductVariantIndex.search(
+        SearchQuery.value,
+        {
+          hitsPerPage: 24,
+          page: MaterialColorProductVariantCurrentPage.value - 1,
+        }
+    );
+
+    const ImagePromise = ImageIndex.search(SearchQuery.value, {
       hitsPerPage: 24,
-      page: currentPage.value - 1,
+      page: MaterialColorProductVariantCurrentPage.value - 1,
     });
-    searchResults.value = response.hits;
-    nbPages.value = response.nbPages;
-    totalHits.value = response.nbHits;  // Updating total hits
+
+    const [MaterialColorProductVariantResponse, ImageResponse] = await Promise.all([
+      MaterialColorProductVariantPromise,
+      ImagePromise,
+    ]);
+
+    MaterialColorProductVariantSearchResults.value = MaterialColorProductVariantResponse.hits;
+    MaterialColorProductVariantTotalHits.value = MaterialColorProductVariantResponse.nbHits;
+
+    // Update ImageSearchResults and ImageTotalHits
+    ImageSearchResults.value = ImageResponse.hits;
+    ImageTotalHits.value = ImageResponse.nbHits;
+
+    // Check for no hits and notify the user
+    if (MaterialColorProductVariantResponse.nbHits === 0 && ImageResponse.nbHits === 0) {
+      // Notify the user, e.g., through a UI element or a console log
+      console.log("No results found in both indices.");
+    }
   } else {
-    searchResults.value = [];
-    totalHits.value = 0;  // Resetting total hits to 0
+    MaterialColorProductVariantSearchResults.value = [];
+    MaterialColorProductVariantTotalHits.value = 0;
+    ImageSearchResults.value = [];  // Resetting Image search results
+    ImageTotalHits.value = 0;  // Resetting Image total hits
   }
 };
+
 const performSearchDebounced = useDebounce(performSearch, 100);  // 100ms delay
 
 
 const updateQueryAndSearch = async (newQuery: string) => {
-  searchQuery.value = newQuery;
+  SearchQuery.value = newQuery;
   await performSearchDebounced();
 };
 // Methods
@@ -111,7 +147,7 @@ onMounted(() => {
   // performSearch();
 });
 const handleNewPage = (newPage) => {
-  currentPage.value = newPage;
+  MaterialColorProductVariantCurrentPage.value = newPage;
   performSearchDebounced(newPage);
   scrollToHitsBlock();
 };
