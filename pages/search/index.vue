@@ -6,10 +6,10 @@
     </div>
     <client-only>
       <!-- Search Form -->
-      <TabGroup   >
+      <TabGroup :selected-index="selectedTabindex"  >
         <TabList>
 
-      <div class="flex md:flex-row flex-col justify-between max-w-[600px] pt-12">
+      <div class="flex md:flex-row flex-col justify-between max-w-[680px] pt-10 lg:pt-16 lg:pb-16 pb-10">
         <form-kit
             type="search"
             prefixIcon="search"
@@ -24,25 +24,25 @@
 
 
 
-          <div class="pl-8 flex justify-start gap-x-12 lg:gap-x-20 pr-4">
-            <Tab index="1" :disabled="!MaterialColorProductVariantSearchResults" class="text-primaryDark">
-              <div class="relative">
+          <div class="md:pl-8 flex  md:justify-start gap-x-28 md:gap-x-32 lg:gap-x-40 pr-4">
+            <Tab index="0" :disabled="MaterialColorProductVariantTotalHits === 0" class="text-primaryDark">
+              <div class="relative outline-none"  @click="MaterialColorProductVariantTotalHits ? selectedTabindex=0 : null">
                   <span v-if="MaterialColorProductVariantTotalHits > 0 " class="text-primaryDark absolute text-md -right-6 -top-3">{{
                       MaterialColorProductVariantTotalHits
                     }}</span>
                 <h2
-
-                    class="underline-offset-4">Двери</h2>
+                    :class="{'underline': selectedTabindex===0, 'text-gray-400': MaterialColorProductVariantTotalHits===0}"
+                    class=" underline-offset-4">Двери</h2>
               </div>
             </Tab>
-            <Tab index=2 :disabled="!ImageSearchResults" class="text-primaryDark">
-              <div class="relative">
+            <Tab index=1 :disabled="ImageTotalHits===0" class="text-primaryDark">
+              <div class="relative" @click="ImageTotalHits ? selectedTabindex=1 : null">
                   <span v-if="ImageTotalHits > 0 " class="text-primaryDark absolute text-md -right-6 -top-3">{{
                       ImageTotalHits
                     }}</span>
                 <h2
-
-                    class="underline-offset-4">Фото</h2>
+                    :class="{'underline': selectedTabindex===1, 'text-gray-400': ImageTotalHits===0}"
+                    class=" underline-offset-4">Фото</h2>
               </div>
             </Tab>
 
@@ -54,7 +54,7 @@
 
         <TabPanels>
           <TabPanel>
-
+<div v-if="MaterialColorProductVariantTotalHits">
             <div class="mt-4 md:mt-16 gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid"
                  ref="parent">
               <!--        <pre>{{MaterialColorProductVariantResponse.hits}}</pre>-->
@@ -77,6 +77,17 @@
                                v-model:current-page="MaterialColorProductVariantCurrentPage"
               />
             </div>
+</div>
+            <div v-else-if="!SearchQuery">
+              <div class="flex justify-center pb-12">
+                <h2 class="text-2xl">Введите запрос</h2>
+              </div>
+            </div>
+            <div v-if="SearchQuery && !ImageTotalHits && !MaterialColorProductVariantTotalHits">
+              <div class="flex justify-center pb-12">
+                <h2 class="text-2xl">К сожалению,Ничего не найдено</h2>
+              </div>
+            </div>
           </TabPanel>
 
 
@@ -90,11 +101,13 @@
                 </div>
               </div>
             </div>
+            <div class="flex justify-center">
             <base-pagination v-if="ImageTotalHits" class="pb-32"
                              :total="ImageTotalHits"
                              :page_size="9"
                              @page-change="handleImagePage"
                              v-model:current-page="ImageCurrentPage"/>
+            </div>
             <image-modal :image="selectedImage" ref="imgModal"/>
           </TabPanel>
         </TabPanels>
@@ -162,8 +175,10 @@ const scrollToImageHitsBlock = () => {
   }
 };
 
+const selectedTabindex = ref(null);
 const performSearch = async (page = 0) => {
   if (SearchQuery.value) {
+
     const MaterialColorProductVariantPromise = MaterialColorProductVariantIndex.search(
         SearchQuery.value,
         {
@@ -174,7 +189,7 @@ const performSearch = async (page = 0) => {
 
     const ImagePromise = ImageIndex.search(SearchQuery.value, {
       hitsPerPage: 9,
-      page: MaterialColorProductVariantCurrentPage.value - 1,
+      page: ImageCurrentPage.value - 1,
     });
 
     const [MaterialColorProductVariantResponse, ImageResponse] = await Promise.all([
@@ -182,8 +197,13 @@ const performSearch = async (page = 0) => {
       ImagePromise,
     ]);
 
+    selectedTabindex.value = 0;
+
     MaterialColorProductVariantSearchResults.value = MaterialColorProductVariantResponse.hits;
     MaterialColorProductVariantTotalHits.value = MaterialColorProductVariantResponse.nbHits;
+    if (MaterialColorProductVariantTotalHits.value === 0) {
+      selectedTabindex.value = 1;
+    }
 
     // Update ImageSearchResults and ImageTotalHits
     ImageSearchResults.value = ImageResponse.hits;
@@ -193,12 +213,14 @@ const performSearch = async (page = 0) => {
     if (MaterialColorProductVariantResponse.nbHits === 0 && ImageResponse.nbHits === 0) {
       // Notify the user, e.g., through a UI element or a console log
       console.log("No results found in both indices.");
+      selectedTabindex.value = null;
     }
   } else {
     MaterialColorProductVariantSearchResults.value = [];
     MaterialColorProductVariantTotalHits.value = 0;
     ImageSearchResults.value = [];  // Resetting Image search results
     ImageTotalHits.value = 0;  // Resetting Image total hits
+    selectedTabindex.value = null;
   }
 };
 const MaterialColorProductVariantResponse = ref(null);
@@ -239,6 +261,8 @@ const performSearchDebounced = useDebounce(performSearch, 100);  // 100ms delay
 
 const updateQueryAndSearch = async (newQuery: string) => {
   SearchQuery.value = newQuery;
+  MaterialColorProductVariantCurrentPage.value = 1;
+  ImageCurrentPage.value = 1;
   await performSearchDebounced();
 };
 // Methods
@@ -263,6 +287,9 @@ const layoutImages = computed(() => {
   }
   return [];
 });
+
+
+
 
 // On Mounted, you could perform an initial search if needed
 onMounted(() => {

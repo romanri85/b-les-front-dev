@@ -49,7 +49,7 @@
 
               </DialogTitle>
               <div class="mt-2">
-                <nuxt-img :src="image.image" class=" w-full object-contain"
+                <nuxt-img :src="`https://b-les-storage.ams3.digitaloceanspaces.com/media/${image.image}`" class=" w-full object-contain"
                           :alt="image.project_name"></nuxt-img>
                 <nuxt-link class="outline-none" :to="`/interior/${image.project}`">
                   <div v-if="!route.path.startsWith('/interior')" class="outline-none text-center py-2">

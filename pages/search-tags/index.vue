@@ -55,7 +55,7 @@ onMounted(
           return
         }
         if (!selectedTags.value[0]) {
-          selectedTags.value = [String(tags.value[1].id)];
+          selectedTags.value = [String(tags.value[0].id)];
           taglistKey.value++
           await getImagesByTags(selectedTags.value)
           return
