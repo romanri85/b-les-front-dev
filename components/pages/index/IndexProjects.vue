@@ -18,16 +18,16 @@
         :breakpoints="{
       360: {
       slidesPerView: 2.2,
-      slidesPerGroup: 2,
+      slidesPerGroup: 1,
       },
 
       768: {
       slidesPerView: 3.2,
-      slidesPerGroup: 3,
+      slidesPerGroup: 1,
       },
       1440: {
       slidesPerView: 4,
-      slidesPerGroup: 4,
+      slidesPerGroup: 1,
       }
       }"
         :space-between="5"
@@ -40,7 +40,7 @@
       <!--    <div v-for="project in projects" :key="project.name">-->
       <SwiperSlide v-if="projects" v-for="project in projects" :key="project.id">
         <NuxtLink :to="{ path: `/interior/${project.id}`}">
-          <nuxt-img placeholder loading="lazy"
+          <NuxtImg loading="lazy" placeholder quality="20"
               class="w-[480px] lg:h-96 md:h-60 h-48 object-cover"
               :src="project.first_image.image"
               :alt="project.name"

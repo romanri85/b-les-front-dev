@@ -91,33 +91,37 @@ let totalPlacemarks = computed(() => {
   return visibleAddressData.length;
 })
 
+
+const browserLang = navigator.language || navigator.userLanguage;
+const isRussian = browserLang.startsWith('ru');
+const langParam = isRussian ? 'ru_RU' : 'en_US';
 // dynamically add the Yandex Maps JavaScript API
-// useHead({
-//   script: [
-//     {
-//       src: 'https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=en_US',
-//       async: true,
-//     },
-//   ],
-// })
+useHead({
+  script: [
+    {
+      src: `https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=${langParam}`,
+      // async: true,
+    },
+  ],
+})
 
 onMounted(async () => {
 
 
-  const browserLang = navigator.language || navigator.userLanguage;
-  const isRussian = browserLang.startsWith('ru');
-  const langParam = isRussian ? 'ru_RU' : 'en_US';
-
-  if (typeof ymaps === 'undefined') {
-    useHead({
-      script: [
-        {
-          src: `https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=${langParam}`,
-          async: true,
-        },
-      ],
-    });
-  }
+  // const browserLang = navigator.language || navigator.userLanguage;
+  // const isRussian = browserLang.startsWith('ru');
+  // const langParam = isRussian ? 'ru_RU' : 'en_US';
+  //
+  // if (typeof ymaps === 'undefined') {
+  //   useHead({
+  //     script: [
+  //       {
+  //         src: `https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=${langParam}`,
+  //         // async: true,
+  //       },
+  //     ],
+  //   });
+  // }
 
 
   addresses.value = props.addresses
@@ -135,8 +139,9 @@ onMounted(async () => {
 
 
 let maxRetries = 10;
-let interval = 500;  // Starting interval
+let interval = 100;  // Starting interval
 async function initMap() {
+
   // Make sure the API is loaded
   if (typeof ymaps === 'undefined') {
     if (maxRetries > 0) {

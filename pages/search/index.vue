@@ -6,7 +6,7 @@
     </div>
     <client-only>
       <!-- Search Form -->
-      <TabGroup :selected-index="selectedTabindex"  >
+      <TabGroup :selected-index="selectedTabindex">
         <TabList>
 
       <div class="flex md:flex-row flex-col justify-between max-w-[680px] pt-10 lg:pt-16 lg:pb-16 pb-10">
@@ -25,7 +25,7 @@
 
 
           <div class="md:pl-8 flex  md:justify-start gap-x-28 md:gap-x-32 lg:gap-x-40 pr-4">
-            <Tab index="0" :disabled="MaterialColorProductVariantTotalHits === 0" class="text-primaryDark">
+            <Tab  class="text-primaryDark">
               <div class="relative outline-none"  @click="MaterialColorProductVariantTotalHits ? selectedTabindex=0 : null">
                   <span v-if="MaterialColorProductVariantTotalHits > 0 " class="text-primaryDark absolute text-md -right-6 -top-3">{{
                       MaterialColorProductVariantTotalHits
@@ -35,7 +35,7 @@
                     class=" underline-offset-4">Двери</h2>
               </div>
             </Tab>
-            <Tab index=1 :disabled="ImageTotalHits===0" class="text-primaryDark">
+            <Tab  class="text-primaryDark">
               <div class="relative" @click="ImageTotalHits ? selectedTabindex=1 : null">
                   <span v-if="ImageTotalHits > 0 " class="text-primaryDark absolute text-md -right-6 -top-3">{{
                       ImageTotalHits
@@ -176,6 +176,7 @@ const scrollToImageHitsBlock = () => {
 };
 
 const selectedTabindex = ref(null);
+const selectedTabindexKey = ref(0);
 const performSearch = async (page = 0) => {
   if (SearchQuery.value) {
 
@@ -222,6 +223,7 @@ const performSearch = async (page = 0) => {
     ImageTotalHits.value = 0;  // Resetting Image total hits
     selectedTabindex.value = null;
   }
+  selectedTabindexKey.value ++;
 };
 const MaterialColorProductVariantResponse = ref(null);
 const performMaterialColorProductVariantSearch = async (page = 0) => {
@@ -275,13 +277,6 @@ const layoutImages = computed(() => {
     const numberOfNarrowImages = images.filter(image => image.layout === 'narrow').length;
 
     adjustLayoutForNarrowImages(images, numberOfNarrowImages);
-
-    // Sort images by height-to-width ratio in descending order
-    // images.sort((a, b) => {
-    //   const hwRatioA = a.height / a.width;
-    //   const hwRatioB = b.height / b.width;
-    //   return hwRatioB - hwRatioA;
-    // });
 
     return images;
   }
