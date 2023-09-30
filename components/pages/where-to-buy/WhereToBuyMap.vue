@@ -139,7 +139,7 @@ onMounted(async () => {
 
 
 let maxRetries = 10;
-let interval = 100;  // Starting interval
+let interval = 250;  // Starting interval
 async function initMap() {
 
   // Make sure the API is loaded
