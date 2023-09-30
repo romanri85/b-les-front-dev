@@ -169,11 +169,11 @@ console.log(cities.value, 'cities')
 // fetchCities()
 
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
+// function getCookie(name) {
+//   const value = `; ${document.cookie}`;
+//   const parts = value.split(`; ${name}=`);
+//   if (parts.length === 2) return parts.pop().split(';').shift();
+// }
 
 
 
@@ -184,7 +184,7 @@ async function handleSubmit(data) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',  // Make sure to set the content type
-        'X-CSRFTOKEN':getCookie('csrftoken'),
+        // 'X-CSRFTOKEN':getCookie('csrftoken'),
       },
       credentials: 'include', // Important
       body: JSON.stringify(data),  // Make sure to stringify the data object

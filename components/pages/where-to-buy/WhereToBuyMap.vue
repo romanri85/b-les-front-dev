@@ -103,21 +103,21 @@ let totalPlacemarks = computed(() => {
 
 onMounted(async () => {
 
-
-  const browserLang = navigator.language || navigator.userLanguage;
-  const isRussian = browserLang.startsWith('ru');
-  const langParam = isRussian ? 'ru_RU' : 'en_US';
-
-  if (typeof ymaps === 'undefined') {
-    useHead({
-      script: [
-        {
-          src: `https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=${langParam}`,
-          async: true,
-        },
-      ],
-    });
-  }
+  //
+  // const browserLang = navigator.language || navigator.userLanguage;
+  // const isRussian = browserLang.startsWith('ru');
+  // const langParam = isRussian ? 'ru_RU' : 'en_US';
+  //
+  // if (typeof ymaps === 'undefined') {
+  //   useHead({
+  //     script: [
+  //       {
+  //         src: `https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=${langParam}`,
+  //         async: true,
+  //       },
+  //     ],
+  //   });
+  // }
 
 
   addresses.value = props.addresses
@@ -134,21 +134,23 @@ onMounted(async () => {
 })
 
 
-let maxRetries = 10;
-let interval = 500;  // Starting interval
+// let maxRetries = 10;
+// let interval = 500;  // Starting interval
 async function initMap() {
   // Make sure the API is loaded
-  if (typeof ymaps === 'undefined') {
-    if (maxRetries > 0) {
-      setTimeout(initMap, interval);
-      maxRetries--;
-      interval += 250;  // Increase interval by 30ms for the next retry
-      return;
-    } else {
-      console.error('Failed to initialize ymaps after multiple attempts.');
-      return;
-    }
-  }
+  // if (typeof ymaps === 'undefined') {
+    // initMap()
+    // if (maxRetries > 0) {
+    //   setTimeout(initMap, interval);
+      // maxRetries--;
+      // interval += 250;  // Increase interval by 30ms for the next retry
+
+    // }
+  // else {
+  //     console.error('Failed to initialize ymaps after multiple attempts.');
+  //     return;
+  //   }
+  // }
 
   ymaps.ready(function () {
     myMap = new ymaps.Map('map', {

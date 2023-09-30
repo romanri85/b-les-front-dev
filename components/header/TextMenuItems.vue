@@ -45,7 +45,6 @@ const currentMenuItems = computed(() => {
     <ul ref="menuRef" :class="light ? 'text-white' : 'text-black'"
         class="menu lg:flex xl:40px lg:gap-x-[30px] xl:h-[100px] lg:h-[86px] h-[60px] justify-between hidden  items-center"
         @mouseenter="textMenuHovered = true" @mouseleave="onTextMenuMouseLeave">
-            <client-only>
       <Popover v-for="(item, index) in textMenuItems" :key="item.name" as="li"
                class="h-full flex menu-item">
         <PopoverButton class="">
@@ -80,6 +79,8 @@ const currentMenuItems = computed(() => {
         </PopoverButton>
 
         <div v-if="activeItemIndex === index && currentMenuItems.length !== 0">
+                      <client-only>
+
           <PopoverPanel static>
             <transition enter="duration-300 ease-out"
                         enter-from="opacity-0 scale-95"
@@ -93,12 +94,25 @@ const currentMenuItems = computed(() => {
                                  :activeMenuItemKey="item.itemHeader"/>
             </transition>
           </PopoverPanel>
+                                    </client-only>
+
         </div>
       </Popover>
 
 
-            </client-only>
     </ul>
+    <div v-for="menuItem in menuItemsProps.catalog" :key="menuItem.name">
+      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
+    </div>
+    <div v-for="menuItem in menuItemsProps['other-elements']" :key="menuItem.name">
+      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
+    </div>
+    <div v-for="menuItem in menuItemsProps['about-us']" :key="menuItem.name">
+      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
+    </div>
+
+
+
   </nav>
 </template>
 <style scoped>
