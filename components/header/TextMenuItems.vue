@@ -102,13 +102,13 @@ const currentMenuItems = computed(() => {
 
     </ul>
     <div v-for="menuItem in menuItemsProps.catalog" :key="menuItem.name">
-      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
+      <img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
     </div>
     <div v-for="menuItem in menuItemsProps['other-elements']" :key="menuItem.name">
-      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
+      <img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
     </div>
     <div v-for="menuItem in menuItemsProps['about-us']" :key="menuItem.name">
-      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
+      <img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
     </div>
 
 
