@@ -27,6 +27,8 @@ export default {
     viewCollection: 'View collection',
     searchByParameters: 'Search by parameters',
     searchPhotoByTag: 'Search photo by tag',
+    projects: 'Projects',
+    photoSearch: 'Photo search',
     ourProjects: 'Our projects',
     ourProjectsDescription: 'Our company strives to provide our clients with the opportunity to bring\n' +
         '            their design and technical solutions to life.',

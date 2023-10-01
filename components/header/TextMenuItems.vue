@@ -77,41 +77,38 @@ const currentMenuItems = computed(() => {
             </span>
           </div>
         </PopoverButton>
+<!--        <transition-->
+<!--            enter-active-class="transition duration-200 ease-out"-->
+<!--            enter-from-class="-translate-y-full  opacity-0"-->
+<!--            enter-to-class="translate-y-full opacity-100"-->
+<!--            leave-active-class="transition duration-150 ease-in"-->
+<!--            leave-from-class="translate-y-full opacity-100"-->
+<!--            leave-to-class="-translate-y-full opacity-0"-->
+<!--        >-->
+        <div v-show="activeItemIndex === index && currentMenuItems.length !== 0">
+<!--          <client-only>-->
 
-        <div v-if="activeItemIndex === index && currentMenuItems.length !== 0">
-                      <client-only>
+              <PopoverPanel static>
+                <div class="modal-center">
+                <modals-header-modal
 
-          <PopoverPanel static>
-            <transition enter="duration-300 ease-out"
-                        enter-from="opacity-0 scale-95"
-                        enter-to="opacity-100 scale-100"
-                        leave="duration-200 ease-in"
-                        leave-from="opacity-100 scale-100"
-                        leave-to="opacity-0 scale-95">
-            <modals-header-modal :currentMenuItems="currentMenuItems"
-                                 :light="light"
+                    :light="light"
+                    :itemName="item.id"
+                    :menuItemsProps="menuItemsProps"
+                    :activeMenuItemKey="item.itemHeader"/>
+                </div>
 
-                                 :menuItemsProps="menuItemsProps"
-                                 :activeMenuItemKey="item.itemHeader"/>
-            </transition>
-          </PopoverPanel>
-                                    </client-only>
+              </PopoverPanel>
+
+<!--          </client-only>-->
 
         </div>
+<!--        </transition>-->
+
       </Popover>
 
 
     </ul>
-    <div v-for="menuItem in menuItemsProps.catalog" :key="menuItem.name">
-      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
-    </div>
-    <div v-for="menuItem in menuItemsProps['other-elements']" :key="menuItem.name">
-      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
-    </div>
-    <div v-for="menuItem in menuItemsProps['about-us']" :key="menuItem.name">
-      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
-    </div>
-
 
 
   </nav>

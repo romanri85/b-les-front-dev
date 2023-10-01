@@ -16,19 +16,22 @@
     "id": "where-to-buy",
     "name": "whereToBuy",
     "slug": "/where-to-buy",
-    "needToShowDropdown": false
+    "needToShowDropdown": false,
+    "itemHeader": "projects"
   },
   {
     "id": "doors-in-interior",
-    "name": "Проекты",
+    "name": "projects",
     "slug": "/interior",
-    "needToShowDropdown": false
+    "needToShowDropdown": false,
+    "itemHeader": "projects"
   },
   {
     "id": "search-tags",
-    "name": "Поиск фото",
+    "name": "photoSearch",
     "slug": "/search-tags",
-    "needToShowDropdown": false
+    "needToShowDropdown": false,
+    "itemHeader": "photoSearch"
   },
 
 
