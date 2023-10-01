@@ -25,7 +25,7 @@ const {locale, setLocale} = useI18n()
     <div>
       <header-mobile :light="props.light" v-if="viewport.isMobile"  />
       <header-tablet :light="props.light" v-else-if="viewport.isTablet"  />
-      <header-desktop :light="props.light" v-else-if="viewport.isDesktop" />
+      <header-desktop :light="props.light" v-else/>
     </div>
 
   </header>

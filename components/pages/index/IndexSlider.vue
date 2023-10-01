@@ -1,8 +1,11 @@
 <template>
 
   <div class="lg:mt-[-87px] md:mt-[-65px] mt-[-65px] w-screen">
+    <div class="hero bg-cover bg-center h-screen w-screen  bg-gray-400">
+
     <client-only>
-      <Swiper
+
+      <Swiper class="h-screen"
           :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
           :slides-per-view="1"
           :navigation="{
@@ -27,7 +30,6 @@
 
       >
         <SwiperSlide  v-for="(collection, index) in collections" :key="collection.name">
-          <div class="hero bg-cover bg-center h-screen w-screen  ">
             <div>
 
               <nuxt-img placeholder :src="collection.image"
@@ -80,12 +82,13 @@
                   <chevron-right-icon class="md:hidden w-8 h-8 text-white"/>
                 </button>
               </div>
-            </div>
           </div>
 
         </SwiperSlide>
       </Swiper>
     </client-only>
+    </div>
+
   </div>
 </template>
 

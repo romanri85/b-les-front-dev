@@ -23,16 +23,16 @@ const isCityFound = ref(true)
 // const browserLang = navigator.language || navigator.userLanguage;
 // const isRussian = browserLang.startsWith('ru');
 // const langParam = isRussian ? 'ru_RU' : 'en_US';
-// const langParam = 'ru_RU';
+const langParam = 'ru_RU';
 //
-// useHead({
-//   script: [
-//     {
-//       src: `https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=${langParam}`,
-//       // async: true,
-//     },
-//   ],
-// });
+useHead({
+  script: [
+    {
+      src: `https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=${langParam}`,
+      // async: true,
+    },
+  ],
+});
 
 async function getAddresses() {
   addresses.value = await $fetch(`${baseURL}/api/shops/`)

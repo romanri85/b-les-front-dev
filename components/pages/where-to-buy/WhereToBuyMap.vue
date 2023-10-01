@@ -138,21 +138,14 @@ onMounted(async () => {
 })
 
 
-let maxRetries = 10;
-let interval = 250;  // Starting interval
+// let maxRetries = 10;
+// let interval = 250;  // Starting interval
 async function initMap() {
 
   // Make sure the API is loaded
   if (typeof ymaps === 'undefined') {
-    if (maxRetries > 0) {
-      setTimeout(initMap, interval);
-      maxRetries--;
-      interval += 250;  // Increase interval by 30ms for the next retry
-      return;
-    } else {
-      console.error('Failed to initialize ymaps after multiple attempts.');
-      return;
-    }
+    setTimeout(initMap, 500);
+    return
   }
 
   ymaps.ready(function () {

@@ -28,7 +28,7 @@ const props = defineProps({
 
 
   <!--    <header class="header relative z-30">-->
-  <client-only>
+<!--  <client-only>-->
     <div
         class=" bg-transparent main-container font-mono whitespace-nowrap flex  justify-between items-center">
       <!--            logo-->
@@ -56,7 +56,7 @@ const props = defineProps({
     <div class="border-b w-full border-white"></div>
 
 
-  </client-only>
+<!--  </client-only>-->
   <!--    </header>-->
 
 
