@@ -90,6 +90,7 @@ const currentMenuItems = computed(() => {
                         leave-to="opacity-0 scale-95">
             <modals-header-modal :currentMenuItems="currentMenuItems"
                                  :light="light"
+
                                  :menuItemsProps="menuItemsProps"
                                  :activeMenuItemKey="item.itemHeader"/>
             </transition>
@@ -102,13 +103,13 @@ const currentMenuItems = computed(() => {
 
     </ul>
     <div v-for="menuItem in menuItemsProps.catalog" :key="menuItem.name">
-      <img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
+      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
     </div>
     <div v-for="menuItem in menuItemsProps['other-elements']" :key="menuItem.name">
-      <img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
+      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
     </div>
     <div v-for="menuItem in menuItemsProps['about-us']" :key="menuItem.name">
-      <img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
+      <nuxt-img :src="menuItem.image" :alt="menuItem.name" class="hidden"/>
     </div>
 
 

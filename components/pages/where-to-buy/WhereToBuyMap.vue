@@ -1,6 +1,6 @@
 <template>
   <div class="block lg:flex ">
-    <div id="map" class="lg:w-[50%] w-full h-[70vh] lg:h-[85vh]">
+    <div id="map" class="pb-12 lg:pb-16 lg:w-[50%] w-full h-[70vh] lg:h-[85vh]">
 
       </div>
     <div class="hidden lg:block">
