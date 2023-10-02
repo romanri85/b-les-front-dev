@@ -92,12 +92,11 @@
 
 
           <TabPanel>
-            <div ref="ImageHitsBlock" class="layout-images pb-16 lg:pb-24">
-              <div class="image-container">
-                <div v-for="(image, index) in layoutImages" :key="index" class="cursor-pointer"
-                     :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
-                  <nuxt-img @click="triggerModal(image)" :src="`https://b-les-storage.ams3.digitaloceanspaces.com/media/${image.image}`" class="object-cover cursor-pointer"
-                            :alt="image.project_name"/>
+            <div ref="ImageHitsBlock" class=" pb-16 lg:pb-24">
+              <div class="my-image-grid grid grid-cols-3 gap-4">
+                <div v-for="(image, index) in ImageSearchResults" :key="index" class="cursor-pointer my-image-cell">
+                  <nuxt-img @click="triggerModal(image)" :src="`https://b-les-storage.ams3.digitaloceanspaces.com/media/${image.image}`"
+                            class="object-cover cursor-pointer my-image-item" :alt="image.project_name"/>
                 </div>
               </div>
             </div>
@@ -269,19 +268,6 @@ const updateQueryAndSearch = async (newQuery: string) => {
 };
 // Methods
 
-const layoutImages = computed(() => {
-  if (ImageSearchResults.value) {
-    let images = ImageSearchResults.value.map(classifyImageLayout);
-
-    // Get the number of narrow images
-    const numberOfNarrowImages = images.filter(image => image.layout === 'narrow').length;
-
-    adjustLayoutForNarrowImages(images, numberOfNarrowImages);
-
-    return images;
-  }
-  return [];
-});
 
 
 
@@ -304,3 +290,25 @@ const handleImagePage = (newPage) => {
   scrollToImageHitsBlock();
 };
 </script>
+<style>
+.my-image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 4px; /* Adjust as needed */
+}
+
+.my-image-cell {
+  position: relative;
+  overflow: hidden;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+}
+
+.my-image-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
