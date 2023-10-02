@@ -103,7 +103,7 @@
             <div class="flex justify-center">
             <base-pagination v-if="ImageTotalHits" class="pb-32"
                              :total="ImageTotalHits"
-                             :page_size="9"
+                             :page_size="12"
                              @page-change="handleImagePage"
                              v-model:current-page="ImageCurrentPage"/>
             </div>
@@ -188,7 +188,7 @@ const performSearch = async (page = 0) => {
     );
 
     const ImagePromise = ImageIndex.search(SearchQuery.value, {
-      hitsPerPage: 9,
+      hitsPerPage: 12,
       page: ImageCurrentPage.value - 1,
     });
 
@@ -245,7 +245,7 @@ const ImageResponse = ref(null);
 const performImageSearch = async (page = 0) => {
   if (SearchQuery.value) {
     ImageResponse.value = await ImageIndex.search(SearchQuery.value, {
-      hitsPerPage: 9,
+      hitsPerPage: 12,
       page: ImageCurrentPage.value - 1,
     });
     ImageSearchResults.value = ImageResponse.value.hits;
