@@ -77,13 +77,13 @@ onMounted(() => {
               {{ $t('saleFrom') }}
               {{ formatDate(sale.start_date).getDate() }}
               <span
-                  v-if="formatDate(sale.start_date).getMonth() !== formatDate(sale.end_date).getMonth()">{{ $t(`month_${formatDate(sale.end_date).getMonth()}`) }} </span>
+                  v-if="formatDate(sale.start_date).getMonth() !== formatDate(sale.end_date).getMonth()">{{ $t(`month_${formatDate(sale.start_date).getMonth()}`) }} </span>
 
               <span
                   v-if="formatDate(sale.start_date).getFullYear()!==formatDate(sale.end_date).getFullYear()">{{ formatDate(sale.start_date).getFullYear() }} </span>
               {{ $t('saleTo') }}
               {{ formatDate(sale.end_date).getDate() }}
-              {{ $t(`month_${formatDate(sale.start_date).getMonth()}`) }}
+              {{ $t(`month_${formatDate(sale.end_date).getMonth()}`) }}
 
               {{ formatDate(sale.end_date).getFullYear() }}</p>
             </div>

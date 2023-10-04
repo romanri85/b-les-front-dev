@@ -51,7 +51,7 @@ const sentences = computed(() => {
       {{ formatDate(sale.start_date).getDate() }}
       <span
           v-if="formatDate(sale.start_date).getMonth() !== formatDate(sale.end_date).getMonth()">{{
-          $t(`month_${formatDate(sale.end_date).getMonth()}`)
+          $t(`month_${formatDate(sale.start_date).getMonth()}`)
         }} </span>
 
       <span
@@ -60,7 +60,7 @@ const sentences = computed(() => {
         }} </span>
       {{ $t('saleTo') }}
       {{ formatDate(sale.end_date).getDate() }}
-      {{ $t(`month_${formatDate(sale.start_date).getMonth()}`) }}
+      {{ $t(`month_${formatDate(sale.end_date).getMonth()}`) }}
 
       {{ formatDate(sale.end_date).getFullYear() }}
     </h4>
