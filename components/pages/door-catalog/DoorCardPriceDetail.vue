@@ -16,13 +16,13 @@ const props = defineProps({
         <!-- Display sale price with glass price if is_sale_active is true -->
         <span v-if="doorVariantData.sale">
         {{
-            toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
+            toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.frame_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
           }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
         <!-- Always display the original price, conditionally grayed out and line-through -->
         <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
         {{
-            toNumber(doorVariantData.leaf_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
+            toNumber(doorVariantData.leaf_price) + toNumber(doorVariantData.frame_price) + toNumber(doorVariantData.casing_variant.price) + toNumber(newGlass.price || product.glass_decor.find((item: GlassDecorItem) => item.initial === true).price)
           }}&nbsp;₽
       </span>
       </h2>
@@ -31,11 +31,11 @@ const props = defineProps({
       <h2 class="font-regular'">
         <!-- Display sale price if is_sale_active is true -->
         <span v-if="doorVariantData.sale">
-        {{ toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.casing_variant.price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
+        {{ toNumber(doorVariantData.sale.sale_leaf_price) + toNumber(doorVariantData.frame_price) + toNumber(doorVariantData.casing_variant.price) }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
         <!-- Always display the original price, conditionally grayed out and line-through -->
         <span :class="doorVariantData.sale ? 'text-gray-400 line-through' : ''">
-        {{ toNumber(doorVariantData.leaf_price)  +  toNumber(doorVariantData.casing_variant.price)}}&nbsp;₽
+        {{ toNumber(doorVariantData.leaf_price)  + toNumber(doorVariantData.frame_price) +  toNumber(doorVariantData.casing_variant.price)}}&nbsp;₽
       </span>
       </h2>
     </div>
