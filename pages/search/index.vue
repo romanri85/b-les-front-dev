@@ -146,7 +146,7 @@ const triggerModal = (image) => {
 const client = algoliasearch(config.public.ALGOLIA_APPLICATION_ID, config.public.ALGOLIA_SEARCH_API_KEY);
 const MaterialColorProductVariantIndex = client.initIndex('MaterialColorProductVariant');
 const ImageIndex = client.initIndex('Image');
-const SearchQuery = ref('');
+const SearchQuery = ref(' ');
 
 
 const ImageSearchResults = ref([]);
@@ -177,18 +177,18 @@ const scrollToImageHitsBlock = () => {
 
 const selectedTabindex = ref(null);
 const selectedTabindexKey = ref(0);
-const performSearch = async (page = 0, query = SearchQuery.value) => {
-  if (query) {
+const performSearch = async (page = 0) => {
+  if (SearchQuery.value) {
 
     const MaterialColorProductVariantPromise = MaterialColorProductVariantIndex.search(
-        query,
+        SearchQuery.value,
         {
           hitsPerPage: 24,
           page: MaterialColorProductVariantCurrentPage.value - 1,
         }
     );
 
-    const ImagePromise = ImageIndex.search(query, {
+    const ImagePromise = ImageIndex.search(SearchQuery.value, {
       hitsPerPage: 12,
       page: ImageCurrentPage.value - 1,
     });
@@ -275,7 +275,8 @@ const updateQueryAndSearch = async (newQuery: string) => {
 
 // On Mounted, you could perform an initial search if needed
 onMounted(() => {
-  performSearch(1, 'к');
+  // SearchQuery.value =  'двери';
+  performSearch();
 
 });
 const handleNewMaterialColorProductVariantPage = (newPage) => {
