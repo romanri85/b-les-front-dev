@@ -275,7 +275,7 @@ const updateQueryAndSearch = async (newQuery: string) => {
 
 // On Mounted, you could perform an initial search if needed
 onMounted(() => {
-  performSearch(1, 'белые');
+  performSearch(1, 'к');
 
 });
 const handleNewMaterialColorProductVariantPage = (newPage) => {
