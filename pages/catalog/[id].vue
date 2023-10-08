@@ -248,7 +248,7 @@ function onChangePage(page) {
                                                 :productVariantsData="productVariantsData"
                                                 :modelName="product.name" :material="material" :color="color"
                                                 :activeCasing="actualCasing"/>
-            <material-color-filter-detail class="pt-0 md:pt-12 lg:pt-0  lg:pl-8"
+            <material-color-filter-detail class="pt-0 md:pt-12 lg:pt-0  lg:pl-16"
                                           @change-filter="getActualDoorVariantData"
                                           :activeFilters="activeFilters"
                                           :material="material"
@@ -262,7 +262,7 @@ function onChangePage(page) {
         <div class="w-full flex flex-col justify-between items-start">
           <door-card-price-detail class="pb-8" :doorVariantData="doorVariantData" :product="product" :newGlass="newGlass"/>
           <div @click="openContactUsModal" class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full">
-            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark text-white">Купить
+            <buttons-primary-button-big class="w-1/2 lg:w-60 max-w-[240px] h-16 bg-primaryDark text-white">Купить
             </buttons-primary-button-big>
             <!--            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В-->
             <!--              избранное-->
@@ -355,7 +355,7 @@ function onChangePage(page) {
 
           <div @click="openContactUsModal"
                class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full md:pl-0 pl-1">
-            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark text-white ">Купить
+            <buttons-primary-button-big class="w-1/2 max-w-[200px] lg:w-60 h-16 bg-primaryDark text-white ">Купить
             </buttons-primary-button-big>
             <!--            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В-->
             <!--              избранное-->

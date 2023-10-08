@@ -213,9 +213,10 @@ function handleChooseTag(tag) {
             :key="taglistKey"
             :value="selectedTags"
             select-icon="add"
-            help="Выберите тег"
+            help="Все теги на фото активны"
             prefixIcon="tag"
             open-on-click
+            placeholder="Выберите тег"
 
             @input="selectTag"
             :filter="(option, search) =>

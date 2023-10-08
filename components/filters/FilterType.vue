@@ -15,7 +15,7 @@ const toggleArrow = () => {
 
 <template>
   <div @click="toggleArrow" class=" flex justify-between cursor-pointer mt-4 mb-4">
-    <h3>{{$props.filterName}}</h3>
+    <h3 class="pr-8">{{$props.filterName}}</h3>
     <ArrowToClick :class="{'-rotate-180': isClicked}" class="border"/>
   </div>
 </template>

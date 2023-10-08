@@ -17,6 +17,7 @@
             @input="updateQueryAndSearch"
 
 
+
             placeholder="Вводите..."
         >
         </form-kit>
@@ -176,18 +177,18 @@ const scrollToImageHitsBlock = () => {
 
 const selectedTabindex = ref(null);
 const selectedTabindexKey = ref(0);
-const performSearch = async (page = 0) => {
-  if (SearchQuery.value) {
+const performSearch = async (page = 0, query = SearchQuery.value) => {
+  if (query) {
 
     const MaterialColorProductVariantPromise = MaterialColorProductVariantIndex.search(
-        SearchQuery.value,
+        query,
         {
           hitsPerPage: 24,
           page: MaterialColorProductVariantCurrentPage.value - 1,
         }
     );
 
-    const ImagePromise = ImageIndex.search(SearchQuery.value, {
+    const ImagePromise = ImageIndex.search(query, {
       hitsPerPage: 12,
       page: ImageCurrentPage.value - 1,
     });
@@ -274,7 +275,8 @@ const updateQueryAndSearch = async (newQuery: string) => {
 
 // On Mounted, you could perform an initial search if needed
 onMounted(() => {
-  // performSearch();
+  performSearch(1, 'белые');
+
 });
 const handleNewMaterialColorProductVariantPage = (newPage) => {
   MaterialColorProductVariantCurrentPage.value = newPage;

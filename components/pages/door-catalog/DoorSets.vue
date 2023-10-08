@@ -131,6 +131,9 @@ function chooseDoorSet(doorSet) {
 
 
 function checkToUnderline(doorSet) {
+  if (!filtersStore.isDoorSetApplied) {
+    return false
+  }
   for (const filterKey in doorSet.filter) {
     const filterValue = activeFilters.value[filterKey];
 
