@@ -65,7 +65,10 @@ onMounted(
       if (product.value && product.value.images) {
         // product.value = data.value
         total.value = product.value.images.count
-        pagesCount.value = product.value.images.page_links.length
+        if (product.value.images.page_links)
+        {
+          pagesCount.value = product.value.images.page_links.length
+        }
       }
 
 
@@ -376,7 +379,7 @@ function onChangePage(page) {
     </div>
     <image-modal :image="selectedImage" ref="imgModal"/>
     <contact-us-modal :should-open-modal="shouldOpenModal"/>
-    <pagination class="pt-12 pb-32 flex justify-center" :total="total"
+    <pagination v-if="total > 0" class="pt-12 pb-32 flex justify-center" :total="total"
                 :page_size="page_size"
                 :pagesCount="pagesCount"
                 @page-change="onChangePage"

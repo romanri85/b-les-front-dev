@@ -94,7 +94,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
             isDoorSetApplied.value = false
             activeFilters.value = {
                 min_price: 0.00,
-                max_price: 6000.00,
+                max_price: 99000.00,
                 design: [],
                 color_set: [],
                 color: [],

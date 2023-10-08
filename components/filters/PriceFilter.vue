@@ -50,11 +50,11 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                                name="slider"
                                tooltip="true"
                                :tooltip-format="(v) => `${v} ₽`"
-                               :value="[0, 6000]"
+                               :value="[0, 99000]"
                                :delay="100"
                                :key="filterCount.price[0]['min_price'] + filterCount.price[0]['max_price']"
                                :min="filtersStore.filterCount.price[0]['min_price'] || 0"
-                               :max="filtersStore.filterCount.price[0]['max_price'] || 6000"
+                               :max="filtersStore.filterCount.price[0]['max_price'] || 99000"
                                @input="updateSliderValues"
 
 
