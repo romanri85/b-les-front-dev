@@ -3,22 +3,22 @@
   <div class="lg:mt-[-87px] md:mt-[-65px] mt-[-65px] w-screen">
     <div class="hero bg-cover bg-center h-screen w-screen  bg-gray-400">
 
-    <client-only>
+      <client-only>
 
-      <Swiper class="h-screen"
-          :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
-          :slides-per-view="1"
-          :navigation="{
+        <Swiper class="h-screen"
+                :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
+                :slides-per-view="1"
+                :navigation="{
       nextEl: '.next-slide-button',
       prevEl: '.prev-slide-button',
     }"
-          :loop="true"
-          :effect="'creative'"
-          :autoplay="{
+                :loop="true"
+                :effect="'creative'"
+                :autoplay="{
       delay: 8000,
       disableOnInteraction: true,
     }"
-          :creative-effect="{
+                :creative-effect="{
       prev: {
         shadow: false,
         translate: ['-20%', 0, -1],
@@ -28,12 +28,15 @@
       },
     }"
 
-      >
-        <SwiperSlide  v-for="(collection, index) in collections" :key="collection.name">
+        >
+          <SwiperSlide v-for="(collection, index) in collections" :key="collection.name">
             <div>
 
               <nuxt-img placeholder :src="collection.image"
-                        class="absolute h-screen w-screen object-cover object-bottom md:object-center  -z-10" />
+                        :class="[
+      'absolute h-screen w-screen object-cover object-bottom md:object-center -z-10',
+      (collection.name === 'versailles' ? 'custom-versal-position' : '')
+    ]"/>
             </div>
 
             <div class="flex flex-col justify-between relative w-full h-full">
@@ -42,7 +45,8 @@
                 <div class="md:text-left text-center  ">
 
                   <h2 v-if="!viewport.isMobile" class="mb-5 lg:text-[23px]">{{ $t('aboutCollection') }}</h2>
-                  <h5 v-if="!viewport.isMobile" class="lg:w-[448px] md:w-[350px] font-light">{{ $t(collection.description) }}</h5>
+                  <h5 v-if="!viewport.isMobile" class="lg:w-[448px] md:w-[350px] font-light">
+                    {{ $t(collection.description) }}</h5>
                 </div>
                 <div class="relative w-[75px] h-[64px] my:mb-0 my-[30px]">
                   <svg class="absolute w-full h-full" viewBox="0 0 100 100"
@@ -70,7 +74,8 @@
                 </button>
                 <div class="lg:ml-[228px] lg:mb-[100px] text-center md:text-left">
                   <h1 class="text-white md:mb-8 mb-[20px]">{{ $t(collection.name) }}</h1>
-                  <nuxt-link :to="`/catalog?collection=${collection.id}`" class="text-white"><h3 class="underline px-1">{{
+                  <nuxt-link :to="`/catalog?collection=${collection.id}`" class="text-white"><h3 class="underline px-1">
+                    {{
                       $t('viewCollection')
                     }}</h3></nuxt-link>
                 </div>
@@ -82,11 +87,11 @@
                   <chevron-right-icon class="md:hidden w-8 h-8 text-white"/>
                 </button>
               </div>
-          </div>
+            </div>
 
-        </SwiperSlide>
-      </Swiper>
-    </client-only>
+          </SwiperSlide>
+        </Swiper>
+      </client-only>
     </div>
 
   </div>
@@ -95,14 +100,18 @@
 <script setup lang="ts">
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/24/solid";
 import {useViewportSize} from "~/composables/useViewportSize";
-const viewport = useViewportSize()
-
 // import {useSliderCollectionStore} from "~/stores/mainSliderCollectionStore.js";
 // const sliderCollectionStore = useSliderCollectionStore()
 // sliderCollectionStore.fillSliderCollections()
 import collections from "~/data/SliderCollections.json";
+
+const viewport = useViewportSize()
 </script>
 
 <style scoped>
-
+@media (max-width: 768px) {
+  .custom-versal-position {
+    object-position: 30% 50% !important; /* 50% is the original center, moving it 20% to the left makes it 30% */
+  }
+}
 </style>
