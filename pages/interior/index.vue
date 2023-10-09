@@ -57,9 +57,9 @@ function onChangePage(page) {
           <div class="w-full h-60 cursor-pointer">
             <NuxtLink :to="`/interior/${project.id}`">
               <nuxt-img placeholder :src="project.first_image.image" :alt="project.name"
-                        class="w-full h-full transition-all duration-500 ease-in-out  brightness-75 lg:brightness-100 group-hover:brightness-50 object-cover"/>
+                        class="w-full h-full transition-all duration-500 ease-in-out  brightness-75  lg:brightness-100 lg:group-hover:brightness-50 object-cover"/>
               <div
-                  class="absolute inset-0 flex items-center justify-center lg:opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                  class="absolute inset-0 flex items-center justify-center lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
                 <div class="text-center">
                   <h2 v-if="project.collection" class="text-white">{{ project.collection.name }}</h2>
                   <p class="text-white">{{ project.name }}</p>
