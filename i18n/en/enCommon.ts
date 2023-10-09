@@ -24,7 +24,7 @@ export default {
     toDesigners: 'To designers',
     toDealers: 'To dealers',
     aboutCollection: 'About collection',
-    viewCollection: 'View collection',
+    viewCollection: 'In catalog',
     searchByParameters: 'Search by parameters',
     searchPhotoByTag: 'Search photo by tag',
     projects: 'Projects',

@@ -26,7 +26,7 @@ export default {
     toDealers: 'Для дилеров',
     toDesigners: 'Для дизайнеров',
     aboutCollection: 'О коллекции',
-    viewCollection: 'Подробнее',
+    viewCollection: 'В каталоге',
     searchByParameters: 'Поиск по параметрам',
     searchPhotoByTag: 'Поиск фото по тегу',
     ourProjects: 'Наши проекты',
