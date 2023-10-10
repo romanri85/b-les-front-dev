@@ -37,9 +37,7 @@ function onChangePage(page) {
     window.scrollTo(0, 380)
 
   }
-  setTimeout(() => {
     filtersStore.onChangeFilters({page: filtersStore.page})
-  }, 500)
 
 
   // if(viewport.isMobile && filtersStore.activeFilters.page > 1){
