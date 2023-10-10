@@ -30,20 +30,20 @@ const doorFiltersHeight = ref(null)
 
 definePageMeta({layout: "dark-header"})
 
+if (!viewport.isMobile) {
+  useResizeObserver(catalogElement, (entries) => {
+    const entry = entries[0];
+    const {height} = entry.contentRect;
+    catalogElementHeight.value = height;
+  });
 
-useResizeObserver(catalogElement, (entries) => {
-  const entry = entries[0];
-  const {height} = entry.contentRect;
-  catalogElementHeight.value = height;
-});
+  useResizeObserver(doorFilters, (entries) => {
+    const entry = entries[0];
+    const {height} = entry.contentRect;
+    doorFiltersHeight.value = height;
 
-useResizeObserver(doorFilters, (entries) => {
-  const entry = entries[0];
-  const {height} = entry.contentRect;
-  doorFiltersHeight.value = height;
-
-});
-
+  });
+}
 let products = ref([])
 let page = ref(1)
 const total = ref(0)
@@ -56,7 +56,6 @@ await filtersStore.onChangeFilters({...activeFilters.value, page: 1})
 
 const sidebar = ref(null)
 if (!viewport.isMobile) {
-
   setTimeout(
       () => {
         sidebar.value = new StickySidebar('.sidebar', {
