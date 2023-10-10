@@ -33,18 +33,18 @@ const doorFiltersHeight = ref(null)
 definePageMeta({layout: "dark-header"})
 
 // if (viewport.isDesktop || viewport.isTablet) {
-  useResizeObserver(catalogElement, (entries) => {
-    const entry = entries[0];
-    const {height} = entry.contentRect;
-    catalogElementHeight.value = height;
-  });
-
-  useResizeObserver(doorFilters, (entries) => {
-    const entry = entries[0];
-    const {height} = entry.contentRect;
-    doorFiltersHeight.value = height;
-
-  });
+//   useResizeObserver(catalogElement, (entries) => {
+//     const entry = entries[0];
+//     const {height} = entry.contentRect;
+//     catalogElementHeight.value = height;
+//   });
+//
+//   useResizeObserver(doorFilters, (entries) => {
+//     const entry = entries[0];
+//     const {height} = entry.contentRect;
+//     doorFiltersHeight.value = height;
+//
+//   });
 // }
 let products = ref([])
 let page = ref(1)
@@ -57,18 +57,18 @@ const route = useRoute()
 await filtersStore.onChangeFilters({...activeFilters.value, page: 1})
 
 const sidebar = ref(null)
-if (viewport.isDesktop || viewport.isTablet) {
-  setTimeout(
-      () => {
-        sidebar.value = new StickySidebar('.sidebar', {
-          containerSelector: '.main-content',
-          innerWrapperSelector: '.sidebar__inner',
-          topSpacing: 50,
-          bottomSpacing: 50,
-          resizeSensor: true,
-        });
-      }, 500)
-}
+// if (viewport.isDesktop || viewport.isTablet) {
+//   setTimeout(
+//       () => {
+//         sidebar.value = new StickySidebar('.sidebar', {
+//           containerSelector: '.main-content',
+//           innerWrapperSelector: '.sidebar__inner',
+//           topSpacing: 50,
+//           bottomSpacing: 50,
+//           resizeSensor: true,
+//         });
+//       }, 500)
+// }
 
 watch(() => route.query.collection, (newValue) => {
   if (newValue) {
@@ -77,21 +77,21 @@ watch(() => route.query.collection, (newValue) => {
   }
 }, {immediate: true});
 
-watch([() => catalogElementHeight.value, () => doorFiltersHeight.value], () => {
-  if (sidebar.value) {
-    sidebar.value.updateSticky();
-    if (footerIsVisible.value) {
-      // Scroll 50px up
-      window.scrollBy(0, -5);
-
-      // Then scroll 50px down after a delay (e.g., 300 milliseconds)
-      setTimeout(() => {
-        window.scrollBy(0, 5);
-      }, 300);
-    }
-
-  }
-});
+// watch([() => catalogElementHeight.value, () => doorFiltersHeight.value], () => {
+//   if (sidebar.value) {
+//     sidebar.value.updateSticky();
+//     if (footerIsVisible.value) {
+//       // Scroll 50px up
+//       window.scrollBy(0, -5);
+//
+//       // Then scroll 50px down after a delay (e.g., 300 milliseconds)
+//       setTimeout(() => {
+//         window.scrollBy(0, 5);
+//       }, 300);
+//     }
+//
+//   }
+// });
 
 
 onUnmounted(() => {

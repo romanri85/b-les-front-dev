@@ -10,16 +10,16 @@ import {ref} from "vue";
 const filtersStore = useFiltersStore()
 
 const {total, pagesCount, products, page_size,page} = storeToRefs(filtersStore)
-filtersStore.fetchProducts()
+// filtersStore.fetchProducts()
 
 
-const [parent] = useAutoAnimate()
+// const [parent] = useAutoAnimate()
 
 const viewport = useViewportSize()
 
 
 const scrollToDoorsBlock = () => {
-  parent.value.scrollIntoView({ behavior: 'smooth' });
+  // parent.value.scrollIntoView({ behavior: 'smooth' });
 };
 
 
