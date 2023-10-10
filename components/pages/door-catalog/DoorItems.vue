@@ -29,8 +29,17 @@ const scrollToDoorsBlock = () => {
 
 function onChangePage(page) {
   filtersStore.page = page
+
+  if (viewport.isDesktop || viewport.isTablet) {
+    scrollToDoorsBlock()
+  }
+  else{
+
+    window.scrollTo(0, 380)
+
+  }
   filtersStore.onChangeFilters({page: filtersStore.page})
-  // scrollToDoorsBlock()
+
   // if(viewport.isMobile && filtersStore.activeFilters.page > 1){
   //   window.scrollTo(0, 250)
   // }
