@@ -2,6 +2,13 @@
 
 import {toNumber} from "@vue/shared";
 
+const isLoading = ref(true);
+
+// Function to set loading to false when the image is loaded
+const onImageLoaded = () => {
+  isLoading.value = false;
+};
+
 const props = defineProps({
   doorVariant: Object
 })
@@ -35,8 +42,20 @@ const mouseLeave = () => {
     </div>
 
     <div ref="imageDiv" class="relative top-4 w-full flex justify-center pb-8 md:mb-5 border-b-2 border-transparent transition-all duration-300 ease-in-out">
-      <nuxt-img width="160" placeholder height="auto" :src="props.doorVariant.merged_image"
-                class="h-auto w-48 mdLg:w-40"></nuxt-img>
+      <!-- Preloader -->
+      <div v-if="isLoading" class="preloader">
+        <div class="spinner"></div>
+      </div>
+
+      <!-- Image -->
+      <nuxt-img
+          width="160"
+          placeholder
+          height="auto"
+          :src="props.doorVariant.merged_image"
+          class="h-auto w-48 mdLg:w-40"
+          @load="onImageLoaded"
+      ></nuxt-img>
     </div>
 
     <div class="flex flex-col items-center pt-5">
@@ -71,4 +90,6 @@ const mouseLeave = () => {
 .hover\:border-black {
   border-color: black !important;
 }
+
+
 </style>

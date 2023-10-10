@@ -13,13 +13,13 @@ const {total, pagesCount, products, page_size, page} = storeToRefs(filtersStore)
 const viewport = useViewportSize()
 
 
-// const parent = ref(null)
 
-const parent= ref(null)
-if (viewport.isDesktop || viewport.isTablet) {
-
-  [parent.value] = useAutoAnimate()
-}
+// const parent= ref(null)
+// if (viewport.isDesktop || viewport.isTablet) {
+//
+//   // parent.value.animate()
+// }
+const [parent] = useAutoAnimate()
 
 
 const scrollToDoorsBlock = () => {
@@ -64,8 +64,22 @@ function onChangePage(page) {
         <p class=" mt-14  md:mt-0 font-regular">Всего дверей: {{ filtersStore.total }}</p>
       </div>
     </div>
-    <div class="mt-4 md:mt-16  md:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid"
+    <div v-if="viewport.isDesktop || viewport.isTablet" class="mt-4 md:mt-16  md:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid"
          ref="parent">
+
+
+      <div v-for="doorVariant in filtersStore.products" :key="doorVariant.id">
+        <NuxtLink
+            :to="`/catalog/${doorVariant.product_variant.product_id}?material=${doorVariant.product_variant.material.id}&color=${doorVariant.color.id}`">
+          <door-card class="relative  transition-all duration-300 pb-6 mb-6"
+                     :doorVariant="doorVariant"
+          />
+        </NuxtLink>
+      </div>
+    </div>
+    <div v-else class="mt-4 md:mt-16  md:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid"
+         >
+
 
       <div v-for="doorVariant in filtersStore.products" :key="doorVariant.id">
         <NuxtLink
