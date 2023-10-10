@@ -114,7 +114,29 @@ export const useFiltersStore = defineStore("filtersStore", () => {
         async function checkDoorSetApplied() {
             if (isDoorSetApplied.value) {
                 console.log('reset')
-                await onResetFilters()
+                // await onResetFilters()
+                activeFilters.value = {
+                    min_price: 0.00,
+                    max_price: 99000.00,
+                    design: [],
+                    color_set: [],
+                    color: [],
+                    collection: [],
+                    material: [],
+                    glass: '',
+                    sale: '',
+                    ordering: ''
+                }
+                filterCount.value = {
+                    price: {},
+                    design: [],
+                    color_set: [],
+                    color: [],
+                    collection: [],
+                    material: [],
+                    sale: {},
+                    glass: {},
+                }
                 isDoorSetApplied.value = false
             }
         }
