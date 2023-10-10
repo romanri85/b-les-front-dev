@@ -120,7 +120,6 @@ onUnmounted(() => {
       <h1>Каталог</h1>
     </div>
     <door-sets/>
-    <!--    <pre>{{filtersStore.activeFilters}}</pre>-->
     <div class="main-content flex md:flex-row flex-col md:mt-0  ">
       <div v-if="viewport.isDesktop || viewport.isTablet" class="md:w-[320px] sidebar">
         <div class="sidebar__inner">
