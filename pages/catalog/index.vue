@@ -33,18 +33,18 @@ const doorFiltersHeight = ref(null)
 definePageMeta({layout: "dark-header"})
 
 // if (viewport.isDesktop || viewport.isTablet) {
-useResizeObserver(catalogElement, (entries) => {
-  const entry = entries[0];
-  const {height} = entry.contentRect;
-  catalogElementHeight.value = height;
-});
+  useResizeObserver(catalogElement, (entries) => {
+    const entry = entries[0];
+    const {height} = entry.contentRect;
+    catalogElementHeight.value = height;
+  });
 
-useResizeObserver(doorFilters, (entries) => {
-  const entry = entries[0];
-  const {height} = entry.contentRect;
-  doorFiltersHeight.value = height;
+  useResizeObserver(doorFilters, (entries) => {
+    const entry = entries[0];
+    const {height} = entry.contentRect;
+    doorFiltersHeight.value = height;
 
-});
+  });
 // }
 let products = ref([])
 let page = ref(1)
@@ -57,18 +57,18 @@ const route = useRoute()
 await filtersStore.onChangeFilters({...activeFilters.value, page: 1})
 
 const sidebar = ref(null)
-// if (viewport.isDesktop || viewport.isTablet) {
-setTimeout(
-    () => {
-      sidebar.value = new StickySidebar('.sidebar', {
-        containerSelector: '.main-content',
-        innerWrapperSelector: '.sidebar__inner',
-        topSpacing: 50,
-        bottomSpacing: 50,
-        resizeSensor: true,
-      });
-    }, 500)
-// }
+if (viewport.isDesktop || viewport.isTablet) {
+  setTimeout(
+      () => {
+        sidebar.value = new StickySidebar('.sidebar', {
+          containerSelector: '.main-content',
+          innerWrapperSelector: '.sidebar__inner',
+          topSpacing: 50,
+          bottomSpacing: 50,
+          resizeSensor: true,
+        });
+      }, 500)
+}
 
 watch(() => route.query.collection, (newValue) => {
   if (newValue) {
@@ -132,9 +132,8 @@ onUnmounted(() => {
         </div>
       </div>
       <door-filters-mobile v-else/>
-      <client-only>
-        <door-items class="md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)]  "/>
-      </client-only>
+
+      <door-items class="md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)]  "/>
     </div>
   </div>
 </template>
