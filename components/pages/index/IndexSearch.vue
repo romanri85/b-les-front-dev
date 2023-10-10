@@ -13,15 +13,16 @@
       </div>
 
     </div>
-    <div class=" lg:w-[50vw] w-[100vw] flex justify-center lg:h-2/3 md:h-1/2 h-[240px] items-center mb-24 md:mb-0 mt-10 md:mt-0">
+    <div
+        class=" lg:w-[50vw] w-[100vw] flex justify-center lg:h-2/3 md:h-1/2 h-[240px] items-center mb-24 md:mb-0 mt-10 md:mt-0">
       <div
           class=" bg-[url('/parameters-search.webp')] bg-cover bg-center lg:w-2/3 w-full h-full flex justify-center items-center main-container">
-        <nuxt-link to="/search-tags">
+        <nuxt-link class="w-full" to="/search-tags">
 
-        <buttons-secondary-button class="md:w-64 md:h-20 w-full h-16
+          <buttons-secondary-button class="md:w-64 md:h-20 w-full h-16
                 md:bg-white bg-black md:text-black text-white cursor-pointer">
-          {{ $t('searchPhotoByTag') }}
-        </buttons-secondary-button>
+            {{ $t('searchPhotoByTag') }}
+          </buttons-secondary-button>
         </nuxt-link>
 
       </div>
@@ -31,7 +32,6 @@
 
 <script setup lang="ts">
 import parameters from "~/data/searchByParameters.json"
-import PrimaryButtonBig from "~/components/buttons/PrimaryButtonBig.vue";
 // import {useTagsStore} from "~/stores/tagsStore";
 //
 // const tagsStore = useTagsStore()
