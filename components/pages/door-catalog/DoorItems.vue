@@ -33,10 +33,10 @@ function onChangePage(page) {
   if (viewport.isDesktop || viewport.isTablet) {
     scrollToDoorsBlock()
   }
-  else{
-    window.scrollTo(0, 380)
-
-  }
+  // else{
+  //   window.scrollTo(0, 380)
+  //
+  // }
     filtersStore.onChangeFilters({page: filtersStore.page})
 
 
