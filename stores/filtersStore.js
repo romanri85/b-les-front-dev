@@ -111,7 +111,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
             await checkFilters(query)
         }
 
-        async function checkDoorSetApplied() {
+        function checkDoorSetApplied() {
             if (isDoorSetApplied.value) {
                 console.log('reset')
                 // await onResetFilters()

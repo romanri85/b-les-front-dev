@@ -1,6 +1,5 @@
 <script setup lang="js">
 import DoorItems from "~/components/pages/door-catalog/DoorItems.vue";
-import BaseHero from "~/components/base/BaseHero.vue";
 import {useFiltersStore} from "~/stores/filtersStore";
 import {storeToRefs} from "pinia";
 import {useViewportSize} from "~/composables/useViewportSize";
@@ -56,18 +55,19 @@ const route = useRoute()
 await filtersStore.onChangeFilters({...activeFilters.value, page: 1})
 
 const sidebar = ref(null)
+if (!viewport.isMobile) {
 
-setTimeout(
-    () => {
-      sidebar.value = new StickySidebar('.sidebar', {
-        containerSelector: '.main-content',
-        innerWrapperSelector: '.sidebar__inner',
-        topSpacing: 50,
-        bottomSpacing: 50,
-        resizeSensor: true,
-      });
-    }, 500)
-
+  setTimeout(
+      () => {
+        sidebar.value = new StickySidebar('.sidebar', {
+          containerSelector: '.main-content',
+          innerWrapperSelector: '.sidebar__inner',
+          topSpacing: 50,
+          bottomSpacing: 50,
+          resizeSensor: true,
+        });
+      }, 500)
+}
 
 watch(() => route.query.collection, (newValue) => {
   if (newValue) {
@@ -77,7 +77,7 @@ watch(() => route.query.collection, (newValue) => {
 }, {immediate: true});
 
 watch([() => catalogElementHeight.value, () => doorFiltersHeight.value], () => {
-  if (sidebar.value) {
+  if (sidebar.value && !viewport.isMobile) {
     sidebar.value.updateSticky();
     if (footerIsVisible.value) {
       // Scroll 50px up
@@ -115,7 +115,7 @@ onUnmounted(() => {
 <template>
   <div ref="catalogElement" class="main-container">
 
-<!--    <base-hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>-->
+    <!--    <base-hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>-->
     <div class="mt-10 lg:pr-72">
       <div class=" flex justify-start items-end"><h4>Главная / Каталог</h4></div>
     </div>
@@ -123,14 +123,14 @@ onUnmounted(() => {
       <h1>Каталог</h1>
     </div>
     <door-sets/>
-<!--    <pre>{{filtersStore.activeFilters}}</pre>-->
+    <!--    <pre>{{filtersStore.activeFilters}}</pre>-->
     <div class="main-content flex md:flex-row flex-col md:mt-0  ">
       <div v-if="viewport.isDesktop || viewport.isTablet" class="md:w-[320px] sidebar">
         <div class="sidebar__inner">
           <door-filters ref="doorFilters" class="pb-32"/>
         </div>
       </div>
-      <door-filters-mobile v-else-if="viewport.isMobile"/>
+      <door-filters-mobile v-else/>
       <door-items class="md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)]  "/>
     </div>
   </div>
