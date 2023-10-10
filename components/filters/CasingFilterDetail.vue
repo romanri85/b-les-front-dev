@@ -51,7 +51,9 @@ function chooseCasing(casing) {
         </DisclosureButton>
         <DisclosurePanel class="">
           <div class="flex gap-y-6 gap-x-10  mb-3 flex-wrap w-full">
-            <div v-for="casing in props.productCasings[props.material]" :key="casing.casing"
+            <div v-for="casing in props.productCasings[props.material].sort(
+            (a, b) => a.casing_name.localeCompare(b.casing_name)
+            )" :key="casing.casing"
                  @click="chooseCasing(casing.casing)">
               <div class="flex flex-col items-start ">
                 <div class="pb-1 border-b-4"

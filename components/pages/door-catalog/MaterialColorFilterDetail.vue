@@ -66,7 +66,7 @@ let index = materialMap[props.material]
     <DisclosureButton class=" w-full">
       <filter-type filterName="Выбрать цвет"/>
     </DisclosureButton>
-    <DisclosurePanel class="mb-8">
+    <DisclosurePanel class="lg:mb-6 mb-10">
       <TabGroup v-if="props.productMaterials" :defaultIndex="index">
         <TabList>
 

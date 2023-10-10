@@ -261,7 +261,7 @@ function onChangePage(page) {
         </div>
         <div class="w-full flex flex-col justify-between items-start">
           <door-card-price-detail class="pb-8" :doorVariantData="doorVariantData" :product="product" :newGlass="newGlass"/>
-          <div @click="openContactUsModal" class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full">
+          <div @click="openContactUsModal" class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full ">
             <buttons-primary-button-big class="w-1/2 lg:w-60 max-w-[240px] h-16 bg-primaryDark text-white">Купить
             </buttons-primary-button-big>
             <!--            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В-->
