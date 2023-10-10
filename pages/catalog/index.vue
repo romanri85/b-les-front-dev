@@ -12,10 +12,12 @@ import {watch} from "vue";
 
 
 const footerElement = ref(null)
+
 const footerIsVisible = useElementVisibility(footerElement)
 
 
 const viewport = useViewportSize()
+
 const filtersStore = useFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(filtersStore)
 
@@ -30,7 +32,7 @@ const doorFiltersHeight = ref(null)
 
 definePageMeta({layout: "dark-header"})
 
-if (!viewport.isMobile) {
+if (viewport.isDesktop || viewport.isTablet) {
   useResizeObserver(catalogElement, (entries) => {
     const entry = entries[0];
     const {height} = entry.contentRect;
@@ -55,7 +57,7 @@ const route = useRoute()
 await filtersStore.onChangeFilters({...activeFilters.value, page: 1})
 
 const sidebar = ref(null)
-if (!viewport.isMobile) {
+if (viewport.isDesktop || viewport.isTablet) {
   setTimeout(
       () => {
         sidebar.value = new StickySidebar('.sidebar', {
@@ -76,7 +78,7 @@ watch(() => route.query.collection, (newValue) => {
 }, {immediate: true});
 
 watch([() => catalogElementHeight.value, () => doorFiltersHeight.value], () => {
-  if (sidebar.value && !viewport.isMobile) {
+  if (sidebar.value && (viewport.isDesktop || viewport.isTablet)) {
     sidebar.value.updateSticky();
     if (footerIsVisible.value) {
       // Scroll 50px up
