@@ -11,7 +11,7 @@ import {useViewportSize} from "~/composables/useViewportSize";
 const filtersStore = useFiltersStore()
 const {color_sets, activeFilters, filterCount} = storeToRefs(filtersStore)
 
-const materials = [{material: 3, colors: [1, 2, 18, 19]}, {material: 2, colors: [3, 4, 5, 6]}, {
+const materials = [{material: 3, colors: [1, 2, 19, 20]}, {material: 2, colors: [3, 4, 5, 6]}, {
   material: 1,
   colors: [7, 8, 9, 10, 11, 12, 13, 14, 15]
 }]
@@ -24,12 +24,12 @@ const door_color_sets = [
   },
   {
     color_set: 2,
-    colors: [18],
+    colors: [19],
     materials: [3]
   },
   {
     color_set: 1,
-    colors: [14, 13, 10, 2, 1, 19],
+    colors: [14, 13, 10, 2, 1, 20],
     materials: [1,3]
   },
   {
