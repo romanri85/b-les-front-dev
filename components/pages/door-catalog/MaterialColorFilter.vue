@@ -25,7 +25,7 @@ const materialActiveindex = ref(0)
 
 function chooseColor(id) {
   const materials = [
-    { material: 3, colors: [1, 2] },
+    { material: 3, colors: [1, 2, 18, 19] },
     { material: 2, colors: [3, 4, 5, 6] },
     { material: 1, colors: [7, 8, 9, 10, 11, 12, 13, 14, 15] },
   ];
@@ -184,6 +184,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
           <TabPanels>
             <TabPanel>
               <div v-if="enamel && enamel.colors" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
+                <pre>{{enamel}}</pre>
                 <div v-for="(color) in enamel.colors" :key="color.color" @click="chooseColor(color.color)">
                   <div v-if="isColorAvailable(color, enamel)" class="flex flex-col items-start max-w-[52px]">
                     <div class="pb-1 border-b-4"

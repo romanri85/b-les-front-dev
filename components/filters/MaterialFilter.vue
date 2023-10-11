@@ -19,7 +19,7 @@ await filtersStore.fetchMaterialColors()
 function chooseMaterial(material) {
   filtersStore.checkDoorSetApplied()
   filtersStore.isFilterCountPriceBlocked = false
-  const materials = [{material: 3, colors: [1, 2]}, {material: 2, colors: [3, 4, 5, 6]}, {
+  const materials = [{material: 3, colors: [1, 2, 18, 19]}, {material: 2, colors: [3, 4, 5, 6]}, {
     material: 1,
     colors: [7, 8, 9, 10, 11, 12, 13, 14, 15]
   }]
