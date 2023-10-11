@@ -148,6 +148,7 @@ export const useFiltersStore = defineStore("filtersStore", () => {
         async function fetchMaterialColors() {
 
             materialColors.value = await $fetch(`${baseURL}/api/product/material-choices`)
+            materialColors.value = materialColors.value.reverse()
 
         }
 

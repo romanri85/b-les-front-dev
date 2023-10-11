@@ -38,7 +38,7 @@ function chooseMaterial(material) {
     return !colorsToDelete.includes(color);
   });
   if (!filtersStore.activeFilters.material.includes(material)) {
-    filtersStore.onChangeFilters({material: [...filtersStore.activeFilters.material, material], color:[]})
+    filtersStore.onChangeFilters({material: [...filtersStore.activeFilters.material, material], color: []})
   } else {
     filterCount.value.color.filter((item) => {
       return item.material !== material
@@ -50,9 +50,10 @@ function chooseMaterial(material) {
 
 
     })
+    console.log(updatedMaterials, 'updatedMaterials')
+    console.log(updatedColors, 'updatedColors')
 
     filtersStore.onChangeFilters({"material": updatedMaterials, "color": updatedColors})
-
 
 
   }
@@ -89,7 +90,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
         leave-to-class="transform scale-95 opacity-0"
     >
       <DisclosurePanel class="mb-10 mt-6">
-<!--        <pre>{{filtersStore.materialColors}}</pre>-->
+        <!--        <pre>{{filtersStore.materialColors}}</pre>-->
 
         <div class="flex justify-start gap-x-12 w-full pr-4">
           <div v-for="(material) in materialColors" :key="material.material" class="text-primaryDark">

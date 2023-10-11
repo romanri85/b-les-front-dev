@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 
 import {
   Disclosure,
@@ -101,12 +101,15 @@ function chooseMaterial(material) {
 
 }
 
-
-watch(() => filterCount.value.color, (newVal) => {
-  if (!newVal.find((material) => material.material === materialActiveindex.value)) {
-    materialActiveindex.value = newVal[newVal.length - 1]?.material;
-  }
-});
+//
+// watch(() => filterCount.value.color, (newVal) => {
+//
+//   if (!newVal.find((material) => material.material === materialActiveindex.value)) {
+//     materialActiveindex.value = newVal[newVal.length - 1]?.material;
+//     console.log(materialMap[materialActiveindex] , 'materialActiveindex.value with map')
+//     console.log(materialActiveindex.value , 'materialActiveindex.value')
+//   }
+// });
 const sortColors = (material) => {
   if (material.colors) {
     material.colors.sort((a, b) => a.color - b.color);
@@ -129,14 +132,36 @@ const enamelCount = computed(() => activeFilters.value.color?.filter((color) => 
 const beechCount = computed(() => activeFilters.value.color?.filter((color) => beechColors.includes(color)).length || 0);
 const oakCount = computed(() => activeFilters.value.color?.filter((color) => oakColors.includes(color)).length || 0);
 
+watch(() => filterCount.value.color, (newVal) => {
+  // Log newVal length for debugging purposes
+  console.log(newVal.length, 'newVal');
 
+  // Don't execute if newVal is an empty array
+  if (newVal.length === 0) {
+    return;
+  }
+
+  const lastItem = newVal[newVal.length - 1];
+
+  // Add check for undefined last item
+  if (lastItem) {
+    console.log(lastItem.material, 'newVal');
+
+    if (!newVal.find((material) => material.material === materialActiveindex.value)) {
+      materialActiveindex.value = lastItem.material;
+
+      // Log for debugging purposes
+      console.log(materialActiveindex.value, 'materialActiveindex.value');
+    }
+  }
+});
 const viewport = useViewportSize()
 const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTablet === true)
 
 </script>
 
 <template class="filter-container ">
-  <client-only>
+<!--  <client-only>-->
     <Disclosure :key="isNotMobile" :default-open="isNotMobile">
       <DisclosureButton class=" w-full">
         <filter-type filterName="Выбрать цвет"/>
@@ -149,12 +174,12 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
           leave-from-class="transform scale-100 opacity-100"
           leave-to-class="transform scale-95 opacity-0"
       >
-      <DisclosurePanel class="mb-10 mt-6">
+      <DisclosurePanel class="mb-10 mt-6" >
         <TabGroup :selectedIndex="materialMap[materialActiveindex] ">
           <TabList>
 
             <div class="flex justify-start gap-x-12 lg:gap-x-20 w-full pr-4">
-              <Tab index=3 :disabled="!isMaterialAvailable(3) " class="text-primaryDark">
+              <Tab  class="text-primaryDark">
                 <div class="relative">
                   <span v-if="enamelCount > 0 " class="text-primaryDark absolute text-xs -right-2 -top-1">{{
                       enamelCount
@@ -164,7 +189,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                       class="underline-offset-4 font-light">ЭМАЛЬ</h4>
                 </div>
               </Tab>
-              <Tab index=2 :disabled="!isMaterialAvailable(2)" class="text-primaryDark">
+              <Tab  class="text-primaryDark">
                 <div class="relative">
                   <span v-if="beechCount > 0 " class="text-primaryDark absolute text-xs -right-2 -top-1">{{
                       beechCount
@@ -174,7 +199,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                       class="underline-offset-4 font-light">БУК</h4>
                 </div>
               </Tab>
-              <Tab index="1" :disabled="!isMaterialAvailable(1)" class="text-primaryDark">
+              <Tab   class="text-primaryDark">
                 <div class="relative">
                   <span v-if="oakCount > 0 " class="text-primaryDark absolute text-xs -right-2 -top-1">{{
                       oakCount
@@ -190,6 +215,8 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
 
           <TabPanels>
             <TabPanel>
+
+<!--              <pre>{{filtersStore.activeFilters.color}}</pre>-->
               <div v-if="enamel && enamel.colors" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
                 <div v-for="(color) in enamel.colors" :key="color.color" @click="chooseColor(color.color)">
                   <div v-if="isColorAvailable(color, enamel)" class="flex flex-col items-start max-w-[52px]">
@@ -224,7 +251,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
             </TabPanel>
             <TabPanel>
               <div v-if="oak && oak.colors" class="grid custom-grid-cols gap-x-8 lg:gap-x-16 gap-y-6 mb-3 mt-5">
-                <div v-for="(color) in oak.colors.sort()" :key="color.color" @click="chooseColor(color.color)">
+                <div v-for="(color) in oak.colors" :key="color.color" @click="chooseColor(color.color)">
                   <div v-if="isColorAvailable(color, oak)" class="flex flex-col items-start max-w-[52px]">
                     <div class="pb-1 border-b-4"
                          :class="{'border-transparent': !activeFilters.color.includes(color.color), 'border-black':activeFilters.color.includes(color.color)}">
@@ -244,7 +271,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
       </DisclosurePanel>
       </transition>
     </Disclosure>
-  </client-only>
+<!--  </client-only>-->
 </template>
 
 <style scoped>
