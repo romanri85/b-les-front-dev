@@ -43,8 +43,8 @@ const mouseLeave = () => {
 
     <div ref="imageDiv" class="relative top-4 w-full flex justify-center pb-8 md:mb-5 border-b-2 border-transparent transition-all duration-300 ease-in-out">
       <!-- Preloader -->
-      <div v-if="isLoading" class="preloader">
-        <div class="spinner"></div>
+      <div v-if="isLoading" class="hidden md:hidden lg:hidden sm:block sm:preloader">
+        <div class="hidden md:hidden lg:hidden sm:block sm:spinner"></div>
       </div>
 
       <!-- Image -->

@@ -23,12 +23,26 @@ const materialActiveindex = ref(0)
 
 // filtersStore.fetchMaterialColors()
 
+function removeInactiveMaterials(materialColors, id, filtersStore) {
+  // Loop through each material in the array
+  materialColors.forEach((mat) => {
+    // Check if the material has the color ID that is being deactivated
+    if (mat.color.some(color => color.id === id)) {
+      // Find out if any other color in this material is still active
+      const isActive = mat.color.some(color => filtersStore.activeFilters.color.includes(color.id));
+
+      // If no colors for this material are active, remove the material from active filters
+      if (!isActive) {
+        const index = filtersStore.activeFilters.material.indexOf(mat.material);
+        if (index > -1) {
+          filtersStore.activeFilters.material.splice(index, 1);
+        }
+      }
+    }
+  });
+}
 function chooseColor(id) {
-  const materials = [
-    { material: 3, colors: [1, 2, 19, 20] },
-    { material: 2, colors: [3, 4, 5, 6] },
-    { material: 1, colors: [7, 8, 9, 10, 11, 12, 13, 14, 15] },
-  ];
+
 
   if (!filtersStore.activeFilters.color.includes(id)) {
     filtersStore.onChangeFilters({ "color": [...filtersStore.activeFilters.color, id] });
@@ -46,15 +60,8 @@ function chooseColor(id) {
 
     filtersStore.onChangeFilters({ "color": updatedColors });
 
-    // Remove the material from activeFilters.material if the color ID is no longer active
-    materials.forEach((mat) => {
-      if (mat.colors.includes(id)) {
-        const index = filtersStore.activeFilters.material.indexOf(mat.material);
-        if (index > -1) {
-          filtersStore.activeFilters.material.splice(index, 1);
-        }
-      }
-    });
+
+    removeInactiveMaterials(materialColors.value, id, filtersStore);
   }
 }
 
@@ -143,9 +150,9 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
           leave-to-class="transform scale-95 opacity-0"
       >
       <DisclosurePanel class="mb-10 mt-6">
-
         <TabGroup :selectedIndex="materialMap[materialActiveindex] ">
           <TabList>
+
             <div class="flex justify-start gap-x-12 lg:gap-x-20 w-full pr-4">
               <Tab index=3 :disabled="!isMaterialAvailable(3) " class="text-primaryDark">
                 <div class="relative">

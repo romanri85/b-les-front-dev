@@ -19,16 +19,24 @@ await filtersStore.fetchMaterialColors()
 function chooseMaterial(material) {
   filtersStore.checkDoorSetApplied()
   filtersStore.isFilterCountPriceBlocked = false
-  const materials = [{material: 3, colors: [1, 2, 19, 20]}, {material: 2, colors: [3, 4, 5, 6]}, {
-    material: 1,
-    colors: [7, 8, 9, 10, 11, 12, 13, 14, 15]
-  }]
-  let materialToDelete = materials.filter((item) => {
-    return item.material === material
-  })
+  // const materials = [{material: 3, colors: [1, 2, 19, 20]}, {material: 2, colors: [3, 4, 5, 6]}, {
+  //   material: 1,
+  //   colors: [7, 8, 9, 10, 11, 12, 13, 14, 15]
+  // }]
+// Find the materials to delete
+  let materialToDelete = filtersStore.materialColors.filter((item) => {
+    return item.material === material;
+  });
+
+// Flatten the color array
+  let colorsToDelete = materialToDelete.reduce((acc, current) => {
+    return acc.concat(current.color);
+  }, []);
+
+// Filter out the colors from activeFilters.color
   const updatedColors = filtersStore.activeFilters.color.filter((color) => {
-    return !materialToDelete[0].colors.includes(color)
-  })
+    return !colorsToDelete.includes(color);
+  });
   if (!filtersStore.activeFilters.material.includes(material)) {
     filtersStore.onChangeFilters({material: [...filtersStore.activeFilters.material, material], color:[]})
   } else {
@@ -81,6 +89,8 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
         leave-to-class="transform scale-95 opacity-0"
     >
       <DisclosurePanel class="mb-10 mt-6">
+<!--        <pre>{{filtersStore.materialColors}}</pre>-->
+
         <div class="flex justify-start gap-x-12 w-full pr-4">
           <div v-for="(material) in materialColors" :key="material.material" class="text-primaryDark">
             <h4 @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"
