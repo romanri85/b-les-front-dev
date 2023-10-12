@@ -134,7 +134,7 @@ const oakCount = computed(() => activeFilters.value.color?.filter((color) => oak
 
 watch(() => filterCount.value.color, (newVal) => {
   // Log newVal length for debugging purposes
-  console.log(newVal.length, 'newVal');
+  // console.log(newVal.length, 'newVal');
 
   // Don't execute if newVal is an empty array
   if (newVal.length === 0) {
@@ -145,13 +145,13 @@ watch(() => filterCount.value.color, (newVal) => {
 
   // Add check for undefined last item
   if (lastItem) {
-    console.log(lastItem.material, 'newVal');
+    // console.log(lastItem.material, 'newVal');
 
     if (!newVal.find((material) => material.material === materialActiveindex.value)) {
       materialActiveindex.value = lastItem.material;
 
       // Log for debugging purposes
-      console.log(materialActiveindex.value, 'materialActiveindex.value');
+      // console.log(materialActiveindex.value, 'materialActiveindex.value');
     }
   }
 });

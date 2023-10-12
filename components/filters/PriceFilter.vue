@@ -14,7 +14,21 @@ const firstUpdateSliderAfterMount = ref(true);
 
 // console.log(props.isOpen, 'props')
 // console.log(open.value, 'open')
+// Refs to hold the previous min and max values
+const prevMin = ref(null);
+const prevMax = ref(null);
+
 function updateSliderValues([newMin, newMax]) {
+  // Check if the new values are the same as the previous values
+  if (newMin === prevMin.value && newMax === prevMax.value) {
+    return;  // Exit early if the values haven't changed
+  }
+
+  // Update the previous values refs
+  prevMin.value = newMin;
+  prevMax.value = newMax;
+
+  // Your existing code
   if (firstUpdateSliderAfterMount.value) {
     firstUpdateSliderAfterMount.value = false;
     return;
@@ -22,6 +36,8 @@ function updateSliderValues([newMin, newMax]) {
   filtersStore.onChangeFilters({'min_price': newMin, 'max_price': newMax});
 }
 
+const min = computed(() => filtersStore.filterCount.price[0]?.['min_price'] || 0);
+const max = computed(() => filtersStore.filterCount.price[0]?.['max_price'] || 99000);
 
 
 const viewport = useViewportSize()
@@ -53,8 +69,8 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                                :value="[0, 99000]"
                                :delay="100"
                                :key="filterCount.price[0]['min_price'] + filterCount.price[0]['max_price']"
-                               :min="filtersStore.filterCount.price[0]['min_price'] || 0"
-                               :max="filtersStore.filterCount.price[0]['max_price'] || 99000"
+                               :min="min"
+                               :max="max"
                                @input="updateSliderValues"
 
 

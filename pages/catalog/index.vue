@@ -5,7 +5,8 @@ import {storeToRefs} from "pinia";
 import {useViewportSize} from "~/composables/useViewportSize";
 import DoorSets from "~/components/pages/door-catalog/DoorSets.vue";
 import DoorFiltersMobile from "~/components/pages/door-catalog/DoorFiltersMobile.vue";
-import {useElementVisibility, useResizeObserver} from '@vueuse/core'
+import {useResizeObserver} from '@vueuse/core'
+// import {useElementVisibility} from "@vueuse/core";
 import DoorFilters from "~/components/pages/door-catalog/DoorFilters.vue";
 import {useRoute} from "vue-router";
 import {watch} from "vue";
@@ -13,7 +14,7 @@ import {watch} from "vue";
 
 const footerElement = ref(null)
 
-const footerIsVisible = useElementVisibility(footerElement)
+// const footerIsVisible = useElementVisibility(footerElement)
 
 
 const viewport = useViewportSize()
@@ -75,15 +76,18 @@ watch(() => route.query.collection, (newValue) => {
 
 watch([() => catalogElementHeight.value, () => doorFiltersHeight.value], () => {
   if (sidebar.value) {
+
     sidebar.value.updateSticky();
     if (footerIsVisible.value) {
+
+      console.log('footer is visible')
       // Scroll 50px up
       window.scrollBy(0, -5);
 
       // Then scroll 50px down after a delay (e.g., 300 milliseconds)
-      setTimeout(() => {
+      // setTimeout(() => {
         window.scrollBy(0, 5);
-      }, 300);
+      // }, 300);
     }
 
   }
@@ -110,7 +114,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="catalogElement" class="main-container">
+  <div ref="catalogElement" class="min-h-[2600px] main-container">
 
     <!--    <base-hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/>-->
     <div class="mt-10 lg:pr-72">
@@ -120,7 +124,7 @@ onUnmounted(() => {
       <h1>Каталог</h1>
     </div>
     <door-sets/>
-    <div class="main-content flex md:flex-row flex-col md:mt-0  ">
+    <div class="main-content  flex md:flex-row flex-col md:mt-0  ">
       <div v-if="viewport.isDesktop || viewport.isTablet" class="md:w-[320px] sidebar">
         <div class="sidebar__inner">
           <door-filters ref="doorFilters" class="pb-32"/>
@@ -128,9 +132,10 @@ onUnmounted(() => {
       </div>
       <door-filters-mobile v-else/>
 
-      <door-items class="md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)]  "/>
+      <door-items class="  md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)]  "/>
     </div>
   </div>
+<!--  <Footer ref="footerElement"/>-->
 </template>
 
 <style scoped>

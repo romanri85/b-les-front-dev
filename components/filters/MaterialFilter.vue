@@ -50,8 +50,6 @@ function chooseMaterial(material) {
 
 
     })
-    console.log(updatedMaterials, 'updatedMaterials')
-    console.log(updatedColors, 'updatedColors')
 
     filtersStore.onChangeFilters({"material": updatedMaterials, "color": updatedColors})
 
