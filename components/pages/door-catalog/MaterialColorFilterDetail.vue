@@ -96,8 +96,9 @@ let index = materialMap[props.material]
                 <div class="flex flex-col items-start w-24">
                   <div class="pb-1 border-b-4"
                        :class="{'border-transparent': color.id === !colorActiveindex,'border-black': color.id === colorActiveindex, 'border-b border-transparent': color.id !== colorActiveindex}">
-                    <div :style="{ backgroundImage: 'url(' + color.image + ')' }"
-                         class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
+                    <div :style="color.image ? `background-image: url(${color.image})` : `background-color: ${color.hex_code}`"
+                         class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer">
+                    </div>
                   </div>
                   <h5  class=" pt-2 cursor-pointer whitespace-nowrap">
                     {{ color.name }}
