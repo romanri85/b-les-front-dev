@@ -11,7 +11,11 @@ import {
   TabPanels
 } from "@headlessui/vue";
 import FilterType from "~/components/filters/FilterType.vue";
+import {useFiltersStore} from "~/stores/filtersStore";
+import {storeToRefs} from "pinia";
+
 // import {background} from "ipx";
+
 
 const props = defineProps({
   activeFilters: {
@@ -37,12 +41,16 @@ const emit = defineEmits(['changeFilter', 'changeMaterials'])
 //
 // })
 
+const filtersStore = useFiltersStore()
+const {activeFilters, materialColors, filterCount} = storeToRefs(filtersStore)
+
 const materialActiveindex = ref(props.material)
 const colorActiveindex = ref(props.color)
 const productMaterials = ref(props.productMaterials)
 
 
 function chooseColor(id) {
+
   colorActiveindex.value = id
 
   emit('changeFilter', {"material": materialActiveindex.value, "color": id})

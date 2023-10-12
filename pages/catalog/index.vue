@@ -6,7 +6,6 @@ import {useViewportSize} from "~/composables/useViewportSize";
 import DoorSets from "~/components/pages/door-catalog/DoorSets.vue";
 import DoorFiltersMobile from "~/components/pages/door-catalog/DoorFiltersMobile.vue";
 import {useResizeObserver} from '@vueuse/core'
-// import {useElementVisibility} from "@vueuse/core";
 import DoorFilters from "~/components/pages/door-catalog/DoorFilters.vue";
 import {useRoute} from "vue-router";
 import {watch} from "vue";
@@ -14,7 +13,6 @@ import {watch} from "vue";
 
 const footerElement = ref(null)
 
-// const footerIsVisible = useElementVisibility(footerElement)
 
 
 const viewport = useViewportSize()
@@ -78,17 +76,7 @@ watch([() => catalogElementHeight.value, () => doorFiltersHeight.value], () => {
   if (sidebar.value) {
 
     sidebar.value.updateSticky();
-    if (footerIsVisible.value) {
 
-      console.log('footer is visible')
-      // Scroll 50px up
-      window.scrollBy(0, -5);
-
-      // Then scroll 50px down after a delay (e.g., 300 milliseconds)
-      // setTimeout(() => {
-        window.scrollBy(0, 5);
-      // }, 300);
-    }
 
   }
 });
@@ -135,7 +123,6 @@ onUnmounted(() => {
       <door-items class="  md:w-[calc(100%-210px)] lg:w-[calc(100%-320px)]  "/>
     </div>
   </div>
-<!--  <Footer ref="footerElement"/>-->
 </template>
 
 <style scoped>
