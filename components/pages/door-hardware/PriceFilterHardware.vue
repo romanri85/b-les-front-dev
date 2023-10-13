@@ -46,7 +46,6 @@ const max = computed(() => hardwareFiltersStore.filterCount.price[0]?.['max_pric
 
         />
       </div>
-      pre{{hardwareFiltersStore.filterCount.price[0]}}
 
     </DisclosurePanel>
 
