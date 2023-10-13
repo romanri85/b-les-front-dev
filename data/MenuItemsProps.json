@@ -10,8 +10,8 @@
       "name": "versailles",
       "description": "versaillesDescription",
       "image": "/header-modal-img/versailles-modal-img.webp",
-      "slug": "/catalog?collection=2",
-        "id": "2"
+      "slug": "/catalog?collection=3",
+        "id": "3"
     },
     {
       "name": "modern",
@@ -24,8 +24,8 @@
       "name": "premier",
       "description": "premierDescription",
       "image": "/header-modal-img/premier-modal-img.webp",
-      "slug": "/catalog?collection=3",
-        "id": "3"
+      "slug": "/catalog?collection=2",
+        "id": "2"
     },
     {
       "name": "rimini",

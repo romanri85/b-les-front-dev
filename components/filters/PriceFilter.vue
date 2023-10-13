@@ -7,32 +7,18 @@ import {useViewportSize} from "~/composables/useViewportSize";
 
 const filtersStore = useFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(filtersStore)
-const firstUpdateSliderAfterMount = ref(true);
 
 
 
 
 // console.log(props.isOpen, 'props')
 // console.log(open.value, 'open')
-// Refs to hold the previous min and max values
-const prevMin = ref(null);
-const prevMax = ref(null);
+
 
 function updateSliderValues([newMin, newMax]) {
-  // Check if the new values are the same as the previous values
-  if (newMin === prevMin.value && newMax === prevMax.value) {
-    return;  // Exit early if the values haven't changed
-  }
 
-  // Update the previous values refs
-  prevMin.value = newMin;
-  prevMax.value = newMax;
 
-  // Your existing code
-  if (firstUpdateSliderAfterMount.value) {
-    firstUpdateSliderAfterMount.value = false;
-    return;
-  }
+
   filtersStore.onChangeFilters({'min_price': newMin, 'max_price': newMax});
 }
 
@@ -68,9 +54,8 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                                :tooltip-format="(v) => `${v} ₽`"
                                :value="[0, 99000]"
                                :delay="100"
-                               :key="filterCount.price[0]['min_price'] + filterCount.price[0]['max_price']"
-                               :min="min"
-                               :max="max"
+                               v-model:min="min"
+                               v-model:max="max"
                                @input="updateSliderValues"
 
 
