@@ -9,14 +9,11 @@ const filtersStore = useFiltersStore()
 const {activeFilters, filterCount} = storeToRefs(filtersStore)
 
 
-
-
 // console.log(props.isOpen, 'props')
 // console.log(open.value, 'open')
 
 
 function updateSliderValues([newMin, newMax]) {
-
 
 
   filtersStore.onChangeFilters({'min_price': newMin, 'max_price': newMax});
@@ -47,19 +44,19 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
       >
         <DisclosurePanel class="mb-10 mt-14">
           <div class="px-5">
-                      <FormKit v-if="filterCount && filterCount.price && filterCount.price[0]"
-                               type="slider"
-                               name="slider"
-                               tooltip="true"
-                               :tooltip-format="(v) => `${v} ₽`"
-                               :value="[0, 99000]"
-                               :delay="100"
-                               v-model:min="min"
-                               v-model:max="max"
-                               @input="updateSliderValues"
 
+            <FormKit v-if="filterCount && filterCount.price && filterCount.price[0]"
+                     type="slider"
+                     name="slider"
+                     tooltip="true"
+                     :tooltip-format="(v) => `${v} ₽`"
+                     :value="[0, 99000]"
+                     :key="filterCount.price[0]['min_price'] + filterCount.price[0]['max_price']"
+                     :min="min"
+                     :max="max"
+                     @input="updateSliderValues"
 
-                      />
+            />
 
 
           </div>

@@ -30,6 +30,7 @@
   "dependencies": {
     "@chenfengyuan/vue-countdown": "^2.1.2",
     "@formkit/auto-animate": "^0.7.0",
+    "@formkit/core": "^1.2.2",
     "@formkit/icons": "^0.17.4",
     "@formkit/nuxt": "^1.0.0",
     "@formkit/pro": "^0.115.3",
