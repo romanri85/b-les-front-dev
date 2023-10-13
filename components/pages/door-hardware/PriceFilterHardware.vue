@@ -18,7 +18,8 @@ function updateSliderValues([newMin, newMax]) {
 
 
 }
-
+const min = computed(() => hardwareFiltersStore.filterCount.price[0]?.['min_price'] || 0);
+const max = computed(() => hardwareFiltersStore.filterCount.price[0]?.['max_price'] || 99000);
 
 </script>
 
@@ -36,15 +37,17 @@ function updateSliderValues([newMin, newMax]) {
                   name="slider"
                   tooltip="true"
                   :tooltip-format="(v) => `${v} ₽`"
-                  :value="[0, 2500]"
+                  :value="[0, 99000]"
                   :key="filterCount.price[0]['min_price'] + filterCount.price[0]['max_price']"
-                  :min="filterCount.price[0]['min_price'] || 0"
-                  :max="filterCount.price[0]['max_price'] || 2500"
+                  :min="min"
+                  :max="max"
                   @input="updateSliderValues"
 
 
         />
       </div>
+      pre{{hardwareFiltersStore.filterCount.price[0]}}
+
     </DisclosurePanel>
 
   </Disclosure>

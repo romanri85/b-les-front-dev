@@ -9,7 +9,7 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
         ordering: "",
         page: 1,
         min_price: 0,
-        max_price: 6000,
+        max_price: 99000,
         design: [],
         color_collection: [],
         // colorSet: [], colors: [], designs: [], collections: []
@@ -80,7 +80,7 @@ export const useHardwareFiltersStore = defineStore("hardwareFiltersStore", () =>
             ordering: "",
             page: 1,
             min_price: 0,
-            max_price: 6000,
+            max_price: 99000,
             design: [],
             color_collection: [],
             // colorSet: [], colors: [], designs: [], collections: []
