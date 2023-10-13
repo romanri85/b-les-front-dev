@@ -66,8 +66,8 @@ function onChangePage(page) {
     </div>
     <div v-if="viewport.isDesktop || viewport.isTablet"
          class="lg:min-h-[3285px]"
-    ref="parent">
-      <div class=" mt-4 md:mt-16 md:gap-y-8 lg:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid">
+    >
+      <div class=" mt-4 md:mt-16 md:gap-y-8 lg:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid" ref="parent">
 
     <div class="" v-for="doorVariant in filtersStore.products" :key="doorVariant.id">
       <NuxtLink

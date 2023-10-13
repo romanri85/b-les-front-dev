@@ -256,8 +256,11 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                     <div class="pb-1 border-b-4"
                          :class="{'border-transparent': !activeFilters.color.includes(color.color), 'border-black':activeFilters.color.includes(color.color)}">
                       <div
-                          :style="{ backgroundImage: 'url(https://b-les-storage.ams3.digitaloceanspaces.com/media/' + color.image + ')' }"
-                          class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer"></div>
+                          :style="color.image ?
+            `background-image: url(https://b-les-storage.ams3.digitaloceanspaces.com/media/${color.image})` :
+            `background-color: ${color.hex_code}`"
+                          class="w-12 h-12 shadow-darkGrey shadow-sm cursor-pointer">
+                      </div>
 
                     </div>
                     <h5 class="hidden lg:block pt-2 cursor-pointer whitespace-nowrap overflow-visible">
