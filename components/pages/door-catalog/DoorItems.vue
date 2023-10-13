@@ -64,20 +64,23 @@ function onChangePage(page) {
         <p class=" mt-14  md:mt-0 font-regular">Всего дверей: {{ filtersStore.total }}</p>
       </div>
     </div>
-    <div v-if="viewport.isDesktop || viewport.isTablet" class="lg:min-h-[3285px] mt-4 md:mt-16  md:gap-y-8 lg:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid"
-         ref="parent">
+    <div v-if="viewport.isDesktop || viewport.isTablet"
+         class="lg:min-h-[3285px]"
+    ref="parent">
+      <div class=" mt-4 md:mt-16 md:gap-y-8 lg:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid">
 
-
-      <div class="" v-for="doorVariant in filtersStore.products" :key="doorVariant.id">
-        <NuxtLink
-            :to="`/catalog/${doorVariant.product_variant.product_id}?material=${doorVariant.product_variant.material.id}&color=${doorVariant.color.id}`">
-          <door-card class="relative  transition-all duration-300 pb-6 mb-6"
-                     :doorVariant="doorVariant"
-          />
-        </NuxtLink>
-      </div>
+    <div class="" v-for="doorVariant in filtersStore.products" :key="doorVariant.id">
+      <NuxtLink
+          :to="`/catalog/${doorVariant.product_variant.product_id}?material=${doorVariant.product_variant.material.id}&color=${doorVariant.color.id}`">
+        <door-card class="relative transition-all duration-300 pb-6 mb-6"
+                   :doorVariant="doorVariant"
+        />
+      </NuxtLink>
     </div>
-    <div v-else class="mt-4 md:mt-16  md:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid"
+      </div>
+  </div>
+
+  <div v-else class="mt-4 md:mt-16  md:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid"
          >
 
 
