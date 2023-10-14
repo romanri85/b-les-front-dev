@@ -1,8 +1,11 @@
 // import {i18n} from './i18n.config';
-
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 export default defineNuxtConfig({
 
     css: ['~/assets/styles/index.scss'],
+    build: {
+        sourcemap: true, // Source map generation must be turned on
+    },
     modules: [
         '@nuxtjs/algolia',
         'nuxt-headlessui',
@@ -87,6 +90,24 @@ export default defineNuxtConfig({
         ssr: {
             noExternal: ['imagesloaded'],
         },
+        optimizeDeps: {
+            exclude: ["fsevents"]
+        },
+        plugins: [
+            // Setup sentry error reporting with source maps
+          sentryVitePlugin({
+                    include: ".nuxt/dist",
+                    ignore: ["node_modules", "nuxt.config.ts"],
+                    org: "Les",
+                    project: "javascript-vue",
+                    authToken: process.env.SENTRY_AUTH_TOKEN,
+                }),
+        ],
+    },
+
+    sourcemap: {
+        client: true,
+        server: true,
     },
 
 });
