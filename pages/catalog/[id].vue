@@ -73,13 +73,20 @@ onMounted(
 
 
       if (product.value && productMaterials.value.length === 0 && product.value.product_variants) {
-        productMaterials.value = product.value.product_variants.map((item) => ({
-          'material': item.material,
-          'name': item.material_name,
-          'color': item.material_colors
-        }));
-
+        productMaterials.value = product.value.product_variants.map((item) => {
+          // Filter material_colors for the current item
+          const relevantColors = item.material_colors.filter(color =>
+              item.material_color_product_variants.some(variant => variant.color.id === color.id)
+          );
+          return {
+            'material': item.material,
+            'name': item.material_name,
+            'color': relevantColors
+          };
+        });
       }
+
+
 
       if (Object.keys(casingVariants.value).length === 0) {
         casingVariants.value = getCasingVariants(product.value);
