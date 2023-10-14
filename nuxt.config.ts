@@ -45,6 +45,7 @@ export default defineNuxtConfig({
     plugins: [
         '~/plugins/auto-animate.js',
         // { src: '~/plugins/ymapPlugin.js',  mode: 'client' }
+        '~/plugins/sentry.plugin.js',
     ],
     vueQuery: {
         // useState key used by nuxt for the vue query state.
@@ -83,32 +84,7 @@ export default defineNuxtConfig({
             ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
         ],
     },
-    vite: {
-        define: {
-            'process.env': process.env,
-        },
-        ssr: {
-            noExternal: ['imagesloaded'],
-        },
-        optimizeDeps: {
-            exclude: ["fsevents"]
-        },
-        plugins: [
-            // Setup sentry error reporting with source maps
-          sentryVitePlugin({
-                    include: ".nuxt/dist",
-                    ignore: ["node_modules", "nuxt.config.ts"],
-                    org: "Les",
-                    project: "javascript-vue",
-                    authToken: process.env.SENTRY_AUTH_TOKEN,
-                }),
-        ],
-    },
 
-    sourcemap: {
-        client: true,
-        server: true,
-    },
 
 });
 
