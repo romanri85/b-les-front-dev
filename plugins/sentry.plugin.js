@@ -30,6 +30,11 @@ export default defineNuxtPlugin((nuxtApp) => {
                 routingInstrumentation: Sentry.vueRouterInstrumentation(nuxtApp.$router),
             }),
             // new Sentry.Replay(),
+            new Sentry.Replay({
+                // Additional SDK configuration goes in here, for example:
+                maskAllText: true,
+                blockAllMedia: true,
+            }),
         ],
 
         // Set tracesSampleRate to 1.0 to capture 100%
@@ -46,8 +51,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         replaysOnErrorSampleRate: 1.0,
     });
 
-    // vueApp.mixin(Sentry.createTracingMixins({ trackComponents: true, timeout: 2000, hooks: ['activate', 'mount', 'update'] }));
-    // Sentry.attachErrorHandler(vueApp, { logErrors: false, attachProps: true, trackComponents: true, timeout: 2000, hooks: ['activate', 'mount', 'update'] });
+    vueApp.mixin(Sentry.createTracingMixins({ trackComponents: true, timeout: 2000, hooks: ['activate', 'mount', 'update'] }));
+    Sentry.attachErrorHandler(vueApp, { logErrors: false, attachProps: true, trackComponents: true, timeout: 2000, hooks: ['activate', 'mount', 'update'] });
 
     return {
         provide: {
