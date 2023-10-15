@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 const { $sentryCaptureException } = useNuxtApp();
 
-onMounted(() => {
-  $sentryCaptureException("Test exception");
-});
+// onMounted(() => {
+//   $sentryCaptureException("Test exception");
+// });
 </script>

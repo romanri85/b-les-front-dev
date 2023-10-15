@@ -6,9 +6,18 @@
       <h2 class="text-25-mono mb-7">{{ $t('searchByParameters') }}</h2>
       <div class="lg:block text-left flex flex-wrap">
         <div v-for="parameter in parameters" :key="parameter.name" class="py-2">
-          <NuxtLink :to="{ path: '/catalog', query: { filters: parameter.id } }" class="lg:pb-4 pb-5 lg:pr-0 pr-7">
+          <!-- If the page is initiated, render the NuxtLink -->
+          <NuxtLink
+              v-if="isPageInitiated"
+              :to="{ path: '/catalog', query: { filters: parameter.id } }"
+              class="lg:pb-4 pb-5 lg:pr-0 pr-7"
+          >
             <h3 class="inline-block">{{ parameter.name }}</h3>
           </NuxtLink>
+          <!-- If the page is not initiated, render a placeholder -->
+          <div v-else class="lg:pb-4 pb-5 lg:pr-0 pr-7">
+            <h3 class="inline-block">{{ parameter.name }}</h3>
+          </div>
         </div>
       </div>
 
@@ -31,7 +40,22 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';  // Ensure to import ref and onMounted
+
 import parameters from "~/data/searchByParameters.json"
+const isPageInitiated = ref(false);
+
+function onPageInitiated() {
+  isPageInitiated.value = true;
+}
+
+onMounted(() => {
+  // Your initialization code here
+  // ...
+
+  // Then call onPageInitiated
+  onPageInitiated();
+});
 // import {useTagsStore} from "~/stores/tagsStore";
 //
 // const tagsStore = useTagsStore()

@@ -44,7 +44,7 @@ function onChangePage(page) {
     <div class="mt-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-rows-7 grid" ref="parent">
 
       <div v-for="hardwareVariant in products" :key="hardwareVariant.id">
-        <hardware-card class="relative  -z-10 hover:border-b border-black"
+        <hardware-card v-if="hardwareVariant && hardwareVariant.image" class="relative  -z-10 hover:border-b border-black"
                        :hardwareVariant="hardwareVariant"
         />
       </div>

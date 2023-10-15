@@ -26,10 +26,10 @@ const triggerModal = (image) => {
 
 <template>
     <client-only>
-        <div  @click="triggerModal(props.hardwareVariant.image)" class="flex flex-col items-center pb-12 cursor-pointer">
+        <div  @click=" triggerModal(props.hardwareVariant.image)" class="flex flex-col items-center pb-12 cursor-pointer">
           <div class="relative pb-8">
 
-                        <nuxt-img width="200px" height="auto" :src="props.hardwareVariant.image"
+                        <nuxt-img v-if="props.hardwareVariant && props.hardwareVariant.image" width="200px" height="auto" :src="props.hardwareVariant.image"
                                   class="h-auto w-36 lg:w-48"></nuxt-img>
           </div>
           <hardware-image-modal :image="props.hardwareVariant.image" ref="imgModal"/>

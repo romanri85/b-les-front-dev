@@ -1,5 +1,4 @@
 // import {i18n} from './i18n.config';
-import { sentryVitePlugin } from "@sentry/vite-plugin";
 export default defineNuxtConfig({
 
     css: ['~/assets/styles/index.scss'],
