@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/vue';
 import { BrowserTracing } from '@sentry/tracing';
+import {Replay} from "@sentry/vue";
 export default defineNuxtPlugin((nuxtApp) => {
     const { vueApp } = nuxtApp;
 
@@ -30,7 +31,7 @@ export default defineNuxtPlugin((nuxtApp) => {
                 routingInstrumentation: Sentry.vueRouterInstrumentation(nuxtApp.$router),
             }),
             // new Sentry.Replay(),
-            new Sentry.Replay({
+            new Replay({
                 // Additional SDK configuration goes in here, for example:
                 maskAllText: true,
                 blockAllMedia: true,
