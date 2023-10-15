@@ -14,7 +14,6 @@ import {watch} from "vue";
 const footerElement = ref(null)
 
 
-
 const viewport = useViewportSize()
 
 const filtersStore = useFiltersStore()
@@ -31,18 +30,18 @@ const doorFiltersHeight = ref(null)
 
 definePageMeta({layout: "dark-header"})
 
-  useResizeObserver(catalogElement, (entries) => {
-    const entry = entries[0];
-    const {height} = entry.contentRect;
-    catalogElementHeight.value = height;
-  });
+useResizeObserver(catalogElement, (entries) => {
+  const entry = entries[0];
+  const {height} = entry.contentRect;
+  catalogElementHeight.value = height;
+});
 
-  useResizeObserver(doorFilters, (entries) => {
-    const entry = entries[0];
-    const {height} = entry.contentRect;
-    doorFiltersHeight.value = height;
+useResizeObserver(doorFilters, (entries) => {
+  const entry = entries[0];
+  const {height} = entry.contentRect;
+  doorFiltersHeight.value = height;
 
-  });
+});
 let products = ref([])
 let page = ref(1)
 const total = ref(0)
@@ -54,8 +53,11 @@ const route = useRoute()
 await filtersStore.onChangeFilters({...activeFilters.value, page: 1})
 
 const sidebar = ref(null)
-  setTimeout(
-      () => {
+
+
+setTimeout(
+    () => {
+      if (viewport.isDesktop || viewport.isTablet) {
         sidebar.value = new StickySidebar('.sidebar', {
           containerSelector: '.main-content',
           innerWrapperSelector: '.sidebar__inner',
@@ -63,7 +65,9 @@ const sidebar = ref(null)
           bottomSpacing: 50,
           resizeSensor: true,
         });
-      }, 500)
+      }
+
+    }, 500)
 
 watch(() => route.query.collection, (newValue) => {
   if (newValue) {
@@ -73,7 +77,7 @@ watch(() => route.query.collection, (newValue) => {
 }, {immediate: true});
 
 watch([() => catalogElementHeight.value, () => doorFiltersHeight.value], () => {
-  if (sidebar.value) {
+  if (sidebar.value && (viewport.isDesktop || viewport.isTablet)) {
 
     sidebar.value.updateSticky();
 
