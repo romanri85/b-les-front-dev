@@ -8,7 +8,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         dsn: 'https://ab7e48b8a9a0b5939675a7eda3081d97@o4506039434805248.ingest.sentry.io/4506039440441344>',
         environment: process.dev ? 'development' : 'production',
         integrations: [
-            new Sentry.BrowserTracing({
+            new BrowserTracing({
                 routingInstrumentation: Sentry.vueRouterInstrumentation(nuxtApp.$router),
             }),
             new Sentry.Replay(),
