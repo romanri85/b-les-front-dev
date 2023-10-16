@@ -1,16 +1,11 @@
 <script setup lang="js">
-import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import { baseURL } from '~/config'
 import BaseHero from '~/components/base/BaseHero.vue'
 import Pagination from '~/components/base/pagination/Pagination.vue'
-import { useInteriorStore } from '~/stores/interiorStore'
 import ImageModal from '~/components/pop-ups/ImageModal.vue'
 
 import { adjustLayoutForNarrowImages, classifyImageLayout } from '~/services/imageLayoutService' // Assuming the service is in the same directory
-
-const interiorStore = useInteriorStore()
-const { projects } = storeToRefs(interiorStore)
 
 const imgModal = ref(null)
 
@@ -40,11 +35,8 @@ const project = ref({
 
 // const response = ref({})
 const page = ref(1)
-const total = ref(0)
 const pagesCount = ref(0)
 const page_size = 10
-
-const heroImage = '/interior/bg-interior.webp'
 
 async function getProjectData(query = `/${route.params.id}`) {
   try {

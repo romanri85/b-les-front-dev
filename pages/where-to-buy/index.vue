@@ -37,14 +37,10 @@ async function getAddresses() {
   addresses.value = await $fetch(`${baseURL}/api/shops/`)
   geo.value = Cookies.get('geolocation') || { country: 'Russia', city: 'Moscow', region: 'Moscow' }
   geo.value = typeof geo.value === 'object' ? geo.value : JSON.parse(geo.value)
-  console.log(geo.value.region, 'geo object')
   cities.value = addresses.value.cities
   city.value = findCity(addresses.value.cities, geo.value.region)
   isCityFound.value = city.value.isFound
   city.value = city.value.city
-  console.log(city.value, 'city')
-  console.log(geo.value.region, 'region')
-  console.log(addresses.value, 'addresses')
   // changeCity(city.value)
 }
 

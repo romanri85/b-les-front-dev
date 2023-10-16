@@ -6,10 +6,7 @@ defineProps({ light: { type: Boolean, default: true } })
 const shouldOpenModal = ref(0)
 
 function openContactUsModal() {
-  console.log('openContactUsModal', shouldOpenModal.value)
-
   shouldOpenModal.value = shouldOpenModal.value + 1
-  console.log('openContactUsModal', shouldOpenModal.value)
 }
 
 const iconsMenuItems = [

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { toNumber } from '@vue/shared'
 import { ref } from 'vue'
 import HardwareImageModal from '~/components/pop-ups/HardwareImageModal.vue'
 
@@ -9,7 +8,7 @@ const props = defineProps({
 
 const imgModal = ref(null)
 
-function triggerModal(image) {
+function triggerModal() {
   if (imgModal.value && imgModal.value.openModal)
     imgModal.value.openModal()
   else
@@ -37,7 +36,7 @@ function triggerModal(image) {
           <p>{{ props.hardwareVariant.color.color }}</p>
         </div>
         <p class="font-regular">
-          {{ toNumber(props.hardwareVariant.price) }}&nbsp;₽
+          {{ parseInt(props.hardwareVariant.price) }}&nbsp;₽
         </p>
       </div>
     </div>

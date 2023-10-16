@@ -20,7 +20,7 @@ const route = useRoute()
 
 watch(
   () => route.path,
-  (newValue, oldValue) => {
+  () => {
     activeItemIndex.value = null
   },
 )
@@ -42,7 +42,7 @@ const currentMenuItems = computed(() => {
 <template>
   <nav>
     <ul
-      ref="menuRef" :class="light ? 'text-white' : 'text-black'"
+      :class="light ? 'text-white' : 'text-black'"
       class="menu lg:flex xl:40px lg:gap-x-[30px] xl:h-[100px] lg:h-[86px] h-[60px] justify-between hidden  items-center"
       @mouseenter="textMenuHovered = true" @mouseleave="onTextMenuMouseLeave"
     >

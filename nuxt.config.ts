@@ -71,17 +71,17 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
     ],
   },
-  vite: {
-    plugins: [
-      // Setup sentry error reporting with source maps
-      process.env.NODE_ENV === 'development'
-        ? null
-        : sentryVitePlugin({
-          include: '.nuxt/dist',
-          ignore: ['node_modules', 'nuxt.config.ts'],
-        }),
-    ],
-  },
+  // vite: {
+  //   plugins: [
+  //     // Setup sentry error reporting with source maps
+  //     process.env.NODE_ENV === 'development'
+  //       ? null
+  //       : sentryVitePlugin({
+  //         include: '.nuxt/dist',
+  //         ignore: ['node_modules', 'nuxt.config.ts'],
+  //       }),
+  //   ],
+  // },
 
   /*
      */

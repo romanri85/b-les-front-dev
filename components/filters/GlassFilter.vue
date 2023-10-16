@@ -6,7 +6,7 @@ import { useFiltersStore } from '~/stores/filtersStore'
 import { useViewportSize } from '~/composables/useViewportSize'
 
 const filtersStore = useFiltersStore()
-const { activeFilters, filterCount } = storeToRefs(filtersStore)
+const { filterCount } = storeToRefs(filtersStore)
 
 const withGlassDisabled = computed(() => filterCount.value.glass[0]?.with_glass === 0)
 const withoutGlassDisabled = computed(() => filterCount.value.glass[0]?.without_glass === 0)

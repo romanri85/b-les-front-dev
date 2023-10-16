@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { toNumber } from '@vue/shared'
-
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -56,14 +54,14 @@ function mouseLeave() {
         <span
           v-if="props.hit.sale"
         >
-          {{ toNumber(props.hit.sale.sale_leaf_casing_price) }}₽&nbsp;&nbsp;
+          {{ parseInt(props.hit.sale.sale_leaf_casing_price) }}₽&nbsp;&nbsp;
         </span>
 
         <!-- Second span: Line-through and gray color only if is_sale_active is true -->
         <span
           :class="props.hit.sale ? 'line-through text-gray-400' : ''"
         >
-          {{ toNumber(props.hit.leaf_casing_price) }}&nbsp;₽
+          {{ parseInt(props.hit.leaf_casing_price) }}&nbsp;₽
         </span>
       </p>
     </div>

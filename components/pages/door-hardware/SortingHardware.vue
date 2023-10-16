@@ -41,7 +41,6 @@ function toggleArrow() {
 }
 
 function sortHardware(sorting: string) {
-  console.log('sortProducts')
   hardwareFiltersStore.onChangeFilters({ ordering: sorting })
 }
 </script>

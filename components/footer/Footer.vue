@@ -7,10 +7,10 @@ defineProps({ light: { type: Boolean, default: true } })
 
 const { locale, setLocale } = useI18n()
 
-function toggleLocale() {
-  const newLocale = locale.value === 'en' ? 'ru' : 'en'
-  setLocale(newLocale)
-}
+// function toggleLocale() {
+//   const newLocale = locale.value === 'en' ? 'ru' : 'en'
+//   setLocale(newLocale)
+// }
 
 const tagsStore = useTagsStore()
 await tagsStore.fetchTags()
@@ -160,7 +160,7 @@ const mdSmMenu = [
           <h3 class="text-white mt-5 mb-5">
             {{ $t('collections') }}
           </h3>
-          <div v-for="(collection, index) in collections" :key="collection.name" class="mt-[10px]">
+          <div v-for="collection in collections" :key="collection.name" class="mt-[10px]">
             <NuxtLink :to="`/catalog?collection=${collection.id}`">
               <p class="text-normalGrey ">
                 {{ $t(collection.name) }}
@@ -216,7 +216,7 @@ const mdSmMenu = [
           <h3 class="text-white mb-5 mt-5 ">
             {{ $t('information') }}
           </h3>
-          <div v-for="(menuItem, index) in xlLgMenu" :key="menuItem.name" class="mt-2">
+          <div v-for="menuItem in xlLgMenu" :key="menuItem.name" class="mt-2">
             <nuxt-link :to="menuItem.slug">
               <p class="text-normalGrey">
                 {{ $t(menuItem.name) }}
@@ -228,7 +228,7 @@ const mdSmMenu = [
         <!--        menu -->
 
         <div class="lg:hidden w-36 ml-12">
-          <div v-for="(menuItem, index) in mdSmMenu.slice(1, 5)" :key="menuItem.name">
+          <div v-for="menuItem in mdSmMenu.slice(1, 5)" :key="menuItem.name">
             <div class="text-white  pt-4">
               <nuxt-link :to="menuItem.slug">
                 <p class="">
@@ -239,7 +239,7 @@ const mdSmMenu = [
           </div>
         </div>
         <div class="lg:hidden w-36 ml-12">
-          <div v-for="(menuItem, index) in mdSmMenu.slice(5, 8)" :key="menuItem.name">
+          <div v-for="menuItem in mdSmMenu.slice(5, 8)" :key="menuItem.name">
             <div class="text-white pt-4">
               <nuxt-link :to="menuItem.slug">
                 <p class=" ">
@@ -250,7 +250,7 @@ const mdSmMenu = [
           </div>
         </div>
         <div class="lg:hidden w-36 ml-12">
-          <div v-for="(menuItem, index) in mdSmMenu.slice(8)" :key="menuItem.name" class="lg:hidden">
+          <div v-for="menuItem in mdSmMenu.slice(8)" :key="menuItem.name" class="lg:hidden">
             <div class="text-white pt-4">
               <nuxt-link :to="menuItem.slug">
                 <p class="whitespace-nowrap">

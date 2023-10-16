@@ -79,14 +79,13 @@ onMounted(async () => {
 
   addresses.value = props.addresses
   geo.value = props.geo
-  if (geo.value.region && addresses.value) {
+  if (geo.value.region && addresses.value)
     city.value = findCity(addresses.value.cities, geo.value.region)
-    console.log(city.value, 'city')
-  }
+
   if (city.value.city.latitude && city.value.city.longitude)
     await initMap()
   else
-    console.log('city.value.latitude or city.value.longitude is not defined')
+    throw new Error('City coordinates are not provided')
 })
 
 // let maxRetries = 10;

@@ -82,7 +82,7 @@ function sortDoors(sorting: string) {
           >
             <MenuItems class="mt-10 z-10 absolute">
               <div
-                v-for="sorting in sortFilters"
+                v-for="sorting in sortFilters" :key="sorting.name"
                 class="whitespace-nowrap  shadow-sm shadow-darkGrey bg-white p-4 [&>a]:p-2 min-w-[320px]"
               >
                 <MenuItem v-slot="{ active }" class="cursor-pointer" @click="sortDoors(sorting.value)">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useIntersectionObserver, useInterval } from '@vueuse/core'
+import { useInterval } from '@vueuse/core'
 import BaseHero from '~/components/base/BaseHero.vue'
 
 const target = ref(null)
@@ -12,13 +12,6 @@ const shopsReachedTarget = ref(false)
 const { counter: employeeCounter, pause: pauseEmployees, resume: resumeEmployees } = useInterval(5, { controls: true, immediate: false })
 const { counter: yearsCounter, pause: pauseYears, resume: resumeYears } = useInterval(30, { controls: true, immediate: false })
 const { counter: shopsCounter, pause: pauseShops, resume: resumeShops } = useInterval(100, { controls: true, immediate: false })
-
-const { stop } = useIntersectionObserver(
-  target,
-  ([{ isIntersecting }], observerElement) => {
-    targetIsVisible.value = isIntersecting
-  },
-)
 
 watch(targetIsVisible, (isVisible) => {
   if (isVisible) {

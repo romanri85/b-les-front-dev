@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRoute } from 'vue-router'
 import searchByParameters from '~/data/searchByParameters.json'
 import PrimaryButtonSmall from '~/components/buttons/PrimaryButtonSmall.vue'
 import { useFiltersStore } from '~/stores/filtersStore'
@@ -9,12 +8,10 @@ import { useFiltersStore } from '~/stores/filtersStore'
 const key = ref(0)
 
 const filtersStore = useFiltersStore()
-const { activeFilters, filterCount, materialColors, isDoorSetApplied } = storeToRefs(filtersStore)
+const { activeFilters, isDoorSetApplied } = storeToRefs(filtersStore)
 
 const doorSets = reactive(searchByParameters)
 const activeDoorSetIndex = ref(null)
-
-const route = useRoute()
 
 const initialFilters = {
   design: [],
@@ -41,11 +38,11 @@ onMounted(() => {
 
       router.replace({ path: '/catalog' }).then(() => {
       }).catch((err) => {
-        console.log('Route replace failed:', err)
+        throw new Error(err)
       })
     }
     else {
-      console.warn(`No doorSet found with id ${filtersId}`)
+      throw new Error('Invalid doorSet id provided')
     }
   }
 })
@@ -56,10 +53,8 @@ function changeDoorset(doorSet) {
   filterKeys.forEach((filterType) => {
     const currentValue = doorSet.filter[filterType]
 
-    if (!activeFilters.value.hasOwnProperty(filterType)) {
-      console.warn('Invalid filter type provided: ', filterType)
-      return
-    }
+    if (!activeFilters.value.hasOwnProperty(filterType))
+      throw new Error(`Invalid filter type provided: ${filterType}`)
 
     if (Array.isArray(currentValue)) { // Handle Array values
       currentValue.forEach((value) => {
@@ -150,10 +145,6 @@ function checkToUnderline(doorSet) {
     }
   }
   return true
-}
-
-function onScroll() {
-  console.log('scroll')
 }
 
 const showAll = ref(false)

@@ -24,7 +24,7 @@ await fetchPlinths()
   </article>
   <!-- <pre>{{plinths}}</pre> -->
   <div v-if="plinths" class="main-container xl:mx-[228px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-5 gap-x-4 lg:pb-32 pb-20">
-    <div v-for="plinth in plinths" class="min-w-80">
+    <div v-for="plinth in plinths" :key="plinth.name" class="min-w-80">
       <div class="relative group">
         <div class="w-full h-60">
           <nuxt-img

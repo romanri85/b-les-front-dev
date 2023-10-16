@@ -4,7 +4,6 @@ import { useSaleStore } from '~/stores/saleStore.js'
 
 const saleStore = useSaleStore()
 const heroName = 'Акции'
-const heroDescription = ''
 const heroImage = '/sale/sale-bg.webp'
 
 // const now = new Date();
@@ -41,7 +40,7 @@ onMounted(() => {
       <!--              </vue-countdown> -->
       <!--            </client-only> -->
       <div v-if="saleStore.sales" class="mt-20 md:mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <div v-for="sale in saleStore.sales" class="min-w-80">
+        <div v-for="sale in saleStore.sales" :key="sale.id" class="min-w-80">
           <div class="relative group">
             <div class="w-full h-60 cursor-pointer">
               <NuxtLink :to="`/sale/${sale.id}`">

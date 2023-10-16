@@ -2,7 +2,6 @@
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { ref, toRefs, watch } from 'vue'
 import { baseURL } from '~/config'
-import { useIsBurgerOpenStore } from '~/stores/isBurgerOpenStore.js'
 import { useIsContactUsOpenStore } from '~/stores/isContactUsOpenStore.js'
 
 const props = defineProps({
@@ -11,10 +10,7 @@ const props = defineProps({
   city: Object,
   cities: Array,
 })
-const isBurgerOpenStore = useIsBurgerOpenStore()
 const isContactUsOpenStore = useIsContactUsOpenStore()
-
-const value = ref([])
 
 const formData = ref({
   form_type: 'Заказать замер',
@@ -59,14 +55,14 @@ async function handleSubmit(data) {
     if (!response.ok) {
       // Log the response if it's not OK
       const responseData = await response.json()
-      console.log(`Error: ${response.status}`, responseData)
+      throw new Error(responseData.detail)
     }
     else {
       closeModal()
     }
   }
   catch (error) {
-    console.error('There was an error sending the request', error)
+    throw new Error(error.message)
   }
 }
 const { shouldOpenModal } = toRefs(props)

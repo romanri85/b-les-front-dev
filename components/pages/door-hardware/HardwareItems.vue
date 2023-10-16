@@ -13,12 +13,11 @@ definePageMeta({
   },
 })
 const hardwareFiltersStore = useHardwareFiltersStore()
-const { total, pagesCount, products, page_size, page } = storeToRefs(hardwareFiltersStore)
+const { total, pagesCount, products } = storeToRefs(hardwareFiltersStore)
 const hardwareItemsBlock = ref(null)
 const [parent] = useAutoAnimate()
 function scrollToHardwareItemsBlock() {
   parent.value.scrollIntoView({ behavior: 'smooth' })
-  console.log('scrollToHardwareItemsBlock')
 }
 
 // const page = ref(1)

@@ -1,10 +1,10 @@
 <script setup lang="js">
-import { storeToRefs } from 'pinia'
 import { useElementVisibility, useResizeObserver } from '@vueuse/core'
 import BaseHero from '~/components/base/BaseHero.vue'
 import HardwareItems from '~/components/pages/door-hardware/HardwareItems.vue'
 import { useHardwareFiltersStore } from '~/stores/hardwareFiltersStore'
 import { useViewportSize } from '~/composables/useViewportSize'
+import HardwareFilters from '~/components/pages/door-hardware/HardwareFilters.vue'
 import HardwareFiltersMobile from '~/components/pages/door-hardware/HardwareFiltersMobile.vue'
 
 definePageMeta({ layout: 'catalog' })
@@ -12,20 +12,11 @@ definePageMeta({ layout: 'catalog' })
 const footerElement = ref(null)
 const viewport = useViewportSize()
 const hardwareFiltersStore = useHardwareFiltersStore()
-const { activeFilters, filterCount } = storeToRefs(hardwareFiltersStore)
 const footerIsVisible = useElementVisibility(footerElement)
 
 const heroName = 'doorHardware'
 const heroDescription = 'doorHardwarePageDescription'
 const heroImage = '/door-hardware/door-hardware.webp'
-
-const products = ref([])
-const page = ref(1)
-const total = ref(0)
-const pagesCount = ref(0)
-const page_size = 20
-
-const route = useRoute()
 
 const catalogElement = ref(null)
 const catalogElementHeight = ref(null)

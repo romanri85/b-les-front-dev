@@ -8,7 +8,7 @@ import { useFiltersStore } from '~/stores/filtersStore'
 import { useViewportSize } from '~/composables/useViewportSize'
 
 const filtersStore = useFiltersStore()
-const { activeFilters, materialColors, filterCount } = storeToRefs(filtersStore)
+const { materialColors, filterCount } = storeToRefs(filtersStore)
 
 await filtersStore.fetchMaterialColors()
 // onMounted(async () => {

@@ -1,18 +1,6 @@
 <script setup>
 import { defineExpose, ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { useRouter } from 'vue-router'
-
-const props = defineProps({
-  image: {
-    type: null,
-    required: true,
-  },
-})
-
-const emit = defineEmits(['chooseTag'])
-
-const router = useRouter()
 
 defineExpose({
   openModal,

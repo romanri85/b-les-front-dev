@@ -5,7 +5,7 @@ import { useHardwareFiltersStore } from '~/stores/hardwareFiltersStore.js'
 import FilterType from '~/components/filters/FilterType.vue'
 
 const hardwareFiltersStore = useHardwareFiltersStore()
-const { activeFilters, filterCount } = storeToRefs(hardwareFiltersStore)
+const { filterCount } = storeToRefs(hardwareFiltersStore)
 // const firstUpdateSliderAfterMount = ref(true);
 
 function updateSliderValues([newMin, newMax]) {

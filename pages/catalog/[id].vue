@@ -17,7 +17,7 @@ import ContactUsModal from '~/components/pop-ups/ContactUsModal.vue'
 import { useViewportSize } from '~/composables/useViewportSize'
 import DoorCardPriceDetail from '~/components/pages/door-catalog/DoorCardPriceDetail.vue'
 
-const { x, y } = useWindowScroll()
+const { y } = useWindowScroll()
 
 const viewport = useViewportSize()
 
@@ -128,8 +128,6 @@ async function fetchDoorVariantData(query = `/${route.params.id}`) {
   product.value = await $fetch(`${baseURL}/api/product${query}`)
 }
 
-const target = ref(null)
-
 function getActualDoorVariantData(filterData = { material: material.value, color: color.value }) {
   color.value = filterData.color
   material.value = filterData.material
@@ -142,7 +140,6 @@ function getActualDoorVariantData(filterData = { material: material.value, color
 }
 
 function changeModel(model) {
-  console.log(model, 'model')
   router.push({ path: `/catalog/${model.id}`, query: { color: color.value, material: material.value } })
 }
 
@@ -151,13 +148,13 @@ function changeCasing(casing) {
   actualCasing.value = casing
 }
 
-function changeGlass(glass) {
-  if (glass === null) {
-    newGlass.value = {}
-    return
-  }
-  newGlass.value = product.value.glass_decor.find(item => item.glass.id === glass.glass && item.decor.id === glass.decor)
-}
+// function changeGlass(glass) {
+//   if (glass === null) {
+//     newGlass.value = {}
+//     return
+//   }
+//   newGlass.value = product.value.glass_decor.find(item => item.glass.id === glass.glass && item.decor.id === glass.decor)
+// }
 
 const isCollectionModelOpen = ref(false)
 
@@ -391,7 +388,7 @@ function onChangePage(page) {
     <div ref="imagesBlock" class="layout-images pt-16 lg:pt-24">
       <div class="image-container">
         <div
-          v-for="(image, index) in layoutImages" :key="image.id" class="cursor-pointer"
+          v-for="image in layoutImages" :key="image.id" class="cursor-pointer"
           :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`"
         >
           <nuxt-img :src="image.image" class="object-cover" :alt="image.project_name" @click="triggerModal(image)" />

@@ -2,7 +2,6 @@
 import BaseHeroWithoutDescription from '~/components/base/BaseHeroWithoutDescription.vue'
 
 const heroName = 'toDesignersHeader'
-const heroDescription = 'toDesignersPageDescription'
 const heroImage = '/to-designers/to-designers-bg.webp'
 </script>
 

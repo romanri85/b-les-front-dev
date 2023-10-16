@@ -8,7 +8,8 @@ const props = defineProps({
   heroDescription: String,
   heroImage: String,
   buttons: Object,
-}); const imageLoaded = ref(false) // Add this line
+})
+const imageLoaded = ref(false) // Add this line
 
 const route = useRoute()
 </script>

@@ -6,7 +6,7 @@ import FilterType from '~/components/filters/FilterType.vue'
 import { useViewportSize } from '~/composables/useViewportSize'
 
 const filtersStore = useFiltersStore()
-const { activeFilters, filterCount } = storeToRefs(filtersStore)
+const { filterCount } = storeToRefs(filtersStore)
 
 // console.log(props.isOpen, 'props')
 // console.log(open.value, 'open')

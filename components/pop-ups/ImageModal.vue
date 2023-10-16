@@ -100,7 +100,7 @@ function openModal() {
                 <div v-else class="py-2" />
               </nuxt-link>
               <div class="inline-flex justify-start flex-wrap">
-                <div v-for="tag in image.tags.sort((a, b) => a.name.localeCompare(b.name))" class=" text-sm text-primaryDark cursor-pointer">
+                <div v-for="tag in image.tags.sort((a, b) => a.name.localeCompare(b.name))" :key="tag.name" class=" text-sm text-primaryDark cursor-pointer">
 &nbsp;
 
                   &nbsp;

@@ -2,7 +2,6 @@
 import BaseHeroWithoutDescription from '~/components/base/BaseHeroWithoutDescription.vue'
 
 const heroName = 'deliveryInstallationPageHeader'
-const heroDescription = 'toDesignersPageDescription'
 const heroImage = '/delivery-and-installation/delivery-installation-bg.webp'
 </script>
 

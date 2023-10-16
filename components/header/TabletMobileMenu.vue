@@ -6,14 +6,12 @@ import {
 } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/solid'
 import { defineEmits } from 'vue'
-import { useRoute } from 'vue-router'
 import menuItemsProps from '~/data/MenuItemsProps.json'
 import TextMenuItemsFile from '~/data/TextMenuItems.json'
 import DisclosureStateEmitter from '~/components/base/DisclosureStateEmitter.vue'
 import { useIsBurgerOpenStore } from '~/stores/isBurgerOpenStore'
 
 const emit = defineEmits()
-const route = useRoute()
 const isBurgerOpenStore = useIsBurgerOpenStore()
 const textMenuItems = reactive(TextMenuItemsFile)
 
@@ -33,11 +31,7 @@ function handleCloseBurger() {
 }
 
 function checkSamePath(item) {
-  console.log(item)
-  // if(item.slug === route.path) {
-  console.log('same path')
   handleCloseBurger()
-  // }
 }
 
 function hideOther(id) {
@@ -45,10 +39,6 @@ function hideOther(id) {
     return elm.getAttribute('data-id') !== id.toString()
   })
   items.forEach(elm => elm.click())
-}
-
-function doClose(close) {
-  close()
 }
 </script>
 

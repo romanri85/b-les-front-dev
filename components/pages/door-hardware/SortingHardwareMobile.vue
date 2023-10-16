@@ -37,7 +37,6 @@ const sortFilters = [
 const hardwareFiltersStore = useHardwareFiltersStore()
 
 function sortHardware(sorting: string) {
-  console.log('sortProducts')
   hardwareFiltersStore.onChangeFilters({ ordering: sorting })
   emit('closeSorting')
 }
@@ -47,7 +46,7 @@ function sortHardware(sorting: string) {
   <client-only>
     <div class="mt-10">
       <div
-        v-for="sorting in sortFilters"
+        v-for="sorting in sortFilters" :key="sorting.name"
         class="whitespace-nowrap bg-white  p-4 [&>a]:p-2 w-[100vw]"
       >
         <div class="cursor-pointer" @click="sortHardware(sorting.value)">

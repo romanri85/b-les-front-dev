@@ -1,7 +1,6 @@
 <script setup lang="js">
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { useInteriorStore } from '~/stores/interiorStore'
 import Pagination from '~/components/base/pagination/Pagination.vue'
 import { baseURL } from '~/config'
 import ImageModal from '~/components/pop-ups/ImageModal.vue'
@@ -13,16 +12,11 @@ definePageMeta({ layout: 'dark-header' })
 const route = useRoute()
 
 const router = useRouter()
-const interiorStore = useInteriorStore()
 
 const tagsBlock = ref(null)
 function scrollToTagsBlock() {
   tagsBlock.value.scrollIntoView({ behavior: 'smooth' })
 }
-
-const heroName = 'interiorHeader'
-const heroDescription = ''
-const heroImage = '/interior/bg-interior.webp'
 
 const initialTags = ref([])
 const imgModal = ref(null)

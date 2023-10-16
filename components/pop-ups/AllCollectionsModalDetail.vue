@@ -23,7 +23,6 @@ const props = defineProps({
 })
 const emit = defineEmits(['closeModal', 'changeModel'])
 const isOpen = ref(true)
-const products = ref([])
 
 const activeProductId = ref(1)
 
@@ -38,7 +37,6 @@ function openModal() {
 }
 
 function chooseProduct(product) {
-  console.log('chooseProduct', product)
   activeProductId.value = product.id
   emit('changeModel', product)
   emit('closeModal')

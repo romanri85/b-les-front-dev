@@ -7,19 +7,13 @@ import DoorItems from '~/components/pages/door-catalog/DoorItems.vue'
 import { useFiltersStore } from '~/stores/filtersStore'
 import { useViewportSize } from '~/composables/useViewportSize'
 import DoorSets from '~/components/pages/door-catalog/DoorSets.vue'
-import DoorFilters from "~/components/pages/door-catalog/DoorFilters.vue";
+import DoorFilters from '~/components/pages/door-catalog/DoorFilters.vue'
 import DoorFiltersMobile from '~/components/pages/door-catalog/DoorFiltersMobile.vue'
-
-const footerElement = ref(null)
 
 const viewport = useViewportSize()
 
 const filtersStore = useFiltersStore()
-const { activeFilters, filterCount } = storeToRefs(filtersStore)
-
-const heroName = 'catalog'
-const heroDescription = 'catalogPageDescription'
-const heroImage = '/catalog/catalog-hero.jpg'
+const { activeFilters } = storeToRefs(filtersStore)
 
 const catalogElement = ref(null)
 const catalogElementHeight = ref(null)
@@ -39,11 +33,6 @@ useResizeObserver(doorFilters, (entries) => {
   const { height } = entry.contentRect
   doorFiltersHeight.value = height
 })
-const products = ref([])
-const page = ref(1)
-const total = ref(0)
-const pagesCount = ref(0)
-const page_size = 24
 
 const route = useRoute()
 

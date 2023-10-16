@@ -9,7 +9,7 @@ import HeaderDesktop from '~/components/header/HeaderDesktop.vue'
 const props = defineProps({ light: { type: Boolean, default: true } })
 const viewport = useViewportSize()
 
-const { locale, setLocale } = useI18n()
+// const { locale, setLocale } = useI18n()
 </script>
 
 <template>

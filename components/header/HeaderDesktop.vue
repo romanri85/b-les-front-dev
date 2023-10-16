@@ -12,11 +12,11 @@ const props = defineProps({
 
 const { locale, setLocale } = useI18n()
 
-async function toggleLocale() {
-  const newLocale = locale.value === 'en' ? 'ru' : 'en'
-  await setLocale(newLocale)
-  await nextTick()
-}
+// async function toggleLocale() {
+//   const newLocale = locale.value === 'en' ? 'ru' : 'en'
+//   await setLocale(newLocale)
+//   await nextTick()
+// }
 </script>
 
 <template>

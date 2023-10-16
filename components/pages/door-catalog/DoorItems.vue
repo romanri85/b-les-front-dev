@@ -1,6 +1,5 @@
 <script setup lang="js">
 import { useAutoAnimate } from '@formkit/auto-animate/vue'
-import { storeToRefs } from 'pinia'
 import DoorCard from '~/components/pages/door-catalog/DoorCard.vue'
 import Sorting from '~/components/filters/Sorting.vue'
 import { useFiltersStore } from '~/stores/filtersStore'
@@ -8,7 +7,6 @@ import { useViewportSize } from '~/composables/useViewportSize'
 
 const filtersStore = useFiltersStore()
 
-const { total, pagesCount, products, page_size, page } = storeToRefs(filtersStore)
 // filtersStore.fetchProducts()
 const viewport = useViewportSize()
 

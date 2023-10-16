@@ -29,20 +29,20 @@ const filtersStore = useFiltersStore()
       </div>
     </div>
     <div class="filter-container">
-<!--      <client-only>-->
-        <PriceFilter />
+      <!--      <client-only> -->
+      <PriceFilter />
 
-        <ColorSetFilter />
-        <DesignFilter />
-        <MaterialFilter />
-        <MaterialColorFilter />
-        <DoorCollectionsFilter />
-        <GlassFilter />
-        <SaleFilter />
-        <div class="w-full text-start " @click="filtersStore.onResetFilters()">
-          <h3><span class="underline-static cursor-pointer">Все двери</span></h3>
-        </div>
-<!--      </client-only>-->
+      <ColorSetFilter />
+      <DesignFilter />
+      <MaterialFilter />
+      <MaterialColorFilter />
+      <DoorCollectionsFilter />
+      <GlassFilter />
+      <SaleFilter />
+      <div class="w-full text-start " @click="filtersStore.onResetFilters()">
+        <h3><span class="underline-static cursor-pointer">Все двери</span></h3>
+      </div>
+      <!--      </client-only> -->
     </div>
   </section>
 </template>

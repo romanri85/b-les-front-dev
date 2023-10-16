@@ -52,7 +52,7 @@ function scrollToImageHitsBlock() {
 
 const selectedTabindex = ref(null)
 const selectedTabindexKey = ref(0)
-async function performSearch(page = 0) {
+async function performSearch() {
   if (SearchQuery.value) {
     const MaterialColorProductVariantPromise = MaterialColorProductVariantIndex.search(
       SearchQuery.value,
@@ -86,7 +86,6 @@ async function performSearch(page = 0) {
     // Check for no hits and notify the user
     if (MaterialColorProductVariantResponse.nbHits === 0 && ImageResponse.nbHits === 0) {
       // Notify the user, e.g., through a UI element or a console log
-      console.log('No results found in both indices.')
       selectedTabindex.value = null
     }
   }
@@ -100,7 +99,7 @@ async function performSearch(page = 0) {
   selectedTabindexKey.value++
 }
 const MaterialColorProductVariantResponse = ref(null)
-async function performMaterialColorProductVariantSearch(page = 0) {
+async function performMaterialColorProductVariantSearch() {
   if (SearchQuery.value) {
     MaterialColorProductVariantResponse.value = await MaterialColorProductVariantIndex.search(SearchQuery.value, {
       hitsPerPage: 24,
@@ -118,7 +117,7 @@ async function performMaterialColorProductVariantSearch(page = 0) {
 
 const ImageResponse = ref(null)
 
-async function performImageSearch(page = 0) {
+async function performImageSearch() {
   if (SearchQuery.value) {
     ImageResponse.value = await ImageIndex.search(SearchQuery.value, {
       hitsPerPage: 12,
@@ -221,7 +220,6 @@ function handleImagePage(newPage) {
           <TabPanel>
             <div v-if="MaterialColorProductVariantTotalHits">
               <div
-                ref="parent"
                 class="mt-4 md:mt-16 gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid"
               >
                 <!--        <pre>{{MaterialColorProductVariantResponse.hits}}</pre> -->

@@ -1,17 +1,13 @@
 <script setup lang="js">
 import { storeToRefs } from 'pinia'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useInteriorStore } from '~/stores/interiorStore'
 import Pagination from '~/components/base/pagination/Pagination.vue'
 
 const interiorStore = useInteriorStore()
 const { projects } = storeToRefs(interiorStore)
 
-const heroName = 'interiorHeader'
-const heroDescription = ''
-const heroImage = '/interior/bg-interior.webp'
 const route = useRoute()
-const router = useRouter()
 
 const interiorsBlock = ref(null)
 function scrollToInteriorsBlock() {
@@ -21,8 +17,6 @@ function scrollToInteriorsBlock() {
 definePageMeta({ layout: 'dark-header' })
 // const currentPage = ref(route.query.page ? parseInt(route.query.page as string) : 1);
 const currentPage = ref(route.query.page ? Number.parseInt(route.query.page) : 1)
-
-const products = ref([])
 
 await interiorStore.getProjects(currentPage.value)
 // watch(() => route.query.page, (newPage) => {
@@ -77,7 +71,7 @@ function onChangePage(page) {
           </div>
         </div>
         <div class="pb-4 pt-4">
-          <div v-for="tag in project.tags" class="inline-block ">
+          <div v-for="tag in project.tags" :key="tag.id" class="inline-block ">
             <NuxtLink :to="{ path: '/search-tags', query: { tags: tag.id } }">
               <p class="text-lg inline">
                 #{{ tag.name }}&nbsp;

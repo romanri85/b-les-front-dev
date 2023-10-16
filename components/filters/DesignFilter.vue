@@ -18,7 +18,7 @@ const designs = [
 ]
 
 const filtersStore = useFiltersStore()
-const { activeFilters, filterCount } = storeToRefs(filtersStore)
+const { filterCount } = storeToRefs(filtersStore)
 
 function isDesignAvailable(design) {
   for (const item of filterCount.value.design) {

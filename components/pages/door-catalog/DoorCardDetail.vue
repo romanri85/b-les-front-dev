@@ -5,7 +5,7 @@ const props = defineProps({
   newGlass: Object,
 })
 
-const initialGlass = props.product.glass_decor.find((item: GlassDecorItem) => item.initial === true) || { price: 0 }
+// const initialGlass = props.product.glass_decor.find((item: GlassDecorItem) => item.initial === true) || { price: 0 }
 </script>
 
 <template>

@@ -19,7 +19,7 @@ const target = ref(null)
 const disclosureNumber = ref(0)
 const isOpen = ref(false)
 
-onClickOutside(target, (event) => {
+onClickOutside(target, () => {
   if (isOpen.value && !isContactUsOpenStore.isContactUsModalOpen) {
     disclosureNumber.value++
     isOpen.value = false
@@ -28,7 +28,7 @@ onClickOutside(target, (event) => {
 
 watch(
   () => route.path,
-  (newValue, oldValue) => {
+  () => {
     isOpen.value = false
   },
 )
@@ -44,7 +44,7 @@ watch(
     <div class="" :class="{ overlay: isOpen }" /> <!-- Add this line -->
 
     <!--  <client-only> -->
-    <Disclosure :key="disclosureNumber + route.path" ref="target" v-slot="{ open, close }" class="z-20" as="div">
+    <Disclosure :key="disclosureNumber + route.path" ref="target" v-slot="{ open }" class="z-20" as="div">
       <div :class="{ 'bg-white': open }">
         <div
           :class="{ 'bg-white': open }"

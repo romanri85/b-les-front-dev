@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { useIsBurgerOpenStore } from '~/stores/isBurgerOpenStore'
-
 const props = defineProps({ light: { type: Boolean } })
-const isBurgerOpenStore = useIsBurgerOpenStore()
 const isOpen = ref(false)
 function toggleBurger() {
   isOpen.value = !isOpen.value

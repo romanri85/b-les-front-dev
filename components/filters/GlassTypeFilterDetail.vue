@@ -15,9 +15,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['changeGlassDecor'])
-interface Props {
-  glass_decor: GlassDecorItem[]
-}
+
 const initialGlass = props.glass_decor.find((item: GlassDecorItem) => item.initial === true)
 
 const glassTypeActiveIndex = ref(initialGlass.glass.id)
@@ -47,10 +45,9 @@ onMounted(async () => {
 
 function chooseGlass(glass: number): void {
   console.log('changeGlassDecor')
-  if (glass === glassDecor.value.glass) {
-    console.log('same glass type')
+  if (glass === glassDecor.value.glass)
     return
-  }
+
   glassTypeActiveIndex.value = glass
   glassDecor.value = { ...glassDecor.value, glass }
   if (glassDecor.value.glass === initialGlass.glass.id && glassDecor.value.decor === initialGlass.decor.id) {
@@ -59,8 +56,6 @@ function chooseGlass(glass: number): void {
   }
 
   emit('changeGlassDecor', { glass: glassDecor.value.glass, decor: glassDecor.value.decor })
-  console.log(glassDecorActiveIndex.value, 'glassDecorActiveIndex.value')
-  console.log(glassTypeActiveIndex.value, 'glassTypeActiveIndex.value')
 }
 
 function chooseDecor(decor: number): void {

@@ -78,7 +78,7 @@ function openModal() {
                 </button>
               </div>
               <div class="mt-8 mb-8">
-                <div v-for="system in systems">
+                <div v-for="system in systems" :key="system.name">
                   <h2 class="cursor-pointer mb-8 inline-block">
                     {{ system.name }}
                   </h2>

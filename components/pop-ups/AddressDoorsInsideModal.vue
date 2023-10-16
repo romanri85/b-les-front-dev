@@ -21,19 +21,12 @@ const products = ref([])
 const activeProductId = ref(1)
 
 function closeModal() {
-  console.log('closed')
   isOpen.value = false
   emit('closeModal')
 }
 
 function openModal() {
   isOpen.value = true
-}
-
-function chooseProduct(product) {
-  activeProductId.value = product.id
-  emit('changeModel', product)
-  emit('closeModal')
 }
 </script>
 

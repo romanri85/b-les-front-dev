@@ -6,10 +6,9 @@ import { useFiltersStore } from '~/stores/filtersStore'
 import { useViewportSize } from '~/composables/useViewportSize'
 
 const filtersStore = useFiltersStore()
-const { activeFilters, filterCount } = storeToRefs(filtersStore)
+const { filterCount } = storeToRefs(filtersStore)
 
 const withSaleDisabled = computed(() => filterCount.value.sale[0]?.with_sale === 0)
-const withoutSaleDisabled = computed(() => filterCount.value.sale[0]?.without_sale === 0)
 
 function chooseSale(bool_str: string) {
   filtersStore.checkDoorSetApplied()
