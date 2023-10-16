@@ -35,7 +35,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         // Set tracesSampleRate to 1.0 to capture 100%
         // of transactions for performance monitoring.
         // We recommend adjusting this value in production
-        tracesSampleRate: 1.0,
+        tracesSampleRate: 0.5,
 
         // Set `tracePropagationTargets` to control for which URLs distributed tracing should be enabled
         tracePropagationTargets: ["localhost", /^https:\/\/romanli\.me\/api/, /^https:\/\/romanli\.me/, ],
@@ -46,8 +46,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         replaysOnErrorSampleRate: 1.0,
     });
 
-    // vueApp.mixin(Sentry.createTracingMixins({ trackComponents: true, timeout: 2000, hooks: ['activate', 'mount', 'update'] }));
-    // Sentry.attachErrorHandler(vueApp, { logErrors: false, attachProps: true, trackComponents: true, timeout: 2000, hooks: ['activate', 'mount', 'update'] });
+    vueApp.mixin(Sentry.createTracingMixins({ trackComponents: true, timeout: 2000, hooks: ['activate', 'mount', 'update'] }));
+    Sentry.attachErrorHandler(vueApp, { logErrors: false, attachProps: true, trackComponents: true, timeout: 2000, hooks: ['activate', 'mount', 'update'] });
 
     return {
         provide: {
