@@ -48,6 +48,7 @@
     "@nuxt/image-edge": "^1.0.0-28094923.e859bba",
     "@nuxtjs/i18n": "^8.0.0-beta.12",
     "@sentry/vite-plugin": "^2.8.0",
+    "autoprefixer": "^10.4.16",
     "eslint": "^8.51.0",
     "nuxt": "^3.7.3",
     "nuxt-headlessui": "^1.1.1",

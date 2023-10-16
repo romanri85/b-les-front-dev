@@ -2,6 +2,7 @@
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 
 export default defineNuxtConfig({
+
   // build: {
   //   transpile: ['fsevents'],
   // },
@@ -54,6 +55,7 @@ export default defineNuxtConfig({
   postcss: {
     plugins: {
       tailwindcss: {},
+        autoprefixer: {},
     },
   },
   headlessui: {
