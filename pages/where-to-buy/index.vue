@@ -25,14 +25,17 @@ const isCityFound = ref(true)
 // const langParam = isRussian ? 'ru_RU' : 'en_US';
 const langParam = 'ru_RU';
 //
-useHead({
-  script: [
-    {
-      src: `https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=${langParam}`,
-      // async: true,
-    },
-  ],
-});
+if (typeof ymaps === 'undefined') {
+  useHead({
+    script: [
+      {
+        src: `https://api-maps.yandex.ru/2.1/?apikey=4b36a04b-c3bd-460a-b5ad-72f6766c8765&lang=${langParam}`,
+        // async: true,
+      },
+    ],
+  });
+}
+
 
 async function getAddresses() {
   addresses.value = await $fetch(`${baseURL}/api/shops/`)
