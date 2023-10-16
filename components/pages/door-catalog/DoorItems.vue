@@ -70,7 +70,7 @@ function onChangePage(page) {
       <div class=" mt-4 md:mt-16 md:gap-y-8 lg:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid" ref="parent">
 
     <div class="" v-for="doorVariant in filtersStore.products" :key="doorVariant.id">
-      <NuxtLink
+      <NuxtLink v-if="doorVariant && doorVariant.merged_image"
           :to="`/catalog/${doorVariant.product_variant.product_id}?material=${doorVariant.product_variant.material.id}&color=${doorVariant.color.id}`">
         <door-card class="relative transition-all duration-300 pb-6 mb-6"
                    :doorVariant="doorVariant"
@@ -85,7 +85,7 @@ function onChangePage(page) {
 
 
       <div v-for="doorVariant in filtersStore.products" :key="doorVariant.id">
-        <NuxtLink
+        <NuxtLink v-if="doorVariant && doorVariant.merged_image"
             :to="`/catalog/${doorVariant.product_variant.product_id}?material=${doorVariant.product_variant.material.id}&color=${doorVariant.color.id}`">
           <door-card class="relative  transition-all duration-300 pb-6 mb-6"
                      :doorVariant="doorVariant"
