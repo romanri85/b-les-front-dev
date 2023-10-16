@@ -48,7 +48,7 @@ const iconsMenuItems = [
         </nuxt-link>
       </template>
       <template v-else>
-        <nuxt-img :src="light ? item.whiteIconPath : item.blackIconPath" :alt="item.alt" class="h-full" />
+        <img :src="light ? item.whiteIconPath : item.blackIconPath" :alt="item.alt" class="h-full" />
       </template>
     </li>
     <ContactUsModal ck :should-open-modal="shouldOpenModal" />
