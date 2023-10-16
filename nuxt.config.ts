@@ -2,15 +2,15 @@
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 
 export default defineNuxtConfig({
-  build: {
-    transpile: ['fsevents'],
-  },
+  // build: {
+  //   transpile: ['fsevents'],
+  // },
 
   css: ['~/assets/styles/index.scss'],
-  sourcemap: {
-    client: true,
-    server: true,
-  },
+  // sourcemap: {
+  //   client: true,
+  //   server: true,
+  // },
   modules: [
     '@nuxtjs/algolia',
     'nuxt-headlessui',
