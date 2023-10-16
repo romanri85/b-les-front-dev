@@ -1,56 +1,50 @@
-<template>
-  <div class="example-six">
-    <vue-awesome-paginate
-        :total-items="props.total"
-        v-model="currentPage"
-        :items-per-page="props.page_size"
-        :max-pages-shown="1"
-        :on-click="HandleNewPage"
-
-    >
-      <template #prev-button>
-        <span>
-          <ChevronLeftIcon class="w-6 h-6 mx-auto"/>
-        </span>
-      </template>
-
-      <template #next-button>
-        <span>
-         <ChevronRightIcon class="w-6 h-6 mx-auto"/>
-        </span>
-      </template>
-    </vue-awesome-paginate>
-
-  </div>
-</template>
-
 <script setup lang="ts">
-import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/24/solid";
-import {computed, ref} from "vue";
-import {VueAwesomePaginate} from "vue-awesome-paginate";
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid'
+import { computed } from 'vue'
+import { VueAwesomePaginate } from 'vue-awesome-paginate'
 
 const props = defineProps({
   total: Number,
   currentPage: Number,
   page_size: Number,
 })
-const currentPage = computed({
-  get: () => props.currentPage,
-  set: (value) => emitPagination('update:currentPage', value)
-})
-
-
 const emitPagination = defineEmits(['update:currentPage', 'pageChange'])
 
+const currentPage = computed({
+  get: () => props.currentPage,
+  set: value => emitPagination('update:currentPage', value),
+})
 
-const HandleNewPage = (current) => {
+function HandleNewPage(current) {
   emitPagination('update:currentPage', current)
   emitPagination('pageChange', current)
-
-
-
 }
 </script>
+
+<template>
+  <div class="example-six">
+    <VueAwesomePaginate
+      v-model="currentPage"
+      :total-items="props.total"
+      :items-per-page="props.page_size"
+      :max-pages-shown="1"
+      :on-click="HandleNewPage"
+    >
+      <template #prev-button>
+        <span>
+          <ChevronLeftIcon class="w-6 h-6 mx-auto" />
+        </span>
+      </template>
+
+      <template #next-button>
+        <span>
+          <ChevronRightIcon class="w-6 h-6 mx-auto" />
+        </span>
+      </template>
+    </VueAwesomePaginate>
+  </div>
+</template>
+
 <style>
 .pagination-container {
   column-gap: 10px;
@@ -86,7 +80,6 @@ const HandleNewPage = (current) => {
 
 .active-page:hover {
 }
-
 
 .back-button:hover,
 .next-button:hover {

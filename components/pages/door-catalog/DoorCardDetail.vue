@@ -1,38 +1,35 @@
 <script setup lang="ts">
-
-import {toNumber} from "@vue/shared";
-import {baseURL} from "~/config";
-
 const props = defineProps({
   doorVariant: Object,
   product: Object,
   newGlass: Object,
 })
 
-
-const initialGlass = props.product.glass_decor.find((item: GlassDecorItem) => item.initial === true) || {price:0}
+const initialGlass = props.product.glass_decor.find((item: GlassDecorItem) => item.initial === true) || { price: 0 }
 </script>
 
 <template>
-<!--  <client-only>-->
+  <!--  <client-only> -->
 
-    <div v-if="props.doorVariant" class="flex flex-col items-center pb-2 md:pb-10 relative">
-      <div v-if="props.doorVariant.casing_variant" class="relative md:pb-8 lg:pb-5">
-        <nuxt-img placeholder width="290px" height="auto" :src="props.doorVariant.casing_variant.image"
-                  class="h-auto w-40 md:w-52 lg:w-72"></nuxt-img>
-        <nuxt-img placeholder width="290px" height="auto"
-                  :src="props.doorVariant.leaf_image"
-                  class="h-auto w-40 md:w-52 lg:w-72 absolute top-0"></nuxt-img>
-        <nuxt-img  v-if="props.newGlass && props.newGlass.image && (props.product.glass_decor.length > 0)" width="290px" height="auto"
-                  :src="props.newGlass.image"
-                  class="h-auto w-40 md:w-52 lg:w-72 absolute top-0"></nuxt-img>
-
-      </div>
-
-
+  <div v-if="props.doorVariant" class="flex flex-col items-center pb-2 md:pb-10 relative">
+    <div v-if="props.doorVariant.casing_variant" class="relative md:pb-8 lg:pb-5">
+      <nuxt-img
+        placeholder width="290px" height="auto" :src="props.doorVariant.casing_variant.image"
+        class="h-auto w-40 md:w-52 lg:w-72"
+      />
+      <nuxt-img
+        placeholder width="290px" height="auto"
+        :src="props.doorVariant.leaf_image"
+        class="h-auto w-40 md:w-52 lg:w-72 absolute top-0"
+      />
+      <nuxt-img
+        v-if="props.newGlass && props.newGlass.image && (props.product.glass_decor.length > 0)" width="290px" height="auto"
+        :src="props.newGlass.image"
+        class="h-auto w-40 md:w-52 lg:w-72 absolute top-0"
+      />
     </div>
-<!--  </client-only>-->
-
+  </div>
+<!--  </client-only> -->
 </template>
 
 <style scoped>

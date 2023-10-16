@@ -1,45 +1,49 @@
-<template>
-  <div class="example-six">
-    <mobilePagination v-if="viewport.isMobile" key="mobile" :total="props.total" :currentPage="currentPage" :page_size="props.page_size"
-                      @pageChange="HandleNewPage"/>
-    <desktopPagination v-else-if="viewport.isDesktop" key="desktop" :total="props.total" :currentPage="currentPage" :page_size="props.page_size"
-                       @pageChange="HandleNewPage"/>
-    <tabletPagination :total="props.total" v-else-if="viewport.isTablet" key="tablet" :currentPage="currentPage" :page_size="props.page_size"
-                      @pageChange="HandleNewPage"/>
-
-
-  </div>
-</template>
-
 <script setup lang="ts">
-import {computed, ref} from "vue";
-import MobilePagination from "~/components/base/pagination/mobilePagination.vue";
-import DesktopPagination from "~/components/base/pagination/desktopPagination.vue";
-import TabletPagination from "~/components/base/pagination/tabletPagination.vue";
-import {useViewportSize} from "~/composables/useViewportSize";
-const viewport = useViewportSize();
+import { computed } from 'vue'
+import MobilePagination from '~/components/base/pagination/mobilePagination.vue'
+import DesktopPagination from '~/components/base/pagination/desktopPagination.vue'
+import TabletPagination from '~/components/base/pagination/tabletPagination.vue'
+import { useViewportSize } from '~/composables/useViewportSize'
 
 const props = defineProps({
   total: Number,
   currentPage: Number,
   page_size: Number,
 })
-const currentPage = computed({
-  get: () => props.currentPage,
-  set: (value) => emitPagination('update:currentPage', value)
-})
-
 
 const emitPagination = defineEmits(['update:currentPage', 'pageChange'])
 
+const viewport = useViewportSize()
 
-const HandleNewPage = (current) => {
+const currentPage = computed({
+  get: () => props.currentPage,
+  set: value => emitPagination('update:currentPage', value),
+})
+
+function HandleNewPage(current) {
   emitPagination('update:currentPage', current)
   emitPagination('pageChange', current)
   // window.scrollTo(0, 500);
-
 }
 </script>
+
+<template>
+  <div class="example-six">
+    <MobilePagination
+      v-if="viewport.isMobile" key="mobile" :total="props.total" :current-page="currentPage" :page_size="props.page_size"
+      @pageChange="HandleNewPage"
+    />
+    <DesktopPagination
+      v-else-if="viewport.isDesktop" key="desktop" :total="props.total" :current-page="currentPage" :page_size="props.page_size"
+      @pageChange="HandleNewPage"
+    />
+    <TabletPagination
+      v-else-if="viewport.isTablet" key="tablet" :total="props.total" :current-page="currentPage" :page_size="props.page_size"
+      @pageChange="HandleNewPage"
+    />
+  </div>
+</template>
+
 <style>
 .pagination-container {
   column-gap: 10px;
@@ -62,7 +66,6 @@ const HandleNewPage = (current) => {
     width: 60px;
   }
 }
-
 
 .back-button,
 .next-button {
@@ -93,7 +96,6 @@ const HandleNewPage = (current) => {
 
 .active-page:hover {
 }
-
 
 .back-button:hover,
 .next-button:hover {

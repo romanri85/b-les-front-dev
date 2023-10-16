@@ -3,7 +3,6 @@
 
 <template>
   <main class="cd-main-content">
-
     <div class="cd-scrolling-bg cd-color-1 bg-white text-primaryDark lg:mx-48 md:mx-10">
       <div class="cd-container">
         <div class=" text-center lg:mt-32 md:mt-20 mt-24 main-container">
@@ -11,21 +10,21 @@
             {{ $t('michelangeloQuote') }}
           </h2>
           <div class="lg:mt-4 md:mt-3 mt-5 lg:mb-12 md:mb-8 mb-5">
-          <h3 class="tracking-wide">{{ $t('michelangelo') }}</h3>
+            <h3 class="tracking-wide">
+              {{ $t('michelangelo') }}
+            </h3>
           </div>
         </div>
       </div> <!-- cd-container -->
     </div> <!-- cd-scrolling-bg -->
 
     <div class="cd-fixed-bg cd-bg-1 lg:min-h-[400px] md:min-h-[250px] min-h-[200px]">
-      <!--      <h2>Last shot is a knee dragger!</h2>-->
+      <!--      <h2>Last shot is a knee dragger!</h2> -->
     </div> <!-- cd-fixed-bg -->
   </main> <!-- cd-main-content -->
-
 </template>
 
 <style scoped>
-
 .cd-container {
   /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
   width: 100%;
@@ -43,7 +42,6 @@
   height: 100%;
   position: relative;
   z-index: 1;
-
 
 }
 
@@ -87,7 +85,4 @@
 .cd-scrolling-bg {
   position: relative;
 }
-
-
-
 </style>

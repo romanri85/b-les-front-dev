@@ -1,22 +1,20 @@
 <script setup lang="ts">
+import ArrowToClick from '~/components/arrows/ArrowToClick.vue'
 
 defineProps({
   filterName: String,
 })
 
-import ArrowToClick from "~/components/arrows/ArrowToClick.vue";
-
 const isClicked = ref(false)
-const toggleArrow = () => {
+function toggleArrow() {
   isClicked.value = !isClicked.value
 }
-
 </script>
 
 <template>
-  <div @click="toggleArrow" class=" flex justify-between cursor-pointer">
-    <h4>{{$props.filterName}}</h4>
-    <ArrowToClick :class="{'-rotate-180': isClicked}"/>
+  <div class=" flex justify-between cursor-pointer" @click="toggleArrow">
+    <h4>{{ $props.filterName }}</h4>
+    <ArrowToClick :class="{ '-rotate-180': isClicked }" />
   </div>
 </template>
 

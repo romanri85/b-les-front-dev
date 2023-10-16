@@ -5,41 +5,40 @@
   "needToShowDropdown": true,
   "itemHeader": "collections"
 },
-  {
-    "id": "other-elements",
-    "name": "otherElements",
-    "slug": "/",
-    "needToShowDropdown": true,
-    "itemHeader": "otherElementsHeader"
-  },
-  {
-    "id": "where-to-buy",
-    "name": "whereToBuy",
-    "slug": "/where-to-buy",
-    "needToShowDropdown": false,
-    "itemHeader": "projects"
-  },
-  {
-    "id": "doors-in-interior",
-    "name": "projects",
-    "slug": "/interior",
-    "needToShowDropdown": false,
-    "itemHeader": "projects"
-  },
-  {
-    "id": "search-tags",
-    "name": "photoSearch",
-    "slug": "/search-tags",
-    "needToShowDropdown": false,
-    "itemHeader": "photoSearch"
-  },
+{
+  "id": "other-elements",
+  "name": "otherElements",
+  "slug": "/",
+  "needToShowDropdown": true,
+  "itemHeader": "otherElementsHeader"
+},
+{
+  "id": "where-to-buy",
+  "name": "whereToBuy",
+  "slug": "/where-to-buy",
+  "needToShowDropdown": false,
+  "itemHeader": "projects"
+},
+{
+  "id": "doors-in-interior",
+  "name": "projects",
+  "slug": "/interior",
+  "needToShowDropdown": false,
+  "itemHeader": "projects"
+},
+{
+  "id": "search-tags",
+  "name": "photoSearch",
+  "slug": "/search-tags",
+  "needToShowDropdown": false,
+  "itemHeader": "photoSearch"
+},
 
-
-  {
-    "id": "about-us",
-    "name": "aboutUs",
-    "slug": "/about-us",
-    "needToShowDropdown": true,
-    "itemHeader": "aboutUsHeader"
-  }
+{
+  "id": "about-us",
+  "name": "aboutUs",
+  "slug": "/about-us",
+  "needToShowDropdown": true,
+  "itemHeader": "aboutUsHeader"
+}
 ]

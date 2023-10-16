@@ -1,48 +1,37 @@
+<script setup lang="ts">
+import { useIsBurgerOpenStore } from '~/stores/isBurgerOpenStore'
+
+const props = defineProps({ light: { type: Boolean } })
+
+function toggleBurger() {
+  isOpen.value = !isOpen.value
+}
+
+const isBurgerOpenStore = useIsBurgerOpenStore()
+const isOpen = ref(false)
+</script>
+
 <template>
   <button class="burger-button" @click="toggleBurger">
-    <span v-if="!isOpen" class="burger-bar burger-bar-one bg-black"></span>
+    <span v-if="!isOpen" class="burger-bar burger-bar-one bg-black" />
     <span
-        v-else
-        class="burger-bar burger-bar-one burger-bar-one--active bg-black"
-    ></span>
-    <span v-if="!isOpen" class="burger-bar burger-bar-two bg-black"></span>
+      v-else
+      class="burger-bar burger-bar-one burger-bar-one--active bg-black"
+    />
+    <span v-if="!isOpen" class="burger-bar burger-bar-two bg-black" />
     <span
-        v-else
-        class="burger-bar burger-bar-two burger-bar-two--active bg-black"
-    ></span>
-    <span v-if="!isOpen" class="burger-bar burger-bar-three bg-black"></span>
+      v-else
+      class="burger-bar burger-bar-two burger-bar-two--active bg-black"
+    />
+    <span v-if="!isOpen" class="burger-bar burger-bar-three bg-black" />
     <span
-        v-else
-        class="burger-bar burger-bar-three burger-bar-three--active bg-black"
-    ></span>
-
+      v-else
+      class="burger-bar burger-bar-three burger-bar-three--active bg-black"
+    />
   </button>
 </template>
 
-
-
-
-
-
-
-<script setup lang="ts">
-
-import {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
-
-function toggleBurger() {
-  isOpen.value = !isOpen.value;
-
-}
-
-const isBurgerOpenStore = useIsBurgerOpenStore();
-const isOpen = ref(false);
-const props = defineProps({light: {type: Boolean}})
-
-
-</script>
-
 <style scoped>
-
 .burger-button {
   all: unset;
   position: relative;
@@ -84,5 +73,4 @@ const props = defineProps({light: {type: Boolean}})
 .burger-bar-three--active {
   display: none;
 }
-
 </style>

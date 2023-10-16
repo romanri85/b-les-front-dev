@@ -1,252 +1,284 @@
 <script setup lang="ts">
-defineProps({light: {type: Boolean, default: true}})
-
 import collections from '~/data/SliderCollections.json'
-import parameters from '~/data/searchByParameters.json'
-import BaseLogo from "~/components/base/BaseLogo.vue";
-import {useTagsStore} from "~/stores/tagsStore";
+import BaseLogo from '~/components/base/BaseLogo.vue'
+import { useTagsStore } from '~/stores/tagsStore'
 
-const {locale, setLocale} = useI18n()
+defineProps({ light: { type: Boolean, default: true } })
 
-
+const { locale, setLocale } = useI18n()
 
 function toggleLocale() {
-    const newLocale = locale.value === 'en' ? 'ru' : 'en'
-    setLocale(newLocale)
+  const newLocale = locale.value === 'en' ? 'ru' : 'en'
+  setLocale(newLocale)
 }
 
 const tagsStore = useTagsStore()
 await tagsStore.fetchTags()
 const tags = tagsStore.tags
 
-
-
 const xlLgMenu = [
-    // {
-    //     "name": "searchPhotoByTag",
-    //     "image": "/header-modal-img/delivery-installation.jpg",
-    //     "slug": "/other-items/delivery-and-installation"
-    // },
-    {
-        "name": "ourProjects",
-        "image": "/header-modal-img/delivery-installation.jpg",
-        "slug": "/interior"
-    },
+  // {
+  //     "name": "searchPhotoByTag",
+  //     "image": "/header-modal-img/delivery-installation.jpg",
+  //     "slug": "/other-items/delivery-and-installation"
+  // },
+  {
+    name: 'ourProjects',
+    image: '/header-modal-img/delivery-installation.jpg',
+    slug: '/interior',
+  },
 
-    {
-        "name": "deliveryAndInstallation",
-        "image": "/header-modal-img/delivery-installation.jpg",
-        "slug": "/delivery-and-installation"
-    },
-    {
+  {
+    name: 'deliveryAndInstallation',
+    image: '/header-modal-img/delivery-installation.jpg',
+    slug: '/delivery-and-installation',
+  },
+  {
 
-        "name": "aboutUs",
-        "image": "/header-modal-img/about-us.jpg",
-        "slug": "/about-us"
-    },
-    {
-        "name": "promotions",
-        "image": "/header-modal-img/promotions.jpg",
-        "slug": "/sale"
-    },
-    {
-        "name": "toDesigners",
-        "image": "/header-modal-img/to-designers.jpg",
-        "slug": "/to-designers"
-    },
-    {
-        "name": "toDealers",
-        "image": "/header-modal-img/to-dealers.jpg",
-        "slug": "/to-dealers"
-    }]
+    name: 'aboutUs',
+    image: '/header-modal-img/about-us.jpg',
+    slug: '/about-us',
+  },
+  {
+    name: 'promotions',
+    image: '/header-modal-img/promotions.jpg',
+    slug: '/sale',
+  },
+  {
+    name: 'toDesigners',
+    image: '/header-modal-img/to-designers.jpg',
+    slug: '/to-designers',
+  },
+  {
+    name: 'toDealers',
+    image: '/header-modal-img/to-dealers.jpg',
+    slug: '/to-dealers',
+  },
+]
 
 const mdSmMenu = [
-    {
-        "name": "catalog",
-        "image": "/header-modal-img/delivery-installation.jpg",
-        "slug": "/catalog"
-    },
-    // {
-    //     "name": "collections",
-    //     "image": "/header-modal-img/delivery-installation.jpg",
-    //     "slug": "/collections"
-    // },
+  {
+    name: 'catalog',
+    image: '/header-modal-img/delivery-installation.jpg',
+    slug: '/catalog',
+  },
+  // {
+  //     "name": "collections",
+  //     "image": "/header-modal-img/delivery-installation.jpg",
+  //     "slug": "/collections"
+  // },
 
-    {
-        "name": "doorSystems",
-        "image": "/header-modal-img/delivery-installation.jpg",
-        "slug": "/systems/swing"
-    },
-    {
-        "name": "doorHardware",
-        "image": "/header-modal-img/door-hardware.jpg",
-        "slug": "/door-hardware"
-    },
-    {
-        "name": "plinth",
-        "image": "/plinth.jpg",
-        "slug": "/plinth"
-    },
-    {
-        "name": "toDesigners",
-        "image": "/header-modal-img/to-designers.jpg",
-        "slug": "/to-designers"
-    },
-    {
-        "name": "toDealers",
-        "image": "/header-modal-img/to-dealers.jpg",
-        "slug": "/to-dealers"
-    },
-    {
-        "name": "promotions",
-        "image": "/header-modal-img/promotions.jpg",
-        "slug": "/sale"
-    },
-    {
-        "name": "deliveryAndInstallation",
-        "image": "delivery-installation.jpg",
-        "slug": "/delivery-and-installation"
-    },
-    {
-        "name": "whereToBuy",
-        "image": "/where-to-buy.jpg",
-        "slug": "/where-to-buy"
-    },
-    {
-        "name": "searchPhotoByTag",
-        "image": "/delivery-installation.jpg",
-        "slug": "/search-tags"
-    },
-    {
-        "name": "ourProjects",
-        "image": "/header-modal-img/delivery-installation.jpg",
-        "slug": "/interior"
-    },
-    {
+  {
+    name: 'doorSystems',
+    image: '/header-modal-img/delivery-installation.jpg',
+    slug: '/systems/swing',
+  },
+  {
+    name: 'doorHardware',
+    image: '/header-modal-img/door-hardware.jpg',
+    slug: '/door-hardware',
+  },
+  {
+    name: 'plinth',
+    image: '/plinth.jpg',
+    slug: '/plinth',
+  },
+  {
+    name: 'toDesigners',
+    image: '/header-modal-img/to-designers.jpg',
+    slug: '/to-designers',
+  },
+  {
+    name: 'toDealers',
+    image: '/header-modal-img/to-dealers.jpg',
+    slug: '/to-dealers',
+  },
+  {
+    name: 'promotions',
+    image: '/header-modal-img/promotions.jpg',
+    slug: '/sale',
+  },
+  {
+    name: 'deliveryAndInstallation',
+    image: 'delivery-installation.jpg',
+    slug: '/delivery-and-installation',
+  },
+  {
+    name: 'whereToBuy',
+    image: '/where-to-buy.jpg',
+    slug: '/where-to-buy',
+  },
+  {
+    name: 'searchPhotoByTag',
+    image: '/delivery-installation.jpg',
+    slug: '/search-tags',
+  },
+  {
+    name: 'ourProjects',
+    image: '/header-modal-img/delivery-installation.jpg',
+    slug: '/interior',
+  },
+  {
 
-        "name": "aboutUs",
-        "image": "/header-modal-img/about-us.jpg",
-        "slug": "/about-us"
-    },
-
+    name: 'aboutUs',
+    image: '/header-modal-img/about-us.jpg',
+    slug: '/about-us',
+  },
 
 ]
 </script>
 
-
 <template>
-    <div class="bg-black ">
-        <div class="main-container">
-            <div class=" flex md:flex-row flex-col justify-between xl:pt-24 lg:pt-16 pt-12 md:items-start items-center md:pb-24 pb-12">
-                <div class="lg:pr-16 ">
-                    <BaseLogo light class=" xl:mb-16 lg:mb-12 mb-5"/>
-                    <div class="md:block hidden ">
-                      <nuxt-link :to="'/catalog'">
-                        <buttons-secondary-button
-                                class="bg-white xl:w-72 xl:h-20 lg:h-16 md:h-16 lg:w-64 md:w-52 lg:flex sm:block sm:border-0 ">
-                            {{ $t('catalog') }}
-                        </buttons-secondary-button>
-                      </nuxt-link>
-                    </div>
-<!--                    <button type="button" class="md:block hidden font-mono text-sm py-12"-->
-<!--                            @click="toggleLocale"><h3-->
-<!--                            :class="light ? 'text-white' : 'text-black'">{{ locale === 'en' ? "EN" : "RU" }}</h3>-->
-<!--                    </button>-->
+  <div class="bg-black ">
+    <div class="main-container">
+      <div class=" flex md:flex-row flex-col justify-between xl:pt-24 lg:pt-16 pt-12 md:items-start items-center md:pb-24 pb-12">
+        <div class="lg:pr-16 ">
+          <BaseLogo light class=" xl:mb-16 lg:mb-12 mb-5" />
+          <div class="md:block hidden ">
+            <nuxt-link to="/catalog">
+              <buttons-secondary-button
+                class="bg-white xl:w-72 xl:h-20 lg:h-16 md:h-16 lg:w-64 md:w-52 lg:flex sm:block sm:border-0 "
+              >
+                {{ $t('catalog') }}
+              </buttons-secondary-button>
+            </nuxt-link>
+          </div>
+          <!--                    <button type="button" class="md:block hidden font-mono text-sm py-12" -->
+          <!--                            @click="toggleLocale"><h3 -->
+          <!--                            :class="light ? 'text-white' : 'text-black'">{{ locale === 'en' ? "EN" : "RU" }}</h3> -->
+          <!--                    </button> -->
+        </div>
+        <nuxt-link to="/catalog">
+          <p class="md:hidden text-white w-36 ml-12">
+            {{ $t('catalog') }}
+          </p>
+        </nuxt-link>
 
-                </div>
-                <nuxt-link :to="'/catalog'"><p class="md:hidden text-white w-36 ml-12"> {{ $t('catalog') }}</p></nuxt-link>
+        <!--            lgMenu -->
 
+        <div class="lg:block hidden">
+          <h3 class="text-white mt-5 mb-5">
+            {{ $t('collections') }}
+          </h3>
+          <div v-for="(collection, index) in collections" :key="collection.name" class="mt-[10px]">
+            <NuxtLink :to="`/catalog?collection=${collection.id}`">
+              <p class="text-normalGrey ">
+                {{ $t(collection.name) }}
+              </p>
+            </NuxtLink>
+          </div>
+        </div>
+        <div class="lg:block hidden">
+          <h3 class="text-white mt-5  mb-5">
+            Поиск фото по тегам
+          </h3>
+          <div v-for="(tag, index) in tags.slice(0, 10)" v-if="tags" :key="index" class="mt-2">
+            <nuxt-link :to="`/search-tags?tags=${tag.id}`">
+              <p class="text-normalGrey">
+                {{ tag.name }}
+              </p>
+            </nuxt-link>
+          </div>
 
-                <!--            lgMenu-->
-
-
-                <div class="lg:block hidden">
-                    <h3 class="text-white mt-5 mb-5">{{ $t('collections') }}</h3>
-                    <div v-for="(collection, index) in collections" :key="collection.name" class="mt-[10px]">
-                      <NuxtLink :to="`/catalog?collection=${collection.id}`"><p class="text-normalGrey ">{{ $t(collection.name) }}</p></NuxtLink>
-                    </div>
-                </div>
-                <div class="lg:block hidden">
-                    <h3 class="text-white mt-5  mb-5"> Поиск фото по тегам</h3>
-                    <div v-if="tags" v-for="(tag, index) in tags.slice(0, 10)" :key="index" class="mt-2">
-                        <nuxt-link :to="`/search-tags?tags=${tag.id}`"><p class="text-normalGrey">{{tag.name}}</p></nuxt-link>
-                    </div>
-
-<!--                  <pre class="text-white">tags{{tags}}</pre>-->
-                </div>
-                <div class="text-white lg:block hidden">
-                  <nuxt-link :to="'where-to-buy'">
-                    <h3 class="mb-12 mt-5 ">{{ $t('whereToBuy') }}</h3>
-                  </nuxt-link>
-                  <nuxt-link :to="'/door-hardware'">
-                    <h3 class="mb-5">{{ $t('doorHardware') }}</h3>
-                  </nuxt-link>
-                    <div>
-<!--                        <div class="mt-2">-->
-<!--                          <nuxt-link :to="''"><p class="text-normalGrey ">{{ $t('handles') }}</p></nuxt-link>-->
-<!--                        </div>-->
-<!--                        <div class="mt-2">-->
-<!--                            <a href=""><p class="text-normalGrey ">{{ $t('hinges') }}</p></a>-->
-<!--                        </div>-->
-                        <div class="mt-12">
-                          <nuxt-link :to="'/plinth'"><h3>{{ $t('plinth') }}</h3></nuxt-link>
-                        </div>
-                    </div>
-                    <div class="mt-12">
-                      <nuxt-link :to="'/systems/swing'"><h3>{{ $t('doorSystems') }}</h3></nuxt-link>
-                    </div>
-
-                </div>
-                <div class="text-white lg:block hidden">
-                    <h3 class="text-white mb-5 mt-5 ">{{ $t('information') }}</h3>
-                    <div v-for="(menuItem, index) in xlLgMenu" :key="menuItem.name" class="mt-2">
-                      <nuxt-link :to="menuItem.slug"><p class="text-normalGrey">{{ $t(menuItem.name) }}</p></nuxt-link>
-                    </div>
-                </div>
-
-
-                <!--        menu-->
-
-                <div class="lg:hidden w-36 ml-12">
-                    <div v-for="(menuItem, index) in mdSmMenu.slice(1, 5)" :key="menuItem.name">
-                        <div class="text-white  pt-4">
-                            <nuxt-link :to="menuItem.slug"><p class="">{{ $t(menuItem.name) }}</p></nuxt-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:hidden w-36 ml-12">
-                    <div v-for="(menuItem, index) in mdSmMenu.slice(5, 8)" :key="menuItem.name">
-                        <div class="text-white pt-4">
-                            <nuxt-link :to="menuItem.slug"><p class=" ">{{ $t(menuItem.name) }}</p></nuxt-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:hidden w-36 ml-12">
-                    <div class="lg:hidden" v-for="(menuItem, index) in mdSmMenu.slice(8)" :key="menuItem.name">
-                        <div class="text-white pt-4">
-                            <nuxt-link :to="menuItem.slug"><p class="whitespace-nowrap">{{ $t(menuItem.name) }}</p></nuxt-link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="border-b border-primaryGrey hidden md:block"></div>
-            <div class="h-24 flex md:justify-end justify-center md:items-center items-start">
-              <nuxt-link :to="'https://www.instagram.com/dveri_b_les/'">
-                <div class="w-36 ml-12">
-                    <nuxt-img  src="/insta.svg"/>
-                </div>
+          <!--                  <pre class="text-white">tags{{tags}}</pre> -->
+        </div>
+        <div class="text-white lg:block hidden">
+          <nuxt-link to="where-to-buy">
+            <h3 class="mb-12 mt-5 ">
+              {{ $t('whereToBuy') }}
+            </h3>
+          </nuxt-link>
+          <nuxt-link to="/door-hardware">
+            <h3 class="mb-5">
+              {{ $t('doorHardware') }}
+            </h3>
+          </nuxt-link>
+          <div>
+            <!--                        <div class="mt-2"> -->
+            <!--                          <nuxt-link :to="''"><p class="text-normalGrey ">{{ $t('handles') }}</p></nuxt-link> -->
+            <!--                        </div> -->
+            <!--                        <div class="mt-2"> -->
+            <!--                            <a href=""><p class="text-normalGrey ">{{ $t('hinges') }}</p></a> -->
+            <!--                        </div> -->
+            <div class="mt-12">
+              <nuxt-link to="/plinth">
+                <h3>{{ $t('plinth') }}</h3>
               </nuxt-link>
             </div>
-            <div class="w-full flex justify-center">
-<!--                <div class="w-36 ml-12">-->
-<!--                    <button type="button" class="md:hidden font-mono text-sm pb-12"-->
-<!--                            @click="toggleLocale"><h3-->
-<!--                            :class="light ? 'text-white' : 'text-black'">{{ locale === 'en' ? "EN" : "RU" }}</h3>-->
-<!--                    </button>-->
-<!--                </div>-->
-            </div>
+          </div>
+          <div class="mt-12">
+            <nuxt-link to="/systems/swing">
+              <h3>{{ $t('doorSystems') }}</h3>
+            </nuxt-link>
+          </div>
         </div>
+        <div class="text-white lg:block hidden">
+          <h3 class="text-white mb-5 mt-5 ">
+            {{ $t('information') }}
+          </h3>
+          <div v-for="(menuItem, index) in xlLgMenu" :key="menuItem.name" class="mt-2">
+            <nuxt-link :to="menuItem.slug">
+              <p class="text-normalGrey">
+                {{ $t(menuItem.name) }}
+              </p>
+            </nuxt-link>
+          </div>
+        </div>
+
+        <!--        menu -->
+
+        <div class="lg:hidden w-36 ml-12">
+          <div v-for="(menuItem, index) in mdSmMenu.slice(1, 5)" :key="menuItem.name">
+            <div class="text-white  pt-4">
+              <nuxt-link :to="menuItem.slug">
+                <p class="">
+                  {{ $t(menuItem.name) }}
+                </p>
+              </nuxt-link>
+            </div>
+          </div>
+        </div>
+        <div class="lg:hidden w-36 ml-12">
+          <div v-for="(menuItem, index) in mdSmMenu.slice(5, 8)" :key="menuItem.name">
+            <div class="text-white pt-4">
+              <nuxt-link :to="menuItem.slug">
+                <p class=" ">
+                  {{ $t(menuItem.name) }}
+                </p>
+              </nuxt-link>
+            </div>
+          </div>
+        </div>
+        <div class="lg:hidden w-36 ml-12">
+          <div v-for="(menuItem, index) in mdSmMenu.slice(8)" :key="menuItem.name" class="lg:hidden">
+            <div class="text-white pt-4">
+              <nuxt-link :to="menuItem.slug">
+                <p class="whitespace-nowrap">
+                  {{ $t(menuItem.name) }}
+                </p>
+              </nuxt-link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="border-b border-primaryGrey hidden md:block" />
+      <div class="h-24 flex md:justify-end justify-center md:items-center items-start">
+        <nuxt-link to="https://www.instagram.com/dveri_b_les/">
+          <div class="w-36 ml-12">
+            <nuxt-img src="/insta.svg" />
+          </div>
+        </nuxt-link>
+      </div>
+      <div class="w-full flex justify-center">
+        <!--                <div class="w-36 ml-12"> -->
+        <!--                    <button type="button" class="md:hidden font-mono text-sm pb-12" -->
+        <!--                            @click="toggleLocale"><h3 -->
+        <!--                            :class="light ? 'text-white' : 'text-black'">{{ locale === 'en' ? "EN" : "RU" }}</h3> -->
+        <!--                    </button> -->
+        <!--                </div> -->
+      </div>
     </div>
+  </div>
 </template>
 
 <style scoped>

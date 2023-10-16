@@ -1,13 +1,13 @@
-<template>
-  <Header :light="true"/>
-  <slot/>
-</template>
-
 <script>
-
 // const data = await $fetch(`${baseURL}/api/product/collections`)
 // const collections = data.results
 </script>
+
+<template>
+  <Header :light="true" />
+  <slot />
+</template>
+
 <style>
 .layout-enter-active,
 .layout-leave-active {

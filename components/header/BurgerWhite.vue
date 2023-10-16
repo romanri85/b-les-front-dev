@@ -1,44 +1,35 @@
-<template>
-    <button class="burger-button" @click="toggleBurger">
-        <span v-if="!isOpen" class="burger-bar burger-bar-one bg-white"></span>
-        <span
-                v-else
-                class="burger-bar burger-bar-one burger-bar-one--active bg-black"
-        ></span>
-        <span v-if="!isOpen" class="burger-bar burger-bar-two bg-white"></span>
-        <span
-                v-else
-                class="burger-bar burger-bar-two burger-bar-two--active bg-black"
-        ></span>
-        <span v-if="!isOpen" class="burger-bar burger-bar-three bg-white"></span>
-        <span
-                v-else
-                class="burger-bar burger-bar-three burger-bar-three--active bg-black"
-        ></span>
-    </button>
-</template>
-
-
-
-
-
-
-
 <script setup lang="ts">
+import { useIsBurgerOpenStore } from '~/stores/isBurgerOpenStore'
 
-import  {useIsBurgerOpenStore} from "~/stores/isBurgerOpenStore";
-const isBurgerOpenStore = useIsBurgerOpenStore();
-const isOpen = ref(false);
-const props = defineProps({light: {type: Boolean}})
+const props = defineProps({ light: { type: Boolean } })
+const isBurgerOpenStore = useIsBurgerOpenStore()
+const isOpen = ref(false)
 function toggleBurger() {
-    isOpen.value = !isOpen.value;
-
+  isOpen.value = !isOpen.value
 }
-
 </script>
 
-<style scoped>
+<template>
+  <button class="burger-button" @click="toggleBurger">
+    <span v-if="!isOpen" class="burger-bar burger-bar-one bg-white" />
+    <span
+      v-else
+      class="burger-bar burger-bar-one burger-bar-one--active bg-black"
+    />
+    <span v-if="!isOpen" class="burger-bar burger-bar-two bg-white" />
+    <span
+      v-else
+      class="burger-bar burger-bar-two burger-bar-two--active bg-black"
+    />
+    <span v-if="!isOpen" class="burger-bar burger-bar-three bg-white" />
+    <span
+      v-else
+      class="burger-bar burger-bar-three burger-bar-three--active bg-black"
+    />
+  </button>
+</template>
 
+<style scoped>
 .burger-button {
     all: unset;
     position: relative;
@@ -80,5 +71,4 @@ function toggleBurger() {
 .burger-bar-three--active {
     display: none;
 }
-
 </style>

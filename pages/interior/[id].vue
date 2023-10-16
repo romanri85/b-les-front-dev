@@ -1,72 +1,66 @@
 <script setup lang="js">
+import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
+import { baseURL } from '~/config'
+import BaseHero from '~/components/base/BaseHero.vue'
+import Pagination from '~/components/base/pagination/Pagination.vue'
+import { useInteriorStore } from '~/stores/interiorStore'
+import ImageModal from '~/components/pop-ups/ImageModal.vue'
 
-import {baseURL} from "~/config";
-import BaseHero from "~/components/base/BaseHero.vue";
-import Pagination from "~/components/base/pagination/Pagination.vue";
-import {useInteriorStore} from "~/stores/interiorStore";
-import {storeToRefs} from "pinia";
-import ImageModal from "~/components/pop-ups/ImageModal.vue";
-import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService'; // Assuming the service is in the same directory
-import {ref} from 'vue';
+import { adjustLayoutForNarrowImages, classifyImageLayout } from '~/services/imageLayoutService' // Assuming the service is in the same directory
 
 const interiorStore = useInteriorStore()
-const {projects} = storeToRefs(interiorStore)
+const { projects } = storeToRefs(interiorStore)
 
+const imgModal = ref(null)
 
-const imgModal = ref(null);
+const selectedImage = ref(null) // this will store the selected/clicked image data
 
-const selectedImage = ref(null); // this will store the selected/clicked image data
-
-const imagesBlock = ref(null);
-const scrollToImagesBlock = () => {
-  imagesBlock.value.scrollIntoView({behavior: 'smooth'});
-};
-const triggerModal = (image) => {
-  selectedImage.value = image;
-  if (imgModal.value && imgModal.value.openModal) {
-    imgModal.value.openModal();
-  } else {
-    console.error('Method not available or component not initialized.');
-  }
-};
+const imagesBlock = ref(null)
+function scrollToImagesBlock() {
+  imagesBlock.value.scrollIntoView({ behavior: 'smooth' })
+}
+function triggerModal(image) {
+  selectedImage.value = image
+  if (imgModal.value && imgModal.value.openModal)
+    imgModal.value.openModal()
+  else
+    console.error('Method not available or component not initialized.')
+}
 
 // definePageMeta({layout: "dark-header"});
 
-let route = useRoute()
+const route = useRoute()
 
 const project = ref({
   images: {
-    images: []
-  }
-});
+    images: [],
+  },
+})
 
 // const response = ref({})
-let page = ref(1)
+const page = ref(1)
 const total = ref(0)
-let pagesCount = ref(0)
+const pagesCount = ref(0)
 const page_size = 10
 
-
-const heroImage = "/interior/bg-interior.webp"
-
+const heroImage = '/interior/bg-interior.webp'
 
 async function getProjectData(query = `/${route.params.id}`) {
   try {
-    const {data} = await useFetch(`${baseURL}/api/projects${query}`, {key: "images", cache: true});
+    const { data } = await useFetch(`${baseURL}/api/projects${query}`, { key: 'images', cache: true })
     project.value = data.value
     // response.value = project.value.images;
-    pagesCount.value = project.value.images.page_links.length;
-  } catch (error) {
-    console.error("Error fetching project data:", error);
+    pagesCount.value = project.value.images.page_links.length
+  }
+  catch (error) {
+    console.error('Error fetching project data:', error)
   }
 }
 
-
 // Layout determination logic
 
-
 await getProjectData()
-
 
 function onChangePage(page) {
   getProjectData(`/${route.params.id}?page=${page}`)
@@ -75,62 +69,65 @@ function onChangePage(page) {
 
 const layoutImages = computed(() => {
   if (project.value && project.value.images) {
-    let images = project.value.images.images.map(classifyImageLayout);
+    const images = project.value.images.images.map(classifyImageLayout)
 
     // Get the number of narrow images
-    const numberOfNarrowImages = images.filter(image => image.layout === 'narrow').length;
+    const numberOfNarrowImages = images.filter(image => image.layout === 'narrow').length
 
-    adjustLayoutForNarrowImages(images, numberOfNarrowImages);
+    adjustLayoutForNarrowImages(images, numberOfNarrowImages)
 
-    return images;
+    return images
   }
-  return [];
-});
-
-
+  return []
+})
 </script>
 
 <template>
   <div>
-    <base-hero v-if="project && project.first_image" class="mb-24" :heroName="project.name" hero-description=""
-               :heroImage="project.first_image.image"/>
-    <!--  <div v-if="project" class="flex justify-center mb-24"><p>{{ project.description }}</p></div>-->
+    <BaseHero
+      v-if="project && project.first_image" class="mb-24" :hero-name="project.name" hero-description=""
+      :hero-image="project.first_image.image"
+    />
+    <!--  <div v-if="project" class="flex justify-center mb-24"><p>{{ project.description }}</p></div> -->
 
     <div ref="imagesBlock" class="layout-images">
       <div class="image-container">
-        <div v-for="(image, index) in layoutImages" :key="index"
-             :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`">
-          <nuxt-img @click="triggerModal(image)" :src="image.image" class="object-cover cursor-pointer"
-                    :alt="image.project_name"/>
+        <div
+          v-for="(image, index) in layoutImages" :key="index"
+          :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`"
+        >
+          <nuxt-img
+            :src="image.image" class="object-cover cursor-pointer" :alt="image.project_name"
+            @click="triggerModal(image)"
+          />
         </div>
       </div>
     </div>
     <div class="main-container">
       <div class="mt-16 mb-16">
-        <h3 v-if="project.designer">Автор
+        <h3 v-if="project.designer">
+          Автор
           проекта:{{
-            ' ' + project.designer.name + ' ' + (project.designer.middle_name ? project.designer.middle_name : '') + ' ' + project.designer.surname
-          }}</h3>
+            ` ${project.designer.name} ${project.designer.middle_name ? project.designer.middle_name : ''} ${project.designer.surname}`
+          }}
+        </h3>
       </div>
       <div class="flex justify-center">
-        <pagination
-            v-if="project.images && project.images.page_links"
-            class="pb-32"
-            :total="project.images.count"
-            :page_size="page_size"
-            :pagesCount="pagesCount"
-            @page-change="onChangePage"
-            v-model:current-page="page"/>
+        <Pagination
+          v-if="project.images && project.images.page_links"
+          v-model:current-page="page"
+          class="pb-32"
+          :total="project.images.count"
+          :page_size="page_size"
+          :pages-count="pagesCount"
+          @page-change="onChangePage"
+        />
       </div>
-
     </div>
-    <image-modal class="" :image="selectedImage" ref="imgModal"/>
-
+    <ImageModal ref="imgModal" class="" :image="selectedImage" />
   </div>
 </template>
 
 <style scoped>
 /* Add to your scoped styles */
-
 </style>
-

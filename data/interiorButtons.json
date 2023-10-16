@@ -1,5 +1,10 @@
-{"searchPicByTag": {
-  "name": "Поиск фото по тегам",
-  "link": "/search-tags"
-}, "projects": {"name": "Проекты",
-  "link": "/interior"}}
+{
+  "searchPicByTag": {
+    "name": "Поиск фото по тегам",
+    "link": "/search-tags"
+  },
+  "projects": {
+    "name": "Проекты",
+    "link": "/interior"
+  }
+}

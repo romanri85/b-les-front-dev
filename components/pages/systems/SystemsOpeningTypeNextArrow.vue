@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import {ChevronRightIcon} from "@heroicons/vue/24/solid";
+import { ChevronRightIcon } from '@heroicons/vue/24/solid'
 </script>
 
 <template>
   <div class="w-16 h-16 bg-primaryDark text-white cursor-pointer shadow-sm shadow-primaryDark flex items-center justify-center">
-    <chevron-right-icon class=" w-5 h-5"/>
+    <ChevronRightIcon class=" w-5 h-5" />
   </div>
-
 </template>
 
 <style scoped>

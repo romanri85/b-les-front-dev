@@ -1,78 +1,66 @@
-<template>
-  <div class="filter-bar ">
-    <div class="pb-4">
-      <h3>{{props.total }} {{ getStoreWordForm(props.total) }}</h3>
-    </div>
-<!--<client-only>-->
-    <FormKit
-        v-model="isOpen"
-        type="checkbox"
-        :options="{ open: 'Только открытые магазины', monoBrand: 'Только монобрендовые магазины' }"
-        @input="changeFilter"
-    />
-<!--</client-only>-->
-
-
-<!--    <pre wrap>{{ filter }}</pre>-->
-  </div>
-</template>
-
 <script setup>
-
-import {ref} from 'vue'
-
-let isOpen = ref(false)
-
-const filterKey = ref(0)
+import { ref } from 'vue'
 
 const props = defineProps({
   total: Number,
 
 })
 
-
 const emit = defineEmits(['filter-change'])
 
-let filterState = ref('all')
+const isOpen = ref(false)
+
+const filterKey = ref(0)
+
+const filterState = ref('all')
 
 function getStoreWordForm(count) {
-  let mod100 = count % 100;
-  if (mod100 > 10 && mod100 < 20) {
-    return 'магазинов';
-  }
+  const mod100 = count % 100
+  if (mod100 > 10 && mod100 < 20)
+    return 'магазинов'
 
   switch (count % 10) {
     case 1:
-      return 'магазин';
+      return 'магазин'
     case 2:
     case 3:
     case 4:
-      return 'магазина';
+      return 'магазина'
     default:
-      return 'магазинов';
+      return 'магазинов'
   }
 }
-
-
 
 function changeFilter(value) {
   filterKey.value++
 
-
-  if (value.length ===2) {
+  if (value.length === 2)
     filterState.value = 'openAndMonobrand'
-  } else if (value.length ===1 && value[0] === 'open') {
+  else if (value.length === 1 && value[0] === 'open')
     filterState.value = 'open'
-  } else if (value.length === 1 && value[0] === 'monoBrand') {
+  else if (value.length === 1 && value[0] === 'monoBrand')
     filterState.value = 'monobrand'
-  } else {
+  else
     filterState.value = 'all'
-  }
 
   emit('filter-change', filterState.value)
 }
-
-
-
-
 </script>
+
+<template>
+  <div class="filter-bar ">
+    <div class="pb-4">
+      <h3>{{ props.total }} {{ getStoreWordForm(props.total) }}</h3>
+    </div>
+    <!-- <client-only> -->
+    <FormKit
+      v-model="isOpen"
+      type="checkbox"
+      :options="{ open: 'Только открытые магазины', monoBrand: 'Только монобрендовые магазины' }"
+      @input="changeFilter"
+    />
+    <!-- </client-only> -->
+
+    <!--    <pre wrap>{{ filter }}</pre> -->
+  </div>
+</template>

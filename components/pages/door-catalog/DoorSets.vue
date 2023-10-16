@@ -1,16 +1,15 @@
 <script setup lang="ts">
-
-import {reactive, ref} from 'vue';
+import { reactive, ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useRoute } from 'vue-router'
 import searchByParameters from '~/data/searchByParameters.json'
-import PrimaryButtonSmall from "~/components/buttons/PrimaryButtonSmall.vue";
-import {useFiltersStore} from "~/stores/filtersStore";
-import {storeToRefs} from "pinia";
-import {useRoute} from "vue-router";
-import PrimaryButtonBig from "~/components/buttons/PrimaryButtonBig.vue";
-const key = ref(0);
+import PrimaryButtonSmall from '~/components/buttons/PrimaryButtonSmall.vue'
+import { useFiltersStore } from '~/stores/filtersStore'
+
+const key = ref(0)
 
 const filtersStore = useFiltersStore()
-const {activeFilters, filterCount, materialColors, isDoorSetApplied} = storeToRefs(filtersStore)
+const { activeFilters, filterCount, materialColors, isDoorSetApplied } = storeToRefs(filtersStore)
 
 const doorSets = reactive(searchByParameters)
 const activeDoorSetIndex = ref(null)
@@ -24,80 +23,75 @@ const initialFilters = {
   collection: [],
   material: [],
   glass: '',
-  ordering: ''
-};
-
-
+  ordering: '',
+}
 
 onMounted(() => {
-  const router = useRouter();
-  const filtersId = router.currentRoute.value.query.filters;
-
+  const router = useRouter()
+  const filtersId = router.currentRoute.value.query.filters
 
   if (filtersId) {
     // Use the find method to get the doorSet by its id
-    const doorSet = doorSets.find(doorset => doorset.id === filtersId);
+    const doorSet = doorSets.find(doorset => doorset.id === filtersId)
 
     // Check if doorSet was found, then execute the function
     if (doorSet) {
-      chooseDoorSet(doorSet);
-      checkToUnderline(doorSet);
+      chooseDoorSet(doorSet)
+      checkToUnderline(doorSet)
 
       router.replace({ path: '/catalog' }).then(() => {
-      }).catch(err => {
-        console.log('Route replace failed:', err);
-      });
-    } else {
-      console.warn(`No doorSet found with id ${filtersId}`);
+      }).catch((err) => {
+        console.log('Route replace failed:', err)
+      })
+    }
+    else {
+      console.warn(`No doorSet found with id ${filtersId}`)
     }
   }
-});
-
-
+})
 
 function changeDoorset(doorSet) {
-  const filterKeys = Object.keys(doorSet.filter);
+  const filterKeys = Object.keys(doorSet.filter)
 
-  filterKeys.forEach(filterType => {
-    const currentValue = doorSet.filter[filterType];
+  filterKeys.forEach((filterType) => {
+    const currentValue = doorSet.filter[filterType]
 
     if (!activeFilters.value.hasOwnProperty(filterType)) {
-      console.warn("Invalid filter type provided: ", filterType);
-      return;
+      console.warn('Invalid filter type provided: ', filterType)
+      return
     }
 
-    if (Array.isArray(currentValue)) {  // Handle Array values
-      currentValue.forEach(value => {
-        const index = activeFilters.value[filterType].indexOf(value);
+    if (Array.isArray(currentValue)) { // Handle Array values
+      currentValue.forEach((value) => {
+        const index = activeFilters.value[filterType].indexOf(value)
 
-        if (index !== -1) {
-          activeFilters.value[filterType].splice(index, 1);  // Remove the value
-        } else {
-          activeFilters.value[filterType].push(value);  // Add the value
-        }
-      });
-    } else {  // Handle String values
-      activeFilters.value[filterType] = activeFilters.value[filterType] === currentValue ? initialFilters[filterType] : currentValue;
+        if (index !== -1)
+          activeFilters.value[filterType].splice(index, 1) // Remove the value
+        else
+          activeFilters.value[filterType].push(value) // Add the value
+      })
     }
-  });
+    else { // Handle String values
+      activeFilters.value[filterType] = activeFilters.value[filterType] === currentValue ? initialFilters[filterType] : currentValue
+    }
+  })
 
   // Call this only once after the loop
-  filtersStore.onChangeFilters(activeFilters.value);
-  filtersStore.isDoorSetApplied = true;
-  activeDoorSetIndex.value = doorSets.indexOf(doorSet);
+  filtersStore.onChangeFilters(activeFilters.value)
+  filtersStore.isDoorSetApplied = true
+  activeDoorSetIndex.value = doorSets.indexOf(doorSet)
 }
 
-
 function chooseDoorSet(doorSet) {
-  key.value++;
+  key.value++
   // Reset activeFilters to its initial state
   if (filtersStore.isDoorSetApplied) {
     if (activeDoorSetIndex.value === doorSets.indexOf(doorSet)) {
       filtersStore.onResetFilters()
 
-
       return
-    } else {
+    }
+    else {
       filtersStore.isDoorSetApplied = false
 
       isDoorSetApplied.value = false
@@ -108,12 +102,11 @@ function chooseDoorSet(doorSet) {
         collection: [],
         material: [],
         glass: '',
-        ordering: ''
+        ordering: '',
       }
       changeDoorset(doorSet)
-      return;
+      return
     }
-
   }
   isDoorSetApplied.value = false
   activeFilters.value = {
@@ -123,62 +116,55 @@ function chooseDoorSet(doorSet) {
     collection: [],
     material: [],
     glass: '',
-    ordering: ''
+    ordering: '',
   }
   changeDoorset(doorSet)
 }
 
-
-
 function checkToUnderline(doorSet) {
-  if (!filtersStore.isDoorSetApplied) {
+  if (!filtersStore.isDoorSetApplied)
     return false
-  }
+
   for (const filterKey in doorSet.filter) {
-    const filterValue = activeFilters.value[filterKey];
+    const filterValue = activeFilters.value[filterKey]
 
     if (Array.isArray(doorSet.filter[filterKey])) {
-
-      if (!filterValue || !doorSet.filter[filterKey].every(val => filterValue.includes(val))) {
-        return false;
-      }
-    } else {
-      if (filterValue !== doorSet.filter[filterKey]) {
-        return false;
-      }
+      if (!filterValue || !doorSet.filter[filterKey].every(val => filterValue.includes(val)))
+        return false
+    }
+    else {
+      if (filterValue !== doorSet.filter[filterKey])
+        return false
     }
   }
 
   // Checking that activeFilters matches the initial state or the values from doorSet
   for (const filterKey in initialFilters) {
     if (Array.isArray(initialFilters[filterKey])) {
-      if (!activeFilters.value[filterKey].every(val => initialFilters[filterKey].includes(val) || (doorSet.filter[filterKey] && doorSet.filter[filterKey].includes(val)))) {
-        return false;
-      }
-    } else {
-      if (activeFilters.value[filterKey] !== initialFilters[filterKey] && activeFilters.value[filterKey] !== doorSet.filter[filterKey]) {
-        return false;
-      }
+      if (!activeFilters.value[filterKey].every(val => initialFilters[filterKey].includes(val) || (doorSet.filter[filterKey] && doorSet.filter[filterKey].includes(val))))
+        return false
+    }
+    else {
+      if (activeFilters.value[filterKey] !== initialFilters[filterKey] && activeFilters.value[filterKey] !== doorSet.filter[filterKey])
+        return false
     }
   }
-  return true;
+  return true
 }
-
 
 function onScroll() {
-  console.log('scroll');
+  console.log('scroll')
 }
 
-
-const showAll = ref(false);
-const toggleDoorSetsVisibility = () => {
-  showAll.value = !showAll.value;
-};
+const showAll = ref(false)
+function toggleDoorSetsVisibility() {
+  showAll.value = !showAll.value
+}
 const plusIcon = `
  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
   <path d="M10.5 4.75a.5.5 0 00-1 0v4.5h-4.5a.5.5 0 000 1h4.5v4.5a.5.5 0 001 0v-4.5h4.5a.5.5 0 000-1h-4.5v-4.5z" />
 </svg>
-`;
+`
 
 const minusIcon = `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -186,11 +172,11 @@ const minusIcon = `
 </svg>
 
 
-`;
+`
 </script>
 
 <template>
-  <div   class=" lg:pb-24 lg:pt-12 md:py-16 py-14">
+  <div class=" lg:pb-24 lg:pt-12 md:py-16 py-14">
     <div class="md:inline-flex flex md:flex-row flex-col-reverse items-start">
       <div class="hidden md:block pr-16 whitespace-nowrap" @click="filtersStore.onResetFilters()">
         <h3 class="cursor-pointer underline-static">
@@ -198,24 +184,29 @@ const minusIcon = `
         </h3>
       </div>
 
-      <div :key="key" class="flex justify-start items-start gap-x-3 gap-y-3 text-darkGrey flex-wrap doorsets-container"
-           :class="{ 'show-all': showAll }">
-        <p  v-for="doorSet in doorSets"    :key="doorSet.name"
+      <div
+        :key="key" class="flex justify-start items-start gap-x-3 gap-y-3 text-darkGrey flex-wrap doorsets-container"
+        :class="{ 'show-all': showAll }"
+      >
+        <p
+          v-for="doorSet in doorSets" :key="doorSet.name"
 
-           class="border-black cursor-pointer whitespace-nowrap text-primaryDark text-16-mono"
-           :class="{'underline-static': checkToUnderline(doorSet)}"
-           @click="chooseDoorSet(doorSet)">#{{ doorSet.name }}</p>
-        <div class="h-[30px]"></div>
+          class="border-black cursor-pointer whitespace-nowrap text-primaryDark text-16-mono"
+          :class="{ 'underline-static': checkToUnderline(doorSet) }"
+          @click="chooseDoorSet(doorSet)"
+        >
+          #{{ doorSet.name }}
+        </p>
+        <div class="h-[30px]" />
       </div>
-
     </div>
-    <primary-button-small class="mt-4 lg:mt-0" @click="toggleDoorSetsVisibility">
+    <PrimaryButtonSmall class="mt-4 lg:mt-0" @click="toggleDoorSetsVisibility">
       <h4>
         {{ showAll ? 'Свернуть' : 'Показать все' }}&nbsp;
-        <span v-if="showAll" class="inline-block relative top-1" v-html="minusIcon"/>
-        <span v-else class="inline-block relative top-1" v-html="plusIcon"/>
+        <span v-if="showAll" class="inline-block relative top-1" v-html="minusIcon" />
+        <span v-else class="inline-block relative top-1" v-html="plusIcon" />
       </h4>
-    </primary-button-small>
+    </PrimaryButtonSmall>
     <div class="block md:hidden pr-16 pt-8 whitespace-nowrap" @click="filtersStore.onResetFilters()">
       <h3 class="">
         <buttons-primary-button-big>Все двери</buttons-primary-button-big>
@@ -244,7 +235,6 @@ const minusIcon = `
     height: 200px; /* Set height to 200px */
   }
 
-
   @media screen and (max-width: 767px) and (min-width: 480px) {
     height: 250px; /* Set height to 200px */
   }
@@ -253,13 +243,5 @@ const minusIcon = `
     height: 320px; /* Set height to 200px */
   }
 
-
-
 }
-
-
 </style>
-
-
-
-

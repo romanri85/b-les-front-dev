@@ -1,10 +1,10 @@
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   workflow_dispatch:
 
 env:
-  DOCKER_TAG: "latest"
+  DOCKER_TAG: latest
 
 jobs:
   push:
@@ -26,13 +26,13 @@ jobs:
           push: true
           tags: romanri85/b-les-frontend:latest
           file: docker/Dockerfile
-#          build-args: FORMKIT_PRO_KEY=${{ secrets.FORMKIT_PRO_KEY }}
+  #          build-args: FORMKIT_PRO_KEY=${{ secrets.FORMKIT_PRO_KEY }}
   pull:
     runs-on: ubuntu-latest
-    needs: [ push ]
+    needs: [push]
     env:
-      DOCKER_CONTAINER_NAME: "b-les-front"
-      DOCKER_IMAGE_TAG: "romanri85/b-les-frontend:latest"
+      DOCKER_CONTAINER_NAME: b-les-front
+      DOCKER_IMAGE_TAG: 'romanri85/b-les-frontend:latest'
     steps:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v0.1.10

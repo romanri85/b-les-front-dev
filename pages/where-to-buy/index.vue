@@ -1,14 +1,12 @@
 <script setup lang="ts">
+import Cookies from 'js-cookie'
+import { onMounted } from 'vue'
+import WhereToBuyMap from '~/components/pages/where-to-buy/WhereToBuyMap.vue'
+import CityDialog from '~/components/pop-ups/CityDialog.vue'
+import { baseURL } from '~/config'
+import { findCity } from '~/utils/helpers'
 
-import WhereToBuyMap from "~/components/pages/where-to-buy/WhereToBuyMap.vue";
-import CityDialog from "~/components/pop-ups/CityDialog.vue";
-import {baseURL} from "~/config";
-import Cookies from "js-cookie";
-import {findCity} from "~/utils/helpers";
-import {onMounted} from "vue";
-
-
-definePageMeta({layout: "dark-header"});
+definePageMeta({ layout: 'dark-header' })
 
 const city = ref({})
 const cities = ref([])
@@ -16,14 +14,13 @@ const addresses = ref({})
 const geo = ref({})
 const shouldOpenModal = ref(0)
 
-
 const isCityLoaded = computed(() => Object.keys(city.value).length > 0)
 const isCityFound = ref(true)
 
 // const browserLang = navigator.language || navigator.userLanguage;
 // const isRussian = browserLang.startsWith('ru');
 // const langParam = isRussian ? 'ru_RU' : 'en_US';
-const langParam = 'ru_RU';
+const langParam = 'ru_RU'
 //
 if (typeof ymaps === 'undefined') {
   useHead({
@@ -33,17 +30,16 @@ if (typeof ymaps === 'undefined') {
         // async: true,
       },
     ],
-  });
+  })
 }
-
 
 async function getAddresses() {
   addresses.value = await $fetch(`${baseURL}/api/shops/`)
-  geo.value = Cookies.get('geolocation') || {"country": "Russia", "city": "Moscow", "region": "Moscow"}
-  geo.value = typeof geo.value === "object" ? geo.value : JSON.parse(geo.value)
+  geo.value = Cookies.get('geolocation') || { country: 'Russia', city: 'Moscow', region: 'Moscow' }
+  geo.value = typeof geo.value === 'object' ? geo.value : JSON.parse(geo.value)
   console.log(geo.value.region, 'geo object')
   cities.value = addresses.value.cities
-  city.value = findCity(addresses.value.cities, geo.value.region);
+  city.value = findCity(addresses.value.cities, geo.value.region)
   isCityFound.value = city.value.isFound
   city.value = city.value.city
   console.log(city.value, 'city')
@@ -57,30 +53,33 @@ onMounted(async () => {
   // console.log(cities.value, 'city')
 })
 
-
 function changeCity(newCityId) {
-  city.value = cities.value.find(city => city.id === newCityId);
+  city.value = cities.value.find(city => city.id === newCityId)
 }
 
 function openCityModal() {
   shouldOpenModal.value = shouldOpenModal.value + 1
 }
-
 </script>
 
 <template>
   <div class=" relative z-10 main-container">
     <div class="mt-10 lg:pr-72">
-      <div class=" flex justify-start items-end"><h4>Главная / Где купить</h4></div>
+      <div class=" flex justify-start items-end">
+        <h4>Главная / Где купить</h4>
+      </div>
     </div>
 
-    <h1 @click="openCityModal" v-if="isCityLoaded && city" class="mt-10 pb-8">Салоны в <span
-        class="border-b-2 border-b-black cursor-pointer">{{ city.dative_case_name || 'Москве' }}</span></h1>
-    <!--    <h5 class="pb-4" v-if="!isCityFound">К сожалению, в вашем регионе нет наших магазинов, или представителей. Но мы можем доставить двери в любой регион России.</h5>-->
+    <h1 v-if="isCityLoaded && city" class="mt-10 pb-8" @click="openCityModal">
+      Салоны в <span
+        class="border-b-2 border-b-black cursor-pointer"
+      >{{ city.dative_case_name || 'Москве' }}</span>
+    </h1>
+    <!--    <h5 class="pb-4" v-if="!isCityFound">К сожалению, в вашем регионе нет наших магазинов, или представителей. Но мы можем доставить двери в любой регион России.</h5> -->
 
-    <city-dialog :should-open-modal="shouldOpenModal" :city="city" :cities="cities" @change-city="changeCity"/>
+    <CityDialog :should-open-modal="shouldOpenModal" :city="city" :cities="cities" @change-city="changeCity" />
     <client-only>
-    <where-to-buy-map v-if="addresses && geo.region && city" :city="city" :addresses="addresses" :geo="geo"/>
+      <WhereToBuyMap v-if="addresses && geo.region && city" :city="city" :addresses="addresses" :geo="geo" />
     </client-only>
   </div>
 </template>
