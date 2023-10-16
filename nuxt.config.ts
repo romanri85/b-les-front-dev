@@ -49,7 +49,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   plugins: [
     '~/plugins/auto-animate.js',
-    '~/plugins/sentry.plugin.js',
+    // '~/plugins/sentry.plugin.js',
   ],
 
   postcss: {
