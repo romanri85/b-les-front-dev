@@ -30,8 +30,15 @@
   {
     "name": "rimini",
     "description": "riminiDescription",
-    "image": "/collection-images/1920Rimini-hero.webp",
+    "image": "/collection-images/rimini-hero.webp",
     "slug": "/rimini",
     "id": 5
+  },
+  {
+    "name": "romani",
+    "description": "romaniDescription",
+    "image": "/collection-images/romani-hero.webp",
+    "slug": "/romani",
+    "id": 6
   }
 ]
