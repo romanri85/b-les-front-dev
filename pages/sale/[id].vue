@@ -9,7 +9,7 @@ const route = useRoute()
 const sale = ref({})
 const saleStore = useSaleStore()
 await saleStore.getSales()
-sale.value = saleStore.sales.find(sale => sale.id === route.params.id)
+sale.value = saleStore.sales.find(sale => sale.id == route.params.id)
 const heroName = sale.value.name
 const heroImage = sale.value.image
 

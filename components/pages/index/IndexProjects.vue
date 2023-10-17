@@ -52,7 +52,7 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
       <!--    <div v-for="project in projects" :key="project.name"> -->
       <SwiperSlide v-for="project in projects" v-if="projects" :key="project.id">
         <NuxtLink :to="{ path: `/interior/${project.id}` }">
-          <Nuxtnuxt-img
+          <nuxt-img
             loading="lazy" placeholder quality="20"
             class="w-[480px] lg:h-96 md:h-60 h-48 object-cover"
             :src="project.first_image.image"
