@@ -23,7 +23,7 @@
   {
     "name": "premier",
     "description": "premierDescription",
-    "image": "/collection-images/classic-hero.webp",
+    "image": "/collection-images/premier-hero.webp",
     "slug": "/premier",
     "id": 2
   },

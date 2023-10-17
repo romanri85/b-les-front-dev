@@ -87,7 +87,7 @@ function openModal() {
               class="text-lg font-medium leading-6 text-gray-900"
             />
             <div class="mt-2">
-              <nuxt-img
+              <nuxt-img placeholder
                 :src="`https://b-les-storage.ams3.digitaloceanspaces.com/media/${image.image}`" class=" w-full object-contain"
                 :alt="image.project_name"
               />
