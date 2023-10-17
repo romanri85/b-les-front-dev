@@ -59,7 +59,7 @@ const route = useRoute()
         </NuxtLink>
       </div>
     </div>
-    <nuxt-img :src="props.heroImage" class="w-full h-full object-cover object-right" @load="imageLoaded = true" />
+    <img :src="props.heroImage" class="w-full h-full object-cover object-right" @load="imageLoaded = true" />
   </div>
 </template>
 

@@ -30,7 +30,7 @@ const imageLoaded = ref(false)
         {{ $t(props.heroDescription) }}
       </h6>
     </div>
-    <nuxt-img :src="props.heroImage" placeholder class="w-full h-full object-cover object-right " @load="imageLoaded = true" />
+    <img :src="props.heroImage" placeholder class="w-full h-full object-cover object-right " @load="imageLoaded = true" />
   </div>
 </template>
 

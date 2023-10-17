@@ -265,7 +265,7 @@ const mdSmMenu = [
       <div class="h-24 flex md:justify-end justify-center md:items-center items-start">
         <nuxt-link to="https://www.instagram.com/dveri_b_les/">
           <div class="w-36 ml-12">
-            <nuxt-img src="/insta.svg" />
+            <img src="/insta.svg" />
           </div>
         </nuxt-link>
       </div>
