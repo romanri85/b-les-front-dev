@@ -8,6 +8,10 @@ const props = defineProps({
   buttons: Object,
 })
 
+
+
+
+
 const imageLoaded = ref(false)
 </script>
 
@@ -30,7 +34,7 @@ const imageLoaded = ref(false)
         {{ $t(props.heroDescription) }}
       </h6>
     </div>
-    <img :src="props.heroImage" placeholder class="w-full h-full object-cover object-right " @load="imageLoaded = true" />
+    <nuxt-img :src="props.heroImage" placeholder class="w-full h-full object-cover object-right " @load="imageLoaded = true" />
   </div>
 </template>
 
