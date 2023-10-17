@@ -33,6 +33,9 @@ function onChangePage(page) {
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - Проекты</title>
+  </Head>
   <div class="main-container">
     <div class="mt-10 lg:pr-72">
       <div class=" flex justify-start items-end">

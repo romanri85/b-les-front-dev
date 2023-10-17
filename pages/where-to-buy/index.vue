@@ -59,6 +59,9 @@ function openCityModal() {
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - Где купить</title>
+  </Head>
   <div class=" relative z-10 main-container">
     <div class="mt-10 lg:pr-72">
       <div class=" flex justify-start items-end">

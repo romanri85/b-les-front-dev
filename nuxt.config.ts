@@ -2,6 +2,9 @@
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 
 export default defineNuxtConfig({
+  meta: {
+    title: 'Двери Брянский лес',
+  },
 
   // build: {
   //   transpile: ['fsevents'],

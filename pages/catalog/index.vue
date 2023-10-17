@@ -86,6 +86,9 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <Head>
+    <title>Двери Брянский лес</title>
+  </Head>
   <div ref="catalogElement" class="min-h-[2600px] main-container">
     <!--    <base-hero :heroName="heroName" :heroDescription="heroDescription" :heroImage="heroImage"/> -->
     <div class="mt-10 lg:pr-72">

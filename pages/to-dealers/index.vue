@@ -6,6 +6,9 @@ const heroImage = '/toDealers/toDealers-bg.webp'
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - Дилерам</title>
+  </Head>
   <BaseHeroWithoutDescription :hero-name="heroName" :hero-image="heroImage" />
   <section class="main-container">
     <div class="lg:px-[255px] mdLg:px-52 md:px-16  lg:pt-24 pt-16 lg:pb-32 pb-20">

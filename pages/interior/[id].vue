@@ -76,6 +76,9 @@ const layoutImages = computed(() => {
 
 <template>
   <div>
+    <Head>
+      <title>Брянский лес - Проекты</title>
+    </Head>
     <BaseHero
       v-if="project && project.first_image" class="mb-24" :hero-name="project.name" hero-description=""
       :hero-image="project.first_image.image"

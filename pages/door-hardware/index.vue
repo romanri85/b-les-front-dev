@@ -70,6 +70,9 @@ onMounted(async () => {
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - Фурнитура</title>
+  </Head>
   <div ref="catalogElement">
     <BaseHero :hero-name="heroName" class="mb-32" :hero-description="heroDescription" :hero-image="heroImage" />
     <div class="main-content flex main-container md:flex-row flex-col">

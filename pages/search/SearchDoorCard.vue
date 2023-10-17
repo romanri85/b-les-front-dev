@@ -19,6 +19,9 @@ function mouseLeave() {
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - Поиск</title>
+  </Head>
   <!--    <client-only> -->
   <div
     class="relative flex flex-col items-center"

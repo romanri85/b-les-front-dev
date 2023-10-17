@@ -173,6 +173,9 @@ function onChangePage(page) {
 </script>
 
 <template>
+  <Head>
+    <title>Двери Брянский лес</title>
+  </Head>
   <div v-if="doorVariantData && doorVariantData.casing_variant" class=" main-container">
     <div class="hidden lg:flex justify-between">
       <div class="h-12 flex justify-start items-end">

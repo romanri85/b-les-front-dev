@@ -58,6 +58,9 @@ const heroImage = '/aboutUs/aboutUs-bg.webp'
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - О нас</title>
+  </Head>
   <BaseHero :hero-name="heroName" :hero-description="heroDescription" :hero-image="heroImage" />
   <section class="main-container ">
     <div class="main-container flex md:flex-row flex-col  justify-between  gap-x-16 lg:gap-x-24">

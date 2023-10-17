@@ -14,6 +14,9 @@ await fetchPlinths()
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - Плинтус</title>
+  </Head>
   <BaseHero :hero-name="heroName" :hero-description="heroDescription" :hero-image="heroImage" />
   <article class="main-container">
     <p class="lg:px-[230px] px-[40px] py-[60px] lg:py-[90px]">

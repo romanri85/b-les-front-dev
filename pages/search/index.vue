@@ -164,6 +164,9 @@ function handleImagePage(newPage) {
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - Поиск фото по тегу</title>
+  </Head>
   <div class="main-container">
     <h4 class="pt-12 hidden md:block">
       Главная/

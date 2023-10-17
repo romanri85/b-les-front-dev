@@ -31,6 +31,9 @@ onMounted(() => {
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - Акции</title>
+  </Head>
   <BaseHeroWithoutDescription :hero-name="heroName" :hero-image="heroImage" />
   <section class="pb-20 lg:pb-32">
     <div class="main-container">

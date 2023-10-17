@@ -28,6 +28,9 @@ const sentences = computed(() => {
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - Акции</title>
+  </Head>
   <BaseHeroWithoutDescription :hero-name="heroName" :hero-image="heroImage" />
   <main class="main-container pb-32">
     <h1 class="md:whitespace-nowrap pt-16 lg:pt-24">

@@ -20,6 +20,9 @@ onMounted(() => {
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - Раздвижные системы</title>
+  </Head>
   <div class="pb-32">
     <HeroSystems :hero-name="heroName" :hero-image="heroImage" :buttons="buttons" />
     <h1 class="flex justify-center pl-5 md:pl-0  pt-12 md:pt-20 pb-12 main-container">

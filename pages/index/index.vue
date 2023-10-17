@@ -3,6 +3,9 @@ import IndexSlider from '~/components/pages/index/IndexSlider.vue'
 </script>
 
 <template>
+  <Head>
+    <title>Брянский лес - Главная</title>
+  </Head>
   <IndexSlider />
   <lazy-pages-index-search class="mt-24 md:mt-0" />
   <lazy-pages-index-nature />
