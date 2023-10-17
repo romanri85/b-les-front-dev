@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   meta: {
     title: 'Двери Брянский лес',
   },
+  image:{
+    provider: 'ipx',
+  },
 
   // build: {
   //   transpile: ['fsevents'],
@@ -78,6 +81,15 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/': { prerender: true },
+    '/about-us': { prerender: true },
+    '/delivery-and-installation': { prerender: true },
+    '/door-hardware': { prerender: true },
+    '/plinth': { prerender: true },
+    '/sale': { prerender: true },
+    '/systems/slide': { prerender: true },
+    '/systems/swing': { prerender: true },
+    '/to-dealers': { prerender: true },
+    '/to-designers': { prerender: true },
   },
 
   // vite: {
