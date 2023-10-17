@@ -121,7 +121,7 @@ onMounted(() => {
           <SwiperSlide v-for="system in systems" v-if="systems" :key="system.id">
             <!--          <NuxtLink :to="{ path: `/interior/${project.id}`}"> -->
 
-            <nuxt-img placeholder class="cursor-pointer w-full h-auto object-contain" :src="system.image" :alt="system.name" @click="openSystemModal" />
+            <nuxt-nuxt-img placeholder class="cursor-pointer w-full h-auto object-contain" :src="system.image" :alt="system.name" @click="openSystemModal" />
             <h4 class="cursor-pointer pt-5" @click="openSystemModal">
               {{ system.name }}
             </h4>

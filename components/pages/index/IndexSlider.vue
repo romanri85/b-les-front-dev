@@ -40,7 +40,7 @@ const viewport = useViewportSize()
         >
           <SwiperSlide v-for="(collection, index) in collections" :key="collection.name">
             <div>
-              <img
+              <nuxt-img
                 placeholder :src="collection.image"
                 class="absolute h-screen w-screen object-cover object-bottom md:object-center -z-10" :class="[
                   (collection.name === 'versailles' ? 'custom-versal-position' : ''),
@@ -82,11 +82,11 @@ const viewport = useViewportSize()
                 <button
                   class="prev-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[40px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[40px]"
                 >
-                  <img
+                  <nuxt-img
                       class="hidden md:block" src="/icons/prev-square-icon.svg"
                     alt="prev"
                   />
-                  <!--                  <nuxt-img placeholder class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev"/> -->
+                  <!--                  <nuxt-nuxt-img placeholder class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev"/> -->
                   <ChevronLeftIcon class="md:hidden w-8 h-8 text-white" />
                 </button>
                 <div class="lg:ml-[228px] lg:mb-[100px] text-center md:text-left">
@@ -104,11 +104,11 @@ const viewport = useViewportSize()
                 <button
                   class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[40px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[40px]"
                 >
-                  <img
+                  <nuxt-img
                      class="hidden md:block" src="/icons/next-square-icon.svg"
                     alt="next"
                   />
-                  <!--                  <nuxt-img placeholder class="md:hidden" src="/icons/next-page-icon-small.svg" alt="next"/> -->
+                  <!--                  <nuxt-nuxt-img placeholder class="md:hidden" src="/icons/next-page-icon-small.svg" alt="next"/> -->
                   <ChevronRightIcon class="md:hidden w-8 h-8 text-white" />
                 </button>
               </div>

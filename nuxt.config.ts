@@ -73,6 +73,9 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
     ],
   },
+  routeRules: {
+    '/': { prerender: true },
+  }
   // vite: {
   //   plugins: [
   //     // Setup sentry error reporting with source maps

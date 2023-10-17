@@ -19,8 +19,8 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
       </h5>
     </div>
     <!--        <div class="flex flex-row flex-wrap gap-1 justify-center lg:mb-10 md:mb-7 mb-5"> -->
-    <!--            <div v-for="(img,index) in projectsImages" class="lg:w-full lg:flex-1 md:w-[calc(50%-2px)] w-[calc((25%-2x)]" :key="index"> -->
-    <!--                <nuxt-img placeholder class="w-full h-full object-cover object-center aspect-square" :src="img"/> -->
+    <!--            <div v-for="(nuxt-img,index) in projectsImages" class="lg:w-full lg:flex-1 md:w-[calc(50%-2px)] w-[calc((25%-2x)]" :key="index"> -->
+    <!--                <nuxt-nuxt-img placeholder class="w-full h-full object-cover object-center aspect-square" :src="nuxt-img"/> -->
     <!--            </div> -->
   </div>
 
@@ -52,7 +52,7 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
       <!--    <div v-for="project in projects" :key="project.name"> -->
       <SwiperSlide v-for="project in projects" v-if="projects" :key="project.id">
         <NuxtLink :to="{ path: `/interior/${project.id}` }">
-          <NuxtImg
+          <Nuxtnuxt-img
             loading="lazy" placeholder quality="20"
             class="w-[480px] lg:h-96 md:h-60 h-48 object-cover"
             :src="project.first_image.image"

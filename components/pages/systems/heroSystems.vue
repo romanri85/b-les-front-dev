@@ -43,7 +43,7 @@ const route = useRoute()
         </NuxtLink>
       </div>
     </div>
-    <img placeholder loading="lazy" :src="props.heroImage" class="w-full h-full object-cover object-right" />
+    <nuxt-img placeholder loading="lazy" :src="props.heroImage" class="w-full h-full object-cover object-right" />
   </div>
 </template>
 
