@@ -40,8 +40,8 @@ const viewport = useViewportSize()
         >
           <SwiperSlide v-for="(collection, index) in collections" :key="collection.name">
             <div>
-              <nuxt-img
-                placeholder :src="collection.image"
+              <img alt="collection.name"
+                :src="collection.image"
                 class="absolute h-screen w-screen object-cover object-bottom md:object-center -z-10" :class="[
                   (collection.name === 'versailles' ? 'custom-versal-position' : ''),
                 ]"
