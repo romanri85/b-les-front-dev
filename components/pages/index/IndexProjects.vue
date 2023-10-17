@@ -20,7 +20,7 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
     </div>
     <!--        <div class="flex flex-row flex-wrap gap-1 justify-center lg:mb-10 md:mb-7 mb-5"> -->
     <!--            <div v-for="(nuxt-img,index) in projectsImages" class="lg:w-full lg:flex-1 md:w-[calc(50%-2px)] w-[calc((25%-2x)]" :key="index"> -->
-    <!--                <nuxt-nuxt-img placeholder class="w-full h-full object-cover object-center aspect-square" :src="nuxt-img"/> -->
+    <!--                <nuxt-img placeholder class="w-full h-full object-cover object-center aspect-square" :src="nuxt-img"/> -->
     <!--            </div> -->
   </div>
 

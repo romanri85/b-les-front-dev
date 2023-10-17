@@ -7,6 +7,12 @@ defineExpose({
   closeModal,
 })
 
+const props = defineProps({
+  image: {
+    type: String,
+  },
+})
+
 const isOpen = ref(false)
 
 function closeModal() {
@@ -65,8 +71,8 @@ function openModal() {
               />
               <div class="mt-2">
                 <nuxt-img
-                  :src="image" class=" h-[30vh] w-full object-contain"
-                  :alt="image"
+                  :src="props.image" class=" h-[30vh] w-full object-contain"
+                  :alt="props.image"
                 />
               </div>
 

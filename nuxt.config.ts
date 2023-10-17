@@ -75,7 +75,8 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/': { prerender: true },
-  }
+  },
+
   // vite: {
   //   plugins: [
   //     // Setup sentry error reporting with source maps

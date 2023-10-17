@@ -47,7 +47,7 @@ function mouseLeave() {
       </div>
 
       <!-- Image -->
-      <nuxt-nuxt-img
+      <nuxt-img
         width="160"
         placeholder
         height="auto"

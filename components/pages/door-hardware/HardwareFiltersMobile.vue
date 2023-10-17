@@ -72,8 +72,10 @@ function toggleSortingOpen() {
 
         <ColorCollectionFilterHardware />
         <DesignFilterHardware />
-        <PrimaryButtonSmall class="w-full text-start " @click="">
-          <h3>Очистить</h3>
+        <PrimaryButtonSmall class="w-full text-start " @click="hardwareFiltersStore.onResetFilters">
+          <h3 class="inline underline-static">
+            Все ручки
+          </h3>
         </PrimaryButtonSmall>
       </div>
     </section>

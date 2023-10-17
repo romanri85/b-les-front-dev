@@ -86,7 +86,7 @@ const viewport = useViewportSize()
                       class="hidden md:block" src="/icons/prev-square-icon.svg"
                     alt="prev"
                   />
-                  <!--                  <nuxt-nuxt-img placeholder class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev"/> -->
+                  <!--                  <nuxt-img placeholder class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev"/> -->
                   <ChevronLeftIcon class="md:hidden w-8 h-8 text-white" />
                 </button>
                 <div class="lg:ml-[228px] lg:mb-[100px] text-center md:text-left">
@@ -108,7 +108,7 @@ const viewport = useViewportSize()
                      class="hidden md:block" src="/icons/next-square-icon.svg"
                     alt="next"
                   />
-                  <!--                  <nuxt-nuxt-img placeholder class="md:hidden" src="/icons/next-page-icon-small.svg" alt="next"/> -->
+                  <!--                  <nuxt-img placeholder class="md:hidden" src="/icons/next-page-icon-small.svg" alt="next"/> -->
                   <ChevronRightIcon class="md:hidden w-8 h-8 text-white" />
                 </button>
               </div>
