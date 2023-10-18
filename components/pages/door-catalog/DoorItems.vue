@@ -16,38 +16,23 @@ const viewport = useViewportSize()
 //   // parent.value.animate()
 // }
 const [parent] = useAutoAnimate()
+const start = ref(null)
 
 function scrollToDoorsBlock() {
-  parent.value.scrollIntoView({ behavior: 'smooth' })
+  start.value.scrollIntoView({ behavior: 'smooth' })
 }
 
 // const page = ref(1)
 
 function onChangePage(page) {
   filtersStore.page = page
-
-  if (viewport.isDesktop || viewport.isTablet)
     scrollToDoorsBlock()
-  else
-    window.scrollTo(0, 380)
-
   filtersStore.onChangeFilters({ page: filtersStore.page })
-
-  // if(viewport.isMobile && filtersStore.activeFilters.page > 1){
-  //   window.scrollTo(0, 250)
-  // }
-  // else if(viewport.isTablet){
-  //   window.scrollTo(0, 300)
-  // }
-  // else{
-  //   window.scrollTo(0, 500)
-  // }
-  // parent.animate()
 }
 </script>
 
 <template>
-  <div class="md:pl-5 lg:pl-16">
+  <div ref="start"  class="md:pl-5 lg:pl-16">
     <div class="text-primaryDark flex justify-center md:justify-between">
       <Sorting />
       <div class="hidden md:block">

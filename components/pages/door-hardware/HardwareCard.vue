@@ -21,8 +21,9 @@ function triggerModal() {
     <div class="flex flex-col items-center pb-12 cursor-pointer" @click=" triggerModal">
       <div class="relative pb-8">
         <nuxt-img
-          v-if="props.hardwareVariant && props.hardwareVariant.image" width="200px" height="auto" :src="props.hardwareVariant.image"
-          class="h-auto w-36 lg:w-48"
+          v-if="props.hardwareVariant && props.hardwareVariant.image" width="200" height="160" :src="props.hardwareVariant.image"
+          class="object-contain h-36 w-40 mdLg:w-40 mdLg:h-36"
+
         />
 
       </div>
