@@ -79,15 +79,25 @@ onMounted(() => {
                 leave-to="opacity-0 scale-95"
               >
                 <DialogPanel
-                  class="w-full   transform overflow-hidden  bg-white p-12 text-left align-middle shadow-xl transition-all"
+                  class="w-full   transform overflow-hidden  bg-white p-8 text-left align-middle shadow-xl transition-all"
                 >
+                  <div class=" text-center md:text-right mb-12 lg:mb-0">
+                    <PrimaryButtonBig
+                        type="button"
+                        class="inline-flex justify-center border border-transparent bg-black-100 px-4 py-2  hover:bg-black-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-black-500 focus-visible:ring-offset-2"
+                        @click="closeModal"
+                    >
+                      Закрыть
+                    </PrimaryButtonBig>
+                  </div>
                   <DialogTitle
                     as="h3"
                     class="text-center pb-8"
                   >
                     Все модели коллекции
                   </DialogTitle>
-                  <div class="flex flex-col md:flex-row gap-y-6 gap-x-8 mb-2 mt-0 flex-nowrap justify-center w-full">
+
+                  <div class="flex flex-col md:flex-row gap-y-6 gap-x-8 mb-2 mt-0 flex-wrap justify-center w-full">
                     <div
                       v-for="product in collectionProducts" v-if="props.collectionProducts"
                       :key="product.id" class="flex flex-col items-center"
@@ -118,15 +128,7 @@ onMounted(() => {
                     <!-- -->
                   </div>
 
-                  <div class=" text-center mt-12">
-                    <PrimaryButtonBig
-                      type="button"
-                      class="inline-flex justify-center border border-transparent bg-black-100 px-4 py-2  hover:bg-black-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-black-500 focus-visible:ring-offset-2"
-                      @click="closeModal"
-                    >
-                      Закрыть
-                    </PrimaryButtonBig>
-                  </div>
+
                 </DialogPanel>
               </TransitionChild>
             </div>
