@@ -60,7 +60,7 @@ function openModal() {
             leave-to="translate-x-full"
           >
             <DialogPanel
-              class="fixed right-0 top-0 h-screen w-full md:w-[60%] lg:w-[45%] overflow-y-auto bg-white p-6 text-left align-middle shadow-xl transition-all"
+              class="fixed right-0 top-0 h-screen w-full md:w-[60%] lg:w-[40%] overflow-y-auto bg-white p-6 text-left align-middle shadow-xl transition-all"
             >
               <!--              <DialogTitle -->
               <!--                  as="h3" -->

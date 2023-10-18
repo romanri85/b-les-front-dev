@@ -49,7 +49,7 @@ onMounted(() => {
               <NuxtLink :to="`/sale/${sale.id}`">
                 <nuxt-img
                   :src="sale.image" :alt="sale.name"
-                  class="w-full h-full transition-all duration-500 ease-in-out group-hover:brightness-50 object-cover"
+                  class="w-full h-full transition-all duration-500 ease-in-out lg:group-hover:brightness-75 object-cover"
                 />
                 <div
                   class="absolute inset-0 flex items-center justify-center  transition-opacity duration-500 ease-in-out"

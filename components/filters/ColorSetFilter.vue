@@ -43,7 +43,6 @@ await filtersStore.fetchColorSets()
 // })
 
 function chooseColorSet(id) {
-  console.log(color_sets.value)
   filtersStore.checkDoorSetApplied()
   if (!activeFilters.value.color_set.includes(id)) {
     filtersStore.onChangeFilters({ color_set: [...activeFilters.value.color_set, id] })

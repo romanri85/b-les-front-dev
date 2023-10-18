@@ -30,6 +30,7 @@ const filtersStore = useFiltersStore()
     </div>
     <div class="filter-container">
       <!--      <client-only> -->
+<!--      TODO: Permanent PriceFilter rerender mutate activeFilters and breaks the filter logic-->
       <PriceFilter />
 
       <ColorSetFilter />
