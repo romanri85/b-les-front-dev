@@ -5,6 +5,7 @@ import Pagination from '~/components/base/pagination/Pagination.vue'
 import HardwareCard from '~/components/pages/door-hardware/HardwareCard.vue'
 import SortingHardware from '~/components/pages/door-hardware/SortingHardware.vue'
 import { useHardwareFiltersStore } from '~/stores/hardwareFiltersStore'
+import { useViewportSize } from '~/composables/useViewportSize'
 
 definePageMeta({
   pageTransition: {
@@ -16,22 +17,29 @@ const hardwareFiltersStore = useHardwareFiltersStore()
 const { total, pagesCount, products } = storeToRefs(hardwareFiltersStore)
 const hardwareItemsBlock = ref(null)
 const [parent] = useAutoAnimate()
+const viewport = useViewportSize()
+const start = ref(null)
 function scrollToHardwareItemsBlock() {
-  parent.value.scrollIntoView({ behavior: 'smooth' })
+  start.value.scrollIntoView({ behavior: 'smooth' })
 }
 
 // const page = ref(1)
 function onChangePage(page) {
   hardwareFiltersStore.page = page
+
+  // if (viewport.isDesktop || viewport.isTablet)
+    scrollToHardwareItemsBlock()
+  // else
+  //   window.scrollTo(0, 380)
+
   hardwareFiltersStore.onChangeFilters({ page: hardwareFiltersStore.page })
-  scrollToHardwareItemsBlock()
-  scrollTo(0, 500)
-  // parent.animate()
+
+
 }
 </script>
 
 <template>
-  <div class="w-full pl-16">
+  <div class="lg:min-h-[2260px] w-full pl-16" ref="start">
     <div ref="hardwareItemsBlock" class="hidden text-primaryDark md:flex justify-between w-full">
       <!--        <p>{{props.products}}</p> -->
       <SortingHardware />
