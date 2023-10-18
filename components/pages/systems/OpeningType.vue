@@ -4,6 +4,7 @@
 import systemsModal from '~/components/pop-ups/SystemsModal.vue'
 import SystemsOpeningTypePrevArrow from '~/components/pages/systems/SystemsOpeningTypePrevArrow.vue'
 import SystemsOpeningTypeNextArrow from '~/components/pages/systems/SystemsOpeningTypeNextArrow.vue'
+import {ref} from "vue";
 
 const props = defineProps({
   systems: {
@@ -26,6 +27,7 @@ function openSystemModal() {
 }
 
 const systems = computed(() => props.systems.filter(item => item.opening_type.name === props.name))
+const hoveredSystem = ref('')
 
 const isSliderInitialized = ref(false)
 const isLeftButtonDisabled = ref(true)
@@ -33,6 +35,28 @@ const isRightButtonDisabled = ref(false)
 const isDragging = ref(false)
 
 const baseURL = 'http://localhost:8000'
+
+function setActiveSystem(id) {
+  hoveredSystem.value = id;
+  const videoElement = document.getElementById(`video-${id}`);
+  if (videoElement) {
+    videoElement.loop = true;  // Ensure the video loops while the cursor is on the system
+    videoElement.play();
+  }
+}
+
+function clearActiveSystem() {
+  const id = hoveredSystem.value;
+  const videoElement = document.getElementById(`video-${id}`);
+  if (videoElement) {
+    videoElement.loop = false;  // Stop the video from looping once the cursor leaves the system
+    videoElement.onended = () => {
+      hoveredSystem.value = '';
+    };
+  } else {
+    hoveredSystem.value = '';
+  }
+}
 
 function disableLeftButton() {
   if (isSliderInitialized.value && !isRightButtonDisabled.value) {
@@ -118,10 +142,24 @@ onMounted(() => {
           @scrollbarDragStart="isDragging = true"
           @scrollbarDragEnd="isDragging = false"
         >
-          <SwiperSlide v-for="system in systems" v-if="systems" :key="system.id">
+          <SwiperSlide v-for="system in systems" v-if="systems" :key="system.id"
+                       v-on:mouseenter="() => setActiveSystem(system.id)"
+                       v-on:mouseleave="clearActiveSystem"
+                       class="hover:cursor-pointer"
+          >
             <!--          <NuxtLink :to="{ path: `/interior/${project.id}`}"> -->
 
             <nuxt-img placeholder class="cursor-pointer w-full h-auto object-contain" :src="system.image" :alt="system.name" @click="openSystemModal" />
+            <video
+                @click="openSystemModal"
+                v-if="hoveredSystem === system.id"
+                :id="`video-${system.id}`"
+                :src="system.video"
+                autoplay
+                loop
+                muted
+                class="absolute top-0 left-0 w-full h-auto"
+            ></video>
             <h4 class="cursor-pointer pt-5" @click="openSystemModal">
               {{ system.name }}
             </h4>
