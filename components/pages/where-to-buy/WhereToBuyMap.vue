@@ -174,7 +174,7 @@ async function updatePlacemarks() {
         hintContent: addressData.address,
         balloonContent: `
   <div style="display: flex; align-items: start;">
-    <nuxt-img src="/logoB.webp" alt="logo" style="width: 40px; height: 40px; object-fit: contain; margin-right: 10px;"/>
+    <img src="/logoB.webp" alt="logo" style="width: 40px; height: 40px; object-fit: contain; margin-right: 10px;"/>
     <div>
       <p style="font-family: 'abchanel-corpo', monospace; font-weight: bold; font-size: 15px; line-height: 21px;">${addressData.name}</p>
       <p style="font-family: 'Helvetica Neue', serif; font-weight: normal; font-size: 15px; line-height: 21px;">${addressData.address}</p>
@@ -210,7 +210,6 @@ async function updatePlacemarks() {
       placemark.phone = index // assign an id to each placemark for Vue's key
       myMap.geoObjects.add(placemark)
 
-      // ... rest of your placemark code ...
 
       return placemark
     })
