@@ -210,6 +210,7 @@ async function updatePlacemarks() {
       placemark.phone = index // assign an id to each placemark for Vue's key
       myMap.geoObjects.add(placemark)
 
+      // ... rest of your placemark code ...
 
       return placemark
     })

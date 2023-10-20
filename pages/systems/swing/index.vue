@@ -30,7 +30,7 @@ onMounted(() => {
       Распашные двери
     </h1>
     <OpeningType class="md:mt-8 lg:mt-12" :should-open-modal="shouldOpenModal" name="В классическом коробе" :systems="swingSystems" />
-    <OpeningType class="md:mt-8 lg:mt-12" :should-open-modal="shouldOpenModal" name="В компланарном коробе" :systems="swingSystems" />
+    <OpeningType class="md:mt-8 lg:mt-12" :should-open-modal="shouldOpenModal" name="В коробе моноблок" :systems="swingSystems" />
     <OpeningType class="md:mt-8 lg:mt-12" :should-open-modal="shouldOpenModal" name="В скрытом коробе" :systems="swingSystems" />
   </div>
 </template>
