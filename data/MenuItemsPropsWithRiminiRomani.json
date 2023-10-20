@@ -1,0 +1,90 @@
+{
+  "catalog": [{
+    "name": "classic",
+    "description": "classicDescription",
+    "image": "/collection-images/classic-hero.webp",
+    "slug": "/catalog?collection=1",
+    "id": "1"
+  },
+  {
+    "name": "versailles",
+    "description": "versaillesDescription",
+    "image": "/collection-images/versal-hero.webp",
+    "slug": "/catalog?collection=3",
+    "id": "3"
+  },
+  {
+    "name": "modern",
+    "description": "modernDescription",
+    "image": "/collection-images/modern-hero.webp",
+    "slug": "/catalog?collection=4",
+    "id": "4"
+  },
+  {
+    "name": "premier",
+    "description": "premierDescription",
+    "image": "/collection-images/premier-hero.webp",
+    "slug": "/catalog?collection=2",
+    "id": "2"
+  },
+  {
+    "name": "rimini",
+    "description": "riminiDescription",
+    "image": "/collection-images/rimini-hero.webp",
+    "slug": "/catalog?collection=5",
+    "id": "5"
+  },
+    {
+      "name": "romani",
+      "description": "romaniDescription",
+      "image": "/collection-images/romani-hero.webp",
+      "slug": "/catalog?collection=6",
+      "id": "6"
+    }
+
+  ],
+
+  "other-elements": [{
+    "name": "doorSystems",
+    "image": "/header-modal-img/door-systems.webp",
+    "slug": "/systems/swing"
+  },
+  {
+    "name": "doorHardware",
+    "image": "/header-modal-img/door-hardware.webp",
+    "slug": "/door-hardware"
+  },
+  {
+    "name": "plinth",
+    "image": "/header-modal-img/plinth.webp",
+    "slug": "/plinth"
+  },
+  {
+    "name": "deliveryAndInstallation",
+    "image": "/header-modal-img/delivery-installation.webp",
+    "slug": "/delivery-and-installation"
+  }
+
+  ],
+  "about-us": [{
+    "name": "aboutUs",
+    "image": "/header-modal-img/about-us.webp",
+    "slug": "/about-us"
+  },
+  {
+    "name": "promotions",
+    "image": "/header-modal-img/promotions.webp",
+    "slug": "/sale"
+  },
+  {
+    "name": "toDesigners",
+    "image": "/header-modal-img/to-designers.webp",
+    "slug": "/to-designers"
+  },
+  {
+    "name": "toDealers",
+    "image": "/header-modal-img/to-dealers.webp",
+    "slug": "/to-dealers"
+  }
+  ]
+}
