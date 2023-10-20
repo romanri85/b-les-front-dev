@@ -8,16 +8,41 @@ import { useViewportSize } from '~/composables/useViewportSize'
 const filtersStore = useFiltersStore()
 const { filterCount } = storeToRefs(filtersStore)
 
-// console.log(props.isOpen, 'props')
-// console.log(open.value, 'open')
+function changeMinMax() {
+  min.value = filtersStore.filterCount.price[0]?.min_price || 0
+  max.value = filtersStore.filterCount.price[0]?.max_price || 79000
+  value.value = [min.value, max.value]
+}
+let isSliderUpdate = ref(false);
 
 function updateSliderValues([newMin, newMax]) {
-  filtersStore.onChangeFilters({ min_price: newMin, max_price: newMax })
+  isSliderUpdate.value = true;  // Set the flag
+  filtersStore.onChangeFilters({ min_price: newMin, max_price: newMax });
 }
 
-const min = computed(() => filtersStore.filterCount.price[0]?.min_price || 0)
-const max = computed(() => filtersStore.filterCount.price[0]?.max_price || 99000)
+watch(
+    () => [
+      filtersStore.activeFilters.color,
+      filtersStore.activeFilters.material,
+      filtersStore.activeFilters.color_set,
+      filtersStore.activeFilters.design,
+      filtersStore.activeFilters.sale,
+    ],
+    async (newValues, oldValues) => {
+      if (newValues.some((value, index) => value !== oldValues[index])) {
+        console.log('changed');
+        await filtersStore.onChangeFilters({ /* ... */ });
+        changeMinMax();
+      }
+    }
+);
 
+
+
+const min = ref(0)
+const max = ref(79900)
+// const value = ref([min.value, max.value])
+const value = ref([0, 79900])
 const viewport = useViewportSize()
 const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTablet === true)
 </script>
@@ -40,12 +65,12 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
           <div class="px-5">
             <FormKit
               v-if="filterCount && filterCount.price && filterCount.price[0]"
-              :key="filterCount.price[0].min_price + filterCount.price[0].max_price"
               type="slider"
               name="slider"
+              v-model="value"
               tooltip="true"
               :tooltip-format="(v) => `${v} ₽`"
-              :value="[0, 99000]"
+              :value="[0, 79000]"
               :min="min"
               :max="max"
               @input="updateSliderValues"
@@ -55,7 +80,6 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
       </transition>
     </Disclosure>
     <div>
-      <!--    <div class="h-24"></div> -->
     </div>
   </div>
 </template>
