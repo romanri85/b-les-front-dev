@@ -50,33 +50,34 @@ function chooseColorSet(id) {
   else {
     const updatedColorSets = activeFilters.value.color_set.filter((set) => {
       return set !== id
+
     })
+    filtersStore.onChangeFilters({ color_set: updatedColorSets})
 
     // Find the removed color_set
-    const removedColorSet = color_sets.value.find(set => set.color_set === id)
+    // const removedColorSet = color_sets.value.find(set => set.color_set === id)
 
     // Prepare a new colors array with the colors from the removed color_set filtered out
-    let updatedColors = activeFilters.value.color || []
-    let updatedMaterials = activeFilters.value.material || []
+    // let updatedColors = activeFilters.value.color || []
+    // let updatedMaterials = activeFilters.value.material || []
 
-    if (removedColorSet) {
-      updatedColors = updatedColors.filter((color) => {
-        return !removedColorSet.colors.includes(color)
-      })
-
-      // Remove materials associated with the removed color_set from activeFilters.materials
-      updatedMaterials = updatedMaterials.filter((material) => {
-        return !removedColorSet.materials.includes(material)
-      })
+    // if (removedColorSet) {
+    //   updatedColors = updatedColors.filter((color) => {
+    //     return !removedColorSet.colors.includes(color)
+    //   })
+    //
+    //   // Remove materials associated with the removed color_set from activeFilters.materials
+    //   updatedMaterials = updatedMaterials.filter((material) => {
+    //     return !removedColorSet.materials.includes(material)
+    //   })
     }
 
     // Invoke onChangeFilters with the new color_set, colors, and materials
-    filtersStore.onChangeFilters({ color_set: updatedColorSets, color: updatedColors, material: updatedMaterials })
 
     // Your existing check; this could likely be removed if you are updating activeFilters above
-    if (!activeFilters.value.color_set)
-      filtersStore.onChangeFilters({ color_set: [] })
-  }
+  //   if (!activeFilters.value.color_set)
+  //     filtersStore.onChangeFilters({ color_set: [] })
+  // }
 }
 
 function isColorSetAvailable(colorSet) {

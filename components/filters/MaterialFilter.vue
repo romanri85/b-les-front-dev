@@ -23,23 +23,25 @@ function chooseMaterial(material) {
   //   colors: [7, 8, 9, 10, 11, 12, 13, 14, 15]
   // }]
   // Find the materials to delete
-  const materialToDelete = filtersStore.materialColors.filter((item) => {
-    return item.material === material
-  })
+  // const materialToDelete = filtersStore.materialColors.filter((item) => {
+  //   return item.material === material
+  // })
 
   // Flatten the color array
-  const colorsToDelete = materialToDelete.reduce((acc, current) => {
-    return acc.concat(current.color)
-  }, [])
+  // const colorsToDelete = materialToDelete.reduce((acc, current) => {
+  //   return acc.concat(current.color)
+  // }, [])
 
   // Filter out the colors from activeFilters.color
-  const updatedColors = filtersStore.activeFilters.color.filter((color) => {
-    return !colorsToDelete.includes(color)
-  })
+  // const updatedColors = filtersStore.activeFilters.color.filter((color) => {
+  //   return !colorsToDelete.includes(color)
+  // })
   if (!filtersStore.activeFilters.material.includes(material)) {
+    console.log('includes')
     filtersStore.onChangeFilters({ material: [...filtersStore.activeFilters.material, material], color: [] })
   }
   else {
+    console.log('not includes')
     filterCount.value.color.filter((item) => {
       return item.material !== material
     })
@@ -47,8 +49,10 @@ function chooseMaterial(material) {
       return item !== material
     })
 
-    filtersStore.onChangeFilters({ material: updatedMaterials, color: updatedColors })
+    filtersStore.onChangeFilters({ material: updatedMaterials})
   }
+  console.log('filtersStore.filterCount.price[0]?.min_price', filtersStore.filterCount.price[0]?.min_price)
+  console.log('filtersStore.filterCount.price[0]?.max_price', filtersStore.filterCount.price[0]?.max_price)
 }
 
 function isMaterialAvailable(material) {

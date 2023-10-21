@@ -1,5 +1,6 @@
 // import {i18n} from './i18n.config';
 import { sentryVitePlugin } from '@sentry/vite-plugin'
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   meta: {
@@ -9,9 +10,9 @@ export default defineNuxtConfig({
     provider: 'ipx',
   },
 
-  // build: {
-  //   transpile: ['fsevents'],
-  // },
+  build: {
+    transpile: ['vuetify','fsevents'],
+  },
 
   css: ['~/assets/styles/index.scss'],
   // sourcemap: {
@@ -19,6 +20,12 @@ export default defineNuxtConfig({
   //   server: true,
   // },
   modules: [
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
+    },
     '@nuxtjs/algolia',
     'nuxt-headlessui',
     '@nuxt/image',
@@ -90,6 +97,13 @@ export default defineNuxtConfig({
     '/systems/swing': { prerender: true },
     '/to-dealers': { prerender: true },
     '/to-designers': { prerender: true },
+  },
+  vite: {
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
   },
 
   // vite: {

@@ -57,7 +57,7 @@ function chooseColor(id) {
 
     filtersStore.onChangeFilters({ color: updatedColors })
 
-    removeInactiveMaterials(materialColors.value, id, filtersStore)
+    // removeInactiveMaterials(materialColors.value, id, filtersStore)
   }
 }
 

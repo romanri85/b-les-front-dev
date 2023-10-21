@@ -53,6 +53,7 @@ export const useFiltersStore = defineStore('filtersStore', () => {
     await fetchProducts(query)
 
     await checkFilters(query)
+
   }
 
   async function fetchProducts(query = '') {

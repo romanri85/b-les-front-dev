@@ -23,6 +23,7 @@
     "@heroicons/vue": "^2.0.18",
     "@intlify/bundle-utils": "^7.0.2",
     "@jridgewell/sourcemap-codec": "^1.4.15",
+    "@mdi/font": "^7.3.67",
     "@nuxt/image": "^1.0.0-rc.1",
     "@nuxtjs/algolia": "^1.9.0",
     "@pinia/nuxt": "^0.4.10",
@@ -54,7 +55,9 @@
     "nuxt-icon": "^0.4.1",
     "nuxt-lodash": "^2.5.0",
     "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.7"
+    "tailwindcss": "^3.2.7",
+    "vite-plugin-vuetify": "^1.0.2",
+    "vuetify": "^3.3.22"
   },
   "browserslist": [
     ">0.3%",

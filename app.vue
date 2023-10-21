@@ -9,7 +9,9 @@
 
 <template>
   <NuxtLayout>
+    <v-app>
     <NuxtLoadingIndicator color="#000000" />
     <NuxtPage />
+    </v-app>
   </NuxtLayout>
 </template>
