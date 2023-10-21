@@ -7,6 +7,7 @@ import {
 } from '@headlessui/vue'
 import { ref, toRefs, watch } from 'vue'
 
+
 const props = defineProps({
   isOpen: Boolean,
   shouldOpenModal: Number,
@@ -15,6 +16,9 @@ const props = defineProps({
 
 const hoveredSystem = ref('')
 const { shouldOpenModal } = toRefs(props)
+const isPlaying = ref(false);
+
+
 
 watch(shouldOpenModal, (newValue) => {
   if (newValue)
@@ -31,13 +35,34 @@ function openModal() {
   isOpen.value = true
 }
 
+const playingStates = reactive({});
+const previousSystem = ref(null);  // New ref to keep track of the previous system
+
+function toggleActiveSystem(id) {
+  if (previousSystem.value !== null && previousSystem.value !== id) {
+    playingStates[previousSystem.value] = false;  // Reset the playing state of the previous system
+  }
+
+  if (hoveredSystem.value === id) {
+    clearActiveSystem();
+    playingStates[id] = false;  // Update playing state
+  } else {
+    setActiveSystem(id);
+    playingStates[id] = true;  // Update playing state
+  }
+
+  previousSystem.value = id;  // Update the previous system
+}
 function setActiveSystem(id) {
   hoveredSystem.value = id;
   const videoElement = document.getElementById(`video-${id}`);
   if (videoElement) {
     videoElement.loop = true;  // Ensure the video loops while the cursor is on the system
     videoElement.play();
+
   }
+  isPlaying.value = true;
+
 }
 
 function clearActiveSystem() {
@@ -51,6 +76,7 @@ function clearActiveSystem() {
   } else {
     hoveredSystem.value = '';
   }
+  isPlaying.value = false;
 }
 </script>
 
@@ -85,6 +111,7 @@ function clearActiveSystem() {
             <DialogPanel
               class="fixed right-0 top-0 h-screen w-full max-w-[700px] md:w-[60%] lg:w-[40%] overflow-y-auto bg-white p-6 text-left align-middle shadow-xl transition-all"
             >
+
               <!--              <DialogTitle -->
               <!--                  as="h3" -->
               <!--                  class="text-lg font-medium leading-6 text-gray-900" -->
@@ -106,9 +133,8 @@ function clearActiveSystem() {
                     {{ system.name }}
                   </h2>
                   <div
-                      class="relative"
-                      v-on:mouseenter="() => setActiveSystem(system.id)"
-                      v-on:mouseleave="clearActiveSystem"
+                      class="relative cursor-pointer"
+                      v-on:click="() => toggleActiveSystem(system.id)"
                   >
 
                     <nuxt-img placeholder :src="system.image" class="w-full h-auto object-contain" :alt="system.name" />
@@ -121,6 +147,10 @@ function clearActiveSystem() {
                         muted
                         class="absolute top-0 left-0 w-full h-auto"
                     ></video>
+                    <div class="symbol-container">
+                      <BasePlaySymbol v-if="!playingStates[system.id]" />
+                      <BasePauseSymbol v-else />
+                    </div>
                   </div>
                   <h5 class="pt-5 pb-20">
                     {{ system.description }}
@@ -137,5 +167,13 @@ function clearActiveSystem() {
 <style scoped>
 .modal-background {
   opacity: 25%;
+}
+.symbol-container {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  right: 10px;
+  z-index: 10; /* Adjust this value if necessary to ensure the symbols are on top of all other elements */
 }
 </style>
