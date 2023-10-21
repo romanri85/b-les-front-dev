@@ -54,10 +54,9 @@ watch([() => catalogElementHeight.value, () => hardwareFiltersHeight.value], () 
     sidebar.value.updateSticky()
   }
 })
+await hardwareFiltersStore.onChangeFilters({ page: 1 })
 
-onMounted(async () => {
-  await hardwareFiltersStore.onChangeFilters({ page: 1 })
-})
+
 </script>
 
 <template>

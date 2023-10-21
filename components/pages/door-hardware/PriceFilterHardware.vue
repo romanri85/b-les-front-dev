@@ -26,7 +26,6 @@ async function changeMinMax() {
     min.value = newMin;
     max.value = newMax;
     await nextTick()
-    console.log(min.value, max.value, 'minmax in if')
     range.value = [min.value, max.value];
   }
 }
@@ -103,8 +102,7 @@ watch(
                 rounded="0"
                 counter="5"
                 v-model.number="range[0]"
-                :max="range[1]"
-                :min="min"
+
                 font-mono="font-mono"
                 bg-color="white"
                 type="number"
@@ -113,6 +111,8 @@ watch(
                 suffix="₽"
                 base-color="grey lighten-4"
                 color="grey darken-4"
+                @input="updateSliderValues([range[0], range[1]])"
+
 
             >
             </v-text-field>
@@ -122,8 +122,6 @@ watch(
             <v-text-field
                 rounded="0"
                 v-model.number="range[1]"
-                :max="max"
-                :min="range[0]"
                 bg-color="white"
                 step="1000"
                 type="number"
@@ -132,6 +130,8 @@ watch(
                 counter="5"
                 base-color="grey lighten-4"
                 color="grey darken-4"
+                @input="updateSliderValues([range[0], range[1]])"
+
             >
             </v-text-field>
           </v-col>

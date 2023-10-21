@@ -44,7 +44,6 @@ onMounted(async () => {
 })
 
 function chooseGlass(glass: number): void {
-  console.log('changeGlassDecor')
   if (glass === glassDecor.value.glass)
     return
 

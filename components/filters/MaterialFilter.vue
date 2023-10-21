@@ -37,11 +37,9 @@ function chooseMaterial(material) {
   //   return !colorsToDelete.includes(color)
   // })
   if (!filtersStore.activeFilters.material.includes(material)) {
-    console.log('includes')
     filtersStore.onChangeFilters({ material: [...filtersStore.activeFilters.material, material], color: [] })
   }
   else {
-    console.log('not includes')
     filterCount.value.color.filter((item) => {
       return item.material !== material
     })
@@ -51,8 +49,6 @@ function chooseMaterial(material) {
 
     filtersStore.onChangeFilters({ material: updatedMaterials})
   }
-  console.log('filtersStore.filterCount.price[0]?.min_price', filtersStore.filterCount.price[0]?.min_price)
-  console.log('filtersStore.filterCount.price[0]?.max_price', filtersStore.filterCount.price[0]?.max_price)
 }
 
 function isMaterialAvailable(material) {

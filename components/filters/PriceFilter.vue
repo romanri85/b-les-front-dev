@@ -27,7 +27,6 @@ async function changeMinMax() {
     min.value = newMin;
     max.value = newMax;
     await nextTick()
-    console.log(min.value, max.value, 'minmax in if')
     range.value = [min.value, max.value];
   }
 }
@@ -118,7 +117,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                     suffix="₽"
                     base-color="grey lighten-4"
                     color="grey darken-4"
-
+                    @input="updateSliderValues([range[0], range[1]])"
 
                 >
                 </v-text-field>
@@ -138,7 +137,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                     counter="5"
                     base-color="grey lighten-4"
                     color="grey darken-4"
-
+                    @input="updateSliderValues([range[0], range[1]])"
                 >
                 </v-text-field>
               </v-col>

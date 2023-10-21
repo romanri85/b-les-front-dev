@@ -88,8 +88,8 @@ function openModal() {
     </Dialog>
   </TransitionRoot>
 </template>
-<style>
+<style scoped>
 .modal-background {
-  opacity: 50%;
+  opacity: 25%;
 }
 </style>

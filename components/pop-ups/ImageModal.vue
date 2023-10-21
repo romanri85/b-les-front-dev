@@ -127,6 +127,6 @@ function openModal() {
 </template>
 <style scoped>
 .modal-background {
- opacity: 50%;
+ opacity: 25%;
 }
 </style>
