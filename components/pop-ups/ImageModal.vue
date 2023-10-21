@@ -93,9 +93,9 @@ function openModal() {
               />
               <nuxt-link class="outline-none" :to="`/interior/${image.project}`">
                 <div v-if="!route.path.startsWith('/interior')" class="outline-none text-center py-2">
-                  <h3 class="inline outline-none">
+                  <h2 class="inline outline-none">
                     {{ image.project_name }}
-                  </h3>
+                  </h2>
                 </div>
                 <div v-else class="py-2" />
               </nuxt-link>
