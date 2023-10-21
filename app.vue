@@ -16,5 +16,7 @@
   </NuxtLayout>
 </template>
 <style>
-
+#app {
+  outline: none;
+}
 </style>

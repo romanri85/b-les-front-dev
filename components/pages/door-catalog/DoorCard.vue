@@ -62,7 +62,7 @@ function mouseLeave() {
         {{ props.doorVariant.product_variant.name }}
       </h3>
 
-      <p class="pb-3 uppercase">
+      <p class="pb-3 font-light uppercase">
         {{ props.doorVariant.product_variant.collection_name }}
       </p>
       <div class="pb-3 inline-flex">

@@ -41,7 +41,7 @@ function onChangePage(page) {
         </p>
       </div>
     </div>
-    <div  class="lg:min-h-[3285px]">
+    <div  class="lg:min-h-[3495px]">
     <div
       v-if="viewport.isDesktop || viewport.isTablet"
 

@@ -120,20 +120,21 @@ function openModal() {
                   as="h3"
                   class="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Заказать двери - это легко
+                  Оставить заявку
                 </DialogTitle>
-                <div class="flex justify-between mt-8 mb-8">
+                <div class="flex justify-center mt-8 mb-8">
                   <h3><a href="tel:+74951500032">+ 7 495 150-00-32</a></h3>
-                  <div class="">
-                    <div class="">
-                      <button
-                          type="button"
-                          class="inline-flex justify-center border border-transparent bg-primaryDark px-4 py-2 text-xs font-mono  text-white  focus:outline-none "
-                          @click="closeModal"
-                      >
-                        Закрыть
-                      </button>
-                    </div>
+
+                </div>
+                <div class="flex justify-end w-full pb-8">
+                  <div class="ml-auto">
+                    <button
+                        type="button"
+                        class="inline-flex justify-center border border-transparent bg-primaryDark px-4 py-2 text-xs font-mono  text-white  focus:outline-none "
+                        @click="closeModal"
+                    >
+                      Закрыть
+                    </button>
                   </div>
                 </div>
                 <div>
