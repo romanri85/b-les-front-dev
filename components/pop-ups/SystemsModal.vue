@@ -143,6 +143,7 @@ function clearActiveSystem() {
                         :id="`video-${system.id}`"
                         :src="system.video"
                         autoplay
+                        playsinline
                         loop
                         muted
                         class="absolute top-0 left-0 w-full h-auto"
