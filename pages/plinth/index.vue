@@ -17,7 +17,7 @@ await fetchPlinths()
   <Head>
     <title>Брянский лес - Плинтус</title>
   </Head>
-  <BaseHero :hero-name="heroName" :hero-description="heroDescription" :hero-image="heroImage" />
+  <BaseHeroWithoutDescription :hero-name="heroName" :hero-image="heroImage" />
   <article class="main-container">
     <h5 class="lg:px-[230px] px-[40px] py-[60px] lg:py-[90px]">
       Плинтус - декоративный элемент, позволяющий оформить интерьер в едином стиле с межкомнатными дверьми. С его помощью

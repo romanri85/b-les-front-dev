@@ -12,7 +12,7 @@ const viewport = useViewportSize()
 const hardwareFiltersStore = useHardwareFiltersStore()
 
 const heroName = 'doorHardware'
-const heroDescription = 'doorHardwarePageDescription'
+const heroDescription = ''
 const heroImage = '/door-hardware/door-hardware.webp'
 
 const catalogElement = ref(null)
@@ -64,7 +64,7 @@ await hardwareFiltersStore.onChangeFilters({ page: 1 })
     <title>Брянский лес - Фурнитура</title>
   </Head>
   <div ref="catalogElement">
-    <BaseHero :heroName="heroName" class="mb-32" :hero-description="heroDescription" :hero-image="heroImage" />
+    <BaseHeroWithoutDescription :heroName="heroName" class="mb-32" :hero-image="heroImage" />
     <div class="main-content flex main-container md:flex-row flex-col">
       <div v-if="viewport.isDesktop || viewport.isTablet" class="md:w-[210px] lg:w-[320px] sidebar">
         <div class="sidebar__inner">

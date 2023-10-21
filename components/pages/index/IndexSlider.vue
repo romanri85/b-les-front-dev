@@ -11,7 +11,7 @@ const viewport = useViewportSize()
 </script>
 
 <template>
-  <div class="lg:mt-[-87px] md:mt-[-65px] mt-[-65px] w-screen">
+  <div class="lg:mt-[-87px] md:mt-[-65px] mt-[-55px] w-screen">
     <div class=" bg-cover bg-center h-screen w-screen  bg-gray-400">
       <client-only>
         <Swiper

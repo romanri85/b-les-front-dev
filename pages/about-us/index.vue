@@ -53,7 +53,7 @@ watch(shopsCounter, (newCounterValue) => {
 })
 
 const heroName = 'aboutUs'
-const heroDescription = 'aboutUsPageDescription'
+const heroDescription = ''
 const heroImage = '/aboutUs/aboutUs-bg.webp'
 </script>
 
@@ -61,7 +61,7 @@ const heroImage = '/aboutUs/aboutUs-bg.webp'
   <Head>
     <title>Брянский лес - О нас</title>
   </Head>
-  <BaseHero :hero-name="heroName" :hero-description="heroDescription" :hero-image="heroImage" />
+  <BaseHeroWithoutDescription :hero-name="heroName" :hero-image="heroImage" />
   <section class="main-container ">
     <div class="main-container flex md:flex-row flex-col  justify-between  gap-x-16 lg:gap-x-24">
       <div class="flex flex-col mt-12 md:mt-0 justify-center md:w-1/2 gap-y-4  lg:gap-y-10">
