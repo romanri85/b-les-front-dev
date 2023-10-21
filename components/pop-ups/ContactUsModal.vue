@@ -125,13 +125,15 @@ function openModal() {
                 <div class="flex justify-between mt-8 mb-8">
                   <h3><a href="tel:+74951500032">+ 7 495 150-00-32</a></h3>
                   <div class="">
-                    <button
-                      type="button"
-                      class="inline-flex justify-center border border-transparent  text-xs font-mono  text-primaryDark lg:underline-direction underline-static  focus:outline-none "
-                      @click="closeModal"
-                    >
-                      Закрыть
-                    </button>
+                    <div class="">
+                      <button
+                          type="button"
+                          class="inline-flex justify-center border border-transparent bg-primaryDark px-4 py-2 text-xs font-mono  text-white  focus:outline-none "
+                          @click="closeModal"
+                      >
+                        Закрыть
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div>
@@ -215,5 +217,8 @@ function openModal() {
 <style scoped>
 .modal-background {
   opacity: 25%;
+}
+button {
+
 }
 </style>

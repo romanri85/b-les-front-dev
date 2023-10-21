@@ -81,13 +81,15 @@ onMounted(() => {
                   class="w-full   transform overflow-hidden  bg-white p-8 text-left align-middle shadow-xl transition-all"
                 >
                   <div class=" text-center md:text-right mb-12 lg:mb-0">
-                    <PrimaryButtonBig
-                        type="button"
-                        class="inline-flex justify-center border border-transparent bg-black-100 px-4 py-2  hover:bg-black-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-black-500 focus-visible:ring-offset-2"
-                        @click="closeModal"
-                    >
-                      Закрыть
-                    </PrimaryButtonBig>
+                    <div class="">
+                      <button
+                          type="button"
+                          class="inline-flex justify-center border border-transparent bg-primaryDark px-4 py-2 text-xs font-mono  text-white  focus:outline-none "
+                          @click="closeModal"
+                      >
+                        Закрыть
+                      </button>
+                    </div>
                   </div>
                   <DialogTitle
                     as="h3"

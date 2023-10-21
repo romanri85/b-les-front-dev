@@ -4,12 +4,14 @@
 
 <template>
   <button class="">
-    <h3 class="underline-static  ">
-      <slot />
+    <h3 class="underline-static  big-button">
+      <slot/>
     </h3>
   </button>
 </template>
 
 <style scoped>
+
+
 
 </style>

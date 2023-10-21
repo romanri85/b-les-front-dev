@@ -82,7 +82,7 @@ const viewport = useViewportSize()
                 <button
                   class="prev-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[40px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[40px]"
                 >
-                  <nuxt-img
+                  <img
                       class="hidden md:block" width="130" src="/icons/prev-square-icon.svg"
                     alt="prev"
                   />
@@ -104,7 +104,7 @@ const viewport = useViewportSize()
                 <button
                   class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[40px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[40px]"
                 >
-                  <nuxt-img
+                  <img
                      class="hidden md:block" width="130" src="/icons/next-square-icon.svg"
                     alt="next"
                   />
