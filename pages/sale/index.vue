@@ -42,7 +42,7 @@ onMounted(() => {
       <!--              <h1>  Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.</h1> -->
       <!--              </vue-countdown> -->
       <!--            </client-only> -->
-      <div v-if="saleStore.sales" class="mt-20 md:mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div v-if="saleStore.sales.length>0" class="mt-20 md:mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         <div v-for="sale in saleStore.sales" :key="sale.id" class="min-w-80">
           <div class="relative group">
             <div class="w-full h-60 cursor-pointer">
@@ -101,6 +101,9 @@ onMounted(() => {
             <!--            </div> -->
           </div>
         </div>
+      </div>
+      <div v-else>
+        <h2 class="pt-12 ma-auto text-left">К сожалению, в данное время нет действующих акций</h2>
       </div>
     </div>
   </section>

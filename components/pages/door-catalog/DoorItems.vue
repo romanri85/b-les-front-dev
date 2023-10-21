@@ -33,7 +33,7 @@ function onChangePage(page) {
 
 <template>
   <div ref="start"  class="md:pl-5 lg:pl-16">
-    <div class="text-primaryDark flex justify-center md:justify-between">
+    <div class="text-primaryDark flex md:justify-between">
       <Sorting />
       <div class="hidden md:block">
         <p class=" mt-14  md:mt-0 font-regular">
@@ -41,9 +41,10 @@ function onChangePage(page) {
         </p>
       </div>
     </div>
+    <div  class="lg:min-h-[3285px]">
     <div
       v-if="viewport.isDesktop || viewport.isTablet"
-      class="lg:min-h-[3285px]"
+
     >
       <div ref="parent" class=" mt-4 md:mt-16 md:gap-y-8 lg:gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid">
         <div v-for="doorVariant in filtersStore.products" :key="doorVariant.id" class="">
@@ -75,12 +76,13 @@ function onChangePage(page) {
     </div>
     <div class="w-full flex justify-center">
       <base-pagination
-        v-model:current-page="filtersStore.page" class="pb-32"
+        v-model:current-page="filtersStore.page" class="lg:pb-32 lg:pt-16 pb-20 pt-4"
         :total="filtersStore.total"
         :page_size="filtersStore.page_size"
         :pages-count="filtersStore.pagesCount"
         @page-change="onChangePage"
       />
+    </div>
     </div>
   </div>
 </template>

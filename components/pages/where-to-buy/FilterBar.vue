@@ -55,6 +55,7 @@ function changeFilter(value) {
     <!-- <client-only> -->
     <FormKit
       v-model="isOpen"
+
       type="checkbox"
       :options="{ open: 'Только открытые магазины', monoBrand: 'Только монобрендовые магазины' }"
       @input="changeFilter"

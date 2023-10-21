@@ -241,7 +241,7 @@ function handleImagePage(newPage) {
               <div class="flex justify-center">
                 <base-pagination
                   v-if="MaterialColorProductVariantTotalHits" v-model:current-page="MaterialColorProductVariantCurrentPage"
-                  class="pb-32"
+                  class="lg:pb-32 lg:pt-28 pb-20 pt-16"
                   :total="MaterialColorProductVariantTotalHits"
                   :page_size="24"
                   @page-change="handleNewMaterialColorProductVariantPage"
@@ -265,7 +265,7 @@ function handleImagePage(newPage) {
           </TabPanel>
 
           <TabPanel>
-            <div ref="ImageHitsBlock" class=" pb-16 lg:pb-24">
+            <div ref="ImageHitsBlock" class=" ">
               <div class="my-image-grid grid grid-cols-3 gap-4">
                 <div v-for="(image, index) in ImageSearchResults" :key="index" class="cursor-pointer my-image-cell">
                   <nuxt-img
@@ -275,10 +275,10 @@ function handleImagePage(newPage) {
                 </div>
               </div>
             </div>
-            <div class="flex justify-center">
+            <div class=" flex justify-center">
               <base-pagination
                 v-if="ImageTotalHits" v-model:current-page="ImageCurrentPage"
-                class="pb-32"
+                class="lg:py-32 py-20 "
                 :total="ImageTotalHits"
                 :page_size="12"
                 @page-change="handleImagePage"
@@ -312,5 +312,9 @@ function handleImagePage(newPage) {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.mt-100 {
+  margin-top: 100px!important;
 }
 </style>

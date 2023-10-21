@@ -81,7 +81,7 @@ const index = materialMap[props.material]
                     class="text-darkGrey cursor-pointer"
                   >
                     <h4
-                      :class="{ 'border-b': selected, 'border-black': selected, 'text-primaryDark': selected }"
+                      :class="{ '': selected, 'selected-color ': selected, 'text-primaryDark': selected }"
                       @click="chooseMaterial(material.material)"
                     >
                       {{
@@ -99,7 +99,7 @@ const index = materialMap[props.material]
                     <div class="flex flex-col items-start w-24">
                       <div
                         class="pb-1 border-b-4"
-                        :class="{ 'border-transparent': color.id === !colorActiveindex, 'border-black': color.id === colorActiveindex, 'border-b border-transparent': color.id !== colorActiveindex }"
+                        :class="{  'border-black': color.id === colorActiveindex, 'border-transparent': color.id !== colorActiveindex}"
                       >
                         <div
                           :style="color.image ? `background-image: url(${color.image})` : `background-color: ${color.hex_code}`"
@@ -122,5 +122,8 @@ const index = materialMap[props.material]
 </template>
 
 <style scoped>
+.selected-color {
 
+  border-bottom: 1px solid #000000;
+}
 </style>

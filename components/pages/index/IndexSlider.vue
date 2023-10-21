@@ -12,7 +12,7 @@ const viewport = useViewportSize()
 
 <template>
   <div class="lg:mt-[-87px] md:mt-[-65px] mt-[-65px] w-screen">
-    <div class="hero bg-cover bg-center h-screen w-screen  bg-gray-400">
+    <div class=" bg-cover bg-center h-screen w-screen  bg-gray-400">
       <client-only>
         <Swiper
           class="h-screen"
@@ -50,7 +50,7 @@ const viewport = useViewportSize()
 
             <div class="flex flex-col justify-between relative w-full h-full">
               <div
-                class="text-left relative main-container md:pb-0 pb-16 text-white lg:mt-[200px]  md:mb-[60px] lg:max-w-screen flex md:flex-row flex-col justify-between items-center lg:order-1 order-2"
+                class="text-left relative main-container md:pb-0 pb-16 text-white lg:mt-[21vh]  md:mb-[7vh] lg:max-w-screen flex md:flex-row flex-col justify-between items-center lg:order-1 order-2"
               >
                 <div class="md:text-left text-center  ">
                   <h2 v-if="!viewport.isMobile" class="mb-5 lg:text-[23px]">
@@ -89,7 +89,7 @@ const viewport = useViewportSize()
                   <!--                  <nuxt-img placeholder class="md:hidden" src="/icons/prev-page-icon-small.svg" alt="prev"/> -->
                   <ChevronLeftIcon class="md:hidden w-8 h-8 text-white" />
                 </button>
-                <div class="lg:ml-[228px] lg:mb-[100px] text-center md:text-left">
+                <div class="lg:ml-[228px] lg:mb-[10vh] text-center md:text-left">
                   <h1 class="text-white md:mb-8 mb-[20px]">
                     {{ $t(collection.name) }}
                   </h1>

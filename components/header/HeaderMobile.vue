@@ -66,7 +66,7 @@ watch(
           <IconsMenuItems :light="!open && props.light" />
         </div>
         <!--    thin line between header and content -->
-        <div class="border-b w-full" :class="open ? '' : 'border-white'" />
+        <div class="" :class="open ? '' : 'border-white border-b w-full header-border'" />
         <!--            burger menu mobile and tablet -->
         <transition
           enter-active-class="transition ease-out duration-500"
@@ -101,5 +101,10 @@ watch(
 }
 .translate-y-0 {
   transform: translateY(0);
+}
+
+.header-border {
+  border-bottom: 1px solid #fff!important;
+
 }
 </style>

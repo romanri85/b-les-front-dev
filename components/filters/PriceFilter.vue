@@ -8,7 +8,7 @@ import {useViewportSize} from '~/composables/useViewportSize'
 const filtersStore = useFiltersStore()
 const {filterCount} = storeToRefs(filtersStore)
 // await filtersStore.checkFilters
-console.log(filterCount.value)
+
 const min = ref(filterCount.value.price?.[0]?.min_price )
 const max = ref(filterCount.value.price?.[0]?.max_price)
 // const value = ref([min.value, max.value])
@@ -19,17 +19,21 @@ const range = ref([
 ])
 const viewport = useViewportSize()
 
-function changeMinMax() {
-  const newMin = ref(filterCount.value.price[0]?.min_price);
-  const newMax = ref(filterCount.value.price[0]?.max_price);
-  if (newMin !== min.value || newMax !== max.value) {
-    min.value = newMin.value;
-    max.value = newMax.value;
-    // value.value = [min.value, max.value];  // Update value to reflect new min and max
-    range.value = [min.value, max.value];  // Update value to reflect new min and max
-  }
 
+async function changeMinMax() {
+  const newMin = filterCount.value.price[0]?.min_price;
+  const newMax = filterCount.value.price[0]?.max_price;
+  if (newMin !== min.value || newMax !== max.value) {
+    min.value = newMin;
+    max.value = newMax;
+    await nextTick()
+    console.log(min.value, max.value, 'minmax in if')
+    range.value = [min.value, max.value];
+  }
 }
+
+
+
 
 let isSliderUpdate = ref(false);
 
@@ -37,7 +41,7 @@ function updateSliderValues([newMin, newMax]) {
   isSliderUpdate.value = true;  // Set the flag
   filtersStore.onChangeFilters({min_price: newMin, max_price: newMax});
 }
-
+// TODO: remove timeout
 watch(
     () => [
       filtersStore.activeFilters.color,
@@ -49,7 +53,12 @@ watch(
     async (newValues, oldValues) => {
       if (newValues.some((value, index) => value !== oldValues[index])) {
         // console.log('changed');
-        await changeMinMax();
+
+        setTimeout(() => {
+          changeMinMax();
+        }, 500);
+
+
 
 
       }
@@ -97,13 +106,20 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                 <!-- Text field for minimum value -->
                 <v-text-field
                     rounded="0"
+                    counter="5"
                     v-model.number="range[0]"
                     :max="range[1]"
                     :min="min"
                     font-mono="font-mono"
                     bg-color="white"
                     type="number"
-                    label="От"
+                    step="1000"
+                    prefix="От"
+                    suffix="₽"
+                    base-color="grey lighten-4"
+                    color="grey darken-4"
+
+
                 >
                 </v-text-field>
               </v-col>
@@ -115,8 +131,14 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                     :max="max"
                     :min="range[0]"
                     bg-color="white"
+                    step="1000"
                     type="number"
-                    label="До"
+                    prefix="До"
+                    suffix="₽"
+                    counter="5"
+                    base-color="grey lighten-4"
+                    color="grey darken-4"
+
                 >
                 </v-text-field>
               </v-col>
@@ -132,16 +154,17 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
 
 
 <style scoped>
-  /* Hide the spin button on the number inputs */
 .v-text-field input[type="number"] {
-  -moz-appearance: textfield; /* For Firefox */
-  appearance: textfield; /* Standard */
+  -moz-appearance: textfield !important; /* For Firefox */
+  appearance: textfield !important; /* Standard */
 }
 
-/* Hide the spin button on the number inputs for Webkit browsers like Chrome and Safari */
 .v-text-field input[type="number"]::-webkit-inner-spin-button,
-.v-text-field input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.v-text-field input[type="number"]::-webkit-outer-spin-button,
+.v-text-field input[type="number"]:hover::-webkit-inner-spin-button,
+.v-text-field input[type="number"]:hover::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+
 }
 </style>

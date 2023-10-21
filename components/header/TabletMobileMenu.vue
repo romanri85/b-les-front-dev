@@ -148,5 +148,7 @@ function hideOther(id) {
 </template>
 
 <style scoped>
-
+.border-black {
+  border-color: #000000!important;
+}
 </style>

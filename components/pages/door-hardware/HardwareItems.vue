@@ -57,7 +57,7 @@ function onChangePage(page) {
     </div>
     <div class="w-full flex justify-center">
       <Pagination
-        v-model:current-page="hardwareFiltersStore.page" class="pb-32"
+        v-model:current-page="hardwareFiltersStore.page" class="lg:pb-32 lg:pt-16 pb-20 pt-4"
         :total="total"
         :page_size="hardwareFiltersStore.page_size"
         :pages-count="pagesCount"

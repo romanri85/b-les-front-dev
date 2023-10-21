@@ -47,12 +47,14 @@ const { locale, setLocale } = useI18n()
   </div>
   <!--    thin line between header and content -->
 
-  <div class="border-b w-full border-white" />
+  <div class="border-b w-full border-white! white-header" />
 
 <!--  </client-only> -->
   <!--    </header> -->
 </template>
 
 <style scoped>
-
+.white-header{
+  border-color: #ffffff!important;
+}
 </style>

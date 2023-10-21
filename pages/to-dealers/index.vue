@@ -12,12 +12,12 @@ const heroImage = '/toDealers/toDealers-bg.webp'
   <BaseHeroWithoutDescription :hero-name="heroName" :hero-image="heroImage" />
   <section class="main-container">
     <div class="lg:px-[255px] mdLg:px-52 md:px-16  lg:pt-24 pt-16 lg:pb-32 pb-20">
-      <h6 class="lg:pb-6 pb-4">
+      <h5 class="lg:pb-6 pb-4">
         {{ $t('toDealersPageDescription') }}
-      </h6>
-      <h6 class="lg:pb-10 pb-8">
+      </h5>
+      <h5 class="lg:pb-10 pb-8">
         {{ $t('toDealersInvitation') }}
-      </h6>
+      </h5>
       <h3 class="flex justify-center pb-8">
         {{ $t('toDealersContactsTitle') }}
       </h3>

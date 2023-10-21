@@ -27,12 +27,12 @@ h5{
 }
 
 h6{
-  @apply font-sans font-light
+  @apply font-sans font-regular
   lg:text-h5-lg md:text-h5-md text-h5-sm tracking-wider
 }
 
 p{
-    @apply font-sans font-light
+    @apply font-sans font-regular
      lg:text-p-lg md:text-p-md text-p-sm tracking-widest
 }
 

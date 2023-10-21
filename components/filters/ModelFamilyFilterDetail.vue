@@ -45,10 +45,10 @@ onMounted(async () => {
           <FilterType filter-name="Форма" />
         </DisclosureButton>
         <DisclosurePanel class="mb-10 ">
-          <div class="flex mb-2 mt-0 lg:flex-wrap flex-nowrap  w-full justify-start">
+          <div class="flex mb-2 mt-0 lg:flex-wrap grid-container w-full justify-start">
             <div
               v-for="model in props.product.product_family.products" v-if="props.product.product_family.products"
-              :key="model.name" class="flex flex-col items-center flex-item lg:mt-8 mt-0"
+              :key="model.name" class="flex flex-col items-start flex-item lg:mt-8 mt-0"
             >
               <div
                 v-if="model.image !== null"
@@ -99,5 +99,11 @@ onMounted(async () => {
     margin-right: 0px ;
     padding-right: 10px ;
   }
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px; /* Adjust gap to your preference */
 }
 </style>

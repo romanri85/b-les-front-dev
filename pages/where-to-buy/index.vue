@@ -77,9 +77,7 @@ function openCityModal() {
     <!--    <h5 class="pb-4" v-if="!isCityFound">К сожалению, в вашем регионе нет наших магазинов, или представителей. Но мы можем доставить двери в любой регион России.</h5> -->
 
     <CityDialog :should-open-modal="shouldOpenModal" :city="city" :cities="cities" @change-city="changeCity" />
-    <client-only>
       <WhereToBuyMap v-if="addresses && geo.region && city" :city="city" :addresses="addresses" :geo="geo" />
-    </client-only>
   </div>
 </template>
 

@@ -86,6 +86,6 @@ module.exports = {
 
     },
   },
-  plugins: [FormKitVariants],
+  plugins: [FormKitVariants, require('tailwindcss-important')()],
 
 }

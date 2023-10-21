@@ -14,7 +14,7 @@ const filtersStore = useFiltersStore()
 
 <template>
   <section class="">
-    <div class=" lg:mb-[80px] md:mb-[70px] flex justify-center md:justify-start gap-3">
+    <div class=" lg:mb-[80px] md:mb-[70px] filters flex  md:justify-start gap-3">
       <div class="inline-flex gap-x-3">
         <svg
           class="w-[20px] h-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -49,5 +49,7 @@ const filtersStore = useFiltersStore()
 </template>
 
 <style scoped>
-
+.filters{
+  justify-items: start!important;
+}
 </style>

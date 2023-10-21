@@ -16,28 +16,28 @@ const heroImage = '/delivery-and-installation/delivery-installation-bg.webp'
         <h3 class="flex pb-4">
           {{ $t('deliveryInstallationMeasurementTitle') }}
         </h3>
-        <h6 class="lg:pb-10 pb-8">
+        <h5 class="lg:pb-10 pb-8">
           {{ $t('deliveryInstallationMeasurementContent') }}
-        </h6>
+        </h5>
       </div>
       <div>
         <h3 class="flex pb-4">
           {{ $t('deliveryInstallationDeliveryTitle') }}
         </h3>
-        <h6 class="lg:pb-6 pb-4">
+        <h5 class="lg:pb-6 pb-4">
           {{ $t('deliveryInstallationDeliveryContent') }}
-        </h6>
-        <h6 class="lg:pb-10 pb-8 otsel">
+        </h5>
+        <h5 class="lg:pb-10 pb-8 otsel">
           {{ $t('deliveryInstallationDeliveryPrice') }}
-        </h6>
+        </h5>
       </div>
       <div>
         <h3 class="flex pb-4">
           {{ $t('deliveryInstallationInstallationTitle') }}
         </h3>
-        <h6 class="lg:pb-10 pb-8">
+        <h5 class="lg:pb-10 pb-8">
           {{ $t('deliveryInstallationInstallationContent') }}
-        </h6>
+        </h5>
       </div>
     </div>
   </section>
