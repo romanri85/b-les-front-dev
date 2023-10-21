@@ -18,6 +18,8 @@ export const useHardwareFiltersStore = defineStore('hardwareFiltersStore', () =>
     price: {},
     design: [],
     color_collection: [],
+    min_price: 0,
+    max_price: 99000,
   })
 
   const products = ref([])

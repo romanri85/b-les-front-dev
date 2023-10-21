@@ -8,13 +8,14 @@ const hardwareFiltersStore = useHardwareFiltersStore()
 const { filterCount } = storeToRefs(hardwareFiltersStore)
 // const firstUpdateSliderAfterMount = ref(true);
 
-const min = ref(filterCount.value.price?.[0]?.min_price )
-const max = ref(filterCount.value.price?.[0]?.max_price)
+const min = ref(filterCount.value.price?.[0]?.min_price || 0)
+const max = ref(filterCount.value.price?.[0]?.max_price ||30000)
+
 // const value = ref([min.value, max.value])
 // const value = ref([0, 79000])
 const range = ref([
   filterCount.value.price?.[0]?.min_price || 0,
-  filterCount.value.price?.[0]?.max_price
+  filterCount.value.price?.[0]?.max_price || 30000
 ])
 const viewport = useViewportSize()
 
@@ -35,7 +36,7 @@ let isSliderUpdate = ref(false);
 
 function updateSliderValues([newMin, newMax]) {
   isSliderUpdate.value = true;  // Set the flag
-  filtersStore.onChangeFilters({min_price: newMin, max_price: newMax});
+  hardwareFiltersStore.onChangeFilters({min_price: newMin, max_price: newMax});
 }
 // TODO: remove timeout
 watch(
@@ -89,6 +90,8 @@ watch(
                 :step="1"
                 class="align-center"
                 @end="updateSliderValues"
+                @start="updateSliderValues"
+
             >
             </v-range-slider>
           </v-col>

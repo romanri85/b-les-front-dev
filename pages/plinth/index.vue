@@ -19,11 +19,11 @@ await fetchPlinths()
   </Head>
   <BaseHero :hero-name="heroName" :hero-description="heroDescription" :hero-image="heroImage" />
   <article class="main-container">
-    <p class="lg:px-[230px] px-[40px] py-[60px] lg:py-[90px]">
+    <h5 class="lg:px-[230px] px-[40px] py-[60px] lg:py-[90px]">
       Плинтус - декоративный элемент, позволяющий оформить интерьер в едином стиле с межкомнатными дверьми. С его помощью
       можно сделать плавный переход от стены к напольному покрытию или, наоборот, создать яркий акцент при разделении
       пространства.
-    </p>
+    </h5>
   </article>
   <!-- <pre>{{plinths}}</pre> -->
   <div v-if="plinths" class="main-container xl:mx-[228px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-5 gap-x-4 lg:pb-32 pb-20">
