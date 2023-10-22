@@ -118,6 +118,7 @@ function hideOther(id) {
                 :current-menu-items="currentMenuItems"
                 :menu-items-props="menuItemsProps"
                 :active-menu-item-key="item.itemHeader"
+                :item-name="item.name"
               />
             </div>
 
