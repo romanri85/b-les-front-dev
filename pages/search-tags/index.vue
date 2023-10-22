@@ -204,7 +204,7 @@ function handleChooseTag(tag) {
         <!--      <pre wrap>{{ value }}</pre> -->
       </FormKit>
     </div>
-    <div ref="tagsBlock" class="layout-images pb-16 lg:pb-24">
+    <div ref="tagsBlock" class="layout-images pb-10">
       <div class="image-container">
         <div
           v-for="(image, index) in layoutImages" :key="index"
@@ -218,7 +218,7 @@ function handleChooseTag(tag) {
       </div>
     </div>
     <Pagination
-      v-if="page" v-model:current-page="page" class="md:pb-32 pb-20 flex justify-center"
+      v-if="page" v-model:current-page="page" class="flex justify-center"
       :total="total"
       :page_size="page_size"
       :pages-count="pagesCount"

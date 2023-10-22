@@ -24,7 +24,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="  flex flex-col lg:flex-row lg:justify-center justify-around items-center lg:py-24"
+    class="  flex flex-col lg:flex-row lg:justify-center justify-around items-center md:py-20 lg:py-24"
   >
     <div class="lg:w-[50vw] w-[80vw] text-center flex flex-col justify-between items-center">
       <h2 class="text-25-mono mb-7">
@@ -52,10 +52,10 @@ onMounted(() => {
       </div>
     </div>
     <div
-      class=" lg:w-[50vw] w-[100vw] flex justify-center lg:h-2/3 md:h-1/2 h-[240px] items-center mb-24 md:mb-0 mt-10 md:mt-0"
+      class=" lg:w-[50vw] w-[100vw] flex justify-center lg:h-2/3 md:h-[360] h-[240px] items-center mb-24 md:mb-0 mt-10 md:mt-0"
     >
       <div
-        class=" bg-[url('/parameters-search.webp')] bg-cover bg-center lg:w-2/3 w-full h-full flex justify-center items-center main-container"
+        class=" bg-[url('/parameters-search.webp')] lg:bg-cover bg-cover  md:bg-fit bg-center lg:w-2/3 w-full h-full flex justify-center items-center main-container"
       >
         <nuxt-link class="w-full flex justify-center" to="/search-tags">
           <buttons-secondary-button

@@ -22,7 +22,7 @@ function HandleNewPage(current) {
 </script>
 
 <template>
-  <div class="example-six">
+  <div class="">
     <VueAwesomePaginate
       v-model="currentPage"
       :total-items="props.total"

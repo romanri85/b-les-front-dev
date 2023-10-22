@@ -76,7 +76,7 @@ function onChangePage(page) {
     </div>
     <div class="w-full flex justify-center">
       <base-pagination
-        v-model:current-page="filtersStore.page" class="lg:pb-32 lg:pt-16 pb-20 pt-4"
+        v-model:current-page="filtersStore.page" class=""
         :total="filtersStore.total"
         :page_size="filtersStore.page_size"
         :pages-count="filtersStore.pagesCount"

@@ -28,7 +28,7 @@ function HandleNewPage(current) {
 </script>
 
 <template>
-  <div class="example-six">
+  <div class="lg:pb-32 lg:pt-20 pb-20 pt-10">
     <MobilePagination
       v-if="viewport.isMobile" key="mobile" :total="props.total" :current-page="currentPage" :page_size="props.page_size"
       @pageChange="HandleNewPage"

@@ -62,7 +62,7 @@ watch(
           <IconsMenuItems :light="!open && props.light" />
         </div>
         <!--    thin line between header and content -->
-        <div class="border-b w-full" :class="open ? '' : 'border-white'" />
+        <div class="border-b w-full" :class="open ? '' : 'border-white border-b w-full header-border'" />
         <!--            burger menu mobile and tablet -->
         <DisclosurePanel class=" w-full">
           <TabletMobileMenu />
@@ -82,5 +82,9 @@ watch(
   height: 100vh; /* Full height */
   background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
   z-index: -1; /* Sit on top */
+}
+.header-border {
+  border-bottom: 1px solid #fff!important;
+
 }
 </style>

@@ -85,7 +85,7 @@ function onChangePage(page) {
       </div>
     </div>
     <Pagination
-      v-model:current-page="currentPage" class="pb-32 flex justify-center"
+      v-model:current-page="currentPage" class=" flex justify-center"
       :total="interiorStore.total"
       :page_size="interiorStore.page_size"
       :pages-count="interiorStore.pagesCount"

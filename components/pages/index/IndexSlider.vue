@@ -77,7 +77,7 @@ const viewport = useViewportSize()
               </div>
 
               <div
-                class="relative main-container  flex md:justify-between justify-evenly lg:mt-[130px] md:mt-64 mt-40 lg:order-2"
+                class="relative main-container  flex md:justify-between justify-evenly lg:mt-[130px] md:mt-40 mt-40 lg:order-2"
               >
                 <button
                   class="prev-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[40px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[40px]"
@@ -90,7 +90,7 @@ const viewport = useViewportSize()
                   <ChevronLeftIcon class="md:hidden w-8 h-8 text-white" />
                 </button>
                 <div class="lg:ml-[228px] lg:mb-[10vh] text-center md:text-left">
-                  <h1 class="text-white md:mb-8 mb-[20px]">
+                  <h1 class="text-white lg:mb-8 mb-5">
                     {{ $t(collection.name) }}
                   </h1>
                   <nuxt-link :to="`/catalog?collection=${collection.id}`" class="text-white">

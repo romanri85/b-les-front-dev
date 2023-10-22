@@ -178,7 +178,7 @@ function handleImagePage(newPage) {
       <!-- Search Form -->
       <TabGroup :selected-index="selectedTabindex">
         <TabList>
-          <div class="flex md:flex-row flex-col justify-between max-w-[680px] pt-10 lg:pt-16 lg:pb-16 pb-10">
+          <div class=" flex md:flex-row flex-col justify-between max-w-[680px] pt-10 lg:pt-16 lg:pb-24 pb-16">
             <form-kit
               v-model="SearchQuery"
               type="search"
@@ -188,7 +188,7 @@ function handleImagePage(newPage) {
               @input="updateQueryAndSearch"
             />
 
-            <div class="md:pl-8 flex  md:justify-start gap-x-28 md:gap-x-32 lg:gap-x-40 pr-4">
+            <div class=" md:pl-8 flex  md:justify-start gap-x-28 md:gap-x-32 lg:gap-x-40 pr-4">
               <Tab class="text-primaryDark">
                 <div class="relative outline-none" @click="MaterialColorProductVariantTotalHits ? selectedTabindex = 0 : null">
                   <span v-if="MaterialColorProductVariantTotalHits > 0 " class="text-primaryDark absolute text-md -right-6 -top-3">{{
@@ -238,10 +238,10 @@ function handleImagePage(newPage) {
                   </NuxtLink>
                 </div>
               </div>
-              <div class="flex justify-center">
+              <div class="mt-10 flex justify-center">
                 <base-pagination
                   v-if="MaterialColorProductVariantTotalHits" v-model:current-page="MaterialColorProductVariantCurrentPage"
-                  class="lg:pb-32 lg:pt-28 pb-20 pt-16"
+                  class=""
                   :total="MaterialColorProductVariantTotalHits"
                   :page_size="24"
                   @page-change="handleNewMaterialColorProductVariantPage"
@@ -275,7 +275,7 @@ function handleImagePage(newPage) {
                 </div>
               </div>
             </div>
-            <div class=" flex justify-center">
+            <div class=" mt-10 flex justify-center">
               <base-pagination
                 v-if="ImageTotalHits" v-model:current-page="ImageCurrentPage"
                 class="lg:py-32 py-20 "
