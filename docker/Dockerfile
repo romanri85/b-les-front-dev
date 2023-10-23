@@ -17,7 +17,7 @@
 #ENTRYPOINT ["node", ".output/server/index.mjs"]
 
 #ARG FORMKIT_PRO_KEY
-FROM node:17-alpine
+FROM node:18-alpine
 #ARG FORMKIT_PRO_KEY
 #ENV FORMKIT_PRO_KEY=${FORMKIT_PRO_KEY}
 
