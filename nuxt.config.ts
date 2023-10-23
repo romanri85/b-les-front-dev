@@ -86,18 +86,18 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
     ],
   },
-  routeRules: {
-    '/': { prerender: true },
-    '/about-us': { prerender: true },
-    '/delivery-and-installation': { prerender: true },
-    '/door-hardware': { prerender: true },
-    '/plinth': { prerender: true },
-    '/sale': { prerender: true },
-    '/systems/slide': { prerender: true },
-    '/systems/swing': { prerender: true },
-    '/to-dealers': { prerender: true },
-    '/to-designers': { prerender: true },
-  },
+  // routeRules: {
+  //   '/': { prerender: true },
+  //   '/about-us': { prerender: true },
+  //   '/delivery-and-installation': { prerender: true },
+  //   '/door-hardware': { prerender: true },
+  //   '/plinth': { prerender: true },
+  //   '/sale': { prerender: true },
+  //   '/systems/slide': { prerender: true },
+  //   '/systems/swing': { prerender: true },
+  //   '/to-dealers': { prerender: true },
+  //   '/to-designers': { prerender: true },
+  // },
   vite: {
     vue: {
       template: {
