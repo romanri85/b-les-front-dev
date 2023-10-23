@@ -1,12 +1,12 @@
-<script setup lang="ts">
+<script setup lang="js">
 import Cookies from 'js-cookie'
-import { onMounted } from 'vue'
+import {onMounted} from 'vue'
 import WhereToBuyMap from '~/components/pages/where-to-buy/WhereToBuyMap.vue'
 import CityDialog from '~/components/pop-ups/CityDialog.vue'
-import { baseURL } from '~/config'
-import { findCity } from '~/utils/helpers'
+import {baseURL} from '~/config'
+import {findCity} from '~/utils/helpers'
 
-definePageMeta({ layout: 'dark-header' })
+definePageMeta({layout: 'dark-header'})
 
 const city = ref({})
 const cities = ref([])
@@ -34,17 +34,26 @@ if (typeof ymaps === 'undefined') {
 }
 
 async function getAddresses() {
-  addresses.value = await $fetch(`${baseURL}/api/shops/`)
-  geo.value = Cookies.get('geolocation') || { country: 'Russia', city: 'Moscow', region: 'Moscow' }
+  try {
+    addresses.value = await $fetch(`${baseURL}/api/shops/`)
+    console.log(addresses.value, 'addresses')
+  } catch (error) {
+    console.error('Failed to fetch addresses:', error)
+  }
+}
+
+async function getCities() {
+  geo.value = Cookies.get('geolocation') || {country: 'Russia', city: 'Moscow', region: 'Moscow'}
   geo.value = typeof geo.value === 'object' ? geo.value : JSON.parse(geo.value)
-  cities.value = addresses.value.cities
-  city.value = findCity(addresses.value.cities, geo.value.region)
+  cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
+  // cities.value = cities.value.cities
+  city.value = findCity(cities.value, geo.value.region)
   isCityFound.value = city.value.isFound
   city.value = city.value.city
-  // changeCity(city.value)
 }
 
 onMounted(async () => {
+  await getCities()
   await getAddresses()
   // console.log(cities.value, 'city')
 })
@@ -56,6 +65,8 @@ function changeCity(newCityId) {
 function openCityModal() {
   shouldOpenModal.value = shouldOpenModal.value + 1
 }
+const isAddressesLoaded = computed(() => addresses.value.addresses)
+
 </script>
 
 <template>
@@ -72,12 +83,13 @@ function openCityModal() {
     <h1 v-if="isCityLoaded && city" class="mt-10 pb-8" @click="openCityModal">
       Салоны в <span
         class="border-b-2 border-b-black cursor-pointer"
-      >{{ city.dative_case_name || 'Москве' }}</span>
+    >{{ city.dative_case_name || 'Москве' }}</span>
     </h1>
+
     <!--    <h5 class="pb-4" v-if="!isCityFound">К сожалению, в вашем регионе нет наших магазинов, или представителей. Но мы можем доставить двери в любой регион России.</h5> -->
 
-    <CityDialog  :should-open-modal="shouldOpenModal" :city="city" :cities="cities" @change-city="changeCity" />
-      <WhereToBuyMap v-if="addresses && geo.region && city" :city="city" :addresses="addresses" :geo="geo" />
+    <CityDialog :should-open-modal="shouldOpenModal" :city="city" :cities="cities" @change-city="changeCity"/>
+    <WhereToBuyMap v-if="isAddressesLoaded && geo.region && city" :city="city" :addresses="addresses" :geo="geo"/>
   </div>
 </template>
 

@@ -72,9 +72,21 @@ export function generateAddressData(address) {
   }
 }
 
-export function findCity(cities, geoValueRegion) {
+export function findCity(cities=[], geoValueRegion) {
   // Default city object with name "Москва"
-  const defaultCity = cities.find(city => city.name === 'Москва')
+  const defaultCity =  {
+        "id": 1,
+        "name": "Москва",
+        "longitude": "37.617664000000000",
+        "latitude": "55.752121000000000",
+        "zoom_level": 10,
+        "timezone": "Europe/Moscow",
+        "ip_check_names": [
+          "Moscow",
+          "Moscow Oblast"
+        ],
+        "dative_case_name": "Москве"
+      }
 
   for (const city of cities) {
     if (city.ip_check_names.includes(geoValueRegion)) {
