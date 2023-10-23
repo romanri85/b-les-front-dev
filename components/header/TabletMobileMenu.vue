@@ -84,7 +84,7 @@ function hideOther(id) {
 
           <!--                            arrows for  menu items with dropdown -->
 
-          <div v-if="item.needToShowDropdown ">
+          <div v-if="item.needToShowDropdown && item.name !== 'catalog' ">
             <ChevronDownIcon
               :class="open ? 'duration-200' : 'duration-200 rotate-180'"
               class="w-5 h-5"

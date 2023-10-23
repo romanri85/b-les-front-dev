@@ -24,7 +24,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="  flex flex-col lg:flex-row lg:justify-center justify-around items-center md:py-20 lg:py-24"
+    class=" mt-24 md:mt-0 flex flex-col lg:flex-row lg:justify-center justify-around items-center md:py-20 lg:py-24"
   >
     <div class="lg:w-[50vw] w-[80vw] text-center flex flex-col justify-between items-center">
       <h2 class="text-25-mono mb-7">

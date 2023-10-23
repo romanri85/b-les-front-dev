@@ -239,4 +239,7 @@ button {
 .phone {
   outline: none!important;
 }
+.phone a:focus {
+  outline: none;
+}
 </style>
