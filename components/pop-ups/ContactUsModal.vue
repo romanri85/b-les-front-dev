@@ -122,8 +122,8 @@ function openModal() {
                   Оставить заявку
                 </h2>
                 </DialogTitle>
-                <div v-if="!isSubmitted" class="flex justify-center mt-8 mb-8">
-                  <h2 class="font-light"><a href="tel:+74951500032">+ 7 495 150-00-32</a></h2>
+                <div v-if="!isSubmitted" class="phone flex justify-center mt-8 mb-8">
+                  <h2 class="phone font-light"><a href="tel:+74951500032">+ 7 495 150-00-32</a></h2>
 
                 </div>
                 <div class="flex justify-end w-full pb-8">
@@ -234,5 +234,9 @@ button {
 
 .black {
   background-color: black !important;
+}
+
+.phone {
+  outline: none!important;
 }
 </style>
