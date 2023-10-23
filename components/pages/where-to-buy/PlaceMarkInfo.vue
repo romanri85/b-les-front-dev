@@ -145,7 +145,7 @@ function closeDoorsInside() {
     </div>
 
     <AddressDoorsInsideModal
-      v-if="isAddressDoorsInsideModelOpen" :doors-inside="props.address.doors_inside"
+      v-if="isAddressDoorsInsideModelOpen"
       :address="props.address" @close="isAddressDoorsInsideModelOpen = false"
       @close-modal="closeDoorsInside"
     />

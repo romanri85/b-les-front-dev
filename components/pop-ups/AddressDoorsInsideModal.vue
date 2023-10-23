@@ -2,11 +2,10 @@
 import { ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import PrimaryButtonBig from '~/components/buttons/PrimaryButtonBig.vue'
+import { baseURL } from '~/config'
 
 const props = defineProps({
-  doorsInside: {
-    type: Array,
-  },
+
   isOpen: {
     type: Boolean,
   },
@@ -16,9 +15,16 @@ const props = defineProps({
 })
 const emit = defineEmits(['closeModal', 'changeModel'])
 const isOpen = ref(true)
-const products = ref([])
+// const products = ref([])
+const doorsInside = ref([])
 
-const activeProductId = ref(1)
+const addressId = ref(1)
+
+
+async function fetchDoorsInside() {
+  doorsInside.value = await $fetch(`${baseURL}/api/shops/doors-inside/?address_id=${props.address.id}`)
+}
+await fetchDoorsInside()
 
 function closeModal() {
   isOpen.value = false
@@ -69,7 +75,7 @@ function openModal() {
               </DialogTitle>
               <div class="px-12 md:grid lg:grid-cols-4 md:grid-cols-3 block  lg:gap-y-16 gap-y-8 mb-2 mt-0 w-full">
                 <div
-                  v-for="door in props.doorsInside" v-if="props.doorsInside"
+                  v-for="door in doorsInside" v-if="doorsInside"
                   :key="door.id" class="flex flex-col items-center"
                 >
                   <NuxtLink
