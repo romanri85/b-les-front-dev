@@ -30,7 +30,7 @@ const route = useRoute()
 const product = ref({})
 const doorVariantData = ref({})
 const productVariantsData = ref({})
-const productMaterials = ref<productMaterials>([])
+const productMaterials = ref([])
 const productCasings = ref([])
 const activeFilters = ref({})
 const casingVariants = ref({})
@@ -126,7 +126,7 @@ function getActualDoorVariantData(filterData = { material: material.value, color
   color.value = filterData.color
   material.value = filterData.material
   productVariantsData.value = product.value.product_variants.find(item => item.material === material.value)
-  if (productVariantsData.value.material_color_product_variants.length === 0) {
+  if (productVariantsData?.value.material_color_product_variants?.length === 0) {
     productVariantsData.value = product.value.product_variants[0];
   }
   doorVariantData.value = productVariantsData.value.material_color_product_variants.find(item => item.color.id === Number(color.value))
