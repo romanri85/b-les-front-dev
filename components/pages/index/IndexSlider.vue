@@ -11,8 +11,8 @@ const viewport = useViewportSize()
 </script>
 
 <template>
-  <div class="lg:mt-[-87px] md:mt-[-65px] mt-[-61px] w-screen">
-    <div class=" bg-cover bg-center h-screen w-screen  bg-gray-400">
+  <div class="lg:mt-[-87px] md:mt-[-65px] mt-[-61px]">
+    <div class=" bg-cover bg-center   bg-gray-400">
       <client-only>
         <Swiper
           class="h-screen"
@@ -42,7 +42,7 @@ const viewport = useViewportSize()
             <div>
               <img alt="collection.name"
                 :src="collection.image"
-                class="absolute object-cover object-bottom md:object-center -z-10" :class="[
+                class="absolute h-screen w-screen object-cover object-bottom md:object-center -z-10" :class="[
                   (collection.name === 'versailles' ? 'custom-versal-position' : ''),
                 ]"
               />
