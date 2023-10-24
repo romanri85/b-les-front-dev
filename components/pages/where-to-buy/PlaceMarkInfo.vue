@@ -154,7 +154,7 @@ function closeDoorsInside() {
 
 <style scoped>
 .placemark-data {
-  margin-bottom: 20px; /* adjust as needed */
+  margin-bottom: 20px;
 }
 
 .status {
