@@ -42,7 +42,7 @@ const viewport = useViewportSize()
             <div>
               <img alt="collection.name"
                 :src="collection.image"
-                class="absolute h-screen w-screen object-cover object-bottom md:object-center -z-10" :class="[
+                class="absolute object-cover object-bottom md:object-center -z-10" :class="[
                   (collection.name === 'versailles' ? 'custom-versal-position' : ''),
                 ]"
               />
