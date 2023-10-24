@@ -97,6 +97,7 @@ export default defineNuxtConfig({
     '/systems/swing': { prerender: true },
     '/to-dealers': { prerender: true },
     '/to-designers': { prerender: true },
+    'interior': { prerender: true },
   },
   vite: {
     vue: {

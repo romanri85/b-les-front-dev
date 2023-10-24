@@ -38,7 +38,9 @@ const page = ref(1)
 const pagesCount = ref(0)
 const page_size = 10
 
+console.log('Route Params ID:', route.params.id);
 async function getProjectData(query = `/${route.params.id}`) {
+  console.log('Fetching project data for:', query);
   try {
     const { data } = await useFetch(`${baseURL}/api/projects${query}`, { key: 'images', cache: true })
     project.value = data.value
