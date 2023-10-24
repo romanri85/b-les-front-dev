@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWindowScroll } from '@vueuse/core'
@@ -90,13 +90,7 @@ onMounted(
   },
 )
 
-type productMaterials = productMaterialsObject[]
 
-interface productMaterialsObject {
-  material: string
-  name: string
-  color: []
-}
 
 const layoutImages = computed(() => {
   if (product.value && product.value.images) {
@@ -132,7 +126,13 @@ function getActualDoorVariantData(filterData = { material: material.value, color
   color.value = filterData.color
   material.value = filterData.material
   productVariantsData.value = product.value.product_variants.find(item => item.material === material.value)
+  if (productVariantsData.value.material_color_product_variants.length === 0) {
+    productVariantsData.value = product.value.product_variants[0];
+  }
   doorVariantData.value = productVariantsData.value.material_color_product_variants.find(item => item.color.id === Number(color.value))
+  if (!doorVariantData.value) {
+    doorVariantData.value = productVariantsData.value.material_color_product_variants[0];
+  }
   collectionProducts.value = getMaterialColorVariantsByColorId(product.value.collection.products, color.value)
 
   if (actualCasing.value !== null)
