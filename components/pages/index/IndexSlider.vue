@@ -15,7 +15,7 @@ const viewport = useViewportSize()
     <div class=" bg-cover bg-center   bg-gray-400">
       <client-only>
         <Swiper
-          class="h-screen"
+          class="hero-image"
           :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
           :slides-per-view="1"
           :navigation="{
@@ -42,7 +42,7 @@ const viewport = useViewportSize()
             <div>
               <img alt="collection.name"
                 :src="collection.image"
-                class="absolute h-screen w-screen object-cover object-bottom md:object-center -z-10" :class="[
+                class="hero-image absolute  w-screen object-cover object-bottom md:object-center -z-10" :class="[
                   (collection.name === 'versailles' ? 'custom-versal-position' : ''),
                 ]"
               />
@@ -125,5 +125,8 @@ const viewport = useViewportSize()
   .custom-versal-position {
     object-position: 30% 50% !important; /* 50% is the original center, moving it 20% to the left makes it 30% */
   }
+}
+.hero-image {
+  height: 100lvh;
 }
 </style>
