@@ -51,9 +51,9 @@ export const useFiltersStore = defineStore('filtersStore', () => {
 
     const query = new URLSearchParams(activeFilters.value).toString()
     // TODO: async or not async
-    checkFilters(query)
+    await checkFilters(query)
 
-    fetchProducts(query)
+    await fetchProducts(query)
 
   }
 
@@ -96,9 +96,10 @@ export const useFiltersStore = defineStore('filtersStore', () => {
       ordering: '',
     }
     const query = `&${new URLSearchParams(activeFilters.value).toString()}`
-    await fetchProducts(query)
+   
 
     await checkFilters(query)
+    await fetchProducts(query)
   }
 
   function checkDoorSetApplied() {
