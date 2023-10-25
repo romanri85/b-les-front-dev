@@ -12,7 +12,7 @@ const viewport = useViewportSize()
 
 <template>
   <div class="lg:mt-[-87px] md:mt-[-65px] mt-[-61px]">
-    <div class=" bg-cover bg-center   bg-gray-400">
+    <div class=" bg-cover bg-center hero-image  bg-gray-400">
       <client-only>
         <Swiper
           class="hero-image"
