@@ -48,7 +48,7 @@ watch(
         // console.log('changed');
         setTimeout(() => {
           changeMinMax();
-        }, 500);
+        }, 350);
 
 
       }

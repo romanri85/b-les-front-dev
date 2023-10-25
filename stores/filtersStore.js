@@ -50,9 +50,10 @@ export const useFiltersStore = defineStore('filtersStore', () => {
     activeFilters.value = { ...activeFilters.value, ...filters }
 
     const query = new URLSearchParams(activeFilters.value).toString()
-    await fetchProducts(query)
+    // TODO: async or not async
+    checkFilters(query)
 
-    await checkFilters(query)
+    fetchProducts(query)
 
   }
 

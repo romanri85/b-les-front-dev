@@ -55,7 +55,7 @@ watch(
 
         setTimeout(() => {
           changeMinMax();
-        }, 500);
+        }, 350);
 
 
 

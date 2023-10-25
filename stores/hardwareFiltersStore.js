@@ -38,9 +38,9 @@ export const useHardwareFiltersStore = defineStore('hardwareFiltersStore', () =>
     activeFilters.value = { ...activeFilters.value, ...filters }
 
     const query = new URLSearchParams(activeFilters.value).toString()
-    await fetchProducts(query)
+    checkFilters(query)
 
-    await checkFilters(query)
+    fetchProducts(query)
   }
 
   async function fetchProducts(query = '') {
