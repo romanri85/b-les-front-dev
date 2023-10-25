@@ -37,13 +37,13 @@ const { locale, setLocale } = useI18n()
     <IconsMenuItems class="flex " :light="props.light" />
 
     <!--            change language menu item -->
-    <div>
+<!--    <div>-->
       <!--        <button type="button" class=" font-mono text-sm " @click="toggleLocale"> -->
       <!--          <h3 :class="{ 'text-white': props.light }"> -->
       <!--            {{ locale === 'en' ? "EN" : "RU" }} -->
       <!--          </h3> -->
       <!--        </button> -->
-    </div>
+<!--    </div>-->
   </div>
   <!--    thin line between header and content -->
 
