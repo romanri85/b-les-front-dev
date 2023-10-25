@@ -241,6 +241,7 @@ function onChangePage(page) {
           />
           <h1 class="pb-5">
             {{ product.name }}
+
           </h1>
           <div class="flex justify-between">
             <p v-if="product && product.collection">
@@ -269,7 +270,7 @@ function onChangePage(page) {
           <!--                                    v-if="product.glass_decor && product.glass_decor[0]" :newGlass="newGlass"/> -->
         </div>
         <div class="w-full flex flex-col justify-between items-start">
-          <DoorCardPriceDetail class="pb-8" :door-variant-data="doorVariantData" :product="product" :new-glass="newGlass" />
+          <DoorCardPriceDetail class="pb-8" :actualCasing="actualCasing" :color="color" :material="material" :productCasings="productCasings" :casingVariants="casingVariants" :door-variant-data="doorVariantData" :product="product" :new-glass="newGlass" />
           <div class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full " @click="openContactUsModal">
             <buttons-primary-button-big class="w-1/2 lg:w-60 max-w-[240px] h-16 bg-primaryDark text-white">
               Купить
@@ -291,7 +292,7 @@ function onChangePage(page) {
 
           :new-glass="newGlass"
         />
-        <DoorCardPriceDetail class="pb-2 md:pb-4 flex justify-center" :door-variant-data="doorVariantData" :product="product" :new-glass="newGlass" />
+        <DoorCardPriceDetail class="pb-2 md:pb-4 flex justify-center" :actualCasing="actualCasing" :color="color" :material="material" :productCasings="productCasings" :casingVariants="casingVariants" :door-variant-data="doorVariantData" :product="product" :new-glass="newGlass" />
       </div>
 
       <div class="h-4 flex justify-end">
