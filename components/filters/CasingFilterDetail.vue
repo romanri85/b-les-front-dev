@@ -35,6 +35,10 @@ function chooseCasing(casing) {
 
   emit('changeFilter', casingActiveindex.value)
 }
+
+function checkColorExists(color, object) {
+  return object.casing_variants.some(variant => variant.color === color);
+}
 </script>
 
 <template class="filter-container ">
@@ -47,10 +51,12 @@ function chooseCasing(casing) {
         <DisclosurePanel class="">
           <div class="flex gap-y-6 gap-x-10  mb-3 flex-wrap w-full">
             <div
-              v-for="casing in sortedCasings" :key="casing.casing_name"
+              v-for="casing in sortedCasings.sort(
+                  (a,b) => checkColorExists(props.color, b) -checkColorExists(props.color, a)
+              )" :key="casing.casing_name"
               @click="chooseCasing(casing.casing)"
             >
-              <div class="flex flex-col items-start ">
+              <div v-if="checkColorExists(props.color, casing)" class="flex flex-col items-start ">
                 <div
                   class="pb-1 border-b-4"
                   :class="{
