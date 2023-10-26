@@ -56,7 +56,7 @@
 
 @font-face {
     font-family: 'Helvetica Neue LT Pro 55 Roman';
-    src: url("/assets/styles/fonts/HelveticaNeueLTPRo55Roman.otf") format('opentype');
+    src: url("/assets/styles/fonts/helvetica/HelveticaNeueLTPro-Roman.otf") format('opentype');
     font-weight: 400; /* Roman typically corresponds to a regular font weight */
     font-style: normal;
 }

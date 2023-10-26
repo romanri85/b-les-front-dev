@@ -17,7 +17,7 @@ const formData = ref({
   name: '',
   phone: '',
   email: '',
-  comment: '',
+  message: '',
   city: 'Москва',
 })
 const cities = ref([])
@@ -193,7 +193,7 @@ function openModal() {
                     />
                     <FormKit
                         type="textarea"
-                        name="comment"
+                        name="message"
                         rows="3"
                         placeholder="Комментарий"
                         help="Введите текст"
