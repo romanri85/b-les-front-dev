@@ -49,7 +49,7 @@ function isColorSetAvailable(colorSet) {
         </div>
         <h4
           :class="{ 'text-gray-400': !isColorSetAvailable(collection.id), 'cursor-pointer': isColorSetAvailable(collection.id) }"
-          class="font-light"
+          class=""
         >
           {{ collection.name }}
         </h4>

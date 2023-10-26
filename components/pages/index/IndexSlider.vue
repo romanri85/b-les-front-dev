@@ -53,12 +53,13 @@ const viewport = useViewportSize()
                 class="text-left relative main-container md:pb-0 pb-16 text-white lg:mt-[21vh]  md:mb-[7vh] lg:max-w-screen flex md:flex-row flex-col justify-between items-center lg:order-1 order-2"
               >
                 <div class="md:text-left text-center  ">
-                  <h2 v-if="!viewport.isMobile" class="mb-5 lg:text-[23px]">
+                  <h2 v-if="!viewport.isMobile" class="mb-5">
                     {{ $t('aboutCollection') }}
                   </h2>
-                  <h5 v-if="!viewport.isMobile" class="lg:w-[448px] md:w-[350px] font-light">
+                  <p v-if="!viewport.isMobile" class="lg:w-[448px] md:w-[350px]">
+
                     {{ $t(collection.description) }}
-                  </h5>
+                  </p>
                 </div>
                 <div class="relative w-[75px] h-[64px] my:mb-0 my-[30px]">
                   <svg
