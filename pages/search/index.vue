@@ -221,20 +221,22 @@ function handleImagePage(newPage) {
 
         <TabPanels>
           <TabPanel>
-            <div v-if="MaterialColorProductVariantTotalHits">
+            <div ref="MaterialColorProductVariantHitsBlock" v-if="MaterialColorProductVariantTotalHits">
               <div
                 class="mt-4 md:mt-16 gap-y-8 lg:grid-cols-4 mdLg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-rows-7 grid"
               >
                 <!--        <pre>{{MaterialColorProductVariantResponse.hits}}</pre> -->
                 <!--        <pre>{{MaterialColorProductVariantSearchResults}}</pre> -->
-                <div v-for="hit in MaterialColorProductVariantSearchResults" ref="MaterialColorProductVariantHitsBlock" :key="hit.objectID">
+                <div v-for="hit in MaterialColorProductVariantSearchResults"  :key="hit.objectID">
                   <NuxtLink
                     :to="`/catalog/${hit.product_variant.product}?material=${hit.color.material}&color=${hit.color.id}`"
                   >
+                    <div class="relative  transition-all duration-300 pb-6 mb-6">
                     <SearchDoorCard
-                      class="relative  transition-all duration-300 pb-6 mb-6"
+
                       :hit="hit"
                     />
+                    </div>
                   </NuxtLink>
                 </div>
               </div>
