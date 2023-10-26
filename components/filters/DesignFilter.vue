@@ -61,7 +61,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
       <DisclosurePanel class="mb-10 mt-6">
         <div v-for="design in designs" :key="design.id" class="flex gap-x-[15px] items-center mb-3">
           <h4
-            class="underline-offset-4 font-light pb-2" :class="{
+            class="underline-offset-4 pb-2" :class="{
               'underline': filtersStore.activeFilters.design.includes(design.id), 'text-gray-400': !isDesignAvailable(design.id), 'cursor-pointer': isDesignAvailable(design.id),
             }"
             @click="!isDesignAvailable(design.id) ? null : chooseDesign(design.id)"

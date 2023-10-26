@@ -122,7 +122,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
           <h4
             :class="{
               'text-gray-400': !isColorSetAvailable(color_set.id), 'cursor-pointer': isColorSetAvailable(color_set.id) }"
-            class="font-light"
+            class=""
           >
             {{ color_set.name }}
           </h4>

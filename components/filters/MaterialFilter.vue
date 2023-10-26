@@ -85,7 +85,7 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
               :class="{
                 'underline': filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'text-primaryDark': filtersStore.activeFilters.material.includes(material.material) && isMaterialAvailable(material.material), 'cursor-pointer': isMaterialAvailable(material.material), 'text-gray-400': !isMaterialAvailable(material.material),
               }"
-              class="underline-offset-4 font-light" @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"
+              class="underline-offset-4" @click="!isMaterialAvailable(material.material) ? null : chooseMaterial(material.material)"
             >
               {{
                 material.name.toUpperCase()
