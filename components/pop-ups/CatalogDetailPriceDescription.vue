@@ -102,14 +102,16 @@ const casingName= computed(() => {
                     варианты обрамления: </p>
                   <!--                  <pre>{{filteredCasings}}</pre>-->
                   <div class="grid md:grid-cols-2 grid-cols-1 lg:gap-x-24 md:gap-x-24 pt-4">
-                    <div v-for="casing in filteredCasings" :key="casing.id" class="flex flex-col items-start">
-                      <div class="flex justify-between items-end w-full pb-4">
+                    <div v-for="casing in filteredCasings.sort(
+                      (a, b) => parseInt(a.casing_variants[0]?.price) - parseInt(b.casing_variants[0]?.price)
+                    )" :key="casing.id" class="flex flex-col items-start">
+                      <div v-if="parseInt(casing.casing_variants[0]?.price)" class="flex justify-between items-end w-full pb-4">
                         <div>
                           <nuxt-img width="40" :src="casing.image"/>
                           <p class="pt-4">{{ casing.casing_name }}</p>
                         </div>
                         <div class="flex">
-                          <h3>{{ parseInt(casing.casing_variants[0].price) }}&nbsp;₽ </h3>
+                          <h3>{{ parseInt(casing.casing_variants[0]?.price) }}&nbsp;₽ </h3>
                         </div>
                       </div>
                     </div>
