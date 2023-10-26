@@ -39,6 +39,18 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     ['@formkit/nuxt'],
     // '@nuxtjs/eslint-module',
+    [
+      'yandex-metrika-module-nuxt3',
+      {
+        id: '37083305',
+        webvisor: true,
+        // consoleLog: true,
+        // clickmap: true,
+        // useCDN: false,
+        // trackLinks: true,
+        // accurateTrackBounce: true,
+      }
+    ]
 
   ],
 
