@@ -103,7 +103,7 @@ const handleClick = async (collectionId) => {
                     {{ $t(collection.name) }}
                   </h1>
                   <div
-                      :class="{ 'text-white': true, 'cursor-not-allowed': isLinkDisabled }"
+                      :class="{ 'text-white': true,'cursor-pointer':true, 'cursor-not-allowed': isLinkDisabled }"
                       @click.once="handleClick(collection.id)">
                     <h3 class="underline px-1">
                       {{
