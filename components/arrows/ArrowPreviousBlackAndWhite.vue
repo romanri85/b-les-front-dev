@@ -9,5 +9,7 @@ import { ChevronLeftIcon } from '@heroicons/vue/24/solid'
 </template>
 
 <style scoped>
-
+.border-white{
+  border-color: #ffffff!important;
+}
 </style>
