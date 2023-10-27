@@ -36,7 +36,6 @@ if (typeof ymaps === 'undefined') {
 async function getAddresses() {
   try {
     addresses.value = await $fetch(`${baseURL}/api/shops/`)
-    console.log(addresses.value, 'addresses')
   } catch (error) {
     console.error('Failed to fetch addresses:', error)
   }
@@ -55,7 +54,6 @@ async function getCities() {
 onMounted(async () => {
   await getCities()
   await getAddresses()
-  // console.log(cities.value, 'city')
 })
 
 function changeCity(newCityId) {

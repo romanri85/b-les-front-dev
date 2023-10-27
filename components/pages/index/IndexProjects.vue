@@ -1,7 +1,13 @@
 <script setup lang="js">
 import { baseURL } from '~/config'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const projects = ref([])
+
+const handleClick = async (id) => {
+  await router.push({ path: `/interior/${id}` })
+}
 
 projects.value = await $fetch(`${baseURL}/api/projects/projects-without-pagination`)
 </script>
@@ -51,14 +57,14 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
     >
       <!--    <div v-for="project in projects" :key="project.name"> -->
       <SwiperSlide v-for="project in projects" v-if="projects" :key="project.id">
-        <NuxtLink :to="{ path: `/interior/${project.id}` }">
+        <div @click.once="handleClick(project.id)">
           <nuxt-img
             loading="lazy" placeholder quality="20"
-            class="w-[480px] lg:h-96 md:h-60 h-48 object-cover"
+            class="w-[480px] lg:h-96 md:h-60 h-48 object-cover cursor-pointer"
             :src="project.first_image.image"
             :alt="project.name"
           />
-        </NuxtLink>
+        </div>
       </SwiperSlide>
       <!--    </div> -->
 
