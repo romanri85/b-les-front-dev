@@ -12,12 +12,12 @@ export const useInteriorStore = defineStore('interiorStore', () => {
   const tagsForForm = ref([])
   const selectedImages = ref([])
 
-  async function getProjects(page = 1) {
+  async function getProjects() {
     // let response = await $fetch(`${baseURL}/api/projects?page=${page}`)
-    if (!page)
-      page = 1
+    if (!page.value)
+      page.value = 1
 
-    const data = await $fetch(`${baseURL}/api/projects?page=${page}`)
+    const data = await $fetch(`${baseURL}/api/projects?page=${page.value}`)
     if (data) {
       // response = data.value
       projects.value = data.results
