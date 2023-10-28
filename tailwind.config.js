@@ -25,10 +25,8 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          'HelveticaNeueLTPro-Roman',
-          'Helvetica Neue',
-          'Arial',
-          'Roboto',
+          '"Roboto"',
+            'Arial',
         ],
         mono: [
           'abchanel-corpo',
