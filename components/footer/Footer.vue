@@ -9,10 +9,6 @@ defineProps({ light: { type: Boolean, default: true } })
 const { locale, setLocale } = useI18n()
 const router = useRouter()
 
-async function handleClickToCollection(collectionId) {
-  await router.push(`/catalog?collection=${collectionId}`)
-}
-
 // function toggleLocale() {
 //   const newLocale = locale.value === 'en' ? 'ru' : 'en'
 //   setLocale(newLocale)
@@ -169,11 +165,11 @@ const mdSmMenu = [
             {{ $t('collections') }}
           </h3>
           <div v-for="collection in collections" :key="collection.name" class="mt-[10px]">
-            <div @click.once="handleClickToCollection(collection.id)">
+            <nuxt-link :to="`/catalog?collection=${collection.id}`">
               <p class="text-normalGrey cursor-pointer">
                 {{ $t(collection.name) }}
               </p>
-            </div>
+            </nuxt-link>
           </div>
         </div>
         <div class="lg:block hidden">

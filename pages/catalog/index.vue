@@ -35,17 +35,19 @@ useResizeObserver(doorFilters, (entries) => {
 })
 
 const route = useRoute()
-watch(() => route.query.collection, (newValue) => {
-  if (newValue) {
-    filtersStore.activeFilters = ({ ...filtersStore.activeFilters, collection: [Number.parseInt(newValue)] })
-    filtersStore.onChangeFilters(filtersStore.activeFilters)
-  }
-}, { immediate: true })
+
 
 onMounted(() => {
   if (!filtersStore.products.value){
     filtersStore.onChangeFilters(filtersStore.activeFilters)
   }
+
+  watch(() => route.query.collection, (newValue) => {
+    if (newValue) {
+      filtersStore.activeFilters = ({ ...filtersStore.activeFilters, collection: [Number.parseInt(newValue)] })
+      filtersStore.onChangeFilters(filtersStore.activeFilters)
+    }
+  }, { immediate: true })
 })
 
 
