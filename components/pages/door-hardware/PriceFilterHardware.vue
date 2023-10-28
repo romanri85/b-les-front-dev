@@ -37,18 +37,19 @@ function updateSliderValues([newMin, newMax]) {
   isSliderUpdate.value = true;  // Set the flag
   hardwareFiltersStore.onChangeFilters({min_price: newMin, max_price: newMax});
 }
-// TODO: remove timeout
 watch(
     () => [
-      hardwareFiltersStore.activeFilters.color_collection,
-      hardwareFiltersStore.activeFilters.design,
+      // hardwareFiltersStore.activeFilters.color_collection,
+      // hardwareFiltersStore.activeFilters.design,
+        filterCount.value.color_collection,
+        filterCount.value.design,
     ],
-    async (newValues, oldValues) => {
+    (newValues, oldValues) => {
       if (newValues.some((value, index) => value !== oldValues[index])) {
         // console.log('changed');
-        setTimeout(() => {
+        // setTimeout(() => {
           changeMinMax();
-        }, 350);
+        // }, 350);
 
 
       }

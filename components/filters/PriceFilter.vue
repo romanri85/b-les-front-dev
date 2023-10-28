@@ -40,22 +40,26 @@ function updateSliderValues([newMin, newMax]) {
   isSliderUpdate.value = true;  // Set the flag
   filtersStore.onChangeFilters({min_price: newMin, max_price: newMax});
 }
-// TODO: remove timeout
 watch(
     () => [
-      filtersStore.activeFilters.color,
-      filtersStore.activeFilters.material,
-      filtersStore.activeFilters.color_set,
-      filtersStore.activeFilters.design,
-      filtersStore.activeFilters.sale,
+      // filtersStore.activeFilters.color,
+      // filtersStore.activeFilters.material,
+      // filtersStore.activeFilters.color_set,
+      // filtersStore.activeFilters.design,
+      // filtersStore.activeFilters.sale,
+        filterCount.value.color,
+        filterCount.value.material,
+        filterCount.value.color_set,
+        filterCount.value.design,
+        filterCount.value.sale,
     ],
-    async (newValues, oldValues) => {
+     (newValues, oldValues) => {
       if (newValues.some((value, index) => value !== oldValues[index])) {
         // console.log('changed');
 
-        setTimeout(() => {
+        // setTimeout(() => {
           changeMinMax();
-        }, 350);
+        // }, 350);
 
 
 
