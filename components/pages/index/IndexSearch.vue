@@ -6,10 +6,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const isPageInitiated = ref(false)
 
-// catalog doorSets component logic
-const handleClick =async (parameterId) => {
-  await router.push(`/catalog?filters=${parameterId}`);
-}
+
 function onPageInitiated() {
   isPageInitiated.value = true
 }
@@ -21,10 +18,7 @@ onMounted(() => {
   // Then call onPageInitiated
   onPageInitiated()
 })
-// import {useTagsStore} from "~/stores/tagsStore";
-//
-// const tagsStore = useTagsStore()
-// tagsStore.fetchTags()
+
 </script>
 
 <template>
@@ -38,16 +32,16 @@ onMounted(() => {
       <div class="lg:block text-left flex flex-wrap">
         <div v-for="parameter in parameters" :key="parameter.name" class="py-2">
           <!-- If the page is initiated, render the NuxtLink -->
-          <div
+          <nuxt-link :to="`/catalog?filters=${parameter.id}`"
             v-if="isPageInitiated"
-            class="lg:pb-4 pb-5 lg:pr-0 pr-7 cursor-pointer"
-            @click.once="handleClick(parameter.id)"
+            class="lg:pb-4 pb-5 lg:pr-0 pr-7"
 
           >
             <h3 class="inline-block">
               {{ parameter.name }}
             </h3>
-          </div>
+          </nuxt-link>
+
           <!-- If the page is not initiated, render a placeholder -->
           <div v-else class="lg:pb-4 pb-5 lg:pr-0 pr-7">
             <h3 class="inline-block">

@@ -19,11 +19,8 @@ const borderedItemIndex = ref(null)
 const route = useRoute()
 const router = useRouter()
 
-const handleClick = async (slug) => {
-  activeItemIndex.value = null
-  await router.push(slug)
 
-}
+
 watch(
     () => route.path,
     () => {
@@ -66,9 +63,9 @@ const currentMenuItems = computed(() => {
               light ? 'text-shadow' : '',
             ]"
           >
-            <div
+            <nuxt-link :to="item.slug"
                 v-if="item.name !== 'otherElements' && item.name !== 'aboutUs'"
-                @click.once="handleClick(item.slug)"
+
                 class="cursor-pointer"
             >
               <h4
@@ -78,7 +75,8 @@ const currentMenuItems = computed(() => {
               >
                 {{ $t(item.name) }}
               </h4>
-            </div>
+            </nuxt-link>
+
 
             <h4
                 v-else class="inline-block pr-2"

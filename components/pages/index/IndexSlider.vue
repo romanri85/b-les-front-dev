@@ -13,9 +13,7 @@ const viewport = useViewportSize()
 const isLinkDisabled = ref(false);
 const router = useRouter();
 
-const handleClick = async (collectionId) => {
-  await router.push(`/catalog?collection=${collectionId}`);
-}
+
 </script>
 
 <template>
@@ -102,15 +100,16 @@ const handleClick = async (collectionId) => {
                   <h1 class="text-white lg:mb-8 mb-5">
                     {{ $t(collection.name) }}
                   </h1>
-                  <div
-                      :class="{ 'text-white': true,'cursor-pointer':true, 'cursor-not-allowed': isLinkDisabled }"
-                      @click.once="handleClick(collection.id)">
+                  <nuxt-link :to="{path:`/catalog?collection=${collection.id}`}" v-if="collection.id"
+                    :class="{ 'text-white': true}"
+                    >
+
                     <h3 class="underline px-1">
                       {{
                         $t('viewCollection')
                       }}
                     </h3>
-                  </div>
+                  </nuxt-link>
                 </div>
                 <button
                     class="next-slide-button xl:w-[80px] lg:w-[70px] md:w-[60px] w-[40px] xl:h-[80px] lg:h-[70px] md:h-[60px] h-[40px]"

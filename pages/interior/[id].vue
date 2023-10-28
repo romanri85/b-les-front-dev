@@ -4,8 +4,11 @@ import {baseURL} from '~/config'
 import BaseHero from '~/components/base/BaseHero.vue'
 import Pagination from '~/components/base/pagination/Pagination.vue'
 import ImageModal from '~/components/pop-ups/ImageModal.vue'
+import {useInteriorStore} from "~/stores/interiorStore";
 
 import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService' // Assuming the service is in the same directory
+
+const interiorStore = useInteriorStore()
 
 const imgModal = ref(null)
 
@@ -50,8 +53,9 @@ async function getProjectData(query = `/${route.params.id}`) {
 }
 
 // Layout determination logic
-
-await getProjectData()
+onMounted(() => {
+    getProjectData()
+})
 
 function onChangePage(page) {
   getProjectData(`/${route.params.id}?page=${page}`)

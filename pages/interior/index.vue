@@ -17,7 +17,13 @@ function scrollToInteriorsBlock() {
 
 definePageMeta({layout: 'dark-header'})
 
-await interiorStore.getProjects()
+onMounted(() => {
+  if (!interiorStore.projects.value) {
+    interiorStore.getProjects()
+  }
+
+
+})
 
 
 function onChangePage(page) {
