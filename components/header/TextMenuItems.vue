@@ -20,11 +20,7 @@ const route = useRoute()
 const router = useRouter()
 
 
-const handleClick = async (slug) => {
-  activeItemIndex.value = null
-  await router.push(slug)
 
-}
 watch(
     () => route.path,
     () => {
