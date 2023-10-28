@@ -103,13 +103,16 @@ function closeDoorsInside() {
       <h3 class="pb-2 cursor-pointer" @click="moveToAddress">
         {{ props.address.name }}
       </h3>
-      <p class="pb-4 cursor-pointer" @click="moveToAddress">
+      <div class="pb-4">
+      <p class=" cursor-pointer pb-2" @click="moveToAddress">
         {{ props.address.address }}
       </p>
-      <p v-if="props.address.metro_station" class="pb-2">
+      <p v-if="props.address.metro_station" class="">
         метро {{ props.address.metro_station }}
       </p>
-      <a href="tel:{{props.address.phone}}">{{ props.address.phone }}</a>
+      </div>
+      <a href="tel:{{props.address.phone}}" class="block font-sans pb-2">{{ props.address.phone }}</a>
+      <a href="mailto:{{props.address.email}}" class="block font-sans">{{ props.address.email }}</a>
       <div>
         <Disclosure>
           <DisclosureButton class="pt-4">

@@ -59,6 +59,7 @@ export function generateAddressData(address) {
     name: address.name,
     address: address.address,
     phone: address.phone,
+    email: address.email,
     metro_station: address.metro_station,
     workingHours: getWorkingHours(address.working_days_working_hours_from, address.working_days_working_hours_to, address.saturday_working_hours_from, address.saturday_working_hours_to, address.sunday_working_hours_from, address.sunday_working_hours_to),
     isOpenData: checkIsOpen(address.working_days_working_hours_from, address.working_days_working_hours_to, address.saturday_working_hours_from, address.saturday_working_hours_to, address.sunday_working_hours_from, address.sunday_working_hours_to),
