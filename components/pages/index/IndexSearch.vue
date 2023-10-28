@@ -35,11 +35,13 @@ onMounted(() => {
           <nuxt-link :to="`/catalog?filters=${parameter.id}`"
             v-if="isPageInitiated"
             class="lg:pb-4 pb-5 lg:pr-0 pr-7"
+
           >
             <h3 class="inline-block">
               {{ parameter.name }}
             </h3>
           </nuxt-link>
+
           <!-- If the page is not initiated, render a placeholder -->
           <div v-else class="lg:pb-4 pb-5 lg:pr-0 pr-7">
             <h3 class="inline-block">

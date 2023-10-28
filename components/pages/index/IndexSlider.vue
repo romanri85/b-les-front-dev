@@ -103,6 +103,7 @@ const router = useRouter();
                   <nuxt-link :to="{path:`/catalog?collection=${collection.id}`}" v-if="collection.id"
                     :class="{ 'text-white': true}"
                     >
+
                     <h3 class="underline px-1">
                       {{
                         $t('viewCollection')

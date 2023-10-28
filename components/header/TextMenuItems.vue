@@ -20,6 +20,11 @@ const route = useRoute()
 const router = useRouter()
 
 
+const handleClick = async (slug) => {
+  activeItemIndex.value = null
+  await router.push(slug)
+
+}
 watch(
     () => route.path,
     () => {
@@ -64,6 +69,7 @@ const currentMenuItems = computed(() => {
           >
             <nuxt-link :to="item.slug"
                 v-if="item.name !== 'otherElements' && item.name !== 'aboutUs'"
+
                 class="cursor-pointer"
             >
               <h4
@@ -74,6 +80,7 @@ const currentMenuItems = computed(() => {
                 {{ $t(item.name) }}
               </h4>
             </nuxt-link>
+
 
             <h4
                 v-else class="inline-block pr-2"

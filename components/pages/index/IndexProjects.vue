@@ -6,6 +6,7 @@ const router = useRouter()
 const projects = ref([])
 
 
+
 projects.value = await $fetch(`${baseURL}/api/projects/projects-without-pagination`)
 </script>
 
@@ -55,6 +56,7 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
       <!--    <div v-for="project in projects" :key="project.name"> -->
       <SwiperSlide v-for="project in projects" v-if="projects" :key="project.id">
         <nuxt-link :to="`/interior/${project.id}`">
+
           <nuxt-img
             loading="lazy" placeholder quality="20"
             class="w-[480px] lg:h-96 md:h-60 h-48 object-cover cursor-pointer"
@@ -62,6 +64,7 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
             :alt="project.name"
           />
         </nuxt-link>
+
       </SwiperSlide>
       <!--    </div> -->
 
