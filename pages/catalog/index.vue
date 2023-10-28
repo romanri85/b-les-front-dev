@@ -35,8 +35,19 @@ useResizeObserver(doorFilters, (entries) => {
 })
 
 const route = useRoute()
+watch(() => route.query.collection, (newValue) => {
+  if (newValue) {
+    filtersStore.activeFilters = ({ ...filtersStore.activeFilters, collection: [Number.parseInt(newValue)] })
+    filtersStore.onChangeFilters(filtersStore.activeFilters)
+  }
+}, { immediate: true })
 
-await filtersStore.onChangeFilters({ ...activeFilters.value, page: 1 })
+onMounted(() => {
+  if (!filtersStore.products.value){
+    filtersStore.onChangeFilters(filtersStore.activeFilters)
+  }
+})
+
 
 const sidebar = ref(null)
 
@@ -55,12 +66,7 @@ setTimeout(
   500,
 )
 
-watch(() => route.query.collection, (newValue) => {
-  if (newValue) {
-    filtersStore.activeFilters = ({ ...filtersStore.activeFilters, collection: [Number.parseInt(newValue)] })
-    filtersStore.onChangeFilters(filtersStore.activeFilters)
-  }
-}, { immediate: true })
+
 
 watch([() => catalogElementHeight.value, () => doorFiltersHeight.value], () => {
   if (sidebar.value && (viewport.isDesktop || viewport.isTablet))
@@ -68,21 +74,6 @@ watch([() => catalogElementHeight.value, () => doorFiltersHeight.value], () => {
     sidebar.value.updateSticky()
 })
 
-onUnmounted(() => {
-  filtersStore.activeFilters = ({
-    ordering: '',
-    // min_price: Number,
-    // max_price: Number,
-    design: [],
-    color_set: [],
-    color: [],
-    collection: [],
-    material: [],
-    glass: '',
-    page: 1,
-    // colorSet: [], colors: [], designs: [], collections: []
-  })
-})
 </script>
 
 <template>
