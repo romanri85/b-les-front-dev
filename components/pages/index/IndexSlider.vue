@@ -100,11 +100,10 @@ const router = useRouter();
                   <h1 class="text-white lg:mb-8 mb-5">
                     {{ $t(collection.name) }}
                   </h1>
-                  <nuxt-link :to="{path:`/catalog?collection=${collection.id}`}" v-if="collection.id"
-                    :class="{ 'text-white': true}"
-                    >
+                  <nuxt-link :to="{ path: '/catalog', query: { collection: collection.id } }" v-if="collection.id" :class="{ 'text-white': true }">
 
-                    <h3 class="underline px-1">
+
+                  <h3 class="underline px-1">
                       {{
                         $t('viewCollection')
                       }}

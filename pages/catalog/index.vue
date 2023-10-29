@@ -42,15 +42,16 @@ onMounted(() => {
     filtersStore.onChangeFilters(filtersStore.activeFilters)
   }
 
-  watch(() => route.query.collection, (newValue) => {
-    if (newValue) {
-      filtersStore.activeFilters = ({ ...filtersStore.activeFilters, collection: [Number.parseInt(newValue)] })
-      filtersStore.onChangeFilters(filtersStore.activeFilters)
-    }
-  }, { immediate: true })
+
 })
 
-
+watch(() => route.query.collection, (newValue) => {
+  if (newValue) {
+    console.log(newValue)
+    filtersStore.activeFilters = ({ ...filtersStore.activeFilters, collection: [Number.parseInt(newValue)] })
+    filtersStore.onChangeFilters(filtersStore.activeFilters)
+  }
+}, { immediate: true })
 const sidebar = ref(null)
 
 setTimeout(
