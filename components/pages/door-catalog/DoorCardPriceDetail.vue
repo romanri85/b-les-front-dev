@@ -6,7 +6,7 @@ const props = defineProps({
   doorVariantData: Object,
   product: Object,
   newGlass: Object,
-  casingVariants: Array,
+  casingVariants: Object,
   productCasings: Object,
   material: Number,
   color: Number,
@@ -68,10 +68,10 @@ const sortedCasings = computed(() => {
 
 <template>
   <div class="flex">
-<!--    <pre>{{props.doorVariantData}}</pre>-->
     <div class="">
       <div>
         <h2 class="font-regular'">
+
           <!-- Display sale price if is_sale_active is true -->
           <span v-if="props.doorVariantData.sale">
           {{
@@ -90,7 +90,7 @@ const sortedCasings = computed(() => {
     <div class="flex items-center" @click="openPriceDescriptionModal">
       <BaseQuestionIcon class=" ml-6 cursor-pointer"/>
 
-      <catalog-detail-price-description :actualCasing="props.actualCasing" :product="props.product" :doorVariantData="props.doorVariantData"  :color="color" :sortedCasings="sortedCasings" :priceProps="priceProps" :should-open-modal="shouldOpenModal"/>
+      <catalog-detail-price-description :actualCasing="props.actualCasing || props.doorVariantData.casing_variant.casing" :product="props.product" :doorVariantData="props.doorVariantData"  :color="color" :sortedCasings="sortedCasings" :priceProps="priceProps" :should-open-modal="shouldOpenModal"/>
 <!--   <pre>{{props.casingVariants}}</pre>-->
     </div>
 
