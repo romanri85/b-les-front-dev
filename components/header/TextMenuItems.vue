@@ -3,7 +3,7 @@ import {Popover, PopoverButton, PopoverPanel} from '@headlessui/vue'
 import {ChevronDownIcon} from '@heroicons/vue/24/solid'
 import {ref} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
-import menuItemsProps from '@/data/MenuItemsProps.json'
+import menuItemsProps from '@/data/MenuItemsPropsWithRiminiRomani.json'
 import TextMenuItems from '@/data/TextMenuItems.json'
 
 defineProps({light: {type: Boolean, default: true}})

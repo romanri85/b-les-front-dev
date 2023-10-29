@@ -52,7 +52,7 @@ function onChangePage(page) {
         class=" pb-0 md:pb-16 mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8"
     >
       <div v-for="project in projects" :key="project.id" class="min-w-80">
-        <div class="relative group">
+        <div v-if="project?.first_image?.image" class="relative group">
           <div class="w-full h-60 cursor-pointer">
             <NuxtLink :to="`/interior/${project.id}`">
               <nuxt-img

@@ -2,7 +2,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { storeToRefs } from 'pinia'
 import FilterType from '~/components/filters/FilterType.vue'
-import collections from '~/data/SliderCollections.json'
+import collections from '~/data/SliderCollectionsWithRiminiRomani.json'
 import { useFiltersStore } from '~/stores/filtersStore'
 import { useViewportSize } from '~/composables/useViewportSize'
 

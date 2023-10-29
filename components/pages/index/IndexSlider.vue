@@ -5,7 +5,7 @@ import {useViewportSize} from '~/composables/useViewportSize'
 // import {useSliderCollectionStore} from "~/stores/mainSliderCollectionStore.js";
 // const sliderCollectionStore = useSliderCollectionStore()
 // sliderCollectionStore.fillSliderCollections()
-import collections from '~/data/SliderCollections.json'
+import collections from '~/data/SliderCollectionsWithRiminiRomani.json'
 import {useRouter} from 'vue-router';
 
 const viewport = useViewportSize()
