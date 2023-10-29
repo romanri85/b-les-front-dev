@@ -39,6 +39,7 @@ function closeModal() {
 function openModal() {
   isOpen.value = true
   changeCasing(props.actualCasing)
+
 }
 
 function changeCasing(casing) {
@@ -54,6 +55,7 @@ const secondCasingName = computed(() => {
 })
 const actualCasingIndex = ref(props.actualCasing || props.doorVariantData.casing_variant.casing || filteredCasings.value[0].casing)
 
+
 const actualCasingPrice = computed(() => {
   return parseInt(filteredCasings?.value.find(casing => casing.casing === actualCasingIndex.value)?.casing_variants[0]?.price)
 })
@@ -64,11 +66,7 @@ watch(shouldOpenModal, (newValue) => {
     openModal()
 })
 
-watchEffect(() => {
-  if (!actualCasingIndex.value) {
-    actualCasingIndex.value = filteredCasings.value[0].casing
-  }
-})
+
 
 </script>
 
@@ -134,6 +132,7 @@ watchEffect(() => {
                   <h3> Выберите обрамление на вторую сторону. </h3>
                   <h5> В этой отделке имеются следующие
                     варианты обрамления:</h5>
+
                   <!--                  <pre>{{filteredCasings}}</pre>-->
                   <div class="grid md:grid-cols-2 grid-cols-1 lg:gap-x-24 lg:gap-y-6 md:gap-x-24 pt-8">
                     <div v-for="casing in filteredCasings.sort(
@@ -145,6 +144,7 @@ watchEffect(() => {
                           v-if="parseInt(casing.casing_variants[0]?.price)"
                           :class="{ selected: casing.casing === actualCasingIndex }"
                           class="imageDiv cursor-pointer flex justify-between items-end w-full pb-1 pt-3 border-b-2 border-transparent transition-all duration-300 ease-in-out">
+
                         <div>
                           <nuxt-img width="40" :src="casing.image"/>
                           <p class="pt-4">{{ casing.casing_name }}</p>
@@ -189,6 +189,7 @@ watchEffect(() => {
 
 .selected {
   border-bottom: 2px solid black !important;
+
 }
 
 </style>
