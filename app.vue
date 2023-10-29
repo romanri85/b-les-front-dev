@@ -6,14 +6,14 @@
 //   throw new Error("Test error")
 // });
 
-useHead({
-  script: [
-    {
-      src: `//code.jivo.ru/widget/NHih7Ka8k8" async`,
-      // async: true,
-    },
-  ],
-})
+// useHead({
+//   script: [
+//     {
+//       src: `//code.jivo.ru/widget/NHih7Ka8k8" async`,
+//       // async: true,
+//     },
+//   ],
+// })
 </script>
 
 <template>
