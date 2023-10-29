@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import collections from '~/data/SliderCollections.json'
+import collections from '~/data/SliderCollectionsWithRiminiRomani.json'
 import BaseLogo from '~/components/base/BaseLogo.vue'
 import { useTagsStore } from '~/stores/tagsStore'
 import {useRouter} from "vue-router";
+import tagsIds from "~/data/tags.json";
 
 defineProps({ light: { type: Boolean, default: true } })
 
@@ -16,8 +17,9 @@ const router = useRouter()
 
 const tagsStore = useTagsStore()
 await tagsStore.fetchTags()
-const tags = tagsStore.tags
-
+const tags = tagsStore.tags.value.filter((tag) => {
+  return tagsIds.includes(tag.id)
+})
 
 
 const xlLgMenu = [
@@ -136,7 +138,7 @@ const mdSmMenu = [
   <div class="bg-black ">
     <div class="main-container">
       <div class=" flex md:flex-row flex-col justify-between xl:pt-24 lg:pt-16 pt-12 md:items-start items-center md:pb-24 pb-12">
-        <div class="lg:pr-16 ">
+        <div class="lg:pr-16">
           <BaseLogo light class=" xl:mb-16 lg:mb-12 mb-5" />
           <div class="md:block hidden ">
             <nuxt-link to="/catalog">
@@ -146,7 +148,15 @@ const mdSmMenu = [
                 {{ $t('catalog') }}
               </buttons-secondary-button>
             </nuxt-link>
+            <div class="pt-24 h-24 md:justify-end lg:block hidden  items-start">
+              <nuxt-link to="https://www.instagram.com/dveri_b_les/">
+                <div class="w-36">
+                  <img src="/insta.svg" />
+                </div>
+              </nuxt-link>
+            </div>
           </div>
+
           <!--                    <button type="button" class="md:block hidden font-mono text-sm py-12" -->
           <!--                            @click="toggleLocale"><h3 -->
           <!--                            :class="light ? 'text-white' : 'text-black'">{{ locale === 'en' ? "EN" : "RU" }}</h3> -->
@@ -176,7 +186,7 @@ const mdSmMenu = [
           <h3 class="text-white mt-5  mb-5">
             Поиск фото по тегам
           </h3>
-          <div v-for="(tag, index) in tags.slice(0, 10)" v-if="tags" :key="index" class="mt-2">
+          <div v-for="(tag, index) in tags" v-if="tags" :key="index" class="mt-2">
             <nuxt-link :to="`/search-tags?tags=${tag.id}`">
               <p class="text-normalGrey">
                 {{ tag.name }}
@@ -264,9 +274,10 @@ const mdSmMenu = [
             </div>
           </div>
         </div>
+
       </div>
       <div class="border-b border-primaryGrey hidden md:block" />
-      <div class="h-24 flex md:justify-end justify-center md:items-center items-start">
+      <div class="h-24 flex md:justify-end justify-center lg:hidden md:items-center items-start">
         <nuxt-link to="https://www.instagram.com/dveri_b_les/">
           <div class="w-36 ml-12">
             <img src="/insta.svg" />
