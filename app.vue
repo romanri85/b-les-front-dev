@@ -5,13 +5,22 @@
 //   $sentryCaptureException("Test exception");
 //   throw new Error("Test error")
 // });
+
+useHead({
+  script: [
+    {
+      src: `//code.jivo.ru/widget/NHih7Ka8k8" async`,
+      // async: true,
+    },
+  ],
+})
 </script>
 
 <template>
   <NuxtLayout>
     <v-app id="app">
-    <NuxtLoadingIndicator color="#000000" />
-    <NuxtPage />
+      <NuxtLoadingIndicator color="#000000"/>
+      <NuxtPage/>
     </v-app>
   </NuxtLayout>
 </template>
