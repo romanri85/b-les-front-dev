@@ -127,6 +127,11 @@ function getActualDoorVariantData(filterData = { material: material.value, color
   material.value = filterData.material
   productVariantsData.value = product.value.product_variants.find(item => item.material === material.value)
   if (productVariantsData?.value.material_color_product_variants?.length === 0) {
+    alert('Дверь с такими параметрами выпускается, но пока не загружена на сайт.')
+    router.go(-1)  // Navigate back to the previous page
+    return;  // Exit the function early to prevent further execution
+  }
+  if (productVariantsData?.value.material_color_product_variants?.length === 0) {
     productVariantsData.value = product.value.product_variants[0];
   }
   doorVariantData.value = productVariantsData.value.material_color_product_variants.find(item => item.color.id === Number(color.value))
