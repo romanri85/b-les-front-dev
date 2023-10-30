@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { useFiltersStore } from '~/stores/filtersStore'
+import {storeToRefs} from "pinia";
 
 const sortFilters = [
   {
@@ -50,8 +51,13 @@ const sortFilters = [
 ]
 
 const filtersStore = useFiltersStore()
+const { activeFilters } = storeToRefs(filtersStore)
 
 const isClicked = ref(false)
+
+const isFiltersApplied = computed(() => {
+  return activeFilters.value.ordering !== 'id' && activeFilters.value.ordering !== ''
+})
 function toggleArrow() {
   isClicked.value = !isClicked.value
 }
@@ -66,7 +72,15 @@ function sortDoors(sorting: string) {
     <div class="hidden md:block">
       <Menu>
         <MenuButton>
-          <div class="flex" @click="toggleArrow">
+          <div class="flex relative" @click="toggleArrow">
+            <div
+                class="w-4 h-4 absolute -right-5 -top-4 text-sm font-mono text-white bg-black flex items-center justify-center"
+                v-if="isFiltersApplied !== false"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+            </div>
             <h3>Сортировка</h3>
             <arrows-arrow-to-click :class="{ '-rotate-180': isClicked }" />
           </div>

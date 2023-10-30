@@ -8,14 +8,37 @@ import MaterialFilter from '~/components/filters/MaterialFilter.vue'
 import GlassFilter from '~/components/filters/GlassFilter.vue'
 import { useFiltersStore } from '~/stores/filtersStore'
 import SaleFilter from '~/components/filters/SaleFilter.vue'
+import {storeToRefs} from "pinia";
 
 const filtersStore = useFiltersStore()
+const {activeFilters} = storeToRefs(filtersStore)
+const filtersNumber = computed(() => {
+  let count = 0;
+  Object.keys(activeFilters.value).forEach(key => {
+    if (!['ordering', 'page', 'min_price', 'max_price'].includes(key)) {
+      const value = activeFilters.value[key];
+      if (Array.isArray(value) ? value.length > 0 : value !== '') {
+        count++;
+      }
+    }
+  });
+  return count;
+});
+
+
+
 </script>
 
 <template>
   <section class="">
     <div class=" lg:mb-[80px] md:mb-[70px] filters flex  md:justify-start gap-3">
-      <div class="inline-flex gap-x-3">
+      <div class="inline-flex gap-x-3 relative">
+        <div
+            class="w-4 h-4 absolute -right-5 -top-4 text-sm font-mono text-white bg-black flex items-center justify-center"
+            v-if="filtersNumber !== 0"
+        >
+          {{filtersNumber}}
+        </div>
         <svg
           class="w-[20px] h-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
           strokeWidth="{1.5}" stroke="currentColor" className="w-6 h-6"

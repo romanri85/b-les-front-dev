@@ -117,7 +117,6 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                     bg-color="white"
                     type="number"
                     step="1000"
-                    prefix="От"
                     suffix="₽"
                     base-color="grey lighten-4"
                     color="grey darken-4"
@@ -136,12 +135,12 @@ const isNotMobile = computed(() => viewport.isDesktop === true || viewport.isTab
                     bg-color="white"
                     step="1000"
                     type="number"
-                    prefix="До"
                     suffix="₽"
                     counter="5"
                     base-color="grey lighten-4"
                     color="grey darken-4"
                     @input="updateSliderValues([range[0], range[1]])"
+
                 >
                 </v-text-field>
               </v-col>

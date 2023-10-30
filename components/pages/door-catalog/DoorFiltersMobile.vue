@@ -11,6 +11,7 @@ import SecondaryButton from '~/components/buttons/SecondaryButton.vue'
 import SortingMobile from '~/components/filters/SortingMobile.vue'
 import SaleFilter from '~/components/filters/SaleFilter.vue'
 import PrimaryButtonBig from '~/components/buttons/PrimaryButtonBig.vue'
+import {storeToRefs} from "pinia";
 
 const filtersStore = useFiltersStore()
 const isFiltersOpen = ref(false)
@@ -27,6 +28,25 @@ function toggleSortingOpen() {
   if (isSortingOpen.value)
     isFiltersOpen.value = false
 }
+const isSortingApplied = computed(() => {
+  return filtersStore.activeFilters.ordering !== 'id' && filtersStore.activeFilters.ordering !== ''
+})
+
+const {activeFilters} = storeToRefs(filtersStore)
+const filtersNumber = computed(() => {
+  let count = 0;
+  Object.keys(activeFilters.value).forEach(key => {
+    if (!['ordering', 'page', 'min_price', 'max_price'].includes(key)) {
+      const value = activeFilters.value[key];
+      if (Array.isArray(value) ? value.length > 0 : value !== '') {
+        count++;
+      }
+    }
+  });
+  return count;
+});
+
+
 </script>
 
 <template>
@@ -38,7 +58,14 @@ function toggleSortingOpen() {
           :class="{ 'bg-primaryDark text-white': isFiltersOpen }"
           @click="toggleFiltersOpen"
         >
-          <div class="inline-flex items-center gap-x-3">
+
+          <div class="inline-flex items-center gap-x-3 relative">
+            <div
+                class="w-4 h-4 absolute -right-1 -top-6 text-sm font-mono border-label border bg-white flex items-center justify-center"
+                v-if="filtersNumber !== 0"
+            >
+              {{filtersNumber}}
+            </div>
             <svg
               class="w-[30px] h-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
               strokeWidth="{1.5}" stroke="currentColor" className="w-6 h-6"
@@ -51,7 +78,17 @@ function toggleSortingOpen() {
             <h3>Фильтры</h3>
           </div>
         </SecondaryButton>
-        <div>
+
+        <div class="relative">
+          <div
+              class="w-4 h-4 absolute right-3 -top-2 text-sm font-mono border-label border bg-white flex items-center justify-center"
+              v-if="isSortingApplied !== false"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+
+          </div>
           <SecondaryButton
             class="w-40 h-16 r" :class="{ 'bg-primaryDark text-white': isSortingOpen }"
             @click="toggleSortingOpen"
@@ -90,5 +127,7 @@ function toggleSortingOpen() {
 </template>
 
 <style scoped>
-
+.border-label{
+  border: 1px solid black!important;
+}
 </style>

@@ -84,8 +84,8 @@ export const useFiltersStore = defineStore('filtersStore', () => {
   async function onResetFilters() {
     isDoorSetApplied.value = false
     activeFilters.value = {
-      min_price: 0.00,
-      max_price: 99000.00,
+      min_price: '',
+      max_price: '',
       design: [],
       color_set: [],
       color: [],
@@ -106,8 +106,8 @@ export const useFiltersStore = defineStore('filtersStore', () => {
     if (isDoorSetApplied.value) {
       // await onResetFilters()
       activeFilters.value = {
-        min_price: 0.00,
-        max_price: 99000.00,
+        min_price: '',
+        max_price: '',
         design: [],
         color_set: [],
         color: [],
