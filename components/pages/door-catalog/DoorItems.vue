@@ -27,7 +27,7 @@ function scrollToDoorsBlock() {
 function onChangePage(page) {
   filtersStore.page = page
     scrollToDoorsBlock()
-  filtersStore.onChangeFilters({ page: filtersStore.page })
+  filtersStore.onChangeFilters({ page: filtersStore.page }, false)
 }
 </script>
 
