@@ -14,22 +14,13 @@ function onImageLoaded() {
 
 const imageDiv = ref(null)
 
-function mouseOver() {
-  if (imageDiv.value)
-    imageDiv.value.classList.add('hover:border-black')
-}
 
-function mouseLeave() {
-  if (imageDiv.value)
-    imageDiv.value.classList.remove('hover:border-black')
-}
 </script>
 
 <template>
   <!--    <client-only> -->
   <div
     class="relative flex flex-col items-center"
-    @mouseover="mouseOver" @mouseleave="mouseLeave"
   >
     <div
       v-if="props.doorVariant.sale"
@@ -40,7 +31,7 @@ function mouseLeave() {
       </h4>
     </div>
 
-    <div ref="imageDiv" class="relative top-4 w-full flex justify-center pb-8 md:mb-5 border-b-2 border-transparent transition-all duration-300 ease-in-out">
+    <div ref="imageDiv" class="relative top-4 w-full flex justify-center pb-8 md:mb-5 border-b-2 border-transparent transition-all duration-300 ease-in-out hover:lg:border-black">
       <!-- Preloader -->
       <div v-if="isLoading" class="hidden md:hidden lg:hidden sm:block sm:preloader">
         <div class="hidden md:hidden lg:hidden sm:block sm:spinner" />
