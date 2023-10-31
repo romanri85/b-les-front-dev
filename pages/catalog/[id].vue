@@ -16,6 +16,7 @@ import SaleInfoDetail from '~/components/pages/door-catalog/SaleInfoDetail.vue'
 import ContactUsModal from '~/components/pop-ups/ContactUsModal.vue'
 import { useViewportSize } from '~/composables/useViewportSize'
 import DoorCardPriceDetail from '~/components/pages/door-catalog/DoorCardPriceDetail.vue'
+import DoorTechInfoModal from "~/components/pop-ups/DoorTechInfoModal.vue";
 
 const { y } = useWindowScroll()
 
@@ -45,7 +46,9 @@ const pagesCount = ref(0)
 const page_size = 9
 const page = ref(1)
 
-const shouldOpenModal = ref(0)
+// const shouldOpenImageModal = ref(0)
+const shouldOpenDoorTechInfoModal = ref(0)
+const shouldOpenContactUsModal = ref(0)
 
 const imagesBlock = ref(null)
 function scrollToImagesBlock() {
@@ -53,7 +56,11 @@ function scrollToImagesBlock() {
 }
 
 function openContactUsModal() {
-  shouldOpenModal.value = shouldOpenModal.value + 1
+  shouldOpenContactUsModal.value = shouldOpenContactUsModal.value + 1
+}
+
+function openDoorTechInfoModal() {
+  shouldOpenDoorTechInfoModal.value = shouldOpenDoorTechInfoModal.value + 1
 }
 
 onMounted(
@@ -276,9 +283,12 @@ function onChangePage(page) {
         </div>
         <div class="w-full flex flex-col justify-between items-start">
           <DoorCardPriceDetail class="pb-8" :actualCasing="actualCasing" :color="color" :material="material" :productCasings="productCasings" :casingVariants="casingVariants" :door-variant-data="doorVariantData" :product="product" :new-glass="newGlass" />
-          <div class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full " @click="openContactUsModal">
-            <buttons-primary-button-big class="w-1/2 lg:w-60 max-w-[240px] h-16 bg-primaryDark text-white">
+          <div class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full " >
+            <buttons-primary-button-big @click="openContactUsModal" class="w-1/2 lg:w-60 max-w-[240px] h-16 bg-primaryDark text-white">
               Купить
+            </buttons-primary-button-big>
+            <buttons-primary-button-big @click="openDoorTechInfoModal" class="w-1/2 lg:w-60 max-w-[240px] h-16 bg-primaryDark text-white" >
+              Информация
             </buttons-primary-button-big>
             <!--            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В -->
             <!--              избранное -->
@@ -379,14 +389,14 @@ function onChangePage(page) {
         <div class="w-full flex flex-col justify-between items-start">
           <div
             class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full md:pl-0 pl-1"
-            @click="openContactUsModal"
+
           >
-            <buttons-primary-button-big class="w-1/2 max-w-[200px] lg:w-60 h-16 bg-primaryDark text-white ">
+            <buttons-primary-button-big @click="openContactUsModal" class="w-1/2 max-w-[200px] lg:w-60 h-16 bg-primaryDark text-white ">
               Купить
             </buttons-primary-button-big>
-            <!--            <buttons-primary-button-big class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">В -->
-            <!--              избранное -->
-            <!--            </buttons-primary-button-big> -->
+                        <buttons-primary-button-big @click="openDoorTechInfoModal" class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">
+                          Информация
+                        </buttons-primary-button-big>
           </div>
         </div>
       </div>
@@ -405,7 +415,8 @@ function onChangePage(page) {
       </div>
     </div>
     <ImageModal ref="imgModal" :image="selectedImage" />
-    <ContactUsModal :should-open-modal="shouldOpenModal" />
+    <ContactUsModal :should-open-modal="shouldOpenContactUsModal" />
+    <DoorTechInfoModal :should-open-modal="shouldOpenDoorTechInfoModal" :data="doorVariantData" :product="product"/>
     <Pagination
       v-if="total > 0" v-model:current-page="page" class="pt-12 pb-32 flex justify-center"
       :total="total"
