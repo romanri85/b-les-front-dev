@@ -25,7 +25,7 @@ const route = useRoute()
         {{ $t(props.heroName) }}
       </h2>
       <!--      <h6  class="hidden md:block w-[90vw] md:w-[500px] text-white text-center pt-6">{{$t(props.heroDescription)}}</h6> -->
-      <div v-if="props.buttons" class="flex gap-24 justify-center pt-5 md:pt-10 lg:pt-20 md:whitespace-nowrap">
+      <div :class="{ 'opacity-visible': imageLoaded, 'opacity-hidden': !imageLoaded }" v-if="props.buttons && imageLoaded" class="flex gap-24 justify-center pt-5 md:pt-10 lg:pt-20 md:whitespace-nowrap">
         <NuxtLink :to="props.buttons.swingDoors.link">
           <PrimaryButtonBigger :class="{ underline: route.path === '/systems/swing' }" class="hidden md:block">
             <h2>{{ $t(props.buttons.swingDoors.name) }}</h2>
