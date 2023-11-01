@@ -78,7 +78,7 @@ function changeCity(id) {
               </DialogTitle>
               <div class="mt-8 mb-8">
                 <div v-for="city in props.cities" :key="city.name">
-                  <h4 class="cursor-pointer mb-4 underline-direction inline-block" @click="changeCity(city.id)">
+                  <h4 class="cursor-pointer mb-4" @click="changeCity(city.id)">
                     {{ city.name }}
                   </h4>
                 </div>

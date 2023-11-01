@@ -78,11 +78,11 @@ const isAddressesLoaded = computed(() => addresses.value.addresses)
       </div>
     </div>
 
-    <h1 v-if="isCityLoaded && city" class="mt-10 pb-8" @click="openCityModal">
+    <h2 v-if="isCityLoaded && city" class=" mt-10 pb-8" @click="openCityModal">
       Салоны в <span
-        class="border-b-2 border-b-black cursor-pointer"
+        class="border-b-2 whitespace-nowrap border-b-black cursor-pointer"
     >{{ city.dative_case_name || 'Москве' }}</span>
-    </h1>
+    </h2>
 
     <!--    <h5 class="pb-4" v-if="!isCityFound">К сожалению, в вашем регионе нет наших магазинов, или представителей. Но мы можем доставить двери в любой регион России.</h5> -->
 
