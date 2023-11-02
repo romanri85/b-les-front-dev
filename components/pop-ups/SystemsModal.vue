@@ -12,6 +12,7 @@ const props = defineProps({
   isOpen: Boolean,
   shouldOpenModal: Number,
   systems: Array,
+  activeSystemId: Number,
 })
 
 const hoveredSystem = ref('')
@@ -37,6 +38,7 @@ function openModal() {
 
 const playingStates = reactive({});
 const previousSystem = ref(null);  // New ref to keep track of the previous system
+const systemRefs = reactive({});
 
 function toggleActiveSystem(id) {
   if (previousSystem.value !== null && previousSystem.value !== id) {
@@ -78,6 +80,17 @@ function clearActiveSystem() {
   }
   isPlaying.value = false;
 }
+
+watch([() => props.systems, () => props.activeSystemId], ([systems, activeSystemId], [oldSystems, oldActiveSystemId], onInvalidate) => {
+  nextTick(() => {
+    if (activeSystemId !== null && systems.length > 0) {
+      const systemElement = systemRefs[activeSystemId];
+      if (systemElement) {
+        systemElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+}, { immediate: true });
 </script>
 
 <template>
@@ -127,9 +140,11 @@ function clearActiveSystem() {
                   Закрыть
                 </button>
               </div>
-              <div class="mt-8 mb-8">
-                <div v-for="system in systems" :key="system.id">
-                  <h2 class="cursor-pointer mb-8 inline-block">
+              <div class=" mb-8">
+                <div v-for="system in systems.sort(
+                    (a,b) => a.serial_number - b.serial_number
+                )" :key="system.id" :ref="el => (systemRefs[system.id] = el)">
+                  <h2 class="cursor-pointer pt-8 mb-8 inline-block">
                     {{ system.name }}
                   </h2>
                   <div
@@ -153,10 +168,15 @@ function clearActiveSystem() {
                       <BasePauseSymbol v-else />
                     </div>
                   </div>
-                  <h5 class="pt-5 pb-20">
+                  <h5 class="pt-5 ">
                     {{ system.description }}
                   </h5>
-                </div>
+                  <div class="pb-20">
+                  <nuxt-link :to="{ path: '/search-tags', query: { tags: system.example_tag } }" v-if="system.example_tag" >
+                  <buttons-primary-button-big class="pt-5 ">Примеры</buttons-primary-button-big>
+                  </nuxt-link>
+                  </div>
+                  </div>
               </div>
             </DialogPanel>
           </TransitionChild>

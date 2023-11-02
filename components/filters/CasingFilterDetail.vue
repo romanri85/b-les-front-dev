@@ -49,14 +49,14 @@ function checkColorExists(color, object) {
           <FilterType class="whitespace-nowrap" filter-name="Оформление портала" />
         </DisclosureButton>
         <DisclosurePanel class="">
-          <div class="flex gap-y-6 gap-x-10  mb-3 flex-wrap w-full">
+          <div class="flex gap-y-6 gap-x-4  mb-3 flex-wrap w-full">
             <div
               v-for="casing in sortedCasings.sort(
                   (a,b) => checkColorExists(props.color, b) -checkColorExists(props.color, a)
               )" :key="casing.casing_name"
               @click="chooseCasing(casing.casing)"
             >
-              <div v-if="checkColorExists(props.color, casing)" class="flex flex-col items-start ">
+              <div v-if="checkColorExists(props.color, casing)" class="lg:min-w-[100px] flex flex-col items-start ">
                 <div
                   class="pb-1 border-b-4"
                   :class="{
@@ -75,7 +75,7 @@ function checkColorExists(color, object) {
                   />
                 </div>
 
-                <p class="hidden lg:block pt-2 cursor-pointer whitespace-nowrap">
+                <p class="hidden lg:block pt-2 text-xs cursor-pointer whitespace-nowrap">
                   {{ casing.casing_name }}
                 </p>
               </div>

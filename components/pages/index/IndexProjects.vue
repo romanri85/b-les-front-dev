@@ -13,7 +13,8 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
 <template>
   <div class="flex flex-col justify-center items-center lg:mt-32 md:mt-20 mt-24 lg:mx-48 md:mx-10  main-container">
     <h2 class="">
-      {{ $t('ourProjects') }}
+<!--      {{ $t('ourProjects') }}-->
+      Производство полного цикла
     </h2>
     <div class="lg:mt-4 md:mt-3 mt-5 lg:mb-12 md:mb-8 mb-5">
       <h5 class=" text-primaryDark md:text-center">

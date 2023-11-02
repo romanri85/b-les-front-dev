@@ -21,8 +21,9 @@ const props = defineProps({
 })
 
 const shouldOpenModal = ref(0)
-
-function openSystemModal() {
+let activeSystemId = ref(null);
+function openSystemModal(id) {
+  activeSystemId.value = id;
   shouldOpenModal.value = shouldOpenModal.value + 1
 }
 
@@ -142,16 +143,19 @@ onMounted(() => {
           @scrollbarDragStart="isDragging = true"
           @scrollbarDragEnd="isDragging = false"
         >
-          <SwiperSlide v-for="system in systems" v-if="systems" :key="system.id"
+          <SwiperSlide v-for="system in systems.sort(
+              (a,b) => a.serial_number - b.serial_number
+          )
+          " v-if="systems" :key="system.id"
                        v-on:mouseenter="() => setActiveSystem(system.id)"
                        v-on:mouseleave="clearActiveSystem"
                        class="hover:cursor-pointer"
           >
             <!--          <NuxtLink :to="{ path: `/interior/${project.id}`}"> -->
 
-            <nuxt-img placeholder class="cursor-pointer w-full h-auto object-contain" :src="system.image" :alt="system.name" @click="openSystemModal" />
+            <nuxt-img placeholder class="cursor-pointer w-full h-auto object-contain" :src="system.image" :alt="system.name" @click="() => openSystemModal(system.id)" />
             <video
-                @click="openSystemModal"
+                @click="() => openSystemModal(system.id)"
                 v-if="hoveredSystem === system.id"
                 :id="`video-${system.id}`"
                 :src="system.video"
@@ -161,7 +165,7 @@ onMounted(() => {
                 muted
                 class="absolute top-0 left-0 w-full h-auto"
             ></video>
-            <h4 class="cursor-pointer pt-5" @click="openSystemModal">
+            <h4 class="cursor-pointer pt-5" @click="() => openSystemModal(system.id)">
               {{ system.name }}
             </h4>
             <!--          </NuxtLink> -->
@@ -184,7 +188,7 @@ onMounted(() => {
             </div>
           </div>
         </Swiper>
-        <systems-modal :should-open-modal="shouldOpenModal" :systems="systems" />
+        <systems-modal :should-open-modal="shouldOpenModal" :systems="systems" :active-system-id="activeSystemId" />
       </client-only>
     </div>
   </section>
