@@ -199,7 +199,7 @@ function onChangePage(page) {
 
     <!--    desktop and tablet screen -->
 
-    <div v-if="!viewport.isMobile" class="block md:flex gap-10 lg:gap-20">
+    <div v-if="!viewport.isMobile" class="block md:flex gap-10 md:gap-20">
       <div class="left md:w-[38%]">
         <DoorCardDetail
           class="door-card-detail" :door-variant="doorVariantData" :product="product"
@@ -261,7 +261,7 @@ function onChangePage(page) {
             </p>
           </div>
         </div>
-        <div class="lg:min-h-[430px]">
+        <div class="lg:min-h-[500px]">
           <div class="flex flex-col lg:flex-row justify-start ">
             <filters-model-family-filter-detail
               class="lg:min-w-[200px]" :product="product" :product-variants-data="productVariantsData"
@@ -388,13 +388,13 @@ function onChangePage(page) {
         </div>
         <div class="w-full flex flex-col justify-between items-start">
           <div
-            class="flex justify-start lg:flex-row gap-x-10 lg:gap-x-20 w-full md:pl-0 pl-1"
+            class="flex justify-between lg:flex-row gap-x-10 lg:gap-x-20 w-full md:pl-0 pl-1 pt-8 md:pt-0"
 
           >
-            <buttons-primary-button-big @click="openContactUsModal" class="w-1/2 max-w-[200px] lg:w-60 h-16 bg-primaryDark text-white ">
+            <buttons-primary-button-big @click="openContactUsModal" class="w-1/2 max-w-[240px] lg:w-60 h-16 bg-primaryDark text-white ">
               Купить
             </buttons-primary-button-big>
-                        <buttons-primary-button-big @click="openDoorTechInfoModal" class="w-1/2 lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">
+                        <buttons-primary-button-big @click="openDoorTechInfoModal" class="w-1/2 max-w-[240px] lg:w-60 h-16 bg-primaryDark whitespace-nowrap text-white">
                           Информация
                         </buttons-primary-button-big>
           </div>

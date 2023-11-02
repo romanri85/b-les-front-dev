@@ -59,7 +59,7 @@ const index = materialMap[props.material]
 
 <template class="filter-container ">
   <!-- <p>{{materialMap[props.material]}}</p> -->
-  <div v-if="props.productMaterials[0]" class="w-full lg:w-1/2 ">
+  <div v-if="props.productMaterials[0]" class="w-full lg:w-1/2 min-h-0 mdLg:min-h-[350px] md:min-h-[440px] lg:min-h-0">
     <client-only>
       <Disclosure default-open>
         <DisclosureButton class=" w-full">

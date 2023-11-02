@@ -9,8 +9,8 @@
 useHead({
   script: [
     {
-      src: `//code.jivo.ru/widget/NHih7Ka8k8" async`,
-      // async: true,
+      src: `//code.jivo.ru/widget/NHih7Ka8k8`,
+      async: true,
     },
   ],
 })

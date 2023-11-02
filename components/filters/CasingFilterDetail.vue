@@ -49,7 +49,7 @@ function checkColorExists(color, object) {
           <FilterType class="whitespace-nowrap" filter-name="Оформление портала" />
         </DisclosureButton>
         <DisclosurePanel class="">
-          <div class="flex gap-y-6 gap-x-4  mb-3 flex-wrap w-full">
+          <div class="flex gap-y-6 lg:gap-x-4 gap-x-10  mb-3 flex-wrap w-full">
             <div
               v-for="casing in sortedCasings.sort(
                   (a,b) => checkColorExists(props.color, b) -checkColorExists(props.color, a)
