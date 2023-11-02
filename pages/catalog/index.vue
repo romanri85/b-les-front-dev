@@ -47,7 +47,19 @@ onMounted(() => {
 
 watch(() => route.query.collection, (newValue) => {
   if (newValue) {
-    console.log(newValue)
+    activeFilters.value = {
+      min_price: '',
+      max_price: '',
+      design: [],
+      color_set: [],
+      color: [],
+      collection: [],
+      material: [],
+      glass: '',
+      sale: '',
+      ordering: '',
+      page: 1,
+    }
     filtersStore.activeFilters = ({ ...filtersStore.activeFilters, collection: [Number.parseInt(newValue)] })
     filtersStore.onChangeFilters(filtersStore.activeFilters)
   }
