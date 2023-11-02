@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 import { onMounted, ref } from 'vue' // Ensure to import ref and onMounted
 
 import parameters from '~/data/searchByParameters.json'
@@ -55,7 +55,7 @@ onMounted(() => {
       class=" lg:w-[50vw] w-[100vw] flex justify-center lg:h-2/3 md:h-[360] h-[240px] items-center mb-24 md:mb-0 mt-10 md:mt-0"
     >
       <div
-          class="bg-[url('/parameters-search.webp')] lg:bg-cover bg-cover md:bg-fit bg-center lg:w-2/3 w-full h-full flex flex-col justify-end items-center main-container"
+          class=" bg-[url('/parameters-search.webp')] lg:bg-cover bg-cover md:bg-fit bg-center lg:w-2/3 w-full h-full flex flex-col justify-end items-center main-container"
       >
         <nuxt-link class="w-full flex justify-center" to="/search-tags">
           <buttons-secondary-button
