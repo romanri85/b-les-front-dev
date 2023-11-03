@@ -217,11 +217,11 @@ function onChangePage(page) {
           <h1 class="pb-5">
             {{ product.name }}
           </h1>
-          <div class="flex justify-between">
-            <p v-if="product && product.collection">
-              {{ product.collection.description }}
-            </p>
-          </div>
+<!--          <div class="flex justify-between">-->
+<!--            <p v-if="product && product.collection">-->
+<!--              {{ product.collection.description }}-->
+<!--            </p>-->
+<!--          </div>-->
           <SaleInfoDetail v-if="doorVariantData.sale" class="pt-6 pb-4" :door-variant-data="doorVariantData" />
         </div>
         <CasingFilterDetail
@@ -255,11 +255,11 @@ function onChangePage(page) {
             {{ product.name }}
 
           </h1>
-          <div class="flex justify-between">
-            <p v-if="product && product.collection">
-              {{ product.collection.description }}
-            </p>
-          </div>
+<!--          <div class="flex justify-between">-->
+<!--            <p v-if="product && product.collection">-->
+<!--              {{ product.collection.description }}-->
+<!--            </p>-->
+<!--          </div>-->
         </div>
         <div class="lg:min-h-[500px]">
           <div class="flex flex-col lg:flex-row justify-start ">
@@ -360,11 +360,11 @@ function onChangePage(page) {
           <h1 class="pb-5">
             {{ product.name }}
           </h1>
-          <div class="flex justify-between">
-            <p v-if="product && product.collection">
-              {{ product.collection.description }}
-            </p>
-          </div>
+<!--          <div class="flex justify-between">-->
+<!--            <p v-if="product && product.collection">-->
+<!--              {{ product.collection.description }}-->
+<!--            </p>-->
+<!--          </div>-->
         </div>
         <div class="lg:min-h-[430px]">
           <div class="flex flex-col lg:flex-row justify-start ">
