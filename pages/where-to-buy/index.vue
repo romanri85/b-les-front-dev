@@ -6,6 +6,9 @@ import CityDialog from '~/components/pop-ups/CityDialog.vue'
 import {baseURL} from '~/config'
 import {findCity} from '~/utils/helpers'
 import {useCityStore} from "~/stores/cityStore";
+import { useStorage } from '@vueuse/core';
+
+const storageCityStore = useStorage('storage-city-store', { city: null, geo: null, isCityFound:false });
 
 
 definePageMeta({layout: 'dark-header'})
@@ -43,6 +46,9 @@ function confirmCity(confirm) {
     cityStore.city = city.value
     cityStore.geo = geo.value
     isCityFound.value = true
+    storageCityStore.value.city = city.value
+    storageCityStore.value.geo = geo.value
+    storageCityStore.value.isCityFound = true
     // Cookies.set('geolocation', JSON.stringify(geo.value), {expires: 365})
   }
   if (!confirm) {
@@ -58,7 +64,8 @@ async function getAddresses() {
 }
 
 async function getCities() {
-  if (!cityStore.city) {
+  if (!storageCityStore.value.city) {
+
   geo.value = Cookies.get('geolocation') || {country: 'Russia', city: 'Moscow', region: 'Moscow'}
   geo.value = typeof geo.value === 'object' ? geo.value : JSON.parse(geo.value)
   cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
@@ -69,21 +76,27 @@ async function getCities() {
     // cityStore.city = city.value
     // cityStore.geo = geo.value
   }
+  else {
+    cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
+    city.value = storageCityStore.value.city
+    geo.value = storageCityStore.value.geo
+    isCityFound.value = true
+  }
 
 }
 
 onMounted(async () => {
-  if(!cityStore.city) {
+  if(!storageCityStore.value.city) {
     await getCities()
     await getAddresses()
-    console.log('city', city.value)
   }
   else {
-    city.value = cityStore.city
-    geo.value = cityStore.geo
+    city.value = storageCityStore.value.city
+    geo.value = storageCityStore.value.geo
     isCityFound.value = true
+    await getCities()
     await getAddresses()
-    console.log('city', city.value)
+
   }
   // await getCities()
   // await getAddresses()
@@ -91,9 +104,14 @@ onMounted(async () => {
 
 function changeCity(newCityId) {
   city.value = cities.value.find(city => city.id === newCityId)
+
   cityStore.city = city.value
   cityStore.geo = geo.value
   isCityFound.value = true
+  storageCityStore.value.city = city.value
+  storageCityStore.value.geo = geo.value
+  storageCityStore.value.isCityFound = true
+
 
 }
 
@@ -110,7 +128,8 @@ const isAddressesLoaded = computed(() => addresses.value.addresses)
     <title>Брянский лес - Где купить</title>
   </Head>
   <div class=" relative z-10 main-container">
-    <div v-if="showConfirmation && !cityStore.city" class="confirmation-button shadow bg-white">
+    <div v-if="showConfirmation && !storageCityStore.city" class="confirmation-button shadow bg-white">
+
       <span class="font-sans">Ваш город {{ city.name || 'Москва' }}?</span>
       <button class="font-sans underline-static" @click="confirmCity(true)">Да</button>
       <button class="font-sans underline-static" @click="confirmCity(false)">Нет</button>
@@ -146,6 +165,7 @@ const isAddressesLoaded = computed(() => addresses.value.addresses)
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: rgb(128, 128, 128) 1px solid;
   box-shadow: rgb(128 128 128 / 50%) 0px 0px 10px;
 }
 </style>
