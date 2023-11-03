@@ -133,11 +133,17 @@ watch(shouldOpenModal, (newValue) => {
                   <h5> В этой отделке имеются следующие
                     варианты обрамления:</h5>
 
-                  <!--                  <pre>{{filteredCasings}}</pre>-->
                   <div class="grid md:grid-cols-2 grid-cols-1 lg:gap-x-24 lg:gap-y-6 md:gap-x-24 pt-8">
-                    <div v-for="casing in filteredCasings.sort(
-                      (a, b) => parseInt(a.casing_variants[0]?.price) - parseInt(b.casing_variants[0]?.price)
-                    )" :key="casing.id" class="flex flex-col items-start">
+                    <div v-for="casing in filteredCasings.sort((a, b) => {
+        const priceA = parseInt(a.casing_variants[0]?.price);
+        const priceB = parseInt(b.casing_variants[0]?.price);
+
+        if (isNaN(priceA) && isNaN(priceB)) return 0;
+        if (isNaN(priceA)) return 1;
+        if (isNaN(priceB)) return -1;
+
+        return priceA - priceB;
+    })" :key="casing.id" class="flex flex-col items-start">
                       <div
                           ref="imageDiv"
                           @click="changeCasing(casing.casing)"
