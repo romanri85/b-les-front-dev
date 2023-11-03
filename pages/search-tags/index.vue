@@ -187,12 +187,12 @@ function handleChooseTag(tag) {
           :key="taglistKey"
           type="taglist"
           name="taglist"
-          label="Поиск фото по тегам"
+          label='Все фото сделаны на проектах компании "Брянский лес".'
           :options="tagsForForm"
           max="10"
           :value="selectedTags"
           select-icon="add"
-          help='Все фото сделаны на проектах компании "Брянский лес". Все теги на фото активны.'
+          help='Все теги на фото активны.'
           prefix-icon="tag"
           open-on-click
           placeholder="Выберите тег"
