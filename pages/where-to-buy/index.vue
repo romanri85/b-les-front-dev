@@ -5,14 +5,18 @@ import WhereToBuyMap from '~/components/pages/where-to-buy/WhereToBuyMap.vue'
 import CityDialog from '~/components/pop-ups/CityDialog.vue'
 import {baseURL} from '~/config'
 import {findCity} from '~/utils/helpers'
+import {useCityStore} from "~/stores/cityStore";
+
 
 definePageMeta({layout: 'dark-header'})
 
+const cityStore = useCityStore()
 const city = ref({})
 const cities = ref([])
 const addresses = ref({})
 const geo = ref({})
 const shouldOpenModal = ref(0)
+const showConfirmation = ref(true);
 
 const isCityLoaded = computed(() => Object.keys(city.value).length > 0)
 const isCityFound = ref(true)
@@ -33,6 +37,18 @@ if (typeof ymaps === 'undefined') {
   })
 }
 
+function confirmCity(confirm) {
+  showConfirmation.value = false;
+  if (confirm) {
+    cityStore.city = city.value
+    cityStore.geo = geo.value
+    isCityFound.value = true
+    // Cookies.set('geolocation', JSON.stringify(geo.value), {expires: 365})
+  }
+  if (!confirm) {
+    openCityModal();
+  }
+}
 async function getAddresses() {
   try {
     addresses.value = await $fetch(`${baseURL}/api/shops/`)
@@ -42,6 +58,7 @@ async function getAddresses() {
 }
 
 async function getCities() {
+  if (!cityStore.city) {
   geo.value = Cookies.get('geolocation') || {country: 'Russia', city: 'Moscow', region: 'Moscow'}
   geo.value = typeof geo.value === 'object' ? geo.value : JSON.parse(geo.value)
   cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
@@ -49,15 +66,35 @@ async function getCities() {
   city.value = findCity(cities.value, geo.value.region)
   isCityFound.value = city.value.isFound
   city.value = city.value.city
+    // cityStore.city = city.value
+    // cityStore.geo = geo.value
+  }
+
 }
 
 onMounted(async () => {
-  await getCities()
-  await getAddresses()
+  if(!cityStore.city) {
+    await getCities()
+    await getAddresses()
+    console.log('city', city.value)
+  }
+  else {
+    city.value = cityStore.city
+    geo.value = cityStore.geo
+    isCityFound.value = true
+    await getAddresses()
+    console.log('city', city.value)
+  }
+  // await getCities()
+  // await getAddresses()
 })
 
 function changeCity(newCityId) {
   city.value = cities.value.find(city => city.id === newCityId)
+  cityStore.city = city.value
+  cityStore.geo = geo.value
+  isCityFound.value = true
+
 }
 
 function openCityModal() {
@@ -68,10 +105,16 @@ const isAddressesLoaded = computed(() => addresses.value.addresses)
 </script>
 
 <template>
+
   <Head>
     <title>Брянский лес - Где купить</title>
   </Head>
   <div class=" relative z-10 main-container">
+    <div v-if="showConfirmation && !cityStore.city" class="confirmation-button shadow bg-white">
+      <span class="font-sans">Ваш город {{ city.name || 'Москва' }}?</span>
+      <button class="font-sans underline-static" @click="confirmCity(true)">Да</button>
+      <button class="font-sans underline-static" @click="confirmCity(false)">Нет</button>
+    </div>
     <div class="mt-10 lg:pr-72">
       <div class=" flex justify-start items-end">
         <h4>Главная / Где купить</h4>
@@ -92,5 +135,18 @@ const isAddressesLoaded = computed(() => addresses.value.addresses)
 </template>
 
 <style scoped>
-
+.confirmation-button {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  max-width: 600px;
+  min-width: 300px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgb(128 128 128 / 50%) 0px 0px 10px;
+}
 </style>
+

@@ -4,14 +4,14 @@ import { baseURL } from '~/config.js'
 export default defineEventHandler(async (event) => {
   try {
     const cookies = parseCookies(event)
-    // console.log(cookies, 'cookies exist')
 
     if (!cookies.geolocation) {
-      // console.log('cookies not exist');
-      const response = await $fetch(`${baseURL}/api/geolocation/`)
+      console.log('cookies not exist');
+      const response = await fetch(`${baseURL}/api/geolocation/`)
+      // console.log(response, 'response')
 
       if (!response.ok) {
-        // console.error(`HTTP error! status: ${response.status}`);
+        console.error(`HTTP error! status: ${response.status}`);
         // Perhaps, respond to the event with an error message here
         return
       }
@@ -21,12 +21,10 @@ export default defineEventHandler(async (event) => {
 
       setCookie(event, 'geolocation', geo, { maxAge })
 
-      event.respondWith(new Response('OK', {
-        headers: {
-          'Set-Cookie': `geolocation=${geo}; Max-Age=${maxAge};`,
-        },
-      }))
+      // Respond with some data (if needed)
+      return { geo }
     }
+    console.log(cookies, 'cookies')
   }
   catch (error) {
     console.error('An error occurred:', error)

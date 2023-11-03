@@ -118,7 +118,7 @@ const filtersNumber = computed(() => {
         <SaleFilter />
         <PrimaryButtonBig class="pb-8 pt-8 lg:pt-0 text-start " @click="filtersStore.onResetFilters">
           <h3 class="underline-static">
-            Все двери
+            Сбросить
           </h3>
         </PrimaryButtonBig>
       </div>
