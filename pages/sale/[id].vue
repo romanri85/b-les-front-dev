@@ -22,7 +22,7 @@ function formatDate(input) {
 }
 
 const sentences = computed(() => {
-  const description = sale.value.sale_type_description
+  const description = 'Акция распространяется только на полотно. Скидка по акции не суммируется со другими. Акция распространяется на полотно при покупке комплекта двери.'
   return description ? description.match(/[^\.!\?]+[\.!\?]+/g) || [] : []
 })
 </script>
