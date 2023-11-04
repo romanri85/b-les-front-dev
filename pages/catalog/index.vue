@@ -62,6 +62,7 @@ watch(() => route.query.collection, (newValue) => {
     }
     filtersStore.activeFilters = ({ ...filtersStore.activeFilters, collection: [Number.parseInt(newValue)] })
     filtersStore.onChangeFilters(filtersStore.activeFilters)
+    scrollTo({ top: 0, behavior: 'smooth' })
   }
 }, { immediate: true })
 const sidebar = ref(null)

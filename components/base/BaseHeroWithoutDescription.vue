@@ -16,12 +16,12 @@ const imageLoaded = ref(false)
   >
     <div
       :class="{ 'opacity-visible': imageLoaded, 'opacity-hidden': !imageLoaded }"
-      class="text-white absolute left-1/2 lg:top-[180px] md:top-[120px] top-[120px] -translate-x-1/2"
+      class="w-full px-7 text-white absolute left-1/2 lg:top-[180px] md:top-[120px] top-[120px] -translate-x-1/2"
     >
       <h1 class="hidden md:block text-center whitespace-nowrap text-shadow">
         {{ $t(props.heroName) }}
       </h1>
-      <h2 class="md:hidden text-center whitespace-nowrap text-shadow">
+      <h2 class="w-full md:hidden text-center text-shadow">
         {{ $t(props.heroName) }}
       </h2>
     </div>

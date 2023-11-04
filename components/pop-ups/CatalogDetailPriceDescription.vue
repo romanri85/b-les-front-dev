@@ -114,7 +114,7 @@ watch(shouldOpenModal, (newValue) => {
                   <p>
                     Стоимость полотна:
                     <h3 v-if="props.doorVariantData.sale" class="inline-block pb-2">
-                      <span class="text-gray-500 line-through">{{ props.doorVariantData.leaf_price }}&nbsp;₽</span>&nbsp;&nbsp;
+                      <span class="text-gray-500 line-through">{{ parseInt(props.doorVariantData.leaf_price) }}&nbsp;₽</span>&nbsp;&nbsp;
                       <span class="text-black">{{ props.priceProps.leafPrice }}&nbsp;₽</span>
                     </h3>
                     <h3 v-else class="inline-block pb-2 text-black">{{ props.priceProps.leafPrice }}&nbsp;₽</h3>
