@@ -6,7 +6,6 @@ export default defineEventHandler(async (event) => {
     const cookies = parseCookies(event)
 
     if (!cookies.geolocation) {
-      console.log('cookies not exist');
       const response = await fetch(`${baseURL}/api/geolocation/`)
       // console.log(response, 'response')
 
@@ -22,9 +21,8 @@ export default defineEventHandler(async (event) => {
       setCookie(event, 'geolocation', geo, { maxAge })
 
       // Respond with some data (if needed)
-      return { geo }
+      // return { geo }
     }
-    console.log(cookies, 'cookies')
   }
   catch (error) {
     console.error('An error occurred:', error)
