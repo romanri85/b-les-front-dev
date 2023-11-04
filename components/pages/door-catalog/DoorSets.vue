@@ -171,7 +171,7 @@ const minusIcon = `
     <div class="md:inline-flex flex md:flex-row flex-col-reverse items-start">
       <div class="hidden md:block pr-16 whitespace-nowrap" @click="filtersStore.onResetFilters()">
         <h3 class="cursor-pointer underline-static">
-          Все двери
+          Сбросить
         </h3>
       </div>
 
@@ -200,7 +200,7 @@ const minusIcon = `
     </PrimaryButtonSmall>
     <div class="block md:hidden pr-16 pt-8 whitespace-nowrap" @click="filtersStore.onResetFilters()">
       <h3 class="">
-        <buttons-primary-button-big>Все двери</buttons-primary-button-big>
+        <buttons-primary-button-big>Сбросить</buttons-primary-button-big>
       </h3>
     </div>
   </div>
