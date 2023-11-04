@@ -111,7 +111,14 @@ watch(shouldOpenModal, (newValue) => {
               </DialogTitle>
               <div class="mt-8 mb-8">
                 <div class="flex flex-col justify-center max-w-[80vw]">
-                  <p>Стоимость полотна: <h3 class="inline-block pb-2">{{ props.priceProps.leafPrice }}&nbsp;₽</h3></p>
+                  <p>
+                    Стоимость полотна:
+                    <h3 v-if="props.doorVariantData.sale" class="inline-block pb-2">
+                      <span class="text-gray-500 line-through">{{ props.doorVariantData.leaf_price }}&nbsp;₽</span>&nbsp;&nbsp;
+                      <span class="text-black">{{ props.priceProps.leafPrice }}&nbsp;₽</span>
+                    </h3>
+                    <h3 v-else class="inline-block pb-2 text-black">{{ props.priceProps.leafPrice }}&nbsp;₽</h3>
+                  </p>
                   <p>Первое обрамление двери: <h3 class=" inline-block">{{ casingName }}</h3>
                     <h3 class="md:pl-4 pb-4 md:inline-block">{{ priceProps.casingPrice }} ₽</h3></p>
                   <p>Второе обрамление двери:

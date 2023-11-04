@@ -165,7 +165,6 @@ const isAddressesLoaded = computed(() => addresses.value.addresses)
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: rgb(128, 128, 128) 1px solid;
   box-shadow: rgb(128 128 128 / 50%) 0px 0px 10px;
 }
 </style>
