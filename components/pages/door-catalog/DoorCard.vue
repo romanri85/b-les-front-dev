@@ -26,7 +26,7 @@ const imageDiv = ref(null)
       v-if="props.doorVariant.sale"
       class="absolute top-0 left-4  p-1"
     >
-      <h4 class="font-light">
+      <h4 class="font-light relative z-10">
         Акция
       </h4>
     </div>
