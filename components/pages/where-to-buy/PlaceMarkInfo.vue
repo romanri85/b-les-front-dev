@@ -112,7 +112,7 @@ function closeDoorsInside() {
       </p>
       </div>
       <a href="tel:{{props.address.phone}}" class="block font-sans pb-2">{{ props.address.phone }}</a>
-      <a href="mailto:{{props.address.email}}" class="block font-sans">{{ props.address.email }}</a>
+      <a v-if="props.address.isEmailShown" href="mailto:{{props.address.email}}" class="block font-sans">{{ props.address.email }}</a>
       <div>
         <Disclosure>
           <DisclosureButton class="pt-4">
