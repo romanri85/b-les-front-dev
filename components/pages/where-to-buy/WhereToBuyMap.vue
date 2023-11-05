@@ -284,8 +284,8 @@ function filterChange(newFilter) {
       @touchmove.stop
       @filter-change="filterChange"
     />
-    <div class="lg:pl-10 lg:w-[50%] w-full h-[100vh] overflow-auto">
-      <div id="placemark-list" class="lg:mt-0 relative w-full">
+    <div class="lg:pl-10 lg:w-[50%] w-full ">
+      <div id="placemark-list" class="lg:mt-0 pb-8 relative w-full">
         <PlaceMarkInfo
           v-for="address in visibleAddressData" v-if="visibleAddressData.length" :key="address.id"
           :address="address" @center-change="changeMapCenterAndZoom"
