@@ -211,7 +211,7 @@ function handleChooseTag(tag) {
           :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`"
         >
           <nuxt-img
-            :src="image.image" class="object-cover cursor-pointer" :alt="image.project_name"
+            :src="image.image" placeholder class="object-cover cursor-pointer" :alt="image.project_name"
             @click="triggerModal(image)"
           />
         </div>
@@ -232,5 +232,8 @@ function handleChooseTag(tag) {
 </template>
 
 <style scoped>
-/* Add to your scoped styles */
+.image-wrapper {
+  background-image: linear-gradient(to bottom, #ffffff, #cccccc);
+  background-size: cover;
+}
 </style>

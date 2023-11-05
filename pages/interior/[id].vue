@@ -127,5 +127,8 @@ const layoutImages = computed(() => {
 </template>
 
 <style scoped>
-/* Add to your scoped styles */
+.image-wrapper {
+  background-image: linear-gradient(to bottom, #ffffff, #cccccc);
+  background-size: cover;
+}
 </style>

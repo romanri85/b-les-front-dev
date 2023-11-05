@@ -148,13 +148,14 @@ watch([() => props.systems, () => props.activeSystemId], ([systems, activeSystem
                     {{ system.name }}
                   </h2>
                   <div
-                      class="relative cursor-pointer"
+                      class="relative "
+                      :class="system.name === 'Оформление проёма без двери' ? '' : 'cursor-pointer'"
                       v-on:click="() => toggleActiveSystem(system.id)"
                   >
 
                     <nuxt-img placeholder :src="system.image" class="w-full h-auto object-contain" :alt="system.name" />
                     <video
-                        v-if="hoveredSystem === system.id"
+                        v-if="hoveredSystem === system.id && (system.name !== 'Оформление проёма без двери')"
                         :id="`video-${system.id}`"
                         :src="system.video"
                         autoplay
@@ -163,7 +164,7 @@ watch([() => props.systems, () => props.activeSystemId], ([systems, activeSystem
                         muted
                         class="absolute top-0 left-0 w-full h-auto"
                     ></video>
-                    <div class="symbol-container">
+                    <div v-if="system.name !== 'Оформление проёма без двери'" class="symbol-container">
                       <BasePlaySymbol v-if="!playingStates[system.id]" />
                       <BasePauseSymbol v-else />
                     </div>

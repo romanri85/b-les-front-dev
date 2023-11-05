@@ -57,7 +57,7 @@ function sortHardware(sorting: string) {
       <MenuItems class="mt-10 absolute z-10">
         <div
           v-for="sorting in sortFilters"
-          class="whitespace-nowrap  shadow-sm shadow-darkGrey bg-white p-4 [&>a]:p-2 min-w-[320px]"
+          class="whitespace-nowrap  shadow-md shadow-primaryDark bg-white p-4 [&>a]:p-2 min-w-[320px]"
         >
           <MenuItem v-slot="{ active }" class="cursor-pointer" @click="sortHardware(sorting.value)">
             <h6 :class="{ &quot;font-regular&quot;: active }">

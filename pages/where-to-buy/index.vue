@@ -128,7 +128,7 @@ const isAddressesLoaded = computed(() => addresses.value.addresses)
     <title>Брянский лес - Где купить</title>
   </Head>
   <div class=" relative z-10 main-container">
-    <div v-if="showConfirmation && !storageCityStore.city" class="confirmation-button shadow bg-white">
+    <div v-if="showConfirmation && !storageCityStore.city" class="confirmation-button shadow-md shadow-primaryDark bg-white">
 
       <span class="font-sans">Ваш город {{ city.name || 'Москва' }}?</span>
       <button class="font-sans underline-static" @click="confirmCity(true)">Да</button>
@@ -165,7 +165,6 @@ const isAddressesLoaded = computed(() => addresses.value.addresses)
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: rgb(128 128 128 / 50%) 0px 0px 10px;
 }
 </style>
 

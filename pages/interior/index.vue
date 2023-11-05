@@ -57,7 +57,7 @@ function onChangePage(page) {
             <NuxtLink :to="`/interior/${project.id}`">
               <nuxt-img
                   placeholder :src="project.first_image.image" :alt="project.name"
-                  class="w-full h-full transition-all duration-500 ease-in-out  brightness-75  lg:brightness-100 lg:group-hover:brightness-50 object-cover"
+                  class="image w-full h-full transition-all duration-500 ease-in-out  brightness-75  lg:brightness-100 lg:group-hover:brightness-50 object-cover"
               />
               <div
                   class="absolute inset-0 flex items-center justify-center lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 ease-in-out"
@@ -96,5 +96,8 @@ function onChangePage(page) {
 </template>
 
 <style scoped>
-
+.image {
+  background-image: linear-gradient(to bottom, #ffffff, #cccccc);
+  background-size: cover;
+}
 </style>

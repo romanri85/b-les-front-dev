@@ -437,4 +437,8 @@ function onChangePage(page) {
   }
 
 }
+.image-wrapper {
+  background-image: linear-gradient(to bottom, #ffffff, #cccccc);
+  background-size: cover;
+}
 </style>

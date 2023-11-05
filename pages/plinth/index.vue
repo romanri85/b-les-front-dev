@@ -6,11 +6,22 @@ const heroName = 'plinthHeader'
 const heroDescription = ''
 const heroImage = '/plinth/plinth-bg.webp'
 const plinths = ref([])
+const tags = ref([])
 
 async function fetchPlinths() {
   plinths.value = await $fetch(`${baseURL}/api/product/plinth`)
 }
+
+async function getTags() {
+  tags.value = await $fetch(`${baseURL}/api/projects/tags`)
+}
+
 await fetchPlinths()
+await getTags()
+
+const plinthTag = tags.value.find((tag) => tag.name === 'плинтус')
+
+
 </script>
 
 <template>
@@ -26,7 +37,8 @@ await fetchPlinths()
     </h5>
   </article>
   <!-- <pre>{{plinths}}</pre> -->
-  <div v-if="plinths" class="main-container xl:mx-[228px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-5 gap-x-4 lg:pb-32 pb-20">
+  <div class=" lg:pb-32 pb-20 main-container">
+  <div v-if="plinths" class=" xl:mx-[228px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-5 gap-x-4">
     <div v-for="plinth in plinths" :key="plinth.name" class="min-w-80">
       <div class="relative group">
         <div class="w-full h-60">
@@ -45,7 +57,18 @@ await fetchPlinths()
         </p>
       </div>
     </div>
+
   </div>
+    <div class="pt-4">
+      <nuxt-link :to="`/search-tags?tags=${plinthTag.id}`" class="text-primaryDark  text-lg">
+
+        <h2 class="underline-static inline-block">
+          Фото плинтуса в интерьере
+        </h2>
+      </nuxt-link>
+    </div>
+  </div>
+
 </template>
 
 <style scoped>
