@@ -60,7 +60,7 @@ function sortHardware(sorting: string) {
           class="whitespace-nowrap  shadow-md shadow-primaryDark bg-white p-4 [&>a]:p-2 min-w-[320px]"
         >
           <MenuItem v-slot="{ active }" class="cursor-pointer" @click="sortHardware(sorting.value)">
-            <h6 :class="{ &quot;font-regular&quot;: active }">
+            <h6 :class="{ 'font-regular': active }">
               {{ sorting.name }}
             </h6>
           </MenuItem>
