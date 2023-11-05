@@ -62,7 +62,7 @@ const plinthTag = tags.value.find((tag) => tag.name === 'плинтус')
     <div class="pt-4">
       <nuxt-link :to="`/search-tags?tags=${plinthTag.id}`" class="text-primaryDark  text-lg">
 
-        <h2 class="underline-static inline-block">
+        <h2 class="md:underline-static underline inline-block">
           Фото плинтуса в интерьере
         </h2>
       </nuxt-link>
