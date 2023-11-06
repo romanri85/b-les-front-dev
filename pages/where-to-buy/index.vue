@@ -71,12 +71,11 @@ async function getAddresses() {
 }
 
 async function getCities() {
+  cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
   if (!storageCityStore.value.city || !storageCityStore.value.geo) {
-
     // geo.value = Cookies.get('geolocation') || {country: 'Russia', city: 'Moscow', region: 'Moscow'}
-    geo.value = {country: null, city: null, region: null}
+    // geo.value = {country: null, city: null, region: null}
     // geo.value = typeof geo.value === 'object' ? geo.value : JSON.parse(geo.value)
-    cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
     geoArray.value = cities.value.map(city => city.ip_check_names).flat();
     if (geoArray.value.includes(geo.value.region)) {
       city.value = findCity(cities.value, geo.value.region)
@@ -108,17 +107,18 @@ async function getCities() {
 }
 
 onMounted(async () => {
-  if (!storageCityStore.value.city) {
-    await getCities()
-    await getAddresses()
-  } else {
-    city.value = storageCityStore.value.city
-    geo.value = storageCityStore.value.geo
-    isCityFound.value = true
-    await getCities()
-    await getAddresses()
-
-  }
+  await getCities()
+  await getAddresses()
+  // if (!storageCityStore.value.city) {
+  //
+  // } else {
+  //   city.value = storageCityStore.value.city
+  //   geo.value = storageCityStore.value.geo
+  //   isCityFound.value = true
+  //   await getCities()
+  //   await getAddresses()
+  //
+  // }
   // await getCities()
   // await getAddresses()
 })
@@ -141,7 +141,7 @@ function openCityModal() {
 }
 
 const isAddressesLoaded = computed(() => addresses.value.addresses)
-
+console.log(cities.value, 'cities')
 </script>
 
 <template>
