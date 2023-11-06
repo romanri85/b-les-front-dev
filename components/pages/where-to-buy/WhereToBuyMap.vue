@@ -4,7 +4,7 @@ import PlaceMarkInfo from '~/components/pages/where-to-buy/PlaceMarkInfo.vue'
 import FilterBar from '~/components/pages/where-to-buy/FilterBar.vue'
 import { findCity, generateAddressData } from '~/utils/helpers.js'
 import { getRoute } from '~/services/getRouteService.js'
-import {useCityStore} from "#~/stores/cityStore";
+import {useCityStore} from "~/stores/cityStore";
 
 const cityStore = useCityStore()
 
