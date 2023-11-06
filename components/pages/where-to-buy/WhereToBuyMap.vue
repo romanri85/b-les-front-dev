@@ -4,6 +4,9 @@ import PlaceMarkInfo from '~/components/pages/where-to-buy/PlaceMarkInfo.vue'
 import FilterBar from '~/components/pages/where-to-buy/FilterBar.vue'
 import { findCity, generateAddressData } from '~/utils/helpers.js'
 import { getRoute } from '~/services/getRouteService.js'
+import {useCityStore} from "#~/stores/cityStore";
+
+const cityStore = useCityStore()
 
 const props = defineProps({
   city: Object,
@@ -21,8 +24,8 @@ const filter = ref('all')
 
 const addresses = ref({})
 
-const geo = ref({})
-const city = ref({})
+const geo = ref(cityStore.geo)
+const city = ref(cityStore.defaultCity)
 
 watch(props, (newProps) => {
   if (newProps.city.latitude && newProps.city.longitude) {

@@ -17,7 +17,11 @@ const cityStore = useCityStore()
 const city = ref({})
 const cities = ref([])
 const addresses = ref({})
-const geo = ref({})
+const geo = ref({
+  country: 'Russia',
+  city: 'Moscow',
+  region: 'Moscow',
+})
 const shouldOpenModal = ref(0)
 const showConfirmation = ref(true);
 
