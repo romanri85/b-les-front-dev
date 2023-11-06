@@ -1,7 +1,11 @@
 import { defineStore } from 'pinia'
 export const useCityStore = defineStore('cityStore', () => {
     const city = ref({})
-    const geo = ref({})
+    const geo = ref({
+        country: 'Russia',
+        region: 'Moscow',
+        city: 'Moscow',
+    })
     const defaultCity =  {
         "id": 1,
         "name": "Москва",

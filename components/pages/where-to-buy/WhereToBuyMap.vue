@@ -243,7 +243,7 @@ async function updatePlacemarks() {
           })
         }
       }
-    }, 100) // You might need to adjust this delay value
+    }, 250) // You might need to adjust this delay value
   })
 }
 
