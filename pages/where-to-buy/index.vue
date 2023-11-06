@@ -1,14 +1,13 @@
 <script setup lang="js">
-import Cookies from 'js-cookie'
 import {onMounted} from 'vue'
 import WhereToBuyMap from '~/components/pages/where-to-buy/WhereToBuyMap.vue'
 import CityDialog from '~/components/pop-ups/CityDialog.vue'
 import {baseURL} from '~/config'
 import {findCity} from '~/utils/helpers'
 import {useCityStore} from "~/stores/cityStore";
-import { useStorage } from '@vueuse/core';
+import {useStorage} from '@vueuse/core';
 
-const storageCityStore = useStorage('storage-city-store', { city: null, geo: null, isCityFound:false });
+const storageCityStore = useStorage('storage-city-store', {city: null, geo: null, isCityFound: false});
 
 
 definePageMeta({layout: 'dark-header'})
@@ -27,6 +26,9 @@ const showConfirmation = ref(true);
 
 const isCityLoaded = computed(() => Object.keys(city.value).length > 0)
 const isCityFound = ref(true)
+
+const geoArray = ref([])
+
 
 // const browserLang = navigator.language || navigator.userLanguage;
 // const isRussian = browserLang.startsWith('ru');
@@ -59,6 +61,7 @@ function confirmCity(confirm) {
     openCityModal();
   }
 }
+
 async function getAddresses() {
   try {
     addresses.value = await $fetch(`${baseURL}/api/shops/`)
@@ -68,19 +71,27 @@ async function getAddresses() {
 }
 
 async function getCities() {
-  if (!storageCityStore.value.city) {
+  if (!storageCityStore.value.city || !storageCityStore.value.geo) {
 
-  geo.value = Cookies.get('geolocation') || {country: 'Russia', city: 'Moscow', region: 'Moscow'}
-  geo.value = typeof geo.value === 'object' ? geo.value : JSON.parse(geo.value)
-  cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
-  // cities.value = cities.value.cities
-  city.value = findCity(cities.value, geo.value.region)
-  isCityFound.value = city.value.isFound
-  city.value = city.value.city
-    // cityStore.city = city.value
-    // cityStore.geo = geo.value
-  }
-  else {
+    // geo.value = Cookies.get('geolocation') || {country: 'Russia', city: 'Moscow', region: 'Moscow'}
+    geo.value = {country: null, city: null, region: null}
+    // geo.value = typeof geo.value === 'object' ? geo.value : JSON.parse(geo.value)
+    cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
+    geoArray.value = cities.value.map(city => city.ip_check_names).flat();
+    if (geoArray.value.includes(geo.value.region)) {
+      city.value = findCity(cities.value, geo.value.region)
+      isCityFound.value = city.value.isFound
+      city.value = city.value.city
+    } else {
+      geo.value = {country: 'Russia', city: 'Moscow', region: 'Moscow'}
+      city.value = findCity(cities.value, geo.value.region)
+      isCityFound.value = city.value.isFound
+      city.value = city.value.city
+
+    }
+    console.log(geo.value, 'geo after find city')
+
+  } else {
     cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
     city.value = storageCityStore.value.city
     geo.value = storageCityStore.value.geo
@@ -90,11 +101,10 @@ async function getCities() {
 }
 
 onMounted(async () => {
-  if(!storageCityStore.value.city) {
+  if (!storageCityStore.value.city) {
     await getCities()
     await getAddresses()
-  }
-  else {
+  } else {
     city.value = storageCityStore.value.city
     geo.value = storageCityStore.value.geo
     isCityFound.value = true
@@ -122,6 +132,7 @@ function changeCity(newCityId) {
 function openCityModal() {
   shouldOpenModal.value = shouldOpenModal.value + 1
 }
+
 const isAddressesLoaded = computed(() => addresses.value.addresses)
 
 </script>
@@ -132,7 +143,8 @@ const isAddressesLoaded = computed(() => addresses.value.addresses)
     <title>Брянский лес - Где купить</title>
   </Head>
   <div class=" relative z-10 main-container">
-    <div v-if="showConfirmation && !storageCityStore.city" class="confirmation-button shadow-md shadow-primaryDark bg-white">
+    <div v-if="showConfirmation && !storageCityStore.city"
+         class="confirmation-button shadow-md shadow-primaryDark bg-white">
 
       <span class="font-sans">Ваш город {{ city.name || 'Москва' }}?</span>
       <button class="font-sans underline-static" @click="confirmCity(true)">Да</button>
