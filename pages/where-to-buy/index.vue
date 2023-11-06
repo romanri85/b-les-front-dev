@@ -4,37 +4,27 @@ import WhereToBuyMap from '~/components/pages/where-to-buy/WhereToBuyMap.vue'
 import CityDialog from '~/components/pop-ups/CityDialog.vue'
 import {baseURL} from '~/config'
 import {findCity} from '~/utils/helpers'
-import {useCityStore} from "~/stores/cityStore";
 import {useStorage} from '@vueuse/core';
 
-const storageCityStore = useStorage('storage-city-store', {city: null, geo: null, isCityFound: false});
-
+const storageCityStore = useStorage('storage-city-store', {"country":"Russia","city":"Moscow","region":"Moscow"});
 
 definePageMeta({layout: 'dark-header'})
 
-const cityStore = useCityStore()
 const city = ref({})
 const cities = ref([])
 const addresses = ref({})
-const geo = ref({
-  country: 'Russia',
-  city: 'Moscow',
-  region: 'Moscow',
-})
+const geo = ref(storageCityStore.value.geo || {"country":"Russia","city":"Moscow","region":"Moscow"})
+const region = ref('Moscow')
 const shouldOpenModal = ref(0)
 const showConfirmation = ref(true);
 
 const isCityLoaded = computed(() => Object.keys(city.value).length > 0)
-const isCityFound = ref(true)
 
 const geoArray = ref([])
 
 
-// const browserLang = navigator.language || navigator.userLanguage;
-// const isRussian = browserLang.startsWith('ru');
-// const langParam = isRussian ? 'ru_RU' : 'en_US';
+
 const langParam = 'ru_RU'
-//
 if (typeof ymaps === 'undefined') {
   useHead({
     script: [
@@ -49,13 +39,9 @@ if (typeof ymaps === 'undefined') {
 function confirmCity(confirm) {
   showConfirmation.value = false;
   if (confirm) {
-    cityStore.city = city.value
-    cityStore.geo = geo.value
-    isCityFound.value = true
-    storageCityStore.value.city = city.value
-    storageCityStore.value.geo = geo.value
+console.log(geo.value, 'geo before find city')
     storageCityStore.value.isCityFound = true
-    // Cookies.set('geolocation', JSON.stringify(geo.value), {expires: 365})
+
   }
   if (!confirm) {
     openCityModal();
@@ -72,63 +58,37 @@ async function getAddresses() {
 
 async function getCities() {
   cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
-  if (!storageCityStore.value.city || !storageCityStore.value.geo) {
-    // geo.value = Cookies.get('geolocation') || {country: 'Russia', city: 'Moscow', region: 'Moscow'}
-    // geo.value = {country: null, city: null, region: null}
-    // geo.value = typeof geo.value === 'object' ? geo.value : JSON.parse(geo.value)
+
     geoArray.value = cities.value.map(city => city.ip_check_names).flat();
     if (geoArray.value.includes(geo.value.region)) {
       city.value = findCity(cities.value, geo.value.region)
-      isCityFound.value = city.value.isFound
       city.value = city.value.city
     } else {
-      geo.value = {country: 'Russia', city: 'Moscow', region: 'Moscow'}
-      city.value = findCity(cities.value, geo.value.region)
-      isCityFound.value = city.value.isFound
+      city.value = findCity(cities.value, 'Moscow')
       city.value = city.value.city
 
     }
-    console.log(geo.value, 'geo after find city')
 
-  } else {
-    if (geoArray.value.includes(geo.value.region)) {
-      city.value = findCity(cities.value, geo.value.region)
-      isCityFound.value = city.value.isFound
-      city.value = city.value.city
-    } else {
-      geo.value = {country: 'Russia', city: 'Moscow', region: 'Moscow'}
-      city.value = findCity(cities.value, geo.value.region)
-      isCityFound.value = city.value.isFound
-      city.value = city.value.city
 
-    }
-  }
 
 }
 
 onMounted(async () => {
   await getCities()
   await getAddresses()
-  // if (!storageCityStore.value.city) {
-  //
-  // } else {
-  //   city.value = storageCityStore.value.city
-  //   geo.value = storageCityStore.value.geo
-  //   isCityFound.value = true
-  //   await getCities()
-  //   await getAddresses()
-  //
-  // }
-  // await getCities()
-  // await getAddresses()
+
+
 })
 
 function changeCity(newCityId) {
-  city.value = cities.value.find(city => city.id === newCityId)
+  const cityName = cities.value.find(city => city.id === newCityId)
 
-  cityStore.city = city.value
-  cityStore.geo = geo.value
-  isCityFound.value = true
+  region.value = cityName.ip_check_names[0]
+  city.value = findCity(cities.value, region.value)
+  city.value = city.value.city
+  geo.value.region = region.value
+
+
   storageCityStore.value.city = city.value
   storageCityStore.value.geo = geo.value
   storageCityStore.value.isCityFound = true
@@ -141,16 +101,18 @@ function openCityModal() {
 }
 
 const isAddressesLoaded = computed(() => addresses.value.addresses)
-console.log(cities.value, 'cities')
+
 </script>
 
 <template>
 
   <Head>
     <title>Брянский лес - Где купить</title>
+    <pre>city{{city}}</pre>
+    <pre>storage value region{{geo}}</pre>
   </Head>
   <div class=" relative z-10 main-container">
-    <div v-if="showConfirmation && !storageCityStore.city"
+    <div v-if="showConfirmation && !storageCityStore.isCityFound"
          class="confirmation-button shadow-md shadow-primaryDark bg-white">
 
       <span class="font-sans">Ваш город {{ city.name || 'Москва' }}?</span>
