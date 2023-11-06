@@ -92,10 +92,17 @@ async function getCities() {
     console.log(geo.value, 'geo after find city')
 
   } else {
-    cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
-    city.value = storageCityStore.value.city
-    geo.value = storageCityStore.value.geo
-    isCityFound.value = true
+    if (geoArray.value.includes(geo.value.region)) {
+      city.value = findCity(cities.value, geo.value.region)
+      isCityFound.value = city.value.isFound
+      city.value = city.value.city
+    } else {
+      geo.value = {country: 'Russia', city: 'Moscow', region: 'Moscow'}
+      city.value = findCity(cities.value, geo.value.region)
+      isCityFound.value = city.value.isFound
+      city.value = city.value.city
+
+    }
   }
 
 }
