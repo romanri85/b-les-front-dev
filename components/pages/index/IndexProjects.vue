@@ -29,7 +29,7 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
     <!--            </div> -->
   </div>
 
-  <div class="relative lg:ml-0 md:ml-8 ml-5">
+  <div class="relative ">
     <Swiper
       :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation, SwiperPagination]"
       :breakpoints="{
@@ -43,7 +43,7 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
           slidesPerGroup: 1,
         },
         1440: {
-          slidesPerView: 4,
+          slidesPerView: 3,
           slidesPerGroup: 1,
         },
       }"
@@ -60,7 +60,7 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
 
           <nuxt-img
             loading="lazy" placeholder quality="20"
-            class="w-[480px] lg:h-96 md:h-60 h-48 object-cover cursor-pointer"
+            class="w-[480px] lg:w-[580px] lg:h-96 md:h-60 h-48 object-cover cursor-pointer"
             :src="project.first_image.image"
             :alt="project.name"
           />
@@ -70,10 +70,10 @@ projects.value = await $fetch(`${baseURL}/api/projects/projects-without-paginati
       <!--    </div> -->
 
       <arrows-arrow-previous-black-and-white
-        class="prev-slide-button absolute z-10 left-10 top-1/2 -translate-y-1/2 hidden lg:block"
+        class="prev-slide-button absolute z-10 left-10 top-1/2 -translate-y-1/2 hidden mdLg:block"
       />
       <arrows-arrow-next-black-and-white
-        class="next-slide-button absolute z-10 right-10 top-1/2 -translate-y-1/2  hidden lg:block"
+        class="next-slide-button absolute z-10 right-10 top-1/2 -translate-y-1/2  hidden mdLg:block"
       />
     </Swiper>
   </div>

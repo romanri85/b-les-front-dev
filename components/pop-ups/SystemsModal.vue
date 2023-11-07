@@ -131,14 +131,12 @@ watch([() => props.systems, () => props.activeSystemId], ([systems, activeSystem
               <!--              > -->
               <!--                Выберите город -->
               <!--              </DialogTitle> -->
-              <div class="">
-                <button
-                  type="button"
-                  class="inline-flex justify-center border border-transparent bg-primaryDark px-4 py-2 text-xs font-mono  text-white  focus:outline-none "
+              <div class="text-right">
+                <buttons-primary-button-big
                   @click="closeModal"
                 >
                   Закрыть
-                </button>
+                </buttons-primary-button-big>
               </div>
               <div class=" mb-8">
                 <div v-for="system in systems.sort(

@@ -67,6 +67,15 @@ function openModal() {
             <DialogPanel
               class="w-full   transform overflow-hidden  bg-white p-12 text-left align-middle shadow-xl transition-all"
             >
+              <div class=" text-right mt-12">
+                <div class="">
+                  <buttons-primary-button-big
+                      @click="closeModal"
+                  >
+                    Закрыть
+                  </buttons-primary-button-big>
+                </div>
+              </div>
               <DialogTitle
                 as="h3"
                 class="text-center pb-8"
@@ -106,15 +115,13 @@ function openModal() {
               </div>
               <!-- -->
 
-              <div class=" text-center mt-12">
+              <div class=" text-right mt-12">
                 <div class="">
-                  <button
-                      type="button"
-                      class="inline-flex justify-center border border-transparent bg-primaryDark px-4 py-2 text-xs font-mono  text-white  focus:outline-none "
+                  <buttons-primary-button-big
                       @click="closeModal"
                   >
                     Закрыть
-                  </button>
+                  </buttons-primary-button-big>
                 </div>
               </div>
             </DialogPanel>

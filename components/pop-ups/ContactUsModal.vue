@@ -128,13 +128,12 @@ function openModal() {
                 </div>
                 <div class="flex justify-end w-full pb-8">
                   <div class="ml-auto">
-                    <button
-                        type="button"
-                        class="inline-flex justify-center border border-transparent bg-primaryDark px-4 py-2 text-xs font-mono  text-white  focus:outline-none "
+                    <buttons-primary-button-big
+                        :class="isSubmitted ? 'text-white' : 'text-black'"
                         @click="closeModal"
                     >
                       Закрыть
-                    </button>
+                    </buttons-primary-button-big>
                   </div>
                 </div>
                 <div class="flex justify-center text-center md:w-[400px] md:h-[200px]" v-if="isSubmitted">

@@ -80,15 +80,14 @@ onMounted(() => {
                 <DialogPanel
                   class="w-full   transform overflow-hidden  bg-white p-8 text-left align-middle shadow-xl transition-all"
                 >
-                  <div class=" text-center md:text-right mb-12 lg:mb-0">
+                  <div class=" text-right md:text-right mb-12 lg:mb-0">
                     <div class="">
-                      <button
+                      <buttons-primary-button-big
                           type="button"
-                          class="inline-flex justify-center border border-transparent bg-primaryDark px-4 py-2 text-xs font-mono  text-white  focus:outline-none "
                           @click="closeModal"
                       >
                         Закрыть
-                      </button>
+                      </buttons-primary-button-big>
                     </div>
                   </div>
                   <DialogTitle

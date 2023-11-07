@@ -77,9 +77,9 @@ function openModal() {
               </div>
 
               <div class="text-center mt-4">
-                <buttons-primary-button-small @click="closeModal">
+                <buttons-primary-button-big @click="closeModal">
                   <h3>Закрыть</h3>
-                </buttons-primary-button-small>
+                </buttons-primary-button-big>
               </div>
             </DialogPanel>
           </TransitionChild>

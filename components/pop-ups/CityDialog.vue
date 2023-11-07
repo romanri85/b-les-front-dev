@@ -85,14 +85,12 @@ function changeCity(id) {
                 <!--                <city-choice-autocomplete class="h-auto" :cities="props.cities" :city="props.city"/> -->
               </div>
 
-              <div class="">
-                <button
-                  type="button"
-                  class="inline-flex justify-center border border-transparent bg-primaryDark px-4 py-2 text-xs font-mono  text-white  focus:outline-none "
+              <div class="text-right">
+                <buttons-primary-button-big
                   @click="closeModal"
                 >
                   Закрыть
-                </button>
+                </buttons-primary-button-big>
               </div>
             </DialogPanel>
           </TransitionChild>
