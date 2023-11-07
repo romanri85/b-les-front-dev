@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useIntersectionObserver, useInterval } from '@vueuse/core'
-import BaseHero from '~/components/base/BaseHero.vue'
+import {useIntersectionObserver, useInterval} from '@vueuse/core'
+import FactoryVideoModal from "~/components/pop-ups/FactoryVideoModal.vue";
 
 const target = ref(null)
 const targetIsVisible = ref(false)
@@ -9,15 +9,17 @@ const employeeReachedTarget = ref(false)
 const yearsReachedTarget = ref(false)
 const shopsReachedTarget = ref(false)
 
-const { counter: employeeCounter, pause: pauseEmployees, resume: resumeEmployees } = useInterval(5, { controls: true, immediate: false })
-const { counter: yearsCounter, pause: pauseYears, resume: resumeYears } = useInterval(30, { controls: true, immediate: false })
-const { counter: shopsCounter, pause: pauseShops, resume: resumeShops } = useInterval(100, { controls: true, immediate: false })
+const {counter: employeeCounter, pause: pauseEmployees, resume: resumeEmployees} = useInterval(5, {controls: true, immediate: false})
+const {counter: yearsCounter, pause: pauseYears, resume: resumeYears} = useInterval(30, {controls: true, immediate: false})
+const {counter: shopsCounter, pause: pauseShops, resume: resumeShops} = useInterval(100, {controls: true, immediate: false})
 
-const { stop } = useIntersectionObserver(
-  target,
-  ([{ isIntersecting }]) => {
-    targetIsVisible.value = isIntersecting
-  },
+const shouldOpenModal = ref(0)
+
+const {stop} = useIntersectionObserver(
+    target,
+    ([{isIntersecting}]) => {
+      targetIsVisible.value = isIntersecting
+    },
 )
 
 watch(targetIsVisible, (isVisible) => {
@@ -52,6 +54,10 @@ watch(shopsCounter, (newCounterValue) => {
   }
 })
 
+function openFactoryVideoModal() {
+  shouldOpenModal.value = shouldOpenModal.value + 1
+}
+
 const heroName = 'aboutUs'
 const heroDescription = ''
 const heroImage = '/aboutUs/aboutUs-bg.webp'
@@ -61,7 +67,7 @@ const heroImage = '/aboutUs/aboutUs-bg.webp'
   <Head>
     <title>Брянский лес - О нас</title>
   </Head>
-  <BaseHeroWithoutDescription :hero-name="heroName" :hero-image="heroImage" />
+  <BaseHeroWithoutDescription :hero-name="heroName" :hero-image="heroImage"/>
   <section class="main-container ">
     <div class="main-container flex md:flex-row flex-col  justify-between  gap-x-16 lg:gap-x-24">
       <div class="flex flex-col mt-12 md:mt-0 justify-center md:w-1/2 gap-y-4  lg:gap-y-10">
@@ -73,12 +79,14 @@ const heroImage = '/aboutUs/aboutUs-bg.webp'
         </h5>
       </div>
       <div class="py-20 lg:py-28 md:w-1/2">
-        <img class="h-[345px] lg:h-[665px] object-cover w-full" src="/aboutUs/about-us-2.webp" alt="aboutUs-1" />
+        <img class="h-[345px] lg:h-[665px] object-cover w-full" src="/aboutUs/about-us-2.webp" alt="aboutUs-1"/>
       </div>
     </div>
   </section>
+
   <section class="main-container">
-    <div ref="target" class="flex flex-col md:flex-row gap-8 md:gap-0 items-center justify-between px-[60px] md:px-[105px] lg:px-[270px]">
+    <div ref="target"
+         class="flex flex-col md:flex-row gap-8 md:gap-0 items-center justify-between px-[60px] md:px-[105px] lg:px-[270px]">
       <div class="flex flex-col items-center md:items-start justify-between">
         <h1>{{ yearsCounter }} </h1>
         <h5>{{ $t('yearsOnMarketNumber') }}</h5>
@@ -97,7 +105,7 @@ const heroImage = '/aboutUs/aboutUs-bg.webp'
   <section class="main-container">
     <div class="main-container flex md:flex-row flex-col-reverse justify-between gap-x-16 lg:gap-x-24">
       <div class="py-24 md:py-20 lg:py-28 md:w-1/2 flex items-center">
-        <img class="h-[345px] lg:h-[665px] object-cover w-full" src="/aboutUs/about-us-3.webp" alt="aboutUs-1" />
+        <img class="h-[345px] lg:h-[665px] object-cover w-full" src="/aboutUs/about-us-3.webp" alt="aboutUs-1"/>
       </div>
       <div class="flex flex-col pt-24 md:pt-0 justify-center md:w-1/2 gap-y-4 lg:gap-y-10">
         <h2> {{ $t('woodWorkingTechnologiesTitle') }}</h2>
@@ -109,8 +117,39 @@ const heroImage = '/aboutUs/aboutUs-bg.webp'
       </div>
     </div>
   </section>
+  <section class="main-container"><h1 class="text-center">3 года гарантии</h1></section>
+  <section class="main-container ">
+    <div class="main-container flex md:flex-row flex-col  justify-between  gap-x-16 lg:gap-x-24">
+      <div class="flex flex-col mt-12 md:mt-0 justify-center md:w-1/2 gap-y-4  lg:gap-y-10">
+        <h2>Мы уверены в качестве своего продукта</h2>
+        <h5 class="">
+          {{
+            $t('naturalMaterialsBeautyContent')
+          }}
+        </h5>
+      </div>
+      <div class="relative cursor-pointer py-20 lg:py-28 md:w-1/2">
+        <img @click="openFactoryVideoModal" class=" px-8 h-[345px] lg:h-[665px] object-contain w-full bg-primaryDark"
+             src="/logo-white.svg" alt="aboutUs-1"/>
+        <div class=" absolute top-2/3 text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-white"
+             @click="openFactoryVideoModal">
+
+          <BasePlaySymbol
+
+              class="play  h-auto "/>
+        </div>
+      </div>
+      <FactoryVideoModal :shouldOpenModal="shouldOpenModal"/>
+    </div>
+  </section>
 </template>
 
 <style scoped>
+.play {
+  border-color: white!important;
+  min-width: 30px;
+  max-width: 60px;
+  width: calc(6vw);
 
+}
 </style>
