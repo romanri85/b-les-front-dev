@@ -67,8 +67,8 @@ function openModal() {
             <DialogPanel
               class="w-full   transform overflow-hidden  bg-white p-12 text-left align-middle shadow-xl transition-all"
             >
-              <div class=" text-right mt-12">
-                <div class="">
+              <div class="">
+                <div class="text-right pb-12">
                   <buttons-primary-button-big
                       @click="closeModal"
                   >
