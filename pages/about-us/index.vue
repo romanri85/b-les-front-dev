@@ -123,9 +123,8 @@ const heroImage = '/aboutUs/aboutUs-bg.webp'
       <div class="flex flex-col mt-12 md:mt-0 justify-center md:w-1/2 gap-y-4  lg:gap-y-10">
         <h2>Мы уверены в качестве своего продукта</h2>
         <h5 class="">
-          {{
-            $t('naturalMaterialsBeautyContent')
-          }}
+          Высокие стандарты качества и контроль на всех этапах производства позволяют нам давать 3-х летнюю гарантию на
+          двери из массива дуба и бука.
         </h5>
       </div>
       <div class="relative cursor-pointer py-20 lg:py-28 md:w-1/2">
