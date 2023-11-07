@@ -108,8 +108,6 @@ const isAddressesLoaded = computed(() => addresses.value.addresses)
 
   <Head>
     <title>Брянский лес - Где купить</title>
-    <pre>city{{city}}</pre>
-    <pre>storage value region{{geo}}</pre>
   </Head>
   <div class=" relative z-10 main-container">
     <div v-if="showConfirmation && !storageCityStore.isCityFound"
