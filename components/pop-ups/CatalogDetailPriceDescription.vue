@@ -282,6 +282,9 @@ watch(shouldOpenModal, (newValue) => {
   opacity: 25%;
 }
 
+*{
+  outline: none!important;
+}
 
 .selected {
   border-bottom: 2px solid black !important;
