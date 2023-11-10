@@ -1,7 +1,7 @@
 <script setup>
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot,} from '@headlessui/vue'
 import {ref, toRefs, watch} from 'vue'
-import{baseURL} from "~/config";
+import {baseURL} from "~/config";
 
 const props = defineProps({
   isOpen: Boolean,
@@ -18,7 +18,13 @@ const props = defineProps({
 const colors = ref([])
 const platbands = ref([])
 
-const currentWidth = ref(300)
+const currentWidth = ref(0)
+
+const maxWidth = computed(() => {
+  // Map the platbands to their widths, then use Math.max to find the largest one
+  const maxPlatbandWidth = Math.max(...platbands.value.map(platband => platband.platband_width + platbands.value[0].platband_additional_width));
+  return maxPlatbandWidth;
+});
 
 const imageDiv = ref(null)
 
@@ -85,13 +91,34 @@ const currentPlatband = computed(() => {
     return undefined; // or handle this case as needed
   }
 
+  if (currentWidth.value <= (platbands.value[0].platband_additional_width + 20)) {
+    return undefined;
+  }
+
   // Now filter the platbands by the found material and find the one with the closest width
   const suitablePlatbands = platbands.value
       .filter(platband => platband.material === currentMaterial.value)
       .sort((a, b) => a.platband_width - b.platband_width);
 
   // Find the platband with the smallest platband_width that is greater than or equal to currentWidth
-  return suitablePlatbands.find(platband => platband.platband_width >= currentWidth.value);
+  return suitablePlatbands.find(platband => platband.platband_width + platband.platband_additional_width >= currentWidth.value);
+});
+
+const currentPlatbandPrice = computed(() => {
+  if (!currentPlatband.value) {
+    return undefined; // or handle this case as needed
+  }
+
+  // Find the color object that matches the ID provided in props.color
+  const currentColor = colors.value.find(color => color.id === props.color);
+
+  // Check if isOakEnamel is true or false for the current color
+  const isEnamelOak = currentColor ? currentColor.isOakEnamel : false;
+
+  // Determine the price based on isOakEnamel
+  return isEnamelOak
+      ? parseFloat(currentPlatband.value.enamel_oak_price) // If isOakEnamel is true, use enamel_oak_price
+      : parseFloat(currentPlatband.value.default_price); // If isOakEnamel is false, use default_price
 });
 
 
@@ -214,20 +241,21 @@ watch(shouldOpenModal, (newValue) => {
                     соответствует стоимости двери с обрамлением на одну сторону.
                   </h5>
                 </div>
-<!--<pre>{{platbands}}</pre>-->
-<!--<pre>{{colors}}</pre>-->
-<!--<pre>{{widthIntervals}}</pre>-->
+                <!--<pre>{{platbands}}</pre>-->
+                <!--<pre>{{colors}}</pre>-->
+                <!--<pre>{{widthIntervals}}</pre>-->
                 <FormKit
                     type="slider"
-                    label="Native Props"
                     v-model="currentWidth"
+                    :tooltip-format="(v) => `${v} мм`"
+                    :tooltip="true"
+                    help=""
                     min="0"
-                    max="1000"
-                    step="25"
-                    help="Feels natural"
+                    :max="maxWidth"
+                    step="1"
                 />
-<!--                <pre>{{currentMaterial}}</pre>-->
-                <pre>current platband{{currentPlatband}}</pre>
+                                <pre>{{currentPlatbandPrice}}</pre>
+                <pre>current platband{{ currentPlatband }}</pre>
               </div>
 
               <div class="text-right">
