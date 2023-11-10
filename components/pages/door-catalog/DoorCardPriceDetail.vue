@@ -1,6 +1,6 @@
 <script setup lang="js">
 import CatalogDetailPriceDescription from "~/components/pop-ups/CatalogDetailPriceDescription.vue";
-import BaseQuestionIcon from "~/components/base/icons/BaseQuestionIcon.vue";
+import BaseCalculatorIcon from "~/components/base/icons/BaseQuestionIcon.vue";
 
 const props = defineProps({
   doorVariantData: Object,
@@ -67,7 +67,7 @@ const sortedCasings = computed(() => {
 </script>
 
 <template>
-  <div class="flex">
+  <div @click="openPriceDescriptionModal" class="flex cursor-pointer">
     <div class="">
       <div>
         <h2 class="font-regular'">
@@ -87,8 +87,8 @@ const sortedCasings = computed(() => {
         </h2>
       </div>
     </div>
-    <div class="flex items-center" @click="openPriceDescriptionModal">
-      <BaseQuestionIcon class=" ml-6 cursor-pointer"/>
+    <div class="flex items-center" >
+      <BaseCalculatorIcon class=" ml-6 cursor-pointer"/>
 
       <catalog-detail-price-description :actualCasing="props.actualCasing || props.doorVariantData.casing_variant.casing" :product="props.product" :doorVariantData="props.doorVariantData"  :color="color" :sortedCasings="sortedCasings" :priceProps="priceProps" :should-open-modal="shouldOpenModal"/>
 <!--   <pre>{{props.casingVariants}}</pre>-->
