@@ -1,6 +1,6 @@
 <script setup lang="js">
 import CatalogDetailPriceDescription from "~/components/pop-ups/CatalogDetailPriceDescription.vue";
-import BaseCalculatorIcon from "~/components/base/icons/BaseQuestionIcon.vue";
+import BaseCalculatorIcon from "~/components/base/icons/BaseCalculatorIcon.vue";
 
 const props = defineProps({
   doorVariantData: Object,
