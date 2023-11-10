@@ -18,7 +18,7 @@ const props = defineProps({
 const colors = ref([])
 const platbands = ref([])
 
-const currentWidth = ref(0)
+const currentWidth = ref(100)
 
 const maxWidth = computed(() => {
   // Map the platbands to their widths, then use Math.max to find the largest one
@@ -39,7 +39,7 @@ const emits = defineEmits(['change-city'])
 const {shouldOpenModal} = toRefs(props)
 
 const totalPrice = computed(() => {
-  return props.priceProps.leafPrice + props.priceProps.casingPrice + actualCasingPrice.value + props.priceProps.framePrice
+  return props.priceProps.leafPrice + props.priceProps.casingPrice + actualCasingPrice.value + props.priceProps.framePrice + currentPlatbandPrice?.value
 })
 
 const isOpen = ref(false)
@@ -106,7 +106,7 @@ const currentPlatband = computed(() => {
 
 const currentPlatbandPrice = computed(() => {
   if (!currentPlatband.value) {
-    return undefined; // or handle this case as needed
+    return 0; // or handle this case as needed
   }
 
   // Find the color object that matches the ID provided in props.color
@@ -163,7 +163,7 @@ watch(shouldOpenModal, (newValue) => {
               leave-to="opacity-0 scale-95"
           >
             <DialogPanel
-                class="w-full h-auto overflow-visible max-w-md md:max-w-xl transform  bg-white p-6 text-left align-middle shadow-xl transition-all"
+                class="w-full h-auto overflow-visible md:max-w-xl lg:max-w-[60vw] transform  bg-white p-6 text-left align-middle shadow-xl transition-all"
             >
               <DialogTitle
                   as="h3"
@@ -173,41 +173,14 @@ watch(shouldOpenModal, (newValue) => {
                 <h2>{{ props.product.name }} {{ props.doorVariantData.color.material_name }}
                   {{ props.doorVariantData.color.name }}</h2>
               </DialogTitle>
-              <div class="mt-8 mb-8">
-                <div class="flex flex-col justify-center max-w-[80vw]">
-                  <p>
-                    Стоимость полотна:
-                    <h3 v-if="props.doorVariantData.sale" class="inline-block pb-2">
-                      <span class="text-gray-500 line-through">{{
-                          parseInt(props.doorVariantData.leaf_price)
-                        }}&nbsp;₽</span>&nbsp;&nbsp;
-                      <span class="text-black">{{ props.priceProps.leafPrice }}&nbsp;₽</span>
-                    </h3>
-                    <h3 v-else class="inline-block pb-2 text-black">{{ props.priceProps.leafPrice }}&nbsp;₽</h3>
-                  </p>
-                  <p>Первое обрамление двери: <h3 class=" inline-block">{{ casingName }}</h3>
-                    <h3 class="md:pl-4 pb-4 md:inline-block">{{ priceProps.casingPrice }} ₽</h3></p>
-                  <p>Второе обрамление двери:
-                    <h3 class="inline-block"> {{ secondCasingName }}</h3>
-                    <h3 class="md:pl-4 pb-4 md:inline-block">{{ actualCasingPrice }} ₽</h3></p>
-                  <p>Стоимость короба: <h3 class="inline-block ">{{ props.priceProps.framePrice }}&nbsp;₽</h3></p>
-                  <div class="h-[1px] bg-black mb-2"></div>
-                  <!--                  <p>Дверь с обрамлением на одну сторону: <h2 class="inline-block pb-2">{{ props.priceProps.totalPrice }}&nbsp;₽</h2></p>-->
-                  <p>Общая стоимость двери: <h2 class="inline-block pb-2">{{ totalPrice }}&nbsp;₽</h2></p>
-                  <div class="pt-2"></div>
-                  <h5 class="pt-6" v-if="props.product.glass===true">
-                    Цена двери указана с обычным матированным стеклом без фацета, или гравировки. Стекло с фацетом или
-                    гравировкой увеличивает стоимость двери.
-                  </h5>
-                </div>
-                <div class="pt-6">
+              <div class="pt-8">
 
-                  <h3> Выберите обрамление на вторую сторону. </h3>
-                  <h5> В этой отделке имеются следующие
-                    варианты обрамления:</h5>
+                <h3> Выберите обрамление на вторую сторону. </h3>
+                <h5> В этой отделке имеются следующие
+                  варианты обрамления:</h5>
 
-                  <div class="grid md:grid-cols-2 grid-cols-1 lg:gap-x-24 lg:gap-y-6 md:gap-x-24 pt-8">
-                    <div v-for="casing in filteredCasings.sort((a, b) => {
+                <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-x-24 lg:gap-y-6 md:gap-x-24 pt-4">
+                  <div v-for="casing in filteredCasings.sort((a, b) => {
         const priceA = parseInt(a.casing_variants[0]?.price);
         const priceB = parseInt(b.casing_variants[0]?.price);
 
@@ -217,48 +190,80 @@ watch(shouldOpenModal, (newValue) => {
 
         return priceA - priceB;
     })" :key="casing.id" class="flex flex-col items-start">
-                      <div
-                          ref="imageDiv"
-                          @click="changeCasing(casing.casing)"
-                          v-if="parseInt(casing.casing_variants[0]?.price)"
-                          :class="{ selected: casing.casing === actualCasingIndex }"
-                          class="imageDiv cursor-pointer flex justify-between items-end w-full pb-1 pt-3 border-b-2 border-transparent transition-all duration-300 ease-in-out">
+                    <div
+                        ref="imageDiv"
+                        @click="changeCasing(casing.casing)"
+                        v-if="parseInt(casing.casing_variants[0]?.price)"
+                        :class="{ selected: casing.casing === actualCasingIndex }"
+                        class="imageDiv cursor-pointer flex justify-between items-end w-full pb-1 pt-3 border-b-2 border-transparent transition-all duration-300 ease-in-out">
 
-                        <div>
-                          <nuxt-img width="40" :src="casing.image"/>
-                          <p class="pt-4">{{ casing.casing_name }}</p>
-                        </div>
-                        <div class="flex">
-                          <h3>{{ parseInt(casing.casing_variants[0]?.price) }}&nbsp;₽ </h3>
-                        </div>
+                      <div>
+                        <nuxt-img width="40" :src="casing.image"/>
+                        <p class="pt-4">{{ casing.casing_name }}</p>
+                      </div>
+                      <div class="flex">
+                        <h3>{{ parseInt(casing.casing_variants[0]?.price) }}&nbsp;₽ </h3>
                       </div>
                     </div>
                   </div>
+                </div>
 
-                </div>
-                <div class="pt-8">
-                  <h5>Примечание: цена в каталоге <h3 class="inline-block">{{ priceProps.totalPrice }} ₽</h3>
-                    соответствует стоимости двери с обрамлением на одну сторону.
-                  </h5>
-                </div>
+              </div>
+              <div class="mt-16 mb-8">
+
+
                 <!--<pre>{{platbands}}</pre>-->
                 <!--<pre>{{colors}}</pre>-->
                 <!--<pre>{{widthIntervals}}</pre>-->
-                <FormKit
-                    type="slider"
-                    v-model="currentWidth"
-                    :tooltip-format="(v) => `${v} мм`"
-                    :tooltip="true"
-                    help=""
-                    min="0"
-                    :max="maxWidth"
-                    step="1"
-                />
-                                <pre>{{currentPlatbandPrice}}</pre>
-                <pre>current platband{{ currentPlatband }}</pre>
+                <h3>Выберите толщину стены дверного проема.</h3>
+                <div class="pt-12">
+                  <FormKit
+                      type="slider"
+                      v-model="currentWidth"
+                      :tooltip-format="(v) => `${v} мм`"
+                      :tooltip="true"
+                      help=""
+                      min="0"
+                      :max="maxWidth"
+                      step="1"
+                  />
+                </div>
+                <div class="flex flex-col justify-center max-w-[80vw] pt-8">
+                  <p>
+                    Стоимость полотна:
+                    <h3 v-if="props.doorVariantData.sale" class="inline-block pb-4">
+                      <span class="text-gray-500 line-through">{{
+                          parseInt(props.doorVariantData.leaf_price)
+                        }}&nbsp;₽</span>&nbsp;&nbsp;
+                      <span class="text-black">{{ props.priceProps.leafPrice }}&nbsp;₽</span>
+                    </h3>
+                    <h3 v-else class="inline-block pb-4 text-black">{{ props.priceProps.leafPrice }}&nbsp;₽</h3>
+                  </p>
+                  <p>Первое обрамление двери: <h3 class=" inline-block">{{ casingName }}</h3>
+                    <h3 class="md:pl-4 pb-4 md:inline-block">{{ priceProps.casingPrice }} ₽</h3></p>
+                  <p>Второе обрамление двери:
+                    <h3 class="inline-block"> {{ secondCasingName }}</h3>
+                    <h3 class="md:pl-4 pb-4 md:inline-block">{{ actualCasingPrice }} ₽</h3></p>
+                  <p class="pb-4">Стоимость короба: <h3 class="inline-block ">{{ props.priceProps.framePrice }}&nbsp;₽</h3></p>
+                  <p v-if="currentPlatband" class="pb-4 ">Стоимость комплекта добора
+                    {{ currentPlatband.platband_width }}&nbsp;мм: <h3 class="inline-block ">{{ currentPlatbandPrice }}&nbsp;₽</h3>
+                  </p>
+                  <div class="h-[1px] bg-black mb-2"></div>
+                  <!--                  <p>Дверь с обрамлением на одну сторону: <h2 class="inline-block pb-2">{{ props.priceProps.totalPrice }}&nbsp;₽</h2></p>-->
+                  <p>Общая стоимость двери: <h2 class="inline-block pb-2">{{ totalPrice }}&nbsp;₽</h2></p>
+                  <div class="pt-2"></div>
+                  <h5 class="pt-6" v-if="props.product.glass===true">
+                    Цена двери указана с обычным матированным стеклом без фацета, или гравировки. Стекло с фацетом или
+                    гравировкой увеличивает стоимость двери.
+                  </h5>
+                </div>
               </div>
-
-              <div class="text-right">
+              <div class="">
+                <h5>Дополнительно для установки двери понадобится: замок, петли, ручка. Цена в каталоге <h3 class="inline-block">{{ priceProps.totalPrice }} ₽</h3>
+                  соответствует стоимости двери с обрамлением на одну сторону.
+                </h5>
+              </div>
+              <div class="text-right pt-8">
                 <buttons-primary-button-big
                     @click="closeModal"
                 >
