@@ -12,7 +12,7 @@ import { baseURL } from '~/config'
 const props = defineProps({
   isOpen: Boolean,
   shouldOpenModal: Number,
-  data: Array,
+  data: Object,
   product:
       {
         type: Object,
@@ -50,9 +50,7 @@ async function fetchTechVariants() {
 
 const targetTechVariant = computed(() => {
   const material = props.data.color.material;
-  console.log(material, 'material');
   const collectionId = props.product.collection.id;
-  console.log(collectionId, 'collectionId');
 
   const matchingTechVariant = techVariants.value?.find(
       techVariant =>

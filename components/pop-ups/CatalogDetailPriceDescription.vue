@@ -1,6 +1,7 @@
 <script setup>
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot,} from '@headlessui/vue'
 import {ref, toRefs, watch} from 'vue'
+import{baseURL} from "~/config";
 
 const props = defineProps({
   isOpen: Boolean,
@@ -13,6 +14,11 @@ const props = defineProps({
   actualCasing: Number,
 
 })
+
+const colors = ref([])
+const platbands = ref([])
+
+const currentWidth = ref(300)
 
 const imageDiv = ref(null)
 
@@ -61,11 +67,42 @@ const actualCasingPrice = computed(() => {
 })
 
 
+async function fetchPlatbands() {
+  const platbandsData = await $fetch(`${baseURL}/api/product/platband-variants`)
+  platbands.value = platbandsData.platband_variants
+  colors.value = platbandsData.colors
+
+}
+
+
+const currentMaterial = computed(() => {
+  const colorObject = colors.value.find(color => color.id === props.color);
+  return colorObject ? colorObject.material : null;
+});
+
+const currentPlatband = computed(() => {
+  if (!currentMaterial.value) {
+    return undefined; // or handle this case as needed
+  }
+
+  // Now filter the platbands by the found material and find the one with the closest width
+  const suitablePlatbands = platbands.value
+      .filter(platband => platband.material === currentMaterial.value)
+      .sort((a, b) => a.platband_width - b.platband_width);
+
+  // Find the platband with the smallest platband_width that is greater than or equal to currentWidth
+  return suitablePlatbands.find(platband => platband.platband_width >= currentWidth.value);
+});
+
+
+onMounted(() => {
+  fetchPlatbands()
+})
+
 watch(shouldOpenModal, (newValue) => {
   if (newValue)
     openModal()
 })
-
 
 
 </script>
@@ -114,7 +151,9 @@ watch(shouldOpenModal, (newValue) => {
                   <p>
                     Стоимость полотна:
                     <h3 v-if="props.doorVariantData.sale" class="inline-block pb-2">
-                      <span class="text-gray-500 line-through">{{ parseInt(props.doorVariantData.leaf_price) }}&nbsp;₽</span>&nbsp;&nbsp;
+                      <span class="text-gray-500 line-through">{{
+                          parseInt(props.doorVariantData.leaf_price)
+                        }}&nbsp;₽</span>&nbsp;&nbsp;
                       <span class="text-black">{{ props.priceProps.leafPrice }}&nbsp;₽</span>
                     </h3>
                     <h3 v-else class="inline-block pb-2 text-black">{{ props.priceProps.leafPrice }}&nbsp;₽</h3>
@@ -175,7 +214,20 @@ watch(shouldOpenModal, (newValue) => {
                     соответствует стоимости двери с обрамлением на одну сторону.
                   </h5>
                 </div>
-
+<!--<pre>{{platbands}}</pre>-->
+<!--<pre>{{colors}}</pre>-->
+<!--<pre>{{widthIntervals}}</pre>-->
+                <FormKit
+                    type="slider"
+                    label="Native Props"
+                    v-model="currentWidth"
+                    min="0"
+                    max="1000"
+                    step="25"
+                    help="Feels natural"
+                />
+<!--                <pre>{{currentMaterial}}</pre>-->
+                <pre>current platband{{currentPlatband}}</pre>
               </div>
 
               <div class="text-right">
