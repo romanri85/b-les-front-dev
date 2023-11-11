@@ -1,21 +1,22 @@
 <script setup lang="js">
-import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import {onMounted, ref} from 'vue'
+import {useRoute} from 'vue-router'
 import Pagination from '~/components/base/pagination/Pagination.vue'
-import { baseURL } from '~/config'
-import ImageModal from '~/components/pop-ups/ImageModal.vue'
+import {baseURL} from '~/config'
+import ImageModal2 from '~/components/pop-ups/ImageModal2.vue'
 
-import { adjustLayoutForNarrowImages, classifyImageLayout } from '~/services/imageLayoutService'
+import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService'
 
-definePageMeta({ layout: 'dark-header' })
+definePageMeta({layout: 'dark-header'})
 
 const route = useRoute()
 
 const router = useRouter()
 
 const tagsBlock = ref(null)
+
 function scrollToTagsBlock() {
-  tagsBlock.value.scrollIntoView({ behavior: 'smooth' })
+  tagsBlock.value.scrollIntoView({behavior: 'smooth'})
 }
 
 const initialTags = ref([])
@@ -31,28 +32,30 @@ const tags = ref([])
 const tagsForForm = ref([])
 const taglistKey = ref(0)
 
+
+
 onMounted(
-  async () => {
-    await getTags()
-    await transformTags()
+    async () => {
+      await getTags()
+      await transformTags()
 
-    await (async () => {
-      if (route.query.tags) {
-        initialTags.value = [String(route.query.tags)] // assuming tags is a single value. If it's multiple values separated by commas, split it: route.query.tags.split(',')
-        selectedTags.value = initialTags.value
-        taglistKey.value++
-        await getImagesByTags(selectedTags.value)
-        return
-      }
-      if (!selectedTags.value[0]) {
-        selectedTags.value = [String(tags.value[0].id)]
-        taglistKey.value++
-        await getImagesByTags(selectedTags.value)
-      }
-    })()
+      await (async () => {
+        if (route.query.tags) {
+          initialTags.value = [String(route.query.tags)] // assuming tags is a single value. If it's multiple values separated by commas, split it: route.query.tags.split(',')
+          selectedTags.value = initialTags.value
+          taglistKey.value++
+          await getImagesByTags(selectedTags.value)
+          return
+        }
+        if (!selectedTags.value[0]) {
+          selectedTags.value = [String(tags.value[0].id)]
+          taglistKey.value++
+          await getImagesByTags(selectedTags.value)
+        }
+      })()
 
-    await getImagesByTags(selectedTags.value)
-  },
+      await getImagesByTags(selectedTags.value)
+    },
 )
 
 const layoutImages = computed(() => {
@@ -131,13 +134,10 @@ function selectTag(tag) {
 watch(selectedTags, (newValue, oldValue) => {
   if (!newValue[0])
     selectedTags.value = oldValue
-}, { deep: true })
+}, {deep: true})
+
 function triggerModal(image) {
   selectedImage.value = image
-  if (imgModal.value && imgModal.value.openModal)
-    imgModal.value.openModal()
-  else
-    console.error('Method not available or component not initialized.')
 }
 
 watch(() => router.currentRoute.value.query.tags, (newValue) => {
@@ -147,12 +147,6 @@ watch(() => router.currentRoute.value.query.tags, (newValue) => {
     taglistKey.value++
     getImagesByTags(selectedTags.value)
   }
-  // if(!selectedTags.value[0]){
-  //   selectedTags.value = [String(tags.value[1].id)];
-  //   taglistKey.value++
-  //   getImagesByTags(selectedTags.value)
-  //   return
-  // }
 })
 
 function handleChooseTag(tag) {
@@ -179,27 +173,27 @@ function handleChooseTag(tag) {
     <div class="flex justify-center pt-10 pb-16">
       <FormKit
 
-        v-slot="{ value }"
-        type="form"
-        :actions="false"
+          v-slot="{ value }"
+          type="form"
+          :actions="false"
       >
         <FormKit
-          :key="taglistKey"
-          type="taglist"
-          name="taglist"
-          label='Все фото сделаны на проектах компании "Брянский лес".'
-          :options="tagsForForm"
-          max="10"
-          :value="selectedTags"
-          select-icon="add"
-          help='Все теги на фото активны.'
-          prefix-icon="tag"
-          open-on-click
-          placeholder="Выберите тег"
+            :key="taglistKey"
+            type="taglist"
+            name="taglist"
+            label='Все фото сделаны на проектах компании "Брянский лес".'
+            :options="tagsForForm"
+            max="10"
+            :value="selectedTags"
+            select-icon="add"
+            help='Все теги на фото активны.'
+            prefix-icon="tag"
+            open-on-click
+            placeholder="Выберите тег"
 
-          :filter="(option, search) =>
+            :filter="(option, search) =>
             option.label.toLowerCase().startsWith(search.toLowerCase())"
-          @input="selectTag"
+            @input="selectTag"
         />
         <!--      <pre wrap>{{ value }}</pre> -->
       </FormKit>
@@ -207,27 +201,28 @@ function handleChooseTag(tag) {
     <div ref="tagsBlock" class="layout-images pb-10">
       <div class="image-container">
         <div
-          v-for="(image, index) in layoutImages" :key="index"
-          :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`"
+            v-for="(image, index) in layoutImages" :key="index"
+            :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`"
         >
           <nuxt-img
-            :src="image.image" placeholder class="object-cover cursor-pointer" :alt="image.project_name"
-            @click="triggerModal(image)"
+              :src="image.image" placeholder class="object-cover cursor-pointer" :alt="image.project_name"
+              @click="triggerModal(image)"
+          />
+          <ImageModal2
+             class="absolute z-50 lg:overflow-visible overflow-auto" @close="selectedImage = null"
+              :image="image" @chooseTag="handleChooseTag" :open="image.image===selectedImage?.image"
           />
         </div>
       </div>
     </div>
     <Pagination
-      v-if="page" v-model:current-page="page" class="flex justify-center"
-      :total="total"
-      :page_size="page_size"
-      :pages-count="pagesCount"
-      @page-change="onChangePage"
+        v-if="page" v-model:current-page="page" class="flex justify-center"
+        :total="total"
+        :page_size="page_size"
+        :pages-count="pagesCount"
+        @page-change="onChangePage"
     />
-    <ImageModal
-      ref="imgModal" class="absolute z-50 lg:overflow-visible overflow-auto"
-      :image="selectedImage" @chooseTag="handleChooseTag"
-    />
+
   </div>
 </template>
 

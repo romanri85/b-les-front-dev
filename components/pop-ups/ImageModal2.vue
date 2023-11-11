@@ -8,28 +8,35 @@ const props = defineProps({
     type: null,
     required: true,
   },
+  open: {
+    type: Boolean,
+    required: true,
+  },
 })
 const emit = defineEmits(['chooseTag'])
 const router = useRouter()
 const route = useRoute()
 
 defineExpose({
-  openModal,
+  // openModal,
   closeModal,
 })
 
 const isTallImage = computed(() => props.image.height / props.image.width > 1)
 const isWideImage = computed(() => props.image.height / props.image.width <= 1)
 
-const isOpen = ref(false)
 
 const imageUrl = ref(props.image.image)
 async function load(src) {
-  const res = await fetch(src, {
-    method: 'GET',
-  })
-  const imageBlob = await res.blob();
+  console.log(src, 'src')
+  const imgRequest = new Request(src);
 
+  const res = await fetch(imgRequest, {
+    method: 'GET',
+    // mode: 'no-cors'
+})
+  const imageBlob = await res.blob();
+  console.log(imageBlob, 'imageBlob')
   return URL.createObjectURL(imageBlob);
 }
 
@@ -40,12 +47,13 @@ function chooseTag(tag) {
 }
 
 function closeModal() {
-  isOpen.value = false
+  emit('close')
+  // isOpen.value = false
 }
 
-function openModal() {
-  isOpen.value = true
-}
+// function openModal() {
+//   isOpen.value = true
+// }
 
 onMounted(async () => {
   imageUrl.value = await load(props.image.image)
@@ -62,8 +70,8 @@ onMounted(async () => {
   <!--      Open dialog -->
   <!--    </button> -->
   <!--  </div> -->
-  <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" class="relative z-30 lg:overflow-visible overflow-auto " @close="closeModal">
+  <TransitionRoot appear :show="props.open" as="template">
+    <Dialog as="div"  class="relative z-30 lg:overflow-visible overflow-auto " @close="closeModal">
       <div class="fixed inset-0 bg-black modal-background"/>
       <div class="fixed inset-0 overflow-y-auto">
         <div
