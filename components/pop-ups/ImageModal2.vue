@@ -28,15 +28,12 @@ const isWideImage = computed(() => props.image.height / props.image.width <= 1)
 
 const imageUrl = ref(props.image.image)
 async function load(src) {
-  console.log(src, 'src')
   const imgRequest = new Request(src);
 
   const res = await fetch(imgRequest, {
     method: 'GET',
-    // mode: 'no-cors'
 })
   const imageBlob = await res.blob();
-  console.log(imageBlob, 'imageBlob')
   return URL.createObjectURL(imageBlob);
 }
 

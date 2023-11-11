@@ -3,14 +3,13 @@ import {ref} from 'vue'
 import {baseURL} from '~/config'
 import BaseHero from '~/components/base/BaseHero.vue'
 import Pagination from '~/components/base/pagination/Pagination.vue'
-import ImageModal from '~/components/pop-ups/ImageModal.vue'
 import {useInteriorStore} from "~/stores/interiorStore";
 
-import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService' // Assuming the service is in the same directory
+import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService'
+import ImageModal2 from "~/components/pop-ups/ImageModal2.vue"; // Assuming the service is in the same directory
 
 const interiorStore = useInteriorStore()
 
-const imgModal = ref(null)
 
 const selectedImage = ref(null) // this will store the selected/clicked image data
 
@@ -22,10 +21,6 @@ function scrollToImagesBlock() {
 
 function triggerModal(image) {
   selectedImage.value = image
-  if (imgModal.value && imgModal.value.openModal)
-    imgModal.value.openModal()
-  else
-    console.error('Method not available or component not initialized.')
 }
 
 // definePageMeta({layout: "dark-header"});
@@ -98,6 +93,10 @@ const layoutImages = computed(() => {
               :src="image.image" class="object-cover cursor-pointer" :alt="image.project_name"
               @click="triggerModal(image)"
           />
+          <ImageModal2
+              class="absolute z-50 lg:overflow-visible overflow-auto" @close="selectedImage = null"
+              :image="image" @chooseTag="handleChooseTag" :open="image.image===selectedImage?.image"
+          />
         </div>
       </div>
     </div>
@@ -122,7 +121,6 @@ const layoutImages = computed(() => {
         />
       </div>
     </div>
-    <ImageModal ref="imgModal" class="" :image="selectedImage"/>
   </div>
 </template>
 
