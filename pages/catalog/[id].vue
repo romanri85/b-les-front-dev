@@ -10,13 +10,13 @@ import MaterialColorFilterDetail from '~/components/pages/door-catalog/MaterialC
 import CasingFilterDetail from '~/components/filters/CasingFilterDetail.vue'
 import AllCollectionsModalDetail from '~/components/pop-ups/AllCollectionsModalDetail.vue'
 import Pagination from '~/components/base/pagination/Pagination.vue'
-import ImageModal from '~/components/pop-ups/ImageModal.vue'
 import { adjustLayoutForNarrowImages, classifyImageLayout } from '~/services/imageLayoutService'
 import SaleInfoDetail from '~/components/pages/door-catalog/SaleInfoDetail.vue'
 import ContactUsModal from '~/components/pop-ups/ContactUsModal.vue'
 import { useViewportSize } from '~/composables/useViewportSize'
 import DoorCardPriceDetail from '~/components/pages/door-catalog/DoorCardPriceDetail.vue'
 import DoorTechInfoModal from "~/components/pop-ups/DoorTechInfoModal.vue";
+import ImageModal2 from "~/components/pop-ups/ImageModal2.vue";
 
 const { y } = useWindowScroll()
 
@@ -112,15 +112,10 @@ const layoutImages = computed(() => {
   return []
 })
 
-const imgModal = ref(null)
 const selectedImage = ref(null)
 
 function triggerModal(image) {
   selectedImage.value = image
-  if (imgModal.value && imgModal.value.openModal)
-    imgModal.value.openModal()
-  else
-    console.error('Method not available or component not initialized.')
 }
 
 async function fetchDoorVariantData(query = `/${route.params.id}`) {
@@ -411,10 +406,13 @@ function onChangePage(page) {
           :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`"
         >
           <nuxt-img :src="image.image" class="object-cover" :alt="image.project_name" @click="triggerModal(image)" />
+          <ImageModal2
+              class="absolute z-50 lg:overflow-visible overflow-auto" @close="selectedImage = null"
+              :image="image" :open="image.image===selectedImage?.image"
+          />
         </div>
       </div>
     </div>
-    <ImageModal ref="imgModal" :image="selectedImage" />
     <ContactUsModal :should-open-modal="shouldOpenContactUsModal" />
     <DoorTechInfoModal :should-open-modal="shouldOpenDoorTechInfoModal" :data="doorVariantData" :product="product"/>
     <Pagination
