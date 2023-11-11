@@ -93,7 +93,7 @@ onMounted(async () => {
               />
               <nuxt-link class="outline-none" :to="`/interior/${image.project}`">
                 <div v-if="!route.path.startsWith('/interior')" class="outline-none text-center py-2">
-                  <h2 class="inline outline-none">
+                  <h2 class="inline outline-none underline underline-offset-4">
                     {{ image.project_name }}
                   </h2>
                 </div>
@@ -107,7 +107,7 @@ onMounted(async () => {
                   &nbsp;
 
                   <span>&nbsp;</span>
-                  <p class="inline text-lg" @click="chooseTag(tag)">
+                  <p class="inline text-lg underline-direction" @click="chooseTag(tag)">
                     #{{ tag.name }}
                   </p>
                 </div>
