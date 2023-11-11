@@ -52,6 +52,10 @@ const sortFilters = [
 
 const filtersStore = useFiltersStore()
 
+const activeSorting = computed(() => {
+  return sortFilters.find((filter) => filter.value === filtersStore.activeFilters.ordering)
+})
+
 function sortDoors(sorting: string) {
   filtersStore.onChangeFilters({ ordering: sorting })
   emit('closeSorting')
@@ -66,8 +70,10 @@ function sortDoors(sorting: string) {
         class="whitespace-nowrap bg-white  p-4 [&>a]:p-2 w-[100vw]"
       >
         <div class="cursor-pointer" @click="sortDoors(sorting.value)">
-          <h6 class="text-black font-regular">
-            {{ sorting.name }}
+          <h6 :class="{ 'font-regular': sorting===activeSorting && sorting.value!=='id', 'underline-static': sorting===activeSorting && sorting.value!=='id'}"
+          class="inline-block">
+            {{ sorting.name}}
+
           </h6>
         </div>
       </div>
