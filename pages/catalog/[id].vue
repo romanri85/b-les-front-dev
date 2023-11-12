@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWindowScroll } from '@vueuse/core'
 import { ArrowDownIcon } from '@heroicons/vue/24/solid'
-import { getCasingVariants, getMaterialColorVariantsByColorId, getProductCasings } from '~/utils/catalogUtils'
+import { getCasingVariants, getProductCasings } from '~/utils/catalogUtils'
 import { baseURL } from '~/config'
 import DoorCardDetail from '~/components/pages/door-catalog/DoorCardDetail.vue'
 import MaterialColorFilterDetail from '~/components/pages/door-catalog/MaterialColorFilterDetail.vue'
@@ -62,6 +62,8 @@ function openContactUsModal() {
 function openDoorTechInfoModal() {
   shouldOpenDoorTechInfoModal.value = shouldOpenDoorTechInfoModal.value + 1
 }
+
+
 
 onMounted(
   async () => {
@@ -140,7 +142,7 @@ function getActualDoorVariantData(filterData = { material: material.value, color
   if (!doorVariantData.value) {
     doorVariantData.value = productVariantsData.value.material_color_product_variants[0];
   }
-  collectionProducts.value = getMaterialColorVariantsByColorId(product.value.collection.products, color.value)
+  // collectionProducts.value = getMaterialColorVariantsByColorId(product.value.collection.products, color.value)
 
   if (actualCasing.value !== null)
     changeCasing(actualCasing.value)
@@ -242,7 +244,7 @@ function onChangePage(page) {
           </div>
           <AllCollectionsModalDetail
             v-if="isCollectionModelOpen" :color="color"
-            :material="material" :collection-products="collectionProducts" :product="product"
+            :material="material" :product="product"
             @close="isCollectionModelOpen = false"
             @close-modal="closeCollection" @change-model="changeModel"
           />
@@ -346,12 +348,12 @@ function onChangePage(page) {
             </buttons-primary-button-big>
             <SaleInfoDetail v-if="doorVariantData.sale" :door-variant-data="doorVariantData" />
           </div>
-          <AllCollectionsModalDetail
-            v-if="isCollectionModelOpen" :color="color"
-            :material="material" :collection-products="collectionProducts" :product="product"
-            @close="isCollectionModelOpen = false"
-            @close-modal="closeCollection" @change-model="changeModel"
-          />
+<!--          <AllCollectionsModalDetail-->
+<!--            v-if="isCollectionModelOpen" :color="color"-->
+<!--            :material="material" :collection-products="collectionProducts" :product="product"-->
+<!--            @close="isCollectionModelOpen = false"-->
+<!--            @close-modal="closeCollection" @change-model="changeModel"-->
+<!--          />-->
           <h1 class="pb-5">
             {{ product.name }}
           </h1>

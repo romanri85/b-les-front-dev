@@ -77,7 +77,7 @@ function onChangePage(page) {
         <div class="pb-4 pt-4">
           <div v-for="tag in project.tags" :key="tag.id" class="inline-block ">
             <NuxtLink :to="{ path: '/search-tags', query: { tags: tag.id } }">
-              <p class="text-lg inline">
+              <p class="text-lg underline-direction inline">
                 #{{ tag.name }}&nbsp;
               </p><span>&nbsp;&nbsp;</span>
             </NuxtLink>

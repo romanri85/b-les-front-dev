@@ -263,7 +263,7 @@ watch(shouldOpenModal, (newValue) => {
                   соответствует стоимости двери с обрамлением на одну сторону.
                 </h5>
               </div>
-              <div class="text-right pt-8">
+              <div class="text-center pt-8">
                 <buttons-primary-button-big
                     @click="closeModal"
                 >
