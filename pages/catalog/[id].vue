@@ -348,12 +348,12 @@ function onChangePage(page) {
             </buttons-primary-button-big>
             <SaleInfoDetail v-if="doorVariantData.sale" :door-variant-data="doorVariantData" />
           </div>
-<!--          <AllCollectionsModalDetail-->
-<!--            v-if="isCollectionModelOpen" :color="color"-->
-<!--            :material="material" :collection-products="collectionProducts" :product="product"-->
-<!--            @close="isCollectionModelOpen = false"-->
-<!--            @close-modal="closeCollection" @change-model="changeModel"-->
-<!--          />-->
+          <AllCollectionsModalDetail
+            v-if="isCollectionModelOpen" :color="color"
+            :material="material" :product="product"
+            @close="isCollectionModelOpen = false"
+            @close-modal="closeCollection" @change-model="changeModel"
+          />
           <h1 class="pb-5">
             {{ product.name }}
           </h1>
