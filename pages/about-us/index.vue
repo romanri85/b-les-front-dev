@@ -128,14 +128,14 @@ const heroImage = '/aboutUs/aboutUs-bg.webp'
         </h5>
       </div>
       <div class="relative cursor-pointer py-20 lg:py-28 md:w-1/2">
-        <img @click="openFactoryVideoModal" class=" px-8 h-[345px] lg:h-[665px] object-contain w-full bg-primaryDark"
-             src="/logo-white.svg" alt="aboutUs-1"/>
-        <div class=" absolute top-2/3 text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-white"
-             @click="openFactoryVideoModal">
+        <div @click="openFactoryVideoModal" class=" px-8 h-[345px] lg:h-[665px] object-contain w-full bg-primaryDark"
+        />
+        <div class=" absolute top-1/2 text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+             @click="openFactoryVideoModal"><h2 class="text-center">Видео о производстве</h2>
 
           <BasePlaySymbol
 
-              class="play  h-auto "/>
+              class="play mx-auto pt-8 h-auto "/>
         </div>
       </div>
       <FactoryVideoModal :shouldOpenModal="shouldOpenModal"/>
@@ -145,7 +145,7 @@ const heroImage = '/aboutUs/aboutUs-bg.webp'
 
 <style scoped>
 .play {
-  border-color: white!important;
+  border-color: white !important;
   min-width: 30px;
   max-width: 60px;
   width: calc(6vw);

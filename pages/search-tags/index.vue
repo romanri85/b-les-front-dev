@@ -55,8 +55,15 @@ onMounted(
       })()
 
       await getImagesByTags(selectedTags.value)
+
     },
 )
+
+watch(() => route.query.tags, async (newTags, oldTags) => {
+  if (newTags !== oldTags) {
+    window.scrollTo(0, 0) // Scroll to the top of the page
+  }
+})
 
 const layoutImages = computed(() => {
   if (selectedImages.value && selectedImages.value.results) {

@@ -55,6 +55,10 @@ function closeModal() {
 onMounted(async () => {
   imageUrl.value = await load(props.image.image)
 })
+
+watch(() => props.image, async () => {
+  imageUrl.value = await load(props.image.image)
+})
 </script>
 
 <template>

@@ -404,7 +404,7 @@ function onChangePage(page) {
     <div ref="imagesBlock" class="layout-images pt-16 lg:pt-24">
       <div class="image-container">
         <div
-          v-for="image in layoutImages" :key="image.id" class="cursor-pointer"
+          v-for="image in layoutImages" :key="image.image" class="cursor-pointer"
           :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`"
         >
           <nuxt-img :src="image.image" class="object-cover" :alt="image.project_name" @click="triggerModal(image)" />

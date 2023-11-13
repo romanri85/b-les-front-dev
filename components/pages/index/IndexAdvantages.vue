@@ -18,7 +18,7 @@
       </div> <!-- cd-container -->
     </div> <!-- cd-scrolling-bg -->
 
-    <div class="cd-fixed-bg cd-bg-1 lg:min-h-[400px] md:min-h-[250px] min-h-[200px]">
+    <div class="cd-fixed-bg cd-bg-1 lg:min-h-[600px] md:min-h-[250px] min-h-[200px]">
       <!--      <h2>Last shot is a knee dragger!</h2> -->
     </div> <!-- cd-fixed-bg -->
   </main> <!-- cd-main-content -->

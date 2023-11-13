@@ -20,7 +20,7 @@
       </div> <!-- cd-container -->
     </div> <!-- cd-scrolling-bg -->
 
-    <div class="cd-fixed-bg cd-bg-1 lg:min-h-[400px] md:min-h-[250px] min-h-[200px]">
+    <div class="cd-fixed-bg cd-bg-1 lg:min-h-[600px] md:min-h-[250px] min-h-[200px]">
       <!--      <h1>Alternating fixed/scrolling backgrounds Pure CSS</h1> -->
     </div> <!-- cd-fixed-bg -->
   </main> <!-- cd-main-content -->
