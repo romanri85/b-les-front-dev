@@ -63,6 +63,11 @@
       "slug": "/sale"
     },
     {
+      "name": "certificates",
+      "image": "/header-modal-img/certificates.webp",
+      "slug": "/certificates"
+    },
+    {
       "name": "toDesigners",
       "image": "/header-modal-img/to-designers.webp",
       "slug": "/to-designers"

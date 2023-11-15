@@ -1,0 +1,3 @@
+export default {
+    certificatesPageDescription: 'The company "Bryansky Les" continuously monitors the quality of the products manufactured. Despite the fact that interior doors are not subject to mandatory certification, we strive to provide our clients with additional quality guarantees. Our doors are tested in accredited laboratories, which confirm the compliance of our products with the requirements of GOST. In addition, we require our suppliers to provide quality certificates for the materials used.',
+}

@@ -13,13 +13,15 @@ import ruSystems from '~/i18n/ru/ruSystems'
 import enSystems from '~/i18n/en/enSystems'
 import enSale from '~/i18n/en/enSale'
 import ruSale from '~/i18n/ru/ruSale'
+import enCerificates from "~/i18n/en/enCerificates";
+import ruCertificates from "~/i18n/ru/ruCertificates";
 
 export default defineI18nConfig(() => ({
   // TODO: add legacy
   // legacy: false,
   locale: 'ru',
   messages: {
-    en: { ...enCommon, ...enToDesigners, ...enAboutUs, ...enToDealers, ...enDeliveryInstallation, ...enSystems, ...enSale },
-    ru: { ...ruCommon, ...ruToDesigners, ...ruAboutUs, ...ruToDealers, ...ruDeliveryInstallation, ...ruSystems, ...ruSale },
+    en: { ...enCommon, ...enToDesigners, ...enAboutUs, ...enToDealers, ...enDeliveryInstallation, ...enSystems, ...enSale, ...enCerificates },
+    ru: { ...ruCommon, ...ruToDesigners, ...ruAboutUs, ...ruToDealers, ...ruDeliveryInstallation, ...ruSystems, ...ruSale, ...ruCertificates },
   },
 }))

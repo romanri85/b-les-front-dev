@@ -23,6 +23,7 @@ export default {
   plinth: 'Плинтус',
   deliveryAndInstallation: 'Доставка и монтаж',
   promotions: 'Акции',
+  certificates: 'Сертификаты',
   toDealers: 'Для дилеров',
   toDesigners: 'Для дизайнеров',
   aboutCollection: 'О коллекции',
