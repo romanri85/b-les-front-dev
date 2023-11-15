@@ -100,8 +100,18 @@ async function getCities() {
 
   geoArray.value = cities.value.map(city => city.ip_check_names).flat();
   if (geoArray.value.includes(geo.value.region)) {
-    city.value = findCity(cities.value, geo.value.region)
-    city.value = city.value.city
+    try {
+      city.value = findCity(cities.value, geo.value.region)
+      city.value = city.value.city
+    } catch (e) {
+      console.log(e)
+      city.value = findCity(cities.value, 'Moscow')
+      city.value = city.value.city
+    }
+    if (city.value === undefined) {
+      city.value = findCity(cities.value, 'Moscow')
+      city.value = city.value.city
+    }
   } else {
     city.value = findCity(cities.value, 'Moscow')
     city.value = city.value.city
