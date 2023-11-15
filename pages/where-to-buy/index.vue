@@ -6,7 +6,7 @@ import {baseURL} from '~/config'
 import {findCity} from '~/utils/helpers'
 import {useStorage} from '@vueuse/core';
 
-const storageCityStore = useStorage('storage-city-store');
+const storageCityStore = useStorage('storage-region-store');
 const showConfirmationDiv = ref(false);
 
 
@@ -100,22 +100,11 @@ async function getCities() {
 
   geoArray.value = cities.value.map(city => city.ip_check_names).flat();
   if (geoArray.value.includes(geo.value.region)) {
-    try {
-      city.value = findCity(cities.value, geo.value.region)
-      city.value = city.value.city
-    } catch (e) {
-      console.log(e)
-      city.value = findCity(cities.value, 'Moscow')
-      city.value = city.value.city
-    }
-    if (city.value === undefined) {
-      city.value = findCity(cities.value, 'Moscow')
-      city.value = city.value.city
-    }
+    city.value = findCity(cities.value, geo.value.region)
+    city.value = city.value.city
   } else {
     city.value = findCity(cities.value, 'Moscow')
     city.value = city.value.city
-
   }
 
 
