@@ -1,6 +1,10 @@
 <script setup lang="js">
 import CatalogDetailPriceDescription from "~/components/pop-ups/CatalogDetailPriceDescription.vue";
 import BaseCalculatorIcon from "~/components/base/icons/BaseCalculatorIcon.vue";
+import {usePrompt} from '~/composables/usePrompt';
+import '@vueuse/core' //
+
+const {show, promptText, showPrompt, hidePrompt, promptStyle} = usePrompt();
 
 const props = defineProps({
   doorVariantData: Object,
@@ -16,7 +20,7 @@ const props = defineProps({
 const shouldOpenModal = ref(0)
 
 const saleLeafPrice = computed(() => {
-    return  parseInt(props.doorVariantData.sale.sale_leaf_price)
+  return parseInt(props.doorVariantData.sale.sale_leaf_price)
 })
 
 const leafPrice = computed(() => {
@@ -67,36 +71,48 @@ const sortedCasings = computed(() => {
 </script>
 
 <template>
-  <div @click="openPriceDescriptionModal" class="flex cursor-pointer">
-    <div class="">
-      <div>
-        <h2 class="font-regular'">
+  <div>
+    <div @mouseover="() => showPrompt('Рассчитать стоимость двери самостоятельно')"
+         @mouseleave="hidePrompt"
+         @click="openPriceDescriptionModal" class="flex cursor-pointer">
+      <div class="">
+        <div>
+          <h2 class="font-regular'">
 
-          <!-- Display sale price if is_sale_active is true -->
-          <span v-if="props.doorVariantData.sale">
+            <!-- Display sale price if is_sale_active is true -->
+            <span v-if="props.doorVariantData.sale">
           {{
-            saleLeafCasingFramePrice
-            }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
+                saleLeafCasingFramePrice
+              }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
         </span>
-          <!-- Always display the original price, conditionally grayed out and line-through -->
-          <span :class="props.doorVariantData.sale ? 'text-gray-400 line-through' : ''">
+            <!-- Always display the original price, conditionally grayed out and line-through -->
+            <span :class="props.doorVariantData.sale ? 'text-gray-400 line-through' : ''">
           {{
-            leafCasingFramePrice
-            }}&nbsp;₽
+                leafCasingFramePrice
+              }}&nbsp;₽
         </span>
-        </h2>
+          </h2>
+        </div>
       </div>
-    </div>
-    <div class="flex items-center" >
-      <BaseCalculatorIcon class=" ml-6 cursor-pointer"/>
+      <div class="flex items-center">
+        <BaseCalculatorIcon class=" ml-8 cursor-pointer"/>
+        <h3 class="ml-3 underline-static">Расчет</h3>
+        <catalog-detail-price-description
+            :actualCasing="props.actualCasing || props.doorVariantData.casing_variant.casing" :product="props.product"
+            :doorVariantData="props.doorVariantData" :color="color" :sortedCasings="sortedCasings"
+            :priceProps="priceProps" :should-open-modal="shouldOpenModal"/>
+        <!--   <pre>{{props.casingVariants}}</pre>-->
+      </div>
 
-      <catalog-detail-price-description :actualCasing="props.actualCasing || props.doorVariantData.casing_variant.casing" :product="props.product" :doorVariantData="props.doorVariantData"  :color="color" :sortedCasings="sortedCasings" :priceProps="priceProps" :should-open-modal="shouldOpenModal"/>
-<!--   <pre>{{props.casingVariants}}</pre>-->
     </div>
-
+    <div v-if="show" class="prompt" :style="promptStyle">
+      {{ promptText }}
+    </div>
   </div>
 </template>
 
 <style scoped>
-
+.prompt {
+  @apply bg-white p-2  shadow-md shadow-primaryDark;
+}
 </style>

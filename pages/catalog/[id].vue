@@ -402,6 +402,7 @@ function onChangePage(page) {
     <!-- door image and filters block end  -->
 
     <div ref="imagesBlock" class="layout-images pt-16 lg:pt-24">
+      <h5 class="pb-4">При выборе фото возможно перейти в проект, где было сделано фото. Также доступны переходы по тегам самого фото.</h5>
       <div class="image-container">
         <div
           v-for="image in layoutImages" :key="image.image" class="cursor-pointer"

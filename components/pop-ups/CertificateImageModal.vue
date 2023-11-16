@@ -1,6 +1,6 @@
 <script setup>
-import { defineExpose, ref } from 'vue'
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import {defineExpose, ref} from 'vue'
+import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 
 defineExpose({
   openModal,
@@ -45,7 +45,7 @@ function openModal() {
           leave-from="opacity-100"
           leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-black modal-background" />
+        <div class="fixed inset-0 bg-black modal-background"/>
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
@@ -63,7 +63,7 @@ function openModal() {
           >
             <DialogPanel
 
-                class="transform overflow-hidden bg-white p-6 text-left align-middle shadow-xl transition-all"
+                class="transform overflow-hidden bg-white text-left align-middle shadow-xl transition-all"
             >
               <DialogTitle
                   as="h3"
@@ -94,9 +94,49 @@ function openModal() {
   opacity: 25%;
 }
 
-@media (max-width: 420px) {
+@media screen and (min-width: 680px) and (max-width: 767px) {
   .image {
-    height: 60vh!important;
+    height: 140vh;
   }
 }
+
+
+@media screen and (min-width: 620px) and (max-width: 679px) {
+  .image {
+    height: 120vh;
+  }
+}
+
+
+@media screen and (min-width: 580px) and (max-width: 619px) {
+  .image {
+    height: 110vh;
+  }
+}
+
+@media screen and (min-width: 499px) and (max-width: 579px) {
+  .image {
+    height: 100vh;
+  }
+}
+
+@media screen and (min-width: 460px) and (max-width: 499px) {
+  .image {
+    height: 90vh;
+  }
+}
+
+@media screen and (min-width: 400px) and (max-width: 459px) {
+  .image {
+    height: 80vh;
+  }
+}
+
+@media screen and (min-width: 360px) and (max-width: 399px) {
+  .image {
+    height: 70vh;
+  }
+}
+
+
 </style>

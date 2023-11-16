@@ -263,6 +263,10 @@ watch(shouldOpenModal, (newValue) => {
                   соответствует стоимости двери с обрамлением на одну сторону.
                 </h5>
               </div>
+              <div class="pt-6">
+                <h5>При покупке ручек и услуги заводской врезки мы предоставляем итальянские замок и скрытые петли в подарок.
+                </h5>
+              </div>
               <div class="text-center pt-8">
                 <buttons-primary-button-big
                     @click="closeModal"

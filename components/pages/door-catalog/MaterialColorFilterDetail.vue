@@ -78,7 +78,7 @@ const index = materialMap[props.material]
                 >
                   <Tab
                     v-slot="{ selected }" as="template"
-                    class="text-darkGrey cursor-pointer"
+                    class="text-primaryDark cursor-pointer"
                   >
                     <h4
                       :class="{ '': selected, 'selected-color ': selected, 'text-primaryDark': selected }"
