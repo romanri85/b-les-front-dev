@@ -6,6 +6,13 @@ const saleStore = useSaleStore()
 const heroName = 'Акции'
 const heroImage = '/sale/sale-bg.webp'
 
+const showNoSaleDiv = ref(false)
+const twoSecondsAfterMount = new Promise((resolve) => {
+  setTimeout(() => {
+    resolve()
+  }, 2000)
+})
+
 // const now = new Date();
 // const newYear = new Date(now.getFullYear() + 1, 0, 1);
 // const time = computed(()=>{
@@ -25,8 +32,10 @@ function formatDate(input) {
   return date
 }
 
-onMounted(() => {
-  saleStore.getSales()
+onMounted(async  () => {
+  await saleStore.getSales()
+  await twoSecondsAfterMount;
+  showNoSaleDiv.value = true
 })
 </script>
 
@@ -34,7 +43,7 @@ onMounted(() => {
   <Head>
     <title>Брянский лес - Акции</title>
   </Head>
-  <BaseHeroWithoutDescription :hero-name="heroName" :hero-image="heroImage" />
+  <BaseHeroWithoutDescription :hero-name="heroName" :hero-image="heroImage" :left="true" />
   <section class="pb-20 lg:pb-32">
     <div class="main-container">
       <!--            <client-only> -->
@@ -102,7 +111,7 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <div v-else>
+      <div v-if="saleStore.sales.length===0 && showNoSaleDiv">
         <h2 class="pt-12 ma-auto text-left">К сожалению, в данное время нет действующих акций</h2>
       </div>
     </div>

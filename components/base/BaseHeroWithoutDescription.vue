@@ -5,9 +5,11 @@ const props = defineProps({
   heroName: String,
   heroImage: String,
   buttons: Object,
+  left: {type: Boolean, default: false},
+  right: {type: Boolean, default: false},
 })
-
 const imageLoaded = ref(false)
+
 </script>
 
 <template>
@@ -25,7 +27,7 @@ const imageLoaded = ref(false)
         {{ $t(props.heroName) }}
       </h2>
     </div>
-    <nuxt-img :src="props.heroImage" placeholder class="w-full h-full object-cover" @load="imageLoaded = true" />
+    <nuxt-img :src="props.heroImage" placeholder class="w-full h-full object-cover" :class="{'sm:object-left': props.left, 'sm:object-right': props.right}" @load="imageLoaded = true" />
   </div>
 </template>
 

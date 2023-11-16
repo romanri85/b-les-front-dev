@@ -68,7 +68,7 @@ onMounted(async () => {
     <title>Брянский лес - Фурнитура</title>
   </Head>
   <div ref="catalogElement">
-    <BaseHeroWithoutDescription :heroName="heroName" class="mb-32" :hero-image="heroImage" />
+    <BaseHeroWithoutDescription :heroName="heroName" class="mb-32" :hero-image="heroImage" :right="true"/>
     <div class="main-content flex main-container md:flex-row flex-col">
       <div v-if="viewport.isDesktop || viewport.isTablet" class="md:w-[210px] lg:w-[320px] sidebar">
         <div class="sidebar__inner">
