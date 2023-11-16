@@ -76,7 +76,7 @@ function openModal() {
               </div>
               <div class="mt-2">
                 <nuxt-img
-                    :src="props.image" class=" h-[100vh] w-full object-contain"
+                    :src="props.image" class="image h-[100vh] w-full object-contain"
                     :alt="props.image"
                 />
               </div>
@@ -92,5 +92,11 @@ function openModal() {
 <style scoped>
 .modal-background {
   opacity: 25%;
+}
+
+@media (max-width: 420px) {
+  .image {
+    height: 60vh!important;
+  }
 }
 </style>
