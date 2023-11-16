@@ -75,7 +75,26 @@ const sortedCasings = computed(() => {
     <div @mouseover="() => showPrompt('Рассчитать стоимость двери самостоятельно')"
          @mouseleave="hidePrompt"
          @click="openPriceDescriptionModal" class="flex cursor-pointer">
-      <div class="">
+      <div v-if="props.doorVariantData.sale" class="">
+        <div>
+          <h3 class="font-regular'">
+
+            <!-- Display sale price if is_sale_active is true -->
+            <span v-if="props.doorVariantData.sale">
+          {{
+                saleLeafCasingFramePrice
+              }}&nbsp;₽&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+            <!-- Always display the original price, conditionally grayed out and line-through -->
+            <span :class="props.doorVariantData.sale ? 'text-gray-400 line-through' : ''">
+          {{
+                leafCasingFramePrice
+              }}&nbsp;₽
+        </span>
+          </h3>
+        </div>
+      </div>
+      <div v-else class="">
         <div>
           <h2 class="font-regular'">
 
