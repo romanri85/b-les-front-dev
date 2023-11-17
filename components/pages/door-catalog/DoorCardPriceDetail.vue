@@ -2,6 +2,8 @@
 import CatalogDetailPriceDescription from "~/components/pop-ups/CatalogDetailPriceDescription.vue";
 import BaseCalculatorIcon from "~/components/base/icons/BaseCalculatorIcon.vue";
 import {usePrompt} from '~/composables/usePrompt';
+import {useViewportSize} from "~/composables/useViewportSize";
+
 import '@vueuse/core' //
 
 const {show, promptText, showPrompt, hidePrompt, promptStyle} = usePrompt();
@@ -16,6 +18,8 @@ const props = defineProps({
   color: Number,
   actualCasing: Number,
 })
+
+const viewport = useViewportSize()
 
 const shouldOpenModal = ref(0)
 
@@ -124,7 +128,7 @@ const sortedCasings = computed(() => {
       </div>
 
     </div>
-    <div v-if="show" class="prompt" :style="promptStyle">
+    <div v-if="show && viewport.isDesktop" class="prompt" :style="promptStyle">
       {{ promptText }}
     </div>
   </div>

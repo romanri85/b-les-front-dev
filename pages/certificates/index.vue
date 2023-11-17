@@ -1,19 +1,24 @@
 <script setup lang="js">
 import certificates from "~/data/serts.json";
 import CertificateImageModal from "~/components/pop-ups/CertificateImageModal.vue";
+import {useViewportSize} from "~/composables/useViewportSize";
 
 const heroName = 'Сертификаты'
 const heroImage = '/certificates/certificates-bg.webp'
 const imgModal = ref(null)
 
+const viewport = useViewportSize()
+
 const selectedCertificate = ref(null)
 
 function triggerModal(certificate) {
-  selectedCertificate.value = certificate;
-  if (imgModal.value && imgModal.value.openModal)
-    imgModal.value.openModal();
-  else
-    console.error('Method not available or component not initialized.');
+  if (viewport.isDesktop || viewport.isTablet) {
+    selectedCertificate.value = certificate;
+    if (imgModal.value && imgModal.value.openModal)
+      imgModal.value.openModal();
+    else
+      console.error('Method not available or component not initialized.');
+  }
 }
 </script>
 
@@ -31,7 +36,8 @@ function triggerModal(certificate) {
     <div class="main-container">
       <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
         <div v-for="certificate in certificates" class="cursor-pointer" :key="certificate">
-          <nuxt-img placeholder :src="certificate" @click="() => triggerModal(certificate)" alt="certificate" class="w-full"/>
+          <nuxt-img placeholder :src="certificate" @click="() => triggerModal(certificate)" alt="certificate"
+                    class="w-full"/>
         </div>
       </div>
     </div>
