@@ -1,9 +1,11 @@
-<script setup lang="ts">
+<script setup lang="js">
 import collections from '~/data/SliderCollectionsWithRiminiRomani.json'
 import BaseLogo from '~/components/base/BaseLogo.vue'
 import { useTagsStore } from '~/stores/tagsStore'
 import {useRouter} from "vue-router";
 import tagsIds from "~/data/tags.json";
+import {useQuery} from "@tanstack/vue-query";
+import {baseURL} from "~/config";
 
 defineProps({ light: { type: Boolean, default: true } })
 
@@ -14,12 +16,18 @@ const router = useRouter()
 //   const newLocale = locale.value === 'en' ? 'ru' : 'en'
 //   setLocale(newLocale)
 // }
-
-const tagsStore = useTagsStore()
-await tagsStore.fetchTags()
-const tags = tagsStore.tags.value.filter((tag) => {
-  return tagsIds.includes(tag.id)
+const {data: tags, isLoading: tagsLoading} = useQuery({
+  queryKey: ['tags'],
+  queryFn: async () => {
+    return await $fetch(`${baseURL}/api/projects/tags`)
+  }, select: (data) => {
+    return data.filter((tag) => {
+      return tagsIds.includes(tag.id)
+    })
+  }
 })
+
+
 
 
 const xlLgMenu = [

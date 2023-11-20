@@ -4,6 +4,8 @@ import {useRoute} from 'vue-router'
 import Pagination from '~/components/base/pagination/Pagination.vue'
 import {baseURL} from '~/config'
 import ImageModal2 from '~/components/pop-ups/ImageModal2.vue'
+import {useQuery} from "@tanstack/vue-query";
+
 
 import {adjustLayoutForNarrowImages, classifyImageLayout} from '~/services/imageLayoutService'
 
@@ -15,6 +17,14 @@ const router = useRouter()
 
 const tagsBlock = ref(null)
 
+const {data: tags, isLoading: tagsLoading} = useQuery({
+  queryKey: ['tags'],
+  queryFn: async () => {
+    return await $fetch(`${baseURL}/api/projects/tags`)
+  }
+})
+
+// console.log(data, 'data')
 function scrollToTagsBlock() {
   tagsBlock.value.scrollIntoView({behavior: 'smooth'})
 }
@@ -28,7 +38,6 @@ const total = ref(0)
 const pagesCount = ref(0)
 const page_size = 9
 const page = ref(1)
-const tags = ref([])
 const tagsForForm = ref([])
 const taglistKey = ref(0)
 
@@ -36,7 +45,6 @@ const taglistKey = ref(0)
 
 onMounted(
     async () => {
-      await getTags()
       await transformTags()
 
       await (async () => {
@@ -216,7 +224,7 @@ function handleChooseTag(tag) {
               @click="triggerModal(image)"
           />
           <ImageModal2
-             class="absolute z-50 lg:overflow-visible overflow-auto" @close="selectedImage = null"
+              class="absolute z-50 lg:overflow-visible overflow-auto" @close="selectedImage = null"
               :image="image" @chooseTag="handleChooseTag" :open="image.image===selectedImage?.image"
           />
         </div>

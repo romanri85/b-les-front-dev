@@ -5,6 +5,7 @@ import CityDialog from '~/components/pop-ups/CityDialog.vue'
 import {baseURL} from '~/config'
 import {findCity} from '~/utils/helpers'
 import {useStorage} from '@vueuse/core';
+import {useQuery} from "@tanstack/vue-query";
 
 const storageCityStore = useStorage('storage-region-store');
 const showConfirmationDiv = ref(false);
@@ -14,16 +15,16 @@ const showConfirmationDiv = ref(false);
 definePageMeta({layout: 'dark-header'})
 
 const city = ref({})
-const cities = ref([])
-const addresses = ref({})
 const geo = ref(null)
 const region = ref('Moscow')
 const shouldOpenModal = ref(0)
 const showConfirmation = ref(true);
 
+
+
+
 const isCityLoaded = computed(() => Object.keys(city.value).length > 0)
 
-const geoArray = ref([])
 
 const twoSecondsAfterMount = new Promise((resolve) => {
   setTimeout(() => {
@@ -44,6 +45,8 @@ if (typeof ymaps === 'undefined') {
 }
 
 async function getGeo() {
+  console.log(storageCityStore.value, 'storage')
+
   // geo.value = JSON.parse(storageCityStore.value)
   if (storageCityStore.value === 'undefined' || storageCityStore.value=== undefined) {
 
@@ -86,20 +89,40 @@ function confirmCity(confirm) {
     openCityModal();
   }
 }
+const {data: addresses, isLoading: shopsLoading} = useQuery({
+  queryKey: ['shops'],
+  queryFn: async () => {
+    return await $fetch(`${baseURL}/api/shops`)
+  },
+})
 
-async function getAddresses() {
-  try {
-    addresses.value = await $fetch(`${baseURL}/api/shops/`)
-  } catch (error) {
-    console.error('Failed to fetch addresses:', error)
+const {data: cities, isLoading: citiesLoading} = useQuery({
+  queryKey: ['cities'],
+  queryFn: async () => {
+    return await $fetch(`${baseURL}/api/shops/cities`)
+  },
+  select: (data) => {
+    return data.cities
+  },
+})
+const geoArray = cities?.value?.flatMap(city => city.ip_check_names) ?? [];
+
+watch(cities, ()=>{
+  console.log(' watch start')
+  const geoArray = cities?.value?.flatMap(city => city.ip_check_names) ?? [];
+  if (geoArray.includes(geo.value.region)) {
+    city.value = findCity(cities.value, geo.value.region).city
+    // city.value = city.value.city
+  } else {
+    city.value = findCity(cities.value, 'Moscow')
+    city.value = city.value.city
   }
-}
+})
 
-async function getCities() {
-  cities.value = await $fetch(`${baseURL}/api/shops/cities`).then(res => res.cities)
-
-  geoArray.value = cities.value.map(city => city.ip_check_names).flat();
-  if (geoArray.value.includes(geo.value.region)) {
+onMounted(async () => {
+  await getGeo();
+  const geoArray = cities?.value?.flatMap(city => city.ip_check_names) ?? [];
+  if (geoArray.includes(geo.value.region)) {
     city.value = findCity(cities.value, geo.value.region)
     city.value = city.value.city
   } else {
@@ -108,14 +131,9 @@ async function getCities() {
   }
 
 
-}
 
-
-onMounted(async () => {
-  await getGeo();
-  await getCities();
-  await getAddresses();
   await twoSecondsAfterMount;
+
   showConfirmationDiv.value = true;
 });
 
@@ -124,10 +142,7 @@ function changeCity(newCityId) {
 
   region.value = cityName.ip_check_names[0]
   city.value = findCity(cities.value, region.value)
-  city.value = city.value.city.name
-  getCities()
-
-
+  city.value = city.value.city
 
 
   geo.value.region = region.value
@@ -135,20 +150,13 @@ function changeCity(newCityId) {
   geo.value.isCityFound = true
 
   storageCityStore.value = JSON.stringify(geo.value)
-
-
-  // storageCityStore.value.city = city.value
-  // storageCityStore.value.geo = geo.value
-  // storageCityStore.value.isCityFound = true
-
-
 }
 
 function openCityModal() {
   shouldOpenModal.value = shouldOpenModal.value + 1
 }
 
-const isAddressesLoaded = computed(() => addresses.value.addresses)
+const isAddressesLoaded = computed(() => addresses?.value?.addresses)
 
 </script>
 

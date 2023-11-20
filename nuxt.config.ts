@@ -26,6 +26,7 @@ export default defineNuxtConfig({
         config.plugins.push(vuetify({ autoImport: true }))
       })
     },
+    "@hebilicious/vue-query-nuxt",
     '@nuxtjs/algolia',
     'nuxt-headlessui',
     '@nuxt/image',
@@ -121,6 +122,20 @@ export default defineNuxtConfig({
       },
     },
   },
+  vueQuery: {
+    // useState key used by nuxt for the vue query state.
+    stateKey: "vue-query-nuxt", // default
+    // If you only want to import some functions, specify them here.
+    // You can pass false or an empty array to disable this feature.
+    // default: ["useQuery", "useQueries", "useInfiniteQuery", "useMutation", "useIsFetching", "useIsMutating", "useQueryClient"]
+    autoImports: ["useQuery"],
+    // Pass the vue query client options here ...
+    queryClientOptions: {
+      defaultOptions: { queries: { staleTime: 5000, refetchOnMount: false, refetchOnReconnect: false, refetchOnWindowFocus: false } } // default
+    },
+    // Pass the vue query plugin options here ....
+    vueQueryPluginOptions: {}
+  }
 
   // vite: {
   //   plugins: [

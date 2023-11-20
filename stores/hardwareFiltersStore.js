@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { baseURL } from '~/config'
+import {useQuery} from "@tanstack/vue-query";
 
 // const config = useRuntimeConfig()
 
@@ -55,7 +56,23 @@ export const useHardwareFiltersStore = defineStore('hardwareFiltersStore', () =>
       throw new Error('No data')
     }
   }
-
+  const query = new URLSearchParams(activeFilters.value).toString()
+  const {data:productsData} = useQuery({
+    queryKey: ['products', query],
+    queryFn: async () => {
+      const data = await $fetch(`${baseURL}/api/hardware/hardware-variants?${page_size}&${query}`)
+      // if (data) {
+      //   total.value = data.count
+      //   pagesCount.value = data.page_links.length
+      //   products.value = data.results
+      // }
+      // else {
+      //   throw new Error('No data')
+      // }
+      return data
+    },
+  })
+console.log(productsData, 'productsData')
   async function checkFilters(query = '') {
     const data = await $fetch(`${baseURL}/api/hardware/hardware-filters?${query}`)
     if (data)
