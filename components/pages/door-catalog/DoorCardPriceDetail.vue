@@ -79,7 +79,7 @@ const sortedCasings = computed(() => {
     <div @mouseover="() => showPrompt('Рассчитать стоимость двери самостоятельно')"
          @mouseleave="hidePrompt"
          @click="openPriceDescriptionModal" class="flex cursor-pointer">
-      <div v-if="props.doorVariantData.sale" class="">
+      <div v-if="props.doorVariantData.sale && (viewport.isTablet || viewport.isMobile)" class="">
         <div>
           <h3 class="font-regular'">
 

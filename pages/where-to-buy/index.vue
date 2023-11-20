@@ -7,7 +7,7 @@ import {findCity} from '~/utils/helpers'
 import {useStorage} from '@vueuse/core';
 import {useQuery} from "@tanstack/vue-query";
 
-const storageCityStore = useStorage('storage-region-store');
+const storageCityStore = useStorage('storage-region-city-store');
 const showConfirmationDiv = ref(false);
 
 
@@ -45,7 +45,6 @@ if (typeof ymaps === 'undefined') {
 }
 
 async function getGeo() {
-  console.log(storageCityStore.value, 'storage')
 
   // geo.value = JSON.parse(storageCityStore.value)
   if (storageCityStore.value === 'undefined' || storageCityStore.value=== undefined) {
@@ -107,15 +106,15 @@ const {data: cities, isLoading: citiesLoading} = useQuery({
 })
 const geoArray = cities?.value?.flatMap(city => city.ip_check_names) ?? [];
 
-watch(cities, ()=>{
-  console.log(' watch start')
-  const geoArray = cities?.value?.flatMap(city => city.ip_check_names) ?? [];
-  if (geoArray.includes(geo.value.region)) {
-    city.value = findCity(cities.value, geo.value.region).city
-    // city.value = city.value.city
-  } else {
-    city.value = findCity(cities.value, 'Moscow')
-    city.value = city.value.city
+watch([cities, geo], () => {
+  if (cities.value && geo.value) { // Check if both cities and geo are not null/undefined
+    const geoArray = cities.value.flatMap(city => city.ip_check_names) ?? [];
+    if (geoArray.includes(geo.value.region)) {
+      city.value = findCity(cities.value, geo.value.region).city
+    } else {
+      city.value = findCity(cities.value, 'Moscow')
+      city.value = city.value.city
+    }
   }
 })
 
@@ -147,9 +146,11 @@ function changeCity(newCityId) {
 
   geo.value.region = region.value
   geo.value.city = city.value
-  geo.value.isCityFound = true
 
-  storageCityStore.value = JSON.stringify(geo.value)
+  if(!geo.value.isCityFound){
+    geo.value.isCityFound = true
+    storageCityStore.value = JSON.stringify(geo.value)
+  }
 }
 
 function openCityModal() {
