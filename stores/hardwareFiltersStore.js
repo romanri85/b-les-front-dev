@@ -72,7 +72,6 @@ export const useHardwareFiltersStore = defineStore('hardwareFiltersStore', () =>
       return data
     },
   })
-console.log(productsData, 'productsData')
   async function checkFilters(query = '') {
     const data = await $fetch(`${baseURL}/api/hardware/hardware-filters?${query}`)
     if (data)

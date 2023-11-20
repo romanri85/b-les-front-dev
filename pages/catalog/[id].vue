@@ -71,8 +71,8 @@ async function fetchProductImages(productId, page = '1') {
 
 onMounted(
     async () => {
+      // fetchProductImages(route.params.id)
       await fetchDoorVariantData()
-      await fetchProductImages(route.params.id)
       if (product.value && productImages.value) {
         // product.value = data.value
         total.value = productImages.value.count
@@ -125,10 +125,21 @@ function triggerModal(image) {
 }
 
 async function fetchDoorVariantData(query = `/${route.params.id}`) {
-  // const {data} = await useFetch(`${baseURL}/api/product${query}`, {key: query});
-  // product.value = data.value
-  product.value = await $fetch(`${baseURL}/api/product${query}`)
-  productImages.value = await $fetch(`${baseURL}/api/product/product/${route.params.id}/images`)
+  try {
+    // Await the promises and then destructure the results
+    const [fetchedProduct, fetchedProductImages] = await Promise.all([
+      $fetch(`${baseURL}/api/product${query}`),
+      $fetch(`${baseURL}/api/product/product/${route.params.id}/images`)
+    ]);
+
+    // Assign the resolved values to the reactive variables
+    product.value = fetchedProduct;
+    productImages.value = fetchedProductImages;
+  } catch (error) {
+    // Handle any errors that occur during the fetch
+    console.error("Error fetching product data:", error);
+    // Optionally, implement additional error handling logic here
+  }
 }
 
 function getActualDoorVariantData(filterData = {material: material.value, color: color.value}) {

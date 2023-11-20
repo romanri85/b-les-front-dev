@@ -13,7 +13,7 @@ const props = defineProps({
     required: true,
   },
 })
-const emit = defineEmits(['chooseTag'])
+const emit = defineEmits(['chooseTag', 'close'])
 const router = useRouter()
 const route = useRoute()
 

@@ -194,7 +194,7 @@ const mdSmMenu = [
           <h3 class="text-white mt-5  mb-5">
             Поиск фото по тегам
           </h3>
-          <div v-for="(tag, index) in tags" v-if="tags" :key="index" class="mt-2">
+          <div v-for="(tag, index) in tags" v-if="tags" :key="tag.name" class="mt-2">
             <nuxt-link :to="`/search-tags?tags=${tag.id}`">
               <p class="text-normalGrey">
                 {{ tag.name }}
