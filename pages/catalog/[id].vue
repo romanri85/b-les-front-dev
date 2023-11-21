@@ -434,7 +434,7 @@ function onChangePage(page) {
         >
           <nuxt-img :src="image.image" class="object-cover" :alt="image.project_name" @click="triggerModal(image)"/>
           <ImageModal2
-              class="absolute z-50 lg:overflow-visible overflow-auto" @close="selectedImage = null"
+              class="absolute z-30 lg:overflow-visible overflow-auto" @close="selectedImage = null"
               :image="image" :open="image.image===selectedImage?.image"
           />
         </div>

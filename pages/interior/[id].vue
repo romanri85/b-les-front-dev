@@ -94,7 +94,7 @@ const layoutImages = computed(() => {
               @click="triggerModal(image)"
           />
           <ImageModal2
-              class="absolute z-50 lg:overflow-visible overflow-auto" @close="selectedImage = null"
+              class="absolute z-30 lg:overflow-visible overflow-auto" @close="selectedImage = null"
               :image="image" @chooseTag="handleChooseTag" :open="image.image===selectedImage?.image"
           />
         </div>
