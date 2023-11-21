@@ -190,7 +190,7 @@ const mdSmMenu = [
             </nuxt-link>
           </div>
         </div>
-        <div class="lg:block hidden">
+        <div class="">
           <h3 class="text-white mt-5  mb-5">
             Поиск фото по тегам
           </h3>

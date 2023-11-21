@@ -72,7 +72,7 @@ watch(() => props.image, async () => {
   <!--    </button> -->
   <!--  </div> -->
   <TransitionRoot appear :show="props.open" as="template">
-    <Dialog as="div"  class="relative z-30 lg:overflow-visible overflow-auto " @close="closeModal">
+    <Dialog as="div"  class="relative z-50 lg:overflow-visible overflow-auto " @close="closeModal">
       <div class="fixed inset-0 bg-black modal-background"/>
       <div class="fixed inset-0 overflow-y-auto">
         <div
