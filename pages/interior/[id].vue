@@ -10,10 +10,24 @@ import ImageModal2 from "~/components/pop-ups/ImageModal2.vue"; // Assuming the 
 
 const interiorStore = useInteriorStore()
 
+const page = ref(1)
+const pagesCount = ref(0)
+const page_size = 10
+
+const project = ref({
+  images: {
+    images: [],
+  },
+})
+
+const route = useRoute()
 
 const selectedImage = ref(null) // this will store the selected/clicked image data
 
 const imagesBlock = ref(null)
+
+
+await getProjectData()
 
 function scrollToImagesBlock() {
   imagesBlock.value.scrollIntoView({behavior: 'smooth'})
@@ -25,18 +39,11 @@ function triggerModal(image) {
 
 // definePageMeta({layout: "dark-header"});
 
-const route = useRoute()
 
-const project = ref({
-  images: {
-    images: [],
-  },
-})
+
 
 // const response = ref({})
-const page = ref(1)
-const pagesCount = ref(0)
-const page_size = 10
+
 
 async function getProjectData(query = `/${route.params.id}`) {
   try {
@@ -47,9 +54,10 @@ async function getProjectData(query = `/${route.params.id}`) {
   }
 }
 
+
 // Layout determination logic
 onMounted(() => {
-    getProjectData()
+    // getProjectData()
 })
 
 function onChangePage(page) {
@@ -88,13 +96,14 @@ const layoutImages = computed(() => {
         <div
             v-for="(image, index) in layoutImages" :key="index"
             :class="`image-wrapper ${image.layout}${image.square ? ' square' : ''}`"
+            class="cursor-pointer"
         >
           <nuxt-img
               :src="image.image" class="object-cover cursor-pointer" :alt="image.project_name"
               @click="triggerModal(image)"
           />
           <ImageModal2
-              class="absolute z-30 lg:overflow-visible overflow-auto" @close="selectedImage = null"
+              class="absolute z-50 lg:overflow-visible overflow-auto" @close="selectedImage = null"
               :image="image" :open="image.image===selectedImage?.image"
           />
         </div>
