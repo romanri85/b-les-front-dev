@@ -45,6 +45,7 @@ const taglistKey = ref(0)
 
 onMounted(
     async () => {
+      await getTags()
       await transformTags()
 
       await (async () => {
